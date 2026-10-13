@@ -3,65 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAFIGASP COACH</title>
+<meta name="google" content="notranslate">
+<title>RAFIGASP COACH - Treinamento Elite</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a2e1a;display:flex;justify-content:center;padding:10px}
-.phone{width:100%;max-width:390px;background:linear-gradient(180deg,#123f25 0%,#0d2e1c 100%);border-radius:28px;border:3px solid #b8963e;overflow:hidden}
-.header{text-align:center;padding:16px;background:#1a4d2e}
-.header h1{font-size:26px;color:#d4af37;font-weight:900}
-.header span{font-size:14px;letter-spacing:3px;display:block;color:#c9a86a}
-.top{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;background:#0a2214}
-.box{background:#000;border:2px solid #b8963e;border-radius:14px;height:68px;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.box.num{font-size:40px;font-weight:900;color:#d4af37}
-.box.col{font-size:19px;font-weight:900;color:#d4af37}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}
-.slot{height:60px;border-radius:12px;border:2px dashed #d4af37;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900}
-.slot.empty{opacity:.5}
-.slot.trigger{background:#f1c40f;color:#000;border-style:solid}
-.slot.win{background:#1a9a3a;color:#fff;border-style:solid}
-.slot.lose{background:#c0392b;color:#fff;border-style:solid}
-.label{text-align:center;color:#d4af37;font-weight:800;padding:8px}
-.keyboard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 14px 18px;background:#0a2214}
-.kbtn{height:58px;border-radius:12px;border:none;font-size:32px;font-weight:900;box-shadow:0 4px 0 rgba(0,0,0,.4)}
-.gold{background:linear-gradient(180deg,#e8c766,#b8963e);color:#5a4100}
-.redbtn{background:linear-gradient(180deg,#e55,#a11);color:#fff}
-.func{font-size:16px!important}
+*{margin:0;padding:0;box-sizing:border-box;notranslate:translate}
+body{background:#0a0e14;color:#fff;font-family:Arial, sans-serif;display:flex;justify-content:center;padding:0}
+.phone{width:100%;max-width:420px;background:#0a0e14;min-height:100vh}
+.header{text-align:center;padding:24px 16px;background:#000;border-bottom:2px solid #d4af37}
+.header h1{font-size:28px;color:#d4af37;font-weight:900;letter-spacing:2px}
+.header span{font-size:12px;letter-spacing:4px;color:#fff;opacity:0.7}
+.hero{padding:28px 20px;text-align:center}
+.hero h2{font-size:32px;line-height:1.1;margin-bottom:12px}
+.hero h2 b{color:#d4af37}
+.hero p{opacity:0.8;font-size:15px;line-height:1.5;margin-bottom:20px}
+.btn{display:block;background:linear-gradient(135deg,#d4af37,#b8960c);color:#000;text-align:center;padding:18px;border-radius:12px;font-weight:900;font-size:18px;text-decoration:none;margin:10px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px}
+.box{background:#11161f;border:1px solid #1e2a3a;border-radius:12px;padding:16px;text-align:center}
+.box .num{font-size:36px;font-weight:900;color:#d4af37}
+.box .label{font-size:11px;opacity:0.7;letter-spacing:1px;margin-top:4px}
+.features{padding:24px 20px}
+.feat{display:flex;gap:12px;background:#11161f;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #1e2a3a}
+.feat i{color:#d4af37;font-style:normal;font-weight:900}
+.footer{text-align:center;padding:24px;opacity:0.5;font-size:12px}
 </style>
 </head>
 <body>
 <div class="phone">
-<div class="header"><h1>RAFIGASP<span>COACH DA ROLETA</span></h1></div>
-<div class="top">
-<div class="box"><span class="num" id="blueNum">--</span></div>
-<div class="box"><span class="col" id="greenCol">COLUNA --</span></div>
+<div class="header">
+<h1>RAFIGASP</h1>
+<span>COACH ELITE</span>
 </div>
-<div class="grid" id="grid"></div>
-<div class="label">TOQUE NOS NUMEROS</div>
-<div class="keyboard">
-<button class="kbtn gold" onclick="press('1')">1</button>
-<button class="kbtn gold" onclick="press('2')">2</button>
-<button class="kbtn gold" onclick="press('3')">3</button>
-<button class="kbtn gold" onclick="press('4')">4</button>
-<button class="kbtn gold" onclick="press('5')">5</button>
-<button class="kbtn gold" onclick="press('6')">6</button>
-<button class="kbtn gold" onclick="press('7')">7</button>
-<button class="kbtn gold" onclick="press('8')">8</button>
-<button class="kbtn gold" onclick="press('9')">9</button>
-<button class="kbtn gold func" onclick="confirmNum()">ENTER</button>
-<button class="kbtn redbtn" onclick="clearAll()">0</button>
-<button class="kbtn gold func" onclick="corrigir()">CORRIGIR</button>
+<div class="hero">
+<h2>TRANSFORME SEU CORPO EM <b>90 DIAS</b></h2>
+<p>Metodo exclusivo de treinamento e dieta para resultados rapidos e duradouros. Sem enrolacao.</p>
+<a class="btn" href="https://wa.me/5585XXXXXXXX?text=Quero%20comecar">QUERO COMECAR AGORA</a>
 </div>
+<div class="grid">
+<div class="box"><div class="num">+500</div><div class="label">ALUNOS TRANSFORMADOS</div></div>
+<div class="box"><div class="num">90</div><div class="label">DIAS DE FOCO TOTAL</div></div>
+<div class="box"><div class="num">100%</div><div class="label">ONLINE E PERSONALIZADO</div></div>
+<div class="box"><div class="num">24H</div><div class="label">SUPORTE NO WHATSAPP</div></div>
 </div>
-<script>
-let buffer="",history=[],triggerCol=null,waiting=0;
-function getCol(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3;}
-function press(d){if(buffer.length>=2)return;buffer+=d;let v=parseInt(buffer);if(v>36){buffer=buffer.slice(0,-1);return;}document.getElementById('blueNum').textContent=buffer;let c=getCol(v);document.getElementById('greenCol').textContent=c==0?'ZERO':'COLUNA '+c;if(buffer.length==2)setTimeout(confirmNum,250);}
-function confirmNum(){if(!buffer)return;let n=parseInt(buffer);buffer="";if(n===0){clearAll();return;}if(waiting===0){history.push({num:n,type:'trigger'});triggerCol=getCol(n);waiting=1;}else{let isWin=(getCol(n)===triggerCol);history.push({num:n,type:isWin?'win':'lose'});waiting++;if(waiting>3){waiting=0;triggerCol=null;}}render();document.getElementById('blueNum').textContent="--";document.getElementById('greenCol').textContent="COLUNA --";}
-function clearAll(){history=[];buffer="";triggerCol=null;waiting=0;document.getElementById('blueNum').textContent="--";document.getElementById('greenCol').textContent="COLUNA --";render();}
-function corrigir(){if(buffer.length>0){buffer=buffer.slice(0,-1);document.getElementById('blueNum').textContent=buffer||"--";return;}if(history.length>0){let l=history.pop();if(l.type==='trigger'){waiting=0;triggerCol=null;}else waiting--;render();}}
-function render(){let g=document.getElementById('grid');g.innerHTML="";for(let i=0;i<12;i++){let it=history[i];let d=document.createElement('div');d.className='slot '+(it?it.type:'empty');if(it)d.textContent=it.num;g.appendChild(d);}}
-render();
-</script>
+<div class="features">
+<div class="feat"><i>✓</i> Treino 100% personalizado para sua rotina</div>
+<div class="feat"><i>✓</i> Dieta flexivel sem passar fome</div>
+<div class="feat"><i>✓</i> Acompanhamento semanal de resultados</div>
+<div class="feat"><i>✓</i> Acesso ao app exclusivo de treinos</div>
+</div>
+<a class="btn" style="margin:0 20px" href="https://wa.me/5585XXXXXXXX?text=Quero%20comecar">FALAR NO WHATSAPP</a>
+<div class="footer">© 2026 RAFIGASP COACH - Fortaleza CE<br>Todos os direitos reservados</div>
+</div>
 </body>
 </html>

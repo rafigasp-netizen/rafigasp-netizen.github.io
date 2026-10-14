@@ -48,13 +48,11 @@ if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
 return 3;
 }
 function render(){
-// AGORA INVERTE: MAIS NOVO PRIMEIRO
-let rev=[...history].reverse();
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-if(i<rev.length){
-let h=rev[i];
+if(i<history.length){
+let h=history[i];
 if(h.result==='win') d.className='hslot green';
 else if(h.result==='lose') d.className='hslot red';
 else d.className='hslot yellow';
@@ -72,9 +70,16 @@ function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
 if(v===0){history=[]; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
+// Se já tem histórico, verifica o último, MAS se ele for 4,8,12 (múltiplo de 4) ele fica AMARELO
 if(history.length>0){
-let last=history[history.length-1];
-last.result = getCol(v)==last.col? 'win':'lose';
+let ultimo = history[history.length-1];
+// Se a posição NÃO for múltiplo de 4, avalia
+if(history.length % 4!== 0){
+ultimo.result = getCol(v)==ultimo.col? 'win':'lose';
+} else {
+// Se for múltiplo de 4 (4,8,12) mantém amarelo
+ultimo.result = 'pending';
+}
 }
 history.push({num:v,col:getCol(v),result:'pending'});
 if(history.length>12) history.shift();

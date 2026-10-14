@@ -44,4 +44,77 @@ const boxCol=document.getElementById('boxCol');
 function getCol(n){
 if(n==0) return 0;
 if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1;
-if([2,5,8
+if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
+return 3;
+}
+function render(){
+grid.innerHTML='';
+for(let i=0;i<12;i++){
+let d=document.createElement('div');
+if(i<history.length){
+let h=history[i];
+if(h.result==='win') d.className='hslot green';
+else if(h.result==='lose') d.className='hslot red';
+else d.className='hslot yellow';
+d.textContent=h.num;
+}else{d.className='hslot empty';}
+grid.appendChild(d);
+}
+}
+function addN(n){
+if(cur.length>=2) return;
+cur+=n; boxUlt.textContent=cur;
+let v=parseInt(cur); if(!isNaN(v)) boxCol.textContent=getCol(v)==0?'ZERO':'COLUNA '+getCol(v);
+}
+function enterN(){
+if(cur==='') return;
+let v=parseInt(cur); if(v>36) return;
+if(v===0){history=[]; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
+
+let idx = history.length; // posição onde vai entrar
+let col = getCol(v);
+let res;
+
+if(idx % 4 === 0){
+// PRIMEIRA COLUNA (vermelho que você circulou) = SEMPRE AMARELO
+res = 'pending';
+} else {
+// OUTRAS COLUNAS (azul que você circulou) = SÓ VERDE OU VERMELHO
+// Compara com o número anterior
+if(history.length>0){
+let prevCol = history[history.length-1].col;
+res = (col === prevCol)? 'win' : 'lose';
+} else {
+res = 'pending';
+}
+// Se o anterior era da primeira coluna e ficou amarelo, avalia ele também agora como verde/vermelho? Não, amarelo fica amarelo
+if(history.length>0 && (history.length-1)%4===0){
+// mantém o amarelo da primeira coluna, não altera
+}
+}
+
+history.push({num:v,col:col,result:res});
+
+// Agora avalia o anterior SE ele NÃO for da primeira coluna
+if(history.length>=2){
+let prevIdx = history.length-2;
+if(prevIdx % 4!== 0 && history[prevIdx].result==='pending'){
+// Se por algum motivo ficou pendente, avalia agora
+let prevCol = history[prevIdx].col;
+let currCol = history[prevIdx+1].col;
+history[prevIdx].result = (prevCol===currCol)? 'win':'lose';
+}
+}
+
+if(history.length>12) history.shift();
+cur=''; boxUlt.textContent=v; boxCol.textContent='COLUNA '+col;
+render();
+}
+function corrige(){
+if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'');}
+else{history.pop(); if(history.length>0){boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+history[history.length-1].col;}else{boxUlt.textContent=''; boxCol.textContent='';} render();}
+}
+render();
+</script>
+</body>
+</html>

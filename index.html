@@ -8,32 +8,28 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sans-serif}
 .app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:2px solid #d4af37;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
-.top{background:linear-gradient(180deg,#1a4d2e,#0d2818);padding:18px;text-align:center;border-bottom:1px solid #d4af37}
-.top h1{color:#d4af37;font-size:32px;font-weight:900;letter-spacing:2px}
-.top p{color:#c9a86a;font-weight:800;letter-spacing:3px;font-size:16px}
 .blacks{display:flex;gap:12px;padding:14px;background:#0a1f12}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:26px}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px}
 .history{background:#123524;padding:12px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .hslot{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
-.hslot.empty{border:1.8px dashed #d4af37;opacity:0.4}
-.hslot.filled{background:#d4af37;color:#000}
-.hslot.green{background:#16a34a;color:#fff}
-.label{text-align:center;color:#d4af37;font-weight:900;padding:14px 0 10px;letter-spacing:1px}
+.hslot.empty{border:1.8px dashed #d4af37;opacity:0.35}
+.hslot.yellow{background:#d4af37;color:#000}
+.hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff;box-shadow:0 0 10px #16a34a}
+.hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff;box-shadow:0 0 10px #dc2626}
 .keypad{padding:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .k{height:68px;border-radius:16px;border:none;font-weight:900;font-size:28px;cursor:pointer}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 4px 0 #7a5d18}
 .k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:15px;box-shadow:0 4px 0 #7a5d18}
 .k:active{transform:translateY(3px);box-shadow:none}
-.typing{text-align:center;color:#fff;font-weight:900;font-size:26px;padding:10px;min-height:44px}
+.typing{text-align:center;color:#fff;font-weight:900;font-size:24px;padding:6px;min-height:16px}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="top"><h1>RAFIGASP</h1><p>COACH DA ROLETA</p></div>
 <div class="blacks"><div class="bbox" id="boxUlt"></div><div class="bbox" id="boxCol"></div></div>
-<div class="history"><div class="hist-grid" id="grid"></div><div class="label">TOQUE NOS NUMEROS</div></div>
+<div class="history"><div class="hist-grid" id="grid"></div></div>
 <div class="typing" id="typing"></div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
@@ -43,7 +39,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 </div>
 </div>
 <script>
-let nums=[]; let cur='';
+let history=[]; let cur=''; let lastPred=null;
 const grid=document.getElementById('grid');
 const boxUlt=document.getElementById('boxUlt');
 const boxCol=document.getElementById('boxCol');
@@ -58,35 +54,40 @@ function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-if(i<nums.length){d.className='hslot '+(nums[i]==0?'green':'filled'); d.textContent=nums[i];}
-else{d.className='hslot empty';}
+if(i<history.length){
+let h=history[i];
+if(h.col==0) d.className='hslot yellow';
+else if(h.result==='win') d.className='hslot green';
+else if(h.result==='lose') d.className='hslot red';
+else d.className='hslot yellow';
+d.textContent=h.num;
+}else{d.className='hslot empty';}
 grid.appendChild(d);
-}
-if(nums.length>0){
-let last=nums[nums.length-1];
-boxUlt.textContent=last;
-let col=getCol(last);
-boxCol.textContent=col==0?'ZERO':'COLUNA '+col;
 }
 }
 function addN(n){
 if(cur.length>=2) return;
-cur+=n;
-typing.textContent=cur;
-boxUlt.textContent=cur;
+cur+=n; typing.textContent=cur; boxUlt.textContent=cur;
 let v=parseInt(cur);
 if(!isNaN(v)){let col=getCol(v); boxCol.textContent=col==0?'ZERO':'COLUNA '+col;}
 }
 function enterN(){
 if(cur==='') return;
-let v=parseInt(cur);
-if(v>36) return;
-nums.push(v); if(nums.length>12) nums.shift();
-cur=''; typing.textContent=''; render();
+let v=parseInt(cur); if(v>36) return;
+let col=getCol(v);
+if(lastPred!==null && history.length>0){
+let res = col==lastPred? 'win' : 'lose';
+history[history.length-1].result=res;
+}
+history.push({num:v,col:col,result:'pending'});
+if(history.length>12) history.shift();
+lastPred=col; cur=''; typing.textContent='';
+boxUlt.textContent=v; boxCol.textContent=col==0?'ZERO':'COLUNA '+col;
+render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur|| (nums.length?nums[nums.length-1]:''); if(cur=='') boxCol.textContent=nums.length?(getCol(nums[nums.length-1])==0?'ZERO':'COLUNA '+getCol(nums[nums.length-1])):'';}
-else{nums.pop(); render(); if(nums.length==0){boxUlt.textContent=''; boxCol.textContent='';}}
+if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'');}
+else{history.pop(); if(history.length>0){lastPred=history[history.length-1].col; boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+lastPred;}else{boxUlt.textContent=''; boxCol.textContent=''; lastPred=null;} render();}
 }
 render();
 </script>

@@ -10,7 +10,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 .app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:2px solid #d4af37;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
 .blacks{display:flex;gap:12px;padding:14px;background:#0a1f12}
 .bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px}
-.history{background:#123524;padding:12px}
+.history{background:#123524;padding:12px;flex:1}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .hslot{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
 .hslot.empty{border:1.8px dashed #d4af37;opacity:0.35}
@@ -23,14 +23,12 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 .k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:15px;box-shadow:0 4px 0 #7a5d18}
 .k:active{transform:translateY(3px);box-shadow:none}
-.typing{text-align:center;color:#fff;font-weight:900;font-size:24px;padding:6px;min-height:16px}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="blacks"><div class="bbox" id="boxUlt"></div><div class="bbox" id="boxCol"></div></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-<div class="typing" id="typing"></div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -43,7 +41,6 @@ let history=[]; let cur=''; let lastPred=null;
 const grid=document.getElementById('grid');
 const boxUlt=document.getElementById('boxUlt');
 const boxCol=document.getElementById('boxCol');
-const typing=document.getElementById('typing');
 function getCol(n){
 if(n==0) return 0;
 if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1;
@@ -66,29 +63,31 @@ grid.appendChild(d);
 }
 function addN(n){
 if(cur.length>=2) return;
-cur+=n; typing.textContent=cur; boxUlt.textContent=cur;
+cur+=n;
+boxUlt.textContent=cur;
 let v=parseInt(cur);
 if(!isNaN(v)){let col=getCol(v); boxCol.textContent=col==0?'ZERO':'COLUNA '+col;}
 }
 function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
-// SE FOR 0, LIMPA TUDO
-if(v===0){
-history=[]; lastPred=null; cur=''; typing.textContent=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;
-}
-if(lastPred!==null && history.length>0){
-let res = getCol(v)==lastPred? 'win' : 'lose';
-history[history.length-1].result=res;
+if(v===0){history=[]; lastPred=null; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
+// Se já tem histórico, verifica se o último AMARELO acertou
+if(history.length>0){
+let ultimo = history[history.length-1];
+let res = getCol(v)==ultimo.col? 'win' : 'lose';
+ultimo.result=res;
 }
 history.push({num:v,col:getCol(v),result:'pending'});
 if(history.length>12) history.shift();
-lastPred=getCol(v); cur=''; typing.textContent='';
-boxUlt.textContent=v; boxCol.textContent='COLUNA '+getCol(v);
+lastPred=getCol(v);
+cur='';
+boxUlt.textContent=v;
+boxCol.textContent=getCol(v)==0?'ZERO':'COLUNA '+getCol(v);
 render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'');}
+if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:''); if(cur==''){boxCol.textContent=history.length?'COLUNA '+history[history.length-1].col:''}}
 else{history.pop(); if(history.length>0){lastPred=history[history.length-1].col; boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+lastPred;}else{boxUlt.textContent=''; boxCol.textContent=''; lastPred=null;} render();}
 }
 render();

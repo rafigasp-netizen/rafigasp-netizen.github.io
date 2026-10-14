@@ -1,1 +1,83 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP COACH</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0e14;color:#fff;font-family:Arial;display:flex;justify-content:center}.box{max-width:420px;width:100%;min-height:100vh;background:#0a0e14}.top{text-align:center;padding:24px;background:#000;border-bottom:2px solid #d4af37}.top h1{color:#d4af37;font-size:28px}.hero{padding:28px 20px;text-align:center}.hero h2{font-size:32px}.hero h2 b{color:#d4af37}.btn{display:block;background:#d4af37;color:#000;padding:18px;border-radius:12px;font-weight:900;text-align:center;text-decoration:none;margin:16px 20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px}.card{background:#11161f;border:1px solid #1e2a3a;border-radius:12px;padding:16px;text-align:center}.card .n{font-size:32px;font-weight:900;color:#d4af37}</style></head><body><div class="box"><div class="top"><h1>RAFIGASP</h1><small>COACH ELITE</small></div><div class="hero"><h2>TRANSFORME SEU CORPO EM <b>90 DIAS</b></h2><p>Metodo exclusivo de treino e dieta</p><a class="btn" href="https://wa.me/5585999999999">QUERO COMECAR AGORA</a></div><div class="grid"><div class="card"><div class="n">+500</div>ALUNOS</div><div class="card"><div class="n">90</div>DIAS</div><div class="card"><div class="n">100%</div>ONLINE</div><div class="card"><div class="n">24H</div>SUPORTE</div></div><a class="btn" href="https://wa.me/5585999999999">FALAR NO WHATSAPP</a></div></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="google" content="notranslate">
+<title>RAFIGASP - COACH DA ROLETA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d2818;display:flex;justify-content:center;font-family:Arial, sans-serif}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:2px solid #d4af37;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.top{background:linear-gradient(180deg,#1a4d2e,#0d2818);padding:18px;text-align:center;border-bottom:1px solid #d4af37}
+.top h1{color:#d4af37;font-size:32px;font-weight:900;letter-spacing:2px}
+.top p{color:#c9a86a;font-weight:800;letter-spacing:3px;font-size:16px}
+.blacks{display:flex;gap:12px;padding:14px;background:#0a1f12}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px}
+.history{background:#123524;padding:12px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.hslot{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
+.hslot.empty{border:1.8px dashed #d4af37;opacity:0.5}
+.hslot.filled{background:#d4af37;color:#000;border:1.5px solid #b8941f}
+.hslot.green{background:#16a34a;color:#fff;border:1.5px solid #d4af37}
+.label{text-align:center;color:#d4af37;font-weight:900;padding:14px 0 10px;letter-spacing:1px}
+.keypad{padding:0 12px 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.k{height:68px;border-radius:16px;border:none;font-weight:900;font-size:28px;cursor:pointer}
+.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 4px 0 #7a5d18}
+.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:16px;box-shadow:0 4px 0 #7a5d18}
+.k:active{transform:translateY(3px);box-shadow:none}
+.result{padding:12px;text-align:center;color:#fff;min-height:50px;font-weight:800}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><h1>RAFIGASP</h1><p>COACH DA ROLETA</p></div>
+<div class="blacks"><div class="bbox" id="last"></div><div class="bbox" id="pred"></div></div>
+<div class="history">
+<div class="hist-grid" id="grid"></div>
+<div class="label">TOQUE NOS NUMEROS</div>
+</div>
+<div class="result" id="res"></div>
+<div class="keypad">
+<button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
+<button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
+<button class="k num" onclick="addN(7)">7</button><button class="k num" onclick="addN(8)">8</button><button class="k num" onclick="addN(9)">9</button>
+<button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
+</div>
+</div>
+<script>
+let nums=[];
+let cur='';
+const grid=document.getElementById('grid');
+const res=document.getElementById('res');
+function render(){
+grid.innerHTML='';
+for(let i=0;i<12;i++){
+let d=document.createElement('div');
+if(i<nums.length){
+d.className='hslot '+(nums[i]==0?'green':'filled');
+d.textContent=nums[i];
+}else{d.className='hslot empty';}
+grid.appendChild(d);
+}
+document.getElementById('last').textContent=nums.length? 'ULT: '+nums[nums.length-1]:'';
+}
+function addN(n){
+if(cur.length<2){cur+=n; res.textContent='Digitando: '+cur}
+}
+function enterN(){
+if(cur==='')return;
+let v=parseInt(cur);
+if(v>=0 && v<=36){nums.push(v); if(nums.length>12)nums.shift(); cur=''; res.textContent='✓ '+v+' adicionado - Prox: '+(Math.floor(Math.random()*37));}
+else{res.textContent='Numero 0 a 36 apenas'; cur='';}
+render();
+}
+function corrige(){
+if(cur!==''){cur=cur.slice(0,-1); res.textContent=cur?'Digitando: '+cur:'';
+}else{nums.pop(); render(); res.textContent='Ultimo removido';}
+}
+render();
+</script>
+</body>
+</html>

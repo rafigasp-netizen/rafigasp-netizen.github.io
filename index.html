@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>RAFIGASP COACH DA ROLETA</title>
+<title>RAFIGASP</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sans-serif}
@@ -56,8 +56,7 @@ for(let i=0;i<12;i++){
 let d=document.createElement('div');
 if(i<history.length){
 let h=history[i];
-if(h.col==0) d.className='hslot yellow';
-else if(h.result==='win') d.className='hslot green';
+if(h.result==='win') d.className='hslot green';
 else if(h.result==='lose') d.className='hslot red';
 else d.className='hslot yellow';
 d.textContent=h.num;
@@ -74,15 +73,18 @@ if(!isNaN(v)){let col=getCol(v); boxCol.textContent=col==0?'ZERO':'COLUNA '+col;
 function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
-let col=getCol(v);
+// SE FOR 0, LIMPA TUDO
+if(v===0){
+history=[]; lastPred=null; cur=''; typing.textContent=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;
+}
 if(lastPred!==null && history.length>0){
-let res = col==lastPred? 'win' : 'lose';
+let res = getCol(v)==lastPred? 'win' : 'lose';
 history[history.length-1].result=res;
 }
-history.push({num:v,col:col,result:'pending'});
+history.push({num:v,col:getCol(v),result:'pending'});
 if(history.length>12) history.shift();
-lastPred=col; cur=''; typing.textContent='';
-boxUlt.textContent=v; boxCol.textContent=col==0?'ZERO':'COLUNA '+col;
+lastPred=getCol(v); cur=''; typing.textContent='';
+boxUlt.textContent=v; boxCol.textContent='COLUNA '+getCol(v);
 render();
 }
 function corrige(){

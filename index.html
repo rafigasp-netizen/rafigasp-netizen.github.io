@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>RAFIGASP</title>
+<title>RAFIGASP - COLUNAS</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sans-serif}
@@ -27,7 +27,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 </head>
 <body>
 <div class="app">
-<div class="blacks"><div class="bbox" id="boxUlt"></div><div class="bbox" id="boxCol"></div></div>
+<div class="blacks"><div class="bbox" id="boxUlt">-</div><div class="bbox" id="boxCol">COLUNA</div></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
@@ -41,12 +41,26 @@ let history=[]; let cur='';
 const grid=document.getElementById('grid');
 const boxUlt=document.getElementById('boxUlt');
 const boxCol=document.getElementById('boxCol');
-function getCol(n){
+
+// SUA REGRA DE ESTRATÉGIA
+const paraColuna1 = [6,9,11,14,16,17,19,21,26,29,33,36];
+const paraColuna2 = [2,3,5,8,10,13,20,25,28,31,32,35];
+const paraColuna3 = [1,4,7,12,15,18,22,23,24,27,30,34];
+
+function getAlvo(n){
+if(paraColuna1.includes(n)) return 1;
+if(paraColuna2.includes(n)) return 2;
+if(paraColuna3.includes(n)) return 3;
+return 0;
+}
+// Coluna REAL da roleta para conferir acerto
+function getColReal(n){
 if(n==0) return 0;
 if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1;
 if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
 return 3;
 }
+
 function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
@@ -64,55 +78,43 @@ grid.appendChild(d);
 function addN(n){
 if(cur.length>=2) return;
 cur+=n; boxUlt.textContent=cur;
-let v=parseInt(cur); if(!isNaN(v)) boxCol.textContent=getCol(v)==0?'ZERO':'COLUNA '+getCol(v);
+let v=parseInt(cur);
+if(!isNaN(v)){
+let alvo=getAlvo(v);
+if(alvo>0) boxCol.textContent='COLUNA '+alvo;
+else boxCol.textContent=v==0?'ZERO':'COLUNA';
+}
 }
 function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
-if(v===0){history=[]; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
+if(v===0){history=[]; cur=''; boxUlt.textContent='-'; boxCol.textContent='COLUNA'; render(); return;}
 
-let idx = history.length; // posição onde vai entrar
-let col = getCol(v);
+let idx = history.length;
+let colReal = getColReal(v);
+let alvoAtual = getAlvo(v);
 let res;
 
 if(idx % 4 === 0){
-// PRIMEIRA COLUNA (vermelho que você circulou) = SEMPRE AMARELO
-res = 'pending';
+// Primeira coluna = SEMPRE AMARELO
+res='pending';
 } else {
-// OUTRAS COLUNAS (azul que você circulou) = SÓ VERDE OU VERMELHO
-// Compara com o número anterior
+// Área C = verifica se a coluna REAL é igual ao ALVO do número anterior
 if(history.length>0){
-let prevCol = history[history.length-1].col;
-res = (col === prevCol)? 'win' : 'lose';
-} else {
-res = 'pending';
-}
-// Se o anterior era da primeira coluna e ficou amarelo, avalia ele também agora como verde/vermelho? Não, amarelo fica amarelo
-if(history.length>0 && (history.length-1)%4===0){
-// mantém o amarelo da primeira coluna, não altera
-}
+let alvoAnterior = history[history.length-1].alvo;
+res = (colReal === alvoAnterior)? 'win':'lose';
+} else res='pending';
 }
 
-history.push({num:v,col:col,result:res});
-
-// Agora avalia o anterior SE ele NÃO for da primeira coluna
-if(history.length>=2){
-let prevIdx = history.length-2;
-if(prevIdx % 4!== 0 && history[prevIdx].result==='pending'){
-// Se por algum motivo ficou pendente, avalia agora
-let prevCol = history[prevIdx].col;
-let currCol = history[prevIdx+1].col;
-history[prevIdx].result = (prevCol===currCol)? 'win':'lose';
-}
-}
-
+history.push({num:v, colReal:colReal, alvo:alvoAtual, result:res});
 if(history.length>12) history.shift();
-cur=''; boxUlt.textContent=v; boxCol.textContent='COLUNA '+col;
+cur=''; boxUlt.textContent=v;
+boxCol.textContent= alvoAtual>0? 'COLUNA '+alvoAtual : 'ZERO';
 render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'');}
-else{history.pop(); if(history.length>0){boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+history[history.length-1].col;}else{boxUlt.textContent=''; boxCol.textContent='';} render();}
+if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'-');}
+else{history.pop(); if(history.length>0){boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+history[history.length-1].alvo;}else{boxUlt.textContent='-'; boxCol.textContent='COLUNA';} render();}
 }
 render();
 </script>

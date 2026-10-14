@@ -53,9 +53,14 @@ for(let i=0;i<12;i++){
 let d=document.createElement('div');
 if(i<history.length){
 let h=history[i];
+// SE FOR PRIMEIRA COLUNA (0,4,8) SEMPRE AMARELO COM NÚMERO PRETO
+if(i%4===0){
+d.className='hslot yellow';
+} else {
 if(h.result==='win') d.className='hslot green';
 else if(h.result==='lose') d.className='hslot red';
 else d.className='hslot yellow';
+}
 d.textContent=h.num;
 }else{d.className='hslot empty';}
 grid.appendChild(d);
@@ -70,15 +75,13 @@ function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
 if(v===0){history=[]; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
-// Se já tem histórico, verifica o último, MAS se ele for 4,8,12 (múltiplo de 4) ele fica AMARELO
 if(history.length>0){
-let ultimo = history[history.length-1];
-// Se a posição NÃO for múltiplo de 4, avalia
-if(history.length % 4!== 0){
-ultimo.result = getCol(v)==ultimo.col? 'win':'lose';
+let lastIndex = history.length-1;
+// Só avalia se NÃO for primeira coluna
+if(lastIndex % 4!== 0){
+history[lastIndex].result = getCol(v)==history[lastIndex].col? 'win':'lose';
 } else {
-// Se for múltiplo de 4 (4,8,12) mantém amarelo
-ultimo.result = 'pending';
+history[lastIndex].result = 'pending';
 }
 }
 history.push({num:v,col:getCol(v),result:'pending'});

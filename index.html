@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="google" content="notranslate">
-<title>RAFIGASP - COACH DA ROLETA</title>
+<title>RAFIGASP COACH DA ROLETA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d2818;display:flex;justify-content:center;font-family:Arial, sans-serif}
+body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sans-serif}
 .app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:2px solid #d4af37;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
 .top{background:linear-gradient(180deg,#1a4d2e,#0d2818);padding:18px;text-align:center;border-bottom:1px solid #d4af37}
 .top h1{color:#d4af37;font-size:32px;font-weight:900;letter-spacing:2px}
 .top p{color:#c9a86a;font-weight:800;letter-spacing:3px;font-size:16px}
 .blacks{display:flex;gap:12px;padding:14px;background:#0a1f12}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px}
 .history{background:#123524;padding:12px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .hslot{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
-.hslot.empty{border:1.8px dashed #d4af37;opacity:0.5}
+.hslot.empty{border:1.8px dashed #d4af37;opacity:0.4}
 .hslot.filled{background:#d4af37;color:#000;border:1.5px solid #b8941f}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #d4af37}
 .label{text-align:center;color:#d4af37;font-weight:900;padding:14px 0 10px;letter-spacing:1px}
@@ -25,20 +24,17 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial, s
 .k{height:68px;border-radius:16px;border:none;font-weight:900;font-size:28px;cursor:pointer}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 4px 0 #7a5d18}
 .k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:16px;box-shadow:0 4px 0 #7a5d18}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:15px;box-shadow:0 4px 0 #7a5d18}
 .k:active{transform:translateY(3px);box-shadow:none}
-.result{padding:12px;text-align:center;color:#fff;min-height:50px;font-weight:800}
+.typing{text-align:center;color:#fff;font-weight:900;font-size:22px;padding:10px;min-height:44px;background:#0a1f12;border-top:1px solid #d4af37}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="top"><h1>RAFIGASP</h1><p>COACH DA ROLETA</p></div>
-<div class="blacks"><div class="bbox" id="last"></div><div class="bbox" id="pred"></div></div>
-<div class="history">
-<div class="hist-grid" id="grid"></div>
-<div class="label">TOQUE NOS NUMEROS</div>
-</div>
-<div class="result" id="res"></div>
+<div class="blacks"><div class="bbox" id="boxUlt">ULT: -</div><div class="bbox" id="boxCol">-</div></div>
+<div class="history"><div class="hist-grid" id="grid"></div><div class="label">TOQUE NOS NUMEROS</div></div>
+<div class="typing" id="typing"></div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -47,35 +43,57 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial, s
 </div>
 </div>
 <script>
-let nums=[];
-let cur='';
+let nums=[]; let cur='';
 const grid=document.getElementById('grid');
-const res=document.getElementById('res');
+const boxUlt=document.getElementById('boxUlt');
+const boxCol=document.getElementById('boxCol');
+const typing=document.getElementById('typing');
+function getCol(n){
+if(n==0) return 0;
+if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1;
+if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
+return 3;
+}
 function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-if(i<nums.length){
-d.className='hslot '+(nums[i]==0?'green':'filled');
-d.textContent=nums[i];
-}else{d.className='hslot empty';}
+if(i<nums.length){d.className='hslot '+(nums[i]==0?'green':'filled'); d.textContent=nums[i];}
+else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-document.getElementById('last').textContent=nums.length? 'ULT: '+nums[nums.length-1]:'';
+if(nums.length>0){
+let last=nums[nums.length-1];
+boxUlt.textContent='ULT: '+last;
+let col=getCol(last);
+if(col==0){boxCol.textContent='ZERO';}
+else{let jogar=col==1?2:col==2?3:1; boxCol.textContent='COLUNA '+jogar;}
+}
 }
 function addN(n){
-if(cur.length<2){cur+=n; res.textContent='Digitando: '+cur}
+if(cur.length>=2) return;
+cur+=n;
+typing.textContent=cur;
+boxUlt.textContent=cur;
+let v=parseInt(cur);
+if(!isNaN(v) && v<=36){
+let col=getCol(v);
+if(col==0) boxCol.textContent='ZERO';
+else{let jogar=col==1?2:col==2?3:1; boxCol.textContent='COLUNA '+jogar;}
+}
 }
 function enterN(){
-if(cur==='')return;
+if(cur==='') return;
 let v=parseInt(cur);
-if(v>=0 && v<=36){nums.push(v); if(nums.length>12)nums.shift(); cur=''; res.textContent='✓ '+v+' adicionado - Prox: '+(Math.floor(Math.random()*37));}
-else{res.textContent='Numero 0 a 36 apenas'; cur='';}
+if(v<0||v>36){typing.textContent='0 a 36'; cur=''; return;}
+nums.push(v);
+if(nums.length>12) nums.shift();
+cur=''; typing.textContent='';
 render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); res.textContent=cur?'Digitando: '+cur:'';
-}else{nums.pop(); render(); res.textContent='Ultimo removido';}
+if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur||(nums.length?'ULT: '+nums[nums.length-1]:'ULT: -'); if(cur=='') boxCol.textContent='-';}
+else{nums.pop(); typing.textContent=''; render(); if(nums.length==0){boxUlt.textContent='ULT: -'; boxCol.textContent='-';}}
 }
 render();
 </script>

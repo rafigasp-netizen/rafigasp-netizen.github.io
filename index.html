@@ -12,27 +12,27 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 .top h1{color:#d4af37;font-size:32px;font-weight:900;letter-spacing:2px}
 .top p{color:#c9a86a;font-weight:800;letter-spacing:3px;font-size:16px}
 .blacks{display:flex;gap:12px;padding:14px;background:#0a1f12}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:26px}
 .history{background:#123524;padding:12px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .hslot{height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
 .hslot.empty{border:1.8px dashed #d4af37;opacity:0.4}
-.hslot.filled{background:#d4af37;color:#000;border:1.5px solid #b8941f}
-.hslot.green{background:#16a34a;color:#fff;border:1.5px solid #d4af37}
+.hslot.filled{background:#d4af37;color:#000}
+.hslot.green{background:#16a34a;color:#fff}
 .label{text-align:center;color:#d4af37;font-weight:900;padding:14px 0 10px;letter-spacing:1px}
-.keypad{padding:0 12px 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.keypad{padding:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .k{height:68px;border-radius:16px;border:none;font-weight:900;font-size:28px;cursor:pointer}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 4px 0 #7a5d18}
 .k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:15px;box-shadow:0 4px 0 #7a5d18}
 .k:active{transform:translateY(3px);box-shadow:none}
-.typing{text-align:center;color:#fff;font-weight:900;font-size:22px;padding:10px;min-height:44px;background:#0a1f12;border-top:1px solid #d4af37}
+.typing{text-align:center;color:#fff;font-weight:900;font-size:26px;padding:10px;min-height:44px}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="top"><h1>RAFIGASP</h1><p>COACH DA ROLETA</p></div>
-<div class="blacks"><div class="bbox" id="boxUlt">ULT: -</div><div class="bbox" id="boxCol">-</div></div>
+<div class="blacks"><div class="bbox" id="boxUlt"></div><div class="bbox" id="boxCol"></div></div>
 <div class="history"><div class="hist-grid" id="grid"></div><div class="label">TOQUE NOS NUMEROS</div></div>
 <div class="typing" id="typing"></div>
 <div class="keypad">
@@ -64,10 +64,9 @@ grid.appendChild(d);
 }
 if(nums.length>0){
 let last=nums[nums.length-1];
-boxUlt.textContent='ULT: '+last;
+boxUlt.textContent=last;
 let col=getCol(last);
-if(col==0){boxCol.textContent='ZERO';}
-else{let jogar=col==1?2:col==2?3:1; boxCol.textContent='COLUNA '+jogar;}
+boxCol.textContent=col==0?'ZERO':'COLUNA '+col;
 }
 }
 function addN(n){
@@ -76,24 +75,18 @@ cur+=n;
 typing.textContent=cur;
 boxUlt.textContent=cur;
 let v=parseInt(cur);
-if(!isNaN(v) && v<=36){
-let col=getCol(v);
-if(col==0) boxCol.textContent='ZERO';
-else{let jogar=col==1?2:col==2?3:1; boxCol.textContent='COLUNA '+jogar;}
-}
+if(!isNaN(v)){let col=getCol(v); boxCol.textContent=col==0?'ZERO':'COLUNA '+col;}
 }
 function enterN(){
 if(cur==='') return;
 let v=parseInt(cur);
-if(v<0||v>36){typing.textContent='0 a 36'; cur=''; return;}
-nums.push(v);
-if(nums.length>12) nums.shift();
-cur=''; typing.textContent='';
-render();
+if(v>36) return;
+nums.push(v); if(nums.length>12) nums.shift();
+cur=''; typing.textContent=''; render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur||(nums.length?'ULT: '+nums[nums.length-1]:'ULT: -'); if(cur=='') boxCol.textContent='-';}
-else{nums.pop(); typing.textContent=''; render(); if(nums.length==0){boxUlt.textContent='ULT: -'; boxCol.textContent='-';}}
+if(cur!==''){cur=cur.slice(0,-1); typing.textContent=cur; boxUlt.textContent=cur|| (nums.length?nums[nums.length-1]:''); if(cur=='') boxCol.textContent=nums.length?(getCol(nums[nums.length-1])==0?'ZERO':'COLUNA '+getCol(nums[nums.length-1])):'';}
+else{nums.pop(); render(); if(nums.length==0){boxUlt.textContent=''; boxCol.textContent='';}}
 }
 render();
 </script>

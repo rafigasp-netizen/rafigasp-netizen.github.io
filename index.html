@@ -17,10 +17,10 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 .hslot.yellow{background:#d4af37;color:#000}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff;box-shadow:0 0 8px #16a34a}
 .hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff;box-shadow:0 0 8px #dc2626}
-.keypad{padding:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;flex:1;align-content:start;background:#0d2818}
+.keypad{padding:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;flex:1;align-content:start}
 .k{height:92px;border-radius:18px;border:none;font-weight:900;font-size:32px;cursor:pointer}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 5px 0 #7a5d18}
-.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 5px 0 #7f1d1d;font-size:32px}
+.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 5px 0 #7f1d1d}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:17px;box-shadow:0 5px 0 #7a5d18}
 .k:active{transform:translateY(4px);box-shadow:none}
 </style>
@@ -37,7 +37,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial,sa
 </div>
 </div>
 <script>
-let history=[]; let cur=''; let lastPred=null;
+let history=[]; let cur='';
 const grid=document.getElementById('grid');
 const boxUlt=document.getElementById('boxUlt');
 const boxCol=document.getElementById('boxCol');
@@ -48,11 +48,13 @@ if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
 return 3;
 }
 function render(){
+// AGORA INVERTE: MAIS NOVO PRIMEIRO
+let rev=[...history].reverse();
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-if(i<history.length){
-let h=history[i];
+if(i<rev.length){
+let h=rev[i];
 if(h.result==='win') d.className='hslot green';
 else if(h.result==='lose') d.className='hslot red';
 else d.className='hslot yellow';
@@ -64,23 +66,24 @@ grid.appendChild(d);
 function addN(n){
 if(cur.length>=2) return;
 cur+=n; boxUlt.textContent=cur;
-let v=parseInt(cur);
-if(!isNaN(v)){boxCol.textContent=getCol(v)==0?'ZERO':'COLUNA '+getCol(v);}
+let v=parseInt(cur); if(!isNaN(v)) boxCol.textContent=getCol(v)==0?'ZERO':'COLUNA '+getCol(v);
 }
 function enterN(){
 if(cur==='') return;
 let v=parseInt(cur); if(v>36) return;
-if(v===0){history=[]; lastPred=null; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
-if(history.length>0){history[history.length-1].result = getCol(v)==history[history.length-1].col? 'win':'lose';}
+if(v===0){history=[]; cur=''; boxUlt.textContent=''; boxCol.textContent=''; render(); return;}
+if(history.length>0){
+let last=history[history.length-1];
+last.result = getCol(v)==last.col? 'win':'lose';
+}
 history.push({num:v,col:getCol(v),result:'pending'});
 if(history.length>12) history.shift();
-lastPred=getCol(v); cur='';
-boxUlt.textContent=v; boxCol.textContent='COLUNA '+getCol(v);
+cur=''; boxUlt.textContent=v; boxCol.textContent='COLUNA '+getCol(v);
 render();
 }
 function corrige(){
-if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:''); if(cur=='') boxCol.textContent=history.length?'COLUNA '+history[history.length-1].col:'';}
-else{history.pop(); if(history.length>0){lastPred=history[history.length-1].col; boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+lastPred;}else{boxUlt.textContent=''; boxCol.textContent=''; lastPred=null;} render();}
+if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'');}
+else{history.pop(); if(history.length>0){boxUlt.textContent=history[history.length-1].num; boxCol.textContent='COLUNA '+history[history.length-1].col;}else{boxUlt.textContent=''; boxCol.textContent='';} render();}
 }
 render();
 </script>

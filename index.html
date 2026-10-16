@@ -18,14 +18,14 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
 .hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
 .ab-top{display:grid;grid-template-columns:70px 1fr;gap:6px;padding:6px;background:#0a1f12}
-.ab-box{border-radius:8px;border:1.5px solid #d4af37;padding:4px 6px;min-height:34px;background:#1a1a1a;display:flex;flex-direction:column}
+.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;min-height:38px;background:#1a1a1a;display:flex;flex-direction:column}
 .ab-label{font-size:8px;color:#d4af37;font-weight:900}
-.ab-content{display:flex;gap:4px;flex-wrap:wrap;min-height:18px;margin-top:2px}
-.ab-chip{font-size:11px;font-weight:800;padding:2px 5px;border-radius:4px;color:#fff;display:flex;align-items:center;justify-content:center;min-width:24px}
+.ab-content{display:flex;gap:5px;flex-wrap:wrap;min-height:20px;margin-top:3px;align-items:center}
+.ab-chip{font-size:13px;font-weight:900;padding:3px 8px;border-radius:6px;min-width:36px;text-align:center}
 .ab-chip.yellow{background:#d4af37;color:#000}
-.ab-chip.green{background:#16a34a;border:1px solid #fff}
-.ab-chip.red{background:#dc2626;border:1px solid #fff}
-.ab-dot{width:12px;height:12px;border-radius:50%}
+.ab-chip.green{background:#16a34a;color:#fff;border:1px solid #fff}
+.ab-chip.red{background:#dc2626;color:#fff;border:1px solid #fff}
+.ab-chip.big{font-size:14px;min-width:42px}
 .keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
 .k{height:48px;border-radius:10px;border:none;font-weight:900;font-size:19px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
@@ -40,7 +40,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <div class="history"><div class="hist-grid" id="grid"></div></div>
 <div class="ab-top">
 <div class="ab-box"><span class="ab-label">A</span><div class="ab-content" id="boxA">-</div></div>
-<div class="ab-box"><span class="ab-label">B - HISTORICO</span><div class="ab-content" id="boxB">-</div></div>
+<div class="ab-box"><span class="ab-label">B - ULTIMO RESULTADO</span><div class="ab-content" id="boxB">-</div></div>
 </div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
@@ -51,7 +51,8 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <div class="bottom-fill"></div>
 </div>
 <script>
-let history=[],cur='',colunaTravada=0,lastYellow=null;
+let history=[],cur='',colunaTravada=0;
+let memorias={}; // 1 ao 36
 const grid=document.getElementById('grid'),boxUlt=document.getElementById('boxUlt'),boxCol=document.getElementById('boxCol'),boxA=document.getElementById('boxA'),boxB=document.getElementById('boxB');
 const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
@@ -59,11 +60,17 @@ function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].in
 function render(){
 grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createElement('div');if(i<history.length){let h=history[i];if(h.result=='win')d.className='hslot green';else if(h.result=='lose')d.className='hslot red';else d.className='hslot yellow';d.textContent=h.num}else{d.className='hslot empty'}grid.appendChild(d)}
 }
-function renderB(num){
+function renderA(num){
+boxA.innerHTML='';
+let chip=document.createElement('span');
+chip.className='ab-chip yellow big';
+chip.textContent=num;
+boxA.appendChild(chip);
+}
+function renderB(ciclo){
 boxB.innerHTML='';
-let mesmoCol = history.filter(h=>h.num==num);
-if(mesmoCol.length==0){boxB.textContent='-';return}
-mesmoCol.slice(-8).forEach(h=>{
+if(!ciclo || ciclo.length==0){boxB.textContent='SEM HISTORICO';return}
+ciclo.forEach(h=>{
 let chip=document.createElement('span');
 chip.className='ab-chip '+h.result;
 if(h.result=='pending')chip.className='ab-chip yellow';
@@ -71,29 +78,40 @@ chip.textContent=h.num;
 boxB.appendChild(chip);
 });
 }
-function updateA(amareloNum){
-boxA.innerHTML='';
-let col=getColReal(amareloNum);
-let mesmos=history.filter(h=>h.colReal==col).map(h=>h.num);
-if(mesmos.length==0){boxA.textContent=amareloNum;return}
-mesmos.slice(-6).forEach(n=>{let chip=document.createElement('span');chip.className='ab-chip yellow';chip.textContent=n;boxA.appendChild(chip)});
-lastYellow=amareloNum;
-}
 function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
 function enterN(){
 if(cur=='')return;let v=parseInt(cur);if(v>36)return;
-if(v==0){history=[];colunaTravada=0;cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.textContent='-';boxB.textContent='-';render();return}
+if(v==0){history=[];cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.textContent='-';boxB.textContent='-';render();return}
 let idx=history.length,colReal=getColReal(v),alvo=getAlvo(v),res;
-if(idx%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;updateA(v)}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}
-history.push({num:v,colReal:colReal,result:res});
+if(idx%4==0){
+// AMARELO - qualquer numero de 1 a 36
+colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;
+renderA(v);
+if(memorias[v]){renderB(memorias[v])}else{boxB.textContent='1ª VEZ DO '+v}
+}else{
+if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'
+}
+history.push({num:v,colReal:colReal,result:res,alvo:alvo});
 if(history.length>12)history.shift();
-cur='';boxUlt.textContent=v;
-render();
-// SE O NUMERO 2 SAIR, MOSTRA HISTORICO DELE NO B
-if(v==2 || history.filter(h=>h.num==v).length>1){
-renderB(v);
+// se completou um ciclo, salva pro numero amarelo daquele ciclo
+if(history.length>=4){
+let cicloCompleto = history.length % 4 == 0;
+if(cicloCompleto){
+let amarelo = history[history.length-4];
+let ultimos3 = history.slice(-3);
+if(amarelo && amarelo.result=='pending'){
+memorias[amarelo.num] = ultimos3.map(h=>({num:h.num,result:h.result}));
+localStorage.setItem('memorias_1_36', JSON.stringify(memorias));
 }
 }
+}
+cur='';boxUlt.textContent=v;render();
+}
+// carrega tudo que salvou
+try{
+let salvo=localStorage.getItem('memorias_1_36');
+if(salvo){memorias=JSON.parse(salvo)}
+}catch(e){}
 function corrige(){if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-'}else{history.pop();render();boxUlt.textContent=history.length?history[history.length-1].num:'-'}}
 render();
 </script>

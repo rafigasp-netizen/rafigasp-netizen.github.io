@@ -24,12 +24,11 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .q.yellow{background:#d4af37;color:#000;border:none;box-shadow:0 0 8px #d4af37}
 .q.green{background:#16a34a}
 .q.red{background:#dc2626}
-.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
-.k{height:60px;border-radius:12px;border:none;font-weight:900;font-size:21px}
+.keypad{flex:1;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
+.k{height:100%;min-height:65px;border-radius:12px;border:none;font-weight:900;font-size:22px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
-.bottom-fill{flex:1;background:#0d2818}
 </style>
 </head>
 <body>
@@ -46,7 +45,6 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <button class="k num" onclick="addN(7)">7</button><button class="k num" onclick="addN(8)">8</button><button class="k num" onclick="addN(9)">9</button>
 <button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
 </div>
-<div class="bottom-fill"></div>
 </div>
 <script>
 let history=[],cur='',colunaTravada=0,memorias={},total=0;
@@ -59,7 +57,17 @@ function render(){grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createE
 function renderA(num){boxA.innerHTML='';let c=document.createElement('div');c.className='q yellow';c.textContent=num;boxA.appendChild(c)}
 function renderB(ciclo){boxB.innerHTML='';if(!ciclo||!ciclo.length)return;ciclo.forEach(h=>{let c=document.createElement('div');c.className='q '+cor(h.result);c.textContent=h.num;boxB.appendChild(c);});}
 function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
-function enterN(){if(cur=='')return;let v=parseInt(cur);if(v>36)return;if(v==0){history=[];cur='';total=0;boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.innerHTML='-';boxB.innerHTML='-';render();return}let colReal=getColReal(v),alvo=getAlvo(v),res;if(total%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;renderA(v);if(memorias[v])renderB(memorias[v]);}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}history.push({num:v,result:res});if(history.length>12)history.shift();total++;if(total%4==0){let amarelo=history[history.length-4];let ult3=history.slice(-3);if(amarelo&&amarelo.result=='pending'){memorias[amarelo.num]=ult3;localStorage.setItem('memorias_1_36',JSON.stringify(memorias))}}cur='';boxUlt.textContent=v;render();}
+function enterN(){
+if(cur=='')return;
+if(cur=='00'){memorias={};localStorage.removeItem('memorias_1_36');boxA.innerHTML='-';boxB.innerHTML='-';boxUlt.textContent='B ZERADO';boxCol.textContent='COLUNA';setTimeout(()=>{boxUlt.textContent='-';},1000);cur='';return;}
+let v=parseInt(cur);if(v>36)return;
+if(v==0){history=[];cur='';total=0;boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.innerHTML='-';boxB.innerHTML='-';render();return}
+let colReal=getColReal(v),alvo=getAlvo(v),res;
+if(total%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;renderA(v);if(memorias[v])renderB(memorias[v]);}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}
+history.push({num:v,result:res});if(history.length>12)history.shift();total++;
+if(total%4==0){let amarelo=history[history.length-4];let ult3=history.slice(-3);if(amarelo&&amarelo.result=='pending'){memorias[amarelo.num]=ult3;localStorage.setItem('memorias_1_36',JSON.stringify(memorias))}}
+cur='';boxUlt.textContent=v;render();
+}
 try{let s=localStorage.getItem('memorias_1_36');if(s)memorias=JSON.parse(s)}catch(e){}
 function corrige(){if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-'}else{if(history.length>0){history.pop();total=Math.max(0,total-1);render();boxUlt.textContent=history.length?history[history.length-1].num:'-'}}}
 render();

@@ -11,29 +11,32 @@ body{display:flex;justify-content:center;font-family:Arial,sans-serif}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
 .blacks{display:flex;gap:8px;padding:8px;background:#0a1f12;flex-shrink:0}
 .bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
+/* QUADRADOS VERMELHOS - MANTIDOS */
 .history{background:#123524;padding:6px;flex-shrink:0}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.hslot{height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
+.hslot{height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
 .hslot.empty{border:1.5px dashed #d4af37;opacity:0.3}
 .hslot.yellow{background:#d4af37;color:#000;box-shadow:0 0 8px #d4af37}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
 .hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
-.ab-row{display:flex;gap:6px;padding:6px;background:#0a1f12;flex-shrink:0}
-.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;display:flex;flex-direction:column;flex:1;min-height:38px}
-.ab-box.a{flex:0.8;background:#1a1a00}
-.ab-box.b{flex:1.2;background:#1a0f0f}
+/* LINHA A e B NO LUGAR DO 1,2,3 */
+.ab-top{display:grid;grid-template-columns:1fr 2fr;gap:6px;padding:6px;background:#0a1f12;flex-shrink:0}
+.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;display:flex;flex-direction:column;min-height:36px}
+.ab-box.a{background:#1a1a00}
+.ab-box.b{background:#1a0f0f}
 .ab-label{font-size:9px;color:#d4af37;font-weight:900}
 .ab-content{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px;align-items:center;min-height:16px}
-.ab-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.ab-dot{width:11px;height:11px;border-radius:50%}
 .ab-dot.green{background:#16a34a}
 .ab-dot.red{background:#dc2626}
 .ab-dot.yellow{background:#d4af37}
 .ab-chip{font-size:11px;font-weight:800;padding:2px 4px;border-radius:4px;background:#0d2818;border:1px solid #2d5a3a;color:#fff}
+/* TECLADO VERDE DIMINUIDO */
 .keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;align-content:stretch}
-.k{border-radius:12px;border:none;font-weight:900;font-size:22px;cursor:pointer;height:100%;min-height:0}
+.k{border-radius:12px;border:none;font-weight:900;font-size:22px;cursor:pointer;height:100%;min-height:32px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 3px 0 #7a5d18}
 .k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 3px 0 #7f1d1d}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px;box-shadow:0 3px 0 #7a5d18}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:11px;box-shadow:0 3px 0 #7a5d18}
 .k:active{transform:translateY(2px);box-shadow:none}
 </style>
 </head>
@@ -41,6 +44,9 @@ body{display:flex;justify-content:center;font-family:Arial,sans-serif}
 <div class="app">
 <div class="blacks"><div class="bbox" id="boxUlt">-</div><div class="bbox" id="boxCol">COLUNA</div></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-<div class="ab-row">
+<div class="ab-top">
 <div class="ab-box a"><span class="ab-label">A - HIST. AMARELO</span><div class="ab-content" id="boxA">-</div></div>
-<div class="ab-box b"><span
+<div class="ab-box b"><span class="ab-label">B - CORES</span><div class="ab-content" id="boxB">-</div></div>
+</div>
+<div class="keypad">
+<button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN

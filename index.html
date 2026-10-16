@@ -12,21 +12,18 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
 .history{background:#123524;padding:6px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.hslot{height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
-.hslot.empty{border:1.5px dashed #d4af37;opacity:.4}
-.hslot.yellow{background:#d4af37;color:#000}
-.hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
-.hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
-.ab-top{display:grid;grid-template-columns:74px 1fr;gap:6px;padding:6px;background:#0a1f12}
-.ab-box{border-radius:10px;border:1.5px solid #d4af37;min-height:46px;background:#0f2e1c;display:flex;align-items:center;padding:4px}
-.ab-content{display:flex;gap:6px;align-items:center;width:100%;justify-content:center}
-.ab-box:first-child .ab-content{justify-content:center}
-.ab-box:last-child .ab-content{justify-content:flex-start}
-.chip{font-size:15px;font-weight:900;padding:0;border-radius:8px;min-width:52px;height:32px;display:flex;align-items:center;justify-content:center}
-.chip.yellow{background:#d4af37;color:#000}
-.chip.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
-.chip.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
-.chip.small-yellow{background:#d4af37;color:#000;min-width:44px;box-shadow:0 0 8px #d4af37}
+.hslot{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;border:1.5px solid #fff}
+.hslot.empty{border:1.5px dashed #d4af37;opacity:.4;background:transparent}
+.hslot.yellow{background:#d4af37!important;color:#000!important;border:none!important;box-shadow:0 0 8px #d4af37}
+.hslot.green{background:#16a34a!important}
+.hslot.red{background:#dc2626!important}
+.ab-top{display:grid;grid-template-columns:74px 1fr;gap:6px;padding:6px;background:#0a1f12;border-top:1px solid #d4af37}
+.ab-box{border-radius:10px;border:1.5px solid #d4af37;min-height:48px;background:#0f2e1c;display:flex;align-items:center;padding:5px}
+.ab-content{display:flex;gap:6px;align-items:center;width:100%}
+.q{height:34px;min-width:48px;padding:0 10px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;border:1.5px solid #fff}
+.q.yellow{background:#d4af37;color:#000;border:none;box-shadow:0 0 8px #d4af37}
+.q.green{background:#16a34a}
+.q.red{background:#dc2626}
 .keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
 .k{height:54px;border-radius:10px;border:none;font-weight:900;font-size:20px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
@@ -58,21 +55,21 @@ const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35
 function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
 function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
 function render(){
-grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createElement('div');if(i<history.length){let h=history[i];d.className='hslot '+h.result;if(h.result=='pending')d.className='hslot yellow';d.textContent=h.num}else{d.className='hslot empty'}grid.appendChild(d)}
+grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createElement('div');if(i<history.length){let h=history[i];let cls=h.result;if(cls=='pending')cls='yellow';d.className='hslot '+cls;d.textContent=h.num}else{d.className='hslot empty'}grid.appendChild(d)}
 }
-function renderA(num){boxA.innerHTML='';let c=document.createElement('div');c.className='chip small-yellow';c.textContent=num;boxA.appendChild(c)}
+function renderA(num){boxA.innerHTML='';let c=document.createElement('div');c.className='q yellow';c.textContent=num;boxA.appendChild(c)}
 function renderB(ciclo){
-boxB.innerHTML='';if(!ciclo||ciclo.length==0){boxB.textContent='-';return}
-ciclo.forEach(h=>{let c=document.createElement('div');c.className='chip '+h.result;if(h.result=='pending')c.className='chip yellow';c.textContent=h.num;boxB.appendChild(c)})
+boxB.innerHTML='';if(!ciclo||ciclo.length==0)return;
+ciclo.forEach(h=>{let c=document.createElement('div');let cls=h.result;if(cls=='pending')cls='yellow';c.className='q '+cls;c.textContent=h.num;boxB.appendChild(c)})
 }
 function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
 function enterN(){
 if(cur=='')return;let v=parseInt(cur);if(v>36)return;
-if(v==0){history=[];cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.textContent='-';boxB.textContent='-';render();return}
+if(v==0){history=[];cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.innerHTML='-';boxB.innerHTML='-';render();return}
 let idx=history.length,colReal=getColReal(v),alvo=getAlvo(v),res;
-if(idx%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;renderA(v);if(memorias[v])renderB(memorias[v]);else boxB.innerHTML='-'}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}
+if(idx%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;renderA(v);if(memorias[v])renderB(memorias[v]);}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}
 history.push({num:v,colReal:colReal,result:res});if(history.length>12)history.shift();
-if(history.length>=4&&history.length%4==0){let amarelo=history[history.length-4];let ult3=history.slice(-3);if(amarelo&&amarelo.result=='pending'){memorias[amarelo.num]=ult3.map(h=>({num:h.num,result:h.result}));localStorage.setItem('memorias_1_36',JSON.stringify(memorias))}}
+if(history.length>=4&&history.length%4==0){let amarelo=history[history.length-4];let ult3=history.slice(-3);if(amarelo&&amarelo.result=='pending'){memorias[amarelo.num]=ult3;localStorage.setItem('memorias_1_36',JSON.stringify(memorias))}}
 cur='';boxUlt.textContent=v;render();
 }
 try{let s=localStorage.getItem('memorias_1_36');if(s)memorias=JSON.parse(s)}catch(e){}

@@ -10,51 +10,37 @@ html,body{height:100%;overflow:hidden;background:#0d2818}
 body{display:flex;justify-content:center;font-family:Arial,sans-serif}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
 .blacks{display:flex;gap:8px;padding:8px;background:#0a1f12;flex-shrink:0}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:44px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
-.history{background:#123524;padding:8px;flex-shrink:0}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
-.hslot.empty{border:1.5px dashed #d4af37;opacity:0.25}
-.hslot.yellow{background:#d4af37;color:#000;box-shadow:0 0 10px #d4af37}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
+.history{background:#123524;padding:6px;flex-shrink:0}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.hslot{height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
+.hslot.empty{border:1.5px dashed #d4af37;opacity:0.3}
+.hslot.yellow{background:#d4af37;color:#000;box-shadow:0 0 8px #d4af37}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
 .hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
-/* LINHA A e B QUE VOCE PEDIU */
 .ab-row{display:flex;gap:6px;padding:6px;background:#0a1f12;flex-shrink:0}
-.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;display:flex;flex-direction:column;flex:1;min-height:42px}
+.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;display:flex;flex-direction:column;flex:1;min-height:38px}
 .ab-box.a{flex:0.8;background:#1a1a00}
 .ab-box.b{flex:1.2;background:#1a0f0f}
-.ab-label{font-size:10px;color:#d4af37;font-weight:900;letter-spacing:1px}
-.ab-content{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px;align-items:center}
-.ab-chip{font-size:12px;font-weight:800;padding:2px 5px;border-radius:5px;background:#0d2818;border:1px solid #2d5a3a;color:#fff}
-.ab-chip.yellow{color:#000;background:#d4af37}
-.ab-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
-.ab-dot.green{background:#16a34a;box-shadow:0 0 5px #16a34a}
-.ab-dot.red{background:#dc2626;box-shadow:0 0 5px #dc2626}
-.ab-dot.yellow{background:#d4af37;box-shadow:0 0 5px #d4af37}
-.keypad{padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:1;align-content:stretch}
-.k{border-radius:14px;border:none;font-weight:900;font-size:26px;cursor:pointer;height:100%;min-height:0}
-.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 4px 0 #7a5d18}
-.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:14px;box-shadow:0 4px 0 #7a5d18}
-.k:active{transform:translateY(3px);box-shadow:none}
+.ab-label{font-size:9px;color:#d4af37;font-weight:900}
+.ab-content{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px;align-items:center;min-height:16px}
+.ab-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.ab-dot.green{background:#16a34a}
+.ab-dot.red{background:#dc2626}
+.ab-dot.yellow{background:#d4af37}
+.ab-chip{font-size:11px;font-weight:800;padding:2px 4px;border-radius:4px;background:#0d2818;border:1px solid #2d5a3a;color:#fff}
+.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;align-content:stretch}
+.k{border-radius:12px;border:none;font-weight:900;font-size:22px;cursor:pointer;height:100%;min-height:0}
+.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 3px 0 #7a5d18}
+.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 3px 0 #7f1d1d}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px;box-shadow:0 3px 0 #7a5d18}
+.k:active{transform:translateY(2px);box-shadow:none}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="blacks"><div class="bbox" id="boxUlt">-</div><div class="bbox" id="boxCol">COLUNA</div></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-<!-- A e B AQUI -->
 <div class="ab-row">
 <div class="ab-box a"><span class="ab-label">A - HIST. AMARELO</span><div class="ab-content" id="boxA">-</div></div>
-<div class="ab-box b"><span class="ab-label">B - CORES</span><div class="ab-content" id="boxB">-</div></div>
-</div>
-<div class="keypad">
-<button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
-<button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
-<button class="k num" onclick="addN(7)">7</button><button class="k num" onclick="addN(8)">8</button><button class="k num" onclick="addN(9)">9</button>
-<button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
-</div>
-</div>
-<script>
-let history=[]; let cur=''; let colunaTravada=0;
-const grid=document
+<div class="ab-box b"><span

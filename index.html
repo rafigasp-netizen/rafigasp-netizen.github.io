@@ -39,14 +39,59 @@ body{display:flex;justify-content:center;font-family:Arial,sans-serif}
 </div>
 <script>
 let history=[]; let cur=''; let colunaTravada=0;
-const grid=document.getElementById('grid'); const boxUlt=document.getElementById('boxUlt'); const boxCol=document.getElementById('boxCol');
-const paraColuna1=[6,9,11,14,16,17,19,21,26,29,33,36]; const paraColuna2=[2,3,5,8,10,13,20,25,28,31,32,35]; const paraColuna3=[1,4,7,12,15,18,22,23,24,27,30,34];
-function getAlvo(n){ if(paraColuna1.includes(n)) return 1; if(paraColuna2.includes(n)) return 2; if(paraColuna3.includes(n)) return 3; return 0; }
-function getColReal(n){ if(n==0) return 0; if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1; if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2; return 3; }
-function render(){ grid.innerHTML=''; for(let i=0;i<12;i++){ let d=document.createElement('div'); if(i<history.length){ let h=history[i]; if(h.result==='win') d.className='hslot green'; else if(h.result==='lose') d.className='hslot red'; else d.className='hslot yellow'; d.textContent=h.num; }else{d.className='hslot empty';} grid.appendChild(d);} }
+const grid=document.getElementById('grid');
+const boxUlt=document.getElementById('boxUlt');
+const boxCol=document.getElementById('boxCol');
+const paraColuna1=[6,9,11,14,16,17,19,21,26,29,33,36];
+const paraColuna2=[2,3,5,8,10,13,20,25,28,31,32,35];
+const paraColuna3=[1,4,7,12,15,18,22,23,24,27,30,34];
+function getAlvo(n){
+if(paraColuna1.includes(n)) return 1;
+if(paraColuna2.includes(n)) return 2;
+if(paraColuna3.includes(n)) return 3;
+return 0;
+}
+function getColReal(n){
+if(n==0) return 0;
+if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n)) return 1;
+if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n)) return 2;
+return 3;
+}
+function render(){
+grid.innerHTML='';
+for(let i=0;i<12;i++){
+let d=document.createElement('div');
+if(i<history.length){
+let h=history[i];
+if(h.result==='win') d.className='hslot green';
+else if(h.result==='lose') d.className='hslot red';
+else d.className='hslot yellow';
+d.textContent=h.num;
+}else{d.className='hslot empty';}
+grid.appendChild(d);
+}
+}
 function addN(n){ if(cur.length>=2) return; cur+=n; boxUlt.textContent=cur; }
-function enterN(){ if(cur==='') return; let v=parseInt(cur); if(v>36) return; if(v===0){history=[]; colunaTravada=0; cur=''; boxUlt.textContent='-'; boxCol.textContent='COLUNA'; render(); return;} let idx=history.length; let colReal=getColReal(v); let alvo=getAlvo(v); let res; if(idx%4===0){ colunaTravada=alvo; res='pending'; boxCol.textContent='COLUNA '+colunaTravada; } else{ if(colunaTravada>0) res=(colReal===colunaTravada)?'win':'lose'; else res='pending'; } history.push({num:v,colReal:colReal,alvo:alvo,result:res}); if(history.length>12) history.shift(); cur=''; boxUlt.textContent=v; render(); }
-function corrige(){ if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'-');} else{ history.pop(); if(history.length>0){ let ultimoAmarelo=Math.floor((history.length-1)/4)*4; if(history[ultimoAmarelo]){ colunaTravada=history[ultimoAmarelo].alvo; boxCol.textContent='COLUNA '+colunaTravada; } } else{ colunaTravada=0; boxCol.textContent='COLUNA';} boxUlt.textContent=history.length?history[history.length-1].num:'-'; render(); } }
+function enterN(){
+if(cur==='') return;
+let v=parseInt(cur); if(v>36) return;
+if(v===0){history=[]; colunaTravada=0; cur=''; boxUlt.textContent='-'; boxCol.textContent='COLUNA'; render(); return;}
+let idx=history.length; let colReal=getColReal(v); let alvo=getAlvo(v); let res;
+if(idx%4===0){ colunaTravada=alvo; res='pending'; boxCol.textContent='COLUNA '+colunaTravada; }
+else{ if(colunaTravada>0) res=(colReal===colunaTravada)?'win':'lose'; else res='pending'; }
+history.push({num:v,colReal:colReal,alvo:alvo,result:res});
+if(history.length>12) history.shift();
+cur=''; boxUlt.textContent=v; render();
+}
+function corrige(){
+if(cur!==''){cur=cur.slice(0,-1); boxUlt.textContent=cur|| (history.length?history[history.length-1].num:'-');}
+else{
+history.pop();
+if(history.length>0){ let ultimoAmarelo=Math.floor((history.length-1)/4)*4; if(history[ultimoAmarelo]){ colunaTravada=history[ultimoAmarelo].alvo; boxCol.textContent='COLUNA '+colunaTravada; } }
+else{ colunaTravada=0; boxCol.textContent='COLUNA';}
+boxUlt.textContent=history.length?history[history.length-1].num:'-'; render();
+}
+}
 render();
 </script>
 </body>

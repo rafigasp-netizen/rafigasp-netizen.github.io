@@ -2,34 +2,71 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RAFIGASP</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;background:#0d2818}
-body{display:flex;justify-content:center;font-family:Arial,sans-serif}
-.app{width:100%;max-width:420px;min-height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
+body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
 .blacks{display:flex;gap:8px;padding:8px;background:#0a1f12}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
-.history{background:#0f2e1c;padding:8px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.history{background:#123524;padding:6px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
 .hslot{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
-.hslot.empty{border:1.5px dashed #4a6b3f;opacity:0.4}
-.hslot.yellow{background:#d4af37;color:#000;box-shadow:0 0 8px #d4af37}
+.hslot.empty{border:1.5px dashed #d4af37;opacity:.4}
+.hslot.yellow{background:#d4af37;color:#000}
 .hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
 .hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
-/* TECLADO VERDE DIMINUIDO */
-.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
-.k{position:relative;height:48px;border-radius:10px;border:none;font-weight:900;font-size:20px;cursor:pointer;overflow:visible}
-.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;box-shadow:0 2px 0 #7a5d18}
-.k.zero{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 2px 0 #7f1d1d}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:11px;box-shadow:0 2px 0 #7a5d18}
-.k:active{transform:translateY(2px);box-shadow:none}
-/* BADGES A e B EM CIMA DO 1,2,3 IGUAL SUA FOTO */
-.badge{position:absolute;top:-8px;left:4px;background:#fff;color:#000;font-weight:900;font-size:12px;padding:2px 6px;border-radius:6px;border:1.5px solid #000;z-index:5;min-width:24px;min-height:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.5)}
-.badge.b{left:50%;transform:translateX(-50%);min-width:80px}
-.badge-content{position:absolute;bottom:2px;left:2px;right:2px;display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
-.badge-dot{width:8px;height:8px;border-radius:50%}
-.badge-dot.green{background:#16a34a}
-.badge-dot.red{background:#dc2626}
-.badge-dot.yellow{background:#d4af37}
+.ab-top{display:grid;grid-template-columns:70px 1fr;gap:6px;padding:6px;background:#0a1f12}
+.ab-box{border-radius:8px;border:1.5px solid #d4af37;padding:3px 5px;min-height:32px;background:#1a1a1a}
+.ab-label{font-size:8px;color:#d4af37;font-weight:900}
+.ab-content{display:flex;gap:3px;flex-wrap:wrap;color:#fff;font-size:11px;min-height:14px}
+.ab-dot{width:10px;height:10px;border-radius:50%}
+.ab-dot.green{background:#16a34a}.ab-dot.red{background:#dc2626}.ab-dot.yellow{background:#d4af37}
+.ab-chip{font-size:10px;font-weight:800;padding:1px 3px;border-radius:3px;background:#0d2818;border:1px solid #fff;color:#fff}
+.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.k{height:46px;border-radius:10px;border:none;font-weight:900;font-size:19px}
+.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
+.k.zero{background:#ef4444;color:#fff}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:10px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="blacks"><div class="bbox" id="boxUlt">-</div><div class="bbox" id="boxCol">COLUNA</div></div>
+<div class="history"><div class="hist-grid" id="grid"></div></div>
+<div class="ab-top">
+<div class="ab-box"><span class="ab-label">A</span><div class="ab-content" id="boxA">-</div></div>
+<div class="ab-box"><span class="ab-label">B</span><div class="ab-content" id="boxB">-</div></div>
+</div>
+<div class="keypad">
+<button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
+<button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
+<button class="k num" onclick="addN(7)">7</button><button class="k num" onclick="addN(8)">8</button><button class="k num" onclick="addN(9)">9</button>
+<button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
+</div>
+</div>
+<script>
+let history=[],cur='',colunaTravada=0;
+const grid=document.getElementById('grid'),boxUlt=document.getElementById('boxUlt'),boxCol=document.getElementById('boxCol'),boxA=document.getElementById('boxA'),boxB=document.getElementById('boxB');
+const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
+function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
+function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
+function render(){
+grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createElement('div');if(i<history.length){let h=history[i];if(h.result=='win')d.className='hslot green';else if(h.result=='lose')d.className='hslot red';else d.className='hslot yellow';d.textContent=h.num}else{d.className='hslot empty'}grid.appendChild(d)}
+let last=history.slice(-8).map(h=>h.result);boxB.innerHTML='';if(last.length==0)boxB.textContent='-';else last.forEach(c=>{let s=document.createElement('span');s.className='ab-dot '+c;if(c=='pending')s.className='ab-dot yellow';boxB.appendChild(s)})}
+function updateA(n){
+let col=getColReal(n);let mesmos=history.filter(h=>h.colReal==col).map(h=>h.num);boxA.innerHTML='';if(mesmos.length==0)boxA.textContent=n;else mesmos.slice(-6).forEach(x=>{let chip=document.createElement('span');chip.className='ab-chip';chip.textContent=x;boxA.appendChild(chip)})}
+function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
+function enterN(){
+if(cur=='')return;let v=parseInt(cur);if(v>36)return;
+if(v==0){history=[];colunaTravada=0;cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.textContent='-';render();return}
+let idx=history.length,colReal=getColReal(v),alvo=getAlvo(v),res;
+if(idx%4==0){colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;updateA(v)}else{if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'}
+history.push({num:v,colReal:colReal,result:res});if(history.length>12)history.shift();
+cur='';boxUlt.textContent=v;render()}
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-'}else{history.pop();render();boxUlt.textContent=history.length?history[history.length-1].num:'-'}}
+render();
+</script>
+</body>
+</html>

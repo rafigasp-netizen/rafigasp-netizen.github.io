@@ -9,10 +9,10 @@
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
 .blacks{display:flex;gap:8px;padding:8px;background:#0a1f12}
-.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.bbox{flex:1;background:#d4af37;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}
 .history{background:#123524;padding:6px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;border:1.5px solid #fff}
+.hslot{height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
 .hslot.empty{border:1.5px dashed #d4af37;opacity:.4;background:transparent}
 .hslot.yellow{background:#d4af37!important;color:#000!important;border:none!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
@@ -44,12 +44,11 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[],cur='',colunaTravada=0,total=0;
+let history=[],cur='',total=0;
 const grid=document.getElementById('grid'),boxUlt=document.getElementById('boxUlt'),boxCol=document.getElementById('boxCol');
 const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
 function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
-
 function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
@@ -57,48 +56,40 @@ let d=document.createElement('div');
 if(i<history.length){
 let h=history[i];
 let row=Math.floor(i/4);
-let alvoDoRow=history[row*4]?.alvo || 0;
-if(i%4==0){
-// PRIMEIRO DA LINHA SEMPRE AMARELO COM NUMERO PRETO
-d.className='hslot yellow';
-}else{
-// RESTO VERDE SE ACERTOU COLUNA, VERMELHO SE ERROU
-let colReal=getColReal(h.num);
-d.className='hslot '+(colReal==alvoDoRow?'green':'red');
-}
+let alvoRow=history[row*4]?.alvo;
+if(i%4==0){d.className='hslot yellow';}
+else{let cr=getColReal(h.num); d.className='hslot '+(cr==alvoRow?'green':'red');}
 d.textContent=h.num;
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
 }
-
-function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
-
+function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur;}
 function enterN(){
 if(cur=='')return;
-if(cur=='00'){history=[];total=0;colunaTravada=0;boxUlt.textContent='ZERADO';boxCol.textContent='COLUNA';cur='';render();return;}
+if(cur=='00'){history=[];total=0;boxUlt.textContent='ZERADO';boxCol.textContent='COLUNA';cur='';render();return;}
 let v=parseInt(cur);if(v>36)return;
-if(v==0){history=[];total=0;colunaTravada=0;boxUlt.textContent='-';boxCol.textContent='COLUNA';cur='';render();return}
-
+if(v==0){history=[];total=0;boxUlt.textContent='-';boxCol.textContent='COLUNA';cur='';render();return}
 let alvo=getAlvo(v);
 if(total%4==0){
-// COMEÇO DE LINHA - DEFINE QUAL COLUNA JOGAR
-colunaTravada=alvo;
-boxCol.textContent='COLUNA '+colunaTravada;
-history.push({num:v, alvo:colunaTravada});
+// NOVO ALVO - TOPO FICA AMARELO COM COLUNA
+boxUlt.textContent=v;
+boxCol.textContent='COLUNA '+alvo;
+history.push({num:v, alvo:alvo});
 }else{
+// NUMERO DE TESTE - VAI FICAR VERDE OU VERMELHO
 history.push({num:v});
+boxUlt.textContent=v;
+let row=Math.floor((total)/4);
+let alvoAtual=history[row*4]?.alvo;
+if(alvoAtual) boxCol.textContent='COLUNA '+alvoAtual;
 }
 if(history.length>12)history.shift();
-total++;
-boxUlt.textContent=v; // ATUALIZA TOPO PARA ULTIMO NUMERO DIGITADO
-cur='';
-render();
+total++;cur='';render();
 }
-
 function corrige(){
-if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-'}
-else{if(history.length>0){history.pop();total=Math.max(0,total-1);let last=history[history.length-1];if(last){boxUlt.textContent=last.num; if(history.length%4==1 || history.length==0){let row=Math.floor((history.length-1)/4); let alvoRow=history[row*4]?.alvo; if(alvoRow) boxCol.textContent='COLUNA '+alvoRow; else boxCol.textContent='COLUNA';}}else{boxUlt.textContent='-';boxCol.textContent='COLUNA';}render();}}
+if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-';}
+else if(history.length>0){history.pop();total=Math.max(0,total-1);let last=history[history.length-1];if(last){boxUlt.textContent=last.num; let r=Math.floor((history.length-1)/4); let a=history[r*4]?.alvo; if(a) boxCol.textContent='COLUNA '+a;}else{boxUlt.textContent='-';boxCol.textContent='COLUNA';}render();}
 }
 render();
 </script>

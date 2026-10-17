@@ -7,119 +7,112 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
-.app{width:100%;max-width:420px;min-height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:#d4af37;padding:8px;text-align:center}
-.topo h1{color:#000;font-size:18px;font-weight:900}
-.topo span{font-size:10px;color:#4a3410;font-weight:800;display:block}
-.history{background:#0f2e1f;padding:10px;min-height:130px;display:block!important}
-.hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;min-height:110px}
-.col-amarela{background:#d4af37;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px;min-height:110px;justify-content:flex-start}
-.col-amarela.empty{background:rgba(212,175,55,0.2);border:2px dashed #d4af37}
-.col-amarela.active{outline:3px solid #fff}
-.yellow-header{font-weight:900;font-size:12px;color:#000;text-align:center;min-height:18px}
-.small-wrap{display:flex;flex-direction:column;gap:4px}
-.ssmall{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;background:#123524}
-.ssmall.green{background:#16a34a}.ssmall.red{background:#dc2626}
-.ssmall.empty{border:1.5px dashed #000;opacity:.3;background:transparent}
-.ssmall.preview{opacity:.6;outline:1px solid #fff}
-.bottom{padding:8px;display:flex;flex-direction:column;gap:8px}
-.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:90px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:4px;min-height:38px;opacity:.2}
-.blue-card.hasData{opacity:1}.blue-card.active{opacity:1;border:2px solid #d4af37}
-.blue-card .label{color:#d4af37;font-weight:900;font-size:10px}
-.blue-card .b{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:900}
-.b.green{background:#16a34a}.b.red{background:#dc2626}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
-.k{height:70px;border-radius:14px;border:none;font-weight:900;font-size:22px}
-.k.num{background:#d4af37;color:#4a3410}
+.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
+.blacks{display:flex;gap:8px;padding:8px;background:#0a1f12}
+.bbox{flex:1;background:#000;border:1.5px solid #d4af37;border-radius:12px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.history{background:#123524;padding:6px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.hslot{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.hslot.empty{border:1.5px dashed #d4af37;opacity:.4}
+.hslot.yellow{background:#d4af37;color:#000}
+.hslot.green{background:#16a34a;color:#fff;border:1.5px solid #fff}
+.hslot.red{background:#dc2626;color:#fff;border:1.5px solid #fff}
+.ab-top{display:grid;grid-template-columns:70px 1fr;gap:6px;padding:6px;background:#0a1f12}
+.ab-box{border-radius:10px;border:1.5px solid #d4af37;padding:4px 6px;min-height:38px;background:#1a1a1a;display:flex;flex-direction:column}
+.ab-label{font-size:8px;color:#d4af37;font-weight:900}
+.ab-content{display:flex;gap:5px;flex-wrap:wrap;min-height:20px;margin-top:3px;align-items:center}
+.ab-chip{font-size:13px;font-weight:900;padding:3px 8px;border-radius:6px;min-width:36px;text-align:center}
+.ab-chip.yellow{background:#d4af37;color:#000}
+.ab-chip.green{background:#16a34a;color:#fff;border:1px solid #fff}
+.ab-chip.red{background:#dc2626;color:#fff;border:1px solid #fff}
+.ab-chip.big{font-size:14px;min-width:42px}
+.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
+.k{height:48px;border-radius:10px;border:none;font-weight:900;font-size:19px}
+.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:#d4af37;color:#4a3410;font-size:11px}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:10px}
+.bottom-fill{flex:1;background:#0d2818}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
+<div class="blacks"><div class="bbox" id="boxUlt">-</div><div class="bbox" id="boxCol">COLUNA</div></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-<div class="bottom">
-<div class="blue-box" id="blueBox"></div>
+<div class="ab-top">
+<div class="ab-box"><span class="ab-label">A</span><div class="ab-content" id="boxA">-</div></div>
+<div class="ab-box"><span class="ab-label">B - ULTIMO RESULTADO</span><div class="ab-content" id="boxB">-</div></div>
+</div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
 <button class="k num" onclick="addN(7)">7</button><button class="k num" onclick="addN(8)">8</button><button class="k num" onclick="addN(9)">9</button>
 <button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
 </div>
-</div>
+<div class="bottom-fill"></div>
 </div>
 <script>
-let history=[],cur='';
-const grid=document.getElementById('grid');
-const blueBox=document.getElementById('blueBox');
-const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
-const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
-const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
-function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
-function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
-function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
-function render(preview=null){
-grid.innerHTML='';
-let previewNum=preview?preview.num:null;
-for(let col=0;col<4;col++){
-let div=document.createElement('div');
-let header=history[col];
-let r1=history[col+4];
-let r2=history[col+8];
-let isActive=false;
-if(previewNum && header && header.num==previewNum) isActive=true;
-if(!header && preview && col==history.length) {header={num:preview.num,alvo:preview.alvo}; isActive=true;}
-div.className = header ? (isActive?'col-amarela active':'col-amarela') : 'col-amarela empty';
-if(!header){
-div.innerHTML=`<div class="yellow-header">-</div><div class="small-wrap"><div class="ssmall empty"></div><div class="ssmall empty"></div></div>`;
+let history=[],cur='',colunaTravada=0;
+let memorias={}; // 1 ao 36
+const grid=document.getElementById('grid'),boxUlt=document.getElementById('boxUlt'),boxCol=document.getElementById('boxCol'),boxA=document.getElementById('boxA'),boxB=document.getElementById('boxB');
+const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
+function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
+function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
+function render(){
+grid.innerHTML='';for(let i=0;i<12;i++){let d=document.createElement('div');if(i<history.length){let h=history[i];if(h.result=='win')d.className='hslot green';else if(h.result=='lose')d.className='hslot red';else d.className='hslot yellow';d.textContent=h.num}else{d.className='hslot empty'}grid.appendChild(d)}
+}
+function renderA(num){
+boxA.innerHTML='';
+let chip=document.createElement('span');
+chip.className='ab-chip yellow big';
+chip.textContent=num;
+boxA.appendChild(chip);
+}
+function renderB(ciclo){
+boxB.innerHTML='';
+if(!ciclo || ciclo.length==0){boxB.textContent='SEM HISTORICO';return}
+ciclo.forEach(h=>{
+let chip=document.createElement('span');
+chip.className='ab-chip '+h.result;
+if(h.result=='pending')chip.className='ab-chip yellow';
+chip.textContent=h.num;
+boxB.appendChild(chip);
+});
+}
+function addN(n){if(cur.length>=2)return;cur+=n;boxUlt.textContent=cur}
+function enterN(){
+if(cur=='')return;let v=parseInt(cur);if(v>36)return;
+if(v==0){history=[];cur='';boxUlt.textContent='-';boxCol.textContent='COLUNA';boxA.textContent='-';boxB.textContent='-';render();return}
+let idx=history.length,colReal=getColReal(v),alvo=getAlvo(v),res;
+if(idx%4==0){
+// AMARELO - qualquer numero de 1 a 36
+colunaTravada=alvo;res='pending';boxCol.textContent='COLUNA '+colunaTravada;
+renderA(v);
+if(memorias[v]){renderB(memorias[v])}else{boxB.textContent='1ª VEZ DO '+v}
 }else{
-function small(h){if(!h) return `<div class="ssmall empty"></div>`;let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="ssmall ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-let html=`<div class="yellow-header">${header.num} ${header.alvo}</div><div class="small-wrap">`;
-if(preview && history.length>=4 && col==history.length%4 && header && previewNum!=header.num){
-// preview de resultado para este A
-let cr=getColunaReal(preview.num);let ca=getColunasDoAlvo(header.alvo);
-html+=`<div class="ssmall ${ca.includes(cr)?'green':'red'} preview">${preview.num}</div>`;
-if(r1) html+=small(r1); else html+=`<div class="ssmall empty"></div>`;
-}else{
-html+=small(r1)+small(r2);
+if(colunaTravada>0)res=(colReal==colunaTravada)?'win':'lose';else res='pending'
 }
-html+=`</div>`;
-div.innerHTML=html;
-}
-grid.appendChild(div);
-}
-// BLUE - APENAS A-A B-B C-C D-D SEPARADO
-blueBox.innerHTML='';
-for(let col=0;col<4;col++){
-let card=document.createElement('div');card.className='blue-card';
-let header=history[col];
-if(previewNum){
-if(header && header.num==previewNum){
-card.classList.add('active','hasData');
-let r1=history[col+4],r2=history[col+8];
-function b(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${b(r1)}${b(r2)}`;
-}else if(!header && col==history.length){
-card.classList.add('active','hasData');
-card.innerHTML=`<span class="label">${previewNum} ${preview.alvo}</span>`;
-}else{card.innerHTML='';}
-}else{
-if(!header){card.innerHTML='';}
-else{
-card.classList.add('hasData');
-let r1=history[col+4],r2=history[col+8];
-function b(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${b(r1)}${b(r2)}`;
+history.push({num:v,colReal:colReal,result:res,alvo:alvo});
+if(history.length>12)history.shift();
+// se completou um ciclo, salva pro numero amarelo daquele ciclo
+if(history.length>=4){
+let cicloCompleto = history.length % 4 == 0;
+if(cicloCompleto){
+let amarelo = history[history.length-4];
+let ultimos3 = history.slice(-3);
+if(amarelo && amarelo.result=='pending'){
+memorias[amarelo.num] = ultimos3.map(h=>({num:h.num,result:h.result}));
+localStorage.setItem('memorias_1_36', JSON.stringify(memorias));
 }
 }
-blueBox.appendChild(card);
 }
+cur='';boxUlt.textContent=v;render();
 }
-function addN(n){if(cur.length>=2)return;cur+=n;let v=parseInt(cur);if(isNaN(v))return;let alvo=getAlvo(v);render({num:v,alvo:alvo});}
-function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){setTimeout(()=>{history=[];render();},800);}}
-function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
+// carrega tudo que salvou
+try{
+let salvo=localStorage.getItem('memorias_1_36');
+if(salvo){memorias=JSON.parse(salvo)}
+}catch(e){}
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);boxUlt.textContent=cur||'-'}else{history.pop();render();boxUlt.textContent=history.length?history[history.length-1].num:'-'}}
 render();
 </script>
 </body>

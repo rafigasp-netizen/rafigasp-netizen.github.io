@@ -12,23 +12,25 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .topo h1{color:#000;font-size:17px;font-weight:900}
 .topo span{font-size:10px;color:#4a3410;font-weight:800;display:block}
 .history{background:#0f2e1f;padding:8px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:52px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
-.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.08)}
-.hslot.yellow{background:#d4af37!important;color:#000!important}
-.hslot.green{background:#16a34a!important;color:#fff!important}
-.hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.55;outline:2px solid #fff}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.col-amarela{background:#d4af37;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px;min-height:110px}
+.col-amarela.empty{background:rgba(212,175,55,0.15);border:2px dashed #d4af37}
+.col-amarela.active{outline:3px solid #fff}
+.yellow-header{font-weight:900;font-size:13px;color:#000;text-align:center}
+.small-wrap{display:flex;flex-direction:column;gap:5px}
+.ssmall{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
+.ssmall.green{background:#16a34a}.ssmall.red{background:#dc2626}
+.ssmall.empty{border:1.5px dashed #000;opacity:.3;background:transparent}
+.ssmall.preview{opacity:.5;outline:1px solid #fff}
 .bottom{padding:8px;display:flex;flex-direction:column;gap:8px;flex:1;justify-content:flex-end}
-.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:105px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;min-height:42px;opacity:.4}
-.blue-card.hasData{opacity:1}
-.blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
-.blue-card .label{color:#d4af37;font-weight:900;font-size:11px;white-space:nowrap}
-.blue-card .b{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900;flex-shrink:0}
-.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{display:none}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.k{height:68px;border-radius:14px;border:none;font-weight:900;font-size:23px}
+.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:100px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;min-height:40px;opacity:.3}
+.blue-card.hasData{opacity:1}.blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
+.blue-card .label{color:#d4af37;font-weight:900;font-size:11px}
+.blue-card .b{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.b.green{background:#16a34a}.b.red{background:#dc2626}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.k{height:72px;border-radius:15px;border:none;font-weight:900;font-size:24px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
@@ -57,71 +59,53 @@ const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
 const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
 function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
-function getColunasDoAlvo(alvo){if(alvo=="C1/3")return [1,3];if(alvo=="C2/3")return [2,3];if(alvo=="C1/2")return [1,2];return [];}
-function salvarMemoria(){for(let col=0;col<4;col++){let h=history[col];if(!h)continue;let r1=history[col+4],r2=history[col+8];let lista=[];if(r1)lista.push(r1);if(r2)lista.push(r2);if(lista.length>0)memoria[h.num]=lista;}localStorage.setItem('raf_mem',JSON.stringify(memoria));}
+function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
+function salvarMemoria(){for(let c=0;c<4;c++){let h=history[c];if(!h)continue;let r1=history[c+4],r2=history[c+8];let l=[];if(r1)l.push(r1);if(r2)l.push(r2);if(l.length)memoria[h.num]=l;}localStorage.setItem('raf_mem',JSON.stringify(memoria));}
 function carregarMemoria(){try{let m=localStorage.getItem('raf_mem');if(m)memoria=JSON.parse(m);}catch(e){}}
 carregarMemoria();
 function render(preview=null){
 grid.innerHTML='';
-for(let i=0;i<12;i++){
-let d=document.createElement('div');
-if(preview && i==history.length){
-let v=preview.num;let alvo=preview.alvo;
-if(i<4){d.className='hslot yellow preview';d.textContent=`${v} ${alvo}`;}
-else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(v);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${v}`;d.className=`hslot ${colsAlvo.includes(colReal)?'green':'red'} preview`;}
-grid.appendChild(d);continue;
-}
-if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${h.num}`;d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');}}else{d.className='hslot empty';}
-grid.appendChild(d);
-}
-// AZUL - A-A B-B C-C D-D SEPARADO
-blueBox.innerHTML='';
 let previewNum=preview?preview.num:null;
-let previewAlvo=preview?preview.alvo:null;
-
 for(let col=0;col<4;col++){
-let card=document.createElement('div');card.className='blue-card';
+let div=document.createElement('div');
 let header=history[col];
+let r1=history[col+4];
+let r2=history[col+8];
+if(!r1 && header && memoria[header.num]?.[0]) r1=memoria[header.num][0];
+if(!r2 && header && memoria[header.num]?.[1]) r2=memoria[header.num][1];
 
-// SE ESTA DIGITANDO, SO MOSTRA O QUE CORRESPONDE AO NUMERO DIGITADO
-if(previewNum){
-// se o header atual é o numero que estou digitando
-if(header && header.num==previewNum){
-card.classList.add('active','hasData');
-let r1=history[col+4],r2=history[col+8];
-if(!r1 && memoria[header.num]?.[0]) r1=memoria[header.num][0];
-if(!r2 && memoria[header.num]?.[1]) r2=memoria[header.num][1];
-function box(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${box(r1)}${box(r2)}`;
-}else if(!header && col==history.length){
-// preview de novo numero amarelo - mostra memoria dele se tiver
-let mem=memoria[previewNum];
-if(mem){
-function boxOld(h){let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(previewAlvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.classList.add('active','hasData');
-card.innerHTML=`<span class="label">${previewNum} ${previewAlvo}</span>${mem.map(boxOld).join('')}`;
+if(!header && preview && col==history.length){
+header={num:preview.num,alvo:preview.alvo};
+div.className='col-amarela active';
+}else if(header){
+let isActive = previewNum && previewNum==header.num;
+div.className='col-amarela'+(isActive?' active':'');
 }else{
-card.classList.add('active','hasData');
-card.innerHTML=`<span class="label">${previewNum} ${previewAlvo}</span>`;
+div.className='col-amarela empty';
 }
-}else{
-// OUTROS QUADRADOS FICAM VAZIOS/APAGADOS QUANDO DIGITA
-card.innerHTML='';
-}
-}else{
-// SEM DIGITACAO - MOSTRA TUDO NORMAL A-A B-B C-C D-D
+
 if(!header){
-card.innerHTML='';
+div.innerHTML=`<div class="yellow-header" style="opacity:.3">-</div><div class="small-wrap"><div class="ssmall empty"></div><div class="ssmall empty"></div></div>`;
 }else{
-card.classList.add('hasData');
-let r1=history[col+4],r2=history[col+8];
-if(!r1 && memoria[header.num]?.[0]) r1=memoria[header.num][0];
-if(!r2 && memoria[header.num]?.[1]) r2=memoria[header.num][1];
-function box(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${box(r1)}${box(r2)}`;
+function small(h,isPreview){
+if(isPreview){
+let cr=getColunaReal(preview.num);
+let ca=getColunasDoAlvo(header.alvo);
+return `<div class="ssmall ${ca.includes(cr)?'green':'red'} preview">${preview.num}</div>`;
 }
+if(!h) return `<div class="ssmall empty"></div>`;
+let cr=getColunaReal(h.num);
+let ca=getColunasDoAlvo(header.alvo);
+return `<div class="ssmall ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;
 }
-blueBox.appendChild(card);
-}
-}
-function addN(n){if(cur=='00')cur='';if(cur.length==0&&
+let previewForThis = preview && col==history.length-1 && history.length>=4 && header.num!=preview.num ? false : (preview && ((header && header.num==previewNum) || (!history[col] && col==history.length)) ? false : false);
+// logica: se ta digitando resultado para este header
+let isResultPreview = preview && history.length>=4 && col==history.length%4 && header;
+let html=`<div class="yellow-header">${header.num} ${header.alvo}</div><div class="small-wrap">`;
+if(isResultPreview){
+let cr=getColunaReal(preview.num);
+let ca=getColunasDoAlvo(header.alvo);
+html+=`<div class="ssmall ${ca.includes(cr)?'green':'red'} preview">${preview.num}</div>`;
+if(r1) html+=small(r1); else html+=`<div class="ssmall empty"></div>`;
+}else{
+html+=small(r1)+small(r2

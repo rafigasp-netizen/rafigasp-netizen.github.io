@@ -18,14 +18,16 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.55;outline:2px solid #fff;outline-offset:-2px}
+.hslot.preview{opacity:.5;outline:2px solid #fff}
 .bottom{padding:10px;display:flex;flex-direction:column;gap:12px;flex:1;justify-content:flex-end}
 .blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:160px;background:#0a2a1a;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.blue-card{background:#123524;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:6px;font-weight:900;font-size:13px;color:#d4af37}
+.blue-card{background:#123524;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:6px;font-weight:900;font-size:13px;color:#d4af37;border:2px solid transparent}
+.blue-card.active{border-color:#d4af37;background:#1a3d26}
 .blue-card .b{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
 .b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:.3;background:transparent}
+.b.old{opacity:.7;outline:1px dashed #d4af37}
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.k{height:62px;border-radius:14px;border:none;font-weight:900;font-size:23px}
+.k{height:64px;border-radius:14px;border:none;font-weight:900;font-size:23px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
@@ -46,7 +48,9 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[],cur='';
+let history=[];
+let cur='';
+let memoria={}; // MEMORIA DE ULTIMO RESULTADO DE CADA NUMERO
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
@@ -70,6 +74,24 @@ if(alvo=="C2/3")return [2,3];
 if(alvo=="C1/2")return [1,2];
 return [];
 }
+function salvarMemoria(){
+for(let col=0;col<4;col++){
+let header=history[col];
+if(!header) continue;
+let r1=history[col+4];
+let r2=history[col+8];
+let lista=[];
+if(r1) lista.push(r1);
+if(r2) lista.push(r2);
+if(lista.length>0) memoria[header.num]=lista;
+}
+localStorage.setItem('raf_mem', JSON.stringify(memoria));
+}
+function carregarMemoria(){
+try{let m=localStorage.getItem('raf_mem'); if(m) memoria=JSON.parse(m);}catch(e){}
+}
+carregarMemoria();
+
 function render(preview=null){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
@@ -99,32 +121,56 @@ d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
+// BLUE COM HISTORICO DA ULTIMA VEZ
 blueBox.innerHTML='';
+let previewNum = preview?preview.num:null;
 for(let col=0;col<4;col++){
 let card=document.createElement('div');
 card.className='blue-card';
 let header=history[col];
+let isActive = previewNum && header && previewNum==header.num || previewNum && !header && col==history.length;
+if(isActive) card.classList.add('active');
 if(!header){
-card.innerHTML=`<span style="opacity:.25">- C1/2</span><div class="b empty"></div><div class="b empty"></div>`;
+// se ta digitando 1 e o 1 nao esta no ciclo atual, mas tem memoria, mostra
+if(previewNum && memoria[previewNum] && col==history.length){
+let alvo=getAlvo(previewNum);
+let res=memoria[previewNum];
+function boxForOld(h){
+let colReal=getColunaReal(h.num);
+let colsAlvo=getColunasDoAlvo(alvo);
+let color=colsAlvo.includes(colReal)?'green':'red';
+return `<div class="b ${color} old">${h.num}</div>`;
+}
+card.innerHTML=`<span>${previewNum} ${alvo}</span>${res.map(boxForOld).join('')}`;
+card.classList.add('active');
 }else{
-let res1=history[col+4];
-let res2=history[col+8];
-function boxFor(h){
+card.innerHTML=`<span style="opacity:.25">- C1/2</span><div class="b empty"></div><div class="b empty"></div>`;
+}
+}else{
+let r1=history[col+4];
+let r2=history[col+8];
+// se nao tem resultado no ciclo atual, pega da memoria
+if(!r1 && memoria[header.num] && memoria[header.num][0]) r1=memoria[header.num][0];
+if(!r2 && memoria[header.num] && memoria[header.num][1]) r2=memoria[header.num][1];
+
+function boxFor(h, isOld){
 if(!h) return `<div class="b empty"></div>`;
 let colReal=getColunaReal(h.num);
 let colsAlvo=getColunasDoAlvo(header.alvo);
 let color=colsAlvo.includes(colReal)?'green':'red';
-return `<div class="b ${color}">${h.num}</div>`;
+let cls = isOld?' old':'';
+return `<div class="b ${color}${cls}">${h.num}</div>`;
 }
-card.innerHTML=`<span>${header.num} ${header.alvo}</span>${boxFor(res1)}${boxFor(res2)}`;
-if(preview && history.length>=4 && col==history.length%4 && history.length>=4){
-let colReal=getColunaReal(preview.num);
-let colsAlvo=getColunasDoAlvo(header.alvo);
-let color=colsAlvo.includes(colReal)?'green':'red';
-card.innerHTML+=`<div class="b ${color}" style="opacity:.6">${preview.num}</div>`;
-}
+let old1 = !history[col+4] && memoria[header.num];
+let old2 = !history[col+8] && memoria[header.num];
+card.innerHTML=`<span>${header.num} ${header.alvo}</span>${boxFor(r1,old1)}${boxFor(r2,old2)}`;
 }
 blueBox.appendChild(card);
+}
+// se digitando um numero que JA TEM no historico, destaca e mostra memoria dele embaixo
+if(previewNum && history.some(h=>h.num==previewNum)){
+// ja ta mostrado acima
+}
 }
 }
 function addN(n){
@@ -140,13 +186,13 @@ render({num:v, alvo:alvo});
 }
 function enterN(){
 if(cur=='')return;
-if(cur=='00'){history=[];cur='';render();return;}
+if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}
 let v=parseInt(cur);if(v>36){cur='';render();return;}
 if(v==0){history=[];cur='';render();return}
 let alvo=getAlvo(v);
 history.push({num:v, alvo:alvo});
 cur='';render();
-if(history.length>=12){setTimeout(()=>{history=[];render();}, 1000);}
+if(history.length>=12){salvarMemoria(); setTimeout(()=>{history=[];render();}, 800);}
 }
 function corrige(){if(cur!=''){cur=cur.slice(0,-1); render();}else if(history.length>0){history.pop();render();}}
 render();

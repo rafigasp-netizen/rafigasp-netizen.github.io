@@ -10,20 +10,20 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
 .history{background:#123524;padding:8px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.hslot{height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px}
 .hslot.empty{border:1.5px dashed #d4af37;opacity:.3;background:transparent}
 .hslot.yellow{background:#d4af37!important;color:#000!important;border:none!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{border:2px solid #d4af37;background:#d4af37;color:#000;opacity:.7}
+.hslot.preview{opacity:.6;outline:2px dashed #d4af37}
 .legenda{background:#001a0a;border:2px solid #d4af37;margin:6px;padding:10px;border-radius:12px}
 .legenda div{color:#e8c86a;font-size:14px;line-height:20px;font-weight:800}
 .legenda span{color:#000;font-weight:900;background:#d4af37;padding:0 6px;border-radius:4px;margin-right:4px}
 .keypad{flex:1;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
-.k{height:100%;min-height:78px;border-radius:12px;border:none;font-weight:900;font-size:24px}
+.k{height:100%;min-height:78px;border-radius:12px;border:none;font-weight:900;font-size:26px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:14px}
 </style>
 </head>
 <body>
@@ -47,63 +47,28 @@ const grid=document.getElementById('grid');
 const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
 function getColReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
-
 function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-// SE ESTÁ DIGITANDO, MOSTRA PREVIEW NO PROXIMO QUADRADO AMARELO/VAZIO
 if(i==history.length && cur!=''){
 let v=parseInt(cur);
-if(isNaN(v)){d.className='hslot empty';}
-else{
+if(!isNaN(v)){
 let alvo=getAlvo(v);
-if(i<4){
-d.className='hslot preview yellow';
-d.textContent=`[${v} C${alvo}]`;
-}else{
-let col=i%4;
-let alvoTopo=history[col]?.alvo;
-d.textContent=`[${v}]`;
-if(alvoTopo){
-let cr=getColReal(v);
-d.className='hslot preview '+(cr==alvoTopo?'green':'red');
-}else{d.className='hslot preview yellow';}
+if(i<4){d.className='hslot preview yellow'; d.textContent=`${v} C${alvo}`;}
+else{let col=i%4; let alvoTopo=history[col]?.alvo; let cr=getColReal(v); d.textContent=`${v}`; d.className='hslot preview '+(alvoTopo?(cr==alvoTopo?'green':'red'):'yellow');}
+grid.appendChild(d); continue;
 }
 }
-grid.appendChild(d);
-continue;
-}
-
 if(i<history.length){
 let h=history[i];
-if(i<4){
-// PRIMEIRA LINHA AMARELA [11 C1]
-d.className='hslot yellow';
-d.textContent=`[${h.num} C${h.alvo}]`;
-}else{
-// DUAS LINHAS DE BAIXO SÓ [2] - VERDE OU VERMELHO
-let col=i%4;
-let alvoTopo=history[col]?.alvo;
-let colReal=getColReal(h.num);
-d.textContent=`[${h.num}]`;
-if(alvoTopo){
-d.className='hslot '+(colReal==alvoTopo?'green':'red');
-}else{
-d.className='hslot yellow';
-}
-}
+if(i<4){d.className='hslot yellow'; d.textContent=`${h.num} C${h.alvo}`;}
+else{let col=i%4; let alvoTopo=history[col]?.alvo; let cr=getColReal(h.num); d.textContent=`${h.num}`; d.className='hslot '+(cr==alvoTopo?'green':'red');}
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
 }
-
-function addN(n){
-if(cur.length>=2)return;
-cur+=n;
-render();
-}
-
+function addN(n){if(cur.length>=2)return;cur+=n;render();}
 function enterN(){
 if(cur=='')return;
 if(cur=='00'){history=[];cur='';render();return;}
@@ -111,14 +76,14 @@ let v=parseInt(cur);if(v>36)return;
 if(v==0){history=[];cur='';render();return}
 let alvo=getAlvo(v);
 history.push({num:v, alvo:alvo});
-if(history.length>12)history.shift();
-cur='';render();
+cur='';
+render();
+// SE FOR O ULTIMO (12º), APAGA TUDO PRA COMEÇAR DE NOVO
+if(history.length>=12){
+setTimeout(()=>{history=[];render();}, 800);
 }
-
-function corrige(){
-if(cur!=''){cur=cur.slice(0,-1);render();}
-else if(history.length>0){history.pop();render();}
 }
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
 render();
 </script>
 </body>

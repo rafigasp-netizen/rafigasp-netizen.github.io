@@ -18,10 +18,10 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{outline:3px solid #fff;opacity:.7}
+.hslot.preview{outline:3px solid #fff;opacity:.85}
 .bottom{padding:10px;display:flex;flex-direction:column;gap:10px}
 .blue-box{border:3px solid #3b82f6;border-radius:14px;padding:8px;background:#0a2a1a;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:110px}
-.blue-card{background:#123524;border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;min-height:48px;opacity:.2}
+.blue-card{background:#123524;border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;min-height:48px;opacity:0}
 .blue-card.hasData{opacity:1}
 .blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
 .blue-card .label{color:#d4af37;font-weight:900;font-size:12px}
@@ -50,7 +50,8 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 <script>
 let history=[],cur='',memoria={};
-try{let m=localStorage.getItem('raf_mem'); if(m) memoria=JSON.parse(m);}catch(e){}
+try{let m=localStorage.getItem('raf_mem_col2'); if(m) memoria=JSON.parse(m);}catch(e){}
+if(!memoria[0]) memoria={0:{},1:{},2:{},3:{}};
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
@@ -65,11 +66,11 @@ let h=history[col];if(!h)continue;
 let r1=history[col+4],r2=history[col+8];
 let lista=[];if(r1)lista.push(r1);if(r2)lista.push(r2);
 if(lista.length){
-memoria[h.num]=lista;
-memoria[h.num+"_alvo"]=h.alvo;
+if(!memoria[col]) memoria[col]={};
+memoria[col][h.num]={results:lista, alvo:h.alvo};
 }
 }
-localStorage.setItem('raf_mem',JSON.stringify(memoria));
+localStorage.setItem('raf_mem_col2',JSON.stringify(memoria));
 }
 function render(preview=null){
 grid.innerHTML='';
@@ -94,7 +95,7 @@ grid.appendChild(d);continue;
 if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let header=history[i%4];let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);d.textContent=h.num;d.className='hslot '+(ca.includes(cr)?'green':'red');}}else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-// AZUL
+// BLUE - EXATAMENTE COMO FOTO
 blueBox.innerHTML='';
 let isPreview = preview!=null;
 let pCol = history.length % 4;
@@ -103,32 +104,27 @@ for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
 let header=history[col];
 if(isPreview){
-let shouldShow=false;
-if(preview.num==="00"){shouldShow=(col==history.length);}
-else if(isTriggerPhase){shouldShow=(col==history.length);}
-else{shouldShow=(col==pCol);}
-if(shouldShow){
+let isActive = false;
+if(preview.num==="00") isActive=(col==history.length);
+else if(isTriggerPhase) isActive=(col==history.length);
+else isActive=(col==pCol);
+if(isActive){
 card.classList.add('active','hasData');
 if(preview.num==="00"){
-card.innerHTML=`<span class="label">00 - VAI ZERAR TUDO A,B,C,D</span>`;
+card.innerHTML=`<span class="label">00 - ZERAR A,B,C,D</span>`;
 }else if(isTriggerPhase){
-// MOSTRA ULTIMO RESULTADO DESTE NUMERO
-let v=preview.num;
-let mem=memoria[v];
-let alvoMem=memoria[v+"_alvo"]||preview.alvo;
-let html=`<span class="label">${v} ${preview.alvo}</span>`;
-if(mem && mem.length>0){
-mem.forEach(m=>{
-let cr=getColunaReal(m.num);
-let ca=getColunasDoAlvo(alvoMem);
-html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${m.num}</div>`;
+// BUSCA MEMORIA SO DESTA LETRA - A-A B-B C-C D-D
+let mem=memoria[col] && memoria[col][preview.num];
+let html=`<span class="label">${preview.num} ${preview.alvo}</span>`;
+if(mem && mem.results.length>0){
+mem.results.forEach(r=>{
+let cr=getColunaReal(r.num);
+let ca=getColunasDoAlvo(mem.alvo);
+html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${r.num}</div>`;
 });
-}else{
-html+=`<span style="color:#8a9a8a;font-size:10px;margin-left:6px">1ª VEZ</span>`;
 }
 card.innerHTML=html;
 }else{
-// RESULTADO PARA ESTA LETRA
 let cr=getColunaReal(preview.num);
 let ca=getColunasDoAlvo(header.alvo);
 let cor=ca.includes(cr)?'green':'red';
@@ -139,7 +135,10 @@ if(r1) html+=b(r1);
 html+=`<div class="b ${cor}">${preview.num}</div>`;
 card.innerHTML=html;
 }
-}else{card.innerHTML='';}
+}else{
+// NAO MOSTRA OUTRA LETRA - ISOLADO
+card.innerHTML='';
+}
 }else{
 if(!header){card.innerHTML='';}
 else{
@@ -163,7 +162,7 @@ render({num:v,alvo:getAlvo(v)});
 }
 function enterN(){
 if(cur==='')return;
-if(cur==="00"){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}
+if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{}};localStorage.removeItem('raf_mem_col2');render();return;}
 let v=parseInt(cur);
 if(v>36){cur='';render();return;}
 if(v===0){history=[];cur='';render();return;}

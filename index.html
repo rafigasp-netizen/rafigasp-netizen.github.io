@@ -18,7 +18,6 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.6;outline:2px dashed #fff}
 .keypad{flex:1;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
 .k{height:100%;min-height:70px;border-radius:14px;border:none;font-weight:900;font-size:28px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
@@ -49,33 +48,37 @@ if(gC13.includes(n))return "C1/3";
 if(gC12.includes(n))return "C1/2";
 return "";
 }
-function getGrupo(n){
-if(gC23.includes(n))return "C2/3";
-if(gC13.includes(n))return "C1/3";
-if(gC12.includes(n))return "C1/2";
-return "";
+function getColunaReal(n){
+if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;
+if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;
+if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;
+return 0;
+}
+function getColunaDoAlvo(alvo){
+if(alvo=="C1/3")return 1;
+if(alvo=="C2/3")return 2;
+if(alvo=="C1/2")return 3;
+return 0;
 }
 function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
-if(i==history.length && cur!=''){
-let v=parseInt(cur); if(!isNaN(v)){
-let alvo=getAlvo(v);
-if(i<4){d.className='hslot preview yellow'; d.textContent=`${v} ${alvo}`;}
-else{let col=i%4; let alvoTopo=history[col]?.alvo; let grupoReal=getGrupo(v); d.textContent=`${v}`; d.className='hslot preview '+(alvoTopo?(grupoReal==alvoTopo?'green':'red'):'yellow');}
-grid.appendChild(d); continue;
-}
-}
 if(i<history.length){
 let h=history[i];
 if(i<4){d.className='hslot yellow'; d.textContent=`${h.num} ${h.alvo}`;}
-else{let col=i%4; let alvoTopo=history[col]?.alvo; let grupoReal=getGrupo(h.num); d.textContent=`${h.num}`; d.className='hslot '+(grupoReal==alvoTopo?'green':'red');}
+else{
+let col=i%4; let alvoTopo=history[col]?.alvo;
+let colReal=getColunaReal(h.num);
+let colAlvo=getColunaDoAlvo(alvoTopo);
+d.textContent=`${h.num}`; 
+d.className='hslot '+(colReal==colAlvo?'green':'red');
+}
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
 }
-function addN(n){if(cur.length>=2)return;cur+=n;render();}
+function addN(n){if(cur.length>=2)return;cur+=n;render(); if(cur!=''){ let v=parseInt(cur); if(!isNaN(v)){ let alvo=getAlvo(v); let d=document.createElement('div'); /* preview */ } } }
 function enterN(){
 if(cur=='')return;
 if(cur=='00'){history=[];cur='';render();return;}
@@ -87,6 +90,35 @@ cur='';render();
 if(history.length>=12){setTimeout(()=>{history=[];render();}, 900);}
 }
 function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
+// preview
+const origRender=render;
+function addN2(n){if(cur.length>=2)return;cur+=n; 
+grid.innerHTML='';
+for(let i=0;i<12;i++){
+let d=document.createElement('div');
+if(i==history.length){
+let v=parseInt(cur); if(!isNaN(v)){
+let alvo=getAlvo(v);
+if(i<4){d.className='hslot yellow'; d.style.opacity='.6'; d.textContent=`${v} ${alvo}`;}
+else{
+let col=i%4; let alvoTopo=history[col]?.alvo;
+let colReal=getColunaReal(v);
+let colAlvo=getColunaDoAlvo(alvoTopo);
+d.textContent=`${v}`; d.style.opacity='.6';
+d.className='hslot '+(colReal==colAlvo?'green':'red');
+}
+grid.appendChild(d); continue;
+}
+}
+if(i<history.length){
+let h=history[i];
+if(i<4){d.className='hslot yellow'; d.textContent=`${h.num} ${h.alvo}`;}
+else{let col=i%4; let alvoTopo=history[col]?.alvo; let colReal=getColunaReal(h.num); let colAlvo=getColunaDoAlvo(alvoTopo); d.textContent=`${h.num}`; d.className='hslot '+(colReal==colAlvo?'green':'red');}
+}else{d.className='hslot empty';}
+grid.appendChild(d);
+}
+}
+window.addN=addN2;
 render();
 </script>
 </body>

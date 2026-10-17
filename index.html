@@ -11,23 +11,22 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
 .topo h1{color:#000;font-size:18px;font-weight:900}
 .topo span{font-size:11px;color:#4a3410;font-weight:800;display:block}
-.history{background:#123524;padding:8px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.hslot{height:60px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
-.hslot.empty{border:1.5px dashed #d4af37;opacity:.3}
+.history{background:#0f2e1f;padding:10px;display:block!important}
+.hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px}
+.hslot{height:62px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
+.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1);opacity:1}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.5;outline:2px solid #fff}
-.bottom{padding:10px;display:flex;flex-direction:column;gap:12px;flex:1;justify-content:flex-end}
-.blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:160px;background:#0a2a1a;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.blue-card{background:#123524;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:6px;font-weight:900;font-size:13px;color:#d4af37;border:2px solid transparent}
-.blue-card.active{border-color:#d4af37;background:#1a3d26}
-.blue-card .b{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
-.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:.3;background:transparent}
-.b.old{opacity:.7;outline:1px dashed #d4af37}
+.hslot.preview{opacity:.6;outline:2px solid #fff}
+.bottom{padding:10px;display:flex;flex-direction:column;gap:12px}
+.blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:110px;max-height:125px;background:#0a2a1a;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;font-weight:900;font-size:12px;color:#d4af37}
+.blue-card.active{border:2px solid #d4af37}
+.blue-card .b{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:.4;background:transparent}
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.k{height:64px;border-radius:14px;border:none;font-weight:900;font-size:23px}
+.k{height:70px;border-radius:16px;border:none;font-weight:900;font-size:24px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
@@ -48,153 +47,58 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[];
-let cur='';
-let memoria={}; // MEMORIA DE ULTIMO RESULTADO DE CADA NUMERO
+let history=[],cur='',memoria={};
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
 const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
 const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
-function getAlvo(n){
-if(gC23.includes(n))return "C2/3";
-if(gC13.includes(n))return "C1/3";
-if(gC12.includes(n))return "C1/2";
-return "";
-}
-function getColunaReal(n){
-if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;
-if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;
-if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;
-return 0;
-}
-function getColunasDoAlvo(alvo){
-if(alvo=="C1/3")return [1,3];
-if(alvo=="C2/3")return [2,3];
-if(alvo=="C1/2")return [1,2];
-return [];
-}
-function salvarMemoria(){
-for(let col=0;col<4;col++){
-let header=history[col];
-if(!header) continue;
-let r1=history[col+4];
-let r2=history[col+8];
-let lista=[];
-if(r1) lista.push(r1);
-if(r2) lista.push(r2);
-if(lista.length>0) memoria[header.num]=lista;
-}
-localStorage.setItem('raf_mem', JSON.stringify(memoria));
-}
-function carregarMemoria(){
-try{let m=localStorage.getItem('raf_mem'); if(m) memoria=JSON.parse(m);}catch(e){}
-}
+function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
+function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
+function getColunasDoAlvo(alvo){if(alvo=="C1/3")return [1,3];if(alvo=="C2/3")return [2,3];if(alvo=="C1/2")return [1,2];return [];}
+function salvarMemoria(){for(let col=0;col<4;col++){let h=history[col];if(!h)continue;let r1=history[col+4],r2=history[col+8];let lista=[];if(r1)lista.push(r1);if(r2)lista.push(r2);if(lista.length>0)memoria[h.num]=lista;}localStorage.setItem('raf_mem',JSON.stringify(memoria));}
+function carregarMemoria(){try{let m=localStorage.getItem('raf_mem');if(m)memoria=JSON.parse(m);}catch(e){}}
 carregarMemoria();
-
 function render(preview=null){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
 if(preview && i==history.length){
 let v=preview.num;
-if(i<4){d.className='hslot yellow preview'; d.textContent=`${v} ${preview.alvo}`;}
-else{
-let col=i%4; let alvoTopo=history[col]?.alvo;
-let colReal=getColunaReal(v);
-let colsAlvo=getColunasDoAlvo(alvoTopo);
-d.textContent=`${v}`;
-d.className=`hslot ${colsAlvo.includes(colReal)?'green':'red'} preview`;
+if(i<4){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
+else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(v);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${v}`;d.className=`hslot ${colsAlvo.includes(colReal)?'green':'red'} preview`;}
+grid.appendChild(d);continue;
 }
-grid.appendChild(d); continue;
-}
-if(i<history.length){
-let h=history[i];
-if(i<4){d.className='hslot yellow'; d.textContent=`${h.num} ${h.alvo}`;}
-else{
-let col=i%4; let alvoTopo=history[col]?.alvo;
-let colReal=getColunaReal(h.num);
-let colsAlvo=getColunasDoAlvo(alvoTopo);
-d.textContent=`${h.num}`;
-d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');
-}
-}else{d.className='hslot empty';}
+if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${h.num}`;d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');}}else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-// BLUE COM HISTORICO DA ULTIMA VEZ
 blueBox.innerHTML='';
-let previewNum = preview?preview.num:null;
+let previewNum=preview?preview.num:null;
 for(let col=0;col<4;col++){
-let card=document.createElement('div');
-card.className='blue-card';
+let card=document.createElement('div');card.className='blue-card';
 let header=history[col];
-let isActive = previewNum && header && previewNum==header.num || previewNum && !header && col==history.length;
-if(isActive) card.classList.add('active');
+let isActive=previewNum && header && previewNum==header.num;
+if(isActive)card.classList.add('active');
 if(!header){
-// se ta digitando 1 e o 1 nao esta no ciclo atual, mas tem memoria, mostra
 if(previewNum && memoria[previewNum] && col==history.length){
-let alvo=getAlvo(previewNum);
-let res=memoria[previewNum];
-function boxForOld(h){
-let colReal=getColunaReal(h.num);
-let colsAlvo=getColunasDoAlvo(alvo);
-let color=colsAlvo.includes(colReal)?'green':'red';
-return `<div class="b ${color} old">${h.num}</div>`;
-}
-card.innerHTML=`<span>${previewNum} ${alvo}</span>${res.map(boxForOld).join('')}`;
+let alvo=getAlvo(previewNum);let res=memoria[previewNum];
+function boxOld(h){let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvo);return `<div class="b ${colsAlvo.includes(colReal)?'green':'red'}">${h.num}</div>`;}
+card.innerHTML=`<span>${previewNum} ${alvo}</span>${res.map(boxOld).join('')}`;
 card.classList.add('active');
+}else{card.innerHTML=`<span style="opacity:.3">- C1/2</span><div class="b empty"></div>`;}
 }else{
-card.innerHTML=`<span style="opacity:.25">- C1/2</span><div class="b empty"></div><div class="b empty"></div>`;
-}
-}else{
-let r1=history[col+4];
-let r2=history[col+8];
-// se nao tem resultado no ciclo atual, pega da memoria
-if(!r1 && memoria[header.num] && memoria[header.num][0]) r1=memoria[header.num][0];
-if(!r2 && memoria[header.num] && memoria[header.num][1]) r2=memoria[header.num][1];
-
-function boxFor(h, isOld){
-if(!h) return `<div class="b empty"></div>`;
-let colReal=getColunaReal(h.num);
-let colsAlvo=getColunasDoAlvo(header.alvo);
-let color=colsAlvo.includes(colReal)?'green':'red';
-let cls = isOld?' old':'';
-return `<div class="b ${color}${cls}">${h.num}</div>`;
-}
-let old1 = !history[col+4] && memoria[header.num];
-let old2 = !history[col+8] && memoria[header.num];
-card.innerHTML=`<span>${header.num} ${header.alvo}</span>${boxFor(r1,old1)}${boxFor(r2,old2)}`;
+let r1=history[col+4],r2=history[col+8];
+if(!r1 && memoria[header.num]?.[0])r1=memoria[header.num][0];
+if(!r2 && memoria[header.num]?.[1])r2=memoria[header.num][1];
+function boxFor(h){if(!h)return `<div class="b empty"></div>`;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(header.alvo);return `<div class="b ${colsAlvo.includes(colReal)?'green':'red'}">${h.num}</div>`;}
+card.innerHTML=`<span>${header.num} ${header.alvo}</span>${boxFor(r1)}${boxFor(r2)}`;
 }
 blueBox.appendChild(card);
 }
-// se digitando um numero que JA TEM no historico, destaca e mostra memoria dele embaixo
-if(previewNum && history.some(h=>h.num==previewNum)){
-// ja ta mostrado acima
 }
-}
-}
-function addN(n){
-if(cur=='00')cur='';
-if(cur.length==0 && n==0){cur='0';}
-else if(cur.length==1 && cur=='0' && n==0){cur='00'; render(); return;}
-else if(cur.length>=2){return;}
-else{cur+=n;}
-let v=parseInt(cur);
-if(isNaN(v) || cur=='0'){render(); return;}
-let alvo=getAlvo(v);
-render({num:v, alvo:alvo});
-}
-function enterN(){
-if(cur=='')return;
-if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}
-let v=parseInt(cur);if(v>36){cur='';render();return;}
-if(v==0){history=[];cur='';render();return}
-let alvo=getAlvo(v);
-history.push({num:v, alvo:alvo});
-cur='';render();
-if(history.length>=12){salvarMemoria(); setTimeout(()=>{history=[];render();}, 800);}
-}
-function corrige(){if(cur!=''){cur=cur.slice(0,-1); render();}else if(history.length>0){history.pop();render();}}
+function addN(n){if(cur=='00')cur='';if(cur.length==0&&n==0){cur='0';}else if(cur.length==1&&cur=='0'&&n==0){cur='00';render();return;}else if(cur.length>=2){return;}else{cur+=n;}let v=parseInt(cur);if(isNaN(v)||cur=='0'){render();return;}let alvo=getAlvo(v);render({num:v,alvo:alvo});}
+function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){salvarMemoria();setTimeout(()=>{history=[];render();},800);}}
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
 render();
 </script>
 </body>

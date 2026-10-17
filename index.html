@@ -18,7 +18,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{outline:3px solid #fff;opacity:.85}
+.hslot.preview{outline:3px solid #fff}
 .bottom{padding:10px;display:flex;flex-direction:column;gap:10px}
 .blue-box{border:3px solid #3b82f6;border-radius:14px;padding:8px;background:#0a2a1a;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:110px}
 .blue-card{background:#123524;border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;min-height:48px;opacity:0}
@@ -50,7 +50,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 <script>
 let history=[],cur='',memoria={};
-try{let m=localStorage.getItem('raf_mem_col2'); if(m) memoria=JSON.parse(m);}catch(e){}
+try{let m=localStorage.getItem('raf_mem_col3'); if(m) memoria=JSON.parse(m);}catch(e){}
 if(!memoria[0]) memoria={0:{},1:{},2:{},3:{}};
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
@@ -70,7 +70,12 @@ if(!memoria[col]) memoria[col]={};
 memoria[col][h.num]={results:lista, alvo:h.alvo};
 }
 }
-localStorage.setItem('raf_mem_col2',JSON.stringify(memoria));
+localStorage.setItem('raf_mem_col3',JSON.stringify(memoria));
+}
+function getBadge(h, headerAlvo){
+let cr=getColunaReal(h.num);
+let ca=getColunasDoAlvo(headerAlvo);
+return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;
 }
 function render(preview=null){
 grid.innerHTML='';
@@ -95,7 +100,6 @@ grid.appendChild(d);continue;
 if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let header=history[i%4];let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);d.textContent=h.num;d.className='hslot '+(ca.includes(cr)?'green':'red');}}else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-// BLUE - EXATAMENTE COMO FOTO
 blueBox.innerHTML='';
 let isPreview = preview!=null;
 let pCol = history.length % 4;
@@ -113,39 +117,50 @@ card.classList.add('active','hasData');
 if(preview.num==="00"){
 card.innerHTML=`<span class="label">00 - ZERAR A,B,C,D</span>`;
 }else if(isTriggerPhase){
-// BUSCA MEMORIA SO DESTA LETRA - A-A B-B C-C D-D
 let mem=memoria[col] && memoria[col][preview.num];
 let html=`<span class="label">${preview.num} ${preview.alvo}</span>`;
-if(mem && mem.results.length>0){
-mem.results.forEach(r=>{
-let cr=getColunaReal(r.num);
-let ca=getColunasDoAlvo(mem.alvo);
-html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${r.num}</div>`;
-});
+if(mem){
+mem.results.forEach(r=>{html+=getBadge(r, mem.alvo);});
 }
 card.innerHTML=html;
 }else{
+let r1=history[col+4];
+let html=`<span class="label">${header.num} ${header.alvo}</span>`;
+if(r1) html+=getBadge(r1, header.alvo);
 let cr=getColunaReal(preview.num);
 let ca=getColunasDoAlvo(header.alvo);
-let cor=ca.includes(cr)?'green':'red';
-let r1=history[col+4];
-function b(h){if(!h)return '';let cr2=getColunaReal(h.num);let ca2=getColunasDoAlvo(header.alvo);return `<div class="b ${ca2.includes(cr2)?'green':'red'}">${h.num}</div>`;}
-let html=`<span class="label">${header.num} ${header.alvo}</span>`;
-if(r1) html+=b(r1);
-html+=`<div class="b ${cor}">${preview.num}</div>`;
+html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${preview.num}</div>`;
 card.innerHTML=html;
 }
 }else{
-// NAO MOSTRA OUTRA LETRA - ISOLADO
+if(header){
+card.classList.add('hasData');
+let r1=history[col+4],r2=history[col+8];
+let mem=memoria[col] && memoria[col][header.num];
+if(!r1 && mem && mem.results[0]) r1=mem.results[0];
+if(!r2 && mem && mem.results[1]) r2=mem.results[1];
+let html=`<span class="label">${header.num} ${header.alvo}</span>`;
+if(r1) html+=getBadge(r1, mem?mem.alvo:header.alvo);
+if(r2) html+=getBadge(r2, mem?mem.alvo:header.alvo);
+card.innerHTML=html;
+}else{
 card.innerHTML='';
 }
+}
 }else{
+// SEM DIGITAR - MOSTRA HISTORICO PAUSADO
 if(!header){card.innerHTML='';}
 else{
 card.classList.add('hasData');
 let r1=history[col+4],r2=history[col+8];
-function b(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${b(r1)}${b(r2)}`;
+let mem=memoria[col] && memoria[col][header.num];
+if(!r1 && mem && mem.results[0]) r1=mem.results[0];
+if(!r2 && mem && mem.results[1]) r2=mem.results[1];
+let alvoToUse = mem?mem.alvo:header.alvo;
+let html=`<span class="label">${header.num} ${header.alvo}</span>`;
+if(r1) html+=getBadge(r1, alvoToUse);
+if(r2) html+=getBadge(r2, alvoToUse);
+card.innerHTML=html;
 }
 }
 blueBox.appendChild(card);
@@ -162,14 +177,14 @@ render({num:v,alvo:getAlvo(v)});
 }
 function enterN(){
 if(cur==='')return;
-if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{}};localStorage.removeItem('raf_mem_col2');render();return;}
+if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{}};localStorage.removeItem('raf_mem_col3');render();return;}
 let v=parseInt(cur);
 if(v>36){cur='';render();return;}
 if(v===0){history=[];cur='';render();return;}
 let alvo=getAlvo(v);
 history.push({num:v,alvo:alvo});
 cur='';render();
-if(history.length>=12){salvar();setTimeout(()=>{history=[];render();},900);}
+if(history.length>=12){salvar();setTimeout(()=>{history=[];render();},1000);}
 }
 function corrige(){
 if(cur!=''){cur=cur.slice(0,-1);if(cur==''){render();}else if(cur==="00"){render({num:"00",alvo:""});}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}}

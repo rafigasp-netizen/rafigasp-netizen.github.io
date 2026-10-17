@@ -14,21 +14,19 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .history{background:#123524;padding:8px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .hslot{height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
-.hslot.empty{border:1.5px dashed #d4af37;opacity:.25}
+.hslot.empty{border:1.5px dashed #d4af37;opacity:.35}
 .hslot.yellow{background:#d4af37!important;color:#000!important;font-size:15px}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-
-/* QUADRADO AZUL - HISTÓRICO DO ÚLTIMO RESULTADO */
-.blue-box{border:3px solid #3b82f6;border-radius:12px;margin:8px;padding:8px;min-height:62px;background:#0a2a1a;display:flex;align-items:center;gap:6px;overflow-x:auto}
-.blue-box-title{color:#3b82f6;font-size:10px;font-weight:900;white-space:nowrap}
-.blue-item{min-width:36px;height:36px;border-radius:8px;background:#d4af37;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.spacer{flex:1}
+.bottom{padding:8px;display:flex;flex-direction:column;gap:8px}
+.blue-box{border:2px solid #3b82f6;border-radius:12px;min-height:60px;background:#0a2a1a;display:flex;align-items:center;gap:6px;padding:8px;overflow-x:auto}
+.blue-item{min-width:38px;height:38px;border-radius:8px;background:#d4af37;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0}
 .blue-item.green{background:#16a34a;color:#fff}
 .blue-item.red{background:#dc2626;color:#fff}
-
-/* QUADRADO VERMELHO - TECLADO NO TAMANHO CERTO */
-.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12;border:3px solid #ef4444;border-radius:12px;margin:0 8px 8px 8px}
-.k{height:46px;border-radius:10px;border:none;font-weight:900;font-size:20px}
+.blue-item.empty{border:1.5px dashed #3b82f6;background:transparent;opacity:.3}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.k{height:48px;border-radius:10px;border:none;font-weight:900;font-size:20px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
@@ -37,15 +35,10 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <body>
 <div class="app">
 <div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
-
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-
-<!-- QUADRADO AZUL -->
-<div class="blue-box" id="blueBox">
-<span class="blue-box-title">HIST:</span>
-</div>
-
-<!-- QUADRADO VERMELHO -->
+<div class="spacer"></div>
+<div class="bottom">
+<div class="blue-box" id="blueBox"></div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -53,7 +46,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
 </div>
 </div>
-
+</div>
 <script>
 let history=[],cur='';
 const grid=document.getElementById('grid');
@@ -61,7 +54,6 @@ const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
 const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
 const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
-
 function getAlvo(n){
 if(gC23.includes(n))return "C2/3";
 if(gC13.includes(n))return "C1/3";
@@ -97,22 +89,43 @@ d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-// ATUALIZA QUADRADO AZUL
-blueBox.innerHTML='<span class="blue-box-title">HIST:</span>';
-history.forEach((h,idx)=>{
-if(idx<4)return;
-let col=idx%4;
+// AZUL SEM NOME HIST
+blueBox.innerHTML='';
+if(history.length<=4){
+for(let i=0;i<4;i++){let e=document.createElement('div');e.className='blue-item empty';blueBox.appendChild(e);}
+}else{
+for(let i=4;i<history.length;i++){
+let h=history[i];
+let col=i%4;
 let alvoTopo=history[col]?.alvo;
 let colReal=getColunaReal(h.num);
 let colsAlvo=getColunasDoAlvo(alvoTopo);
-let color = colsAlvo.includes(colReal)?'green':'red';
 let b=document.createElement('div');
-b.className=`blue-item ${color}`;
+b.className=`blue-item ${colsAlvo.includes(colReal)?'green':'red'}`;
 b.textContent=h.num;
 blueBox.appendChild(b);
-});
+}
+}
 }
 function addN(n){
 if(cur=='00')cur='';
 if(cur.length==0 && n==0){cur='0';}
-else if(cur.length==1 && cur=='0' && n==0){cur='00
+else if(cur.length==1 && cur=='0' && n==0){cur='00';}
+else if(cur.length>=2){return;}
+else{cur+=n;}
+}
+function enterN(){
+if(cur=='')return;
+if(cur=='00'){history=[];cur='';render();return;}
+let v=parseInt(cur);if(v>36)return;
+if(v==0){history=[];cur='';render();return}
+let alvo=getAlvo(v);
+history.push({num:v, alvo:alvo});
+cur='';render();
+if(history.length>=12){setTimeout(()=>{history=[];render();}, 1500);}
+}
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);}else if(history.length>0){history.pop();}render();}
+render();
+</script>
+</body>
+</html>

@@ -11,22 +11,23 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
 .topo h1{color:#000;font-size:18px;font-weight:900}
 .topo span{font-size:11px;color:#4a3410;font-weight:800;display:block}
-.history{background:#0f2e1f;padding:10px;display:block!important}
-.hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px}
+.history{background:#0f2e1f;padding:10px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .hslot{height:62px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
-.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1);opacity:1}
+.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1)}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.6;outline:2px solid #fff}
-.bottom{padding:10px;display:flex;flex-direction:column;gap:12px}
-.blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:110px;max-height:125px;background:#0a2a1a;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;font-weight:900;font-size:12px;color:#d4af37}
-.blue-card.active{border:2px solid #d4af37}
-.blue-card .b{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
-.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:.4;background:transparent}
+.hslot.preview{opacity:.5;outline:2px solid #fff}
+.bottom{padding:10px;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:flex-end}
+.blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:115px;background:#0a2a1a;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.blue-card{background:#123524;border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;min-height:48px}
+.blue-card.highlight{border:2px solid #d4af37;background:#1a3d26}
+.blue-card .label{color:#d4af37;font-weight:900;font-size:12px}
+.blue-card .b{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
+.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:0;background:transparent}
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.k{height:70px;border-radius:16px;border:none;font-weight:900;font-size:24px}
+.k{height:72px;border-radius:16px;border:none;font-weight:900;font-size:24px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
@@ -64,40 +65,43 @@ grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
 if(preview && i==history.length){
-let v=preview.num;
-if(i<4){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
+let v=preview.num;let alvo=preview.alvo;
+if(i<4){d.className='hslot yellow preview';d.textContent=`${v} ${alvo}`;}
 else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(v);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${v}`;d.className=`hslot ${colsAlvo.includes(colReal)?'green':'red'} preview`;}
 grid.appendChild(d);continue;
 }
 if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${h.num}`;d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');}}else{d.className='hslot empty';}
 grid.appendChild(d);
 }
+// BLUE = CADA QUADRADO DE CIMA = SEU HISTORICO
 blueBox.innerHTML='';
 let previewNum=preview?preview.num:null;
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
 let header=history[col];
-let isActive=previewNum && header && previewNum==header.num;
-if(isActive)card.classList.add('active');
+// se ta digitando e esse numero ja tem memoria mas ainda nao ta no topo, mostra como preview
+if(!header && preview && col==history.length){
+header={num:preview.num,alvo:preview.alvo};
+card.classList.add('highlight');
+}
 if(!header){
-if(previewNum && memoria[previewNum] && col==history.length){
-let alvo=getAlvo(previewNum);let res=memoria[previewNum];
-function boxOld(h){let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvo);return `<div class="b ${colsAlvo.includes(colReal)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span>${previewNum} ${alvo}</span>${res.map(boxOld).join('')}`;
-card.classList.add('active');
-}else{card.innerHTML=`<span style="opacity:.3">- C1/2</span><div class="b empty"></div>`;}
+card.innerHTML=''; // VAZIO - APAGADO COMO VC PEDIU
 }else{
-let r1=history[col+4],r2=history[col+8];
-if(!r1 && memoria[header.num]?.[0])r1=memoria[header.num][0];
-if(!r2 && memoria[header.num]?.[1])r2=memoria[header.num][1];
-function boxFor(h){if(!h)return `<div class="b empty"></div>`;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(header.alvo);return `<div class="b ${colsAlvo.includes(colReal)?'green':'red'}">${h.num}</div>`;}
-card.innerHTML=`<span>${header.num} ${header.alvo}</span>${boxFor(r1)}${boxFor(r2)}`;
+let r1=history[col+4];
+let r2=history[col+8];
+// se ciclo atual nao tem, busca na memoria da ultima vez que esse numero saiu
+if(!r1 && memoria[header.num]?.[0]) r1=memoria[header.num][0];
+if(!r2 && memoria[header.num]?.[1]) r2=memoria[header.num][1];
+function box(h){if(!h)return '<div class="b empty"></div>';let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(header.alvo);let cor=colsAlvo.includes(colReal)?'green':'red';return `<div class="b ${cor}">${h.num}</div>`;}
+let highlight = previewNum && previewNum==header.num;
+if(highlight) card.classList.add('highlight');
+card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${box(r1)}${box(r2)}`;
 }
 blueBox.appendChild(card);
 }
 }
 function addN(n){if(cur=='00')cur='';if(cur.length==0&&n==0){cur='0';}else if(cur.length==1&&cur=='0'&&n==0){cur='00';render();return;}else if(cur.length>=2){return;}else{cur+=n;}let v=parseInt(cur);if(isNaN(v)||cur=='0'){render();return;}let alvo=getAlvo(v);render({num:v,alvo:alvo});}
-function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){salvarMemoria();setTimeout(()=>{history=[];render();},800);}}
+function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){salvarMemoria();setTimeout(()=>{history=[];render();},900);}}
 function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
 render();
 </script>

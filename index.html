@@ -8,32 +8,28 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
-.history{background:#123524;padding:8px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px}
-.hslot.empty{border:1.5px dashed #d4af37;opacity:.3;background:transparent}
+.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:10px;text-align:center;border-bottom:2px solid #000}
+.topo h1{color:#000;font-size:20px;font-weight:900;letter-spacing:1px;line-height:20px}
+.topo span{font-size:12px;color:#4a3410;font-weight:800;display:block}
+.history{background:#123524;padding:8px;flex-shrink:0}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.hslot{height:62px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px}
+.hslot.empty{border:2px dashed #d4af37;opacity:.3;background:transparent}
 .hslot.yellow{background:#d4af37!important;color:#000!important;border:none!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.6;outline:2px dashed #d4af37}
-.legenda{background:#001a0a;border:2px solid #d4af37;margin:6px;padding:10px;border-radius:12px}
-.legenda div{color:#e8c86a;font-size:14px;line-height:20px;font-weight:800}
-.legenda span{color:#000;font-weight:900;background:#d4af37;padding:0 6px;border-radius:4px;margin-right:4px}
-.keypad{flex:1;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
-.k{height:100%;min-height:78px;border-radius:12px;border:none;font-weight:900;font-size:26px}
+.hslot.preview{opacity:.6;outline:2px dashed #fff}
+.keypad{flex:1;padding:8px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
+.k{height:100%;min-height:70px;border-radius:14px;border:none;font-weight:900;font-size:28px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:14px}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:15px}
 </style>
 </head>
 <body>
 <div class="app">
+<div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-<div class="legenda">
-<div><span>=1</span> (6,9,11,14,16,17,19,21,26,29,33,36)</div>
-<div><span>=2</span> (2,3,5,8,10,13,20,25,28,31,32,35)</div>
-<div><span>=3</span> (1,4,7,12,15,18,22,23,24,27,30,34)</div>
-</div>
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -76,12 +72,8 @@ let v=parseInt(cur);if(v>36)return;
 if(v==0){history=[];cur='';render();return}
 let alvo=getAlvo(v);
 history.push({num:v, alvo:alvo});
-cur='';
-render();
-// SE FOR O ULTIMO (12º), APAGA TUDO PRA COMEÇAR DE NOVO
-if(history.length>=12){
-setTimeout(()=>{history=[];render();}, 800);
-}
+cur='';render();
+if(history.length>=12){setTimeout(()=>{history=[];render();}, 900);}
 }
 function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
 render();

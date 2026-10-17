@@ -10,16 +10,17 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
 .history{background:#123524;padding:8px}
 .hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hslot{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;letter-spacing:.2px}
+.hslot{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
 .hslot.empty{border:1.5px dashed #d4af37;opacity:.3;background:transparent}
 .hslot.yellow{background:#d4af37!important;color:#000!important;border:none!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
+.hslot.preview{border:2px solid #d4af37;background:#d4af37;color:#000;opacity:.7}
 .legenda{background:#001a0a;border:2px solid #d4af37;margin:6px;padding:10px;border-radius:12px}
 .legenda div{color:#e8c86a;font-size:14px;line-height:20px;font-weight:800}
 .legenda span{color:#000;font-weight:900;background:#d4af37;padding:0 6px;border-radius:4px;margin-right:4px}
 .keypad{flex:1;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:8px;background:#0a1f12}
-.k{height:100%;min-height:80px;border-radius:12px;border:none;font-weight:900;font-size:24px}
+.k{height:100%;min-height:78px;border-radius:12px;border:none;font-weight:900;font-size:24px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
@@ -28,13 +29,11 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <body>
 <div class="app">
 <div class="history"><div class="hist-grid" id="grid"></div></div>
-
 <div class="legenda">
 <div><span>=1</span> (6,9,11,14,16,17,19,21,26,29,33,36)</div>
 <div><span>=2</span> (2,3,5,8,10,13,20,25,28,31,32,35)</div>
 <div><span>=3</span> (1,4,7,12,15,18,22,23,24,27,30,34)</div>
 </div>
-
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -43,7 +42,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[],cur='',total=0;
+let history=[],cur='';
 const grid=document.getElementById('grid');
 const p1=[6,9,11,14,16,17,19,21,26,29,33,36],p2=[2,3,5,8,10,13,20,25,28,31,32,35],p3=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(p1.includes(n))return 1;if(p2.includes(n))return 2;if(p3.includes(n))return 3;return 0}
@@ -53,41 +52,72 @@ function render(){
 grid.innerHTML='';
 for(let i=0;i<12;i++){
 let d=document.createElement('div');
+// SE ESTÁ DIGITANDO, MOSTRA PREVIEW NO PROXIMO QUADRADO AMARELO/VAZIO
+if(i==history.length && cur!=''){
+let v=parseInt(cur);
+if(isNaN(v)){d.className='hslot empty';}
+else{
+let alvo=getAlvo(v);
+if(i<4){
+d.className='hslot preview yellow';
+d.textContent=`[${v} C${alvo}]`;
+}else{
+let col=i%4;
+let alvoTopo=history[col]?.alvo;
+d.textContent=`[${v}]`;
+if(alvoTopo){
+let cr=getColReal(v);
+d.className='hslot preview '+(cr==alvoTopo?'green':'red');
+}else{d.className='hslot preview yellow';}
+}
+}
+grid.appendChild(d);
+continue;
+}
+
 if(i<history.length){
 let h=history[i];
-let row=Math.floor(i/4);
-let alvoRow=history[row*4]?.alvo;
-let txt=`[${h.num} C${h.alvo}]`;
-d.textContent=txt;
-if(row==0){
-// PRIMEIRA LINHA TODA AMARELA COM NUMERO PRETO
+if(i<4){
+// PRIMEIRA LINHA AMARELA [11 C1]
 d.className='hslot yellow';
+d.textContent=`[${h.num} C${h.alvo}]`;
 }else{
-// DUAS LINHAS DE BAIXO VERDE OU VERMELHO
+// DUAS LINHAS DE BAIXO SÓ [2] - VERDE OU VERMELHO
+let col=i%4;
+let alvoTopo=history[col]?.alvo;
 let colReal=getColReal(h.num);
-d.className='hslot '+(colReal==alvoRow?'green':'red');
+d.textContent=`[${h.num}]`;
+if(alvoTopo){
+d.className='hslot '+(colReal==alvoTopo?'green':'red');
+}else{
+d.className='hslot yellow';
+}
 }
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
 }
 
-function addN(n){if(cur.length>=2)return;cur+=n;}
+function addN(n){
+if(cur.length>=2)return;
+cur+=n;
+render();
+}
 
 function enterN(){
 if(cur=='')return;
-if(cur=='00'){history=[];total=0;cur='';render();return;}
+if(cur=='00'){history=[];cur='';render();return;}
 let v=parseInt(cur);if(v>36)return;
-if(v==0){history=[];total=0;cur='';render();return}
+if(v==0){history=[];cur='';render();return}
 let alvo=getAlvo(v);
 history.push({num:v, alvo:alvo});
 if(history.length>12)history.shift();
-total++;cur='';render();
+cur='';render();
 }
 
 function corrige(){
-if(cur!=''){cur=cur.slice(0,-1);}
-else if(history.length>0){history.pop();total=Math.max(0,total-1);render();}
+if(cur!=''){cur=cur.slice(0,-1);render();}
+else if(history.length>0){history.pop();render();}
 }
 render();
 </script>

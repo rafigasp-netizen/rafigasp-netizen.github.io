@@ -9,26 +9,43 @@
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
-.topo h1{color:#000;font-size:18px;font-weight:900;line-height:1}
+.topo h1{color:#000;font-size:18px;font-weight:900}
 .topo span{font-size:11px;color:#4a3410;font-weight:800;display:block}
-.history{background:#123524;padding:8px;flex:1}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.hslot{height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px}
+.history{background:#123524;padding:8px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.hslot{height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
 .hslot.empty{border:1.5px dashed #d4af37;opacity:.25}
-.hslot.yellow{background:#d4af37!important;color:#000!important;font-size:16px}
+.hslot.yellow{background:#d4af37!important;color:#000!important;font-size:15px}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12}
-.k{height:48px;border-radius:10px;border:none;font-weight:900;font-size:21px}
+
+/* QUADRADO AZUL - HISTÓRICO DO ÚLTIMO RESULTADO */
+.blue-box{border:3px solid #3b82f6;border-radius:12px;margin:8px;padding:8px;min-height:62px;background:#0a2a1a;display:flex;align-items:center;gap:6px;overflow-x:auto}
+.blue-box-title{color:#3b82f6;font-size:10px;font-weight:900;white-space:nowrap}
+.blue-item{min-width:36px;height:36px;border-radius:8px;background:#d4af37;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.blue-item.green{background:#16a34a;color:#fff}
+.blue-item.red{background:#dc2626;color:#fff}
+
+/* QUADRADO VERMELHO - TECLADO NO TAMANHO CERTO */
+.keypad{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0a1f12;border:3px solid #ef4444;border-radius:12px;margin:0 8px 8px 8px}
+.k{height:46px;border-radius:10px;border:none;font-weight:900;font-size:20px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
+
 <div class="history"><div class="hist-grid" id="grid"></div></div>
+
+<!-- QUADRADO AZUL -->
+<div class="blue-box" id="blueBox">
+<span class="blue-box-title">HIST:</span>
+</div>
+
+<!-- QUADRADO VERMELHO -->
 <div class="keypad">
 <button class="k num" onclick="addN(1)">1</button><button class="k num" onclick="addN(2)">2</button><button class="k num" onclick="addN(3)">3</button>
 <button class="k num" onclick="addN(4)">4</button><button class="k num" onclick="addN(5)">5</button><button class="k num" onclick="addN(6)">6</button>
@@ -36,13 +53,14 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 <button class="k act" onclick="enterN()">ENTER</button><button class="k zero" onclick="addN(0)">0</button><button class="k act" onclick="corrige()">CORRIGIR</button>
 </div>
 </div>
+
 <script>
 let history=[],cur='';
 const grid=document.getElementById('grid');
-// Grupos que definem o alvo
-const gC23=[6,9,11,14,16,17,19,21,26,29,33,36]; // C2/3
-const gC13=[2,3,5,8,10,13,20,25,28,31,32,35]; // C1/3
-const gC12=[1,4,7,12,15,18,22,23,24,27,30,34]; // C1/2
+const blueBox=document.getElementById('blueBox');
+const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
+const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
+const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 
 function getAlvo(n){
 if(gC23.includes(n))return "C2/3";
@@ -56,7 +74,6 @@ if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;
 if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;
 return 0;
 }
-// LÓGICA DEFINITIVA: C1/3 = 1 ou 3, C2/3 = 2 ou 3, C1/2 = 1 ou 2
 function getColunasDoAlvo(alvo){
 if(alvo=="C1/3")return [1,3];
 if(alvo=="C2/3")return [2,3];
@@ -80,53 +97,22 @@ d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
+// ATUALIZA QUADRADO AZUL
+blueBox.innerHTML='<span class="blue-box-title">HIST:</span>';
+history.forEach((h,idx)=>{
+if(idx<4)return;
+let col=idx%4;
+let alvoTopo=history[col]?.alvo;
+let colReal=getColunaReal(h.num);
+let colsAlvo=getColunasDoAlvo(alvoTopo);
+let color = colsAlvo.includes(colReal)?'green':'red';
+let b=document.createElement('div');
+b.className=`blue-item ${color}`;
+b.textContent=h.num;
+blueBox.appendChild(b);
+});
 }
 function addN(n){
 if(cur=='00')cur='';
 if(cur.length==0 && n==0){cur='0';}
-else if(cur.length==1 && cur=='0' && n==0){cur='00';}
-else if(cur.length>=2){return;}
-else{cur+=n;}
-let tempGrid=document.getElementById('grid');
-tempGrid.innerHTML='';
-for(let i=0;i<12;i++){
-let d=document.createElement('div');
-if(i==history.length){
-if(cur=='00'){d.className='hslot yellow'; d.style.opacity='.6'; d.textContent=`ZERAR`; tempGrid.appendChild(d); continue;}
-let v=parseInt(cur); 
-if(!isNaN(v) && cur!='0' && cur!=''){
-let alvo=getAlvo(v);
-if(i<4){d.className='hslot yellow'; d.style.opacity='.6'; d.textContent=`${v} ${alvo}`;}
-else{
-let col=i%4; let alvoTopo=history[col]?.alvo;
-let colReal=getColunaReal(v);
-let colsAlvo=getColunasDoAlvo(alvoTopo);
-d.textContent=`${v}`; d.style.opacity='.6';
-d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');
-}
-tempGrid.appendChild(d); continue;
-}
-}
-if(i<history.length){
-let h=history[i];
-if(i<4){d.className='hslot yellow'; d.textContent=`${h.num} ${h.alvo}`;}
-else{let col=i%4; let alvoTopo=history[col]?.alvo; let colReal=getColunaReal(h.num); let colsAlvo=getColunasDoAlvo(alvoTopo); d.textContent=`${h.num}`; d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');}
-}else{d.className='hslot empty';}
-tempGrid.appendChild(d);
-}
-}
-function enterN(){
-if(cur=='')return;
-if(cur=='00'){history=[];cur='';render();return;}
-let v=parseInt(cur);if(v>36)return;
-if(v==0){history=[];cur='';render();return}
-let alvo=getAlvo(v);
-history.push({num:v, alvo:alvo});
-cur='';render();
-if(history.length>=12){setTimeout(()=>{history=[];render();}, 1500);}
-}
-function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
-render();
-</script>
-</body>
-</html>
+else if(cur.length==1 && cur=='0' && n==0){cur='00

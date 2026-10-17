@@ -7,33 +7,33 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
-.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:6px;text-align:center}
-.topo h1{color:#000;font-size:17px;font-weight:900}
+.app{width:100%;max-width:420px;min-height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
+.topo{background:#d4af37;padding:8px;text-align:center}
+.topo h1{color:#000;font-size:18px;font-weight:900}
 .topo span{font-size:10px;color:#4a3410;font-weight:800;display:block}
-.history{background:#0f2e1f;padding:8px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.col-amarela{background:#d4af37;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px;min-height:110px}
-.col-amarela.empty{background:rgba(212,175,55,0.15);border:2px dashed #d4af37}
+.history{background:#0f2e1f;padding:10px;min-height:130px;display:block!important}
+.hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;min-height:110px}
+.col-amarela{background:#d4af37;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px;min-height:110px;justify-content:flex-start}
+.col-amarela.empty{background:rgba(212,175,55,0.2);border:2px dashed #d4af37}
 .col-amarela.active{outline:3px solid #fff}
-.yellow-header{font-weight:900;font-size:13px;color:#000;text-align:center}
-.small-wrap{display:flex;flex-direction:column;gap:5px}
-.ssmall{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
+.yellow-header{font-weight:900;font-size:12px;color:#000;text-align:center;min-height:18px}
+.small-wrap{display:flex;flex-direction:column;gap:4px}
+.ssmall{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;background:#123524}
 .ssmall.green{background:#16a34a}.ssmall.red{background:#dc2626}
 .ssmall.empty{border:1.5px dashed #000;opacity:.3;background:transparent}
-.ssmall.preview{opacity:.5;outline:1px solid #fff}
-.bottom{padding:8px;display:flex;flex-direction:column;gap:8px;flex:1;justify-content:flex-end}
-.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:100px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;min-height:40px;opacity:.3}
-.blue-card.hasData{opacity:1}.blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
-.blue-card .label{color:#d4af37;font-weight:900;font-size:11px}
-.blue-card .b{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.ssmall.preview{opacity:.6;outline:1px solid #fff}
+.bottom{padding:8px;display:flex;flex-direction:column;gap:8px}
+.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:90px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:4px;min-height:38px;opacity:.2}
+.blue-card.hasData{opacity:1}.blue-card.active{opacity:1;border:2px solid #d4af37}
+.blue-card .label{color:#d4af37;font-weight:900;font-size:10px}
+.blue-card .b{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:900}
 .b.green{background:#16a34a}.b.red{background:#dc2626}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.k{height:72px;border-radius:15px;border:none;font-weight:900;font-size:24px}
-.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+.k{height:70px;border-radius:14px;border:none;font-weight:900;font-size:22px}
+.k.num{background:#d4af37;color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
+.k.act{background:#d4af37;color:#4a3410;font-size:11px}
 </style>
 </head>
 <body>
@@ -51,7 +51,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[],cur='',memoria={};
+let history=[],cur='';
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
@@ -60,9 +60,6 @@ const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
 function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
 function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
-function salvarMemoria(){for(let c=0;c<4;c++){let h=history[c];if(!h)continue;let r1=history[c+4],r2=history[c+8];let l=[];if(r1)l.push(r1);if(r2)l.push(r2);if(l.length)memoria[h.num]=l;}localStorage.setItem('raf_mem',JSON.stringify(memoria));}
-function carregarMemoria(){try{let m=localStorage.getItem('raf_mem');if(m)memoria=JSON.parse(m);}catch(e){}}
-carregarMemoria();
 function render(preview=null){
 grid.innerHTML='';
 let previewNum=preview?preview.num:null;
@@ -71,41 +68,59 @@ let div=document.createElement('div');
 let header=history[col];
 let r1=history[col+4];
 let r2=history[col+8];
-if(!r1 && header && memoria[header.num]?.[0]) r1=memoria[header.num][0];
-if(!r2 && header && memoria[header.num]?.[1]) r2=memoria[header.num][1];
-
-if(!header && preview && col==history.length){
-header={num:preview.num,alvo:preview.alvo};
-div.className='col-amarela active';
-}else if(header){
-let isActive = previewNum && previewNum==header.num;
-div.className='col-amarela'+(isActive?' active':'');
-}else{
-div.className='col-amarela empty';
-}
-
+let isActive=false;
+if(previewNum && header && header.num==previewNum) isActive=true;
+if(!header && preview && col==history.length) {header={num:preview.num,alvo:preview.alvo}; isActive=true;}
+div.className = header ? (isActive?'col-amarela active':'col-amarela') : 'col-amarela empty';
 if(!header){
-div.innerHTML=`<div class="yellow-header" style="opacity:.3">-</div><div class="small-wrap"><div class="ssmall empty"></div><div class="ssmall empty"></div></div>`;
+div.innerHTML=`<div class="yellow-header">-</div><div class="small-wrap"><div class="ssmall empty"></div><div class="ssmall empty"></div></div>`;
 }else{
-function small(h,isPreview){
-if(isPreview){
-let cr=getColunaReal(preview.num);
-let ca=getColunasDoAlvo(header.alvo);
-return `<div class="ssmall ${ca.includes(cr)?'green':'red'} preview">${preview.num}</div>`;
-}
-if(!h) return `<div class="ssmall empty"></div>`;
-let cr=getColunaReal(h.num);
-let ca=getColunasDoAlvo(header.alvo);
-return `<div class="ssmall ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;
-}
-let previewForThis = preview && col==history.length-1 && history.length>=4 && header.num!=preview.num ? false : (preview && ((header && header.num==previewNum) || (!history[col] && col==history.length)) ? false : false);
-// logica: se ta digitando resultado para este header
-let isResultPreview = preview && history.length>=4 && col==history.length%4 && header;
+function small(h){if(!h) return `<div class="ssmall empty"></div>`;let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="ssmall ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
 let html=`<div class="yellow-header">${header.num} ${header.alvo}</div><div class="small-wrap">`;
-if(isResultPreview){
-let cr=getColunaReal(preview.num);
-let ca=getColunasDoAlvo(header.alvo);
+if(preview && history.length>=4 && col==history.length%4 && header && previewNum!=header.num){
+// preview de resultado para este A
+let cr=getColunaReal(preview.num);let ca=getColunasDoAlvo(header.alvo);
 html+=`<div class="ssmall ${ca.includes(cr)?'green':'red'} preview">${preview.num}</div>`;
 if(r1) html+=small(r1); else html+=`<div class="ssmall empty"></div>`;
 }else{
-html+=small(r1)+small(r2
+html+=small(r1)+small(r2);
+}
+html+=`</div>`;
+div.innerHTML=html;
+}
+grid.appendChild(div);
+}
+// BLUE - APENAS A-A B-B C-C D-D SEPARADO
+blueBox.innerHTML='';
+for(let col=0;col<4;col++){
+let card=document.createElement('div');card.className='blue-card';
+let header=history[col];
+if(previewNum){
+if(header && header.num==previewNum){
+card.classList.add('active','hasData');
+let r1=history[col+4],r2=history[col+8];
+function b(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
+card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${b(r1)}${b(r2)}`;
+}else if(!header && col==history.length){
+card.classList.add('active','hasData');
+card.innerHTML=`<span class="label">${previewNum} ${preview.alvo}</span>`;
+}else{card.innerHTML='';}
+}else{
+if(!header){card.innerHTML='';}
+else{
+card.classList.add('hasData');
+let r1=history[col+4],r2=history[col+8];
+function b(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
+card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${b(r1)}${b(r2)}`;
+}
+}
+blueBox.appendChild(card);
+}
+}
+function addN(n){if(cur.length>=2)return;cur+=n;let v=parseInt(cur);if(isNaN(v))return;let alvo=getAlvo(v);render({num:v,alvo:alvo});}
+function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){setTimeout(()=>{history=[];render();},800);}}
+function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
+render();
+</script>
+</body>
+</html>

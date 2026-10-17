@@ -8,29 +8,30 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
-.topo h1{color:#000;font-size:18px;font-weight:900}
-.topo span{font-size:11px;color:#4a3410;font-weight:800;display:block}
-.history{background:#0f2e1f;padding:10px}
-.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.hslot{height:62px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
-.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1)}
+.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:6px;text-align:center}
+.topo h1{color:#000;font-size:17px;font-weight:900}
+.topo span{font-size:10px;color:#4a3410;font-weight:800;display:block}
+.history{background:#0f2e1f;padding:8px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.hslot{height:52px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
+.hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.08)}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
-.hslot.preview{opacity:.5;outline:2px solid #fff}
-.bottom{padding:10px;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:flex-end}
-.blue-box{border:3px solid #3b82f6;border-radius:14px;min-height:115px;background:#0a2a1a;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.blue-card{background:#123524;border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;min-height:48px}
-.blue-card.highlight{border:2px solid #d4af37;background:#1a3d26}
-.blue-card .label{color:#d4af37;font-weight:900;font-size:12px}
-.blue-card .b{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
-.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{border:1.5px dashed #3b82f6;opacity:0;background:transparent}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.k{height:72px;border-radius:16px;border:none;font-weight:900;font-size:24px}
+.hslot.preview{opacity:.55;outline:2px solid #fff}
+.bottom{padding:8px;display:flex;flex-direction:column;gap:8px;flex:1;justify-content:flex-end}
+.blue-box{border:3px solid #3b82f6;border-radius:12px;min-height:105px;background:#0a2a1a;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.blue-card{background:#123524;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:5px;min-height:42px;opacity:.4}
+.blue-card.hasData{opacity:1}
+.blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
+.blue-card .label{color:#d4af37;font-weight:900;font-size:11px;white-space:nowrap}
+.blue-card .b{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900;flex-shrink:0}
+.b.green{background:#16a34a}.b.red{background:#dc2626}.b.empty{display:none}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:68px;border-radius:14px;border:none;font-weight:900;font-size:23px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:12px}
 </style>
 </head>
 <body>
@@ -73,37 +74,54 @@ grid.appendChild(d);continue;
 if(i<history.length){let h=history[i];if(i<4){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}else{let alvoTopo=history[i%4]?.alvo;let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(alvoTopo);d.textContent=`${h.num}`;d.className='hslot '+(colsAlvo.includes(colReal)?'green':'red');}}else{d.className='hslot empty';}
 grid.appendChild(d);
 }
-// BLUE = CADA QUADRADO DE CIMA = SEU HISTORICO
+// AZUL - A-A B-B C-C D-D SEPARADO
 blueBox.innerHTML='';
 let previewNum=preview?preview.num:null;
+let previewAlvo=preview?preview.alvo:null;
+
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
 let header=history[col];
-// se ta digitando e esse numero ja tem memoria mas ainda nao ta no topo, mostra como preview
-if(!header && preview && col==history.length){
-header={num:preview.num,alvo:preview.alvo};
-card.classList.add('highlight');
-}
-if(!header){
-card.innerHTML=''; // VAZIO - APAGADO COMO VC PEDIU
-}else{
-let r1=history[col+4];
-let r2=history[col+8];
-// se ciclo atual nao tem, busca na memoria da ultima vez que esse numero saiu
+
+// SE ESTA DIGITANDO, SO MOSTRA O QUE CORRESPONDE AO NUMERO DIGITADO
+if(previewNum){
+// se o header atual é o numero que estou digitando
+if(header && header.num==previewNum){
+card.classList.add('active','hasData');
+let r1=history[col+4],r2=history[col+8];
 if(!r1 && memoria[header.num]?.[0]) r1=memoria[header.num][0];
 if(!r2 && memoria[header.num]?.[1]) r2=memoria[header.num][1];
-function box(h){if(!h)return '<div class="b empty"></div>';let colReal=getColunaReal(h.num);let colsAlvo=getColunasDoAlvo(header.alvo);let cor=colsAlvo.includes(colReal)?'green':'red';return `<div class="b ${cor}">${h.num}</div>`;}
-let highlight = previewNum && previewNum==header.num;
-if(highlight) card.classList.add('highlight');
+function box(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
 card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${box(r1)}${box(r2)}`;
+}else if(!header && col==history.length){
+// preview de novo numero amarelo - mostra memoria dele se tiver
+let mem=memoria[previewNum];
+if(mem){
+function boxOld(h){let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(previewAlvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
+card.classList.add('active','hasData');
+card.innerHTML=`<span class="label">${previewNum} ${previewAlvo}</span>${mem.map(boxOld).join('')}`;
+}else{
+card.classList.add('active','hasData');
+card.innerHTML=`<span class="label">${previewNum} ${previewAlvo}</span>`;
+}
+}else{
+// OUTROS QUADRADOS FICAM VAZIOS/APAGADOS QUANDO DIGITA
+card.innerHTML='';
+}
+}else{
+// SEM DIGITACAO - MOSTRA TUDO NORMAL A-A B-B C-C D-D
+if(!header){
+card.innerHTML='';
+}else{
+card.classList.add('hasData');
+let r1=history[col+4],r2=history[col+8];
+if(!r1 && memoria[header.num]?.[0]) r1=memoria[header.num][0];
+if(!r2 && memoria[header.num]?.[1]) r2=memoria[header.num][1];
+function box(h){if(!h)return '';let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(header.alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
+card.innerHTML=`<span class="label">${header.num} ${header.alvo}</span>${box(r1)}${box(r2)}`;
+}
 }
 blueBox.appendChild(card);
 }
 }
-function addN(n){if(cur=='00')cur='';if(cur.length==0&&n==0){cur='0';}else if(cur.length==1&&cur=='0'&&n==0){cur='00';render();return;}else if(cur.length>=2){return;}else{cur+=n;}let v=parseInt(cur);if(isNaN(v)||cur=='0'){render();return;}let alvo=getAlvo(v);render({num:v,alvo:alvo});}
-function enterN(){if(cur=='')return;if(cur=='00'){history=[];cur='';memoria={};localStorage.removeItem('raf_mem');render();return;}let v=parseInt(cur);if(v>36){cur='';render();return;}if(v==0){history=[];cur='';render();return}let alvo=getAlvo(v);history.push({num:v,alvo:alvo});cur='';render();if(history.length>=12){salvarMemoria();setTimeout(()=>{history=[];render();},900);}}
-function corrige(){if(cur!=''){cur=cur.slice(0,-1);render();}else if(history.length>0){history.pop();render();}}
-render();
-</script>
-</body>
-</html>
+function addN(n){if(cur=='00')cur='';if(cur.length==0&&

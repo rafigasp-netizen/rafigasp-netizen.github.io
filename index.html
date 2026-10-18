@@ -50,8 +50,10 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 <script>
 let history=[],cur='',memoria={};
-try{let m=localStorage.getItem('raf_mem_2blocos'); if(m) memoria=JSON.parse(m);}catch(e){}
+try{let m=localStorage.getItem('raf_mem_zig'); if(m) memoria=JSON.parse(m);}catch(e){}
 if(!memoria[0]) memoria={0:{},1:{},2:{},3:{},8:{},9:{},10:{},11:{}};
+// ORDEM ZIGUE-ZAGUE: amarelo, verde, amarelo, verde...
+const SEQ=[0,4,1,5,2,6,3,7,8,12,9,13,10,14,11,15];
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
@@ -60,35 +62,52 @@ const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
 function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
 function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
-function getHeaderIdx(i){if(i<4) return null;if(i<8) return i%4;if(i<12) return null;return 8 + (i%4);}
 function salvar(){
-for(let i=0;i<4;i++){
-let h=history[i];if(!h)continue;
-let r=history[i+4];if(!r)continue;
-if(!memoria[i]) memoria[i]={};
-memoria[i][h.num]={results:[r], alvo:h.alvo};
+for(let col=0;col<4;col++){
+let yellowPos=col;
+let jYellow=SEQ.indexOf(yellowPos);
+let resultPos=col+4;
+let jResult=SEQ.indexOf(resultPos);
+if(jYellow<history.length && jResult<history.length){
+let h=history[jYellow];let r=history[jResult];
+if(!memoria[col]) memoria[col]={};
+memoria[col][h.num]={results:[r], alvo:h.alvo};
 }
-for(let i=8;i<12;i++){
-let h=history[i];if(!h)continue;
-let r=history[i+4];if(!r)continue;
-if(!memoria[i]) memoria[i]={};
-memoria[i][h.num]={results:[r], alvo:h.alvo};
 }
-localStorage.setItem('raf_mem_2blocos',JSON.stringify(memoria));
+for(let col=0;col<4;col++){
+let yellowPos=8+col;
+let jYellow=SEQ.indexOf(yellowPos);
+let resultPos=12+col;
+let jResult=SEQ.indexOf(resultPos);
+if(jYellow<history.length && jResult<history.length){
+let h=history[jYellow];let r=history[jResult];
+if(!memoria[8+col]) memoria[8+col]={};
+memoria[8+col][h.num]={results:[r], alvo:h.alvo};
+}
+}
+localStorage.setItem('raf_mem_zig',JSON.stringify(memoria));
 }
 function getBadge(h, alvo){let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
 function render(preview=null){
 grid.innerHTML='';
-for(let i=0;i<16;i++){
+// mapa pos fisica -> indice logico
+let posToLog={};SEQ.forEach((p,i)=>{posToLog[p]=i;});
+for(let phys=0;phys<16;phys++){
 let d=document.createElement('div');
-let isYellowSlot = (i<4 || (i>=8 && i<12));
-if(preview && i==history.length){
+let logIdx=posToLog[phys];
+let isYellowPhys=(phys<4 || (phys>=8 && phys<12));
+let isNext=false;
+if(preview && history.length<16){
+let nextPhys=SEQ[history.length];
+if(phys==nextPhys) isNext=true;
+}
+if(isNext){
 let v=preview.num;
 if(v==="00"){d.className='hslot yellow preview';d.textContent='00';}
-else if(isYellowSlot){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
+else if(isYellowPhys){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
 else{
-let hi=getHeaderIdx(i);
-let header=history[hi];
+let headerLog=logIdx-1;
+let header=history[headerLog];
 if(!header){d.className='hslot empty';}
 else{
 let cr=getColunaReal(v);
@@ -99,12 +118,12 @@ d.className='hslot '+(ca.includes(cr)?'green':'red')+' preview';
 }
 grid.appendChild(d);continue;
 }
-if(i<history.length){
-let h=history[i];
-if(isYellowSlot){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}
+if(logIdx<history.length){
+let h=history[logIdx];
+if(isYellowPhys){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}
 else{
-let hi=getHeaderIdx(i);
-let header=history[hi];
+let headerLog=logIdx-1;
+let header=history[headerLog];
 let cr=getColunaReal(h.num);
 let ca=getColunasDoAlvo(header.alvo);
 d.textContent=h.num;
@@ -113,64 +132,41 @@ d.className='hslot '+(ca.includes(cr)?'green':'red');
 }else{d.className='hslot empty';}
 grid.appendChild(d);
 }
+// BLUE BOX - mostra 4 colunas pausadas
 blueBox.innerHTML='';
 let isPreview=preview!=null;
-let pCol=history.length%4;
-let isBlock0Trigger=history.length<4;
-let isBlock0Result=history.length>=4 && history.length<8;
-let isBlock1Trigger=history.length>=8 && history.length<12;
-let isBlock1Result=history.length>=12;
+let nextPhys=isPreview?SEQ[history.length]:-1;
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
-let header0=history[col];
-let header1=history[8+col];
-if(isPreview){
-let isActive=false;
-if(isBlock0Trigger) isActive=(col==history.length);
-else if(isBlock0Result) isActive=(col==pCol);
-else if(isBlock1Trigger) isActive=(col+8==history.length);
-else if(isBlock1Result) isActive=(col==pCol);
-if(isActive){
+// procura amarelo desta coluna no bloco atual
+let block=history.length<8?0:1;
+let yellowPhys=block*8+col;
+let resultPhys=yellowPhys+4;
+let jY=posToLog[yellowPhys];
+let jR=posToLog[resultPhys];
+let h=null,r=null;
+if(jY<history.length) h=history[jY];
+if(jR<history.length) r=history[jR];
+let isActive=nextPhys==yellowPhys || nextPhys==resultPhys;
+if(isPreview && isActive){
 card.classList.add('active','hasData');
-if(preview.num==="00"){card.innerHTML=`<span class="label">00 - ZERAR TUDO</span>`;}
-else if(isBlock0Trigger || isBlock1Trigger){
-let memIdx = isBlock0Trigger?col:8+col;
-let mem=memoria[memIdx] && memoria[memIdx][preview.num];
+if(preview.num==="00"){card.innerHTML=`<span class="label">00 - ZERAR</span>`;}
+else if(nextPhys==yellowPhys){
+let mem=memoria[yellowPhys] && memoria[yellowPhys][preview.num];
 let html=`<span class="label">${preview.num} ${preview.alvo}</span>`;
-if(mem){mem.results.forEach(r=>{html+=getBadge(r, mem.alvo);});}
+if(mem){html+=getBadge(mem.results[0], mem.alvo);}
 card.innerHTML=html;
 }else{
-let header = isBlock0Result?header0:header1;
-let html=`<span class="label">${header.num} ${header.alvo}</span>`;
 let cr=getColunaReal(preview.num);
-let ca=getColunasDoAlvo(header.alvo);
+let ca=getColunasDoAlvo(h.alvo);
+let html=`<span class="label">${h.num} ${h.alvo}</span>`;
 html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${preview.num}</div>`;
 card.innerHTML=html;
 }
 }else{
-let h=header0||header1;
 if(h){
 card.classList.add('hasData');
-let rIdx = header0?col+4:12+col;
-let r=history[rIdx];
-let memIdx = header0?col:8+col;
-let mem=memoria[memIdx] && memoria[memIdx][h.num];
-if(!r && mem) r=mem.results[0];
-let alvo=mem?mem.alvo:h.alvo;
-let html=`<span class="label">${h.num} ${h.alvo}</span>`;
-if(r) html+=getBadge(r, alvo);
-card.innerHTML=html;
-}
-}
-}else{
-let h=header0||header1;
-if(!h){card.innerHTML='';}
-else{
-card.classList.add('hasData');
-let rIdx = header0?col+4:12+col;
-let r=history[rIdx];
-let memIdx = header0?col:8+col;
-let mem=memoria[memIdx] && memoria[memIdx][h.num];
+let mem=memoria[yellowPhys] && memoria[yellowPhys][h.num];
 if(!r && mem) r=mem.results[0];
 let alvo=mem?mem.alvo:h.alvo;
 let html=`<span class="label">${h.num} ${h.alvo}</span>`;
@@ -192,7 +188,7 @@ render({num:v,alvo:getAlvo(v)});
 }
 function enterN(){
 if(cur==='')return;
-if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{},8:{},9:{},10:{},11:{}};localStorage.removeItem('raf_mem_2blocos');render();return;}
+if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{},8:{},9:{},10:{},11:{}};localStorage.removeItem('raf_mem_zig');render();return;}
 let v=parseInt(cur);
 if(v>36){cur='';render();return;}
 if(v===0){history=[];cur='';render();return;}

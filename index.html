@@ -7,27 +7,26 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
-.app{width:100%;max-width:420px;min-height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:10px;text-align:center}
-.topo h1{color:#000;font-size:20px;font-weight:900}
-.topo span{font-size:11px;color:#4a3410;font-weight:800;display:block}
-.top2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;background:#0f2e1f}
-.slot{height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:2px dashed #d4af37;color:#d4af37}
+.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:2px solid #d4af37;display:flex;flex-direction:column}
+.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
+.topo h1{color:#000;font-size:18px;font-weight:900;letter-spacing:1px}
+.topo span{font-size:11px;color:#000;font-weight:900;display:block}
+.top2{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:#0f2e1f}
+.slot{height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:2px dashed #d4af37;color:#d4af37}
 .slot.yellow{background:#d4af37;color:#000;border-style:solid}
 .slot.green{background:#16a34a;color:#fff;border-style:solid}
 .slot.red{background:#dc2626;color:#fff;border-style:solid}
 .slot.next{border:3px solid #fff;background:rgba(255,255,255,0.15)}
-.historyBox{flex:1;background:#0a2a1a;margin:10px;border:3px solid #3b82f6;border-radius:14px;padding:10px;min-height:350px}
-.hist-title{color:#d4af37;font-size:11px;font-weight:900;text-align:center;margin-bottom:10px}
-.squares{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
-.sq{height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
-.sq.yellow{background:#d4af37;color:#000}
+.historyBox{background:#0a2a1a;margin:6px 8px;border:2px solid #3b82f6;border-radius:12px;padding:6px;flex:1;overflow-y:auto;min-height:120px;max-height:220px}
+.hist-title{color:#d4af37;font-size:9px;font-weight:900;text-align:center;margin-bottom:6px}
+.squares{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.sq{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff}
 .sq.green{background:#16a34a}
 .sq.red{background:#dc2626}
-.page-info{color:#888;font-size:10px;text-align:center;margin-top:10px}
-.bottom{padding:10px}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.k{height:58px;border-radius:14px;border:none;font-weight:900;font-size:20px}
+.page-info{color:#888;font-size:8px;text-align:center;margin-top:6px}
+.bottom{padding:6px;background:#0d2818}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.k{height:48px;border-radius:12px;border:none;font-weight:900;font-size:18px}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
 .k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:11px}
@@ -35,13 +34,13 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </head>
 <body>
 <div class="app">
-<div class="topo"><h1>RAFIGASP</h1><span>SÓ QUADRADINHOS - 15 EM 15</span><span id="nextInfo">DIGITE 1º AMARELO</span></div>
+<div class="topo"><h1>RAFIGASP COACH DA ROLETA</h1><span id="nextInfo">DIGITE 1º AMARELO</span></div>
 <div class="top2">
 <div class="slot" id="slotY">VAZIO</div>
 <div class="slot" id="slotR">VAZIO</div>
 </div>
 <div class="historyBox">
-<div class="hist-title">HISTORICO - QUADRADINHOS 5 POR LINHA - 15 DESCENDO</div>
+<div class="hist-title">HISTORICO - SÓ VERDE E VERMELHO - 10 POR FILEIRA</div>
 <div class="squares" id="squares"></div>
 <div class="page-info" id="pageInfo"></div>
 </div>
@@ -103,10 +102,9 @@ slotR.className='slot next'; slotR.textContent='RESULTADO';
 }
 }
 if(history.length==0) nextInfo.textContent="DIGITE 1º AMARELO";
-else if(isYellowNext) nextInfo.textContent="PROXIMO AMARELO AUTOMATICO";
+else if(isYellowNext) nextInfo.textContent="AUTO AMARELO PRONTO - DIGITE RESULTADO";
 else nextInfo.textContent="DIGITE RESULTADO + ENTER";
 
-// RENDER QUADRADINHOS PEQUENOS - SÓ NUMEROS DIGITADOS
 squaresDiv.innerHTML='';
 for(let i=0;i<allSquares.length;i++){
 let s=allSquares[i];
@@ -116,67 +114,7 @@ d.textContent=s.num;
 squaresDiv.appendChild(d);
 }
 let total=allSquares.length;
-let linhas=Math.ceil(total/5);
-pageInfo.textContent=total==0 ? "Nenhum número ainda" : total+" números - "+linhas+" linhas (5 por linha) - "+Math.ceil(total/15)+" blocos de 15";
+pageInfo.textContent=total==0 ? "Nenhum resultado ainda - só verde e vermelho" : total+" resultados - "+Math.ceil(total/10)+" fileiras de 10";
 }
 
-function addN(n){
-if(cur==="0" && n===0){cur="00";render({num:"00",alvo:""});return;}
-if(cur==="00"){cur=n.toString();let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});return;}
-if(cur.length>=2)return;
-cur+=n.toString();
-if(cur==="00"){render({num:"00",alvo:""});return;}
-let v=parseInt(cur);
-render({num:v,alvo:getAlvo(v)});
-}
-
-function enterN(){
-if(cur==='')return;
-if(cur==="00"){history=[];allSquares=[];cur='';render();return;}
-let v=parseInt(cur);
-if(v>36){cur='';render();return;}
-if(v===0){history=[];allSquares=[];cur='';render();return;}
-let alvo=getAlvo(v);
-
-if(history.length%2===0){
-// AMARELO
-history.push({num:v, alvo:alvo});
-allSquares.push({num:v, color:'yellow'});
-}else{
-// RESULTADO
-history.push({num:v, alvo:""});
-let y = history[history.length-2];
-let cr=getColunaReal(v);
-let ca=getColunasDoAlvo(y.alvo);
-let win=ca.includes(cr);
-allSquares.push({num:v, color: win?'green':'red'});
-// AUTO
-let autoAlvo=getAlvo(v);
-history.push({num:v, alvo:autoAlvo});
-allSquares.push({num:v, color:'yellow'});
-}
-cur='';render();
-}
-
-function corrige(){
-if(cur!=''){cur=cur.slice(0,-1);if(cur==''){render();}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}}
-else if(history.length>0){
-history.pop();
-if(allSquares.length>0) allSquares.pop();
-if(history.length>0 && history.length%2===0 && allSquares.length>0){
-let last = allSquares[allSquares.length-1];
-if(last.color!=='yellow' || history.length%2!==0){
-// se foi resultado, tira o amarelo auto tambem
-if(history.length>=1 && history.length%2===1){
-history.pop();
-if(allSquares.length>0) allSquares.pop();
-}
-}
-}
-render();
-}
-}
-render();
-</script>
-</body>
-</html>
+function addN(n

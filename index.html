@@ -15,6 +15,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px}
 .hslot{height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
 .hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1)}
+.hslot.empty.next{border:3px solid #fff;background:rgba(255,255,255,0.15)}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
@@ -49,10 +50,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 </div>
 <script>
-let history=[],cur='',memoria={};
-try{let m=localStorage.getItem('raf_mem_zig'); if(m) memoria=JSON.parse(m);}catch(e){}
-if(!memoria[0]) memoria={0:{},1:{},2:{},3:{},8:{},9:{},10:{},11:{}};
-// ORDEM ZIGUE-ZAGUE: amarelo, verde, amarelo, verde...
+let history=[],cur='';
 const SEQ=[0,4,1,5,2,6,3,7,8,12,9,13,10,14,11,15];
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
@@ -62,35 +60,9 @@ const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
 function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
 function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
-function salvar(){
-for(let col=0;col<4;col++){
-let yellowPos=col;
-let jYellow=SEQ.indexOf(yellowPos);
-let resultPos=col+4;
-let jResult=SEQ.indexOf(resultPos);
-if(jYellow<history.length && jResult<history.length){
-let h=history[jYellow];let r=history[jResult];
-if(!memoria[col]) memoria[col]={};
-memoria[col][h.num]={results:[r], alvo:h.alvo};
-}
-}
-for(let col=0;col<4;col++){
-let yellowPos=8+col;
-let jYellow=SEQ.indexOf(yellowPos);
-let resultPos=12+col;
-let jResult=SEQ.indexOf(resultPos);
-if(jYellow<history.length && jResult<history.length){
-let h=history[jYellow];let r=history[jResult];
-if(!memoria[8+col]) memoria[8+col]={};
-memoria[8+col][h.num]={results:[r], alvo:h.alvo};
-}
-}
-localStorage.setItem('raf_mem_zig',JSON.stringify(memoria));
-}
 function getBadge(h, alvo){let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
 function render(preview=null){
 grid.innerHTML='';
-// mapa pos fisica -> indice logico
 let posToLog={};SEQ.forEach((p,i)=>{posToLog[p]=i;});
 for(let phys=0;phys<16;phys++){
 let d=document.createElement('div');
@@ -101,14 +73,17 @@ if(preview && history.length<16){
 let nextPhys=SEQ[history.length];
 if(phys==nextPhys) isNext=true;
 }
-if(isNext){
+if(!preview && history.length<16){
+let nextPhys=SEQ[history.length];
+if(phys==nextPhys && logIdx>=history.length) isNext=true;
+}
+if(isNext && preview){
 let v=preview.num;
 if(v==="00"){d.className='hslot yellow preview';d.textContent='00';}
 else if(isYellowPhys){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
 else{
-let headerLog=logIdx-1;
-let header=history[headerLog];
-if(!header){d.className='hslot empty';}
+let header=history[logIdx-1];
+if(!header){d.className='hslot empty next';}
 else{
 let cr=getColunaReal(v);
 let ca=getColunasDoAlvo(header.alvo);
@@ -122,23 +97,22 @@ if(logIdx<history.length){
 let h=history[logIdx];
 if(isYellowPhys){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}
 else{
-let headerLog=logIdx-1;
-let header=history[headerLog];
+let header=history[logIdx-1];
 let cr=getColunaReal(h.num);
 let ca=getColunasDoAlvo(header.alvo);
 d.textContent=h.num;
 d.className='hslot '+(ca.includes(cr)?'green':'red');
 }
-}else{d.className='hslot empty';}
+}else{
+d.className=isNext?'hslot empty next':'hslot empty';
+}
 grid.appendChild(d);
 }
-// BLUE BOX - mostra 4 colunas pausadas
 blueBox.innerHTML='';
 let isPreview=preview!=null;
-let nextPhys=isPreview?SEQ[history.length]:-1;
+let nextPhys=isPreview?SEQ[history.length]:SEQ[history.length];
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
-// procura amarelo desta coluna no bloco atual
 let block=history.length<8?0:1;
 let yellowPhys=block*8+col;
 let resultPhys=yellowPhys+4;
@@ -152,25 +126,15 @@ if(isPreview && isActive){
 card.classList.add('active','hasData');
 if(preview.num==="00"){card.innerHTML=`<span class="label">00 - ZERAR</span>`;}
 else if(nextPhys==yellowPhys){
-let mem=memoria[yellowPhys] && memoria[yellowPhys][preview.num];
-let html=`<span class="label">${preview.num} ${preview.alvo}</span>`;
-if(mem){html+=getBadge(mem.results[0], mem.alvo);}
-card.innerHTML=html;
+card.innerHTML=`<span class="label">${preview.num} ${preview.alvo}</span>`;
 }else{
-let cr=getColunaReal(preview.num);
-let ca=getColunasDoAlvo(h.alvo);
-let html=`<span class="label">${h.num} ${h.alvo}</span>`;
-html+=`<div class="b ${ca.includes(cr)?'green':'red'}">${preview.num}</div>`;
-card.innerHTML=html;
+card.innerHTML=`<span class="label">${h.num} ${h.alvo}</span><div class="b ${(() => {let cr=getColunaReal(preview.num);let ca=getColunasDoAlvo(h.alvo);return ca.includes(cr)?'green':'red'})()}">${preview.num}</div>`;
 }
 }else{
 if(h){
 card.classList.add('hasData');
-let mem=memoria[yellowPhys] && memoria[yellowPhys][h.num];
-if(!r && mem) r=mem.results[0];
-let alvo=mem?mem.alvo:h.alvo;
 let html=`<span class="label">${h.num} ${h.alvo}</span>`;
-if(r) html+=getBadge(r, alvo);
+if(r) html+=getBadge(r, h.alvo);
 card.innerHTML=html;
 }
 }
@@ -188,14 +152,14 @@ render({num:v,alvo:getAlvo(v)});
 }
 function enterN(){
 if(cur==='')return;
-if(cur==="00"){history=[];cur='';memoria={0:{},1:{},2:{},3:{},8:{},9:{},10:{},11:{}};localStorage.removeItem('raf_mem_zig');render();return;}
+if(cur==="00"){history=[];cur='';render();return;}
 let v=parseInt(cur);
 if(v>36){cur='';render();return;}
 if(v===0){history=[];cur='';render();return;}
 let alvo=getAlvo(v);
 history.push({num:v,alvo:alvo});
 cur='';render();
-if(history.length>=16){salvar();setTimeout(()=>{history=[];render();},1000);}
+if(history.length>=16){setTimeout(()=>{history=[];render();},1000);}
 }
 function corrige(){
 if(cur!=''){cur=cur.slice(0,-1);if(cur==''){render();}else if(cur==="00"){render({num:"00",alvo:""});}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}}

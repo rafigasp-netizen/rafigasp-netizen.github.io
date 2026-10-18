@@ -20,7 +20,6 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
 .hslot.preview{outline:3px solid #fff}
-.next-label{color:#d4af37;text-align:center;font-size:11px;font-weight:900;margin-bottom:6px}
 .bottom{padding:10px;display:flex;flex-direction:column;gap:8px}
 .blue-box{border:3px solid #3b82f6;border-radius:14px;padding:8px;background:#0a2a1a;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:90px}
 .blue-card{background:#123524;border-radius:10px;padding:6px;display:flex;align-items:center;gap:4px;min-height:44px;flex-wrap:wrap;opacity:0}
@@ -38,7 +37,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </head>
 <body>
 <div class="app">
-<div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA - ZIGUE ZAGUE</span><span id="nextInfo">PROXIMO: AMARELO</span></div>
+<div class="topo"><h1>RAFIGASP</h1><span>AUTO - RESULTADO VIRA AMARELO</span><span id="nextInfo">DIGITE 1º AMARELO</span></div>
 <div class="history"><div class="hist-grid" id="grid"></div></div>
 <div class="bottom">
 <div class="blue-box" id="blueBox"></div>
@@ -74,7 +73,7 @@ grid.innerHTML='';
 let posToLog={};
 SEQ.forEach(function(p,i){posToLog[p]=i;});
 let isYellowNext = history.length%2===0;
-nextInfo.textContent = history.length>=16 ? "COMPLETO - VAI ZERAR" : (isYellowNext ? "PROXIMO: AMARELO (GATILHO)" : "PROXIMO: VERDE/VERMELHO (RESULTADO)");
+nextInfo.textContent = history.length==0 ? "DIGITE 1º AMARELO (ex: 1)" : (isYellowNext ? "PROXIMO: AMARELO AUTO" : "DIGITE RESULTADO VERDE (ex: 2) + ENTER");
 for(let phys=0;phys<16;phys++){
 let d=document.createElement('div');
 let logIdx=posToLog[phys];
@@ -112,9 +111,9 @@ blueBox.innerHTML='';
 let nextPhys=history.length<16?SEQ[history.length]:-1;
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
-let block=history.length<8?0:1;
-let yellowPhys=block*8+col;
-let resultPhys=yellowPhys+4;
+let yellowPhys=col;
+let resultPhys=col+4;
+if(history.length>=8){yellowPhys=8+col; resultPhys=12+col;}
 let jy=posToLog[yellowPhys];
 let jr=posToLog[resultPhys];
 let h=null,r=null;
@@ -160,12 +159,29 @@ if(v>36){cur='';render();return;}
 if(v===0){history=[];cur='';render();return;}
 let alvo=getAlvo(v);
 history.push({num:v,alvo:alvo});
+// SE ACABOU DE DIGITAR VERDE, JÁ CRIA AMARELO AUTOMATICO COM MESMO NUMERO
+if(history.length%2===0 && history.length<16){
+let autoNum=v;
+let autoAlvo=getAlvo(autoNum);
+history.push({num:autoNum, alvo:autoAlvo});
+}
 cur='';render();
-if(history.length>=16){setTimeout(function(){history=[];render();},1200);}
+if(history.length>=16){setTimeout(function(){history=[];render();},1500);}
 }
 function corrige(){
 if(cur!=''){cur=cur.slice(0,-1);if(cur==''){render();}else if(cur==="00"){render({num:"00",alvo:""});}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}}
-else if(history.length>0){history.pop();render();}
+else if(history.length>0){
+history.pop();
+// se tirou amarelo auto, tira o verde antes tambem
+if(history.length%2===1 && history.length>0){
+let last=history[history.length-1];
+let prev=history[history.length-2];
+if(prev && last && prev.num===last.num && history.length%2===1){
+history.pop();
+}
+}
+render();
+}
 }
 render();
 </script>

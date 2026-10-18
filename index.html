@@ -12,16 +12,16 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 .topo h1{color:#000;font-size:20px;font-weight:900}
 .topo span{font-size:12px;color:#4a3410;font-weight:800;display:block}
 .history{background:#0f2e1f;padding:10px}
-.hist-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px}
+.hist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .hslot{height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
 .hslot.empty{border:2px dashed #d4af37;background:rgba(212,175,55,0.1)}
-.hslot.empty.next{border:3px solid #fff;background:rgba(255,255,255,0.15)}
+.hslot.empty.next{border:3px solid #fff;background:rgba(255,255,255,0.2)}
 .hslot.yellow{background:#d4af37!important;color:#000!important}
 .hslot.green{background:#16a34a!important;color:#fff!important}
 .hslot.red{background:#dc2626!important;color:#fff!important}
 .hslot.preview{outline:3px solid #fff}
 .bottom{padding:10px;display:flex;flex-direction:column;gap:10px}
-.blue-box{border:3px solid #3b82f6;border-radius:14px;padding:8px;background:#0a2a1a;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:100px}
+.blue-box{border:3px solid #3b82f6;border-radius:14px;padding:8px;background:#0a2a1a;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:90px}
 .blue-card{background:#123524;border-radius:10px;padding:6px;display:flex;align-items:center;gap:4px;min-height:44px;flex-wrap:wrap;opacity:0}
 .blue-card.hasData{opacity:1}
 .blue-card.active{opacity:1;border:2px solid #d4af37;background:#1a3d26}
@@ -51,7 +51,7 @@ body{background:#0d2818;display:flex;justify-content:center;font-family:Arial}
 </div>
 <script>
 let history=[],cur='',memoria={};
-try{let m=localStorage.getItem('raf_zig_mem'); if(m) memoria=JSON.parse(m);}catch(e){}
+try{let m=localStorage.getItem('raf_zig_final'); if(m) memoria=JSON.parse(m);}catch(e){}
 const SEQ=[0,4,1,5,2,6,3,7,8,12,9,13,10,14,11,15];
 const grid=document.getElementById('grid');
 const blueBox=document.getElementById('blueBox');
@@ -80,12 +80,19 @@ if(!memoria[yp]) memoria[yp]={};
 memoria[yp][h.num]={results:[r], alvo:h.alvo};
 }
 }
-localStorage.setItem('raf_zig_mem',JSON.stringify(memoria));
+localStorage.setItem('raf_zig_final',JSON.stringify(memoria));
 }
-function getBadge(h, alvo){let cr=getColunaReal(h.num);let ca=getColunasDoAlvo(alvo);return `<div class="b ${ca.includes(cr)?'green':'red'}">${h.num}</div>`;}
-function render(preview=null){
+function getBadge(h, alvo){
+let cr=getColunaReal(h.num);
+let ca=getColunasDoAlvo(alvo);
+let cls=ca.includes(cr)?'green':'red';
+return '<div class="b '+cls+'">'+h.num+'</div>';
+}
+function render(preview){
+if(!preview) preview=null;
 grid.innerHTML='';
-let posToLog={};SEQ.forEach((p,i)=>{posToLog[p]=i;});
+let posToLog={};
+SEQ.forEach(function(p,i){posToLog[p]=i;});
 for(let phys=0;phys<16;phys++){
 let d=document.createElement('div');
 let logIdx=posToLog[phys];
@@ -94,7 +101,7 @@ let isNext=history.length<16 && SEQ[history.length]==phys;
 if(isNext && preview){
 let v=preview.num;
 if(v==="00"){d.className='hslot yellow preview';d.textContent='00';}
-else if(isYellowPhys){d.className='hslot yellow preview';d.textContent=`${v} ${preview.alvo}`;}
+else if(isYellowPhys){d.className='hslot yellow preview';d.textContent=v+' '+preview.alvo;}
 else{
 let header=history[logIdx-1];
 let cr=getColunaReal(v);
@@ -106,7 +113,7 @@ grid.appendChild(d);continue;
 }
 if(logIdx<history.length){
 let h=history[logIdx];
-if(isYellowPhys){d.className='hslot yellow';d.textContent=`${h.num} ${h.alvo}`;}
+if(isYellowPhys){d.className='hslot yellow';d.textContent=h.num+' '+h.alvo;}
 else{
 let header=history[logIdx-1];
 let cr=getColunaReal(h.num);
@@ -123,7 +130,7 @@ blueBox.innerHTML='';
 let nextPhys=history.length<16?SEQ[history.length]:-1;
 for(let col=0;col<4;col++){
 let card=document.createElement('div');card.className='blue-card';
-let block = history.length<8?0:1;
+let block=history.length<8?0:1;
 if(preview && nextPhys>=8) block=1;
 let yellowPhys=block*8+col;
 let resultPhys=yellowPhys+4;
@@ -135,18 +142,17 @@ if(jr<history.length) r=history[jr];
 let isActive=nextPhys==yellowPhys || nextPhys==resultPhys;
 if(isActive && preview){
 card.classList.add('active','hasData');
-if(preview.num==="00"){card.innerHTML=`<span class="label">00 ZERAR</span>`;}
+if(preview.num==="00"){card.innerHTML='<span class="label">00 ZERAR</span>';}
 else if(nextPhys==yellowPhys){
-// AMARELO NOVO - leva o numero 4 e seu historico
 let mem=memoria[yellowPhys] && memoria[yellowPhys][preview.num];
-let html=`<span class="label">${preview.num} ${preview.alvo}</span>`;
+let html='<span class="label">'+preview.num+' '+preview.alvo+'</span>';
 if(mem){html+=getBadge(mem.results[0], mem.alvo);}
 card.innerHTML=html;
 }else{
-// RESULTADO EMBAIXO
 let cr=getColunaReal(preview.num);
 let ca=getColunasDoAlvo(h.alvo);
-card.innerHTML=`<span class="label">${h.num} ${h.alvo}</span><div class="b ${ca.includes(cr)?'green':'red'}">${preview.num}</div>`;
+let cls=ca.includes(cr)?'green':'red';
+card.innerHTML='<span class="label">'+h.num+' '+h.alvo+'</span><div class="b '+cls+'">'+preview.num+'</div>';
 }
 }else{
 if(h){
@@ -154,7 +160,39 @@ card.classList.add('hasData');
 let mem=memoria[yellowPhys] && memoria[yellowPhys][h.num];
 if(!r && mem) r=mem.results[0];
 let alvo=mem?mem.alvo:h.alvo;
-let html=`<span class="label">${h.num} ${h.alvo}</span>`;
+let html='<span class="label">'+h.num+' '+h.alvo+'</span>';
 if(r) html+=getBadge(r, alvo);
 card.innerHTML=html;
-}else
+}
+}
+blueBox.appendChild(card);
+}
+}
+function addN(n){
+if(cur==="0" && n===0){cur="00";render({num:"00",alvo:""});return;}
+if(cur==="00"){cur=n.toString();let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});return;}
+if(cur.length>=2)return;
+cur+=n.toString();
+if(cur==="00"){render({num:"00",alvo:""});return;}
+let v=parseInt(cur);
+render({num:v,alvo:getAlvo(v)});
+}
+function enterN(){
+if(cur==='')return;
+if(cur==="00"){history=[];cur='';memoria={};localStorage.removeItem('raf_zig_final');render();return;}
+let v=parseInt(cur);
+if(v>36){cur='';render();return;}
+if(v===0){history=[];cur='';render();return;}
+let alvo=getAlvo(v);
+history.push({num:v,alvo:alvo});
+cur='';render();
+if(history.length>=16){salvar();setTimeout(function(){history=[];render();},1000);}
+}
+function corrige(){
+if(cur!=''){cur=cur.slice(0,-1);if(cur==''){render();}else if(cur==="00"){render({num:"00",alvo:""});}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}}
+else if(history.length>0){history.pop();render();}
+}
+render();
+</script>
+</body>
+</html>

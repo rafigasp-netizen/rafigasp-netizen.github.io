@@ -10,19 +10,21 @@ html,body{height:100%;background:#0d2818}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:12px;text-align:center}
-.topo h1{color:#000;font-size:18px;font-weight:900}
+.topo h1{color:#000;font-size:17px;font-weight:900}
 .top2{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:#0f2e1f}
-.slot{height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:2px dashed #d4af37;color:#d4af37;background:transparent}
+.slot{height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:2px dashed #d4af37;color:#d4af37}
 .slot.yellow{background:#d4af37;color:#000;border:2px solid #d4af37}
 .slot.green{background:#16a34a;color:#fff;border:2px solid #16a34a}
 .slot.red{background:#dc2626;color:#fff;border:2px solid #dc2626}
-.historyBox{background:#0a2a1a;margin:6px 8px;border:2px solid #3b82f6;border-radius:10px;padding:6px;flex:0 160px;overflow-y:auto}
-.hist-title{color:#d4af37;font-size:9px;font-weight:900;text-align:center;margin-bottom:6px}
-.squares{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
-.sq{height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff}
+.historyBox{background:#0a2a1a;margin:6px 8px;border:2px solid #3b82f6;border-radius:10px;padding:6px;flex:0 200px;overflow-y:auto;display:flex;gap:6px}
+.colBox{flex:1;background:#0f2e1f;border-radius:8px;padding:4px}
+.colTitle{color:#fff;background:#000;border-radius:10px;padding:2px 8px;font-size:11px;font-weight:900;text-align:center;margin-bottom:6px}
+.colTitle.duzia{background:#fff;color:#000}
+.squares{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.sq{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px;color:#fff}
 .sq.green{background:#16a34a}.sq.red{background:#dc2626}
-.bottom{flex:1;display:flex;flex-direction:column;padding:8px;gap:0}
-.keypad{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-content:stretch}
+.bottom{flex:1;display:flex;flex-direction:column;padding:8px}
+.keypad{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .k{width:100%;height:100%;min-height:62px;border-radius:14px;border:none;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
@@ -37,8 +39,14 @@ body{display:flex;justify-content:center}
 <div class="slot" id="slotR">VAZIO</div>
 </div>
 <div class="historyBox">
-<div class="hist-title">HISTORICO - SÓ VERDE E VERMELHO - 10 POR FILEIRA</div>
-<div class="squares" id="squares"></div>
+<div class="colBox">
+<div class="colTitle">COLUNA</div>
+<div class="squares" id="sqCol"></div>
+</div>
+<div class="colBox">
+<div class="colTitle duzia">DUZIA</div>
+<div class="squares" id="sqDuz"></div>
+</div>
 </div>
 <div class="bottom">
 <div class="keypad">
@@ -50,16 +58,18 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-let history=[],cur='',allSquares=[];
+let history=[],cur='',colSquares=[],duzSquares=[];
 const gC23=[6,9,11,14,16,17,19,21,26,29,33,36];
 const gC13=[2,3,5,8,10,13,20,25,28,31,32,35];
 const gC12=[1,4,7,12,15,18,22,23,24,27,30,34];
 function getAlvo(n){if(gC23.includes(n))return "C2/3";if(gC13.includes(n))return "C1/3";if(gC12.includes(n))return "C1/2";return "";}
 function getColunaReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
-function getColunasDoAlvo(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
+function getDuziaReal(n){if(n>=1&&n<=12)return 1;if(n>=13&&n<=24)return 2;if(n>=25&&n<=36)return 3;return 0;}
+function getAlvos(a){if(a=="C1/3")return [1,3];if(a=="C2/3")return [2,3];if(a=="C1/2")return [1,2];return [];}
 const slotY=document.getElementById('slotY');
 const slotR=document.getElementById('slotR');
-const squaresDiv=document.getElementById('squares');
+const sqCol=document.getElementById('sqCol');
+const sqDuz=document.getElementById('sqDuz');
 
 function render(preview){
 if(history.length===0 && !preview){
@@ -74,9 +84,8 @@ slotR.className='slot'; slotR.textContent='...';
 let header=history[history.length-1];
 slotY.className='slot yellow'; slotY.textContent=header.num+' '+header.alvo;
 let cr=getColunaReal(preview.num);
-let ca=getColunasDoAlvo(header.alvo);
-let cls=ca.includes(cr)?'green':'red';
-slotR.className='slot '+cls; slotR.textContent=preview.num;
+let ca=getAlvos(header.alvo);
+slotR.className='slot '+(ca.includes(cr)?'green':'red'); slotR.textContent=preview.num;
 }
 }else{
 let lastY = history.length%2===1 ? history[history.length-1] : (history.length>=2?history[history.length-2]:null);
@@ -85,23 +94,23 @@ if(history.length>=2 && history.length%2===0){
 let lastR = history[history.length-1];
 let header = history[history.length-2];
 let cr=getColunaReal(lastR.num);
-let ca=getColunasDoAlvo(header.alvo);
-let cls=ca.includes(cr)?'green':'red';
-slotR.className='slot '+cls; slotR.textContent=lastR.num;
+let ca=getAlvos(header.alvo);
+slotR.className='slot '+(ca.includes(cr)?'green':'red'); slotR.textContent=lastR.num;
 }
 }
-squaresDiv.innerHTML='';
-for(let s of allSquares){
-let d=document.createElement('div');
-d.className='sq '+s.color;
-d.textContent=s.num;
-squaresDiv.appendChild(d);
+sqCol.innerHTML='';
+sqDuz.innerHTML='';
+for(let s of colSquares){
+let d=document.createElement('div'); d.className='sq '+s.color; d.textContent=s.num; sqCol.appendChild(d);
+}
+for(let s of duzSquares){
+let d=document.createElement('div'); d.className='sq '+s.color; d.textContent=s.num; sqDuz.appendChild(d);
 }
 }
 
 function addN(n){
-if(cur==="0" && n===0){cur="00";render({num:"00",alvo:""});return;}
 if(cur.length>=2) return;
+if(cur==="0" && n===0){cur="00";render({num:"00",alvo:""});return;}
 cur+=n.toString();
 if(cur==="00"){render({num:"00",alvo:""});return;}
 let v=parseInt(cur);
@@ -111,20 +120,26 @@ render({num:v, alvo:getAlvo(v)});
 
 function enterN(){
 if(cur==='') return;
-if(cur==="00"){history=[];allSquares=[];cur='';render();return;}
+if(cur==="00"){history=[];colSquares=[];duzSquares=[];cur='';render();return;}
 let v=parseInt(cur);
 if(isNaN(v) || v>36){cur='';render();return;}
-if(v===0){history=[];allSquares=[];cur='';render();return;}
+if(v===0){history=[];colSquares=[];duzSquares=[];cur='';render();return;}
 let alvo=getAlvo(v);
 if(history.length%2===0){
 history.push({num:v, alvo:alvo});
 }else{
 history.push({num:v, alvo:""});
 let y=history[history.length-2];
-let cr=getColunaReal(v);
-let ca=getColunasDoAlvo(y.alvo);
-let win=ca.includes(cr);
-allSquares.push({num:v, color: win?'green':'red'});
+// COLUNA
+let colReal=getColunaReal(v);
+let colAlvos=getAlvos(y.alvo);
+let winCol=colAlvos.includes(colReal);
+colSquares.push({num:v, color: winCol?'green':'red'});
+// DUZIA - mesma logica C1/2 = duzia 1 ou 2 verde, 3 vermelho
+let duzReal=getDuziaReal(v);
+let winDuz=colAlvos.includes(duzReal);
+duzSquares.push({num:v, color: winDuz?'green':'red'});
+// AUTO AMARELO
 let autoAlvo=getAlvo(v);
 history.push({num:v, alvo:autoAlvo});
 }
@@ -136,8 +151,8 @@ if(cur!==''){cur=cur.slice(0,-1);render(cur?{num:parseInt(cur),alvo:getAlvo(pars
 else if(history.length>0){
 let wasAuto = history.length%2===1;
 history.pop();
-if(wasAuto && allSquares.length>0){
-allSquares.pop();
+if(wasAuto){
+if(colSquares.length>0){colSquares.pop(); duzSquares.pop();}
 if(history.length>0) history.pop();
 }
 render();

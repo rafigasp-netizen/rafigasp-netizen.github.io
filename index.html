@@ -87,4 +87,26 @@ if(!currentSignal || !isDupla(currentSignal.alvo)){
 }
 logGrid.innerHTML=''; logNums.forEach(l=>{let d=document.createElement('div');d.className='logNum '+(l.win===true?'greenLog':l.win===false?'redLog':'');d.textContent=l.num;logGrid.appendChild(d);});
 }
-function addN(d){if(cur.length>=
+function addN(d){if(cur.length>=2)return;cur+=d;if(cur==="0"||cur==="00"){render({num:cur,alvo:""});return;}let v=parseInt(cur);if(isNaN(v))return;if(v>36){cur=d;v=parseInt(cur);}render({num:v,alvo:getAlvo(v)});}
+function enterN(){
+if(cur==='')return;
+if(cur==="0"||cur==="00"){currentSignal=null;activeResults=[];logNums=[];isWaitingSignal=true;cur='';render();return;}
+let v=parseInt(cur);if(isNaN(v)||v<1||v>36){cur='';render();return;}
+if(isWaitingSignal){
+ currentSignal={num:v,alvo:getAlvo(v)};activeResults=[];isWaitingSignal=false;logNums.unshift({num:v,win:null});
+}else{
+ let ca=getAlvos(currentSignal.alvo);let cr=getColReal(v),dr=getDuzReal(v);
+ let colWin=ca.includes(cr),duzWin=ca.includes(dr);
+ if(isDupla(currentSignal.alvo)){
+   activeResults.push({num:v,colColor:colWin?'green':'red',duzColor:duzWin?'green':'red'});
+   if(colWin || activeResults.length>=5){isWaitingSignal=true;activeResults=[];}
+ }
+ logNums.unshift({num:v,win:colWin});
+}
+cur='';render();
+}
+function corrige(){if(cur!==''){cur=cur.slice(0,-1);if(cur===''){render();}else{let v=parseInt(cur);render({num:v,alvo:getAlvo(v)});}return;} if(logNums.length>0)logNums.shift(); if(activeResults.length>0)activeResults.pop(); render();}
+render();
+</script>
+</body>
+</html>

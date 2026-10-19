@@ -61,25 +61,25 @@ function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
 if(p){
 if(wait===1){
-sy.className='s y';sy.textContent=p.a;
+sy.className='s y';sy.textContent=p.n+' '+p.a;
 sr.className='s y';sr.textContent=p.a;
 }else{
 var cw=ga(cs.a).indexOf(gc(p.n))>=0;
-sy.className='s '+(cw?'g':'r');sy.textContent=cs.a;
+sy.className='s '+(cw?'g':'r');sy.textContent=p.n+' '+cs.a;
 sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;
 }
 }else{
 if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}
 else{
-sy.className='s y';sy.textContent=cs.a;
+sy.className='s y';sy.textContent=cs.n+' '+cs.a;
 sr.className='s y';sr.textContent=cs.a;
-if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=cs.a;sr.className='s '+l.cc;sr.textContent=cs.a;}
+if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=l.n+' '+cs.a;sr.className='s '+l.cc;sr.textContent=cs.a;}
 }
 }
 ca.innerHTML='';da.innerHTML='';
 if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}
 else{
-// AGORA SO COLUNA, SEM NUMERO
+// EMBAIXO SO COLUNA COMO VOCE PEDIU
 var h='<div class="head">'+cs.a+'</div>';
 var s1='<div class="sq">';for(var i=0;i<5;i++){s1+=ar[i]?'<div class="q '+ar[i].cc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s1+='</div>';
 var s2='<div class="sq">';for(var i=0;i<5;i++){s2+=ar[i]?'<div class="q '+ar[i].dc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s2+='</div>';

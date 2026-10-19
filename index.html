@@ -24,14 +24,14 @@ body{display:flex;justify-content:center}
 .sq{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px}
 .q{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
 .q.e{background:#1a3d2a;border:1px dashed #2a5a3a}.q.g{background:#16a34a}.q.r{background:#dc2626}
-.hist{margin:6px 6px 0 6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:36px}
-.hist2{margin:0 6px 6px 6px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:36px}
-.histT{font-size:9px;color:#4ade80;font-weight:900;min-width:40px}
-.histT2{font-size:8px;color:#fbbf24;font-weight:900;min-width:40px}
-.lg{display:flex;gap:3px;overflow-x:auto;flex:1}
-.ln{min-width:26px;height:22px;border-radius:4px;background:#1e3a2a;color:#a7f3d0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;border:1px solid #2a5a3a;flex-shrink:0}
-.ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}.ln.d{background:#14532d;color:#86efac;border-color:#166534}
-.ln2{min-width:28px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;border:1px solid}
+.hist{margin:6px 6px 0 6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
+.hist2{margin:0 6px 6px 6px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
+.histT{font-size:10px;color:#4ade80;font-weight:900;min-width:42px}
+.histT2{font-size:10px;color:#fbbf24;font-weight:900;min-width:42px}
+.lg{display:flex;gap:4px;overflow-x:auto;flex:1}
+.ln{min-width:36px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;border:1px solid}
+.ln.g{background:#16a34a;color:#fff;border-color:#16a34a}.ln.r{background:#dc2626;color:#fff;border-color:#dc2626}.ln.d{background:#14532d;color:#86efac;border-color:#166534}
+.ln2{min-width:36px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;border:1px solid}
 .ln2.d{background:#14532d;color:#fff;border-color:#22c55e}
 .ln2.g{background:#16a34a;color:#fff;border-color:#16a34a}.ln2.r{background:#dc2626;color:#fff;border-color:#dc2626}
 .kb{flex:1;display:flex;flex-direction:column;gap:7px;padding:6px}
@@ -57,7 +57,7 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-var cur='',cs=null,ar=[],wait=1,log=[],secLog=[];
+var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],secLastCol=null;
 var tb={
 1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",
 11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",
@@ -81,25 +81,26 @@ lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];wait=1;cur='';R();return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];secLastCol=null;wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-if(wait){
-// GATILHO - MESMO NUMERO NOS 2 HISTORICOS
-cs={n:v,a:col};ar=[];wait=0;
-log.push({n:v,w:null});
-secLog.push({n:v,w:null}); // VERDE ESCURO
+// HIST DE CIMA - NAO MEXER (LOGICA ORIGINAL)
+if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
+else{var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
+
+// 2º HIST - CORRIGIDO: VERDE ESCURO + RESULTADO
+if(secLog.length%2===0){
+// POSICAO PAR = VERDE ESCURO (GATILHO) - LINHA AZUL
+secLog.unshift({n:v,w:null});
+secLastCol=ga(col);
 }else{
-var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;
-ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});
-log.push({n:v,w:cw});
-// 2º HIST - MESMO NUMERO, MAS COM RESULTADO VERMELHO/VERDE
-secLog.push({n:v,w:cw}); // SE ACERTOU VERDE, SE ERROU VERMELHO
-if(cw||ar.length>=5){cs=null;ar=[];wait=1;}
+// POSICAO IMPAR = RESULTADO VERMELHO/VERDE - LINHA VERMELHA
+var cw2=secLastCol?secLastCol.indexOf(gc(v))>=0:false;
+secLog.unshift({n:v,w:cw2});
 }
 cur='';R();
 }
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length)ar.pop();if(log.length)log.shift();R();}
+function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0){secLog.shift(); if(secLog.length%2!==0){secLastCol=null; for(var i=secLog.length-1;i>=0;i--){if(secLog[i].w===null){var c=gv(secLog[i].n);secLastCol=ga(c);break;}}}}R();}
 R();
 </script>
 </body>

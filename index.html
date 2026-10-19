@@ -60,22 +60,13 @@ function ga(a){var t=a.replace('C','');return t.indexOf('/')>=0?t.split('/').map
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
 if(p){
-// QUADRADO A: MOSTRA O QUE TA DIGITANDO, NUNCA CONGELA
 sy.className='s y';sy.textContent=p.n+' '+p.a;
-if(wait===1){
-sr.className='s y';sr.textContent=p.a;
+if(wait===1){sr.className='s y';sr.textContent=p.a;}
+else{var cw=ga(cs.a).indexOf(gc(p.n))>=0;sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;}
 }else{
-var cw=ga(cs.a).indexOf(gc(p.n))>=0;
-sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;
-}
-}else{
-// SEM DIGITAR: A = VAZIO (NAO CONGELA) | B = CONGELADO SE TIVER 2 COLUNAS
 sy.className='s';sy.textContent='VAZIO';
 if(!cs){sr.className='s';sr.textContent='VAZIO';}
-else{
-sr.className='s y';sr.textContent=cs.a;
-if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}
-}
+else{sr.className='s y';sr.textContent=cs.a;if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}}
 }
 ca.innerHTML='';da.innerHTML='';
 if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}
@@ -95,18 +86,19 @@ var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
 var tem2=col.indexOf('/')>=0;
 if(wait){
-if(tem2){
-// 2 COLUNAS: CONGELA SO O B
-cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});
+if(tem2){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
+else{log.unshift({n:v,w:null});cs=null;wait=1;ar=[];}
 }else{
-// 1 COLUNA: NAO CONGELA NADA, SO HIST
-log.unshift({n:v,w:null});
-cs=null;wait=1;ar=[];
-}
-}else{
+// JOGANDO
 var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;
 ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});log.unshift({n:v,w:cw});
-if(cw||ar.length>=5){wait=1;ar=[];}
+if(cw){
+// ACERTOU: LIMPA TUDO JUNTO (B + RASTREIO)
+cs=null;ar=[];wait=1;
+}else if(ar.length>=5){
+// ERROU 5X: TAMBEM LIMPA TUDO
+cs=null;ar=[];wait=1;
+}
 }
 cur='';R();
 }

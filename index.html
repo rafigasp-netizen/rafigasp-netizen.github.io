@@ -20,7 +20,7 @@ body{display:flex;justify-content:center}
 .t.b{background:#000;color:#fff}.t.w{background:#fff;color:#000}
 .box{background:#0a2a1a;margin:0 6px;border:1px solid #1e4d8a;border-radius:8px;min-height:90px;display:flex;gap:6px;padding:6px}
 .cb{flex:1;background:#0f2e1f;border-radius:6px;padding:4px}
-.head{color:#d4af37;font-weight:900;text-align:center;font-size:13px;margin-bottom:4px}
+.head{color:#d4af37;font-weight:900;text-align:center;font-size:14px;margin-bottom:4px}
 .sq{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px}
 .q{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
 .q.e{background:#1a3d2a;border:1px dashed #2a5a3a}.q.g{background:#16a34a}.q.r{background:#dc2626}
@@ -60,30 +60,27 @@ function ga(a){var t=a.replace('C','');return t.indexOf('/')>=0?t.split('/').map
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
 if(p){
-// A = NUMERO QUE DIGITA, B = QUAL COLUNA JOGAR
 if(wait===1){
-// DIGITANDO NOVO SINAL: A mostra numero, B mostra coluna desse numero
-sy.className='s y';sy.textContent=p.n;
+sy.className='s y';sy.textContent=p.a;
 sr.className='s y';sr.textContent=p.a;
 }else{
-// JOGANDO: A mostra numero que esta digitando, B continua mostrando qual coluna jogar (do sinal congelado)
-sy.className='s';sy.textContent=p.n+' ?';
 var cw=ga(cs.a).indexOf(gc(p.n))>=0;
+sy.className='s '+(cw?'g':'r');sy.textContent=cs.a;
 sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;
 }
 }else{
 if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}
 else{
-// SEM DIGITAR: A = numero do sinal congelado, B = qual coluna jogar
-sy.className='s y';sy.textContent=cs.n;
+sy.className='s y';sy.textContent=cs.a;
 sr.className='s y';sr.textContent=cs.a;
-if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=l.n;sr.className='s '+l.cc;sr.textContent=cs.a;}
+if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=cs.a;sr.className='s '+l.cc;sr.textContent=cs.a;}
 }
 }
 ca.innerHTML='';da.innerHTML='';
 if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}
 else{
-var h='<div class="head">'+cs.n+' '+cs.a+'</div>';
+// AGORA SO COLUNA, SEM NUMERO
+var h='<div class="head">'+cs.a+'</div>';
 var s1='<div class="sq">';for(var i=0;i<5;i++){s1+=ar[i]?'<div class="q '+ar[i].cc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s1+='</div>';
 var s2='<div class="sq">';for(var i=0;i<5;i++){s2+=ar[i]?'<div class="q '+ar[i].dc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s2+='</div>';
 ca.innerHTML=h+s1;da.innerHTML=h+s2;

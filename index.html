@@ -5,38 +5,64 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>RAFIGASP</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:#0d2818}
-body{display:flex;justify-content:center}
-.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:6px;text-align:center}
-.topo h1{color:#000;font-size:13px;font-weight:900}
-.top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:#0f2e1f}
-.slot{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
-.slot.yellow{background:#d4af37;color:#000;border-style:solid}
-.slot.green{background:#16a34a;color:#fff;border-style:solid;border-color:#16a34a}
-.slot.red{background:#dc2626;color:#fff;border-style:solid;border-color:#dc2626}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:#0f2e1f}
-.tab{height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px}
-.tab.col{background:#000;color:#fff}
-.tab.duz{background:#fff;color:#000}
-.trackArea{background:#0a2a1a;margin:0 6px 2px 6px;border-radius:8px;border:1.5px solid #1e4d8a;min-height:125px;padding:6px;display:flex;gap:6px}
-.colBox{flex:1;background:#0f2e1f;border-radius:6px;padding:4px}
-.groupHead{font-size:9px;color:#d4af37;font-weight:900;text-align:center;margin-bottom:4px}
-.squares5{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
-.sq{height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px;color:#fff}
-.sq.empty{background:#1a3d2a;border:1px dashed #2a5a3a}
-.sq.green{background:#16a34a}.sq.red{background:#dc2626}
-.keyboard{padding:6px;display:flex;flex-direction:column;gap:7px;background:#0f2e1f}
-.krow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.k{height:60px;border-radius:14px;border:none;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d2818;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
+.topo{background:#d4af37;padding:6px;text-align:center;color:#000;font-weight:900;font-size:13px}
+.top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px}
+.s{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
+.s.y{background:#d4af37;color:#000;border-style:solid}
+.s.g{background:#16a34a;color:#fff;border-color:#16a34a;border-style:solid}
+.s.r{background:#dc2626;color:#fff;border-color:#dc2626;border-style:solid}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 6px 6px 6px}
+.t{height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px}
+.t.b{background:#000;color:#fff}.t.w{background:#fff;color:#000}
+.box{background:#0a2a1a;margin:0 6px;border:1px solid #1e4d8a;border-radius:8px;min-height:120px;display:flex;gap:6px;padding:6px}
+.cb{flex:1;background:#0f2e1f;border-radius:6px;padding:4px}
+.sq{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px}
+.q{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
+.q.e{background:#1a3d2a;border:1px dashed #2a5a3a}.q.g{background:#16a34a}.q.r{background:#dc2626}
+.kb{padding:6px;display:grid;gap:7px}
+.kr{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.k{height:58px;border-radius:14px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
 .k:active{transform:scale(0.96)}
-.k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#3a2a0a}
-.k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#3a2a0a;font-size:14px}
+.k.z{background:#ef4444;color:#fff}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><h1>RAFIGASP COACH DA ROLETA</h1></div>
-<div class="top2">
+<div class="topo">RAFIGASP COACH DA ROLETA</div>
+<div class="top2"><div class="s" id="sy">VAZIO</div><div class="s" id="sr">VAZIO</div></div>
+<div class="tabs"><div class="t b">COLUNA</div><div class="t w">DUZIA</div></div>
+<div class="box"><div class="cb" id="ca"></div><div class="cb" id="da"></div></div>
+<div class="kb">
+<div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
+<div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
+<div class="kr"><button class="k" onclick="A('7')">7</button><button class="k" onclick="A('8')">8</button><button class="k" onclick="A('9')">9</button></div>
+<div class="kr"><button class="k" onclick="E()" style="font-size:13px">ENTER</button><button class="k z" onclick="A('0')">0</button><button class="k" onclick="C()" style="font-size:13px">CORRIGIR</button></div>
+</div>
+</div>
+<script>
+let cur='',cs=null,ar=[],wait=1;
+const tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C3",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C1",10:"C2/3",11:"C1/3",12:"C2/3",13:"C2",14:"C1",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C1",22:"C3",23:"C3",24:"C2/3",25:"C2",26:"C1",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C2",32:"C1/2",33:"C1",34:"C3",35:"C2/3",36:"C1/2"};
+function gv(n){return tb[n]||""}
+function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
+function ga(a){let t=a.replace('C','');return t.includes('/')?t.split('/').map(x=>+x):[+t]}
+function R(p){
+let sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da');
+if(p){sy.className='s y';sy.textContent=p.n+' '+p.a;sr.className='s';sr.textContent=wait?'CONFIRMAR?':p.n;if(!wait){let cr=gc(p.n),cav=ga(cs.a);sr.className='s '+(cav.includes(cr)?'g':'r');}}
+else{if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}else{sy.className='s y';sy.textContent=cs.n+' '+cs.a;sr.className='s';sr.textContent='JOGANDO...';if(ar.length){let l=ar[ar.length-1];sr.className='s '+l.c;sr.textContent=l.n;}}}
+ca.innerHTML='';da.innerHTML='';
+if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:30px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:30px">VAZIO</div>';return;}
+let h='<div style="color:#d4af37;font-size:9px;font-weight:900;text-align:center">'+cs.n+' '+cs.a+'</div>';
+let s1='<div class="sq">';for(let i=0;i<5;i++){if(ar[i])s1+='<div class="q '+ar[i].c+'">'+ar[i].n+'</div>';else s1+='<div class="q e"></div>';}s1+='</div>';
+let s2=s1;
+ca.innerHTML=h+s1;da.innerHTML=h+s2;
+}
+function A(d){if(cur.length>=2)return;cur+=d;let v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0")return R({n:"0",a:""});R({n:v,a:gv(v)})}
+function E(){if(cur==='')return;if(cur==="0"){cs=null;ar=[];wait=1;cur='';R();return;}let v=+cur;if(v<1||v>36){cur='';R();return}if(wait){cs={n:v,a:gv(v)};ar=[];wait=0}else{let ca=ga(cs.a);let cr=gc(v);let w=ca.includes(cr);ar.push({n:v,c:w?'g':'r'});if(w||ar.length>=5){wait=1;ar=[]}}cur='';R()}
+function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length)ar.pop();R()}
+R();
+</script>
+</body>
+</html>

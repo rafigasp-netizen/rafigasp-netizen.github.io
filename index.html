@@ -52,30 +52,24 @@ body{display:flex;justify-content:center}
 </div>
 <script>
 var cur='',cs=null,ar=[],wait=1,log=[];
-var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C3",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C1",10:"C2/3",11:"C1/3",12:"C2/3",13:"C2",14:"C1",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C1",22:"C3",23:"C3",24:"C2/3",25:"C2",26:"C1",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C2",32:"C1/2",33:"C1",34:"C3",35:"C2/3",36:"C1/2"};
+// SUA LISTA EXATA AGORA
+var tb={
+1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",
+11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",
+21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",
+31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"
+};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function gd(n){if(n<=12)return 1;if(n<=24)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.indexOf('/')>=0?t.split('/').map(function(x){return +x}):[+t]}
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
-if(p){
-sy.className='s y';sy.textContent=p.n+' '+p.a;
-if(wait===1){sr.className='s y';sr.textContent=p.a;}
-else{var cw=ga(cs.a).indexOf(gc(p.n))>=0;sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;}
-}else{
-sy.className='s';sy.textContent='VAZIO';
-if(!cs){sr.className='s';sr.textContent='VAZIO';}
-else{sr.className='s y';sr.textContent=cs.a;if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}}
-}
+if(p){sy.className='s y';sy.textContent=p.n+' '+p.a;if(wait===1){sr.className='s y';sr.textContent=p.a;}else{var cw=ga(cs.a).indexOf(gc(p.n))>=0;sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;}}
+else{sy.className='s';sy.textContent='VAZIO';if(!cs){sr.className='s';sr.textContent='VAZIO';}else{sr.className='s y';sr.textContent=cs.a;if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}}}
 ca.innerHTML='';da.innerHTML='';
 if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}
-else{
-var h='<div class="head">'+cs.a+'</div>';
-var s1='<div class="sq">';for(var i=0;i<5;i++){s1+=ar[i]?'<div class="q '+ar[i].cc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s1+='</div>';
-var s2='<div class="sq">';for(var i=0;i<5;i++){s2+=ar[i]?'<div class="q '+ar[i].dc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s2+='</div>';
-ca.innerHTML=h+s1;da.innerHTML=h+s2;
-}
+else{var h='<div class="head">'+cs.a+'</div>';var s1='<div class="sq">';for(var i=0;i<5;i++){s1+=ar[i]?'<div class="q '+ar[i].cc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s1+='</div>';var s2='<div class="sq">';for(var i=0;i<5;i++){s2+=ar[i]?'<div class="q '+ar[i].dc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s2+='</div>';ca.innerHTML=h+s1;da.innerHTML=h+s2;}
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'');d.textContent=l.n;lg.appendChild(d);}
 }
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
@@ -84,21 +78,12 @@ if(cur==='')return;
 if(cur==="0"){cs=null;ar=[];log=[];wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-var tem2=col.indexOf('/')>=0;
 if(wait){
-if(tem2){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
-else{log.unshift({n:v,w:null});cs=null;wait=1;ar=[];}
+cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});
 }else{
-// JOGANDO
 var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;
 ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});log.unshift({n:v,w:cw});
-if(cw){
-// ACERTOU: LIMPA TUDO JUNTO (B + RASTREIO)
-cs=null;ar=[];wait=1;
-}else if(ar.length>=5){
-// ERROU 5X: TAMBEM LIMPA TUDO
-cs=null;ar=[];wait=1;
-}
+if(cw){cs=null;ar=[];wait=1;}else if(ar.length>=5){cs=null;ar=[];wait=1;}
 }
 cur='';R();
 }

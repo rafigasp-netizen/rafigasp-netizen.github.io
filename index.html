@@ -60,20 +60,21 @@ function ga(a){var t=a.replace('C','');return t.indexOf('/')>=0?t.split('/').map
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
 if(p){
-if(wait===1){
+// QUADRADO A: MOSTRA O QUE TA DIGITANDO, NUNCA CONGELA
 sy.className='s y';sy.textContent=p.n+' '+p.a;
+if(wait===1){
 sr.className='s y';sr.textContent=p.a;
 }else{
 var cw=ga(cs.a).indexOf(gc(p.n))>=0;
-sy.className='s '+(cw?'g':'r');sy.textContent=p.n+' '+cs.a;
 sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;
 }
 }else{
-if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}
+// SEM DIGITAR: A = VAZIO (NAO CONGELA) | B = CONGELADO SE TIVER 2 COLUNAS
+sy.className='s';sy.textContent='VAZIO';
+if(!cs){sr.className='s';sr.textContent='VAZIO';}
 else{
-sy.className='s y';sy.textContent=cs.n+' '+cs.a;
 sr.className='s y';sr.textContent=cs.a;
-if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=l.n+' '+cs.a;sr.className='s '+l.cc;sr.textContent=cs.a;}
+if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}
 }
 }
 ca.innerHTML='';da.innerHTML='';
@@ -92,14 +93,13 @@ if(cur==='')return;
 if(cur==="0"){cs=null;ar=[];log=[];wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-// REGRA NOVA: SO CONGELA SE FOR 2 COLUNAS
 var tem2=col.indexOf('/')>=0;
 if(wait){
 if(tem2){
-// TEM 2 COLUNAS: CONGELA NO B
+// 2 COLUNAS: CONGELA SO O B
 cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});
 }else{
-// SO 1 COLUNA: NAO CONGELA, SO MOSTRA E VOLTA PRA VAZIO
+// 1 COLUNA: NAO CONGELA NADA, SO HIST
 log.unshift({n:v,w:null});
 cs=null;wait=1;ar=[];
 }

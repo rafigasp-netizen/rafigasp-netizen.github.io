@@ -10,14 +10,14 @@ body{background:#0d2818;display:flex;justify-content:center}
 .app{width:100%;max-width:420px;min-height:100vh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:#d4af37;padding:6px;text-align:center;color:#000;font-weight:900;font-size:13px}
 .top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px}
-.s{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
+.s{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:15px}
 .s.y{background:#d4af37;color:#000;border-style:solid}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a;border-style:solid}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626;border-style:solid}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 6px 6px 6px}
 .t{height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px}
 .t.b{background:#000;color:#fff}.t.w{background:#fff;color:#000}
-.box{background:#0a2a1a;margin:0 6px;border:1px solid #1e4d8a;border-radius:8px;min-height:120px;display:flex;gap:6px;padding:6px}
+.box{background:#0a2a1a;margin:0 6px;border:1px solid #1e4d8a;border-radius:8px;min-height:110px;display:flex;gap:6px;padding:6px}
 .cb{flex:1;background:#0f2e1f;border-radius:6px;padding:4px}
 .sq{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px}
 .q{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
@@ -27,6 +27,11 @@ body{background:#0d2818;display:flex;justify-content:center}
 .k{height:58px;border-radius:14px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
 .k:active{transform:scale(0.96)}
 .k.z{background:#ef4444;color:#fff}
+.hist{margin:6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:38px}
+.histT{font-size:9px;color:#4ade80;font-weight:900;white-space:nowrap}
+.lg{display:flex;gap:3px;overflow-x:auto;flex:1}
+.ln{min-width:26px;height:22px;border-radius:4px;background:#1e3a2a;color:#a7f3d0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;border:1px solid #2a5a3a;flex-shrink:0}
+.ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}
 </style>
 </head>
 <body>
@@ -41,28 +46,17 @@ body{background:#0d2818;display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="A('7')">7</button><button class="k" onclick="A('8')">8</button><button class="k" onclick="A('9')">9</button></div>
 <div class="kr"><button class="k" onclick="E()" style="font-size:13px">ENTER</button><button class="k z" onclick="A('0')">0</button><button class="k" onclick="C()" style="font-size:13px">CORRIGIR</button></div>
 </div>
+<div class="hist"><div class="histT">HIST:</div><div class="lg" id="lg"></div></div>
 </div>
 <script>
-let cur='',cs=null,ar=[],wait=1;
+let cur='',cs=null,ar=[],wait=1,log=[];
 const tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C3",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C1",10:"C2/3",11:"C1/3",12:"C2/3",13:"C2",14:"C1",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C1",22:"C3",23:"C3",24:"C2/3",25:"C2",26:"C1",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C2",32:"C1/2",33:"C1",34:"C3",35:"C2/3",36:"C1/2"};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3}
+function gd(n){if(n>=1&&n<=12)return 1;if(n>=13&&n<=24)return 2;if(n>=25&&n<=36)return 3;return 0}
 function ga(a){let t=a.replace('C','');return t.includes('/')?t.split('/').map(x=>+x):[+t]}
 function R(p){
-let sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da');
-if(p){sy.className='s y';sy.textContent=p.n+' '+p.a;sr.className='s';sr.textContent=wait?'CONFIRMAR?':p.n;if(!wait){let cr=gc(p.n),cav=ga(cs.a);sr.className='s '+(cav.includes(cr)?'g':'r');}}
-else{if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}else{sy.className='s y';sy.textContent=cs.n+' '+cs.a;sr.className='s';sr.textContent='JOGANDO...';if(ar.length){let l=ar[ar.length-1];sr.className='s '+l.c;sr.textContent=l.n;}}}
-ca.innerHTML='';da.innerHTML='';
-if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:30px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:30px">VAZIO</div>';return;}
-let h='<div style="color:#d4af37;font-size:9px;font-weight:900;text-align:center">'+cs.n+' '+cs.a+'</div>';
-let s1='<div class="sq">';for(let i=0;i<5;i++){if(ar[i])s1+='<div class="q '+ar[i].c+'">'+ar[i].n+'</div>';else s1+='<div class="q e"></div>';}s1+='</div>';
-let s2=s1;
-ca.innerHTML=h+s1;da.innerHTML=h+s2;
-}
-function A(d){if(cur.length>=2)return;cur+=d;let v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0")return R({n:"0",a:""});R({n:v,a:gv(v)})}
-function E(){if(cur==='')return;if(cur==="0"){cs=null;ar=[];wait=1;cur='';R();return;}let v=+cur;if(v<1||v>36){cur='';R();return}if(wait){cs={n:v,a:gv(v)};ar=[];wait=0}else{let ca=ga(cs.a);let cr=gc(v);let w=ca.includes(cr);ar.push({n:v,c:w?'g':'r'});if(w||ar.length>=5){wait=1;ar=[]}}cur='';R()}
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length)ar.pop();R()}
-R();
-</script>
-</body>
-</html>
+let sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
+if(p){
+// AMARELO CONGELADO - NAO ATUALIZA QUANDO DIGITA
+if(!cs){sy.className='s y';sy.textContent=p.n+' '+

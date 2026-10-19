@@ -9,16 +9,14 @@
 html,body{height:100%;background:#0d2818}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
-.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:8px;text-align:center}
-.topo h1{color:#000;font-size:14px;font-weight:900}
+.topo{background:linear-gradient(180deg,#e8c86a,#b8941f);padding:7px;text-align:center}
+.topo h1{color:#000;font-size:13px;font-weight:900}
 .top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:#0f2e1f}
-.slot{height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
+.slot{height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
 .slot.yellow{background:#d4af37;color:#000;border-color:#d4af37}
 .slot.green{background:#16a34a;color:#fff;border-color:#16a34a}
 .slot.red{background:#dc2626;color:#fff;border-color:#dc2626}
-.slot.wait{border-style:dashed}
-/* AZUL - JOGO ATUAL COM 5 */
-.blueBox{background:#0a2a1a;margin:4px 6px 0 6px;border:2px solid #2563eb;border-radius:10px;padding:4px;display:flex;gap:5px;min-height:62px}
+.blueBox{background:#0a2a1a;margin:3px 6px;border:2px solid #2563eb;border-radius:10px;padding:4px;display:flex;gap:5px}
 .colBox{flex:1;background:#0f2e1f;border-radius:6px;padding:3px}
 .colTitle{color:#fff;background:#000;border-radius:8px;padding:1px 6px;font-size:8px;font-weight:900;text-align:center;margin-bottom:3px}
 .colTitle.duzia{background:#fff;color:#000}
@@ -28,31 +26,31 @@ body{display:flex;justify-content:center}
 .sq.empty{background:#1a3d2a;border:1px dashed #2a5a3a}
 .sq.green{background:#16a34a}
 .sq.red{background:#dc2626}
-/* VERMELHO - HISTORICO QUE EMPURRA */
-.redBox{background:#0a1f14;margin:4px 6px;border:1px solid #1e4d2b;border-radius:8px;padding:5px;flex:1;overflow-y:auto;min-height:80px}
-.redTitle{font-size:9px;color:#4ade80;font-weight:900;margin-bottom:4px}
-.logGrid{display:flex;flex-wrap:wrap;gap:4px}
-.logNum{width:28px;height:22px;border-radius:4px;background:#1e3a2a;color:#a7f3d0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;border:1px solid #2a5a3a}
+.redBox{background:#0a1f14;margin:3px 6px;border:1px solid #1e4d2b;border-radius:8px;padding:4px;flex:0 0 52px;overflow:hidden}
+.redTitle{font-size:8px;color:#4ade80;font-weight:900;margin-bottom:2px}
+.logGrid{display:flex;gap:4px;overflow-x:auto;flex-wrap:nowrap}
+.logNum{min-width:28px;height:22px;border-radius:4px;background:#1e3a2a;color:#a7f3d0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;border:1px solid #2a5a3a;flex-shrink:0}
 .logNum.greenLog{background:#16a34a;color:#fff}
 .logNum.redLog{background:#dc2626;color:#fff}
-.bottom{flex:0 0 auto;display:flex;flex-direction:column;padding:6px}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.k{width:100%;height:56px;border-radius:12px;border:none;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.k:active{transform:scale(0.95)}
+/* TECLADO TAMANHO DO QUADRADO VERMELHO */
+.bottom{flex:1;display:flex;flex-direction:column;padding:6px;background:#0d2818}
+.keypad{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;height:100%}
+.k{width:100%;height:100%;border-radius:14px;border:none;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.k:active{transform:scale(0.96)}
 .k.num{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410}
 .k.zero{background:#ef4444;color:#fff}
-.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:13px;font-weight:900}
+.k.act{background:linear-gradient(180deg,#e8c86a,#b8941f);color:#4a3410;font-size:14px;font-weight:900}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo"><h1>RAFIGASP COACH DA ROLETA</h1></div>
-<div class="top2"><div class="slot" id="slotY">VAZIO</div><div class="slot wait" id="slotR">AGUARDE</div></div>
+<div class="top2"><div class="slot" id="slotY">VAZIO</div><div class="slot" id="slotR">VAZIO</div></div>
 <div class="blueBox" id="blueBox">
 <div class="colBox"><div class="colTitle">COLUNA</div><div id="colActive"></div></div>
 <div class="colBox"><div class="colTitle duzia">DUZIA</div><div id="duzActive"></div></div>
 </div>
-<div class="redBox"><div class="redTitle">HISTÓRICO - ÚLTIMOS NÚMEROS</div><div class="logGrid" id="logGrid"></div></div>
+<div class="redBox"><div class="redTitle">HISTÓRICO</div><div class="logGrid" id="logGrid"></div></div>
 <div class="bottom">
 <div class="keypad">
 <button type="button" class="k num" onclick="addN('1')">1</button>
@@ -77,89 +75,60 @@ function getAlvo(n){return tabela[n]||"";}
 function getColReal(n){if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;if([3,6,9,12,15,18,21,24,27,30,33,36].includes(n))return 3;return 0;}
 function getDuzReal(n){if(n>=1&&n<=12)return 1;if(n>=13&&n<=24)return 2;if(n>=25&&n<=36)return 3;return 0;}
 function getAlvos(a){if(!a)return[];let t=a.replace('C','');if(t.includes('/'))return t.split('/').map(x=>parseInt(x));return[parseInt(t)];}
-const slotY=document.getElementById('slotY'),slotR=document.getElementById('slotR'),colActive=document.getElementById('colActive'),duzActive=document.getElementById('duzActive'),logGrid=document.getElementById('logGrid'),blueBox=document.getElementById('blueBox');
+const slotY=document.getElementById('slotY'),slotR=document.getElementById('slotR'),colActive=document.getElementById('colActive'),duzActive=document.getElementById('duzActive'),logGrid=document.getElementById('logGrid');
 
 function render(preview){
- // TOPO VERDE - NAO CONGELA
- if(preview){
-   if(isWaitingSignal){
-     slotY.className='slot yellow'; slotY.textContent=preview.num+' '+preview.alvo;
-     slotR.className='slot wait'; slotR.textContent='CONFIRMAR?';
-   }else{
-     slotY.className='slot yellow'; slotY.textContent=currentSignal.num+' '+currentSignal.alvo;
-     let cr=getColReal(preview.num), ca=getAlvos(currentSignal.alvo);
-     slotR.className='slot '+(ca.includes(cr)?'green':'red'); slotR.textContent=preview.num;
-   }
- }else{
-   if(!currentSignal){slotY.className='slot';slotY.textContent='VAZIO';slotR.className='slot wait';slotR.textContent='AGUARDE';}
-   else if(isWaitingSignal){slotY.className='slot yellow';slotY.textContent=currentSignal.num+' '+currentSignal.alvo;slotR.className='slot wait';slotR.textContent='NOVO SINAL';}
-   else{
-     slotY.className='slot yellow';slotY.textContent=currentSignal.num+' '+currentSignal.alvo;
-     if(activeResults.length>0){let last=activeResults[activeResults.length-1];slotR.className='slot '+last.colColor;slotR.textContent=last.num;}
-     else{slotR.className='slot wait';slotR.textContent='JOGANDO...';}
-   }
- }
- // AZUL - MOSTRA SO O JOGO ATUAL COM 5
- colActive.innerHTML=''; duzActive.innerHTML='';
- if(!currentSignal || isWaitingSignal){colActive.innerHTML='<div style="color:#4a5a4a;font-size:8px;text-align:center;margin-top:10px">AGUARDE SINAL</div>'; duzActive.innerHTML='<div style="color:#4a5a4a;font-size:8px;text-align:center;margin-top:10px">AGUARDE SINAL</div>'; blueBox.style.display='flex';}
- else{
-   blueBox.style.display='flex';
-   let headC=document.createElement('div'); headC.className='groupHead'; headC.textContent=currentSignal.num+' '+currentSignal.alvo; colActive.appendChild(headC);
-   let gridC=document.createElement('div'); gridC.className='squares5';
-   for(let i=0;i<5;i++){let d=document.createElement('div'); if(activeResults[i]){d.className='sq '+activeResults[i].colColor; d.textContent=activeResults[i].num;}else{d.className='sq empty';} gridC.appendChild(d);} colActive.appendChild(gridC);
-   let headD=document.createElement('div'); headD.className='groupHead'; headD.textContent=currentSignal.num+' '+currentSignal.alvo; duzActive.appendChild(headD);
-   let gridD=document.createElement('div'); gridD.className='squares5';
-   for(let i=0;i<5;i++){let d=document.createElement('div'); if(activeResults[i]){d.className='sq '+activeResults[i].duzColor; d.textContent=activeResults[i].num;}else{d.className='sq empty';} gridD.appendChild(d);} duzActive.appendChild(gridD);
- }
- // VERMELHO - HISTORICO EMPURRANDO
- logGrid.innerHTML='';
- logNums.forEach(l=>{
-   let d=document.createElement('div'); d.className='logNum '+(l.win?'greenLog':(l.win===false?'redLog':'')); d.textContent=l.num; logGrid.appendChild(d);
- });
+if(preview){
+ if(isWaitingSignal){slotY.className='slot yellow'; slotY.textContent=preview.num+' '+preview.alvo; slotR.className='slot'; slotR.textContent='CONFIRMAR?';}
+ else{slotY.className='slot yellow'; slotY.textContent=currentSignal.num+' '+currentSignal.alvo; let cr=getColReal(preview.num), ca=getAlvos(currentSignal.alvo); slotR.className='slot '+(ca.includes(cr)?'green':'red'); slotR.textContent=preview.num;}
+}else{
+ if(!currentSignal){slotY.className='slot';slotY.textContent='VAZIO';slotR.className='slot';slotR.textContent='VAZIO';}
+ else{slotY.className='slot yellow';slotY.textContent=currentSignal.num+' '+currentSignal.alvo; if(activeResults.length>0){let last=activeResults[activeResults.length-1];slotR.className='slot '+last.colColor;slotR.textContent=last.num;}else{slotR.className='slot';slotR.textContent='JOGANDO...';}}
+}
+colActive.innerHTML=''; duzActive.innerHTML='';
+if(!currentSignal){colActive.innerHTML='<div style="color:#4a5a4a;font-size:8px;text-align:center;margin-top:8px">AGUARDE</div>'; duzActive.innerHTML='<div style="color:#4a5a4a;font-size:8px;text-align:center;margin-top:8px">AGUARDE</div>';}
+else{
+ let headC=document.createElement('div'); headC.className='groupHead'; headC.textContent=currentSignal.num+' '+currentSignal.alvo; colActive.appendChild(headC);
+ let gridC=document.createElement('div'); gridC.className='squares5';
+ for(let i=0;i<5;i++){let d=document.createElement('div'); if(activeResults[i]){d.className='sq '+activeResults[i].colColor; d.textContent=activeResults[i].num;}else{d.className='sq empty';} gridC.appendChild(d);} colActive.appendChild(gridC);
+ let headD=document.createElement('div'); headD.className='groupHead'; headD.textContent=currentSignal.num+' '+currentSignal.alvo; duzActive.appendChild(headD);
+ let gridD=document.createElement('div'); gridD.className='squares5';
+ for(let i=0;i<5;i++){let d=document.createElement('div'); if(activeResults[i]){d.className='sq '+activeResults[i].duzColor; d.textContent=activeResults[i].num;}else{d.className='sq empty';} gridD.appendChild(d);} duzActive.appendChild(gridD);
+}
+logGrid.innerHTML='';
+logNums.forEach(l=>{let d=document.createElement('div'); d.className='logNum '+(l.win===true?'greenLog':l.win===false?'redLog':''); d.textContent=l.num; logGrid.appendChild(d);});
 }
 
-function addN(d){
-if(cur.length>=2) return; cur+=d;
-if(cur==="0"||cur==="00"){render({num:cur,alvo:""});return;}
-let v=parseInt(cur); if(isNaN(v))return; if(v>36){cur=d; v=parseInt(cur);} render({num:v,alvo:getAlvo(v)});
-}
+function addN(d){if(cur.length>=2) return; cur+=d; if(cur==="0"||cur==="00"){render({num:cur,alvo:""});return;} let v=parseInt(cur); if(isNaN(v))return; if(v>36){cur=d; v=parseInt(cur);} render({num:v,alvo:getAlvo(v)});}
+
 function enterN(){
 if(cur==='') return;
 if(cur==="0"||cur==="00"){currentSignal=null;activeResults=[];logNums=[];isWaitingSignal=true;cur='';render();return;}
 let v=parseInt(cur); if(isNaN(v)||v<1||v>36){cur='';render();return;}
 if(isWaitingSignal){
- // NOVO SINAL
- currentSignal={num:v,alvo:getAlvo(v)};
- activeResults=[];
- isWaitingSignal=false;
- logNums.push({num:v,win:null}); // sinal entra no historico vermelho
+ currentSignal={num:v,alvo:getAlvo(v)}; activeResults=[]; isWaitingSignal=false;
+ // EMPURRANDO - NOVO VAI PRA FRENTE
+ logNums.unshift({num:v,win:null});
 }else{
- // RESULTADO
- let ca=getAlvos(currentSignal.alvo);
- let cr=getColReal(v), dr=getDuzReal(v);
+ let ca=getAlvos(currentSignal.alvo); let cr=getColReal(v), dr=getDuzReal(v);
  let colWin=ca.includes(cr), duzWin=ca.includes(dr);
  activeResults.push({num:v,colColor:colWin?'green':'red',duzColor:duzWin?'green':'red'});
- logNums.push({num:v,win:colWin});
- // SE ACERTA, SUMIR TUDO E COMEÇA DE NOVO
+ // EMPURRANDO - 1 VAI PRA FRENTE
+ logNums.unshift({num:v,win:colWin});
  if(colWin){
-   setTimeout(()=>{
-     currentSignal=null; activeResults=[]; isWaitingSignal=true; render();
-   },800);
+   // SO REINICIA O QUADRADO AZUL, AMARELO FICA
+   setTimeout(()=>{activeResults=[]; render();},700);
  }
- if(activeResults.length>=5){
-   // se fez 5 sem acerto, tambem limpa e espera novo sinal
-   setTimeout(()=>{
-     if(!isWaitingSignal){currentSignal=null; activeResults=[]; isWaitingSignal=true; render();}
-   },1000);
+ if(activeResults.length>=5 && !colWin){
+   setTimeout(()=>{activeResults=[]; render();},800);
  }
 }
 cur='';render();
 }
 function corrige(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur===''){render();} else {let v=parseInt(cur); render({num:v,alvo:getAlvo(v)});} return;}
-if(logNums.length>0) logNums.pop();
+if(logNums.length>0) logNums.shift();
 if(activeResults.length>0) activeResults.pop();
-else if(currentSignal){currentSignal=null; isWaitingSignal=true;}
 render();
 }
 render();

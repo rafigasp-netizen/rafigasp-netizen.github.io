@@ -11,7 +11,7 @@ body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:#d4af37;padding:6px;text-align:center;color:#000;font-weight:900;font-size:13px}
 .top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px}
-.s{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:15px}
+.s{height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:16px}
 .s.y{background:#d4af37;color:#000;border-style:solid}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a;border-style:solid}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626;border-style:solid}
@@ -60,17 +60,25 @@ function ga(a){var t=a.replace('C','');return t.indexOf('/')>=0?t.split('/').map
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg');
 if(p){
+// A = NUMERO QUE DIGITA, B = QUAL COLUNA JOGAR
 if(wait===1){
-sy.className='s y';sy.textContent=p.n+' '+p.a;
-sr.className='s';sr.textContent='CONFIRMAR?';
+// DIGITANDO NOVO SINAL: A mostra numero, B mostra coluna desse numero
+sy.className='s y';sy.textContent=p.n;
+sr.className='s y';sr.textContent=p.a;
 }else{
-sr.className='s';sr.textContent=p.n+' ?';
+// JOGANDO: A mostra numero que esta digitando, B continua mostrando qual coluna jogar (do sinal congelado)
+sy.className='s';sy.textContent=p.n+' ?';
 var cw=ga(cs.a).indexOf(gc(p.n))>=0;
-sr.className='s '+(cw?'g':'r');
+sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;
 }
 }else{
 if(!cs){sy.className='s';sy.textContent='VAZIO';sr.className='s';sr.textContent='VAZIO';}
-else{sy.className='s y';sy.textContent=cs.n+' '+cs.a;sr.className='s';sr.textContent='JOGANDO...';if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=l.n;}}
+else{
+// SEM DIGITAR: A = numero do sinal congelado, B = qual coluna jogar
+sy.className='s y';sy.textContent=cs.n;
+sr.className='s y';sr.textContent=cs.a;
+if(ar.length){var l=ar[ar.length-1];sy.className='s '+l.cc;sy.textContent=l.n;sr.className='s '+l.cc;sr.textContent=cs.a;}
+}
 }
 ca.innerHTML='';da.innerHTML='';
 if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}

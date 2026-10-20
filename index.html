@@ -15,17 +15,8 @@ body{display:flex;justify-content:center}
 .s.y{background:#d4af37;color:#000;border-style:solid}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a;border-style:solid}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626;border-style:solid}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 6px 6px 6px}
-.t{height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px}
-.t.b{background:#000;color:#fff}.t.w{background:#fff;color:#000}
-.box{background:#0a2a1a;margin:0 6px;border:1px solid #1e4d8a;border-radius:8px;min-height:90px;display:flex;gap:6px;padding:6px}
-.cb{flex:1;background:#0f2e1f;border-radius:6px;padding:4px}
-.head{color:#d4af37;font-weight:900;text-align:center;font-size:14px;margin-bottom:4px}
-.sq{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px}
-.q{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
-.q.e{background:#1a3d2a;border:1px dashed #2a5a3a}.q.g{background:#16a34a}.q.r{background:#dc2626}
-.hist{margin:6px 6px 0 6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
-.hist2{margin:0 6px 6px 6px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
+.hist{margin:0 6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
+.hist2{margin:6px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:44px}
 .histT{font-size:10px;color:#4ade80;font-weight:900;min-width:42px}
 .histT2{font-size:10px;color:#fbbf24;font-weight:900;min-width:42px}
 .lg{display:flex;gap:4px;overflow-x:auto;flex:1}
@@ -45,8 +36,6 @@ body{display:flex;justify-content:center}
 <div class="app">
 <div class="topo">RAFIGASP COACH DA ROLETA</div>
 <div class="top2"><div class="s" id="sy">VAZIO</div><div class="s" id="sr">VAZIO</div></div>
-<div class="tabs"><div class="t b">COLUNA</div><div class="t w">DUZIA</div></div>
-<div class="box"><div class="cb" id="ca"></div><div class="cb" id="da"></div></div>
 <div class="hist"><div class="histT">HIST:</div><div class="lg" id="lg"></div></div>
 <div class="hist2"><div class="histT2">2º HIST:</div><div class="lg" id="lg2"></div></div>
 <div class="kb">
@@ -58,23 +47,14 @@ body{display:flex;justify-content:center}
 </div>
 <script>
 var cur='',cs=null,ar=[],wait=1,log=[],secLog=[];
-var tb={
-1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",
-11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",
-21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",
-31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"
-};
+var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
-function gd(n){if(n<=12)return 1;if(n<=24)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
 function R(p){
-var sy=document.getElementById('sy'),sr=document.getElementById('sr'),ca=document.getElementById('ca'),da=document.getElementById('da'),lg=document.getElementById('lg'),lg2=document.getElementById('lg2');
+var sy=document.getElementById('sy'),sr=document.getElementById('sr'),lg=document.getElementById('lg'),lg2=document.getElementById('lg2');
 if(p){sy.className='s y';sy.textContent=p.n+' '+p.a;if(wait===1){sr.className='s y';sr.textContent=p.a;}else{var cw=ga(cs.a).indexOf(gc(p.n))>=0;sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;}}
 else{sy.className='s';sy.textContent='VAZIO';if(!cs){sr.className='s';sr.textContent='VAZIO';}else{sr.className='s y';sr.textContent=cs.a;if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}}}
-ca.innerHTML='';da.innerHTML='';
-if(!cs){ca.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';da.innerHTML='<div style="color:#2a5a3a;text-align:center;margin-top:20px">VAZIO</div>';}
-else{var h='<div class="head">'+cs.a+'</div>';var s1='<div class="sq">';for(var i=0;i<5;i++){s1+=ar[i]?'<div class="q '+ar[i].cc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s1+='</div>';var s2='<div class="sq">';for(var i=0;i<5;i++){s2+=ar[i]?'<div class="q '+ar[i].dc+'">'+ar[i].n+'</div>':'<div class="q e"></div>';}s2+='</div>';ca.innerHTML=h+s1;da.innerHTML=h+s2;}
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg.appendChild(d);}
 lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document.createElement('div');d.className='ln2 '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg2.appendChild(d);}
 }
@@ -84,33 +64,14 @@ if(cur==='')return;
 if(cur==="0"){cs=null;ar=[];log=[];secLog=[];wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-// HIST CIMA - ORIGINAL, NAO MEXER
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
-else{var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
-
-// 2º HIST - REFEITO DO ZERO: VERDE ESCURO + RESULTADO
-// Usa a mesma conta do HIST de cima, mas força alternado
-var isDark = (secLog.length % 2 === 0);
-if(isDark){
-// AZUL = GATILHO VERDE ESCURO
-secLog.unshift({n:v,w:null});
-}else{
-// VERMELHO = RESULTADO - procura o ultimo gatilho escuro
-var lastDarkCol=null;
-for(var i=1;i<secLog.length;i++){if(secLog[i].w===null){lastDarkCol=ga(gv(secLog[i].n));break;}}
-if(!lastDarkCol) lastDarkCol=ga(col);
-var cw2=lastDarkCol.indexOf(gc(v))>=0;
-secLog.unshift({n:v,w:cw2});
-}
+else{var ca=ga(cs.a);var cr=gc(v);var cw=ca.indexOf(cr)>=0;ar.push({n:v,cc:cw?'g':'r',dc:cw?'g':'r'});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
+var isDark=(secLog.length%2===0);
+if(isDark){secLog.unshift({n:v,w:null});}
+else{var lastDarkCol=null;for(var i=1;i<secLog.length;i++){if(secLog[i].w===null){lastDarkCol=ga(gv(secLog[i].n));break;}}if(!lastDarkCol) lastDarkCol=ga(col);var cw2=lastDarkCol.indexOf(gc(v))>=0;secLog.unshift({n:v,w:cw2});}
 cur='';R();
 }
-function C(){
-if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}
-if(ar.length>0)ar.pop();
-if(log.length>0)log.shift();
-if(secLog.length>0)secLog.shift();
-R();
-}
+function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0)secLog.shift();R();}
 R();
 </script>
 </body>

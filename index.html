@@ -10,29 +10,25 @@ html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:#d4af37;padding:5px;text-align:center;color:#000;font-weight:900;font-size:13px}
-.top3{display:grid;grid-template-columns:1fr 1fr 110px;gap:5px;padding:5px;background:#16a34a;border-radius:10px;margin:5px}
-.top3.b2{background:#0a2a1a;border:1px solid #d4af37}
-.top3.b3{background:#0a2a1a;border:2px solid #3b82f6}
-.s{height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;background:#fff;color:#000;border:2px solid #000}
+.top3{display:grid;grid-template-columns:1fr 1fr 115px;gap:5px;padding:4px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:4px}
+.top3.b3{border:2px solid #3b82f6}
+.s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;background:#d4af37;color:#000;border:1px solid #000}
 .s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
-.s.y{background:#d4af37;color:#000;border-color:#d4af37}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626}
-.corBox{display:flex;gap:3px;align-items:center;justify-content:flex-start}
-.cb{width:18px;height:18px;border-radius:4px;flex-shrink:0;border:1px solid #000}
+.corBox{display:flex;gap:2px;align-items:center;justify-content:flex-start;min-height:34px}
+.cb{width:20px;height:20px;border-radius:4px;flex-shrink:0;border:1px solid #000}
 .cb.g{background:#16a34a;border-color:#22c55e}
 .cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 5px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:5px;display:flex;gap:4px;align-items:center;min-height:38px}
-.hist2{margin:5px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:5px;display:flex;gap:4px;align-items:center;min-height:38px}
+.hist{margin:0 4px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:36px}
+.hist2{margin:4px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:36px}
 .histT{font-size:9px;color:#4ade80;font-weight:900;min-width:38px}
 .lg{display:flex;gap:4px;overflow-x:auto;flex:1}
 .ln{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;border:1px solid}
 .ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}.ln.d{background:#14532d;color:#86efac}
-.ln3{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;border:1px solid}
-.ln3.d{background:#14532d;color:#86efac}.ln3.g{background:#16a34a;color:#fff}.ln3.r{background:#dc2626;color:#fff}
-.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:5px;min-height:0}
+.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
-.k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:22px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
+.k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
 .k:active{transform:scale(0.96)}
 .k.z{background:#ef4444;color:#fff}
 </style>
@@ -42,7 +38,7 @@ body{display:flex;justify-content:center}
 <div class="topo">RAFIGASP COACH DA ROLETA</div>
 <div class="top3"><div class="s d" id="sy">VAZIO</div><div class="s d" id="sr">VAZIO</div><div class="corBox" id="cr1"></div></div>
 <div class="hist"><div class="histT">HIST:</div><div class="lg" id="lg"></div></div>
-<div class="top3 b2"><div class="s d" id="sy2">VAZIO</div><div class="s d" id="sr2">VAZIO</div><div class="corBox" id="cr2"></div></div>
+<div class="top3"><div class="s d" id="sy2">VAZIO</div><div class="s d" id="sr2">VAZIO</div><div class="corBox" id="cr2"></div></div>
 <div class="hist2"><div class="histT" style="color:#fbbf24">2º HIST:</div><div class="lg" id="lg2"></div></div>
 <div class="top3 b3"><div class="s d" id="sy3">VAZIO</div><div class="s d" id="sr3">VAZIO</div><div class="corBox" id="cr3"></div></div>
 <div class="hist2" style="border-color:#3b82f6"><div class="histT" style="color:#60a5fa">3º HIST:</div><div class="lg" id="lg3"></div></div>
@@ -62,51 +58,50 @@ function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
 function drawCors(key, elId){
 var el=document.getElementById(elId); el.innerHTML='';
-if(!histCor[key] || histCor[key].length==0){return;}
+if(!histCor[key] || histCor[key].length==0) return;
 var h=histCor[key];
 for(var i=0;i<Math.min(5,h.length);i++){
 var d=document.createElement('div');d.className='cb '+(h[i]?'g':'r');el.appendChild(d);
 }
 }
 function R(p){
-if(p){
-document.getElementById('sy').textContent=p.n+' C/3';document.getElementById('sy').className='s';
-document.getElementById('sr').textContent=p.a;document.getElementById('sr').className='s';
-document.getElementById('sy2').textContent=p.n+' C2/3';document.getElementById('sy2').className='s y';
-document.getElementById('sr2').textContent=p.a;document.getElementById('sr2').className='s y';
-document.getElementById('sy3').textContent=p.n+' C2/3';document.getElementById('sy3').className='s y';
-document.getElementById('sr3').textContent=p.a;document.getElementById('sr3').className='s y';
-drawCors(p.n+'','cr1');drawCors('2_'+p.n,'cr2');drawCors('3_'+p.n,'cr3');
+// mostra sempre o último número em todos os blocos - achatado pra caber 5
+var show = p ? p : thirdLast;
+if(show){
+var txt1=show.n+' C/3';var txt2=show.a;
+document.getElementById('sy').textContent=txt1;document.getElementById('sy').className='s';
+document.getElementById('sr').textContent=txt2;document.getElementById('sr').className='s';
+document.getElementById('sy2').textContent=show.n+' C2/3';document.getElementById('sy2').className='s';
+document.getElementById('sr2').textContent=txt2;document.getElementById('sr2').className='s';
+document.getElementById('sy3').textContent=show.n+' C2/3';document.getElementById('sy3').className='s';
+document.getElementById('sr3').textContent=txt2;document.getElementById('sr3').className='s';
+drawCors(show.n+'','cr1');drawCors('2_'+show.n,'cr2');drawCors('3_'+show.n,'cr3');
 }else{
-if(cs){document.getElementById('sy').textContent=cs.n+' C/3';document.getElementById('sy').className='s';document.getElementById('sr').textContent=cs.a;drawCors(cs.n+'','cr1');}
-if(secLast){document.getElementById('sy2').textContent=secLast.n+' C2/3';document.getElementById('sy2').className='s y';document.getElementById('sr2').textContent=secLast.a;drawCors('2_'+secLast.n,'cr2');}
-if(thirdLast){document.getElementById('sy3').textContent=thirdLast.n+' C2/3';document.getElementById('sy3').className='s y';document.getElementById('sr3').textContent=thirdLast.a;drawCors('3_'+thirdLast.n,'cr3');}
+document.getElementById('sy').textContent='VAZIO';document.getElementById('sy').className='s d';document.getElementById('sr').textContent='VAZIO';document.getElementById('sr').className='s d';
+document.getElementById('sy2').textContent='VAZIO';document.getElementById('sy2').className='s d';document.getElementById('sr2').textContent='VAZIO';document.getElementById('sr2').className='s d';
+document.getElementById('sy3').textContent='VAZIO';document.getElementById('sy3').className='s d';document.getElementById('sr3').textContent='VAZIO';document.getElementById('sr3').className='s d';
 }
 var lg=document.getElementById('lg'),lg2=document.getElementById('lg2'),lg3=document.getElementById('lg3');
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg.appendChild(d);}
 lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg2.appendChild(d);}
-lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.createElement('div');d.className='ln3 '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg3.appendChild(d);}
+lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg3.appendChild(d);}
 }
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;histCor={};wait=1;cur='';document.getElementById('sy').className='s d';document.getElementById('sy').textContent='VAZIO';document.getElementById('sr').className='s d';document.getElementById('sr').textContent='VAZIO';document.getElementById('sy2').className='s d';document.getElementById('sy2').textContent='VAZIO';document.getElementById('sr2').className='s d';document.getElementById('sr2').textContent='VAZIO';document.getElementById('sy3').className='s d';document.getElementById('sy3').textContent='VAZIO';document.getElementById('sr3').className='s d';document.getElementById('sr3').textContent='VAZIO';document.getElementById('cr1').innerHTML='';document.getElementById('cr2').innerHTML='';document.getElementById('cr3').innerHTML='';document.getElementById('lg').innerHTML='';document.getElementById('lg2').innerHTML='';document.getElementById('lg3').innerHTML='';return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;histCor={};wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-// CORRIGE: só conta cor quando TEM próximo número, não conta o atual
 if(log.length>0){
 var prevNum=log[0].n;
 var prevCol=gv(prevNum);
 var cwPrev=ga(prevCol).indexOf(gc(v))>=0;
 var k=prevNum+'';
-if(!histCor[k]) histCor[k]=[];
-histCor[k].unshift(cwPrev);
+if(!histCor[k]) histCor[k]=[];histCor[k].unshift(cwPrev);
 var k2='2_'+prevNum;
-if(!histCor[k2]) histCor[k2]=[];
-histCor[k2].unshift(cwPrev);
+if(!histCor[k2]) histCor[k2]=[];histCor[k2].unshift(cwPrev);
 var k3='3_'+prevNum;
-if(!histCor[k3]) histCor[k3]=[];
-histCor[k3].unshift(cwPrev);
+if(!histCor[k3]) histCor[k3]=[];histCor[k3].unshift(cwPrev);
 }
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
 else{var cw=ga(cs.a).indexOf(gc(v))>=0;ar.push({n:v});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}

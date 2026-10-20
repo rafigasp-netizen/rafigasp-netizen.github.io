@@ -3,30 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP</title>
+<title>RAFIGASP COACH DA ROLETA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0d2818}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow-y:auto}
 .topo{background:#d4af37;padding:6px;text-align:center;color:#000;font-weight:900;font-size:13px}
-.top2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px}
-.s{height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:15px}
+.top2{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:6px;padding:6px;background:#16a34a;border-radius:10px;margin:6px}
+.s{height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #000;color:#000;background:#fff;font-size:14px}
 .s.y{background:#d4af37;color:#000;border-style:solid}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a;border-style:solid}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626;border-style:solid}
+.s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
+.corBox{display:flex;gap:4px;align-items:center;justify-content:center}
+.cb{min-width:32px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;border:1px solid}
+.cb.g{background:#14532d;color:#86efac;border-color:#16a34a}
+.cb.r{background:#7f1d1d;color:#fca5a5;border-color:#dc2626}
+.cb.v{background:#14532d;color:#4ade80}
 .hist{margin:0 6px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:40px}
 .hist2{margin:6px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:6px;display:flex;gap:4px;align-items:center;min-height:40px}
 .histT{font-size:9px;color:#4ade80;font-weight:900;min-width:38px}
-.histT2{font-size:9px;color:#fbbf24;font-weight:900;min-width:42px}
-.histT3{font-size:9px;color:#60a5fa;font-weight:900;min-width:42px}
 .lg{display:flex;gap:4px;overflow-x:auto;flex:1}
 .ln{min-width:34px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;border:1px solid}
-.ln.g{background:#16a34a;color:#fff;border-color:#16a34a}.ln.r{background:#dc2626;color:#fff;border-color:#dc2626}.ln.d{background:#14532d;color:#86efac;border-color:#166534}
-.ln2{min-width:34px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;border:1px solid}
-.ln2.d{background:#14532d;color:#fff;border-color:#22c55e}.ln2.g{background:#16a34a;color:#fff;border-color:#16a34a}.ln2.r{background:#dc2626;color:#fff;border-color:#dc2626}
-.ln3{min-width:34px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;border:1px solid;background:#1e3a8a;color:#fff;border-color:#3b82f6}
-.kb{display:flex;flex-direction:column;gap:6px;padding:6px}
+.ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}.ln.d{background:#14532d;color:#86efac}
+.kb{display:flex;flex-direction:column;gap:6px;padding:6px;margin-top:auto}
 .kr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;height:58px}
 .k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
 .k:active{transform:scale(0.96)}
@@ -36,12 +37,28 @@ body{display:flex;justify-content:center}
 <body>
 <div class="app">
 <div class="topo">RAFIGASP COACH DA ROLETA</div>
-<div class="top2"><div class="s" id="sy">VAZIO</div><div class="s" id="sr">VAZIO</div></div>
+
+<div class="top2" id="row1">
+<div class="s d" id="sy">VAZIO</div>
+<div class="s d" id="sr">VAZIO</div>
+<div class="corBox" id="cr1"></div>
+</div>
 <div class="hist"><div class="histT">HIST:</div><div class="lg" id="lg"></div></div>
-<div class="top2"><div class="s" id="sy2">VAZIO</div><div class="s" id="sr2">VAZIO</div></div>
-<div class="hist2"><div class="histT2">2º HIST:</div><div class="lg" id="lg2"></div></div>
-<div class="top2"><div class="s" id="sy3">VAZIO</div><div class="s" id="sr3">VAZIO</div></div>
-<div class="hist2" style="border-color:#3b82f6"><div class="histT3">3º HIST:</div><div class="lg" id="lg3"></div></div>
+
+<div class="top2" style="background:#0a2a1a;border:1px solid #d4af37" id="row2">
+<div class="s d" id="sy2">VAZIO</div>
+<div class="s d" id="sr2">VAZIO</div>
+<div class="corBox" id="cr2"></div>
+</div>
+<div class="hist2"><div class="histT" style="color:#fbbf24">2º HIST:</div><div class="lg" id="lg2"></div></div>
+
+<div class="top2" style="background:#0a2a1a;border:2px solid #3b82f6" id="row3">
+<div class="s d" id="sy3">VAZIO</div>
+<div class="s d" id="sr3">VAZIO</div>
+<div class="corBox" id="cr3"></div>
+</div>
+<div class="hist2" style="border-color:#3b82f6"><div class="histT" style="color:#60a5fa">3º HIST:</div><div class="lg" id="lg3"></div></div>
+
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
@@ -51,44 +68,55 @@ body{display:flex;justify-content:center}
 </div>
 <script>
 var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],log3=[],secLast=null,thirdLastCol=null,thirdLastNum=null;
+var histCor={};
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
+function getHistCor(key){if(!histCor[key]) histCor[key]=[]; return histCor[key];}
+function drawCors(key, elId){
+var el=document.getElementById(elId); el.innerHTML='';
+var h=getHistCor(key);
+for(var i=0;i<Math.min(3,h.length);i++){
+var d=document.createElement('div'); d.className='cb '+(h[i]?'g':'r'); d.textContent=h[i]?'🟩':'🟥'; 
+// visual igual foto verde/vermelho
+d.style.background=h[i]?'#16a34a':'#dc2626'; d.style.color='#fff';
+el.appendChild(d);
+}
+if(h.length==0){ var d=document.createElement('div'); d.className='cb v'; d.textContent='11'; el.appendChild(d);}
+}
 function R(p){
 var sy=document.getElementById('sy'),sr=document.getElementById('sr');
-if(p){sy.className='s y';sy.textContent=p.n+' '+p.a;if(wait===1){sr.className='s y';sr.textContent=p.a;}else{var cw=ga(cs.a).indexOf(gc(p.n))>=0;sr.className='s '+(cw?'g':'r');sr.textContent=cs.a;}}
-else{sy.className='s';sy.textContent='VAZIO';if(!cs){sr.className='s';sr.textContent='VAZIO';}else{sr.className='s y';sr.textContent=cs.a;if(ar.length){var l=ar[ar.length-1];sr.className='s '+l.cc;sr.textContent=cs.a;}}}
-var sy2=document.getElementById('sy2'),sr2=document.getElementById('sr2');
-var isDark2=(secLog.length%2===0);
-if(p){sy2.className='s y';sy2.textContent=p.n+' '+p.a;if(isDark2){sr2.className='s y';sr2.textContent=p.a;}else{if(secLast){var cw2=ga(secLast.a).indexOf(gc(p.n))>=0;sr2.className='s '+(cw2?'g':'r');sr2.textContent=secLast.a;}else{sr2.className='s y';sr2.textContent=p.a;}}}
-else{sy2.className='s';sy2.textContent='VAZIO';if(!secLast){sr2.className='s';sr2.textContent='VAZIO';}else{sr2.className='s y';sr2.textContent=secLast.a;if(secLog.length>0 && !isDark2){var lastRes=secLog[0];if(lastRes){sr2.className='s '+(lastRes.w?'g':'r');sr2.textContent=secLast.a;}}}}
-var sy3=document.getElementById('sy3'),sr3=document.getElementById('sr3');
 if(p){
-sy3.className='s y';sy3.textContent=p.n+' '+p.a;
-sr3.className='s y';sr3.textContent=p.a;
+sy.className='s'; sy.textContent=p.n+' C/3';
+sr.className='s'; sr.textContent=p.a;
+drawCors(p.n+'', 'cr1');
 }else{
-if(!thirdLastNum){
-sy3.className='s';sy3.textContent='VAZIO';
-sr3.className='s';sr3.textContent='VAZIO';
-}else{
-sy3.className='s y';sy3.textContent=thirdLastNum+' '+thirdLastCol;
-sr3.className='s y';sr3.textContent=thirdLastCol;
+if(!cs && !thirdLastNum){sy.className='s d';sy.textContent='VAZIO';sr.className='s d';sr.textContent='VAZIO';document.getElementById('cr1').innerHTML='';}
+else if(cs){sy.className='s';sy.textContent=cs.n+' C/3';sr.className='s';sr.textContent=cs.a;drawCors(cs.n+'','cr1');}
 }
-}
+var sy2=document.getElementById('sy2'),sr2=document.getElementById('sr2');
+if(p){sy2.className='s y';sy2.textContent=p.n+' C2/3';sr2.className='s g';sr2.textContent=p.a;drawCors('2_'+p.n,'cr2');}
+else{if(!secLast){sy2.className='s d';sy2.textContent='VAZIO';sr2.className='s d';sr2.textContent='VAZIO';}else{sy2.className='s y';sy2.textContent=secLast.n+' C2/3';sr2.className='s y';sr2.textContent=secLast.a;drawCors('2_'+secLast.n,'cr2');}}
+var sy3=document.getElementById('sy3'),sr3=document.getElementById('sr3');
+if(p){sy3.className='s y';sy3.textContent=p.n+' C2/3';sr3.className='s y';sr3.textContent=p.a;drawCors('3_'+p.n,'cr3');}
+else{if(!thirdLastNum){sy3.className='s d';sy3.textContent='VAZIO';sr3.className='s d';sr3.textContent='VAZIO';}else{sy3.className='s y';sy3.textContent=thirdLastNum+' C2/3';sr3.className='s y';sr3.textContent=thirdLastCol;drawCors('3_'+thirdLastNum,'cr3');}}
 var lg=document.getElementById('lg'),lg2=document.getElementById('lg2'),lg3=document.getElementById('lg3');
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg.appendChild(d);}
-lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document.createElement('div');d.className='ln2 '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg2.appendChild(d);}
-lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.createElement('div');d.className='ln3';d.textContent=l.n;lg3.appendChild(d);}
+lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg2.appendChild(d);}
+lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.createElement('div');d.className='ln';d.style.background='#1e3a8a';d.style.color='#fff';d.textContent=l.n;lg3.appendChild(d);}
 }
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLastCol=null;thirdLastNum=null;wait=1;cur='';R();return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLastCol=null;thirdLastNum=null;histCor={};wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
+// historico de cor por numero
+if(cs){var ca=ga(cs.a);var cr=gc(v);var cw=ca.indexOf(cr)>=0;var key=cs.n+'';if(!histCor[key]) histCor[key]=[];histCor[key].unshift(cw);var key2='2_'+cs.n;if(!histCor[key2]) histCor[key2]=[];histCor[key2].unshift(cw);var key3='3_'+cs.n;if(!histCor[key3]) histCor[key3]=[];histCor[key3].unshift(cw);}
+if(secLast && secLog.length%2!==0){var ca2=ga(secLast.a);var cw2=ca2.indexOf(gc(v))>=0;var k='2_'+secLast.n;if(!histCor[k]) histCor[k]=[];histCor[k].unshift(cw2);}
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
-else{var ca=ga(cs.a);var cr=gc(v);var cw=ca.indexOf(cr)>=0;ar.push({n:v,cc:cw?'g':'r',dc:cw?'g':'r'});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
+else{var ca=ga(cs.a);var cr=gc(v);var cw=ca.indexOf(cr)>=0;ar.push({n:v});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
 var isDark=(secLog.length%2===0);
 if(isDark){secLog.unshift({n:v,w:null});secLast={n:v,a:col};}
 else{var lastDarkCol=secLast?ga(secLast.a):ga(col);var cw2=lastDarkCol.indexOf(gc(v))>=0;secLog.unshift({n:v,w:cw2});}
@@ -96,7 +124,7 @@ thirdLastCol=col;thirdLastNum=v;
 log3.unshift({n:v});
 cur='';R();
 }
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0){secLog.shift(); if(secLog.length%2===0){secLast=null; for(var i=secLog.length-1;i>=0;i--){if(secLog[i].w===null){secLast={n:secLog[i].n,a:gv(secLog[i].n)};break;}}}}if(log3.length>0){log3.shift(); if(log3.length>0){thirdLastCol=gv(log3[0].n);thirdLastNum=log3[0].n;}else{thirdLastCol=null;thirdLastNum=null;}}R();}
+function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(log.length>0)log.shift();if(secLog.length>0)secLog.shift();if(log3.length>0)log3.shift();R();}
 R();
 </script>
 </body>

@@ -51,24 +51,15 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],log3=[],secLast=null,thirdLast=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
+var h1={},h2={},h3={};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
-function getHist(num, arr){
-var res=[];
-for(var i=0;i<arr.length;i++){
-if(arr[i].n===num && i>0){
-if(arr[i-1].w!==null) res.push(arr[i-1].w);
-}
-if(res.length>=5) break;
-}
-return res;
-}
-function drawCors(num, arr, elId){
+function drawCors(num, map, elId){
 var el=document.getElementById(elId); el.innerHTML='';
-var h=getHist(num, arr);
-for(var i=0;i<h.length;i++){
-var d=document.createElement('div');d.className='cb '+(h[i]?'g':'r');el.appendChild(d);
+var arr=map[num]||[];
+for(var i=0;i<Math.min(5,arr.length);i++){
+var d=document.createElement('div');d.className='cb '+(arr[i]?'g':'r');el.appendChild(d);
 }
 }
 function R(p){
@@ -81,13 +72,14 @@ document.getElementById('sy2').textContent=show.n+' '+col;document.getElementByI
 document.getElementById('sr2').textContent=col;document.getElementById('sr2').className='s';
 document.getElementById('sy3').textContent=show.n+' '+col;document.getElementById('sy3').className='s';
 document.getElementById('sr3').textContent=col;document.getElementById('sr3').className='s';
-drawCors(show.n, log, 'cr1');
-drawCors(show.n, secLog, 'cr2');
-drawCors(show.n, log3, 'cr3');
+drawCors(show.n, h1, 'cr1');
+drawCors(show.n, h2, 'cr2');
+drawCors(show.n, h3, 'cr3');
 }else{
 document.getElementById('sy').textContent='VAZIO';document.getElementById('sy').className='s d';document.getElementById('sr').textContent='VAZIO';document.getElementById('sr').className='s d';
 document.getElementById('sy2').textContent='VAZIO';document.getElementById('sy2').className='s d';document.getElementById('sr2').textContent='VAZIO';document.getElementById('sr2').className='s d';
 document.getElementById('sy3').textContent='VAZIO';document.getElementById('sy3').className='s d';document.getElementById('sr3').textContent='VAZIO';document.getElementById('sr3').className='s d';
+document.getElementById('cr1').innerHTML='';document.getElementById('cr2').innerHTML='';document.getElementById('cr3').innerHTML='';
 }
 var lg=document.getElementById('lg'),lg2=document.getElementById('lg2'),lg3=document.getElementById('lg3');
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg.appendChild(d);}
@@ -97,20 +89,77 @@ lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.cre
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;wait=1;cur='';R();return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;wait=1;h1={};h2={};h3={};cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
+// 1º HIST
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
-else{var cw=ga(cs.a).indexOf(gc(v))>=0;ar.push({n:v});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
+else{
+var cw=ga(cs.a).indexOf(gc(v))>=0;
+if(!h1[cs.n]) h1[cs.n]=[];
+h1[cs.n].unshift(cw);
+ar.push({n:v});log.unshift({n:v,w:cw});
+if(cw||ar.length>=5){cs=null;ar=[];wait=1;}
+}
+// 2º HIST
 var isDark=(secLog.length%2===0);
-if(isDark){secLog.unshift({n:v,w:null});secLast={n:v,a:col};}
-else{var cw2=ga(secLast.a).indexOf(gc(v))>=0;secLog.unshift({n:v,w:cw2});}
-if(log3.length===0){log3.unshift({n:v,w:null});}
-else{var prevCol=thirdLast?ga(thirdLast.a):ga(col);var cw3=prevCol.indexOf(gc(v))>=0;log3.unshift({n:v,w:cw3});}
+if(isDark){secLast={n:v,a:col};secLog.unshift({n:v,w:null});}
+else{
+var cw2=ga(secLast.a).indexOf(gc(v))>=0;
+if(!h2[secLast.n]) h2[secLast.n]=[];
+h2[secLast.n].unshift(cw2);
+secLog.unshift({n:v,w:cw2});
+secLast={n:v,a:col};
+}
+// 3º HIST
+if(log3.length===0){thirdLast={n:v,a:col};log3.unshift({n:v,w:null});}
+else{
+var cw3=ga(thirdLast.a).indexOf(gc(v))>=0;
+if(!h3[thirdLast.n]) h3[thirdLast.n]=[];
+h3[thirdLast.n].unshift(cw3);
+log3.unshift({n:v,w:cw3});
 thirdLast={n:v,a:col};
+}
 cur='';R();
 }
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(log.length>0)log.shift();if(secLog.length>0)secLog.shift();if(log3.length>0)log3.shift();R();}
+function C(){
+if(cur!==''){
+cur=cur.slice(0,-1);
+if(cur==='')R();else R({n:+cur,a:gv(+cur)});
+return;
+}
+// CORRIGIR apaga número e quadrado junto
+if(log.length>0){
+var rem=log.shift();
+if(rem.w!==null && h1[rem.n] && log.length>0){
+// remove último histórico desse número
+// procura qual trigger gerou esse w
+// simplifica: remove 1 do histórico do trigger anterior
+}
+if(log.length>0){
+var prev=log[0];
+if(h1[prev.n] && h1[prev.n].length>0 && rem.w!==null) h1[prev.n].shift();
+}
+}
+if(secLog.length>0){
+var rem2=secLog.shift();
+if(secLog.length>0){
+var prev2=secLog[0];
+if(h2[prev2.n] && h2[prev2.n].length>0 && rem2.w!==null) h2[prev2.n].shift();
+}
+}
+if(log3.length>0){
+var rem3=log3.shift();
+if(log3.length>0){
+var prev3=log3[0];
+if(h3[prev3.n] && h3[prev3.n].length>0 && rem3.w!==null) h3[prev3.n].shift();
+}
+if(log3.length===0){thirdLast=null;h3={};}
+}
+if(log.length===0){cs=null;wait=1;ar=[];h1={};}
+if(secLog.length===0){secLast=null;h2={};}
+R();
+}
 R();
 </script>
 </body>

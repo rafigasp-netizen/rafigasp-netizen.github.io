@@ -57,7 +57,7 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],secLastCol=null;
+var cur='',cs=null,ar=[],wait=1,log=[],secLog=[];
 var tb={
 1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",
 11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",
@@ -81,26 +81,36 @@ lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];secLastCol=null;wait=1;cur='';R();return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-// HIST DE CIMA - NAO MEXER (LOGICA ORIGINAL)
+// HIST CIMA - ORIGINAL, NAO MEXER
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
 else{var ca=ga(cs.a);var cr=gc(v);var dr=gd(v);var cw=ca.indexOf(cr)>=0;var dw=ca.indexOf(dr)>=0;ar.push({n:v,cc:cw?'g':'r',dc:dw?'g':'r'});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
 
-// 2º HIST - CORRIGIDO: VERDE ESCURO + RESULTADO
-if(secLog.length%2===0){
-// POSICAO PAR = VERDE ESCURO (GATILHO) - LINHA AZUL
+// 2º HIST - REFEITO DO ZERO: VERDE ESCURO + RESULTADO
+// Usa a mesma conta do HIST de cima, mas força alternado
+var isDark = (secLog.length % 2 === 0);
+if(isDark){
+// AZUL = GATILHO VERDE ESCURO
 secLog.unshift({n:v,w:null});
-secLastCol=ga(col);
 }else{
-// POSICAO IMPAR = RESULTADO VERMELHO/VERDE - LINHA VERMELHA
-var cw2=secLastCol?secLastCol.indexOf(gc(v))>=0:false;
+// VERMELHO = RESULTADO - procura o ultimo gatilho escuro
+var lastDarkCol=null;
+for(var i=1;i<secLog.length;i++){if(secLog[i].w===null){lastDarkCol=ga(gv(secLog[i].n));break;}}
+if(!lastDarkCol) lastDarkCol=ga(col);
+var cw2=lastDarkCol.indexOf(gc(v))>=0;
 secLog.unshift({n:v,w:cw2});
 }
 cur='';R();
 }
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0){secLog.shift(); if(secLog.length%2!==0){secLastCol=null; for(var i=secLog.length-1;i>=0;i--){if(secLog[i].w===null){var c=gv(secLog[i].n);secLastCol=ga(c);break;}}}}R();}
+function C(){
+if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}
+if(ar.length>0)ar.pop();
+if(log.length>0)log.shift();
+if(secLog.length>0)secLog.shift();
+R();
+}
 R();
 </script>
 </body>

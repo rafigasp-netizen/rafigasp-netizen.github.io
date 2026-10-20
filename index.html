@@ -14,8 +14,8 @@ body{display:flex;justify-content:center}
 .top3.b3{border:2px solid #3b82f6}
 .s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;background:#d4af37;color:#000;border:1px solid #000}
 .s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
-.corBox{display:flex;gap:2px;align-items:center;justify-content:flex-start;min-height:34px}
-.cb{width:22px;height:22px;border-radius:4px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff}
+.corBox{display:flex;gap:3px;align-items:center;justify-content:flex-start;min-height:34px}
+.cb{width:30px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff}
 .cb.g{background:#16a34a;border-color:#22c55e}
 .cb.r{background:#dc2626;border-color:#fca5a5}
 .hist{margin:0 4px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:36px;overflow:hidden}
@@ -49,7 +49,7 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],log3=[],secLast=null,thirdLast=null;
+var cur='',log=[],secLog=[],log3=[],secLast=null,thirdLast=null,firstLast=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 var h1={},h2={},h3={};
 function gv(n){return tb[n]||""}
@@ -91,25 +91,27 @@ lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.cre
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;wait=1;h1={};h2={};h3={};cur='';R();return}
+if(cur==="0"){log=[];secLog=[];log3=[];firstLast=null;secLast=null;thirdLast=null;h1={};h2={};h3={};cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
+// 1º HIST - alternado igual 2º e 3º
+if(log.length%2===0){firstLast={n:v,a:col};log.unshift({n:v,w:null});}
 else{
-var cw=ga(cs.a).indexOf(gc(v))>=0;
-if(!h1[cs.n]) h1[cs.n]=[];h1[cs.n].unshift({n:v,w:cw});
-ar.push({n:v});log.unshift({n:v,w:cw});
-if(cw||ar.length>=5){cs=null;ar=[];wait=1;}
+var cw=ga(firstLast.a).indexOf(gc(v))>=0;
+if(!h1[firstLast.n]) h1[firstLast.n]=[];h1[firstLast.n].unshift({n:v,w:cw});
+log.unshift({n:v,w:cw});
+firstLast={n:v,a:col};
 }
-var isDarkSec=(secLog.length%2===0);
-if(isDarkSec){secLast={n:v,a:col};secLog.unshift({n:v,w:null});}
+// 2º HIST
+if(secLog.length%2===0){secLast={n:v,a:col};secLog.unshift({n:v,w:null});}
 else{
 var cw2=ga(secLast.a).indexOf(gc(v))>=0;
 if(!h2[secLast.n]) h2[secLast.n]=[];h2[secLast.n].unshift({n:v,w:cw2});
 secLog.unshift({n:v,w:cw2});
 secLast={n:v,a:col};
 }
-if(log3.length===0){thirdLast={n:v,a:col};log3.unshift({n:v,w:null});}
+// 3º HIST
+if(log3.length%2===0){thirdLast={n:v,a:col};log3.unshift({n:v,w:null});}
 else{
 var cw3=ga(thirdLast.a).indexOf(gc(v))>=0;
 if(!h3[thirdLast.n]) h3[thirdLast.n]=[];h3[thirdLast.n].unshift({n:v,w:cw3});
@@ -126,7 +128,7 @@ if(rem.w!==null && log.length>0){
 var prev=log[0];
 if(h1[prev.n] && h1[prev.n].length>0) h1[prev.n].shift();
 }
-if(log.length===0){cs=null;wait=1;ar=[];}
+if(log.length===0) firstLast=null;
 }
 if(secLog.length>0){
 var rem2=secLog.shift();
@@ -142,7 +144,7 @@ if(rem3.w!==null && log3.length>0){
 var prev3=log3[0];
 if(h3[prev3.n] && h3[prev3.n].length>0) h3[prev3.n].shift();
 }
-if(log3.length===0){thirdLast=null;}
+if(log3.length===0) thirdLast=null;
 }
 R();
 }

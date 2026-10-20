@@ -15,9 +15,9 @@ body{display:flex;justify-content:center}
 .s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;background:#d4af37;color:#000;border:1px solid #000}
 .s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
 .corBox{display:flex;gap:4px;align-items:center;justify-content:flex-start;min-height:34px}
-.cb{width:34px;height:28px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;background:#333}
-.cb.g{background:#16a34a;border-color:#22c55e;color:#fff}
-.cb.r{background:#dc2626;border-color:#fca5a5;color:#fff}
+.cb{width:34px;height:28px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.cb.g{background:#16a34a;border-color:#22c55e}
+.cb.r{background:#dc2626;border-color:#fca5a5}
 .hist{margin:0 4px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:36px;overflow:hidden}
 .hist2{margin:4px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:36px;overflow:hidden}
 .histT{font-size:9px;color:#4ade80;font-weight:900;min-width:38px}
@@ -25,6 +25,8 @@ body{display:flex;justify-content:center}
 .lg::-webkit-scrollbar{display:none}
 .ln{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;border:1px solid}
 .ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}.ln.d{background:#14532d;color:#86efac}
+#lg2 .ln.d{background:#1e3a8a;color:#bfdbfe;border-color:#3b82f6}
+#lg2 .ln.g{background:#1e40af;color:#fff}
 .kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
@@ -55,10 +57,7 @@ var h1={},h2={},h3={};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
-function isDarkNow(num, arr){
-if(arr.length===0) return false;
-return arr[0].n===num && arr[0].w===null;
-}
+function isDarkNow(num, arr){if(arr.length===0) return false;return arr[0].n===num && arr[0].w===null;}
 function drawCors(num, map, arr, elId){
 var el=document.getElementById(elId); el.innerHTML='';
 if(!isDarkNow(num, arr)) return;

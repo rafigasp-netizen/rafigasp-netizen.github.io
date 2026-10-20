@@ -38,13 +38,10 @@ body{display:flex;justify-content:center}
 <div class="topo">RAFIGASP COACH DA ROLETA</div>
 <div class="top2"><div class="s" id="sy">VAZIO</div><div class="s" id="sr">VAZIO</div></div>
 <div class="hist"><div class="histT">HIST:</div><div class="lg" id="lg"></div></div>
-
 <div class="top2"><div class="s" id="sy2">VAZIO</div><div class="s" id="sr2">VAZIO</div></div>
 <div class="hist2"><div class="histT2">2º HIST:</div><div class="lg" id="lg2"></div></div>
-
 <div class="top2"><div class="s" id="sy3">VAZIO</div><div class="s" id="sr3">VAZIO</div></div>
 <div class="hist2" style="border-color:#3b82f6"><div class="histT3">3º HIST:</div><div class="lg" id="lg3"></div></div>
-
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
@@ -53,7 +50,7 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],log3=[],secLast=null,thirdLastCol=null;
+var cur='',cs=null,ar=[],wait=1,log=[],secLog=[],log3=[],secLast=null,thirdLastCol=null,thirdLastNum=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
@@ -67,7 +64,18 @@ var isDark2=(secLog.length%2===0);
 if(p){sy2.className='s y';sy2.textContent=p.n+' '+p.a;if(isDark2){sr2.className='s y';sr2.textContent=p.a;}else{if(secLast){var cw2=ga(secLast.a).indexOf(gc(p.n))>=0;sr2.className='s '+(cw2?'g':'r');sr2.textContent=secLast.a;}else{sr2.className='s y';sr2.textContent=p.a;}}}
 else{sy2.className='s';sy2.textContent='VAZIO';if(!secLast){sr2.className='s';sr2.textContent='VAZIO';}else{sr2.className='s y';sr2.textContent=secLast.a;if(secLog.length>0 && !isDark2){var lastRes=secLog[0];if(lastRes){sr2.className='s '+(lastRes.w?'g':'r');sr2.textContent=secLast.a;}}}}
 var sy3=document.getElementById('sy3'),sr3=document.getElementById('sr3');
-if(p){sy3.className='s y';sy3.textContent=p.n+' '+p.a;sr3.className='s y';sr3.textContent=p.a;}else{sy3.className='s';sy3.textContent='VAZIO';if(!thirdLastCol){sr3.className='s';sr3.textContent='VAZIO';}else{sr3.className='s y';sr3.textContent=thirdLastCol;}}
+if(p){
+sy3.className='s y';sy3.textContent=p.n+' '+p.a;
+sr3.className='s y';sr3.textContent=p.a;
+}else{
+if(!thirdLastNum){
+sy3.className='s';sy3.textContent='VAZIO';
+sr3.className='s';sr3.textContent='VAZIO';
+}else{
+sy3.className='s y';sy3.textContent=thirdLastNum+' '+thirdLastCol;
+sr3.className='s y';sr3.textContent=thirdLastCol;
+}
+}
 var lg=document.getElementById('lg'),lg2=document.getElementById('lg2'),lg3=document.getElementById('lg3');
 lg.innerHTML='';for(var j=0;j<log.length;j++){var l=log[j];var d=document.createElement('div');d.className='ln '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg.appendChild(d);}
 lg2.innerHTML='';for(var j=0;j<secLog.length;j++){var l=secLog[j];var d=document.createElement('div');d.className='ln2 '+(l.w===true?'g':l.w===false?'r':'d');d.textContent=l.n;lg2.appendChild(d);}
@@ -76,7 +84,7 @@ lg3.innerHTML='';for(var j=0;j<log3.length;j++){var l=log3[j];var d=document.cre
 function A(d){if(cur.length>=2)return;cur+=d;var v=+cur;if(v>36){cur=d;v=+cur}if(cur==="0"){R({n:"0",a:""});return}R({n:v,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLastCol=null;wait=1;cur='';R();return}
+if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLastCol=null;thirdLastNum=null;wait=1;cur='';R();return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
@@ -84,11 +92,11 @@ else{var ca=ga(cs.a);var cr=gc(v);var cw=ca.indexOf(cr)>=0;ar.push({n:v,cc:cw?'g
 var isDark=(secLog.length%2===0);
 if(isDark){secLog.unshift({n:v,w:null});secLast={n:v,a:col};}
 else{var lastDarkCol=secLast?ga(secLast.a):ga(col);var cw2=lastDarkCol.indexOf(gc(v))>=0;secLog.unshift({n:v,w:cw2});}
-thirdLastCol=col;
+thirdLastCol=col;thirdLastNum=v;
 log3.unshift({n:v});
 cur='';R();
 }
-function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0){secLog.shift(); if(secLog.length%2===0){secLast=null; for(var i=secLog.length-1;i>=0;i--){if(secLog[i].w===null){secLast={n:secLog[i].n,a:gv(secLog[i].n)};break;}}}}if(log3.length>0){log3.shift(); if(log3.length>0){thirdLastCol=gv(log3[0].n);}else{thirdLastCol=null;}}R();}
+function C(){if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:+cur,a:gv(+cur)});return}if(ar.length>0)ar.pop();if(log.length>0)log.shift();if(secLog.length>0){secLog.shift(); if(secLog.length%2===0){secLast=null; for(var i=secLog.length-1;i>=0;i--){if(secLog[i].w===null){secLast={n:secLog[i].n,a:gv(secLog[i].n)};break;}}}}if(log3.length>0){log3.shift(); if(log3.length>0){thirdLastCol=gv(log3[0].n);thirdLastNum=log3[0].n;}else{thirdLastCol=null;thirdLastNum=null;}}R();}
 R();
 </script>
 </body>

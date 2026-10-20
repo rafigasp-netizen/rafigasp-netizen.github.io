@@ -10,7 +10,7 @@ html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column}
 .topo{background:#d4af37;padding:5px;text-align:center;color:#000;font-weight:900;font-size:13px}
-.top3{display:grid;grid-template-columns:1fr 1fr 90px;gap:5px;padding:5px;background:#16a34a;border-radius:10px;margin:5px}
+.top3{display:grid;grid-template-columns:1fr 1fr 110px;gap:5px;padding:5px;background:#16a34a;border-radius:10px;margin:5px}
 .top3.b2{background:#0a2a1a;border:1px solid #d4af37}
 .top3.b3{background:#0a2a1a;border:2px solid #3b82f6}
 .s{height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;background:#fff;color:#000;border:2px solid #000}
@@ -18,11 +18,10 @@ body{display:flex;justify-content:center}
 .s.y{background:#d4af37;color:#000;border-color:#d4af37}
 .s.g{background:#16a34a;color:#fff;border-color:#16a34a}
 .s.r{background:#dc2626;color:#fff;border-color:#dc2626}
-.corBox{display:flex;gap:3px;align-items:center;justify-content:center}
-.cb{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
-.cb.g{background:#16a34a;border:1px solid #4ade80}
-.cb.r{background:#dc2626;border:1px solid #fca5a5}
-.cb.v{background:#14532d;color:#4ade80;border:1px solid #166534;min-width:32px}
+.corBox{display:flex;gap:3px;align-items:center;justify-content:flex-start}
+.cb{width:18px;height:18px;border-radius:4px;flex-shrink:0;border:1px solid #000}
+.cb.g{background:#16a34a;border-color:#22c55e}
+.cb.r{background:#dc2626;border-color:#fca5a5}
 .hist{margin:0 5px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:5px;display:flex;gap:4px;align-items:center;min-height:38px}
 .hist2{margin:5px;background:#0a1f14;border:2px solid #d4af37;border-radius:6px;padding:5px;display:flex;gap:4px;align-items:center;min-height:38px}
 .histT{font-size:9px;color:#4ade80;font-weight:900;min-width:38px}
@@ -31,8 +30,8 @@ body{display:flex;justify-content:center}
 .ln.g{background:#16a34a;color:#fff}.ln.r{background:#dc2626;color:#fff}.ln.d{background:#14532d;color:#86efac}
 .ln3{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;border:1px solid}
 .ln3.d{background:#14532d;color:#86efac}.ln3.g{background:#16a34a;color:#fff}.ln3.r{background:#dc2626;color:#fff}
-.kb{flex:1;display:flex;flex-direction:column;gap:5px;padding:5px;min-height:0}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;min-height:0}
+.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:5px;min-height:0}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:22px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
 .k:active{transform:scale(0.96)}
 .k.z{background:#ef4444;color:#fff}
@@ -51,7 +50,7 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
 <div class="kr"><button class="k" onclick="A('7')">7</button><button class="k" onclick="A('8')">8</button><button class="k" onclick="A('9')">9</button></div>
-<div class="kr"><button class="k" onclick="E()" style="font-size:12px">ENTER</button><button class="k z" onclick="A('0')">0</button><button class="k" onclick="C()" style="font-size:12px">CORRIGIR</button></div>
+<div class="kr"><button class="k" onclick="E()" style="font-size:11px">ENTER</button><button class="k z" onclick="A('0')">0</button><button class="k" onclick="C()" style="font-size:11px">CORRIGIR</button></div>
 </div>
 </div>
 <script>
@@ -63,10 +62,10 @@ function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
 function drawCors(key, elId){
 var el=document.getElementById(elId); el.innerHTML='';
-if(!histCor[key] || histCor[key].length==0){var d=document.createElement('div');d.className='cb v';d.textContent='11';el.appendChild(d);return;}
+if(!histCor[key] || histCor[key].length==0){return;}
 var h=histCor[key];
-for(var i=0;i<Math.min(3,h.length);i++){
-var d=document.createElement('div');d.className='cb '+(h[i]?'g':'r');d.textContent=h[i]?'G':'R';el.appendChild(d);
+for(var i=0;i<Math.min(5,h.length);i++){
+var d=document.createElement('div');d.className='cb '+(h[i]?'g':'r');el.appendChild(d);
 }
 }
 function R(p){
@@ -94,7 +93,21 @@ if(cur==='')return;
 if(cur==="0"){cs=null;ar=[];log=[];secLog=[];log3=[];secLast=null;thirdLast=null;histCor={};wait=1;cur='';document.getElementById('sy').className='s d';document.getElementById('sy').textContent='VAZIO';document.getElementById('sr').className='s d';document.getElementById('sr').textContent='VAZIO';document.getElementById('sy2').className='s d';document.getElementById('sy2').textContent='VAZIO';document.getElementById('sr2').className='s d';document.getElementById('sr2').textContent='VAZIO';document.getElementById('sy3').className='s d';document.getElementById('sy3').textContent='VAZIO';document.getElementById('sr3').className='s d';document.getElementById('sr3').textContent='VAZIO';document.getElementById('cr1').innerHTML='';document.getElementById('cr2').innerHTML='';document.getElementById('cr3').innerHTML='';document.getElementById('lg').innerHTML='';document.getElementById('lg2').innerHTML='';document.getElementById('lg3').innerHTML='';return}
 var v=+cur;if(v<1||v>36){cur='';R();return}
 var col=gv(v);
-if(cs){var cw=ga(cs.a).indexOf(gc(v))>=0;var k=cs.n+'';if(!histCor[k]) histCor[k]=[];histCor[k].unshift(cw);var k2='2_'+cs.n;if(!histCor[k2]) histCor[k2]=[];histCor[k2].unshift(cw);var k3='3_'+cs.n;if(!histCor[k3]) histCor[k3]=[];histCor[k3].unshift(cw);}
+// CORRIGE: só conta cor quando TEM próximo número, não conta o atual
+if(log.length>0){
+var prevNum=log[0].n;
+var prevCol=gv(prevNum);
+var cwPrev=ga(prevCol).indexOf(gc(v))>=0;
+var k=prevNum+'';
+if(!histCor[k]) histCor[k]=[];
+histCor[k].unshift(cwPrev);
+var k2='2_'+prevNum;
+if(!histCor[k2]) histCor[k2]=[];
+histCor[k2].unshift(cwPrev);
+var k3='3_'+prevNum;
+if(!histCor[k3]) histCor[k3]=[];
+histCor[k3].unshift(cwPrev);
+}
 if(wait){cs={n:v,a:col};ar=[];wait=0;log.unshift({n:v,w:null});}
 else{var cw=ga(cs.a).indexOf(gc(v))>=0;ar.push({n:v});log.unshift({n:v,w:cw});if(cw||ar.length>=5){cs=null;ar=[];wait=1;}}
 var isDark=(secLog.length%2===0);

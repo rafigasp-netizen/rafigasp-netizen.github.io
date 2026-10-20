@@ -22,11 +22,11 @@ body{display:flex;justify-content:center}
 .lg{display:flex;gap:5px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
 .ln{min-width:42px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;flex-shrink:0;border:2px solid #000;color:#fff}
-.ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.d{background:#14532d;border-color:#4ade80}.ln.b{background:#1e3a8a;border-color:#60a5fa}
+.ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa;color:#fff}
 .kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:22px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
-.k:active{transform:scale(0.96)}.k.z{background:#ef4444;color:#fff}
+.k:active{transform:scale(0.96)}.k.z{background:#ef4444;color:#fff}.k.zz{background:#991b1b;color:#fff;font-size:14px}
 </style>
 </head>
 <body>
@@ -42,7 +42,7 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
 <div class="kr"><button class="k" onclick="A('7')">7</button><button class="k" onclick="A('8')">8</button><button class="k" onclick="A('9')">9</button></div>
-<div class="kr"><button class="k" onclick="E()" style="font-size:11px">ENTER</button><button class="k z" onclick="A('0')">0</button><button class="k" onclick="C()" style="font-size:11px">CORRIGIR</button></div>
+<div class="kr"><button class="k" onclick="E()" style="font-size:11px">ENTER</button><button class="k z" onclick="Z()">0</button><button class="k zz" onclick="ZZ()">00</button></div>
 </div>
 </div>
 <script>
@@ -53,7 +53,6 @@ function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
 function norm(n){if(n>100){var dez=parseInt((''+n).slice(-2)); if(dez===0) dez=100; var g=Math.ceil(dez/4); if(g>36) g=((g-1)%36)+1; return g;} return n;}
-function countBlue(log, num){var c=0; for(var i=0;i<log.length;i++){ if(log[i].w===null && log[i].n===num) c++; } return c;}
 function R(p){
 var show=p||lastC||lastB||lastA;
 if(show){
@@ -63,7 +62,7 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-// A: SÓ 2 QUADRADOS - 1 VERDE E 1 VERMELHO COM NÚMERO BRANCO GRANDE
+// A: só 2 quadrados - 1 verde e 1 vermelho com número branco grande
 var crA=document.getElementById('crA');crA.innerHTML='';
 if(show){
 var all=histA[show.n]||[];
@@ -79,13 +78,15 @@ var green=all.find(function(x){return x.w===true});
 var red=all.find(function(x){return x.w===false});
 if(green){var d=document.createElement('div');d.className='ln g';d.textContent=green.raw;lgA.appendChild(d);}
 if(red){var d=document.createElement('div');d.className='ln r';d.textContent=red.raw;lgA.appendChild(d);}
+if(all.length===0 && logA.length>0){
+var d=document.createElement('div');d.className='ln b';d.textContent=logA[logA.length-1].raw;lgA.appendChild(d);
 }
-// B: 1 em 1 azul - mostra tudo
+}
+// B e C
 var crB=document.getElementById('crB');crB.innerHTML='';
 if(show){var h=histB[show.n]||[]; for(var i=0;i<Math.min(4,h.length);i++){var d=document.createElement('div');d.className='cb '+(h[i].w?'g':'r');d.textContent=h[i].raw;crB.appendChild(d);} }
 var lgB=document.getElementById('lgB');lgB.innerHTML='';
 for(var j=logB.length-1;j>=0;j--){var l=logB[j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
-// C: azul de 3 em 3
 var lgC=document.getElementById('lgC');lgC.innerHTML='';
 for(var j=logC.length-1;j>=0;j--){var l=logC[j];var cls=((logC.length-1-j)%3===0)?'b':(l.w===null?'d':l.w?'g':'r');var d=document.createElement('div');d.className='ln '+cls;d.textContent=l.raw;lgC.appendChild(d);}
 document.getElementById('crC').innerHTML='';
@@ -93,7 +94,6 @@ document.getElementById('crC').innerHTML='';
 function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),raw:cur,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};cur='';R();return}
 var raw=cur; var v=parseInt(cur); var n=norm(v); var col=gv(v);
 if(logA.length%2===0){lastA={n:n,raw:raw,a:col};logA.push({n:n,raw:raw,w:null});}
 else{var cw=ga(lastA.a).indexOf(gc(v))>=0; if(!histA[lastA.n]) histA[lastA.n]=[]; histA[lastA.n].unshift({n:n,raw:raw,w:cw}); logA.push({n:n,raw:raw,w:cw}); lastA={n:n,raw:raw,a:col};}
@@ -103,14 +103,17 @@ if(logC.length%3===0){lastC={n:n,raw:raw,a:col};logC.push({n:n,raw:raw,w:null});
 else{var cwC=ga(lastC.a).indexOf(gc(v))>=0; logC.push({n:n,raw:raw,w:cwC}); lastC={n:n,raw:raw,a:col};}
 cur='';R();
 }
-function C(){
-if(cur!==''){cur=cur.slice(0,-1);if(cur==='')R();else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))});return;}
+// 0 = APAGAR (apaga último)
+function Z(){
+if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(); else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))}); return;}
 if(logA.length>0){var r=logA.pop(); if(r.w!==null&&logA.length>0){var prev=logA[logA.length-1]; if(prev.w===null&&histA[prev.n]) histA[prev.n].shift();}}
 if(logB.length>0){var r=logB.pop(); if(r.w!==null&&logB.length>0){var prev=logB[logB.length-1]; if(prev.w===null&&histB[prev.n]) histB[prev.n].shift();}}
 if(logC.length>0) logC.pop();
-if(logA.length===0) lastA=null;if(logB.length===0) lastB=null;if(logC.length===0) lastC=null;
+if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 R();
 }
+// 00 = APAGAR TODO HISTÓRICO
+function ZZ(){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};cur='';R();}
 R();
 </script>
 </body>

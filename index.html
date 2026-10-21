@@ -78,14 +78,14 @@ function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),r
 function E(){
 if(cur==='')return;
 var raw=cur; var v=parseInt(cur); var n=norm(v); var col=gv(v);
-// A = AZUL 1 SIM 1 NÃO - AZUL NO ÍNDICE ÍMPAR
+// A = 🟦⬜️🟦⬜️ - AZUL NO 0,2,4...
 if(logA.length%2===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
-else{var cw=lastA?ga(lastA.a).indexOf(gc(v))>=0:false; if(lastA){if(!histA[lastA.n]) histA[lastA.n]=[]; histA[lastA.n].unshift({n:n,raw:raw,w:cw});} logA.push({n:n,raw:raw,w:cw}); lastA={n:n,raw:raw,a:col};}
-// B = MESMA COISA
+else{var cw=lastA?ga(lastA.a).indexOf(gc(v))>=0:false; if(lastA){if(!histA[lastA.n]) histA[lastA.n]=[]; histA[lastA.n].unshift({n:n,raw:raw,w:cw});} logA.push({n:n,raw:raw,w:cw});}
+// B = 🟦⬜️🟦⬜️
 if(logB.length%2===0){logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};}
-else{var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false; if(lastB){if(!histB[lastB.n]) histB[lastB.n]=[]; histB[lastB.n].unshift({n:n,raw:raw,w:cwB});} logB.push({n:n,raw:raw,w:cwB}); lastB={n:n,raw:raw,a:col};}
-// C = ⬜️⬜️🟦 - AZUL A CADA 3 (ÍNDICE 2,5,8...) - SÓ TEM HISTÓRICO SE 3 FOI AZUL
-if(logC.length%3===2){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
+else{var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false; if(lastB){if(!histB[lastB.n]) histB[lastB.n]=[]; histB[lastB.n].unshift({n:n,raw:raw,w:cwB});} logB.push({n:n,raw:raw,w:cwB});}
+// C = 🟦⬜️⬜️🟦⬜️⬜️ - AZUL NO 0,3,6... - CORRIGIDO ERA PRA TÁ AZUL
+if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;
 if(lastC){if(!histC[lastC.n]) histC[lastC.n]=[]; histC[lastC.n].unshift({n:n,raw:raw,w:cwC});}
@@ -97,7 +97,7 @@ function Z(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(); else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))}); return;}
 if(logA.length>0){var r=logA.pop(); if(r.w!==null){var prev=null; for(var i=logA.length-1;i>=0;i--){if(logA[i].w===null){prev=logA[i];break;}} if(prev&&histA[prev.n]) histA[prev.n].shift();}}
 if(logB.length>0){var r=logB.pop(); if(r.w!==null){var prev=null; for(var i=logB.length-1;i>=0;i--){if(logB[i].w===null){prev=logB[i];break;}} if(prev&&histB[prev.n]) histB[prev.n].shift();}}
-if(logC.length>0){var r=logC.pop(); if(r.w!==null){var prev=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){prev=logC[i];break;}} if(prev&&histC[prev.n]) histC[prev.n].shift();} else {lastC=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){lastC=logC[i];break;}}}}
+if(logC.length>0){var r=logC.pop(); if(r.w!==null){var prev=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){prev=logC[i];break;}} if(prev&&histC[prev.n]) histC[prev.n].shift();} else {lastC=null;}}
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 R();
 }

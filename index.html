@@ -14,7 +14,7 @@ body{display:flex;justify-content:center}
 .s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:#d4af37;color:#000;border:1px solid #000}
 .s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
 .corBox{display:flex;gap:4px;align-items:center;min-height:36px}
-.cb{width:44px;height:30px;border-radius:8px;flex-shrink:0;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.cb{width:48px;height:32px;border-radius:8px;flex-shrink:0;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
 .hist{margin:0 3px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
 .hist2{margin:3px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
@@ -62,14 +62,15 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-function renderTop(hist, elId, max){
+// TOPO SÓ 1 QUADRADO - O QUE TÁ NA FRENTE DO AZUL
+function renderTop(hist, elId){
 var el=document.getElementById(elId); el.innerHTML='';
 if(!show) return;
 var arr=hist[show.n];
 if(!arr || arr.length===0) return;
-for(var i=0;i<Math.min(max,arr.length);i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;el.appendChild(d);}
+var d=document.createElement('div');d.className='cb '+(arr[0].w?'g':'r');d.textContent=arr[0].raw;el.appendChild(d);
 }
-renderTop(histA,'crA',1); renderTop(histB,'crB',1); renderTop(histC,'crC',2);
+renderTop(histA,'crA'); renderTop(histB,'crB'); renderTop(histC,'crC');
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
@@ -78,22 +79,32 @@ function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),r
 function E(){
 if(cur==='')return;
 var raw=cur; var v=parseInt(cur); var n=norm(v); var col=gv(v);
-// A = CORRIGIDO: SÓ PRIMEIRO AZUL, RESTO TUDO VERDE/VERMELHO
+// A = SÓ PRIMEIRO AZUL, RESTO VERDE/VERMELHO - TOPO SÓ PRIMEIRO DA FRENTE
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
 else{
 var cwA=lastA?ga(lastA.a).indexOf(gc(v))>=0:false;
 if(!histA[lastA.n]) histA[lastA.n]=[];
-histA[lastA.n].unshift({n:n,raw:raw,w:cwA});
+if(histA[lastA.n].length===0) histA[lastA.n].unshift({n:n,raw:raw,w:cwA});
 logA.push({n:n,raw:raw,w:cwA});
 }
-// B = 🟦⬜️🟦⬜️
+// B = 🟦⬜️🟦⬜️ - TOPO SÓ PRIMEIRO DA FRENTE (2 VERDE) - CORRETO
 if(logB.length%2===0){logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};}
-else{var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false; if(lastB){if(!histB[lastB.n]) histB[lastB.n]=[]; histB[lastB.n].unshift({n:n,raw:raw,w:cwB});} logB.push({n:n,raw:raw,w:cwB});}
-// C = 🟦⬜️⬜️🟦⬜️⬜️
+else{
+var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false;
+if(lastB){
+if(!histB[lastB.n]) histB[lastB.n]=[];
+if(histB[lastB.n].length===0) histB[lastB.n].unshift({n:n,raw:raw,w:cwB});
+}
+logB.push({n:n,raw:raw,w:cwB});
+}
+// C = 🟦⬜️⬜️🟦⬜️⬜️ - TOPO SÓ PRIMEIRO DA FRENTE (2 VERDE)
 if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;
-if(lastC){if(!histC[lastC.n]) histC[lastC.n]=[]; histC[lastC.n].unshift({n:n,raw:raw,w:cwC});}
+if(lastC){
+if(!histC[lastC.n]) histC[lastC.n]=[];
+if(histC[lastC.n].length===0) histC[lastC.n].unshift({n:n,raw:raw,w:cwC});
+}
 logC.push({n:n,raw:raw,w:cwC});
 }
 cur='';R();

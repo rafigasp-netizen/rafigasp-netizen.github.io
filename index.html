@@ -67,29 +67,21 @@ var el=document.getElementById(elId); el.innerHTML='';
 if(!show) return;
 var arr=hist[show.n];
 if(!arr || arr.length===0) return;
-// A = SÓ PRIMEIRO AZUL, RESTO VERDE/VERMELHO - MOSTRA RESULTADO (2 VERDE)
 var d=document.createElement('div');d.className='cb '+(arr[0].w?'g':'r');d.textContent=arr[0].raw;el.appendChild(d);
 }
 function renderTopBC(hist, elId, log){
-// B e C = SÓ MOSTRA SE O NÚMERO 1 TIVESSE NO AZUL DE NOVO - SE PRÓXIMO É RESULTADO NÃO MOSTRA
+// CORRIGIDO: SÓ MOSTRA SE NÚMERO 1 SAIU NO QUADRADO AZUL IGUAL O PRIMEIRO QUADRADO
+// Se não saiu número 1 no azul igual o primeiro, não mostra (VAZIO)
 var el=document.getElementById(elId); el.innerHTML='';
 if(!show) return;
 var arr=hist[show.n];
 if(!arr || arr.length===0) return;
-// VERIFICA SE O NÚMERO 1 ESTÁ NO AZUL ATUALMENTE - SE NÃO, NÃO MOSTRA
-// SE O PRÓXIMO É RESULTADO (VERDE/VERMELHO) NÃO MOSTRA, SÓ SE FOR AZUL
-// Para isso, só mostra se o número atual é AZUL no log
-var isBlueNow=false;
-for(var i=0;i<log.length;i++){if(log[i].n===show.n && log[i].w===null){isBlueNow=true; break;}}
-// Se o histórico é de resultado (verde/vermelho), não mostra em B e C quando próximo é resultado
-// Só mostra se o número 1 estiver no AZUL (segunda vez)
-if(!isBlueNow) return;
-// Se o próximo é resultado, não mostra - só se o número 1 tivesse no AZUL
-// Como o array é de resultado, se o último log do número for resultado, não mostra
-var lastEntry=null;
-for(var i=log.length-1;i>=0;i--){if(log[i].n===show.n){lastEntry=log[i];break;}}
-if(lastEntry && lastEntry.w!==null) return; // último é resultado, não mostra
-var d=document.createElement('div');d.className='cb b';d.textContent=arr[0].raw;el.appendChild(d);
+// CONTA QUANTAS VEZES O NÚMERO APARECEU NO AZUL
+var countBlue=0;
+for(var i=0;i<log.length;i++){if(log[i].n===show.n && log[i].w===null) countBlue++;}
+// SE SÓ APARECEU 1 VEZ NO AZUL (PRIMEIRO QUADRADO), NÃO MOSTRA - TEM QUE APARECER DE NOVO NO AZUL
+if(countBlue<2) return;
+var d=document.createElement('div');d.className='cb '+(arr[0].w?'g':'r');d.textContent=arr[0].raw;el.appendChild(d);
 }
 renderTopA(histA,'crA');
 renderTopBC(histB,'crB',logB);

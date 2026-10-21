@@ -10,16 +10,16 @@
 html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
-.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b}
-.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0}
+.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b;user-select:none;cursor:pointer}
+.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0;transition:all 0.3s}
 .s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden;padding:1px}
 .s.d{border:1px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:8px}
 .corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;max-width:100%}
 .corBox::-webkit-scrollbar{display:none}
 .cb{min-width:32px;width:32px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
-.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
+.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0;transition:all 0.3s}
+.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0;transition:all 0.3s}
 .histT{font-size:8px;color:#4ade80;font-weight:900;min-width:26px}
 .lg{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
@@ -29,17 +29,23 @@ body{display:flex;justify-content:center}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:21px;background:linear-gradient(180deg,#f9e27a 0%,#e8c86a 50%,#b8941f 100%);color:#1a1000;text-shadow:0 1px 0 #fff8c0;box-shadow:inset 0 1px 0 #fff8c0,0 2px 4px rgba(0,0,0,0.3);font-family:'Montserrat',sans-serif}
 .k:active{transform:scale(0.96);filter:brightness(0.9)}
+/* MODO ESCONDIDO */
+.app.escondido .top3, .app.escondido .hist, .app.escondido .hist2{display:none !important}
+.app.escondido .kb{padding-top:10px}
+.aviso{position:fixed;top:40px;left:50%;transform:translateX(-50%);background:#000;color:#d4af37;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:900;border:1px solid #d4af37;z-index:100;display:none}
 </style>
 </head>
 <body>
-<div class="app">
-<div class="topo">✦ RAFIGASP COACH DA ROLETA ✦</div>
+<div class="app" id="app">
+<div class="topo" id="logo" ondblclick="toggleEscondido()" ontouchstart="handleTouch(event)">✦ RAFIGASP COACH DA ROLETA ✦</div>
+<div id="painel">
 <div class="top3" style="border:1px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
 <div class="hist" style="border-color:#3b82f6"><div class="histT">A HIST:</div><div class="lg" id="lgA"></div></div>
 <div class="top3" style="border:1px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
 <div class="hist2" style="border-color:#ef4444"><div class="histT" style="color:#fca5a5">B HIST:</div><div class="lg" id="lgB"></div></div>
 <div class="top3" style="border:1px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
 <div class="hist2" style="border-color:#22c55e"><div class="histT" style="color:#86efac">C HIST:</div><div class="lg" id="lgC"></div></div>
+</div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
@@ -47,11 +53,27 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="E()">ENTER</button><button class="k" onclick="A('0')">0</button><button class="k" onclick="CORR()">CORRIGIR</button></div>
 </div>
 </div>
+<div class="aviso" id="aviso"></div>
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 var nextA={},nextBBlue={},nextCBlue={}; 
 var prevA=null;
+var escondido=false;
+var lastTap=0;
+function toggleEscondido(){
+escondido=!escondido;
+document.getElementById('app').classList.toggle('escondido',escondido);
+var aviso=document.getElementById('aviso');
+aviso.style.display='block';
+aviso.textContent=escondido?'🔒 MODO ESCONDIDO - só teclado':'🔓 MODO NORMAL';
+setTimeout(function(){aviso.style.display='none'},2000);
+}
+function handleTouch(e){
+var now=Date.now();
+if(now-lastTap<400){toggleEscondido();}
+lastTap=now;
+}
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}

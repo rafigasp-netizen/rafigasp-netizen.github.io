@@ -48,7 +48,7 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-var histA={},histB={};
+var histA={},histB={},histC={};
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
@@ -62,48 +62,61 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-// A = AZUL DE 2 EM 2 IGUAL OS OUTROS
+// A = AZUL 1 SIM 1 NÃO (0,2,4...)
 var crA=document.getElementById('crA');crA.innerHTML='';
 if(show){
 var all=histA[show.n]||[];
-var green=all.find(function(x){return x.w===true});
-var red=all.find(function(x){return x.w===false});
-if(green){var d=document.createElement('div');d.className='cb g';d.textContent=green.raw;crA.appendChild(d);}
-if(red){var d=document.createElement('div');d.className='cb r';d.textContent=red.raw;crA.appendChild(d);}
+var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false});
+if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crA.appendChild(d);}
+if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crA.appendChild(d);}
 }
 var lgA=document.getElementById('lgA');lgA.innerHTML='';
-for(var j=logA.length-1;j>=0;j--){var l=logA[j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
-// B = AZUL DE 1 EM 1
+for(var j=logA.length-1;j>=0;j--){var idx=logA.length-1-j; var l=logA[j]; var isBlue=(idx%2===0); var d=document.createElement('div');d.className='ln '+(isBlue?'b':(l.w?'g':'r'));d.textContent=l.raw;lgA.appendChild(d);}
+// B = AZUL 1 SIM 1 NÃO (igual A, mas separado)
 var crB=document.getElementById('crB');crB.innerHTML='';
-if(show){var h=histB[show.n]||[]; for(var i=0;i<Math.min(3,h.length);i++){var d=document.createElement('div');d.className='cb '+(h[i].w?'g':'r');d.textContent=h[i].raw;crB.appendChild(d);} }
+if(show){
+var all=histB[show.n]||[];
+var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false});
+if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crB.appendChild(d);}
+if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crB.appendChild(d);}
+}
 var lgB=document.getElementById('lgB');lgB.innerHTML='';
-for(var j=logB.length-1;j>=0;j--){var l=logB[j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
-// C = AZUL DE 3 EM 3
+for(var j=logB.length-1;j>=0;j--){var idx=logB.length-1-j; var l=logB[j]; var isBlue=(idx%2===0); var d=document.createElement('div');d.className='ln '+(isBlue?'b':(l.w?'g':'r'));d.textContent=l.raw;lgB.appendChild(d);}
+// C = AZUL 2 EM 2 (2 azuis, 2 vermelhos)
+var crC=document.getElementById('crC');crC.innerHTML='';
+if(show){
+var all=histC[show.n]||[];
+var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false});
+if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crC.appendChild(d);}
+if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crC.appendChild(d);}
+}
 var lgC=document.getElementById('lgC');lgC.innerHTML='';
-for(var j=logC.length-1;j>=0;j--){var l=logC[j];var cls=((logC.length-1-j)%3===0)?'b':(l.w===null?'b':l.w?'g':'r');var d=document.createElement('div');d.className='ln '+cls;d.textContent=l.raw;lgC.appendChild(d);}
-document.getElementById('crC').innerHTML='';
+for(var j=logC.length-1;j>=0;j--){var idx=logC.length-1-j; var l=logC[j]; var isBlue=(Math.floor(idx/2)%2===0); var d=document.createElement('div');d.className='ln '+(isBlue?'b':(l.w?'g':'r'));d.textContent=l.raw;lgC.appendChild(d);}
 }
 function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),raw:cur,a:gv(v)})}
 function E(){
 if(cur==='')return;
 var raw=cur; var v=parseInt(cur); var n=norm(v); var col=gv(v);
+// A
 if(logA.length%2===0){lastA={n:n,raw:raw,a:col};logA.push({n:n,raw:raw,w:null});}
 else{var cw=ga(lastA.a).indexOf(gc(v))>=0; if(!histA[lastA.n]) histA[lastA.n]=[]; histA[lastA.n].unshift({n:n,raw:raw,w:cw}); logA.push({n:n,raw:raw,w:cw}); lastA={n:n,raw:raw,a:col};}
-if(logB.length===0){lastB={n:n,raw:raw,a:col};logB.push({n:n,raw:raw,w:null});}
+// B
+if(logB.length%2===0){lastB={n:n,raw:raw,a:col};logB.push({n:n,raw:raw,w:null});}
 else{var cwB=ga(lastB.a).indexOf(gc(v))>=0; if(!histB[lastB.n]) histB[lastB.n]=[]; histB[lastB.n].unshift({n:n,raw:raw,w:cwB}); logB.push({n:n,raw:raw,w:cwB}); lastB={n:n,raw:raw,a:col};}
-if(logC.length%3===0){lastC={n:n,raw:raw,a:col};logC.push({n:n,raw:raw,w:null});}
-else{var cwC=ga(lastC.a).indexOf(gc(v))>=0; logC.push({n:n,raw:raw,w:cwC}); lastC={n:n,raw:raw,a:col};}
+// C
+if(logC.length%4<2){lastC={n:n,raw:raw,a:col};logC.push({n:n,raw:raw,w:null});}
+else{var cwC=ga(lastC.a).indexOf(gc(v))>=0; if(!histC[lastC.n]) histC[lastC.n]=[]; histC[lastC.n].unshift({n:n,raw:raw,w:cwC}); logC.push({n:n,raw:raw,w:cwC}); lastC={n:n,raw:raw,a:col};}
 cur='';R();
 }
 function Z(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(); else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))}); return;}
 if(logA.length>0){var r=logA.pop(); if(r.w!==null&&logA.length>0){var prev=logA[logA.length-1]; if(prev.w===null&&histA[prev.n]) histA[prev.n].shift();}}
 if(logB.length>0){var r=logB.pop(); if(r.w!==null&&logB.length>0){var prev=logB[logB.length-1]; if(prev.w===null&&histB[prev.n]) histB[prev.n].shift();}}
-if(logC.length>0) logC.pop();
+if(logC.length>0){var r=logC.pop(); if(r.w!==null&&logC.length>0){var prev=logC[logC.length-1]; if(prev.w===null&&histC[prev.n]) histC[prev.n].shift();}}
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 R();
 }
-function ZZ(){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};cur='';R();}
+function ZZ(){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};histC={};cur='';R();}
 R();
 </script>
 </body>

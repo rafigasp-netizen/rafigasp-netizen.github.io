@@ -11,33 +11,44 @@ html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
 .topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b}
-.sinalBoxGrande{margin:4px;background:linear-gradient(180deg,#2a0000,#1a0000);border:3px solid #ff4444;border-radius:12px;padding:10px;text-align:center;flex:1;display:none;flex-direction:column;justify-content:center;align-items:center;animation:pisca 0.6s infinite alternate;min-height:300px}
+.sinalBoxGrande{margin:4px;background:linear-gradient(180deg,#2a0000,#1a0000);border:3px solid #ff4444;border-radius:12px;padding:10px;text-align:center;flex:1;display:none;flex-direction:column;justify-content:center;align-items:center;animation:pisca 0.6s infinite alternate;min-height:280px}
 @keyframes pisca{from{box-shadow:0 0 10px #ff4444}to{box-shadow:0 0 25px #ff0000}}
 .sinalTitleGrande{font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#fff;letter-spacing:1px;margin-bottom:20px;text-shadow:0 2px 4px #000}
 .sinalTentGrande{display:flex;gap:14px;justify-content:center;margin:20px 0}
 .stG{width:78px;height:62px;border-radius:12px;border:3px dashed #ffaaaa;background:#1a0000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#ffaaaa}
 .stG.g{background:#16a34a;border-color:#86efac;color:#fff;box-shadow:0 0 12px #16a34a}.stG.r{background:#dc2626;border-color:#fca5a5;color:#fff;box-shadow:0 0 12px #dc2626}.stG.vazio{background:#1a0000;border-style:dashed}
-.painelVazio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:12px}
+.painelVazio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:10px}
 .badgeAtivo{background:linear-gradient(180deg,#f9e27a,#d4af37);padding:8px 16px;border-radius:20px;color:#000;font-weight:900;font-size:11px;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(212,175,55,0.4);animation:piscaGold 1s infinite alternate}
 @keyframes piscaGold{from{box-shadow:0 0 5px #d4af37}to{box-shadow:0 0 15px #f9e27a}}
-.ultimos{ display:flex; gap:5px; flex-wrap:wrap; justify-content:center; min-height:32px}
+.ultimos{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;min-height:32px}
 .pill{min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;border:1px solid #000}
 .pill.g{background:#16a34a;border-color:#86efac}.pill.r{background:#dc2626;border-color:#fca5a5}.pill.b{background:#1e40af;border-color:#60a5fa}
 .placar{display:flex;gap:16px;font-size:11px;font-weight:900}
+.digitando{width:100%;height:44px;background:#000;border:2px solid #d4af37;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:28px;letter-spacing:2px;box-shadow:inset 0 0 8px #d4af37}
+.digitando.vazio{color:#1a4d1a;font-size:12px;letter-spacing:0.5px}
 .kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0;max-height:50%}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:22px;background:linear-gradient(180deg,#f9e27a 0%,#e8c86a 50%,#b8941f 100%);color:#1a1000;text-shadow:0 1px 0 #fff8c0;box-shadow:inset 0 1px 0 #fff8c0,0 2px 4px rgba(0,0,0,0.3);font-family:'Montserrat',sans-serif}
 .k:active{transform:scale(0.96)}
-.areaOculta{display:none !important}
+.painelDetalhe{flex:1;display:none;flex-direction:column;gap:2px;padding:4px;overflow:auto}
+.top3{display:flex;gap:2px}
+.bx{flex:1;height:44px;background:#1a0000;border:1.5px solid #8a6d1b;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.bxLbl{font-size:7px;font-weight:900;color:#d4af37;position:absolute;top:2px;left:4px}
+.bxVal{font-size:16px;font-weight:900;color:#f9e27a;margin-top:6px}
+.bxSub{font-size:7px;font-weight:900;color:#aaa;margin-top:1px}
+.bl{margin-top:2px;background:#0a1a0a;border:1px solid #1a4d1a;border-radius:6px;padding:3px}
+.blTitle{font-size:8px;font-weight:900;color:#d4af37;margin-bottom:2px}
+.hist{display:flex;flex-wrap:wrap;gap:2px;min-height:20px}
+.ln{width:28px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;border:1px solid #000}
+.ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}
+.ln.sy{border-color:#f9e27a;box-shadow:0 0 4px #d4af37}
+.ln.sr{border-color:#fff}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo">✦ RAFIGASP COACH DA ROLETA ✦</div>
-<div id="painel" style="flex:1;display:flex;flex-direction:column;min-height:0">
-<div id="conteudoOculto" class="areaOculta">
-<div id="syA"></div><div id="srA"></div><div id="crA"></div><div id="lgA"></div><div id="syB"></div><div id="srB"></div><div id="crB"></div><div id="lgB"></div><div id="syC"></div><div id="srC"></div><div id="crC"></div><div id="lgC"></div>
-</div>
+<div id="painelSimples" style="flex:1;display:flex;flex-direction:column;min-height:0">
 <div class="painelVazio" id="painelVazio">
 <div class="badgeAtivo">● SISTEMA ATIVO - AGUARDANDO SINAL</div>
 <div class="ultimos" id="ultimosNumeros"></div>
@@ -49,6 +60,16 @@ body{display:flex;justify-content:center}
 <div class="sinalTentGrande" id="sinalTent"><div class="stG vazio">⬜️</div><div class="stG vazio">⬜️</div><div class="stG vazio">⬜️</div></div>
 </div>
 </div>
+<div class="painelDetalhe" id="painelDetalhe">
+<div class="top3"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syA">-</div><div class="bxSub" id="crA"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="srA">-</div><div class="bxSub" id="lgA"></div></div></div>
+<div class="bl"><div class="blTitle">A HIST</div><div class="hist" id="histA"></div></div>
+<div class="top3"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syB">-</div><div class="bxSub" id="crB"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="srB">-</div><div class="bxSub" id="lgB"></div></div></div>
+<div class="bl"><div class="blTitle">B HIST</div><div class="hist" id="histB"></div></div>
+<div class="top3"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syC">-</div><div class="bxSub" id="crC"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="srC">-</div><div class="bxSub" id="lgC"></div></div></div>
+<div class="bl"><div class="blTitle">C HIST</div><div class="hist" id="histC"></div></div>
+<div class="sinalBoxGrande" id="sinalBoxDet" style="min-height:120px;margin-top:4px"><div class="sinalTitleGrande" style="font-size:18px">JOGAR NA COLUNA <span id="sinalColDet">C1/2</span></div><div class="sinalTentGrande" id="sinalTentDet" style="margin:8px 0"></div></div>
+</div>
+<div style="padding:0 4px 4px 4px"><div class="digitando vazio" id="digitando">DIGITE O NÚMERO</div></div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
 <div class="kr"><button class="k" onclick="A('4')">4</button><button class="k" onclick="A('5')">5</button><button class="k" onclick="A('6')">6</button></div>
@@ -59,29 +80,52 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-var nextA={},nextBBlue={},nextCBlue={},prevA=null,sinal=null,greenCount=0,redCount=0;
+var nextA={},nextBBlue={},nextCBlue={},prevA=null,sinal=null,greenCount=0,redCount=0,modoDetalhe=false;
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
+function atualizarDigitando(){
+var d=document.getElementById('digitando');
+if(cur===''){d.textContent='DIGITE O NÚMERO';d.className='digitando vazio';}
+else{d.textContent=cur; d.className='digitando'; if(cur==="0") d.textContent="0 - APAGAR ÚLTIMO"; if(cur==="00") d.textContent="00 - APAGAR TUDO"; if(cur==="000") d.textContent="000 - TROCAR PÁGINA";}
+}
 function atualizarUltimos(){
 var div=document.getElementById('ultimosNumeros'); div.innerHTML='';
 var ult = logA.slice(-5);
 for(var i=0;i<ult.length;i++){
 var l=ult[i];
-var d=document.createElement('div');
-d.className='pill '+(l.w===null?'b':l.w?'g':'r');
-d.textContent=l.raw;
-div.appendChild(d);
+var e=document.createElement('div');
+e.className='pill '+(l.w===null?'b':l.w?'g':'r');
+e.textContent=l.raw;
+div.appendChild(e);
 }
 document.getElementById('placarGreen').textContent='✅ '+greenCount+' GREEN';
 document.getElementById('placarRed').textContent='❌ '+redCount+' RED';
 }
 function atualizarSinal(){
 var box=document.getElementById('sinalBox');
+var boxDet=document.getElementById('sinalBoxDet');
 var vazio=document.getElementById('painelVazio');
-if(!sinal){box.style.display='none';vazio.style.display='flex';atualizarUltimos();return;}
-vazio.style.display='none';
-box.style.display='flex';
+var det=document.getElementById('painelDetalhe');
+var simples=document.getElementById('painelSimples');
+if(!sinal){
+box.style.display='none'; boxDet.style.display='none';
+if(!modoDetalhe){vazio.style.display='flex';}
+else{det.style.display='flex'; simples.style.display='none';}
+atualizarUltimos(); return;
+}
+if(!modoDetalhe){
+vazio.style.display='none'; box.style.display='flex';
+}else{
+boxDet.style.display='flex';
+document.getElementById('sinalColDet').textContent=sinal.col;
+var tentDivDet=document.getElementById('sinalTentDet'); tentDivDet.innerHTML='';
+for(var i=0;i<3;i++){
+var d=document.createElement('div');d.className='stG'; d.style.width='60px'; d.style.height='44px'; d.style.fontSize='20px';
+if(i < sinal.tentativas.length){var t=sinal.tentativas[i];d.classList.add(t.acerto?'g':'r');d.textContent=t.num;}else{d.classList.add('vazio');d.textContent='⬜️';}
+tentDivDet.appendChild(d);
+}
+}
 document.getElementById('sinalCol').textContent=sinal.col;
 var tentDiv=document.getElementById('sinalTent'); tentDiv.innerHTML='';
 for(var i=0;i<3;i++){
@@ -93,6 +137,21 @@ if(sinal.ganhou || sinal.tentativas.length>=3){
 if(sinal.ganhou) greenCount++; else if(sinal.tentativas.length>=3) redCount++;
 setTimeout(function(){sinal=null;atualizarSinal();},3000);
 }
+}
+function atualizarPainelDetalhe(){
+if(!modoDetalhe) return;
+document.getElementById('syA').textContent=lastA?lastA.raw:'-';
+document.getElementById('syB').textContent=lastB?lastB.raw:'-';
+document.getElementById('syC').textContent=lastC?lastC.raw:'-';
+document.getElementById('crA').textContent=lastA?lastA.a:'';
+document.getElementById('crB').textContent=lastB?lastB.a:'';
+document.getElementById('crC').textContent=lastC?lastC.a:'';
+var histA=document.getElementById('histA'); histA.innerHTML='';
+for(var i=logA.length-1;i>=0 && histA.children.length<36;i--){var l=logA[i]; var d=document.createElement('div'); d.className='ln '+(l.w===null?'b':l.w?'g':'r'); d.textContent=l.raw; histA.appendChild(d);}
+var histB=document.getElementById('histB'); histB.innerHTML='';
+for(var i=logB.length-1;i>=0 && histB.children.length<36;i--){var l=logB[i]; var d=document.createElement('div'); d.className='ln '+(l.w===null?'b':l.w?'g':'r'); d.textContent=l.raw; histB.appendChild(d);}
+var histC=document.getElementById('histC'); histC.innerHTML='';
+for(var i=logC.length-1;i>=0 && histC.children.length<36;i--){var l=logC[i]; var d=document.createElement('div'); d.className='ln '+(l.w===null?'b':l.w?'g':'r'); d.textContent=l.raw; histC.appendChild(d);}
 }
 function R(p){
 var show=p? p:null;
@@ -111,23 +170,34 @@ var info = primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC;
 sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false, pausado:true};
 atualizarSinal();
 }
+atualizarPainelDetalhe();
 }
 function A(d){
-if(cur.length>=2) return;
-if(cur==="" && d==="0"){cur="0";R({n:0,raw:cur,a:"APAGAR"});return;}
-if(cur==="0"){if(d==="0"){cur="00";R({n:0,raw:cur,a:"APAGAR TUDO"});return;}else{cur=d;var v=parseInt(cur);R({n:v,raw:cur,a:gv(v)});return;}}
+if(cur.length>=3) return;
+if(cur==="" && d==="0"){cur="0";atualizarDigitando();R({n:0,raw:cur,a:"APAGAR"});return;}
+if(cur==="0"){if(d==="0"){cur="00";atualizarDigitando();R({n:0,raw:cur,a:"APAGAR TUDO"});return;}else{cur=d;var v=parseInt(cur);atualizarDigitando();R({n:v,raw:cur,a:gv(v)});return;}}
+if(cur==="00"){if(d==="0"){cur="000";atualizarDigitando();return;}else{cur=d;var v=parseInt(cur);atualizarDigitando();R({n:v,raw:cur,a:gv(v)});return;}}
 var tentativa = cur+d;
-var numTent = parseInt(tentativa);
-if(numTent>36) return;
+if(cur!=="000" && parseInt(tentativa)>36 && tentativa.length<=2) { if(parseInt(tentativa)>36) return;}
 cur=tentativa;
+atualizarDigitando();
+if(cur==="000") return;
 var v=parseInt(cur);
+if(isNaN(v)) return;
 R({n:v,raw:cur,a:gv(v)})
 }
 function E(){
 if(cur==='')return;
-if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); atualizarUltimos(); return;}
-if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;greenCount=0;redCount=0;atualizarSinal();cur='';R(null); return;}
-var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
+if(cur==="000"){
+modoDetalhe=!modoDetalhe;
+var simples=document.getElementById('painelSimples');
+var det=document.getElementById('painelDetalhe');
+if(modoDetalhe){simples.style.display='none'; det.style.display='flex';}else{simples.style.display='flex'; det.style.display='none';}
+cur='';atualizarDigitando();atualizarSinal();atualizarPainelDetalhe();return;
+}
+if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';atualizarDigitando();R(null); atualizarUltimos(); return;}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;greenCount=0;redCount=0;cur='';atualizarDigitando();atualizarSinal();atualizarPainelDetalhe(); return;}
+var raw=cur; var v=parseInt(cur); if(v>36) {cur='';atualizarDigitando();R(null);return;} var n=v; var col=gv(v);
 if(sinal && sinal.pausado){
 sinal.pausado=false;
 atualizarSinal();
@@ -148,18 +218,18 @@ var isPrevCBlue = logC.length>0 && logC[logC.length-1].w===null;
 if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false; logC.push({n:n,raw:raw,w:cwC}); if(isPrevCBlue){var blueNumC = logC[logC.length-2].n; if(!nextCBlue[blueNumC]) nextCBlue[blueNumC]=[]; nextCBlue[blueNumC].unshift({n:n,raw:raw,w:cwC});}}
 prevA={n:n,raw:raw};
-cur='';R(null); atualizarUltimos();
+cur='';atualizarDigitando();R(null); atualizarUltimos(); atualizarPainelDetalhe();
 }
 function CORR(){
-if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(null); else {var v=parseInt(cur); if(cur==="0"||cur==="00") R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); else R({n:v,raw:cur,a:gv(v)});} return;}
+if(cur!==''){cur=cur.slice(0,-1); atualizarDigitando(); if(cur==='')R(null); else {var v=parseInt(cur); if(cur==="0"||cur==="00"||cur==="000") R({n:0,raw:cur,a:cur==="0"?"APAGAR":cur==="00"?"APAGAR TUDO":"TROCAR PÁGINA"}); else R({n:v,raw:cur,a:gv(v)});} return;}
 if(logA.length>0) logA.pop();
 if(logB.length>0) logB.pop();
 if(logC.length>0) logC.pop();
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 if(logA.length===0) prevA=null;
-R(null); atualizarUltimos();
+R(null); atualizarUltimos(); atualizarPainelDetalhe();
 }
-atualizarSinal();
+atualizarDigitando(); atualizarSinal();
 </script>
 </body>
 </html>

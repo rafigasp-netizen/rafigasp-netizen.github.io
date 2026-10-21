@@ -10,28 +10,34 @@
 html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
-.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b;user-select:none;cursor:pointer}
-.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0;transition:all 0.3s}
-.s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden;padding:1px}
+.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b;user-select:none;cursor:pointer}
+.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0}
+.s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden}
 .s.d{border:1px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:8px}
-.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;max-width:100%}
+.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
 .corBox::-webkit-scrollbar{display:none}
 .cb{min-width:32px;width:32px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0;transition:all 0.3s}
-.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0;transition:all 0.3s}
+.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
+.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
 .histT{font-size:8px;color:#4ade80;font-weight:900;min-width:26px}
 .lg{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
 .ln{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;border:1px solid #000;color:#fff}
 .ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa}
+/* SINAL NOVO */
+.sinalBox{margin:2px;background:linear-gradient(180deg,#1a2f00,#0d1a00);border:2px solid #f9e27a;border-radius:10px;padding:5px;text-align:center;flex-shrink:0;display:none;animation:pisca 0.8s infinite alternate}
+@keyframes pisca{from{box-shadow:0 0 5px #d4af37}to{box-shadow:0 0 15px #f9e27a}}
+.sinalTitle{font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;color:#f9e27a;letter-spacing:1px}
+.sinalTent{display:flex;gap:6px;justify-content:center;margin:6px 0}
+.st{width:38px;height:30px;border-radius:8px;border:2px dashed #d4af37;background:#0a1a00;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#f9e27a}
+.st.g{background:#16a34a;border-color:#86efac;color:#fff}.st.r{background:#dc2626;border-color:#fca5a5;color:#fff}.st.vazio{background:#0a1a00;border-style:dashed}
+.sinalFoot{font-size:10px;font-weight:900;color:#f9e27a}
 .kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:21px;background:linear-gradient(180deg,#f9e27a 0%,#e8c86a 50%,#b8941f 100%);color:#1a1000;text-shadow:0 1px 0 #fff8c0;box-shadow:inset 0 1px 0 #fff8c0,0 2px 4px rgba(0,0,0,0.3);font-family:'Montserrat',sans-serif}
-.k:active{transform:scale(0.96);filter:brightness(0.9)}
-/* MODO ESCONDIDO */
-.app.escondido .top3, .app.escondido .hist, .app.escondido .hist2{display:none !important}
-.app.escondido .kb{padding-top:10px}
+.k:active{transform:scale(0.96)}
+.app.escondido .top3,.app.escondido .hist,.app.escondido .hist2,.app.escondido .sinalBox{display:none !important}
 .aviso{position:fixed;top:40px;left:50%;transform:translateX(-50%);background:#000;color:#d4af37;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:900;border:1px solid #d4af37;z-index:100;display:none}
 </style>
 </head>
@@ -45,6 +51,11 @@ body{display:flex;justify-content:center}
 <div class="hist2" style="border-color:#ef4444"><div class="histT" style="color:#fca5a5">B HIST:</div><div class="lg" id="lgB"></div></div>
 <div class="top3" style="border:1px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
 <div class="hist2" style="border-color:#22c55e"><div class="histT" style="color:#86efac">C HIST:</div><div class="lg" id="lgC"></div></div>
+<div class="sinalBox" id="sinalBox">
+<div class="sinalTitle">JOGAR NA COLUNA <span id="sinalCol">C1/2</span></div>
+<div class="sinalTent" id="sinalTent"><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div></div>
+<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS</span> - <span id="sinalOrig"></span></div>
+</div>
 </div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
@@ -59,24 +70,33 @@ var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
 var nextA={},nextBBlue={},nextCBlue={}; 
 var prevA=null;
-var escondido=false;
-var lastTap=0;
-function toggleEscondido(){
-escondido=!escondido;
-document.getElementById('app').classList.toggle('escondido',escondido);
-var aviso=document.getElementById('aviso');
-aviso.style.display='block';
-aviso.textContent=escondido?'🔒 MODO ESCONDIDO - só teclado':'🔓 MODO NORMAL';
-setTimeout(function(){aviso.style.display='none'},2000);
-}
-function handleTouch(e){
-var now=Date.now();
-if(now-lastTap<400){toggleEscondido();}
-lastTap=now;
-}
+var escondido=false,lastTap=0;
+var sinal=null; // {col, tentativas:[], max:3, orig}
+function toggleEscondido(){escondido=!escondido;document.getElementById('app').classList.toggle('escondido',escondido);var aviso=document.getElementById('aviso');aviso.style.display='block';aviso.textContent=escondido?'🔒 MODO ESCONDIDO - só teclado':'🔓 MODO NORMAL';setTimeout(function(){aviso.style.display='none'},2000);}
+function handleTouch(e){var now=Date.now();if(now-lastTap<400){toggleEscondido();}lastTap=now;}
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
+function atualizarSinal(){
+var box=document.getElementById('sinalBox');
+if(!sinal){box.style.display='none';return;}
+box.style.display='block';
+document.getElementById('sinalCol').textContent=sinal.col;
+document.getElementById('sinalOrig').textContent='ORIGEM '+sinal.orig+' | '+sinal.col+' = '+sinal.numOrig;
+var tentDiv=document.getElementById('sinalTent'); tentDiv.innerHTML='';
+for(var i=0;i<3;i++){
+var d=document.createElement('div');d.className='st';
+if(i < sinal.tentativas.length){
+var t=sinal.tentativas[i];
+d.classList.add(t.acerto?'g':'r');
+d.textContent=t.num;
+}else{d.classList.add('vazio');d.textContent='⬜️';}
+tentDiv.appendChild(d);
+}
+var rest=3 - sinal.tentativas.length;
+document.getElementById('sinalCount').textContent=rest>0?rest+' TENTATIVAS RESTANTES':(sinal.ganhou?'✅ GREEN!':'❌ RED - FIM');
+if(sinal.ganhou || sinal.tentativas.length>=3){setTimeout(function(){sinal=null;atualizarSinal();},4000);}
+}
 function R(p){
 var show=p? p:null;
 if(show){
@@ -92,21 +112,9 @@ el.className='s';
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-var elA=document.getElementById('crA'); elA.innerHTML='';
-if(show){
-var arr=nextA[show.n];
-if(arr){for(var i=0;i<arr.length;i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);}}
-}
-var elB=document.getElementById('crB'); elB.innerHTML='';
-if(show){
-var arrB=nextBBlue[show.n];
-if(arrB){for(var i=0;i<arrB.length;i++){var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);}}
-}
-var elC=document.getElementById('crC'); elC.innerHTML='';
-if(show){
-var arrC=nextCBlue[show.n];
-if(arrC){for(var i=0;i<arrC.length;i++){var d=document.createElement('div');d.className='cb '+(arrC[i].w?'g':'r');d.textContent=arrC[i].raw;elC.appendChild(d);}}
-}
+var elA=document.getElementById('crA'); elA.innerHTML=''; if(show){var arr=nextA[show.n];if(arr){for(var i=0;i<arr.length;i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);}}}
+var elB=document.getElementById('crB'); elB.innerHTML=''; if(show){var arrB=nextBBlue[show.n];if(arrB){for(var i=0;i<arrB.length;i++){var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);}}}
+var elC=document.getElementById('crC'); elC.innerHTML=''; if(show){var arrC=nextCBlue[show.n];if(arrC){for(var i=0;i<arrC.length;i++){var d=document.createElement('div');d.className='cb '+(arrC[i].w?'g':'r');d.textContent=arrC[i].raw;elC.appendChild(d);}}}
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
@@ -115,40 +123,46 @@ function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0
 function E(){
 if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
-if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;cur='';R(null); return;}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;atualizarSinal();cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
+// ATUALIZA SINAL SE ESTIVER ATIVO
+if(sinal && !sinal.ganhou && sinal.tentativas.length<3){
+var acerto = gv(n)===sinal.col;
+sinal.tentativas.push({num:raw,acerto:acerto});
+if(acerto) sinal.ganhou=true;
+atualizarSinal();
+}
+var foiVermelho=false; var origemVermelho=''; var numVermelho=raw; var colVermelho=col;
+// A
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
 else{
 var cwA=lastA?ga(lastA.a).indexOf(gc(v))>=0:false;
 logA.push({n:n,raw:raw,w:cwA});
-if(prevA!==null){
-if(!nextA[prevA.n]) nextA[prevA.n]=[];
-nextA[prevA.n].unshift({n:n,raw:raw,w:cwA});
+if(!cwA){foiVermelho=true; origemVermelho='A'; colVermelho=gv(n); numVermelho=raw;}
+if(prevA!==null){if(!nextA[prevA.n]) nextA[prevA.n]=[]; nextA[prevA.n].unshift({n:n,raw:raw,w:cwA});}
 }
-}
+// B
 var isPrevBBlue = logB.length>0 && logB[logB.length-1].w===null;
-if(logB.length%2===0){
-logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};
-}else{
+if(logB.length%2===0){logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};}
+else{
 var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false;
 logB.push({n:n,raw:raw,w:cwB});
-if(isPrevBBlue){
-var blueNum = logB[logB.length-2].n;
-if(!nextBBlue[blueNum]) nextBBlue[blueNum]=[];
-nextBBlue[blueNum].unshift({n:n,raw:raw,w:cwB});
+if(!cwB){foiVermelho=true; origemVermelho='B'; colVermelho=gv(n); numVermelho=raw;}
+if(isPrevBBlue){var blueNum = logB[logB.length-2].n; if(!nextBBlue[blueNum]) nextBBlue[blueNum]=[]; nextBBlue[blueNum].unshift({n:n,raw:raw,w:cwB});}
 }
-}
+// C
 var isPrevCBlue = logC.length>0 && logC[logC.length-1].w===null;
-if(logC.length%3===0){
-logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};
-}else{
+if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
+else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;
 logC.push({n:n,raw:raw,w:cwC});
-if(isPrevCBlue){
-var blueNumC = logC[logC.length-2].n;
-if(!nextCBlue[blueNumC]) nextCBlue[blueNumC]=[];
-nextCBlue[blueNumC].unshift({n:n,raw:raw,w:cwC});
+if(!cwC){foiVermelho=true; origemVermelho='C'; colVermelho=gv(n); numVermelho=raw;}
+if(isPrevCBlue){var blueNumC = logC[logC.length-2].n; if(!nextCBlue[blueNumC]) nextCBlue[blueNumC]=[]; nextCBlue[blueNumC].unshift({n:n,raw:raw,w:cwC});}
 }
+// SE VERMELHO, CRIA SINAL NOVO
+if(foiVermelho){
+sinal={col:colVermelho, numOrig:numVermelho, orig:origemVermelho, tentativas:[], ganhou:false};
+atualizarSinal();
 }
 prevA={n:n,raw:raw};
 cur='';R(null);

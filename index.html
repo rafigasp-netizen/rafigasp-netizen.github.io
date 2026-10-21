@@ -161,7 +161,17 @@ var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
 }
-function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0"||cur==="00"){R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); return;} R({n:v,raw:cur,a:gv(v)})}
+function A(d){
+if(cur.length>=2) return;
+if(cur==="" && d==="0"){cur="0";R({n:0,raw:cur,a:"APAGAR"});return;}
+if(cur==="0"){if(d==="0"){cur="00";R({n:0,raw:cur,a:"APAGAR TUDO"});return;}else{cur=d;var v=parseInt(cur);R({n:v,raw:cur,a:gv(v)});return;}}
+var tentativa = cur+d;
+var numTent = parseInt(tentativa);
+if(numTent>36) return;
+cur=tentativa;
+var v=parseInt(cur);
+R({n:v,raw:cur,a:gv(v)})
+}
 function E(){
 if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}

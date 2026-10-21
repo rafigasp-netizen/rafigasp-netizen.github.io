@@ -10,50 +10,45 @@
 html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
-.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b;user-select:none;cursor:pointer}
-.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0}
-.s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden}
-.s.d{border:1px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:8px}
-.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
-.corBox::-webkit-scrollbar{display:none}
-.cb{min-width:32px;width:32px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
-.cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
-.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
-.histT{font-size:8px;color:#4ade80;font-weight:900;min-width:26px}
-.lg{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none}
-.lg::-webkit-scrollbar{display:none}
-.ln{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;border:1px solid #000;color:#fff}
-.ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa}
-.sinalBox{margin:2px;background:linear-gradient(180deg,#2a0000,#1a0000);border:2px solid #ff4444;border-radius:10px;padding:6px;text-align:center;flex-shrink:0;display:none;animation:pisca 0.6s infinite alternate}
-@keyframes pisca{from{box-shadow:0 0 5px #ff4444}to{box-shadow:0 0 15px #ff0000}}
-.sinalTitle{font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;color:#ffcccc;letter-spacing:1px}
-.sinalTent{display:flex;gap:8px;justify-content:center;margin:7px 0}
-.st{width:42px;height:32px;border-radius:8px;border:2px dashed #ffaaaa;background:#1a0000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#ffaaaa}
-.st.g{background:#16a34a;border-color:#86efac;color:#fff}.st.r{background:#dc2626;border-color:#fca5a5;color:#fff}.st.vazio{background:#1a0000;border-style:dashed}
-.sinalFoot{font-size:10px;font-weight:900;color:#ffaaaa}
-.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
+.topo{background:linear-gradient(180deg,#f9e27a,#d4af37,#b8941f);padding:8px;text-align:center;color:#1a1000;font-family:'Cinzel Decorative',serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-shadow:0 1px 0 #fff8c0,0 2px 3px rgba(0,0,0,0.4);flex-shrink:0;height:32px;line-height:16px;border-bottom:2px solid #8a6d1b}
+.sinalBoxGrande{margin:4px;background:linear-gradient(180deg,#2a0000,#1a0000);border:3px solid #ff4444;border-radius:12px;padding:10px;text-align:center;flex:1;display:none;flex-direction:column;justify-content:center;align-items:center;animation:pisca 0.6s infinite alternate;min-height:280px}
+@keyframes pisca{from{box-shadow:0 0 10px #ff4444}to{box-shadow:0 0 25px #ff0000}}
+.sinalTitleGrande{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:#fff;letter-spacing:1px;margin-bottom:12px;text-shadow:0 2px 4px #000}
+.sinalTentGrande{display:flex;gap:12px;justify-content:center;margin:18px 0}
+.stG{width:70px;height:54px;border-radius:12px;border:3px dashed #ffaaaa;background:#1a0000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:#ffaaaa}
+.stG.g{background:#16a34a;border-color:#86efac;color:#fff;box-shadow:0 0 12px #16a34a}.stG.r{background:#dc2626;border-color:#fca5a5;color:#fff;box-shadow:0 0 12px #dc2626}.stG.vazio{background:#1a0000;border-style:dashed}
+.sinalFootGrande{font-size:11px;font-weight:900;color:#ffaaaa;margin-top:10px}
+.painelVazio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:12px}
+.badgeAtivo{background:linear-gradient(180deg,#f9e27a,#d4af37);padding:8px 16px;border-radius:20px;color:#000;font-weight:900;font-size:11px;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(212,175,55,0.4);animation:piscaGold 1s infinite alternate}
+@keyframes piscaGold{from{box-shadow:0 0 5px #d4af37}to{box-shadow:0 0 15px #f9e27a}}
+.ultimos{ display:flex; gap:5px; flex-wrap:wrap; justify-content:center; min-height:32px}
+.pill{min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;border:1px solid #000}
+.pill.g{background:#16a34a;border-color:#86efac}.pill.r{background:#dc2626;border-color:#fca5a5}.pill.b{background:#1e40af;border-color:#60a5fa}
+.placar{display:flex;gap:16px;font-size:11px;font-weight:900}
+.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0;max-height:50%}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
-.k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:21px;background:linear-gradient(180deg,#f9e27a 0%,#e8c86a 50%,#b8941f 100%);color:#1a1000;text-shadow:0 1px 0 #fff8c0;box-shadow:inset 0 1px 0 #fff8c0,0 2px 4px rgba(0,0,0,0.3);font-family:'Montserrat',sans-serif}
+.k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:22px;background:linear-gradient(180deg,#f9e27a 0%,#e8c86a 50%,#b8941f 100%);color:#1a1000;text-shadow:0 1px 0 #fff8c0;box-shadow:inset 0 1px 0 #fff8c0,0 2px 4px rgba(0,0,0,0.3);font-family:'Montserrat',sans-serif}
 .k:active{transform:scale(0.96)}
-.app.escondido .top3,.app.escondido .hist,.app.escondido .hist2,.app.escondido .sinalBox{display:none !important}
-.aviso{position:fixed;top:40px;left:50%;transform:translateX(-50%);background:#000;color:#d4af37;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:900;border:1px solid #d4af37;z-index:100;display:none}
+.areaOculta{display:none !important}
 </style>
 </head>
 <body>
-<div class="app" id="app">
-<div class="topo" id="logo" ondblclick="toggleEscondido()" ontouchstart="handleTouch(event)">✦ RAFIGASP COACH DA ROLETA ✦</div>
-<div id="painel">
-<div class="top3" style="border:1px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
-<div class="hist" style="border-color:#3b82f6"><div class="histT">A HIST:</div><div class="lg" id="lgA"></div></div>
-<div class="top3" style="border:1px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
-<div class="hist2" style="border-color:#ef4444"><div class="histT" style="color:#fca5a5">B HIST:</div><div class="lg" id="lgB"></div></div>
-<div class="top3" style="border:1px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
-<div class="hist2" style="border-color:#22c55e"><div class="histT" style="color:#86efac">C HIST:</div><div class="lg" id="lgC"></div></div>
-<div class="sinalBox" id="sinalBox">
-<div class="sinalTitle">JOGAR NA COLUNA <span id="sinalCol">C1/2</span></div>
-<div class="sinalTent" id="sinalTent"><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div></div>
-<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS</span> - <span id="sinalOrig"></span></div>
+<div class="app">
+<div class="topo">✦ RAFIGASP COACH DA ROLETA ✦</div>
+<div id="painel" style="flex:1;display:flex;flex-direction:column;min-height:0">
+<div id="conteudoOculto" class="areaOculta">
+<div id="syA"></div><div id="srA"></div><div id="crA"></div><div id="lgA"></div><div id="syB"></div><div id="srB"></div><div id="crB"></div><div id="lgB"></div><div id="syC"></div><div id="srC"></div><div id="crC"></div><div id="lgC"></div>
+</div>
+<div class="painelVazio" id="painelVazio">
+<div class="badgeAtivo">● SISTEMA ATIVO - AGUARDANDO SINAL</div>
+<div class="ultimos" id="ultimosNumeros"></div>
+<div class="placar"><span id="placarGreen" style="color:#4ade80">✅ 0 GREEN</span><span id="placarRed" style="color:#fca5a5">❌ 0 RED</span></div>
+<div style="font-size:9px;color:#4a7a4a;font-weight:900">DIGITE OS NÚMEROS DA ROLETA</div>
+</div>
+<div class="sinalBoxGrande" id="sinalBox">
+<div class="sinalTitleGrande">JOGAR NA COLUNA <span id="sinalCol">C1/2</span></div>
+<div class="sinalTentGrande" id="sinalTent"><div class="stG vazio">⬜️</div><div class="stG vazio">⬜️</div><div class="stG vazio">⬜️</div></div>
+<div class="sinalFootGrande"><span id="sinalCount">3 TENTATIVAS</span><br><span id="sinalOrig"></span></div>
 </div>
 </div>
 <div class="kb">
@@ -63,28 +58,37 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="E()">ENTER</button><button class="k" onclick="A('0')">0</button><button class="k" onclick="CORR()">CORRIGIR</button></div>
 </div>
 </div>
-<div class="aviso" id="aviso"></div>
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-var nextA={},nextBBlue={},nextCBlue={}; 
-var prevA=null;
-var escondido=false,lastTap=0;
-var sinal=null;
-function toggleEscondido(){escondido=!escondido;document.getElementById('app').classList.toggle('escondido',escondido);var aviso=document.getElementById('aviso');aviso.style.display='block';aviso.textContent=escondido?'🔒 MODO ESCONDIDO - só teclado':'🔓 MODO NORMAL';setTimeout(function(){aviso.style.display='none'},2000);}
-function handleTouch(e){var now=Date.now();if(now-lastTap<400){toggleEscondido();}lastTap=now;}
+var nextA={},nextBBlue={},nextCBlue={},prevA=null,sinal=null,greenCount=0,redCount=0;
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
+function atualizarUltimos(){
+var div=document.getElementById('ultimosNumeros'); div.innerHTML='';
+var ult = logA.slice(-5);
+for(var i=0;i<ult.length;i++){
+var l=ult[i];
+var d=document.createElement('div');
+d.className='pill '+(l.w===null?'b':l.w?'g':'r');
+d.textContent=l.raw;
+div.appendChild(d);
+}
+document.getElementById('placarGreen').textContent='✅ '+greenCount+' GREEN';
+document.getElementById('placarRed').textContent='❌ '+redCount+' RED';
+}
 function atualizarSinal(){
 var box=document.getElementById('sinalBox');
-if(!sinal){box.style.display='none';return;}
-box.style.display='block';
+var vazio=document.getElementById('painelVazio');
+if(!sinal){box.style.display='none';vazio.style.display='flex';atualizarUltimos();return;}
+vazio.style.display='none';
+box.style.display='flex';
 document.getElementById('sinalCol').textContent=sinal.col;
 document.getElementById('sinalOrig').textContent='ORIGEM '+sinal.orig+' | '+sinal.col+' = '+sinal.numOrig+' VERMELHO '+sinal.numVermelho;
 var tentDiv=document.getElementById('sinalTent'); tentDiv.innerHTML='';
 for(var i=0;i<3;i++){
-var d=document.createElement('div');d.className='st';
+var d=document.createElement('div');d.className='stG';
 if(i < sinal.tentativas.length){var t=sinal.tentativas[i];d.classList.add(t.acerto?'g':'r');d.textContent=t.num;}else{d.classList.add('vazio');d.textContent='⬜️';}
 tentDiv.appendChild(d);
 }
@@ -95,71 +99,27 @@ document.getElementById('sinalCount').textContent='PAUSADO - AGUARDANDO PRÓXIMO
 document.getElementById('sinalCount').textContent=rest>0?rest+' TENTATIVAS RESTANTES':(sinal.ganhou?'✅ GREEN! ACERTOU!':'❌ RED - 3 VERMELHO, FIM');
 }
 if(sinal.ganhou || sinal.tentativas.length>=3){
+if(sinal.ganhou) greenCount++; else if(sinal.tentativas.length>=3) redCount++;
 setTimeout(function(){sinal=null;atualizarSinal();},3500);
 }
 }
 function R(p){
 var show=p? p:null;
+var primeiroVermelhoA=null,primeiroVermelhoB=null,primeiroVermelhoC=null;
 if(show){
 var col=show.a||gv(show.raw||show.n);
-var shortLabel=show.raw||show.n;
-var shortCol=col;
-['syA','srA','syB','srB','syC','srC'].forEach(function(id){
-var isY=id.startsWith('sy');
-var el=document.getElementById(id);
-if(isY){el.textContent=shortLabel+' '+shortCol;} else {el.textContent=shortCol;}
-el.className='s';
-});
-}else{
-['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
-}
-var elA=document.getElementById('crA'); elA.innerHTML=''; 
-var primeiroVermelhoA=null;
-if(show){
 var arr=nextA[show.n];
-if(arr){
-for(var i=0;i<arr.length;i++){
-var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);
-}
-if(arr.length>0 && !arr[0].w){
-primeiroVermelhoA={col:col, numOrig:show.raw, numVermelho:arr[0].raw, orig:'A'};
-}
-}
-}
-var elB=document.getElementById('crB'); elB.innerHTML=''; 
-var primeiroVermelhoB=null;
-if(show){
+if(arr && arr.length>0 && !arr[0].w){primeiroVermelhoA={col:col, numOrig:show.raw, numVermelho:arr[0].raw, orig:'A'};}
 var arrB=nextBBlue[show.n];
-if(arrB){
-for(var i=0;i<arrB.length;i++){
-var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);
-}
-if(arrB.length>0 && !arrB[0].w){
-primeiroVermelhoB={col:col, numOrig:show.raw, numVermelho:arrB[0].raw, orig:'B'};
-}
-}
-}
-var elC=document.getElementById('crC'); elC.innerHTML=''; 
-var primeiroVermelhoC=null;
-if(show){
+if(arrB && arrB.length>0 && !arrB[0].w){primeiroVermelhoB={col:col, numOrig:show.raw, numVermelho:arrB[0].raw, orig:'B'};}
 var arrC=nextCBlue[show.n];
-if(arrC){
-for(var i=0;i<arrC.length;i++){
-var d=document.createElement('div');d.className='cb '+(arrC[i].w?'g':'r');d.textContent=arrC[i].raw;elC.appendChild(d);
-}
-if(arrC.length>0 && !arrC[0].w){
-primeiroVermelhoC={col:col, numOrig:show.raw, numVermelho:arrC[0].raw, orig:'C'};
-}
-}
+if(arrC && arrC.length>0 && !arrC[0].w){primeiroVermelhoC={col:col, numOrig:show.raw, numVermelho:arrC[0].raw, orig:'C'};}
 }
 if(show && !sinal && (primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC)){
 var info = primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC;
 sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false, pausado:true};
 atualizarSinal();
 }
-var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
-var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
-var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
 }
 function A(d){
 if(cur.length>=2) return;
@@ -174,8 +134,8 @@ R({n:v,raw:cur,a:gv(v)})
 }
 function E(){
 if(cur==='')return;
-if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
-if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;atualizarSinal();cur='';R(null); return;}
+if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); atualizarUltimos(); return;}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;greenCount=0;redCount=0;atualizarSinal();cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
 if(sinal && sinal.pausado){
 sinal.pausado=false;
@@ -197,7 +157,7 @@ var isPrevCBlue = logC.length>0 && logC[logC.length-1].w===null;
 if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false; logC.push({n:n,raw:raw,w:cwC}); if(isPrevCBlue){var blueNumC = logC[logC.length-2].n; if(!nextCBlue[blueNumC]) nextCBlue[blueNumC]=[]; nextCBlue[blueNumC].unshift({n:n,raw:raw,w:cwC});}}
 prevA={n:n,raw:raw};
-cur='';R(null);
+cur='';R(null); atualizarUltimos();
 }
 function CORR(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(null); else {var v=parseInt(cur); if(cur==="0"||cur==="00") R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); else R({n:v,raw:cur,a:gv(v)});} return;}
@@ -206,9 +166,9 @@ if(logB.length>0) logB.pop();
 if(logC.length>0) logC.pop();
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 if(logA.length===0) prevA=null;
-R(null);
+R(null); atualizarUltimos();
 }
-R(null);
+atualizarSinal();
 </script>
 </body>
 </html>

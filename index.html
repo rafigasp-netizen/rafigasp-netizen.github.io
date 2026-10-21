@@ -53,7 +53,7 @@ body{display:flex;justify-content:center}
 <div class="sinalBox" id="sinalBox">
 <div class="sinalTitle">JOGAR NA COLUNA <span id="sinalCol">C1/2</span></div>
 <div class="sinalTent" id="sinalTent"><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div></div>
-<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS RESTANTES</span> - <span id="sinalOrig"></span></div>
+<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS</span> - <span id="sinalOrig"></span></div>
 </div>
 </div>
 <div class="kb">
@@ -114,41 +114,48 @@ el.className='s';
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
 var elA=document.getElementById('crA'); elA.innerHTML=''; 
-var temVermelhoA=null;
+var primeiroVermelhoA=null;
 if(show){
 var arr=nextA[show.n];
 if(arr){
 for(var i=0;i<arr.length;i++){
 var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);
-if(!arr[i].w && !temVermelhoA){temVermelhoA={col:col, numOrig:show.raw, numVermelho:arr[i].raw, orig:'A'};}
+}
+// SÓ O PRIMEIRO QUADRADO DO LADO CONTA!
+if(arr.length>0 && !arr[0].w){
+primeiroVermelhoA={col:col, numOrig:show.raw, numVermelho:arr[0].raw, orig:'A'};
 }
 }
 }
 var elB=document.getElementById('crB'); elB.innerHTML=''; 
-var temVermelhoB=null;
+var primeiroVermelhoB=null;
 if(show){
 var arrB=nextBBlue[show.n];
 if(arrB){
 for(var i=0;i<arrB.length;i++){
 var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);
-if(!arrB[i].w && !temVermelhoB){temVermelhoB={col:col, numOrig:show.raw, numVermelho:arrB[i].raw, orig:'B'};}
+}
+if(arrB.length>0 && !arrB[0].w){
+primeiroVermelhoB={col:col, numOrig:show.raw, numVermelho:arrB[0].raw, orig:'B'};
 }
 }
 }
 var elC=document.getElementById('crC'); elC.innerHTML=''; 
-var temVermelhoC=null;
+var primeiroVermelhoC=null;
 if(show){
 var arrC=nextCBlue[show.n];
 if(arrC){
 for(var i=0;i<arrC.length;i++){
 var d=document.createElement('div');d.className='cb '+(arrC[i].w?'g':'r');d.textContent=arrC[i].raw;elC.appendChild(d);
-if(!arrC[i].w && !temVermelhoC){temVermelhoC={col:col, numOrig:show.raw, numVermelho:arrC[i].raw, orig:'C'};}
+}
+if(arrC.length>0 && !arrC[0].w){
+primeiroVermelhoC={col:col, numOrig:show.raw, numVermelho:arrC[0].raw, orig:'C'};
 }
 }
 }
-// SÓ CRIA SINAL QUANDO APARECE VERMELHO NO CANTO MARCADO
-if(show && !sinal && (temVermelhoA || temVermelhoB || temVermelhoC)){
-var info = temVermelhoA || temVermelhoB || temVermelhoC;
+// SÓ CRIA SE PRIMEIRO QUADRADO DO LADO FOR VERMELHO!
+if(show && !sinal && (primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC)){
+var info = primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC;
 sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false, pausado:true};
 atualizarSinal();
 }
@@ -162,13 +169,10 @@ if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
 if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;atualizarSinal();cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
-// SE TEM SINAL PAUSADO, DESPAUSA E NÃO CONTA ESSE NÚMERO COMO TENTATIVA
 if(sinal && sinal.pausado){
 sinal.pausado=false;
 atualizarSinal();
-// NÃO MARCA ESSE NÚMERO, SÓ DESPAUSA - PRÓXIMO NÚMERO COMEÇA A CONTAR
 }else if(sinal && !sinal.ganhou && sinal.tentativas.length<3){
-// JÁ DESPAUSADO, MARCA TENTATIVA - VERMELHO SE ERRA, VERDE SE ACERTA
 var acerto = gv(n)===sinal.col;
 sinal.tentativas.push({num:raw,acerto:acerto});
 if(acerto) sinal.ganhou=true;

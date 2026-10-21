@@ -51,9 +51,9 @@ body{display:flex;justify-content:center}
 <div class="top3" style="border:1px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
 <div class="hist2" style="border-color:#22c55e"><div class="histT" style="color:#86efac">C HIST:</div><div class="lg" id="lgC"></div></div>
 <div class="sinalBox" id="sinalBox">
-<div class="sinalTitle">JOGAR NA COLUNA <span id="sinalCol">C2/3</span></div>
+<div class="sinalTitle">JOGAR NA COLUNA <span id="sinalCol">C1/2</span></div>
 <div class="sinalTent" id="sinalTent"><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div><div class="st vazio">⬜️</div></div>
-<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS</span> - <span id="sinalOrig"></span></div>
+<div class="sinalFoot"><span id="sinalCount">3 TENTATIVAS RESTANTES</span> - <span id="sinalOrig"></span></div>
 </div>
 </div>
 <div class="kb">
@@ -89,9 +89,13 @@ if(i < sinal.tentativas.length){var t=sinal.tentativas[i];d.classList.add(t.acer
 tentDiv.appendChild(d);
 }
 var rest=3 - sinal.tentativas.length;
-document.getElementById('sinalCount').textContent=rest>0?rest+' TENTATIVAS RESTANTES':(sinal.ganhou?'✅ GREEN!':'❌ RED - FIM');
+if(sinal.pausado){
+document.getElementById('sinalCount').textContent='PAUSADO - AGUARDANDO PRÓXIMO NÚMERO';
+}else{
+document.getElementById('sinalCount').textContent=rest>0?rest+' TENTATIVAS RESTANTES':(sinal.ganhou?'✅ GREEN! ACERTOU!':'❌ RED - 3 VERMELHO, FIM');
+}
 if(sinal.ganhou || sinal.tentativas.length>=3){
-setTimeout(function(){sinal=null;atualizarSinal();},4000);
+setTimeout(function(){sinal=null;atualizarSinal();},3500);
 }
 }
 function R(p){
@@ -142,10 +146,10 @@ if(!arrC[i].w && !temVermelhoC){temVermelhoC={col:col, numOrig:show.raw, numVerm
 }
 }
 }
-// SÓ CRIA SINAL QUANDO APARECE VERMELHO NO CANTO MARCADO E NÃO TEM SINAL ATIVO
+// SÓ CRIA SINAL QUANDO APARECE VERMELHO NO CANTO MARCADO
 if(show && !sinal && (temVermelhoA || temVermelhoB || temVermelhoC)){
 var info = temVermelhoA || temVermelhoB || temVermelhoC;
-sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false};
+sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false, pausado:true};
 atualizarSinal();
 }
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
@@ -158,8 +162,13 @@ if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
 if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;sinal=null;atualizarSinal();cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
-// SE TEM SINAL ATIVO, MARCA TENTATIVA - VERDE SE ACERTA, VERMELHO SE ERRA
-if(sinal && !sinal.ganhou && sinal.tentativas.length<3){
+// SE TEM SINAL PAUSADO, DESPAUSA E NÃO CONTA ESSE NÚMERO COMO TENTATIVA
+if(sinal && sinal.pausado){
+sinal.pausado=false;
+atualizarSinal();
+// NÃO MARCA ESSE NÚMERO, SÓ DESPAUSA - PRÓXIMO NÚMERO COMEÇA A CONTAR
+}else if(sinal && !sinal.ganhou && sinal.tentativas.length<3){
+// JÁ DESPAUSADO, MARCA TENTATIVA - VERMELHO SE ERRA, VERDE SE ACERTA
 var acerto = gv(n)===sinal.col;
 sinal.tentativas.push({num:raw,acerto:acerto});
 if(acerto) sinal.ganhou=true;

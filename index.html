@@ -32,7 +32,7 @@ body{display:flex;justify-content:center}
 </head>
 <body>
 <div class="app">
-<div class="topo">RAFIGASP COACH DA ROLETA</div>
+<div class="topo">RAFIGASP - A TRAVADO ✅ B SÓ AZUL</div>
 <div class="top3" style="border:1px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
 <div class="hist" style="border-color:#3b82f6"><div class="histT">A HIST:</div><div class="lg" id="lgA"></div></div>
 <div class="top3" style="border:1px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
@@ -49,7 +49,8 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-var nextA={}; var prevA=null;
+var nextA={},nextBBlue={}; 
+var prevA=null;
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
@@ -57,24 +58,29 @@ function R(p){
 var show=p? p:null;
 if(show){
 var col=show.a||gv(show.raw||show.n);
-var label=(show.raw||show.n)+' '+col;
 var shortLabel=show.raw||show.n;
 var shortCol=col;
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){
 var isY=id.startsWith('sy');
 var el=document.getElementById(id);
-if(isY){el.textContent=shortLabel+' '+shortCol; el.title=label;} else {el.textContent=shortCol;}
+if(isY){el.textContent=shortLabel+' '+shortCol;} else {el.textContent=shortCol;}
 el.className='s';
 });
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
+// A TRAVADO - NÃO MEXER
 var elA=document.getElementById('crA'); elA.innerHTML='';
 if(show){
 var arr=nextA[show.n];
 if(arr){for(var i=0;i<arr.length;i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);}}
 }
-document.getElementById('crB').innerHTML='';
+// B - SÓ AZUL
+var elB=document.getElementById('crB'); elB.innerHTML='';
+if(show){
+var arrB=nextBBlue[show.n];
+if(arrB){for(var i=0;i<arrB.length;i++){var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);}}
+}
 document.getElementById('crC').innerHTML='';
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
@@ -84,8 +90,9 @@ function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0
 function E(){
 if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
-if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};prevA=null;cur='';R(null); return;}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};prevA=null;cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
+// A TRAVADO
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
 else{
 var cwA=lastA?ga(lastA.a).indexOf(gc(v))>=0:false;
@@ -95,11 +102,20 @@ if(!nextA[prevA.n]) nextA[prevA.n]=[];
 nextA[prevA.n].unshift({n:n,raw:raw,w:cwA});
 }
 }
-if(logB.length%2===0){logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};}
-else{
+// B - SÓ AZUL - GUARDA SÓ QUANDO ANTERIOR ERA AZUL
+var isPrevBBlue = lastB && logB.length>0 && logB[logB.length-1].w===null;
+if(logB.length%2===0){
+logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};
+}else{
 var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false;
 logB.push({n:n,raw:raw,w:cwB});
+if(isPrevBBlue){
+var blueNum = logB[logB.length-2].n;
+if(!nextBBlue[blueNum]) nextBBlue[blueNum]=[];
+nextBBlue[blueNum].unshift({n:n,raw:raw,w:cwB});
 }
+}
+// C - NÃO MEXER
 if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;

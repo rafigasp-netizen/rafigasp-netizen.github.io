@@ -9,34 +9,35 @@
 html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
-.topo{background:#d4af37;padding:6px;text-align:center;color:#000;font-weight:900;font-size:13px;position:relative;z-index:10;overflow:hidden;white-space:nowrap}
-.top3{display:grid;grid-template-columns:1fr 1fr 125px;gap:5px;padding:4px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:3px;overflow:hidden;min-height:46px}
-.s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden}
-.s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
-.corBox{display:flex;gap:4px;align-items:center;min-height:36px;overflow:hidden;justify-content:flex-start}
-.cb{width:42px;height:30px;border-radius:8px;flex-shrink:0;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.topo{background:#d4af37;padding:5px;text-align:center;color:#000;font-weight:900;font-size:12px;z-index:10}
+.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px;min-height:38px;align-items:center}
+.s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden;padding:1px}
+.s.d{border:1px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:8px}
+.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+.corBox::-webkit-scrollbar{display:none}
+.cb{min-width:32px;width:32px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 3px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
-.hist2{margin:3px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
-.histT{font-size:9px;color:#4ade80;font-weight:900;min-width:30px}
-.lg{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden}
+.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden}
+.histT{font-size:8px;color:#4ade80;font-weight:900;min-width:26px}
+.lg{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
-.ln{min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;border:2px solid #000;color:#fff}
+.ln{min-width:32px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;border:1px solid #000;color:#fff}
 .ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa}
-.kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
-.k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:22px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
-.k:active{transform:scale(0.96)}.k.z{background:#ef4444;color:#fff;font-size:18px}.k.zz{background:#991b1b;color:#fff;font-size:12px;font-weight:900}
+.kb{flex:1;display:flex;flex-direction:column;gap:2px;padding:3px;min-height:0}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;min-height:0}
+.k{width:100%;height:100%;border-radius:10px;border:none;font-weight:900;font-size:20px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
+.k:active{transform:scale(0.96)}.k.z{background:#ef4444;color:#fff;font-size:16px}.k.zz{background:#991b1b;color:#fff;font-size:11px;font-weight:900}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo">RAFIGASP COACH DA ROLETA</div>
-<div class="top3" style="border:2px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
+<div class="top3" style="border:1px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
 <div class="hist" style="border-color:#3b82f6"><div class="histT">A HIST:</div><div class="lg" id="lgA"></div></div>
-<div class="top3" style="border:2px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
+<div class="top3" style="border:1px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
 <div class="hist2" style="border-color:#ef4444"><div class="histT" style="color:#fca5a5">B HIST:</div><div class="lg" id="lgB"></div></div>
-<div class="top3" style="border:2px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
+<div class="top3" style="border:1px solid #22c55e"><div class="s d" id="syC">VAZIO</div><div class="s d" id="srC">VAZIO</div><div class="corBox" id="crC"></div></div>
 <div class="hist2" style="border-color:#22c55e"><div class="histT" style="color:#86efac">C HIST:</div><div class="lg" id="lgC"></div></div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="A('1')">1</button><button class="k" onclick="A('2')">2</button><button class="k" onclick="A('3')">3</button></div>
@@ -48,9 +49,7 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-// SÓ A VAI MUDAR - B E C NÃO MEXEM
-var nextA={};
-var prevA=null;
+var nextA={}; var prevA=null;
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
 function ga(a){var t=a.replace('C','');return t.split('/').map(function(x){return +x})}
@@ -59,21 +58,22 @@ var show=p? p:null;
 if(show){
 var col=show.a||gv(show.raw||show.n);
 var label=(show.raw||show.n)+' '+col;
-['syA','srA','syB','srB','syC','srC'].forEach(function(id){var isY=id.startsWith('sy'); document.getElementById(id).textContent=isY?label:col; document.getElementById(id).className='s';});
+var shortLabel=show.raw||show.n;
+var shortCol=col;
+['syA','srA','syB','srB','syC','srC'].forEach(function(id){
+var isY=id.startsWith('sy');
+var el=document.getElementById(id);
+if(isY){el.textContent=shortLabel+' '+shortCol; el.title=label;} else {el.textContent=shortCol;}
+el.className='s';
+});
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-// SÓ A - MOSTRA SÓ O QUE SAIU DEPOIS DO 1: 2 e 5
 var elA=document.getElementById('crA'); elA.innerHTML='';
 if(show){
 var arr=nextA[show.n];
-if(arr){
-for(var i=0;i<arr.length;i++){
-var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);
+if(arr){for(var i=0;i<arr.length;i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);}}
 }
-}
-}
-// B E C - NÃO MEXEM, FICAM VAZIOS COMO ANTES
 document.getElementById('crB').innerHTML='';
 document.getElementById('crC').innerHTML='';
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
@@ -83,27 +83,23 @@ var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1
 function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0"||cur==="00"){R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); return;} R({n:v,raw:cur,a:gv(v)})}
 function E(){
 if(cur==='')return;
-if(cur==="0"){if(logA.length>0){logA.pop(); if(logA.length===0) lastA=null;} if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
+if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
 if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};prevA=null;cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
-// A - SÓ PRIMEIRO AZUL, RESTO VERDE/VERMELHO - SÓ MEXE NO A
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
 else{
 var cwA=lastA?ga(lastA.a).indexOf(gc(v))>=0:false;
 logA.push({n:n,raw:raw,w:cwA});
-// GUARDA SÓ O QUE SAIU DEPOIS - PARA MOSTRAR 2 E 5 DEPOIS DO 1
 if(prevA!==null){
 if(!nextA[prevA.n]) nextA[prevA.n]=[];
 nextA[prevA.n].unshift({n:n,raw:raw,w:cwA});
 }
 }
-// B - NÃO MEXEM
 if(logB.length%2===0){logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};}
 else{
 var cwB=lastB?ga(lastB.a).indexOf(gc(v))>=0:false;
 logB.push({n:n,raw:raw,w:cwB});
 }
-// C - NÃO MEXEM
 if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
 else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;

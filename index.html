@@ -9,16 +9,16 @@
 html,body{height:100%;background:#0d2818;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#0d2818;border:3px solid #d4af37;display:flex;flex-direction:column;overflow:hidden}
-.topo{background:#d4af37;padding:5px;text-align:center;color:#000;font-weight:900;font-size:12px;z-index:10}
-.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px;min-height:38px;align-items:center}
+.topo{background:#d4af37;padding:6px 8px;text-align:center;color:#000;font-weight:900;font-size:12px;flex-shrink:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:28px;line-height:16px}
+.top3{display:grid;grid-template-columns:70px 60px 1fr;gap:3px;padding:3px;background:#0a2a1a;border:1px solid #d4af37;border-radius:8px;margin:2px 2px 0 2px;min-height:38px;align-items:center;flex-shrink:0}
 .s{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;background:#d4af37;color:#000;border:1px solid #000;overflow:hidden;padding:1px}
 .s.d{border:1px dashed #d4af37;color:#d4af37;background:#0a2a1a;font-size:8px}
-.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+.corBox{display:flex;gap:2px;align-items:center;min-height:32px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;max-width:100%}
 .corBox::-webkit-scrollbar{display:none}
 .cb{min-width:32px;width:32px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden}
-.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden}
+.hist{margin:0 2px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
+.hist2{margin:2px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:3px;display:flex;gap:3px;align-items:center;min-height:36px;overflow:hidden;flex-shrink:0}
 .histT{font-size:8px;color:#4ade80;font-weight:900;min-width:26px}
 .lg{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
@@ -32,7 +32,7 @@ body{display:flex;justify-content:center}
 </head>
 <body>
 <div class="app">
-<div class="topo">RAFIGASP - A TRAVADO ✅ B SÓ AZUL</div>
+<div class="topo">RAFIGASP COACH DA ROLETA</div>
 <div class="top3" style="border:1px solid #3b82f6"><div class="s d" id="syA">VAZIO</div><div class="s d" id="srA">VAZIO</div><div class="corBox" id="crA"></div></div>
 <div class="hist" style="border-color:#3b82f6"><div class="histT">A HIST:</div><div class="lg" id="lgA"></div></div>
 <div class="top3" style="border:1px solid #ef4444"><div class="s d" id="syB">VAZIO</div><div class="s d" id="srB">VAZIO</div><div class="corBox" id="crB"></div></div>
@@ -49,7 +49,7 @@ body{display:flex;justify-content:center}
 <script>
 var cur='',logA=[],logB=[],logC=[],lastA=null,lastB=null,lastC=null;
 var tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"};
-var nextA={},nextBBlue={}; 
+var nextA={},nextBBlue={},nextCBlue={}; 
 var prevA=null;
 function gv(n){return tb[n]||""}
 function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}
@@ -81,7 +81,12 @@ if(show){
 var arrB=nextBBlue[show.n];
 if(arrB){for(var i=0;i<arrB.length;i++){var d=document.createElement('div');d.className='cb '+(arrB[i].w?'g':'r');d.textContent=arrB[i].raw;elB.appendChild(d);}}
 }
-document.getElementById('crC').innerHTML='';
+// C - SÓ AZUL IGUAL B
+var elC=document.getElementById('crC'); elC.innerHTML='';
+if(show){
+var arrC=nextCBlue[show.n];
+if(arrC){for(var i=0;i<arrC.length;i++){var d=document.createElement('div');d.className='cb '+(arrC[i].w?'g':'r');d.textContent=arrC[i].raw;elC.appendChild(d);}}
+}
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
@@ -90,7 +95,7 @@ function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0
 function E(){
 if(cur==='')return;
 if(cur==="0"){if(logA.length>0) logA.pop(); if(logB.length>0) logB.pop(); if(logC.length>0) logC.pop(); if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null; prevA=null; cur='';R(null); return;}
-if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};prevA=null;cur='';R(null); return;}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;nextA={};nextBBlue={};nextCBlue={};prevA=null;cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
 // A TRAVADO
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
@@ -102,8 +107,8 @@ if(!nextA[prevA.n]) nextA[prevA.n]=[];
 nextA[prevA.n].unshift({n:n,raw:raw,w:cwA});
 }
 }
-// B - SÓ AZUL - GUARDA SÓ QUANDO ANTERIOR ERA AZUL
-var isPrevBBlue = lastB && logB.length>0 && logB[logB.length-1].w===null;
+// B - SÓ AZUL
+var isPrevBBlue = logB.length>0 && logB[logB.length-1].w===null;
 if(logB.length%2===0){
 logB.push({n:n,raw:raw,w:null}); lastB={n:n,raw:raw,a:col};
 }else{
@@ -115,11 +120,18 @@ if(!nextBBlue[blueNum]) nextBBlue[blueNum]=[];
 nextBBlue[blueNum].unshift({n:n,raw:raw,w:cwB});
 }
 }
-// C - NÃO MEXER
-if(logC.length%3===0){logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};}
-else{
+// C - SÓ AZUL IGUAL B
+var isPrevCBlue = logC.length>0 && logC[logC.length-1].w===null;
+if(logC.length%3===0){
+logC.push({n:n,raw:raw,w:null}); lastC={n:n,raw:raw,a:col};
+}else{
 var cwC=lastC?ga(lastC.a).indexOf(gc(v))>=0:false;
 logC.push({n:n,raw:raw,w:cwC});
+if(isPrevCBlue){
+var blueNumC = logC[logC.length-2].n;
+if(!nextCBlue[blueNumC]) nextCBlue[blueNumC]=[];
+nextCBlue[blueNumC].unshift({n:n,raw:raw,w:cwC});
+}
 }
 prevA={n:n,raw:raw};
 cur='';R(null);

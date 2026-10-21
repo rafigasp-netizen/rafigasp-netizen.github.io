@@ -62,40 +62,39 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-var crA=document.getElementById('crA');crA.innerHTML=''; if(show){var all=histA[show.n]||[]; var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false}); if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crA.appendChild(d);} if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crA.appendChild(d);} }
+// A, B, C - HISTÓRICO SÓ APARECE SE NÚMERO ESTEVE NO AZUL EM BAIXO
+function renderTop(hist, elId){
+var el=document.getElementById(elId); el.innerHTML='';
+if(!show) return;
+var arr=hist[show.n]||[];
+for(var i=0;i<Math.min(2,arr.length);i++){var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;el.appendChild(d);}
+}
+renderTop(histA,'crA'); renderTop(histB,'crB'); renderTop(histC,'crC');
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
-var crB=document.getElementById('crB');crB.innerHTML=''; if(show){var all=histB[show.n]||[]; var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false}); if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crB.appendChild(d);} if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crB.appendChild(d);} }
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
-var crC=document.getElementById('crC');crC.innerHTML=''; if(show){var all=histC[show.n]||[]; var g=all.find(function(x){return x.w===true}); var r=all.find(function(x){return x.w===false}); if(g){var d=document.createElement('div');d.className='cb g';d.textContent=g.raw;crC.appendChild(d);} if(r){var d=document.createElement('div');d.className='cb r';d.textContent=r.raw;crC.appendChild(d);} }
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
 }
 function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),raw:cur,a:gv(v)})}
 function E(){
 if(cur==='')return;
 var raw=cur; var v=parseInt(cur); var n=norm(v); var col=gv(v);
-// A = AZUL 1 SIM 1 NÃO
+// A = 1 SIM 1 NÃO
 if(logA.length%2===0){lastA={n:n,raw:raw,a:col};logA.push({n:n,raw:raw,w:null});}
 else{var cw=ga(lastA.a).indexOf(gc(v))>=0; if(!histA[lastA.n]) histA[lastA.n]=[]; histA[lastA.n].unshift({n:n,raw:raw,w:cw}); logA.push({n:n,raw:raw,w:cw});}
-// B = AZUL 1 SIM 1 NÃO
+// B = 1 SIM 1 NÃO - CORRIGIDO: SÓ AZUL SE TEVE AZUL EM BAIXO
 if(logB.length%2===0){lastB={n:n,raw:raw,a:col};logB.push({n:n,raw:raw,w:null});}
 else{var cwB=ga(lastB.a).indexOf(gc(v))>=0; if(!histB[lastB.n]) histB[lastB.n]=[]; histB[lastB.n].unshift({n:n,raw:raw,w:cwB}); logB.push({n:n,raw:raw,w:cwB});}
-// C = ⬜️⬜️🟦 = 1 AZUL, 16 VERMELHO, 5 VERDE, 8 AZUL - QUADRADO ANDA COM NÚMERO
+// C = ⬜️⬜️🟦 = 2 BRANCOS 1 AZUL - CERTO
 if(logC.length%3===0){lastC={n:n,raw:raw,a:col};logC.push({n:n,raw:raw,w:null});}
-else{
-var cwC=ga(lastC.a).indexOf(gc(v))>=0;
-if(!histC[lastC.n]) histC[lastC.n]=[];
-histC[lastC.n].unshift({n:n,raw:raw,w:cwC});
-logC.push({n:n,raw:raw,w:cwC});
-if(logC.length%3===0){lastC=logC[logC.length-1];} // atualiza gatilho quando completa ciclo
-}
+else{var cwC=ga(lastC.a).indexOf(gc(v))>=0; if(!histC[lastC.n]) histC[lastC.n]=[]; histC[lastC.n].unshift({n:n,raw:raw,w:cwC}); logC.push({n:n,raw:raw,w:cwC});}
 cur='';R();
 }
 function Z(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(); else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))}); return;}
-if(logA.length>0){var r=logA.pop(); if(r.w!==null&&logA.length>0){var prev=null; for(var i=logA.length-1;i>=0;i--){if(logA[i].w===null){prev=logA[i];break;}} if(prev&&histA[prev.n]) histA[prev.n].shift();}}
-if(logB.length>0){var r=logB.pop(); if(r.w!==null){var prev=null; for(var i=logB.length-1;i>=0;i--){if(logB[i].w===null){prev=logB[i];break;}} if(prev&&histB[prev.n]) histB[prev.n].shift();}}
-if(logC.length>0){var r=logC.pop(); if(r.w!==null){var prev=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){prev=logC[i];break;}} if(prev&&histC[prev.n]) histC[prev.n].shift();} else {lastC=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){lastC=logC[i];break;}}}}
-if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0){lastC=null;}
+if(logA.length>0){var r=logA.pop(); if(r.w!==null){var prev=null; for(var i=logA.length-1;i>=0;i--){if(logA[i].w===null){prev=logA[i];break;}} if(prev&&histA[prev.n]) histA[prev.n].shift();} else {lastA=null;}}
+if(logB.length>0){var r=logB.pop(); if(r.w!==null){var prev=null; for(var i=logB.length-1;i>=0;i--){if(logB[i].w===null){prev=logB[i];break;}} if(prev&&histB[prev.n]) histB[prev.n].shift();} else {lastB=null;}}
+if(logC.length>0){var r=logC.pop(); if(r.w!==null){var prev=null; for(var i=logC.length-1;i>=0;i--){if(logC[i].w===null){prev=logC[i];break;}} if(prev&&histC[prev.n]) histC[prev.n].shift();} else {lastC=null;}}
+if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 R();
 }
 function ZZ(){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};histC={};cur='';R();}

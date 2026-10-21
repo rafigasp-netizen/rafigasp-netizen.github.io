@@ -14,15 +14,15 @@ body{display:flex;justify-content:center}
 .s{height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:#d4af37;color:#000;border:1px solid #000}
 .s.d{border:2px dashed #d4af37;color:#d4af37;background:#0a2a1a}
 .corBox{display:flex;gap:4px;align-items:center;min-height:36px}
-.cb{width:48px;height:32px;border-radius:8px;flex-shrink:0;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff}
+.cb{width:44px;height:30px;border-radius:8px;flex-shrink:0;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
 .cb.b{background:#1e40af;border-color:#60a5fa}.cb.g{background:#16a34a;border-color:#86efac}.cb.r{background:#dc2626;border-color:#fca5a5}
-.hist{margin:0 3px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:5px;align-items:center;min-height:40px;overflow:hidden}
-.hist2{margin:3px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:5px;align-items:center;min-height:40px;overflow:hidden}
+.hist{margin:0 3px;background:#0a1f14;border:1px solid #1e4d2b;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
+.hist2{margin:3px;background:#0a1f14;border:1px solid #d4af37;border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;min-height:40px;overflow:hidden}
 .histT{font-size:9px;color:#4ade80;font-weight:900;min-width:30px}
-.lg{display:flex;gap:5px;overflow-x:auto;flex:1;scrollbar-width:none}
+.lg{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
 .lg::-webkit-scrollbar{display:none}
-.ln{min-width:42px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;flex-shrink:0;border:2px solid #000;color:#fff}
-.ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa;color:#fff}
+.ln{min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;border:2px solid #000;color:#fff}
+.ln.g{background:#16a34a;border-color:#86efac}.ln.r{background:#dc2626;border-color:#fca5a5}.ln.b{background:#1e3a8a;border-color:#60a5fa}
 .kb{flex:1;display:flex;flex-direction:column;gap:3px;padding:4px;min-height:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;min-height:0}
 .k{width:100%;height:100%;border-radius:12px;border:none;font-weight:900;font-size:22px;background:linear-gradient(#e8c86a,#b8941f);color:#3a2a0a}
@@ -62,7 +62,7 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-// A: só 2 quadrados - 1 verde e 1 vermelho com número branco grande
+// A = AZUL DE 2 EM 2 IGUAL OS OUTROS
 var crA=document.getElementById('crA');crA.innerHTML='';
 if(show){
 var all=histA[show.n]||[];
@@ -72,23 +72,15 @@ if(green){var d=document.createElement('div');d.className='cb g';d.textContent=g
 if(red){var d=document.createElement('div');d.className='cb r';d.textContent=red.raw;crA.appendChild(d);}
 }
 var lgA=document.getElementById('lgA');lgA.innerHTML='';
-if(show){
-var all=histA[show.n]||[];
-var green=all.find(function(x){return x.w===true});
-var red=all.find(function(x){return x.w===false});
-if(green){var d=document.createElement('div');d.className='ln g';d.textContent=green.raw;lgA.appendChild(d);}
-if(red){var d=document.createElement('div');d.className='ln r';d.textContent=red.raw;lgA.appendChild(d);}
-if(all.length===0 && logA.length>0){
-var d=document.createElement('div');d.className='ln b';d.textContent=logA[logA.length-1].raw;lgA.appendChild(d);
-}
-}
-// B e C
+for(var j=logA.length-1;j>=0;j--){var l=logA[j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
+// B = AZUL DE 1 EM 1
 var crB=document.getElementById('crB');crB.innerHTML='';
-if(show){var h=histB[show.n]||[]; for(var i=0;i<Math.min(4,h.length);i++){var d=document.createElement('div');d.className='cb '+(h[i].w?'g':'r');d.textContent=h[i].raw;crB.appendChild(d);} }
+if(show){var h=histB[show.n]||[]; for(var i=0;i<Math.min(3,h.length);i++){var d=document.createElement('div');d.className='cb '+(h[i].w?'g':'r');d.textContent=h[i].raw;crB.appendChild(d);} }
 var lgB=document.getElementById('lgB');lgB.innerHTML='';
 for(var j=logB.length-1;j>=0;j--){var l=logB[j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
+// C = AZUL DE 3 EM 3
 var lgC=document.getElementById('lgC');lgC.innerHTML='';
-for(var j=logC.length-1;j>=0;j--){var l=logC[j];var cls=((logC.length-1-j)%3===0)?'b':(l.w===null?'d':l.w?'g':'r');var d=document.createElement('div');d.className='ln '+cls;d.textContent=l.raw;lgC.appendChild(d);}
+for(var j=logC.length-1;j>=0;j--){var l=logC[j];var cls=((logC.length-1-j)%3===0)?'b':(l.w===null?'b':l.w?'g':'r');var d=document.createElement('div');d.className='ln '+cls;d.textContent=l.raw;lgC.appendChild(d);}
 document.getElementById('crC').innerHTML='';
 }
 function A(d){if(cur.length>=4)return;cur+=d;var v=parseInt(cur); R({n:norm(v),raw:cur,a:gv(v)})}
@@ -103,7 +95,6 @@ if(logC.length%3===0){lastC={n:n,raw:raw,a:col};logC.push({n:n,raw:raw,w:null});
 else{var cwC=ga(lastC.a).indexOf(gc(v))>=0; logC.push({n:n,raw:raw,w:cwC}); lastC={n:n,raw:raw,a:col};}
 cur='';R();
 }
-// 0 = APAGAR (apaga último)
 function Z(){
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(); else R({n:norm(parseInt(cur)),raw:cur,a:gv(parseInt(cur))}); return;}
 if(logA.length>0){var r=logA.pop(); if(r.w!==null&&logA.length>0){var prev=logA[logA.length-1]; if(prev.w===null&&histA[prev.n]) histA[prev.n].shift();}}
@@ -112,7 +103,6 @@ if(logC.length>0) logC.pop();
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 R();
 }
-// 00 = APAGAR TODO HISTÓRICO
 function ZZ(){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};cur='';R();}
 R();
 </script>

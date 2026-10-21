@@ -121,7 +121,6 @@ if(arr){
 for(var i=0;i<arr.length;i++){
 var d=document.createElement('div');d.className='cb '+(arr[i].w?'g':'r');d.textContent=arr[i].raw;elA.appendChild(d);
 }
-// SÓ O PRIMEIRO QUADRADO DO LADO CONTA!
 if(arr.length>0 && !arr[0].w){
 primeiroVermelhoA={col:col, numOrig:show.raw, numVermelho:arr[0].raw, orig:'A'};
 }
@@ -153,7 +152,6 @@ primeiroVermelhoC={col:col, numOrig:show.raw, numVermelho:arrC[0].raw, orig:'C'}
 }
 }
 }
-// SÓ CRIA SE PRIMEIRO QUADRADO DO LADO FOR VERMELHO!
 if(show && !sinal && (primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC)){
 var info = primeiroVermelhoA || primeiroVermelhoB || primeiroVermelhoC;
 sinal={col:info.col, numOrig:info.numOrig, numVermelho:info.numVermelho, orig:info.orig, tentativas:[], ganhou:false, pausado:true};
@@ -173,7 +171,9 @@ if(sinal && sinal.pausado){
 sinal.pausado=false;
 atualizarSinal();
 }else if(sinal && !sinal.ganhou && sinal.tentativas.length<3){
-var acerto = gv(n)===sinal.col;
+var colDoNumero = gc(n);
+var colunasDoSinal = ga(sinal.col);
+var acerto = colunasDoSinal.indexOf(colDoNumero)>=0;
 sinal.tentativas.push({num:raw,acerto:acerto});
 if(acerto) sinal.ganhou=true;
 atualizarSinal();

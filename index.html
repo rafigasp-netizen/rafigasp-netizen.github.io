@@ -62,29 +62,45 @@ var label=(show.raw||show.n)+' '+col;
 }else{
 ['syA','srA','syB','srB','syC','srC'].forEach(function(id){document.getElementById(id).textContent='VAZIO';document.getElementById(id).className='s d';});
 }
-function renderTop(hist, elId){
+function renderTopA(hist, elId){
 var el=document.getElementById(elId); el.innerHTML='';
 if(!show) return;
 var arr=hist[show.n];
 if(!arr || arr.length===0) return;
+// A = SÓ PRIMEIRO AZUL, RESTO VERDE/VERMELHO - MOSTRA RESULTADO (2 VERDE)
 var d=document.createElement('div');d.className='cb '+(arr[0].w?'g':'r');d.textContent=arr[0].raw;el.appendChild(d);
 }
-renderTop(histA,'crA'); renderTop(histB,'crB'); renderTop(histC,'crC');
+function renderTopBC(hist, elId, log){
+// B e C = SÓ MOSTRA SE O NÚMERO 1 TIVESSE NO AZUL DE NOVO - SE PRÓXIMO É RESULTADO NÃO MOSTRA
+var el=document.getElementById(elId); el.innerHTML='';
+if(!show) return;
+var arr=hist[show.n];
+if(!arr || arr.length===0) return;
+// VERIFICA SE O NÚMERO 1 ESTÁ NO AZUL ATUALMENTE - SE NÃO, NÃO MOSTRA
+// SE O PRÓXIMO É RESULTADO (VERDE/VERMELHO) NÃO MOSTRA, SÓ SE FOR AZUL
+// Para isso, só mostra se o número atual é AZUL no log
+var isBlueNow=false;
+for(var i=0;i<log.length;i++){if(log[i].n===show.n && log[i].w===null){isBlueNow=true; break;}}
+// Se o histórico é de resultado (verde/vermelho), não mostra em B e C quando próximo é resultado
+// Só mostra se o número 1 estiver no AZUL (segunda vez)
+if(!isBlueNow) return;
+// Se o próximo é resultado, não mostra - só se o número 1 tivesse no AZUL
+// Como o array é de resultado, se o último log do número for resultado, não mostra
+var lastEntry=null;
+for(var i=log.length-1;i>=0;i--){if(log[i].n===show.n){lastEntry=log[i];break;}}
+if(lastEntry && lastEntry.w!==null) return; // último é resultado, não mostra
+var d=document.createElement('div');d.className='cb b';d.textContent=arr[0].raw;el.appendChild(d);
+}
+renderTopA(histA,'crA');
+renderTopBC(histB,'crB',logB);
+renderTopBC(histC,'crC',logC);
 var lgA=document.getElementById('lgA');lgA.innerHTML=''; for(var j=logA.length-1;j>=0;j--){var l=logA[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgA.appendChild(d);}
 var lgB=document.getElementById('lgB');lgB.innerHTML=''; for(var j=logB.length-1;j>=0;j--){var l=logB[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgB.appendChild(d);}
 var lgC=document.getElementById('lgC');lgC.innerHTML=''; for(var j=logC.length-1;j>=0;j--){var l=logC[j]; var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;lgC.appendChild(d);}
 }
-function A(d){
-// SÓ 2 DÍGITOS - CORRIGIDO NÃO DIGITA 3 DÍGITOS
-if(cur.length>=2) return;
-cur+=d;
-var v=parseInt(cur);
-if(cur==="0"||cur==="00"){R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); return;}
-R({n:v,raw:cur,a:gv(v)})
-}
+function A(d){if(cur.length>=2) return; cur+=d; var v=parseInt(cur); if(cur==="0"||cur==="00"){R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); return;} R({n:v,raw:cur,a:gv(v)})}
 function E(){
 if(cur==='')return;
-// 0 + ENTER = APAGA ÚLTIMO
 if(cur==="0"){
 if(logA.length>0){var r=logA.pop(); if(r.w!==null && lastA && histA[lastA.n]) histA[lastA.n].shift(); if(logA.length===0) lastA=null;}
 if(logB.length>0){var r=logB.pop(); if(r.w!==null){var prev=null; for(var i=logB.length-1;i>=0;i--){if(logB[i].w===null){prev=logB[i];break;}} if(prev&&histB[prev.n]) histB[prev.n].shift();}}
@@ -92,10 +108,7 @@ if(logC.length>0){var r=logC.pop(); if(r.w!==null){var prev=null; for(var i=logC
 if(logA.length===0) lastA=null; if(logB.length===0) lastB=null; if(logC.length===0) lastC=null;
 cur='';R(null); return;
 }
-// 00 + ENTER = APAGA TUDO
-if(cur==="00"){
-logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};histC={};cur='';R(null); return;
-}
+if(cur==="00"){logA=[];logB=[];logC=[];lastA=null;lastB=null;lastC=null;histA={};histB={};histC={};cur='';R(null); return;}
 var raw=cur; var v=parseInt(cur); if(v>36) {cur='';R(null);return;} var n=v; var col=gv(v);
 if(logA.length===0){logA.push({n:n,raw:raw,w:null}); lastA={n:n,raw:raw,a:col};}
 else{
@@ -125,7 +138,6 @@ logC.push({n:n,raw:raw,w:cwC});
 cur='';R(null);
 }
 function CORR(){
-// BOTÃO CORRIGIR - CORRIGE ÚLTIMO DÍGITO
 if(cur!==''){cur=cur.slice(0,-1); if(cur==='')R(null); else {var v=parseInt(cur); if(cur==="0"||cur==="00") R({n:0,raw:cur,a:cur==="0"?"APAGAR":"APAGAR TUDO"}); else R({n:v,raw:cur,a:gv(v)});} return;}
 if(logA.length>0){var r=logA.pop(); if(r.w!==null && lastA && histA[lastA.n]) histA[lastA.n].shift(); if(logA.length===0) lastA=null;}
 if(logB.length>0){var r=logB.pop(); if(r.w!==null){var prev=null; for(var i=logB.length-1;i>=0;i--){if(logB[i].w===null){prev=logB[i];break;}} if(prev&&histB[prev.n]) histB[prev.n].shift();}}

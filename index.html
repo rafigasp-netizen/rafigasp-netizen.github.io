@@ -22,24 +22,19 @@ body{display:flex;justify-content:center}
 .sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;width:100%}
 .sq{width:100%;max-width:52px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
 .sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}
-.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;display:inline-block;min-width:110px}
+.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;min-width:110px}
 .centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:6px}
 .kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 6px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
 .painelDetalhe{flex:1;display:none;flex-direction:column;gap:4px;padding:6px;overflow:auto;background:#0d2818}
-.top2{display:flex;gap:4px;margin-top:2px}
-.bx{flex:1;height:36px;background:#1a0000;border:1.5px solid #8a6d1b;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.bxLbl{font-size:6px;font-weight:900;color:#d4af37;position:absolute;top:2px;left:4px}
-.bxVal{font-size:14px;font-weight:900;color:#f9e27a;margin-top:6px}
-.bxSub{font-size:7px;font-weight:900;color:#aaa;margin-top:1px}
-.bl{background:#0e2a14;border:1px solid #1a4d1a;border-radius:6px;padding:3px;margin-bottom:2px}
-.blTitle{font-size:8px;font-weight:900;color:#f9e27a;margin-bottom:2px}
-.colunaHist{display:flex;flex-direction:column;gap:2px}
-.linhaAzul{display:flex;gap:2px;align-items:center;flex-wrap:wrap;background:rgba(0,0,0,0.2);border-radius:4px;padding:2px}
-.ln{width:24px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff;border:1px solid #000;flex-shrink:0}
+.seqTop{display:flex;flex-wrap:wrap;gap:3px;background:#0a1a0a;border:1px solid #1a4d1a;border-radius:6px;padding:4px;min-height:28px}
+.ln{width:28px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;border:1px solid #000}
 .ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}
-.seqTop{display:flex;flex-wrap:wrap;gap:2px;background:#0a1a0a;border:1px solid #1a4d1a;border-radius:5px;padding:3px;min-height:22px}
+.bl{background:#0e2a14;border:1px solid #1a4d1a;border-radius:6px;padding:4px;margin-bottom:3px}
+.blTitle{font-size:9px;font-weight:900;color:#f9e27a}
+.colHist{display:flex;flex-direction:column;gap:2px}
+.linha{display:flex;gap:2px;flex-wrap:wrap;background:rgba(0,0,0,0.2);border-radius:4px;padding:2px}
 </style>
 </head>
 <body>
@@ -56,18 +51,9 @@ body{display:flex;justify-content:center}
 </div>
 <div class="painelDetalhe" id="painel2">
 <div class="seqTop" id="seqTop"></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syA">-</div><div class="bxSub" id="crA"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">A HIST 🟦⬜️ (1+1)</div><div class="colunaHist" id="histA"></div></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syB">-</div><div class="bxSub" id="crB"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">B HIST 🟦⬜️⬜️ (1+2)</div><div class="colunaHist" id="histB"></div></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syC">-</div><div class="bxSub" id="crC"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">C HIST 🟦⬜️⬜️⬜️ (1+3)</div><div class="colunaHist" id="histC"></div></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syD">-</div><div class="bxSub" id="crD"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">D HIST 🟦⬜️⬜️⬜️⬜️ (1+4)</div><div class="colunaHist" id="histD"></div></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syE">-</div><div class="bxSub" id="crE"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">E HIST 🟦⬜️⬜️⬜️⬜️⬜️ (1+5)</div><div class="colunaHist" id="histE"></div></div>
-<div class="top2"><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal" id="syF">-</div><div class="bxSub" id="crF"></div></div><div class="bx"><div class="bxLbl">VAZIO</div><div class="bxVal">-</div></div></div>
-<div class="bl"><div class="blTitle">F HIST 🟦⬜️⬜️⬜️⬜️⬜️⬜️ (1+6)</div><div class="colunaHist" id="histF"></div></div>
+<div class="bl"><div class="blTitle">A HIST</div><div class="colHist" id="histA"></div></div>
+<div class="bl"><div class="blTitle">B HIST</div><div class="colHist" id="histB"></div></div>
+<div class="bl"><div class="blTitle">C HIST</div><div class="colHist" id="histC"></div></div>
 </div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div>
@@ -77,24 +63,23 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 <script>
-var cur="",lista=[],logB=[],logC=[],logD=[],logE=[],logF=[],lastA=null,lastB=null,lastC=null,lastD=null,lastE=null,lastF=null,tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},nextA={},nextB={},nextC={},nextD={},nextE={},nextF={},prevA=null,sinal=null,green=0,red=0,modo2=false,hist=[],logAcerto=[];
-function gv(n){return tb[n]||""}function gc(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3}function ga(a){if(!a)return[];return a.replace('C','').split('/').map(Number)}
-function clone(o){try{return JSON.parse(JSON.stringify(o))}catch(e){return o}}
-function save(){hist.push({lista:clone(lista),logB:clone(logB),logC:clone(logC),logD:clone(logD),logE:clone(logE),logF:clone(logF),lastA:clone(lastA),lastB:clone(lastB),lastC:clone(lastC),lastD:clone(lastD),lastE:clone(lastE),lastF:clone(lastF),nextA:clone(nextA),nextB:clone(nextB),nextC:clone(nextC),nextD:clone(nextD),nextE:clone(nextE),nextF:clone(nextF),prevA:clone(prevA),sinal:clone(sinal),green:green,red:red,logAcerto:clone(logAcerto)});if(hist.length>60)hist.shift();}
-function mostrarDisplay(){var el=document.getElementById('dig');if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
+var cur="",lista=[],green=0,red=0,hist=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,modo2=false;
+function getCol(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
+function getCols(s){try{return s.replace('C','').split('/').map(Number)}catch(e){return []}}
+function mostrarDisplay(){var el=document.getElementById('dig');if(!el)return;if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
 function atualizarTela(){
+try{
 var bn=document.getElementById('boxNum');bn.innerHTML="";var m=lista.slice(-9);for(var i=m.length-1;i>=0;i--){var o=m[i];var d=document.createElement('div');d.className='sq '+(o.w===null?'b':o.w?'g':'r');d.textContent=o.raw;bn.appendChild(d);}
 var ba=document.getElementById('boxAcerto');ba.innerHTML="";var ma=logAcerto.slice(-9);for(var i=ma.length-1;i>=0;i--){var o=ma[i];var d=document.createElement('div');d.className='sq '+(o.acerto?'g':'r');d.textContent=o.raw;ba.appendChild(d);}
 document.getElementById('gCount').textContent="✅ "+green;document.getElementById('rCount').textContent="❌ "+red;document.getElementById('pillPlacar').textContent="GREEN "+green+" x "+red+" RED";
 var pc=document.getElementById('pillCol'),txt=document.getElementById('txtOrig'),cn=document.getElementById('boxColNums');
 if(sinal){pc.textContent=sinal.col;txt.textContent=sinal.orig;pc.style.background="linear-gradient(180deg,#ff6b6b,#dc2626)";pc.style.color="#fff";cn.innerHTML="";for(var i=0;i<sinal.tentativas.length;i++){var t=sinal.tentativas[i];var s=document.createElement('div');s.className='sq '+(t.acerto?'g':'r');s.style.width='32px';s.style.height='24px';s.textContent=t.num;cn.appendChild(s);}}else{pc.textContent="AGUARDANDO";txt.textContent="-";pc.style.background="linear-gradient(180deg,#f9e27a,#d4af37)";pc.style.color="#0a2a12";cn.innerHTML="";}
+var seq=document.getElementById('seqTop');if(seq){seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}}
+}catch(e){console.log(e)}
 }
-function renderColuna(log,id){var c=document.getElementById(id);if(!c)return;c.innerHTML="";var linha=null;for(var i=0;i<log.length;i++){var l=log[i];if(l.w===null){linha=document.createElement('div');linha.className='linhaAzul';var d=document.createElement('div');d.className='ln b';d.textContent=l.raw;linha.appendChild(d);c.appendChild(linha);}else{if(!linha){linha=document.createElement('div');linha.className='linhaAzul';c.appendChild(linha);}var d=document.createElement('div');d.className='ln '+(l.w?'g':'r');d.textContent=l.raw;linha.appendChild(d);}}}
-function getLastBlue(log){for(var i=log.length-1;i>=0;i--){if(log[i]&&log[i].w===null)return log[i];}return null;}
-function atualizarDetalhe(){renderColuna(lista,'histA');renderColuna(logB,'histB');renderColuna(logC,'histC');renderColuna(logD,'histD');renderColuna(logE,'histE');renderColuna(logF,'histF');var seq=document.getElementById('seqTop');seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}function upd(log,sy,cr){var b=getLastBlue(log);var el=document.getElementById(sy),crEl=document.getElementById(cr);if(!el)return;if(b){el.textContent=b.raw;crEl.textContent=gv(b.n);}else{el.textContent='-';crEl.textContent='';}}upd(lista,'syA','crA');upd(logB,'syB','crB');upd(logC,'syC','crC');upd(logD,'syD','crD');upd(logE,'syE','crE');upd(logF,'syF','crF');}
-function checarGatilho(map,nome,max){if(sinal)return null;for(var k in map){var arr=map[k];if(arr&&arr[0]&&!arr[0].w){return{col:arr[0].colOrig||tb[k]||"C1/2",orig:nome+" "+k+" RED",tentativas:[],ganhou:false,maxTent:max};}}return null;}
-function R(p){if(!p)return;var show=p;if(prevA&&show.n!==0){var colPrev=lastA?lastA.a:gv(prevA.n);if(!nextA[prevA.n])nextA[prevA.n]=[];nextA[prevA.n].unshift({raw:show.raw,w:ga(colPrev).indexOf(gc(show.n))>=0,colOrig:gv(show.n)});if(nextA[prevA.n].length>10)nextA[prevA.n].pop();}var g=checarGatilho(nextA,"ORIGEM A",1)||checarGatilho(nextB,"ORIGEM B",2)||checarGatilho(nextC,"ORIGEM C",3)||checarGatilho(nextD,"ORIGEM D",4)||checarGatilho(nextE,"ORIGEM E",5)||checarGatilho(nextF,"ORIGEM F",6);if(g&&!sinal){sinal=g;atualizarTela();}atualizarDetalhe();}
+function save(){try{hist.push({lista:JSON.parse(JSON.stringify(lista)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto))});if(hist.length>60)hist.shift();}catch(e){}}
 function digitar(d){
+try{
 if(cur.length>=2 && cur!=="0" && cur!=="00" && cur!=="000") return;
 if(cur===""&&d==="0"){cur="0";}
 else if(cur==="0"&&d==="0"){cur="00";}
@@ -102,39 +87,56 @@ else if(cur==="00"&&d==="0"){cur="000";}
 else if(cur==="0"||cur==="00"){cur=d;}
 else{var t=cur+d;if(t!=="000" && parseInt(t)>36)return;cur=t;}
 mostrarDisplay();
+}catch(e){cur="";mostrarDisplay()}
 }
 function confirmar(){
+try{
 if(cur==="")return;
 if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';cur="";mostrarDisplay();return;}
-if(cur==="0"){save();if(lista.length>0)lista.pop();if(logB.length>0)logB.pop();if(logC.length>0)logC.pop();if(logD.length>0)logD.pop();if(logE.length>0)logE.pop();if(logF.length>0)logF.pop();if(logAcerto.length>0 && lista.length<2)logAcerto.pop();if(lista.length===0)lastA=null;prevA=null;cur="";mostrarDisplay();atualizarTela();atualizarDetalhe();return;}
-if(cur==="00"){save();lista=[];logB=[];logC=[];logD=[];logE=[];logF=[];lastA=null;lastB=null;lastC=null;lastD=null;lastE=null;lastF=null;nextA={};nextB={};nextC={};nextD={};nextE={};nextF={};prevA=null;sinal=null;green=0;red=0;logAcerto=[];cur="";mostrarDisplay();atualizarTela();atualizarDetalhe();return;}
+if(cur==="0"){save();if(lista.length>0)lista.pop();if(logAcerto.length>0 && lista.length===0)logAcerto=[];sinal=null;cur="";mostrarDisplay();atualizarTela();return;}
+if(cur==="00"){save();lista=[];green=0;red=0;sinal=null;logAcerto=[];cur="";mostrarDisplay();atualizarTela();return;}
 var raw=cur;var v=parseInt(cur);if(v>36||isNaN(v)){cur="";mostrarDisplay();return;}
 save();
-// Se tiver sinal ativo, testa o acerto
-if(sinal&&!sinal.ganhou&&sinal.tentativas.length<sinal.maxTent){
-  var cn=getCol(v),cs=ga(sinal.col),ac=cs.indexOf(cn)>=0;
-  sinal.tentativas.push({num:raw,acerto:ac});
-  if(ac){green++;logAcerto.push({raw:raw,acerto:true});}
+
+// SE TIVER SINAL, ESSE NUMERO É A TENTATIVA
+if(sinal){
+  var colNum=getCol(v);
+  var cols=getCols(sinal.col);
+  var acerto=cols.indexOf(colNum)>=0;
+  sinal.tentativas.push({num:raw,acerto:acerto});
+  if(acerto){green++;logAcerto.push({raw:raw,acerto:true});}
   else{red++;logAcerto.push({raw:raw,acerto:false});}
   sinal=null;
-  // ainda adiciona o numero na lista normal
+  // adiciona numero na lista mesmo assim
+  var col=tb[v]||"C1/2";
+  var tipo=true;
+  if(lista.length>0){
+    var last=lista[lista.length-1];
+    var lastCol=tb[last.n]||"C1/2";
+    tipo=getCols(lastCol).indexOf(getCol(v))>=0;
+  }
+  lista.push({n:v,raw:raw,w:lista.length===0?null:tipo});
+  cur="";mostrarDisplay();atualizarTela();return;
 }
-var col=gv(v);
-function addLog(log,lastRef,mod,map){
-  if(log.length%mod===0){log.push({n:v,raw:raw,w:null});return{n:v,raw:raw,a:col};}
-  else{var cw=ga(lastRef.a).indexOf(gc(v))>=0;log.push({n:v,raw:raw,w:cw});var isPrevBlue=log.length>=2&&log[log.length-2].w===null;if(isPrevBlue){var blueNum=log[log.length-2].n;if(!map[blueNum])map[blueNum]=[];map[blueNum].unshift({raw:raw,w:cw,colOrig:col});if(map[blueNum].length>5)map[blueNum].pop();}return lastRef;}
+
+// SEM SINAL - adiciona normal e verifica se cria novo sinal
+var col=tb[v]||"C1/2";
+var w=null;
+if(lista.length>0){
+  var last=lista[lista.length-1];
+  var lastCol=tb[last.n]||"C1/2";
+  w=getCols(lastCol).indexOf(getCol(v))>=0;
+  // se deu RED, cria sinal para proxima jogada com a coluna do numero que falhou
+  if(!w){
+    sinal={col:col,orig:"ORIGEM A "+last.raw+" RED",tentativas:[],ganhou:false,maxTent:1};
+  }
 }
-if(lista.length===0){lastA={n:v,raw:raw,a:col};lista.push({n:v,raw:raw,w:null});}
-else{var cwA=ga(lastA.a).indexOf(gc(v))>=0;lista.push({n:v,raw:raw,w:cwA});lastA={n:v,raw:raw,a:col};}
-lastB=addLog(logB,lastB||{a:col},2,nextB);lastC=addLog(logC,lastC||{a:col},3,nextC);lastD=addLog(logD,lastD||{a:col},4,nextD);lastE=addLog(logE,lastE||{a:col},5,nextE);lastF=addLog(logF,lastF||{a:col},6,nextF);
-prevA={n:v,raw:raw};
-var showObj={n:v,raw:raw};
-if(prevA){var colPrev=lastA?lastA.a:gv(prevA.n);if(!nextA[prevA.n])nextA[prevA.n]=[];}
-R(showObj);
-cur="";mostrarDisplay();atualizarTela();atualizarDetalhe();
+lista.push({n:v,raw:raw,w:lista.length===0?null:w});
+cur="";mostrarDisplay();atualizarTela();
+}catch(e){console.log(e);cur="";mostrarDisplay();atualizarTela();}
 }
-function corrigir(){if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;logB=p.logB;logC=p.logC;logD=p.logD;logE=p.logE;logF=p.logF;lastA=p.lastA;lastB=p.lastB;lastC=p.lastC;lastD=p.lastD;lastE=p.lastE;lastF=p.lastF;nextA=p.nextA;nextB=p.nextB;nextC=p.nextC;nextD=p.nextD;nextE=p.nextE;nextF=p.nextF;prevA=p.prevA;sinal=p.sinal;green=p.green;red=p.red;logAcerto=p.logAcerto;atualizarTela();atualizarDetalhe();}}
-mostrarDisplay();atualizarTela();atualizarDetalhe();
+function corrigir(){try{if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;atualizarTela();}}catch(e){}}
+mostrarDisplay();atualizarTela();
 </script>
 </body>
 </html>

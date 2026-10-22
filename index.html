@@ -17,45 +17,32 @@ body{display:flex;justify-content:center}
 .display.vazio{color:#3a7a3a;font-size:13px}
 .painel{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;overflow:hidden}
-.box{border:1.5px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:6px 6px 4px 6px;display:flex;flex-direction:column;overflow:hidden}
-.boxLabel{font-size:9px;font-weight:900;color:#d4af37;margin-bottom:4px;text-align:left}
-.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;overflow:hidden;width:100%;flex:1}
-.sq{width:100%;max-width:52px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}
+.box{border:1.5px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:6px;display:flex;flex-direction:column;overflow:hidden}
+.boxLabel{font-size:9px;font-weight:900;color:#d4af37;margin-bottom:4px}
+.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;width:100%}
+.sq{width:100%;max-width:52px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
 .sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}
-.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;display:inline-block}
+.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;display:inline-block;min-width:110px}
 .centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:6px}
 .kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 6px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;font-family:'Montserrat',sans-serif;display:flex;align-items:center;justify-content:center}
-.painelDetalhe{flex:1;display:none;flex-direction:column;gap:4px;padding:6px;overflow:auto;background:#0d2818}
-.bl{background:#0e2a14;border:1px solid #1a4d1a;border-radius:8px;padding:6px;margin-bottom:4px}
-.blTitle{font-size:10px;font-weight:900;color:#f9e27a;margin-bottom:4px}
-.linhaAzul{display:flex;gap:3px;flex-wrap:wrap;background:rgba(0,0,0,0.2);border-radius:5px;padding:3px}
-.ln{width:28px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff}
-.ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}
+.k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
+.painelDetalhe{flex:1;display:none;flex-direction:column;gap:4px;padding:6px;overflow:auto}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="display vazio" id="dig">DIGITE O NÚMERO</div>
-
 <div class="painel" id="painel1">
 <div class="grid">
 <div class="box"><div class="boxLabel">NUMERO CHAMADO</div><div class="sqs" id="boxNum"></div></div>
-<div class="box"><div class="boxLabel">JOGAR NA COLUNA</div><div class="centroBox"><span class="pill" id="pillCol">AGUARDANDO</span><div id="txtOrig" style="font-size:8px;color:#f9e27a;font-weight:900">-</div><div id="boxColNums" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div></div>
+<div class="box"><div class="boxLabel">JOGAR NA COLUNA</div><div class="centroBox"><span class="pill" id="pillCol">AGUARDANDO</span><div id="txtOrig" style="font-size:9px;color:#f9e27a;font-weight:900;text-align:center">-</div><div id="boxColNums" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
 <div class="box"><div class="boxLabel">ACERTO OU ERRO</div><div class="sqs" id="boxAcerto"></div></div>
 <div class="box"><div class="boxLabel">PLACAR</div><div class="centroBox"><span class="pill" id="pillPlacar">GREEN 0 x 0 RED</span><div style="font-weight:900;margin-top:4px"><span style="color:#4ade80" id="gCount">✅ 0</span> <span style="color:#f87171" id="rCount">❌ 0</span></div></div></div>
 </div>
 </div>
-
-<div class="painelDetalhe" id="painel2">
-<div class="bl"><div class="blTitle">SEQUENCIA</div><div class="sqs" id="seqTop" style="display:flex"></div></div>
-<div class="bl"><div class="blTitle">A HIST (1+1)</div><div id="histA"></div></div>
-<div class="bl"><div class="blTitle">B HIST (1+2)</div><div id="histB"></div></div>
-<div class="bl"><div class="blTitle">C HIST (1+3)</div><div id="histC"></div></div>
-</div>
-
+<div class="painelDetalhe" id="painel2"><div id="detalheContent" style="color:#fff;font-size:12px"></div></div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div>
 <div class="kr"><button class="k" onclick="digitar('4')">4</button><button class="k" onclick="digitar('5')">5</button><button class="k" onclick="digitar('6')">6</button></div>
@@ -63,29 +50,23 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="confirmar()">ENTER</button><button class="k" onclick="digitar('0')">0</button><button class="k" onclick="corrigir()">CORRIGIR</button></div>
 </div>
 </div>
-
 <script>
-var cur="",listaNumeros=[],green=0,red=0,historico=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,nextMap={},modo2=false;
+var cur="",lista=[],green=0,red=0,hist=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,nextMap={},modo2=false;
 function getCol(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
 function getCols(s){return s.replace('C','').split('/').map(Number);}
 function mostrarDisplay(){var el=document.getElementById('dig');if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
 function atualizarTela(){
-// NUMERO CHAMADO - mostra 9 quadrados centralizados 3x3
-var bn=document.getElementById('boxNum');bn.innerHTML="";var mostrar=listaNumeros.slice(-9);for(var i=mostrar.length-1;i>=0;i--){var o=mostrar[i];var d=document.createElement('div');d.className='sq '+(o.tipo==='blue'?'b':o.tipo==='green'?'g':'r');d.textContent=o.num;bn.appendChild(d);}
-for(var k=mostrar.length;k<9;k++){var d=document.createElement('div');d.style.visibility='hidden';d.className='sq';bn.appendChild(d);}
+var bn=document.getElementById('boxNum');bn.innerHTML="";var mostrar=lista.slice(-9);for(var i=mostrar.length-1;i>=0;i--){var o=mostrar[i];var d=document.createElement('div');d.className='sq '+(o.tipo==='blue'?'b':o.tipo==='green'?'g':'r');d.textContent=o.num;bn.appendChild(d);}
 var ba=document.getElementById('boxAcerto');ba.innerHTML="";var mostrarA=logAcerto.slice(-9);for(var i=mostrarA.length-1;i>=0;i--){var o=mostrarA[i];var d=document.createElement('div');d.className='sq '+(o.acerto?'g':'r');d.textContent=o.num;ba.appendChild(d);}
-for(var k=mostrarA.length;k<9;k++){var d=document.createElement('div');d.style.visibility='hidden';d.className='sq';ba.appendChild(d);}
 document.getElementById('gCount').textContent="✅ "+green;document.getElementById('rCount').textContent="❌ "+red;document.getElementById('pillPlacar').textContent="GREEN "+green+" x "+red+" RED";
-var pc=document.getElementById('pillCol');
-var txt=document.getElementById('txtOrig');
-var colNums=document.getElementById('boxColNums');
+var pc=document.getElementById('pillCol'),txt=document.getElementById('txtOrig'),colNums=document.getElementById('boxColNums');
 if(sinal){
   pc.textContent=sinal.col;
   txt.textContent=sinal.orig;
   pc.style.background="linear-gradient(180deg,#ff6b6b,#dc2626)";
   pc.style.color="#fff";
   colNums.innerHTML="";
-  for(var i=0;i<sinal.tentativas.length;i++){var t=sinal.tentativas[i];var s=document.createElement('div');s.className='sq '+(t.acerto?'g':'r');s.style.width='30px';s.style.height='24px';s.textContent=t.num;colNums.appendChild(s);}
+  for(var i=0;i<sinal.tentativas.length;i++){var t=sinal.tentativas[i];var s=document.createElement('div');s.className='sq '+(t.acerto?'g':'r');s.style.width='32px';s.style.height='24px';s.textContent=t.num;colNums.appendChild(s);}
 }else{
   pc.textContent="AGUARDANDO";
   txt.textContent="-";
@@ -94,32 +75,46 @@ if(sinal){
   colNums.innerHTML="";
 }
 }
-function salvarEstado(){historico.push({lista:JSON.parse(JSON.stringify(listaNumeros)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto)),map:JSON.parse(JSON.stringify(nextMap))});if(historico.length>50)historico.shift();}
+function salvarEstado(){hist.push({lista:JSON.parse(JSON.stringify(lista)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto)),map:JSON.parse(JSON.stringify(nextMap))});if(hist.length>50)hist.shift();}
 function digitar(d){if(cur.length>=3 && cur!=="0" && cur!=="00") return;if(cur===""&&d==="0"){cur="0";}else if(cur==="0"&&d==="0"){cur="00";}else if(cur==="00"&&d==="0"){cur="000";}else if(cur==="0"||cur==="00"){cur=d;}else{var tentativa=cur+d;if(parseInt(tentativa)>36)return;cur=tentativa;}mostrarDisplay();}
 function confirmar(){
 if(cur==="")return;
-if(cur==="0"){salvarEstado();if(listaNumeros.length>0)listaNumeros.pop();cur="";mostrarDisplay();atualizarTela();return;}
-if(cur==="00"){salvarEstado();listaNumeros=[];green=0;red=0;sinal=null;logAcerto=[];nextMap={};cur="";mostrarDisplay();atualizarTela();return;}
-if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';cur="";mostrarDisplay();return;}
+if(cur==="0"){salvarEstado();if(lista.length>0)lista.pop();if(Object.keys(nextMap).length>0){var lastKey=lista.length>0?lista[lista.length-1]?.num:null;if(lastKey&&nextMap[lastKey])nextMap[lastKey].shift();}cur="";mostrarDisplay();atualizarTela();return;}
+if(cur==="00"){salvarEstado();lista=[];green=0;red=0;sinal=null;logAcerto=[];nextMap={};cur="";mostrarDisplay();atualizarTela();return;}
+if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';var det=document.getElementById('detalheContent');if(det){det.innerHTML="SEGUNDA PAGINA - HISTORICO<br><br>";for(var k in nextMap){det.innerHTML+="<div style='margin-bottom:8px;border:1px solid #d4af37;padding:4px;border-radius:6px'>Numero "+k+" ("+tb[k]+"):<br>";for(var j=0;j<nextMap[k].length;j++){var e=nextMap[k][j];det.innerHTML+="<span style='display:inline-block;padding:2px 6px;margin:2px;border-radius:4px;background:"+(e.tipo==='green'?'#16a34a':e.tipo==='red'?'#dc2626':'#1e40af')+"'>"+e.num+" "+(e.tipo==='green'?'✅':'❌')+"</span>";}det.innerHTML+="</div>";}}cur="";mostrarDisplay();return;}
 var num=parseInt(cur);if(num>36||isNaN(num)){cur="";mostrarDisplay();return;}
 salvarEstado();
-var colStr=tb[num];
-var last=listaNumeros.length>0?listaNumeros[listaNumeros.length-1]:null;
+// determina se é azul (posicao par) ou branco
+var idx=lista.length;
+var isBlue=(idx%2===0);
 var tipo='blue';
-if(last){
-  var lastCol=tb[parseInt(last.num)];
-  if(lastCol){var need=getCols(lastCol);var isGreen=need.indexOf(getCol(num))>=0;tipo=isGreen?'green':'red';
-  if(!nextMap[last.num])nextMap[last.num]=[];nextMap[last.num].unshift({num:cur,tipo:tipo,col:colStr,orig:last.num});}
+var colStr=tb[num];
+if(!isBlue && lista.length>0){
+  var prev=lista[lista.length-1];
+  var prevCol=tb[parseInt(prev.num)];
+  if(prevCol){
+    var need=getCols(prevCol);
+    var ok=need.indexOf(getCol(num))>=0;
+    tipo=ok?'green':'red';
+    var blueNum=lista.length>=2?lista[lista.length-2].num:null;
+    // procura o azul anterior
+    for(var b=lista.length-1;b>=0;b--){if(b%2===0){blueNum=lista[b].num;break;}}
+    if(blueNum){
+      if(!nextMap[blueNum])nextMap[blueNum]=[];
+      nextMap[blueNum].unshift({num:cur,tipo:tipo,col:colStr,orig:blueNum});
+      if(nextMap[blueNum].length>5)nextMap[blueNum].pop();
+    }
+  }
 }
-listaNumeros.push({num:cur,tipo:tipo,col:colStr});
+lista.push({num:cur,tipo:isBlue?'blue':tipo,col:colStr,isBlue:isBlue});
 
-// LÓGICA NOVA PARA MOSTRAR COLUNA - procura QUALQUER vermelho no historico
+// cria sinal se tiver vermelho
 if(!sinal){
-  for(var k in nextMap){
-    var arr=nextMap[k];
+  for(var key in nextMap){
+    var arr=nextMap[key];
     for(var j=0;j<arr.length;j++){
       if(arr[j].tipo==='red'){
-        sinal={col:arr[j].col,orig:"ORIGEM "+k+" -> "+arr[j].num,tentativas:[],ganhou:false,max:1,origNum:k};
+        sinal={col:arr[j].col,orig:"ORIGEM "+key+" -> "+arr[j].num+" RED",tentativas:[],ganhou:false,max:1,origNum:key};
         break;
       }
     }
@@ -136,7 +131,7 @@ if(sinal&&!sinal.ganhou&&sinal.tentativas.length<sinal.max){
 }
 cur="";mostrarDisplay();atualizarTela();
 }
-function corrigir(){if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(historico.length>0){var p=historico.pop();listaNumeros=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;nextMap=p.map;atualizarTela();}}
+function corrigir(){if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;nextMap=p.map;atualizarTela();}}
 mostrarDisplay();atualizarTela();
 </script>
 </body>

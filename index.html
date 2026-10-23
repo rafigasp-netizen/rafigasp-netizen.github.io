@@ -6,41 +6,21 @@
 <title>RAFIGASP</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;background:#0d2818;overflow:hidden}
-body{display:flex;justify-content:center}
-.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
-.topo{padding:10px 0 5px 0;text-align:center;background:#0a1f14;flex-shrink:0}
-.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:40px;color:#e8c76a;line-height:1}
-.topoS{font-size:9px;letter-spacing:4px;color:#d4af37;font-weight:800;margin-top:2px}
-.display{margin:6px 8px;background:#000;border:2px solid #d4af37;border-radius:10px;height:46px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:20px;flex-shrink:0}
-.display.vazio{color:#3a7a3a;font-size:13px}
-.painel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;overflow:hidden}
-.box{border:1.5px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:6px;display:flex;flex-direction:column;overflow:hidden}
-.boxLabel{font-size:9px;font-weight:900;color:#d4af37;margin-bottom:4px}
-.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;width:100%}
-.sq{width:100%;max-width:52px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
-.sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}
-.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;min-width:110px}
-.centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:6px}
-.kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 6px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
-.painelDetalhe{flex:1;display:none;flex-direction:column;gap:4px;padding:6px;overflow:auto;background:#0d2818}
-.seqTop{display:flex;flex-wrap:wrap;gap:3px;background:#0a1a0a;border:1px solid #1a4d1a;border-radius:6px;padding:4px;min-height:28px}
-.ln{width:28px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;border:1px solid #000}
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818;overflow:hidden}body{display:flex;justify-content:center}.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column;position:relative}.topo{padding:10px 0 5px 0;text-align:center;background:#0a1f14;flex-shrink:0}.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:40px;color:#e8c76a;line-height:1}.topoS{font-size:9px;letter-spacing:4px;color:#d4af37;font-weight:800;margin-top:2px}.display{margin:6px 8px;background:#000;border:2px solid #d4af37;border-radius:10px;height:46px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:20px;flex-shrink:0}.display.vazio{color:#3a7a3a;font-size:13px}.painel{flex:1;display:flex;flex-direction:column;overflow:hidden}.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;overflow:hidden}.box{border:1.5px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:6px;display:flex;flex-direction:column;overflow:hidden}.boxLabel{font-size:9px;font-weight:900;color:#d4af37;margin-bottom:4px}.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;width:100%}.sq{width:100%;max-width:52px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}.sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;min-width:110px}.centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:6px}.kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 6px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
+.painel2{flex:1;display:none;flex-direction:column;overflow:hidden;padding:6px;gap:6px}
+.seqTop{display:flex;gap:4px;background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:6px;flex-wrap:wrap;min-height:38px}
+.ln{width:28px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
 .ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}
-.bl{background:#0e2a14;border:1px solid #1a4d1a;border-radius:6px;padding:4px;margin-bottom:3px}
-.blTitle{font-size:9px;font-weight:900;color:#f9e27a}
-.colHist{display:flex;flex-direction:column;gap:2px}
-.linha{display:flex;gap:2px;flex-wrap:wrap;background:rgba(0,0,0,0.2);border-radius:4px;padding:2px}
+.histRow{border:1px solid #1a4d1a;background:#0f2e1a;border-radius:8px;padding:5px 8px;display:flex;align-items:center;gap:6px;min-height:32px}
+.histLabel{font-size:11px;font-weight:900;color:#e8c76a;width:52px;flex-shrink:0}
+.histNums{display:flex;gap:4px;flex-wrap:wrap;flex:1}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="display vazio" id="dig">DIGITE O NÚMERO</div>
+
 <div class="painel" id="painel1">
 <div class="grid">
 <div class="box"><div class="boxLabel">NUMERO CHAMADO</div><div class="sqs" id="boxNum"></div></div>
@@ -49,24 +29,32 @@ body{display:flex;justify-content:center}
 <div class="box"><div class="boxLabel">PLACAR</div><div class="centroBox"><span class="pill" id="pillPlacar">GREEN 0 x 0 RED</span><div style="font-weight:900;margin-top:4px"><span style="color:#4ade80" id="gCount">✅ 0</span> <span style="color:#f87171" id="rCount">❌ 0</span></div></div></div>
 </div>
 </div>
-<div class="painelDetalhe" id="painel2">
+
+<div class="painel2" id="painel2">
 <div class="seqTop" id="seqTop"></div>
-<div class="bl"><div class="blTitle">A HIST</div><div class="colHist" id="histA"></div></div>
-<div class="bl"><div class="blTitle">B HIST</div><div class="colHist" id="histB"></div></div>
-<div class="bl"><div class="blTitle">C HIST</div><div class="colHist" id="histC"></div></div>
+<div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:5px">
+<div class="histRow"><div class="histLabel">A HIST</div><div class="histNums" id="hA"></div></div>
+<div class="histRow"><div class="histLabel">B HIST</div><div class="histNums" id="hB"></div></div>
+<div class="histRow"><div class="histLabel">C HIST</div><div class="histNums" id="hC"></div></div>
+<div class="histRow"><div class="histLabel">D HIST</div><div class="histNums" id="hD"></div></div>
+<div class="histRow"><div class="histLabel">E HIST</div><div class="histNums" id="hE"></div></div>
+<div class="histRow"><div class="histLabel">F HIST</div><div class="histNums" id="hF"></div></div>
 </div>
+</div>
+
 <div class="kb">
 <div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div>
 <div class="kr"><button class="k" onclick="digitar('4')">4</button><button class="k" onclick="digitar('5')">5</button><button class="k" onclick="digitar('6')">6</button></div>
 <div class="kr"><button class="k" onclick="digitar('7')">7</button><button class="k" onclick="digitar('8')">8</button><button class="k" onclick="digitar('9')">9</button></div>
 <div class="kr"><button class="k" onclick="confirmar()">ENTER</button><button class="k" onclick="digitar('0')">0</button><button class="k" onclick="corrigir()">CORRIGIR</button></div>
 </div>
+
 </div>
 <script>
 var cur="",lista=[],green=0,red=0,hist=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,modo2=false;
 function getCol(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
 function getCols(s){try{return s.replace('C','').split('/').map(Number)}catch(e){return []}}
-function mostrarDisplay(){var el=document.getElementById('dig');if(!el)return;if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
+function mostrarDisplay(){var el=document.getElementById('dig');if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - VOLTAR / SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
 function atualizarTela(){
 try{
 var bn=document.getElementById('boxNum');bn.innerHTML="";var m=lista.slice(-9);for(var i=m.length-1;i>=0;i--){var o=m[i];var d=document.createElement('div');d.className='sq '+(o.w===null?'b':o.w?'g':'r');d.textContent=o.raw;bn.appendChild(d);}
@@ -74,67 +62,15 @@ var ba=document.getElementById('boxAcerto');ba.innerHTML="";var ma=logAcerto.sli
 document.getElementById('gCount').textContent="✅ "+green;document.getElementById('rCount').textContent="❌ "+red;document.getElementById('pillPlacar').textContent="GREEN "+green+" x "+red+" RED";
 var pc=document.getElementById('pillCol'),txt=document.getElementById('txtOrig'),cn=document.getElementById('boxColNums');
 if(sinal){pc.textContent=sinal.col;txt.textContent=sinal.orig;pc.style.background="linear-gradient(180deg,#ff6b6b,#dc2626)";pc.style.color="#fff";cn.innerHTML="";for(var i=0;i<sinal.tentativas.length;i++){var t=sinal.tentativas[i];var s=document.createElement('div');s.className='sq '+(t.acerto?'g':'r');s.style.width='32px';s.style.height='24px';s.textContent=t.num;cn.appendChild(s);}}else{pc.textContent="AGUARDANDO";txt.textContent="-";pc.style.background="linear-gradient(180deg,#f9e27a,#d4af37)";pc.style.color="#0a2a12";cn.innerHTML="";}
-var seq=document.getElementById('seqTop');if(seq){seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}}
-}catch(e){console.log(e)}
+var seq=document.getElementById('seqTop');seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}
+var groups={A:[],B:[],C:[],D:[],E:[],F:[]};
+for(var i=0;i<lista.length;i++){var key=["A","B","C","D","E","F"][i%6];groups[key].push(lista[i]);}
+for(var k in groups){var el=document.getElementById('h'+k);if(el){el.innerHTML="";for(var j=0;j<groups[k].length;j++){var l=groups[k][j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;el.appendChild(d);}}}
+}catch(e){}
 }
 function save(){try{hist.push({lista:JSON.parse(JSON.stringify(lista)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto))});if(hist.length>60)hist.shift();}catch(e){}}
-function digitar(d){
-try{
-if(cur.length>=2 && cur!=="0" && cur!=="00" && cur!=="000") return;
-if(cur===""&&d==="0"){cur="0";}
-else if(cur==="0"&&d==="0"){cur="00";}
-else if(cur==="00"&&d==="0"){cur="000";}
-else if(cur==="0"||cur==="00"){cur=d;}
-else{var t=cur+d;if(t!=="000" && parseInt(t)>36)return;cur=t;}
-mostrarDisplay();
-}catch(e){cur="";mostrarDisplay()}
-}
-function confirmar(){
-try{
-if(cur==="")return;
-if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';cur="";mostrarDisplay();return;}
-if(cur==="0"){save();if(lista.length>0)lista.pop();if(logAcerto.length>0 && lista.length===0)logAcerto=[];sinal=null;cur="";mostrarDisplay();atualizarTela();return;}
-if(cur==="00"){save();lista=[];green=0;red=0;sinal=null;logAcerto=[];cur="";mostrarDisplay();atualizarTela();return;}
-var raw=cur;var v=parseInt(cur);if(v>36||isNaN(v)){cur="";mostrarDisplay();return;}
-save();
-
-// SE TIVER SINAL, ESSE NUMERO É A TENTATIVA
-if(sinal){
-  var colNum=getCol(v);
-  var cols=getCols(sinal.col);
-  var acerto=cols.indexOf(colNum)>=0;
-  sinal.tentativas.push({num:raw,acerto:acerto});
-  if(acerto){green++;logAcerto.push({raw:raw,acerto:true});}
-  else{red++;logAcerto.push({raw:raw,acerto:false});}
-  sinal=null;
-  // adiciona numero na lista mesmo assim
-  var col=tb[v]||"C1/2";
-  var tipo=true;
-  if(lista.length>0){
-    var last=lista[lista.length-1];
-    var lastCol=tb[last.n]||"C1/2";
-    tipo=getCols(lastCol).indexOf(getCol(v))>=0;
-  }
-  lista.push({n:v,raw:raw,w:lista.length===0?null:tipo});
-  cur="";mostrarDisplay();atualizarTela();return;
-}
-
-// SEM SINAL - adiciona normal e verifica se cria novo sinal
-var col=tb[v]||"C1/2";
-var w=null;
-if(lista.length>0){
-  var last=lista[lista.length-1];
-  var lastCol=tb[last.n]||"C1/2";
-  w=getCols(lastCol).indexOf(getCol(v))>=0;
-  // se deu RED, cria sinal para proxima jogada com a coluna do numero que falhou
-  if(!w){
-    sinal={col:col,orig:"ORIGEM A "+last.raw+" RED",tentativas:[],ganhou:false,maxTent:1};
-  }
-}
-lista.push({n:v,raw:raw,w:lista.length===0?null:w});
-cur="";mostrarDisplay();atualizarTela();
-}catch(e){console.log(e);cur="";mostrarDisplay();atualizarTela();}
-}
+function digitar(d){try{if(cur.length>=2&&cur!=="0"&&cur!=="00"&&cur!=="000")return;if(cur===""&&d==="0"){cur="0";}else if(cur==="0"&&d==="0"){cur="00";}else if(cur==="00"&&d==="0"){cur="000";}else if(cur==="0"||cur==="00"){cur=d;}else{var t=cur+d;if(t!=="000"&&parseInt(t)>36)return;cur=t;}mostrarDisplay();}catch(e){cur="";mostrarDisplay()}}
+function confirmar(){try{if(cur==="")return;if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';cur="";mostrarDisplay();return;}if(cur==="0"){save();if(lista.length>0)lista.pop();sinal=null;cur="";mostrarDisplay();atualizarTela();return;}if(cur==="00"){save();lista=[];green=0;red=0;sinal=null;logAcerto=[];cur="";mostrarDisplay();atualizarTela();return;}var raw=cur;var v=parseInt(cur);if(v>36||isNaN(v)){cur="";mostrarDisplay();return;}save();if(sinal){var colNum=getCol(v);var cols=getCols(sinal.col);var acerto=cols.indexOf(colNum)>=0;if(acerto){green++;logAcerto.push({raw:raw,acerto:true});}else{red++;logAcerto.push({raw:raw,acerto:false});}sinal=null;var col=tb[v]||"C1/2";var tipo=true;if(lista.length>0){var last=lista[lista.length-1];var lastCol=tb[last.n]||"C1/2";tipo=getCols(lastCol).indexOf(getCol(v))>=0;}lista.push({n:v,raw:raw,w:lista.length===0?null:tipo});cur="";mostrarDisplay();atualizarTela();return;}var col=tb[v]||"C1/2";var w=null;if(lista.length>0){var last=lista[lista.length-1];var lastCol=tb[last.n]||"C1/2";w=getCols(lastCol).indexOf(getCol(v))>=0;if(!w){sinal={col:col,orig:"ORIGEM A "+last.raw+" RED",tentativas:[],ganhou:false,maxTent:1};}}lista.push({n:v,raw:raw,w:lista.length===0?null:w});cur="";mostrarDisplay();atualizarTela();}catch(e){cur="";mostrarDisplay();atualizarTela();}}
 function corrigir(){try{if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;atualizarTela();}}catch(e){}}
 mostrarDisplay();atualizarTela();
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - PAG2 NOVO PADRAO 5 LINHAS</title>
+<title>RAFIGASP - PAG3 PADRAO 5 LINHAS VERMELHO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -19,20 +19,20 @@ body{display:flex;justify-content:center}
 .nav2 button{flex:1;height:26px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:8px;background:#112a1a;color:#d4af37}
 .nav2 button.home{background:#e8c76a;color:#111}
 .nav2 button.limpar{background:#330000;color:#ffaaaa}
-.display{margin:3px;background:#000;border:2px solid #d4af37;border-radius:8px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0;text-align:center;padding:2px;transition:all 0.3s;line-height:1.2}
+.display{margin:3px;background:#000;border:2px solid #d4af37;border-radius:8px;height:48px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0;text-align:center;padding:3px;transition:all 0.3s;line-height:1.2}
 .display.inicial{color:#1a7a2a}
-.display.sinal{background:#ffaa00;color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate;font-size:12px}
+.display.sinal{background:#ffaa00;color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate;font-size:11px}
 .display.verde{background:#00aa00;color:#fff;border-color:#00ff00;box-shadow:0 0 10px #00ff00}
 .display.vermelho{background:#cc0000;color:#fff;border-color:#ff0000;box-shadow:0 0 10px #ff0000}
-.display.alerta{background:linear-gradient(180deg,#ff0000,#990000);color:#fff;border:2px solid #ffff00;animation:piscaAlerta 0.5s infinite alternate}
+.display.alerta{background:linear-gradient(180deg,#ff0000,#990000);color:#fff;border:3px solid #ffff00;animation:piscaAlerta 0.5s infinite alternate;font-size:12px;box-shadow:0 0 20px #ff0000}
 @keyframes pisca{0%{background:#ffaa00}100%{background:#ff8800}}
-@keyframes piscaAlerta{0%{background:#ff0000}100%{background:#cc0000}}
+@keyframes piscaAlerta{0%{background:#ff0000;transform:scale(1)}100%{background:#ff4444;transform:scale(1.02)}}
 .page{flex:1;overflow-y:auto;padding:4px;display:none;flex-direction:column;gap:4px}
 .page.ativa{display:flex}
 .topBar{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:6px;display:flex;gap:4px;flex-wrap:wrap;min-height:40px;align-items:center}
-.patternFixedNovo{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:200px}
-.linhaPadrao{display:flex;gap:6px;align-items:center}
-.sq{width:36px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333;flex-shrink:0}
+.patternFixedNovo{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:180px}
+.linhaPadrao{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sq{width:34px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333;flex-shrink:0}
 .sq.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 5px #60a5fa;color:#fff}
 .sq.blue.filled{background:#1e40af;border:2px solid #fff;box-shadow:0 0 8px #60a5fa;color:#fff}
 .sq.white{background:#fff;border:1.5px solid #999;color:#000}
@@ -52,17 +52,16 @@ body{display:flex;justify-content:center}
 .k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 3px rgba(0,0,0,0.3)}
 .k:active{transform:scale(0.96);background:#fff}
 .infoBar{background:#111;border:1px solid #333;border-radius:6px;padding:6px;margin:2px 0;font-size:9px;color:#d4af37;text-align:center;line-height:1.3}
-.redListBar{background:#330000;border:2px solid #ff4444;border-radius:10px;padding:8px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:50px}
-.alertaBox{background:linear-gradient(180deg,#ff0000,#990000);border:3px solid #ffff00;border-radius:12px;padding:10px;text-align:center;font-weight:900;font-size:13px;color:#fff;box-shadow:0 0 15px #ff0000;display:none}
+.alertaBox{background:linear-gradient(180deg,#ff0000,#990000);border:3px solid #ffff00;border-radius:12px;padding:12px;text-align:center;font-weight:900;font-size:14px;color:#fff;box-shadow:0 0 20px #ff0000;display:none}
 .alertaBox.ativo{display:block;animation:piscaAlerta 0.6s infinite alternate}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irPara(2)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - PAG2 NOVO PADRAO 5 LINHAS</div></div>
+<div class="topo" onclick="irPara(1)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - PAG2 E PAG3 5 LINHAS</div></div>
 <div class="pagesNav" id="pagesNav">
-<button onclick="irPara(1)">1 INICIO</button>
-<button class="ativo" onclick="irPara(2)">2 PADRÃO</button>
+<button class="ativo" onclick="irPara(1)">1 INICIO</button>
+<button onclick="irPara(2)">2 PADRÃO</button>
 <button onclick="irPara(3)">3 VERMELHO</button>
 <button onclick="irPara(4)">4 COLUNA</button>
 <button onclick="irPara(5)">5 ACERTO</button>
@@ -78,22 +77,25 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG 2 - NOVO PADRÃO 5 LINHAS - P1 MARCA JUNTO</div>
+<div class="display inicial" id="disp">PÁG 1 - DIGITE - P2 E P3 5 LINHAS</div>
 
-<div class="page" id="page1"><div class="topBar" id="topBar1"></div></div>
+<div class="page ativa" id="page1">
+<div class="topBar" id="topBar1"></div>
+<div class="alertaBox" id="alertaBox1">
+<div id="alertaTexto1">🚨 2 VERMELHOS SEGUIDOS NA PÁG 3 - ENTRA TAMBÉM! JOGAR COLUNA 2 E 3!</div>
+</div>
+</div>
 
-<div class="page ativa" id="page2">
+<div class="page" id="page2">
 <div class="patternFixedNovo" id="patternFixed2"></div>
-<div class="infoBar" id="infoBar2">PÁGINA 2 - NOVO PADRÃO:<br>🟦⬜️🟦⬜️🟦⬜️<br>🟦⬜️⬜️<br>🟦⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️⬜️<br>Quando digita na PÁG 1, marca junto aqui - Vermelho depois do azul vai pra PÁG 3</div>
+<div class="infoBar" id="infoBar2">PÁGINA 2:<br>🟦⬜️🟦⬜️🟦⬜️<br>🟦⬜️⬜️<br>🟦⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️⬜️</div>
 </div>
 
 <div class="page" id="page3">
-<div class="emptyPage3">
-<div class="emptyTitle">🔵 PÁGINA 3 - VERMELHOS DEPOIS DO AZUL</div>
-<div class="redListBar" id="redListBar3"></div>
+<div class="patternFixedNovo" id="patternFixed3"></div>
+<div class="infoBar" id="infoBar3">PÁGINA 3:<br>🟦🟥🟦🟥🟦⬜️<br>🟦🟥🟥<br>🟦🟥🟥⬜️<br>🟦🟥🟥⬜️⬜️<br>🟦🟥🟥⬜️⬜️⬜️<br>Quando 2 vermelhos seguidos 🟥🟥, alerta na PÁG 1</div>
 <div class="alertaBox" id="alertaBox3">
-<div id="alertaTexto3">JOGAR NA COLUNA 2 E 3!</div>
-</div>
+<div id="alertaTexto3">🚨 2 VERMELHOS SEGUIDOS - JOGAR COLUNA!</div>
 </div>
 </div>
 
@@ -114,17 +116,27 @@ body{display:flex;justify-content:center}
 </div>
 
 <script>
-var cur="",lista=[],paginaAtual=2;
+var cur="",lista=[],paginaAtual=1;
 var green=0,red=0,ultimoSinal=null,ultimoResultado=null;
-var padraoLinhas = [
+var padraoP2 = [
   ['blue','white','blue','white','blue','white'],
+  ['blue','white','white'],
   ['blue','white','white','white'],
   ['blue','white','white','white','white'],
   ['blue','white','white','white','white','white']
 ];
-var todosQuadrados=[];
-var indiceAtual=0;
-var vermelhosLista=[];
+var padraoP3 = [
+  ['blue','red','blue','red','blue','white'],
+  ['blue','red','red'],
+  ['blue','red','red','white'],
+  ['blue','red','red','white','white'],
+  ['blue','red','red','white','white','white']
+];
+var todosP2=[];
+var todosP3=[];
+var idxP2=0;
+var idxP3=0;
+var vermelhosP3=[];
 function getCol(n){
  if(n==0) return 0;
  if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0) return 1;
@@ -148,54 +160,96 @@ function show(){
   else{d.textContent="P"+paginaAtual+" - NUM: "+cur;d.className="display inicial";}
   return;
  }
- if(ultimoSinal){
-  d.innerHTML="🚨 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+"<br>👉 JOGAR NA COLUNA 2 E 3!";
+ var tem2Vermelhos=false;
+ if(vermelhosP3.length>=2){
+  var countRedAfterBlue=0;
+  for(var k=lista.length-1;k>=0 && countRedAfterBlue<2;k--){
+   if(k < todosP2.length){
+    var sq=todosP2[k];
+    if(sq && sq.dataset.tipo=='white' && getCol(lista[k])==1){
+     countRedAfterBlue++;
+    }else if(sq && sq.dataset.tipo=='white' && getCol(lista[k])!=1){
+     break;
+    }
+   }
+  }
+  if(countRedAfterBlue>=2) tem2Vermelhos=true;
+ }
+ if(tem2Vermelhos){
+  d.innerHTML="🚨 2 VERMELHOS 🟥🟥 NA P3!<br>👉 PÁG 1 - ENTRA TAMBÉM! COLUNA 2/3";
+  d.className="display alerta";
+ }else if(ultimoSinal){
+  d.innerHTML="🚨 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+"<br>👉 JOGAR COLUNA 2/3";
   d.className="display alerta";
  }else{
-  if(paginaAtual==2){d.textContent="PÁG 2 - NOVO PADRÃO 5 LINHAS - Pos: "+(indiceAtual+1)+"/"+todosQuadrados.length+" - P1 marca junto";}
-  else if(paginaAtual==1){d.textContent="PÁG 1 - DIGITE - MARCA JUNTO NA PÁG 2 - Vermelho depois azul vai PÁG 3";}
-  else if(paginaAtual==3){d.textContent="PÁG 3 - VERMELHOS DEPOIS DO AZUL - "+vermelhosLista.length+" vermelhos";}
-  else{d.textContent="PÁGINA "+paginaAtual+" - DIGITE NÚMERO";}
+  if(paginaAtual==1){d.textContent="PÁG 1 - DIGITE - P2: 🟦⬜️🟦⬜️🟦⬜️ P3: 🟦🟥🟦🟥🟦⬜️ - 2🟥 alerta entra também";}
+  else if(paginaAtual==2){d.textContent="PÁG 2 - 🟦⬜️🟦⬜️🟦⬜️ - Pos: "+(idxP2+1)+"/"+todosP2.length;}
+  else if(paginaAtual==3){d.textContent="PÁG 3 - 🟦🟥🟦🟥🟦⬜️ - Pos: "+(idxP3+1)+"/"+todosP3.length+" - 2🟥🟥 alerta P1";}
+  else{d.textContent="PÁGINA "+paginaAtual+" - DIGITE";}
   d.className="display inicial";
  }
 }
-function irInicio(){cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;irPara(1);}
+function irInicio(){cur="";lista=[];vermelhosP3=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;idxP2=0;idxP3=0;irPara(1);}
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
 function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
 function apagarUltimo(){
- if(todosQuadrados.length>0 && lista.length>0){
-  if(indiceAtual==0){indiceAtual=todosQuadrados.length-1;}else{indiceAtual--;}
-  var sq=todosQuadrados[indiceAtual];
-  if(sq){
-   if(sq.dataset.tipo=="blue"){sq.textContent="";sq.className="sq blue";}
-   else{sq.textContent="";sq.className="sq white vazio";}
-  }
- }
  if(lista.length>0){
   lista.pop();
-  recalcularVermelhosDepoisAzul();
+  reconstruirTudo();
   show();upd();
  }
 }
 function limparTudo(){
- cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;
- todosQuadrados.forEach(function(sq){
-  if(sq.dataset.tipo=="blue"){sq.textContent="";sq.className="sq blue";}
-  else{sq.textContent="";sq.className="sq white vazio";}
- });
+ cur="";lista=[];vermelhosP3=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;idxP2=0;idxP3=0;
+ reconstruirTudo();
  irPara(paginaAtual);
  show();upd();
 }
-function recalcularVermelhosDepoisAzul(){
- vermelhosLista=[];
- for(var i=0;i<lista.length && i<todosQuadrados.length;i++){
-  var sq=todosQuadrados[i];
+function reconstruirTudo(){
+ todosP2.forEach(function(sq){
+  sq.textContent="";sq.className=sq.dataset.tipo=="blue"?"sq blue":"sq white vazio";
+ });
+ idxP2=0;
+ for(var i=0;i<lista.length && i<todosP2.length;i++){
+  var num=lista[i];var sq=todosP2[i];
   if(!sq) continue;
+  sq.textContent=num;
+  if(sq.dataset.tipo=="blue"){sq.className="sq blue filled";}
+  else{var col=getCol(num);if(col==1) sq.className="sq red";else sq.className="sq green";}
+  idxP2++;
+ }
+ idxP2 = lista.length % todosP2.length;
+ todosP3.forEach(function(sq){
+  sq.textContent="";if(sq.dataset.tipo=="blue") sq.className="sq blue"; else if(sq.dataset.tipo=="red") sq.className="sq red"; else sq.className="sq white vazio";
+ });
+ vermelhosP3=[];
+ idxP3=0;
+ var p3Pos=0;
+ for(var i=0;i<lista.length && p3Pos<todosP3.length;i++){
   var num=lista[i];
-  if(sq.dataset.tipo=="white" && getCol(num)==1){
-   vermelhosLista.push(num);
+  var col=getCol(num);
+  if(i < todosP2.length){
+   var sqP2=todosP2[i];
+   if(sqP2 && sqP2.dataset.tipo=="white" && col==1){
+    while(p3Pos < todosP3.length && todosP3[p3Pos].dataset.tipo=="blue"){
+     p3Pos++;
+    }
+    if(p3Pos < todosP3.length){
+     var sqP3=todosP3[p3Pos];
+     sqP3.textContent=num;
+     if(sqP3.dataset.tipo=="red") sqP3.className="sq red";
+     else sqP3.className="sq red";
+     vermelhosP3.push(num);
+     p3Pos++;
+    }
+   }
   }
  }
+ idxP3=p3Pos;
+ todosP2.forEach(function(s){s.classList.remove('active');});
+ todosP3.forEach(function(s){s.classList.remove('active');});
+ if(todosP2[idxP2]) todosP2[idxP2].classList.add('active');
+ if(todosP3[idxP3]) todosP3[idxP3].classList.add('active');
 }
 function ok(){
  if(cur===""){return;}
@@ -209,63 +263,47 @@ function ok(){
   else{ultimoResultado={tipo:'azul',num:n};}
   ultimoSinal=null;
  }
- if(todosQuadrados.length>0 && indiceAtual < todosQuadrados.length){
-  var sq=todosQuadrados[indiceAtual];
-  if(sq){
-   var isBlue=sq.dataset.tipo=="blue";
-   sq.textContent=n;
-   if(isBlue){sq.className="sq blue filled new";}
-   else{var col=getCol(n);if(col==1){sq.className="sq red new";}else{sq.className="sq green new";}}
-   indiceAtual++;if(indiceAtual>=todosQuadrados.length){indiceAtual=0;}
-  }
- }
  lista.push(n);
- recalcularVermelhosDepoisAzul();
- cur="";show();upd();
+ cur="";
+ reconstruirTudo();
+ show();upd();
  if(ultimoResultado){
   var d=document.getElementById('disp');
   if(ultimoResultado.tipo=='verde'){d.textContent="P"+paginaAtual+" - ✅ ACERTOU! "+n+" VERDE";d.className="display verde";}
   else if(ultimoResultado.tipo=='vermelho'){d.textContent="P"+paginaAtual+" - ❌ ERROU! "+n+" VERMELHO";d.className="display vermelho";}
   setTimeout(function(){show();},1500);
  }
- if(todosQuadrados.length>0){
-  var sqPrev=todosQuadrados[indiceAtual==0?todosQuadrados.length-1:indiceAtual-1];
-  if(sqPrev){
-   setTimeout(function(el){
-    if(el){el.classList.remove('new');todosQuadrados.forEach(function(s){s.classList.remove('active');});if(todosQuadrados[indiceAtual]){todosQuadrados[indiceAtual].classList.add('active');}}
-   },600,sqPrev);
-  }
- }
 }
-function criarQuadradosPagina2Novo(){
+function criarP2(){
  var container=document.getElementById('patternFixed2');
  if(!container) return;
- container.innerHTML="";
- todosQuadrados=[];
- padraoLinhas.forEach(function(linha){
-  var linhaDiv=document.createElement('div');
-  linhaDiv.className='linhaPadrao';
+ container.innerHTML="";todosP2=[];
+ padraoP2.forEach(function(linha){
+  var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';
   linha.forEach(function(tipo){
    var sq=document.createElement('div');
    if(tipo=='blue'){sq.className='sq blue';sq.dataset.tipo='blue';}
    else{sq.className='sq white vazio';sq.dataset.tipo='white';}
-   sq.textContent="";
-   linhaDiv.appendChild(sq);
-   todosQuadrados.push(sq);
+   sq.textContent="";linhaDiv.appendChild(sq);todosP2.push(sq);
   });
   container.appendChild(linhaDiv);
  });
- if(todosQuadrados.length>0){todosQuadrados[0].classList.add('active');}
- indiceAtual=0;
- for(var i=0;i<lista.length && i<todosQuadrados.length;i++){
-  var num=lista[i];var sq=todosQuadrados[i];if(!sq) continue;
-  var isBlue=sq.dataset.tipo=="blue";sq.textContent=num;
-  if(isBlue){sq.className='sq blue filled';}
-  else{var col=getCol(num);if(col==1) sq.className='sq red';else sq.className='sq green';}
- }
- indiceAtual=lista.length % todosQuadrados.length;
- todosQuadrados.forEach(function(s){s.classList.remove('active');});
- if(todosQuadrados[indiceAtual]){todosQuadrados[indiceAtual].classList.add('active');}
+}
+function criarP3(){
+ var container=document.getElementById('patternFixed3');
+ if(!container) return;
+ container.innerHTML="";todosP3=[];
+ padraoP3.forEach(function(linha){
+  var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';
+  linha.forEach(function(tipo){
+   var sq=document.createElement('div');
+   if(tipo=='blue'){sq.className='sq blue';sq.dataset.tipo='blue';}
+   else if(tipo=='red'){sq.className='sq red';sq.dataset.tipo='red';}
+   else{sq.className='sq white vazio';sq.dataset.tipo='white';}
+   sq.textContent="";linhaDiv.appendChild(sq);todosP3.push(sq);
+  });
+  container.appendChild(linhaDiv);
+ });
 }
 function upd(){
  var eventos=[];var gatilhoSet=new Set();var i=0;
@@ -283,13 +321,14 @@ function upd(){
   var ev=eventos[eventos.length-1];
   if(lista.length==ev.pos+ev.vermelhos+1){ultimoSinal=ev;}
  }
- if(todosQuadrados.length==0){criarQuadradosPagina2Novo();}
+ if(todosP2.length==0) criarP2();
+ if(todosP3.length==0) criarP3();
  var topBar1=document.getElementById('topBar1');
  if(topBar1){
   topBar1.innerHTML="";
   var rev=lista.slice().reverse().slice(0,12);
   if(rev.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:11px;color:#1a7a2a;padding:6px;text-align:center;width:100%";e.textContent="PÁGINA 1 - DIGITE AQUI - MARCA JUNTO NA PÁG 2 NO NOVO PADRÃO 5 LINHAS";
+   var e=document.createElement('div');e.style.cssText="font-size:11px;color:#1a7a2a;padding:6px;text-align:center;width:100%";e.textContent="PÁG 1 - DIGITE - P2: 🟦⬜️🟦⬜️🟦⬜️ P3: 🟦🟥🟦🟥🟦⬜️ - 2🟥🟥 alerta entra também";
    topBar1.appendChild(e);
   }else{
    rev.forEach(function(num,idx){
@@ -301,28 +340,32 @@ function upd(){
    });
   }
  }
- var redListBar3=document.getElementById('redListBar3');
+ var alertaBox1=document.getElementById('alertaBox1');
  var alertaBox3=document.getElementById('alertaBox3');
+ var alertaTexto1=document.getElementById('alertaTexto1');
  var alertaTexto3=document.getElementById('alertaTexto3');
- if(redListBar3){
-  redListBar3.innerHTML="";
-  if(vermelhosLista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:11px;color:#ff8888;padding:4px";e.textContent="Nenhum vermelho depois do azul ainda - Quando der vermelho depois do 🟦, marca aqui";
-   redListBar3.appendChild(e);
-   if(alertaBox3) alertaBox3.classList.remove('ativo');
-  }else{
-   var revVerm=vermelhosLista.slice().reverse();
-   revVerm.forEach(function(num, idx){
-    var box=document.createElement('div');box.className='nBox red'+(idx==0?' new':'');box.textContent=num;redListBar3.appendChild(box);
-   });
-   if(alertaBox3){
-    alertaBox3.classList.add('ativo');
-    if(alertaTexto3){
-     var ultimoVermelho=vermelhosLista[vermelhosLista.length-1];
-     alertaTexto3.textContent="🚨 VERMELHO DEPOIS DO AZUL: "+ultimoVermelho+" -> JOGAR NA COLUNA 2 E 3!";
+ var tem2Vermelhos=false;
+ if(vermelhosP3.length>=2){
+  var lastTwo = vermelhosP3.slice(-2);
+  var countRedAfterBlue=0;
+  for(var k=lista.length-1;k>=0 && countRedAfterBlue<2;k--){
+   if(k < todosP2.length){
+    var sq=todosP2[k];
+    if(sq && sq.dataset.tipo=='white' && getCol(lista[k])==1){
+     countRedAfterBlue++;
+    }else if(sq && sq.dataset.tipo=='white' && getCol(lista[k])!=1){
+     break;
     }
    }
   }
+  if(countRedAfterBlue>=2) tem2Vermelhos=true;
+ }
+ if(tem2Vermelhos){
+  if(alertaBox1){alertaBox1.classList.add('ativo');if(alertaTexto1) alertaTexto1.textContent="🚨 2 VERMELHOS 🟥🟥 SEGUIDOS NA PÁG 3! ENTRA TAMBÉM! JOGAR COLUNA 2 E 3! - "+vermelhosP3.slice(-2).join(", ");}
+  if(alertaBox3){alertaBox3.classList.add('ativo');if(alertaTexto3) alertaTexto3.textContent="🚨 2 VERMELHOS 🟥🟥: "+vermelhosP3.slice(-2).join(", ")+" -> JOGAR COLUNA!";}
+ }else{
+  if(alertaBox1) alertaBox1.classList.remove('ativo');
+  if(alertaBox3) alertaBox3.classList.remove('ativo');
  }
  ['topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
   var el=document.getElementById(id);
@@ -332,16 +375,10 @@ function upd(){
   if(rev.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent="Sem números";el.appendChild(e);}
   else{rev.forEach(function(num,idx){var posOrig=lista.length-1-idx;var isGat=gatilhoSet.has(posOrig);var col=getCol(num);var cor=isGat?'blue':(col==1?'red':'green');var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);});}
  });
- var infoBar2=document.getElementById('infoBar2');
- if(infoBar2){
-  if(todosQuadrados.length>0){
-   infoBar2.innerHTML="🔵 PÁG 2 - NOVO PADRÃO 5 LINHAS:<br>🟦⬜️🟦⬜️🟦⬜️<br>🟦⬜️⬜️<br>🟦⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️<br>🟦⬜️⬜️⬜️⬜️⬜️<br>Pos: "+(indiceAtual+1)+"/"+todosQuadrados.length+" - Vermelho depois do azul vai PÁG 3";
-  }
- }
  show();
 }
 show();upd();
-criarQuadradosPagina2Novo();
+criarP2();criarP3();reconstruirTudo();
 </script>
 </body>
 </html>

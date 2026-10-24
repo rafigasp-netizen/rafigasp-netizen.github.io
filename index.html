@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - PAG2 CORRETO 5 LINHAS - CADA NUMERO VAI PRA TODAS AS LINHAS - CONTINUA MESMA LINHA</title>
+<title>RAFIGASP - SEM NOME LINHA - SO QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -31,7 +31,7 @@ body{display:flex;justify-content:center}
 .page.ativa{display:flex}
 .topBar{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:8px;display:flex;gap:5px;flex-wrap:wrap;min-height:50px;align-items:center}
 .conjuntosContainer{display:flex;flex-direction:column;gap:10px}
-.conjuntoBox{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:12px 10px 10px;display:flex;flex-direction:column;gap:10px;position:relative;margin-top:10px}
+.conjuntoBox{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:12px 10px 10px;display:flex;flex-direction:column;gap:8px;position:relative;margin-top:10px}
 .conjuntoLabel{position:absolute;top:-9px;left:10px;background:#d4af37;color:#000;font-size:8px;font-weight:900;padding:3px 8px;border-radius:5px;letter-spacing:1px}
 .linhaPadrao{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-height:36px;padding:2px 0}
 .sq{width:34px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333;flex-shrink:0}
@@ -87,7 +87,7 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG2 CORRETO 5 LINHAS - CADA NUMERO VAI PRA TODAS AS LINHAS - CONTINUA MESMA LINHA</div>
+<div class="display inicial" id="disp">PÁG2 SEM NOME LINHA - SO QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</div>
 
 <div class="page ativa" id="page1">
 <div class="topBar" id="topBar1"></div>
@@ -102,12 +102,12 @@ body{display:flex;justify-content:center}
 
 <div class="page" id="page2">
 <div class="conjuntosContainer" id="conjuntosP2"></div>
-<div class="infoBar" id="infoBar2">PÁG 2 CORRETO: 🟦⬜ / 🟦⬜⬜ / 🟦⬜⬜⬜ / 🟦⬜⬜⬜⬜ / 🟦⬜⬜⬜⬜⬜ - Cada numero digitado vai para TODAS as 5 linhas ao mesmo tempo - Completa brancos acrescenta azul e continua na mesma linha</div>
+<div class="infoBar" id="infoBar2">PÁG 2 - SEM NOME LINHA - SÓ QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</div>
 </div>
 
 <div class="page" id="page3">
 <div class="conjuntosContainer" id="conjuntosP3"></div>
-<div class="infoBar" id="infoBar3">PÁG 3: MESMA LÓGICA 5 LINHAS - 2🟥🟥 manda jogar coluna do azul</div>
+<div class="infoBar" id="infoBar3">PÁG 3 - SEM NOME LINHA - 5 LINHAS - 2🟥🟥 manda jogar coluna do azul</div>
 <div class="alertaGrande verde" id="alertaGrande3">
 <div class="colunaGrande" id="colunaGrandeTexto3">AGUARDANDO<br>SINAL...</div>
 <div class="placarSimples" id="placarBox3">
@@ -153,27 +153,21 @@ function inicializar(){
  linhasP2=[];linhasP3=[];
  var containerP2=document.getElementById('conjuntosP2');
  var boxP2=document.createElement('div');boxP2.className='conjuntoBox';
- var labelP2=document.createElement('div');labelP2.className='conjuntoLabel';labelP2.textContent='PÁG 2 - CORRETO - 5 LINHAS - CADA NUMERO VAI PRA TODAS AS LINHAS';boxP2.appendChild(labelP2);
+ var labelP2=document.createElement('div');labelP2.className='conjuntoLabel';labelP2.textContent='PÁG 2 - PADRÃO - 5 LINHAS - SEM NOME';boxP2.appendChild(labelP2);
  var brancosPorLinha = [1,2,3,4,5];
  for(var r=0;r<5;r++){
   var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP2_'+r;
-  var brancos=brancosPorLinha[r];
-  var titulo=document.createElement('div');titulo.style.cssText='font-size:7px;color:#d4af37;min-width:70px';titulo.textContent='LINHA '+(r+1)+' (B+'+brancos+'W):';
-  linhaDiv.appendChild(titulo);
   boxP2.appendChild(linhaDiv);
-  linhasP2.push({div:linhaDiv, itens:[], brancos:brancos, linhaIdx:r});
+  linhasP2.push({div:linhaDiv, itens:[], brancos:brancosPorLinha[r], linhaIdx:r});
  }
  containerP2.appendChild(boxP2);
  var containerP3=document.getElementById('conjuntosP3');
  var boxP3=document.createElement('div');boxP3.className='conjuntoBox';
- var labelP3=document.createElement('div');labelP3.className='conjuntoLabel';labelP3.textContent='PÁG 3 - VERMELHO - 5 LINHAS';boxP3.appendChild(labelP3);
+ var labelP3=document.createElement('div');labelP3.className='conjuntoLabel';labelP3.textContent='PÁG 3 - VERMELHO - 5 LINHAS - SEM NOME';boxP3.appendChild(labelP3);
  for(var r=0;r<5;r++){
   var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP3_'+r;
-  var brancos=brancosPorLinha[r];
-  var titulo=document.createElement('div');titulo.style.cssText='font-size:7px;color:#d4af37;min-width:70px';titulo.textContent='LINHA '+(r+1)+' (B+'+brancos+'W):';
-  linhaDiv.appendChild(titulo);
   boxP3.appendChild(linhaDiv);
-  linhasP3.push({div:linhaDiv, itens:[], brancos:brancos, linhaIdx:r});
+  linhasP3.push({div:linhaDiv, itens:[], brancos:brancosPorLinha[r], linhaIdx:r});
  }
  containerP3.appendChild(boxP3);
 }
@@ -209,7 +203,7 @@ function show(){
     d.textContent="P"+paginaAtual+" - NUM: "+cur+" - RESULTADO COLUNA DO AZUL "+colunaParaJogar;
     d.className="display sinal";
    }else{
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER - VAI PRA TODAS AS 5 LINHAS";
+    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER";
     d.className="display inicial";
    }
   }
@@ -217,17 +211,17 @@ function show(){
  }
  if(paginaAtual==1){
   if(esperandoResultado){
-   d.innerHTML="🔴 SINAL - JOGAR COLUNA "+colunaParaJogar+" DO AZUL "+numeroAzulAtual+"<br>👉 DIGITE PRÓXIMO";
+   d.innerHTML="🔴 SINAL - JOGAR COLUNA "+colunaParaJogar+" DO AZUL "+numeroAzulAtual;
    d.className="display alerta";
   }else if(lista.length==0){
-   d.textContent="PÁG 1 - DIGITE - VAI PRA TODAS AS 5 LINHAS DA PÁG2 AO MESMO TEMPO";
+   d.textContent="PÁG 1 - SEM NOME LINHA - VERDE AGUARDANDO";
    d.className="display inicial";
   }else{
    d.textContent="PÁG 1 - "+lista.length+" nums - ✅:"+green+" ❌:"+red;
    d.className="display inicial";
   }
  }else{
-  if(paginaAtual==2){d.textContent="PÁG 2 - 5 LINHAS - CADA NUMERO VAI PRA TODAS AS LINHAS - CONTINUA MESMA LINHA";}
+  if(paginaAtual==2){d.textContent="PÁG 2 - SEM NOME - SÓ QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA";}
   else if(paginaAtual==3){d.textContent="PÁG 3 - COLUNA DO AZUL: "+(colunaParaJogar!==null?colunaParaJogar:"-");}
   else{d.textContent="PÁG "+paginaAtual+" - COACH DA ROLETA";}
   d.className="display inicial";
@@ -374,7 +368,7 @@ function upd(){
  if(topBar1){
   topBar1.innerHTML="";
   if(lista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:10px;color:#1a7a2a;padding:6px;text-align:center;width:100%";e.textContent="PÁG 1 - DIGITE - CADA NUMERO VAI PRA TODAS AS 5 LINHAS DA PÁG2: 🟦⬜ / 🟦⬜⬜⬜ / 🟦⬜⬜⬜⬜ / 🟦⬜⬜⬜⬜⬜ - CONTINUA MESMA LINHA";
+   var e=document.createElement('div');e.style.cssText="font-size:10px;color:#1a7a2a;padding:6px;text-align:center;width:100%";e.textContent="PÁG 1 - DIGITE - PÁG2 SEM NOME LINHA - SÓ QUADRADOS";
    topBar1.appendChild(e);
   }else{
    var rev=lista.slice().reverse();

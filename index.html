@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - FIX APAGAR E INICIO</title>
+<title>RAFIGASP - FIX QUADRADOS</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#001a00;overflow:hidden}
@@ -11,30 +11,30 @@ body{display:flex;justify-content:center}
 .app{width:100%;max-width:400px;height:100dvh;background:#001a00;display:flex;flex-direction:column;border:2px solid #d4af37}
 .topo{text-align:center;background:linear-gradient(180deg,#e8c76a,#b8941f);padding:6px 0 4px;flex-shrink:0;cursor:pointer}
 .topoR{font-weight:900;font-size:28px;color:#111;letter-spacing:1px;line-height:1}
-.topoS{font-size:9px;letter-spacing:4px;color:#333;font-weight:800}
 .nav{display:flex;gap:2px;padding:3px 4px;background:#001a00;flex-shrink:0}
 .nav button{flex:1;height:28px;border-radius:5px;border:1.5px solid #d4af37;font-weight:900;font-size:9px;background:#112a1a;color:#d4af37}
 .nav button.home{background:#e8c76a;color:#111;border-color:#fff}
 .nav button.limpar{background:#330000;color:#ffaaaa;border-color:#ff4444}
-.display{margin:4px 6px;background:#000;border:2.5px solid #d4af37;border-radius:10px;height:44px;display:flex;align-items:center;justify-content:center;color:#0f8a1f;font-weight:900;font-size:12px;flex-shrink:0;text-align:center;padding:2px;line-height:1.1;cursor:pointer}
-.display.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;border-color:#fff;font-size:11px;animation:pisca 0.6s infinite alternate}
-.display.vermelho{background:#cc0000;color:#fff;border-color:#ff0000}
-.display.verde{background:#002200;color:#00ff00;border-color:#00ff00}
+.display{margin:4px 6px;background:#000;border:2.5px solid #d4af37;border-radius:10px;min-height:44px;display:flex;align-items:center;justify-content:center;color:#0f8a1f;font-weight:900;font-size:11px;flex-shrink:0;text-align:center;padding:4px;line-height:1.2;cursor:pointer}
+.display.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate}
 @keyframes pisca{0%{background:#ffaa00}100%{background:#ff8800}}
 .topHistBar{background:#000;border:1.5px solid #1a4a1a;border-radius:6px;margin:0 4px;padding:4px;display:flex;gap:2px;flex-wrap:wrap;min-height:30px;flex-shrink:0}
+.combinedPattern{background:#111;border:1.5px solid #d4af37;border-radius:6px;margin:0 4px;padding:5px;display:flex;gap:2px;flex-wrap:wrap;min-height:34px;flex-shrink:0;align-items:center}
+.patternLabel{font-size:8px;color:#d4af37;font-weight:900;margin-right:4px}
 .nBox{height:22px;min-width:22px;padding:0 5px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff}
 .nBox.green{background:#0f8a2a}.nBox.red{background:#cc0000}.nBox.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 4px #60a5fa}
 .histContainer{flex:1;overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:4px;background:#001a00}
 .hCard{background:#0a2a0a;border:1.5px solid #2a5a2a;border-radius:6px;padding:5px}
 .hCard.ativo{border-color:#ffaa00;box-shadow:0 0 8px #ffaa00;background:#1a2a00}
 .hTitle{font-size:10px;font-weight:900;color:#d4af37;margin-bottom:3px;display:flex;gap:4px;align-items:center}
-.hTitle b{color:#ffaa00}
+.hTitle b{color:#ffaa00;font-size:11px}
 .icons{display:flex;gap:1px}
 .iconB{width:14px;height:12px;background:#1e40af;border:2px solid #fff;border-radius:2px}
 .iconW{width:14px;height:12px;background:#fff;border:1px solid #999;border-radius:2px}
-.squareRow{display:flex;gap:1px;flex-wrap:wrap;min-height:18px;margin-top:3px;padding:2px;background:#000;border-radius:4px;border:1px solid #1a3a1a}
-.sq{width:14px;height:12px;border-radius:2px}
-.sq.blue{background:#1e40af;border:1.5px solid #fff}.sq.white{background:#fff;border:1px solid #999}
+.squareRow{display:flex;gap:1px;flex-wrap:wrap;min-height:20px;margin-top:3px;padding:3px;background:#000;border-radius:4px;border:1px solid #1a3a1a}
+.sq{width:16px;height:14px;border-radius:2px}
+.sq.blue{background:#1e40af;border:1.5px solid #fff;box-shadow:0 0 2px #60a5fa}
+.sq.white{background:#fff;border:1px solid #999}
 .jogarBar{background:linear-gradient(180deg,#4a0000,#8a0000);border:2px solid #ff4444;border-radius:8px;padding:7px;text-align:center;color:#fff;font-weight:900;font-size:13px;flex-shrink:0;margin:4px;line-height:1.2;cursor:pointer}
 .jogarBar.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;border-color:#fff;animation:piscaBar 0.7s infinite alternate}
 @keyframes piscaBar{0%{background:#ffaa00}100%{background:#ff8800}}
@@ -46,21 +46,23 @@ body{display:flex;justify-content:center}
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irInicio()"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - TOQUE AQUI PARA INICIO</div></div>
+<div class="topo" onclick="irInicio()"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - TOQUE PARA INICIO</div></div>
 <div class="nav">
 <button class="home" onclick="irInicio()">🏠 INICIO</button>
-<button onclick="apagarUltimo()">⬅️ APAGAR ULTIMO</button>
-<button class="limpar" onclick="limparTudo()">🗑️ LIMPAR TUDO</button>
+<button onclick="apagarUltimo()">⬅️ APAGAR</button>
+<button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 </div>
-<div class="display" id="disp" onclick="irInicio()">DIGITE O NÚMERO - TOQUE PARA INICIO</div>
+<div class="display" id="disp" onclick="irInicio()">🟦⬜️🟦⬜️⬜️🟦⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️⬜️ - DIGITE NÚMERO</div>
+<div class="combinedPattern" id="combinedPattern"><span class="patternLabel">PADRÃO:</span></div>
 <div class="topHistBar" id="topHist"></div>
 <div class="histContainer">
-<div class="hCard" id="card-A"><div class="hTitle"><b>A HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+1)</div><div class="squareRow" id="row-A"></div><div style="font-size:8px;color:#888;margin-top:2px" id="count-A"></div></div>
-<div class="hCard" id="card-B"><div class="hTitle"><b>B HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+2)</div><div class="squareRow" id="row-B"></div><div style="font-size:8px;color:#888" id="count-B"></div></div>
-<div class="hCard" id="card-C"><div class="hTitle"><b>C HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+3)</div><div class="squareRow" id="row-C"></div><div style="font-size:8px;color:#888" id="count-C"></div></div>
-<div class="hCard" id="card-D"><div class="hTitle"><b>D HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+4)</div><div class="squareRow" id="row-D"></div><div style="font-size:8px;color:#888" id="count-D"></div></div>
+<div class="hCard" id="card-A"><div class="hTitle"><b>A HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+1) = 🟦⬜️</div><div class="squareRow" id="row-A"></div><div style="font-size:8px;color:#d4af37;margin-top:2px" id="count-A"></div></div>
+<div class="hCard" id="card-B"><div class="hTitle"><b>B HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+2) = 🟦⬜️⬜️</div><div class="squareRow" id="row-B"></div><div style="font-size:8px;color:#d4af37;margin-top:2px" id="count-B"></div></div>
+<div class="hCard" id="card-C"><div class="hTitle"><b>C HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+3) = 🟦⬜️⬜️⬜️</div><div class="squareRow" id="row-C"></div><div style="font-size:8px;color:#d4af37;margin-top:2px" id="count-C"></div></div>
+<div class="hCard" id="card-D"><div class="hTitle"><b>D HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+4) = 🟦⬜️⬜️⬜️⬜️</div><div class="squareRow" id="row-D"></div><div style="font-size:8px;color:#d4af37;margin-top:2px" id="count-D"></div></div>
+<div class="hCard" id="card-E"><div class="hTitle"><b>E HIST</b> <div class="icons"><div class="iconB"></div><div class="iconW"></div></div> (1+5) = 🟦⬜️⬜️⬜️⬜️⬜️</div><div class="squareRow" id="row-E"></div><div style="font-size:8px;color:#d4af37;margin-top:2px" id="count-E"></div></div>
 </div>
-<div class="jogarBar" id="jogarBar" onclick="irInicio()">TOQUE AQUI PARA INICIO</div>
+<div class="jogarBar" id="jogarBar" onclick="irInicio()">TOQUE PARA INICIO - AGUARDANDO 🟦 GATILHO</div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
 <div class="kr"><button class="k" onclick="dig('4')">4</button><button class="k" onclick="dig('5')">5</button><button class="k" onclick="dig('6')">6</button></div>
@@ -72,57 +74,53 @@ body{display:flex;justify-content:center}
 var cur="",lista=[];
 function getCol(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
 function isGatilho(n){return n==2||n==0;}
-function show(){var d=document.getElementById('disp');if(cur==""){if(lista.length==0){d.textContent="DIGITE O NÚMERO - TOQUE NO TOPO PARA INICIO";d.className="display";}else{d.textContent="DIGITE O NÚMERO - Total: "+lista.length+" - TOQUE PARA INICIO";d.className="display";}}else if(cur=="0"){d.textContent="0 = APAGAR ULTIMO - APERTE ENTER OU CORRIGIR";d.className="display vermelho";}else if(cur=="00"){d.textContent="00 = LIMPAR TUDO - APERTE ENTER OU CORRIGIR";d.className="display vermelho";}else{d.textContent="NUM: "+cur+" - ENTER PARA CONFIRMAR";d.className="display verde";}}
-function irInicio(){cur="";lista=[];show();upd();var d=document.getElementById('disp');d.textContent="🏠 PÁGINA INICIAL - TUDO LIMPO - DIGITE O NÚMERO";d.className="display verde";setTimeout(function(){show();},1500);}
+function show(){var d=document.getElementById('disp');if(cur==""){if(lista.length==0){d.textContent="🟦⬜️🟦⬜️⬜️🟦⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️⬜️ - PADRÃO COMPLETO - DIGITE NÚMERO";d.className="display";}else{d.textContent="Total: "+lista.length+" - DIGITE NÚMERO - TOQUE PARA INICIO";d.className="display";}}else if(cur=="0"){d.textContent="0 = APAGAR ULTIMO - ENTER OU CORRIGIR";d.className="display vermelho";}else if(cur=="00"){d.textContent="00 = LIMPAR TUDO - ENTER OU CORRIGIR";d.className="display vermelho";}else{d.textContent="NUM: "+cur+" - ENTER PARA CONFIRMAR";d.className="display verde";}}
+function irInicio(){cur="";lista=[];show();upd();}
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
-function corr(){
- if(cur=="0"){apagarUltimo();return;}
- if(cur=="00"){limparTudo();return;}
- if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}
-}
-function apagarUltimo(){
- if(lista.length>0){var removido=lista.pop();cur="";show();upd();var d=document.getElementById('disp');d.textContent="⬅️ APAGADO: "+removido+" - Restam: "+lista.length;d.className="display amarelo";setTimeout(function(){show();},1000);}
- else{var d=document.getElementById('disp');d.textContent="NADA PARA APAGAR - LISTA VAZIA";d.className="display";setTimeout(function(){show();},1000);}
-}
-function limparTudo(){lista=[];cur="";show();upd();var d=document.getElementById('disp');d.textContent="🗑️ TUDO LIMPO - PÁGINA INICIAL - 0 NÚMEROS";d.className="display verde";setTimeout(function(){show();},1500);}
-function ok(){
- if(cur===""){return;}
- if(cur==="00"){limparTudo();return;}
- if(cur==="0"){apagarUltimo();return;}
- var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();var d=document.getElementById('disp');d.textContent="❌ NÚMERO INVÁLIDO";d.className="display vermelho";setTimeout(function(){show();},1000);return;}
- lista.push(n);cur="";show();upd();var d=document.getElementById('disp');d.textContent="✅ ADICIONADO: "+n+" - Total: "+lista.length;d.className="display verde";setTimeout(function(){show();},800);
-}
+function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
+function apagarUltimo(){if(lista.length>0){lista.pop();cur="";show();upd();}else{show();}}
+function limparTudo(){lista=[];cur="";show();upd();}
+function ok(){if(cur===""){return;}if(cur==="00"){limparTudo();return;}if(cur==="0"){apagarUltimo();return;}var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}lista.push(n);cur="";show();upd();}
 function makeNumBox(num, cor){var e=document.createElement('div');e.className='nBox '+cor;e.textContent=num;return e;}
 function makeSquare(tipo){var e=document.createElement('div');e.className='sq '+tipo;return e;}
 function upd(){
+ var combined=document.getElementById('combinedPattern');
+ combined.innerHTML='<span class="patternLabel">PADRÃO:</span>';
+ var padraoCompleto=[{blue:1,white:1},{blue:1,white:2},{blue:1,white:3},{blue:1,white:4},{blue:1,white:5}];
+ for(var p of padraoCompleto){combined.appendChild(makeSquare('blue'));for(var w=0;w<p.white;w++)combined.appendChild(makeSquare('white'));var sep=document.createElement('span');sep.style.cssText="width:4px;display:inline-block";combined.appendChild(sep);}
  var top=document.getElementById('topHist');top.innerHTML="";
  var mostrarTop=lista.length>0?lista.slice(-12):[];
- if(mostrarTop.length==0){var e=document.createElement('div');e.style.cssText="font-size:10px;color:#555;padding:4px";e.textContent="Nenhum número - digite 0-36 + ENTER - 0=apagar ultimo, 00=limpar tudo - TOQUE NO TOPO PARA INICIO";top.appendChild(e);}
+ if(mostrarTop.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#666;padding:2px";e.textContent="Nenhum número - digite 0-36 + ENTER";top.appendChild(e);}
  else{for(var i=0;i<mostrarTop.length;i++){var num=mostrarTop[i];var cor=isGatilho(num)?'blue':(getCol(num)==1?'red':(getCol(num)==0?'blue':'green'));top.appendChild(makeNumBox(num, cor));}}
  var eventos=[];var i=0;while(i<lista.length){var n=lista[i];if(isGatilho(n)){var vermelhos=0;var j=i+1;while(j<lista.length&&getCol(lista[j])==1){vermelhos++;j++;}if(vermelhos>0)eventos.push({pos:i,vermelhos:vermelhos,gatilhoNum:n});i=j;}else{i++;}}
- var letras=["A","B","C","D"];var niveis=[1,2,3,4];var contadores=[0,0,0,0];
+ var letras=["A","B","C","D","E"];var niveis=[1,2,3,4,5];var contadores=[0,0,0,0,0];
  for(var ev of eventos){for(var lvlIdx=0;lvlIdx<niveis.length;lvlIdx++){if(ev.vermelhos>=niveis[lvlIdx])contadores[lvlIdx]++;}}
  for(var lvlIdx=0;lvlIdx<niveis.length;lvlIdx++){
-  var letra=letras[lvlIdx];var nivel=niveis[lvlIdx];var row=document.getElementById('row-'+letra);if(!row)continue;var countEl=document.getElementById('count-'+letra);var card=document.getElementById('card-'+letra);row.innerHTML="";if(card)card.classList.remove('ativo');
+  var letra=letras[lvlIdx];var nivel=niveis[lvlIdx];var row=document.getElementById('row-'+letra);var countEl=document.getElementById('count-'+letra);var card=document.getElementById('card-'+letra);if(!row)continue;row.innerHTML="";if(card)card.classList.remove('ativo');
   var count=contadores[lvlIdx];
-  if(lista.length==0){if(countEl)countEl.textContent="Ex: "+nivel+"x - digite números";continue;}
-  if(count==0){if(countEl)countEl.textContent="0x - aguardando "+nivel+" vermelho(s)";continue;}
-  var maxMostrar=Math.min(count, 30);
-  for(var c=0;c<maxMostrar;c++){row.appendChild(makeSquare('blue'));for(var w=0;w<nivel;w++){row.appendChild(makeSquare('white'));}}
-  if(countEl)countEl.textContent=count+"x 🟦"+"⬜️".repeat(nivel);
+  if(lista.length==0){
+   var qtdExemplo=[3,2,2,1,1][lvlIdx]||1;
+   for(var c=0;c<qtdExemplo;c++){row.appendChild(makeSquare('blue'));for(var w=0;w<nivel;w++)row.appendChild(makeSquare('white'));}
+   if(countEl){var exemploTexto=["🟦⬜️ x3 = 3 gatilhos 1+1","🟦⬜️⬜️ x2 = 2 gatilhos 1+2","🟦⬜️⬜️⬜️ x2 = 2 gatilhos 1+3","🟦⬜️⬜️⬜️⬜️ x1","🟦⬜️⬜️⬜️⬜️⬜️ x1"][lvlIdx];countEl.textContent=exemploTexto+" - digite números para atualizar";countEl.style.color="#ffaa00";}
+   continue;
+  }
+  if(count==0){if(countEl){countEl.textContent="0x - aguardando "+nivel+" vermelho(s)";countEl.style.color="#888";}continue;}
+  var maxMostrar=Math.min(count, 15);
+  for(var c=0;c<maxMostrar;c++){row.appendChild(makeSquare('blue'));for(var w=0;w<nivel;w++)row.appendChild(makeSquare('white'));}
+  if(countEl){countEl.textContent=count+"x 🟦"+"⬜️".repeat(nivel)+" = "+count+" eventos";countEl.style.color="#00ff00";}
   if(eventos.length>0){var ultimo=eventos[eventos.length-1];if(ultimo.vermelhos==nivel&&card)card.classList.add('ativo');}
  }
  var bar=document.getElementById('jogarBar');
  if(eventos.length==0){
-  if(lista.length>0&&isGatilho(lista[lista.length-1])){bar.textContent="🟦 GATILHO AZUL SAIU ("+lista[lista.length-1]+") - AGUARDANDO 🔴 VERMELHO C1 - TOQUE PARA INICIO";bar.className="jogarBar sinal";}
-  else{bar.textContent="🏠 TOQUE NO TOPO PARA INICIO - AGUARDANDO 🟦 GATILHO AZUL (2 ou 0) + 🔴 VERMELHO";bar.className="jogarBar";}
+  if(lista.length>0&&isGatilho(lista[lista.length-1])){bar.textContent="🟦 GATILHO AZUL ("+lista[lista.length-1]+") - AGUARDANDO 🔴 VERMELHO C1 - JOGAR C2/3";bar.className="jogarBar sinal";}
+  else{bar.textContent="PADRÃO: 🟦⬜️🟦⬜️⬜️🟦⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️⬜️ - TOQUE PARA INICIO";bar.className="jogarBar";}
  }else{
   var ultimoEv=eventos[eventos.length-1];var posDepois=ultimoEv.pos+1+ultimoEv.vermelhos;
   if(posDepois<lista.length){
    var depois=lista[posDepois];var colDepois=getCol(depois);
-   if(colDepois==2||colDepois==3){bar.textContent="🟢 GANHOU! 🟦+"+ultimoEv.vermelhos+"🔴 -> C2/3 ("+depois+") - TOQUE PARA INICIO";bar.className="jogarBar";bar.style.background="linear-gradient(180deg,#004400,#00aa00)";}
+   if(colDepois==2||colDepois==3){bar.textContent="🟢 GANHOU! 🟦+"+ultimoEv.vermelhos+"🔴 -> C2/3 ("+depois+")";bar.className="jogarBar";bar.style.background="linear-gradient(180deg,#004400,#00aa00)";}
    else if(colDepois==1){bar.textContent="🔴 CONTINUOU VERMELHO - "+(ultimoEv.vermelhos+1)+" - TOQUE PARA INICIO";bar.className="jogarBar sinal";}
-  }else{bar.textContent="🔴 "+ultimoEv.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 GATILHO ("+ultimoEv.gatilhoNum+") - JOGAR C2/3 AGORA! - TOQUE PARA INICIO";bar.className="jogarBar sinal";}
+  }else{bar.textContent="🔴 "+ultimoEv.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 GATILHO ("+ultimoEv.gatilhoNum+") - JOGAR C2/3 AGORA! - "+String.fromCharCode(64+ultimoEv.vermelhos)+" HIST";bar.className="jogarBar sinal";}
  }
 }
 show();upd();

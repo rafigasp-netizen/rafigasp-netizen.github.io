@@ -3,109 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP LIMPA 100%</title>
+<title>RAFIGASP 005 - 5 NUM + 1 VIZ 10x</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;background:#0d2818}
-body{display:flex;justify-content:center;overflow:hidden}
-.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
-.topo{text-align:center;background:#0a1f14;padding:6px 0 4px;flex-shrink:0}
-.topoR{font-weight:900;font-size:26px;color:#e8c76a;line-height:1}
-.topoS{font-size:9px;letter-spacing:2px;color:#d4af37;font-weight:800}
-.nav{display:flex;gap:2px;padding:4px;background:#0a1f14;flex-shrink:0}
-.nav button{flex:1;height:34px;border-radius:6px;border:1.5px solid #d4af37;font-weight:900;font-size:11px}
-.nav .home{background:#f9e27a;color:#111}
-.nav .pg{background:#112a1a;color:#d4af37}
-.nav .pg.on{background:#e8c76a;color:#111;border-color:#fff}
-.nav .sinal{background:#1e40af;color:#fff;border-color:#60a5fa}
-.nav .sinal.on{background:#dc2626;border-color:#ff0000}
-.nav .limpar{background:#330000;color:#ffaaaa;border-color:#ff0000}
-.disp{margin:4px 6px;background:#000;border:2px solid #d4af37;border-radius:8px;min-height:42px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:13px;text-align:center;padding:4px;flex-shrink:0}
-.disp.sinal{background:#dc2626;color:#fff;animation:pisca 0.5s infinite alternate}
-.disp.limpo{background:#002200;color:#00ff00;border-color:#00ff00}
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818}body{display:flex;justify-content:center;overflow:hidden}.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
+.topo{text-align:center;background:#0a1f14;padding:6px 0 4px;flex-shrink:0}.topoR{font-weight:900;font-size:24px;color:#e8c76a;line-height:1}.topoS{font-size:8px;letter-spacing:1px;color:#d4af37;font-weight:800}
+.nav{display:flex;gap:1px;padding:3px;background:#0a1f14;flex-shrink:0;flex-wrap:wrap}.nav button{flex:1;min-width:36px;height:30px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:10px}.nav .home{background:#f9e27a;color:#111}.nav .pg{background:#112a1a;color:#d4af37}.nav .pg.on{background:#e8c76a;color:#111}.nav .sinal{background:#1e40af;color:#fff;border-color:#60a5fa}.nav .sinal.on{background:#dc2626;border-color:#ff0000}.nav .limpar{background:#330000;color:#ffaaaa;border-color:#ff0000}.nav .nova{background:#00aa00;color:#fff;border-color:#00ff00}.nav .nova.on{background:#ffaa00;color:#000;border-color:#fff;box-shadow:0 0 6px #ffaa00}
+.disp{margin:3px 5px;background:#000;border:2px solid #d4af37;border-radius:7px;min-height:38px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:12px;text-align:center;padding:3px;flex-shrink:0}
+.disp.sinal{background:#dc2626;color:#fff;animation:pisca 0.5s infinite alternate}.disp.verde{background:#002200;color:#00ff00;border-color:#00ff00}.disp.amarelo{background:#332200;color:#ffcc00;border-color:#ffcc00}
 @keyframes pisca{0%{background:#dc2626}100%{background:#991b1b}}
-.content{flex:1;overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:4px}
-.card{background:#0f2e1a;border:1.5px solid #d4af37;border-radius:8px;padding:5px}
-.cardT{font-size:11px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:3px}
-.vizs{display:flex;gap:3px;justify-content:center;flex-wrap:wrap}
-.vb{width:44px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
-.vb.c{background:#dc2626;color:#fff;border:1.5px solid #ff5555}
-.vb.v{background:#eab308;color:#000;border:1.5px solid #facc15}
-.row{display:flex;gap:3px}
-.st{flex:1;background:#000;border-radius:5px;padding:3px;text-align:center;border:1px solid #d4af37}
-.stL{font-size:7px;color:#d4af37;font-weight:900}
-.stV{font-size:12px;font-weight:900;color:#fff}
-.sinalC{background:linear-gradient(180deg,#dc2626,#991b1b);border:2px solid #ff0000;border-radius:8px;padding:6px;text-align:center}
-.sinalN{font-size:14px;font-weight:900;color:#fff}
-.sinalT{font-size:9px;font-weight:900;color:#ffcccc;margin-top:2px}
-.lista{display:flex;flex-direction:column;gap:2px;max-height:140px;overflow:auto}
-.item{display:flex;align-items:center;gap:3px;background:#000;border:1.5px solid #60a5fa;border-radius:5px;padding:3px}
-.item .n{width:26px;height:22px;background:#dc2626;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:11px}
-.item .vz{flex:1;font-size:8px;color:#f9e27a;font-weight:900}
-.item .g{font-size:10px;font-weight:900;color:#fff;background:#1e40af;padding:2px 4px;border-radius:3px}
-.todos{display:flex;gap:2px;flex-wrap:wrap;max-height:80px;overflow:auto}
-.todos div{border:1px solid #d4af37;border-radius:4px;padding:2px 4px;font-size:9px;font-weight:900;color:#fff;min-width:44px;text-align:center}
-.kb{background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:4px;border-radius:10px;border:1.5px solid #d4af37;padding:4px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;height:34%;min-height:180px}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.k{border-radius:7px;border:1px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#b8941f);color:#1a1000}
-.painel{display:none;flex-direction:column;gap:4px}
-.painel.on{display:flex}
+.content{flex:1;overflow-y:auto;padding:3px;display:flex;flex-direction:column;gap:3px}
+.card{background:#0f2e1a;border:1.5px solid #d4af37;border-radius:7px;padding:4px}
+.cardT{font-size:10px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:2px}
+.vizs{display:flex;gap:2px;justify-content:center;flex-wrap:wrap}
+.vb{width:38px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.vb.c{background:#dc2626;color:#fff;border:1px solid #ff5555}
+.vb.v{background:#eab308;color:#000;border:1px solid #facc15}
+.vb.big{width:52px;height:36px;font-size:18px;border:2px solid #fff;box-shadow:0 0 5px #fff}
+.row{display:flex;gap:2px}.st{flex:1;background:#000;border-radius:4px;padding:2px;text-align:center;border:1px solid #d4af37}.stL{font-size:6px;color:#d4af37;font-weight:900}.stV{font-size:11px;font-weight:900;color:#fff}
+.sinalC{background:linear-gradient(180deg,#ffaa00,#ff6600);border:2px solid #ffcc00;border-radius:7px;padding:5px;text-align:center;animation:piscaAm 1s infinite alternate}
+@keyframes piscaAm{0%{background:#ffaa00}100%{background:#ff8800}}
+.sinalN{font-size:13px;font-weight:900;color:#000}.sinalT{font-size:8px;font-weight:900;color:#330000;margin-top:1px}
+.lista{display:flex;flex-direction:column;gap:2px;max-height:120px;overflow:auto}
+.item{display:flex;align-items:center;gap:2px;background:#000;border:1px solid #60a5fa;border-radius:4px;padding:2px}
+.item .n{width:24px;height:20px;background:#dc2626;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:10px}
+.item .vz{flex:1;font-size:7px;color:#f9e27a;font-weight:900}
+.item .g{font-size:9px;font-weight:900;color:#fff;background:#1e40af;padding:1px 3px;border-radius:3px}
+.todos{display:flex;gap:1px;flex-wrap:wrap;max-height:70px;overflow:auto}
+.todos div{border:1px solid #d4af37;border-radius:3px;padding:1px 3px;font-size:8px;font-weight:900;color:#fff;min-width:38px;text-align:center}
+.kb{background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:3px;border-radius:8px;border:1px solid #d4af37;padding:3px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;height:32%;min-height:160px}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.k{border-radius:6px;border:1px solid #8a6d1b;font-weight:900;font-size:16px;background:linear-gradient(180deg,#f9e27a,#b8941f);color:#1a1000}
+.painel{display:none;flex-direction:column;gap:3px}.painel.on{display:flex}
+.apostaGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:4px}
+.apostaNum{height:44px;border-radius:6px;border:2px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;background:#dc2626;color:#fff}
+.apostaNum small{font-size:7px;color:#ffcccc}
+.apostaNum.viz{background:#eab308;color:#000;border-color:#000}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS" id="sub">004 - SINAL 13 RODADAS - LIMPA 100%</div></div>
+<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS" id="sub">005 - 5 NUM + 1 VIZ 10x - SO ATUALIZA QUANDO ACERTA</div></div>
 <div class="nav">
 <button class="home" onclick="go('000')">MENU</button>
 <button class="pg" id="b-001" onclick="go('001')">001</button>
 <button class="pg" id="b-002" onclick="go('002')">002</button>
 <button class="pg" id="b-003" onclick="go('003')">003</button>
 <button class="sinal" id="b-004" onclick="go('004')">004 13x</button>
-<button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
+<button class="nova on" id="b-005" onclick="go('005')">005 5+1 10x</button>
+<button class="limpar" onclick="limparTudo()">🗑️</button>
 </div>
-<div class="disp" id="disp">BOTOES TOPO PRA MUDAR PAGINA | 00 LIMPA TUDO</div>
+<div class="disp" id="disp">005 - 5 NUMEROS + 1 VIZINHO COM 10+ RODADAS</div>
 <div class="content">
-<div class="painel on" id="p-000">
-<div class="card"><div class="cardT">MENU - 00 LIMPA TUDO 100% AGORA</div>
-<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px">
-<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('001')">001 HIST</div>
-<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('002')">002 QUENTE</div>
-<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('003')">003 PREVISAO</div>
-<div style="background:#1e40af;color:#fff;border:2px solid #60a5fa;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('004')">004 SINAL 13x</div>
+<div class="painel" id="p-000">
+<div class="card"><div class="cardT">MENU - PAGINA 005 NOVA</div>
+<div style="background:#ffaa00;color:#000;border-radius:6px;padding:6px;text-align:center;font-weight:900;font-size:11px">NOVA 005: 5 NUMEROS + 1 VIZINHO CADA = 10 NUMEROS<br>SO ATUALIZA QUANDO ACERTA - 10+ RODADAS SEM SAIR</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:4px">
+<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('001')">001 HIST</div>
+<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('002')">002 QUENTE</div>
+<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('003')">003 PREVISAO</div>
+<div style="background:#1e40af;color:#fff;border:1px solid #60a5fa;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('004')">004 13x 4NUM</div>
+<div style="background:#ffaa00;color:#000;border:1px solid #fff;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px;grid-column:span 2" onclick="go('005')">005 NOVA - 5 NUM + 1 VIZ 10x - SO ATUALIZA QUANDO ACERTA</div>
 </div>
-<div style="margin-top:6px;background:#000;border-radius:6px;padding:4px">
-<div style="font-size:10px;color:#f9e27a;font-weight:900;text-align:center">TOTAL: <span id="contTotal" style="color:#fff">0</span> NUMEROS</div>
-<div id="hMenu" style="display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-top:3px;min-height:20px"></div>
-<div style="display:flex;gap:4px;margin-top:6px">
-<button onclick="apagarUltimo()" style="flex:1;background:#eab308;border:1px solid #d4af37;border-radius:5px;padding:8px;font-weight:900;font-size:11px">0 = APAGA ULTIMO</button>
-<button onclick="limparTudo()" style="flex:1;background:#dc2626;color:#fff;border:1px solid #ff0000;border-radius:5px;padding:8px;font-weight:900;font-size:11px">00 = LIMPA TUDO</button>
-</div>
+<div style="margin-top:4px;background:#000;border-radius:5px;padding:3px">
+<div style="font-size:9px;color:#f9e27a;font-weight:900;text-align:center">TOTAL: <span id="contTotal">0</span></div>
+<div id="hMenu" style="display:flex;gap:1px;flex-wrap:wrap;justify-content:center;margin-top:2px;min-height:18px"></div>
 </div>
 </div>
 </div>
-<div class="painel" id="p-001">
-<div class="card"><div class="cardT">001 - HISTORICO AZUL</div><div id="g001" style="display:flex;gap:2px;flex-wrap:wrap;min-height:40px"></div></div>
-<div class="card"><div class="cardT">ESTATISTICA</div><div class="row"><div class="st"><div class="stL">TOTAL</div><div class="stV" id="t001">0</div></div><div class="st"><div class="stL">AZUL</div><div class="stV" id="a001">0</div></div><div class="st"><div class="stL">CLUSTER</div><div class="stV" id="c001">0</div></div></div></div>
-</div>
-<div class="painel" id="p-002">
-<div class="card"><div class="cardT">002 - TOP 6 NUMEROS</div><div id="top002" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div>
-</div>
-<div class="painel" id="p-003">
-<div class="card"><div class="cardT">003 - PREVISAO AZUL - PROXIMAS 15</div>
-<div style="display:flex;gap:4px;margin-top:3px"><div style="flex:1;background:#dc2626;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#fff;font-weight:900">QUENTE 5 N</div><div style="font-size:16px;color:#f87171;font-weight:900">35%</div></div><div style="flex:1;background:#eab308;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#000;font-weight:900">VIZ 4 N</div><div style="font-size:16px;color:#000;font-weight:900">25%</div></div><div style="flex:1;background:#1e40af;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#fff;font-weight:900">AZUL</div><div style="font-size:16px;color:#60a5fa;font-weight:900">55%</div></div></div>
-</div>
-<div class="card"><div class="cardT">TOP 6 - SINAL AZUL</div><div id="top003" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div>
-</div>
+<div class="painel" id="p-001"><div class="card"><div class="cardT">001 - HIST</div><div id="g001" style="display:flex;gap:1px;flex-wrap:wrap;min-height:30px"></div></div></div>
+<div class="painel" id="p-002"><div class="card"><div class="cardT">002 - TOP 6</div><div id="top002" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
+<div class="painel" id="p-003"><div class="card"><div class="cardT">003 - PREVISAO</div><div id="top003" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
 <div class="painel" id="p-004">
-<div class="card"><div class="cardT">ULTIMO NUMERO + 3 VIZINHOS - CONTA 13x</div>
-<div style="display:flex;justify-content:center;align-items:center;gap:4px"><span style="font-size:10px;color:#d4af37;font-weight:900">NUM:</span><span id="numAval" style="font-size:28px;font-weight:900;color:#fff;background:#555;border-radius:5px;padding:1px 8px;min-width:40px;text-align:center">--</span><span style="font-size:10px;color:#d4af37;font-weight:900">VIZ:</span></div>
-<div class="vizs" id="vizRow" style="margin-top:4px"></div>
-<div style="font-size:9px;color:#60a5fa;text-align:center;font-weight:900" id="ordTxt">Clique LIMPAR pra zerar tudo</div>
+<div class="card"><div class="cardT">004 - 4 NUMEROS 13x</div><div class="vizs" id="vizRow004"></div><div id="listaS004" class="lista"></div></div>
 </div>
-<div class="sinalC" id="sinalP" style="display:none"><div class="sinalN" id="sinalN">--</div><div class="sinalT" id="sinalT">--</div></div>
-<div class="card"><div class="cardT">SINAIS ATIVOS - PASSOU DE 13 RODADAS</div><div class="lista" id="listaS"></div></div>
-<div class="card"><div class="cardT">AVALIACAO - CONTA 13</div><div class="row"><div class="st"><div class="stL">JA CONTOU</div><div class="stV" id="atual">--</div></div><div class="st"><div class="stL">MEDIA</div><div class="stV" id="media">--</div></div><div class="st"><div class="stL">FALTA 13</div><div class="stV" id="falta">--</div></div></div><div style="display:flex;gap:2px;flex-wrap:wrap;margin-top:3px;min-height:18px" id="gapHist"></div></div>
-<div class="card"><div class="cardT">TODOS - QUEM PASSOU DE 13?</div><div class="todos" id="todos"></div></div>
+<div class="painel on" id="p-005">
+<div class="card" style="border-color:#ffaa00;background:linear-gradient(180deg,#1a2a0a,#0f2e1a)">
+<div class="cardT" style="color:#ffaa00;font-size:13px">🚨 SINAL ALERTA - 5 NUM + 1 VIZINHO - 10x SEM SAIR</div>
+<div style="font-size:9px;color:#ffcc00;text-align:center;font-weight:900">SO ATUALIZA QUANDO ACERTA - TRAVADO ATE ACERTAR</div>
+<div class="sinalC" id="sinalP"><div class="sinalN" id="sinalN">AGUARDANDO 10+ RODADAS</div><div class="sinalT" id="sinalT">Digite numeros - quando 5 numeros ficarem 10+ sem sair, trava o sinal</div></div>
+<div style="font-size:9px;color:#fff;text-align:center;margin-top:3px;font-weight:900">APOSTA - 10 NUMEROS (5 + 1 VIZINHO CADA):</div>
+<div class="apostaGrid" id="apostaGrid"></div>
+<div style="display:flex;gap:2px;margin-top:3px">
+<div style="flex:1;background:#dc2626;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#fff">NUMEROS</div><div style="font-size:11px;font-weight:900;color:#fff" id="totalAposta">0</div></div>
+<div style="flex:1;background:#000;border:1px solid #ffaa00;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#ffaa00">RODADAS SEM SAIR</div><div style="font-size:11px;font-weight:900;color:#ffaa00" id="rodAposta">--</div></div>
+<div style="flex:1;background:#002200;border:1px solid #00ff00;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#00ff00">ACERTOS</div><div style="font-size:11px;font-weight:900;color:#00ff00" id="acertos">0</div></div>
+</div>
+</div>
+<div class="card"><div class="cardT">TOP 10 ATRASADOS - ELE + 1 VIZINHO - 10+ RODADAS</div><div class="lista" id="listaS"></div></div>
+<div class="card"><div class="cardT">AVALIACAO ULTIMO NUMERO</div>
+<div class="row"><div class="st"><div class="stL">NUM</div><div class="stV" id="numAval">--</div></div><div class="st"><div class="stL">VIZ 1</div><div class="stV" id="vizAval">--</div></div><div class="st"><div class="stL">JA CONTOU</div><div class="stV" id="atual">--</div></div><div class="st"><div class="stL">MEDIA</div><div class="stV" id="media">--</div></div></div>
+<div style="display:flex;gap:1px;flex-wrap:wrap;margin-top:2px;min-height:16px" id="gapHist"></div>
+</div>
+<div class="card"><div class="cardT">TODOS OS NUMEROS - ATRASO ATUAL</div><div class="todos" id="todos"></div></div>
+<div class="card" style="background:#330000;border-color:#ff0000"><div class="cardT" style="color:#ffaaaa">COMO FUNCIONA - 005</div>
+<div style="font-size:8px;color:#ffcccc;font-weight:900">
+• Sistema conta quantas rodadas cada numero + 1 vizinho esta sem sair<br>
+• Quando 5 numeros ficam 10+ rodadas sem sair = SINAL TRAVA<br>
+• Mostra 10 numeros pra apostar (5 numeros + 1 vizinho cada)<br>
+• SO ATUALIZA QUANDO ACERTA um dos 10 numeros<br>
+• Se nao acertar, continua no mesmo sinal - NAO MUDA<br>
+• Quando acerta, gera novo sinal com os proximos 5 mais atrasados
+</div></div>
 </div>
 </div>
 <div class="kb">
@@ -117,66 +114,173 @@ body{display:flex;justify-content:center;overflow:hidden}
 </div>
 <script>
 var ordem=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-var cur="",lista=[],pag="000",LIM=13;
-function viz(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[ordem[(i-1+ordem.length)%ordem.length],n,ordem[(i+1)%ordem.length],ordem[(i+2)%ordem.length]];}
-function calc(a){var v=viz(a);var gaps=[],last=-1;for(var i=0;i<lista.length;i++){if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}}var atual=last==-1?lista.length:lista.length-1-last;var media=0,max=0;if(gaps.length){var s=0;for(var g of gaps){s+=g;if(g>max)max=g;}media=Math.round(s/gaps.length*10)/10;}return{v:v,g:gaps,m:media,mx:max,at:atual,vez:gaps.length};}
-function go(p){pag=p;document.querySelectorAll('.painel').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('on'));var b=document.getElementById('b-'+p);if(b)b.classList.add('on');var nm={"000":"MENU - 00 LIMPA TUDO","001":"001 - HIST AZUL","002":"002 - QUENTE AZUL","003":"003 - PREVISAO AZUL","004":"004 - SINAL 13 RODADAS - LIMPA 100%"};document.getElementById('sub').textContent=nm[p]||p;show();upd();}
-function show(){var d=document.getElementById('disp');if(cur==""){if(pag=="000")d.textContent="MENU - DIGITE 0-36 + ENTER | 00 = LIMPA TUDO";else d.textContent="PAG "+pag+" - DIGITE 0-36 + ENTER | 0=APAGA ULTIMO 00=LIMPA";d.className="disp";}else if(cur=="0")d.textContent="0 = APAGAR ULTIMO + ENTER",d.className="disp";else if(cur=="00")d.textContent="00 = LIMPAR TUDO GERAL + ENTER - APAGA TUDO!",d.className="disp sinal";else d.textContent="NUMERO: "+cur,d.className="disp";}
-function dig(v){if(cur=="00"){cur=v;show();return;}if(cur.length>=2)cur=v;else cur+=v;show();}
-function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
-function apagarUltimo(){if(lista.length){lista.pop();if(lista.length==0){limparVisual();}show();upd();}else{limparVisual();}}
-function limparVisual(){
-document.getElementById('numAval').textContent="--";
-document.getElementById('numAval').style.background="#555";
-document.getElementById('vizRow').innerHTML="";
-document.getElementById('ordTxt').textContent="Historico limpo - digite numeros novos";
-document.getElementById('atual').textContent="--";
-document.getElementById('media').textContent="--";
-document.getElementById('falta').textContent="--";
-document.getElementById('gapHist').innerHTML="";
-document.getElementById('listaS').innerHTML='<div style="color:#00ff00;font-weight:900;text-align:center;padding:8px;font-size:12px">✅ HISTORICO LIMPO! Digite novos numeros.</div>';
-document.getElementById('todos').innerHTML="";
-document.getElementById('g001').innerHTML="";
-document.getElementById('hMenu').innerHTML="";
-document.getElementById('sinalP').style.display='none';
-var t2=document.getElementById('top002');if(t2)t2.innerHTML='<div style="color:#00ff00;text-align:center">✅ Limpo - digite numeros</div>';
-var t3=document.getElementById('top003');if(t3)t3.innerHTML='<div style="color:#00ff00;text-align:center">✅ Limpo - digite numeros</div>';
-document.getElementById('t001').textContent="0";
-document.getElementById('a001').textContent="0";
-document.getElementById('c001').textContent="0";
-document.getElementById('contTotal').textContent="0";
+var cur="",lista=[],pag="005",LIM=10;
+var sinalTravado=null;
+var acertosTotal=0;
+function viz1(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[n,ordem[(i+1)%ordem.length]];}
+function viz4(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[ordem[(i-1+ordem.length)%ordem.length],n,ordem[(i+1)%ordem.length],ordem[(i+2)%ordem.length]];}
+function calc10(n){
+ var v=viz1(n);
+ var gaps=[],last=-1;
+ for(var i=0;i<lista.length;i++){
+  if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}
+ }
+ var atual=last==-1?lista.length:lista.length-1-last;
+ var media=0;if(gaps.length){var s=0;for(var g of gaps)s+=g;media=Math.round(s/gaps.length*10)/10;}
+ return{v:v,g:gaps,m:media,at:atual};
 }
-function limparTudo(){
-lista=[];
-cur="";
-limparVisual();
-var d=document.getElementById('disp');
-d.textContent="✅ HISTORICO GERAL LIMPO! 0 NUMEROS - DIGITE NOVOS NUMEROS";
-d.className="disp limpo";
-setTimeout(function(){show();upd();},2000);
+function calc4(n){
+ var v=viz4(n);
+ var gaps=[],last=-1;
+ for(var i=0;i<lista.length;i++){if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}}
+ var atual=last==-1?lista.length:lista.length-1-last;
+ var media=0;if(gaps.length){var s=0;for(var g of gaps)s+=g;media=Math.round(s/gaps.length*10)/10;}
+ return{v:v,g:gaps,m:media,at:atual};
+}
+function go(p){pag=p;document.querySelectorAll('.painel').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('on'));var b=document.getElementById('b-'+p);if(b)b.classList.add('on');var nm={"000":"MENU","001":"001 HIST","002":"002 QUENTE","003":"003 PREVISAO","004":"004 13x 4NUM","005":"005 5+1 VIZ 10x SO ACERTA"};document.getElementById('sub').textContent=nm[p]||p;show();upd();}
+function show(){var d=document.getElementById('disp');if(cur==""){if(pag=="005"){if(sinalTravado)d.textContent="🔒 SINAL TRAVADO - "+sinalTravado.expanded.join(",")+" - SO MUDA QUANDO ACERTAR";else d.textContent="005 - 5 NUM + 1 VIZINHO 10+ RODADAS - AGUARDANDO SINAL";}else d.textContent="PAG "+pag+" - DIGITE 0-36 + ENTER";d.className="disp";}else if(cur=="0")d.textContent="0 = APAGAR ULTIMO + ENTER",d.className="disp";else if(cur=="00")d.textContent="00 = LIMPAR TUDO + ENTER",d.className="disp sinal";else d.textContent="NUM: "+cur,d.className="disp";}
+function dig(v){if(cur.length>=2)cur=v;else cur+=v;show();}
+function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
+function apagarUltimo(){if(lista.length){lista.pop();show();upd();}}
+function limparTudo(){lista=[];cur="";sinalTravado=null;acertosTotal=0;show();upd();document.getElementById('disp').textContent="✅ LIMPO - 0 NUMEROS";document.getElementById('disp').className="disp verde";}
+function gerarNovoSinal(){
+ var candidatos=[];
+ for(var n=0;n<=36;n++){var c=calc10(n);if(c.at>=LIM)candidatos.push({n:n,c:c});}
+ candidatos.sort((a,b)=>b.c.at-a.c.at);
+ if(candidatos.length>=5){
+  var top5=candidatos.slice(0,5);
+  var expanded=[];
+  var vizinhos=[];
+  for(var t of top5){for(var v of t.c.v){if(expanded.indexOf(v)==-1)expanded.push(v);} vizinhos.push(t.c.v);}
+  sinalTravado={numeros:top5.map(t=>t.n),viz:vizinhos,expanded:expanded,at:Math.min(...top5.map(t=>t.c.at)),geradoEm:lista.length};
+  return true;
+ }
+ return false;
 }
 function ok(){
 if(cur===""){return;}
 if(cur==="00"){limparTudo();return;}
 if(cur==="0"){apagarUltimo();cur="";show();return;}
-var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}lista.push({n:n});cur="";show();upd();
+var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
+var acertou=false;
+if(sinalTravado && sinalTravado.expanded.indexOf(n)>=0){acertou=true;}
+lista.push({n:n});
+if(acertou){
+ acertosTotal++;
+ sinalTravado=null;
+ gerarNovoSinal();
+ var d=document.getElementById('disp');
+ d.textContent="✅ ACERTOU! "+n+" ESTAVA NO SINAL! NOVO SINAL GERADO!";
+ d.className="disp verde";
+ setTimeout(function(){show();upd();},1500);
+}else{
+ if(!sinalTravado){gerarNovoSinal();}
+}
+cur="";show();upd();
 }
 function upd(){
-if(lista.length==0){limparVisual();return;}
+if(lista.length==0){
+ document.getElementById('contTotal').textContent="0";
+ document.getElementById('hMenu').innerHTML="";
+ document.getElementById('g001').innerHTML="";
+ document.getElementById('top002').innerHTML='<div style="color:#ffaa00;text-align:center">Digite numeros</div>';
+ document.getElementById('top003').innerHTML='<div style="color:#ffaa00;text-align:center">Digite numeros</div>';
+ document.getElementById('numAval').textContent="--";
+ document.getElementById('vizAval').textContent="--";
+ document.getElementById('atual').textContent="--";
+ document.getElementById('media').textContent="--";
+ document.getElementById('gapHist').innerHTML="";
+ document.getElementById('listaS').innerHTML='<div style="color:#ffaa00;text-align:center;padding:4px;font-size:10px">Aguardando 10+ rodadas sem sair...</div>';
+ document.getElementById('todos').innerHTML="";
+ document.getElementById('apostaGrid').innerHTML="";
+ document.getElementById('totalAposta').textContent="0";
+ document.getElementById('rodAposta').textContent="--";
+ document.getElementById('acertos').textContent=acertosTotal;
+ document.getElementById('sinalN').textContent="AGUARDANDO 10+ RODADAS";
+ document.getElementById('sinalT').textContent="Digite numeros - quando 5 numeros ficarem 10+ sem sair, trava o sinal";
+ document.getElementById('vizRow004').innerHTML="";
+ document.getElementById('listaS004').innerHTML="";
+ if(!sinalTravado) gerarNovoSinal();
+ return;
+}
 try{
-var hm=document.getElementById('hMenu');if(hm){hm.innerHTML="";for(var i=Math.max(0,lista.length-18);i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:22px;height:18px;border-radius:3px;background:#0f2e1a;border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff";e.textContent=lista[i].n;hm.appendChild(e);}}
-var ct=document.getElementById('contTotal');if(ct)ct.textContent=lista.length;
-var g1=document.getElementById('g001');if(g1){g1.innerHTML="";for(var i=0;i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:22px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;background:"+(i%2==0?"#1e40af":"#dc2626")+";border:1px solid #d4af37";e.textContent=lista[i].n;g1.appendChild(e);}document.getElementById('t001').textContent=lista.length;document.getElementById('a001').textContent=Math.round(lista.length*0.35);document.getElementById('c001').textContent=Math.round(lista.length*0.65);}
+var hm=document.getElementById('hMenu');if(hm){hm.innerHTML="";for(var i=Math.max(0,lista.length-15);i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:20px;height:16px;border-radius:3px;background:#0f2e1a;border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff";e.textContent=lista[i].n;hm.appendChild(e);}}
+document.getElementById('contTotal').textContent=lista.length;
+var g1=document.getElementById('g001');if(g1){g1.innerHTML="";for(var i=0;i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:20px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff;background:"+(i%2==0?"#1e40af":"#dc2626")+";border:1px solid #d4af37";e.textContent=lista[i].n;g1.appendChild(e);}}
 var freq={};for(var it of lista)freq[it.n]=(freq[it.n]||0)+1;var sorted=Object.keys(freq).map(k=>({n:parseInt(k),c:freq[k]})).sort((a,b)=>b.c-a.c);
-var t2=document.getElementById('top002');if(t2){t2.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:48px;height:48px;border-radius:7px;background:#1e40af;border:1.5px solid #60a5fa;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:18px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:9px;color:#93c5fd">'+t.c+'x</div>';t2.appendChild(d);}}
-var t3=document.getElementById('top003');if(t3){t3.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:54px;height:54px;border-radius:7px;background:#1e40af;border:2px solid #facc15;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:20px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:10px;color:#facc15;font-weight:900">'+Math.round(t.c/lista.length*100)+'%</div>';t3.appendChild(d);}}
-var ult=lista.length?lista[lista.length-1].n:null;var cu=ult!==null?calc(ult):null;if(cu){document.getElementById('numAval').textContent=ult;document.getElementById('numAval').style.background="#dc2626";var vr=document.getElementById('vizRow');vr.innerHTML="";for(var i=0;i<cu.v.length;i++){var e=document.createElement('div');e.className='vb '+(cu.v[i]==ult?'c':'v');e.textContent=cu.v[i];vr.appendChild(e);}document.getElementById('ordTxt').textContent="4 numeros: "+cu.v.join(" - ")+" | Roleta real";document.getElementById('atual').textContent=cu.at+" rod";document.getElementById('media').textContent=cu.m?cu.m+" rod":"--";var falta=LIM-cu.at;document.getElementById('falta').textContent=falta<=0?"SINAL!":falta+" rod";var gh=document.getElementById('gapHist');gh.innerHTML="";for(var g of cu.g.slice(-10)){var e=document.createElement('div');e.style.cssText="width:26px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;background:"+(g>=LIM?"#dc2626":g>=9?"#eab308":"#16a34a");e.textContent=g;gh.appendChild(e);}}
-var ls=document.getElementById('listaS');if(ls){ls.innerHTML="";var ativos=[];for(var n=0;n<=36;n++){var c=calc(n);if(c.at>=LIM)ativos.push({n:n,d:c});}ativos.sort((a,b)=>b.d.at-a.d.at);var sp=document.getElementById('sinalP');var disp=document.getElementById('disp');if(ativos.length&&pag=="004"){var top=ativos[0];sp.style.display='block';document.getElementById('sinalN').textContent="🔵 SINAL! "+top.n+" + VIZ "+top.d.v.join(",");document.getElementById('sinalT').textContent=top.d.at+" ROD SEM SAIR - MEDIA "+top.d.m+" - ENTRAR 4 NUMS";if(cur==""){disp.textContent="🔵 SINAL 13x! ENTRAR: "+top.d.v.join(",")+" ("+top.d.at+" ROD)";disp.className="disp sinal";}}else if(pag=="004"){if(!ativos.length){sp.style.display='none';if(cur==""){disp.textContent="PAG 004 - DIGITE NUMERO 0-36 + ENTER | 00 LIMPA TUDO";disp.className="disp";}}}for(var s of ativos){var div=document.createElement('div');div.className='item';div.innerHTML='<div class="n">'+s.n+'</div><div class="vz">VIZ: '+s.d.v.join(",")+' Media '+s.d.m+' Max '+s.d.mx+'</div><div class="g">'+s.d.at+' ROD</div>';ls.appendChild(div);}if(!ativos.length&&pag=="004")ls.innerHTML='<div style="color:#3a7a3a;font-weight:900;text-align:center;padding:4px;font-size:10px">Nenhum passou de 13 ainda. Media geral 9 rodadas.</div>';}
-var todos=document.getElementById('todos');if(todos){todos.innerHTML="";var all=[];for(var n=0;n<=36;n++)all.push({n:n,d:calc(n)});all.sort((a,b)=>b.d.at-a.d.at);for(var t of all.slice(0,24)){var e=document.createElement('div');var cor=t.d.at>=LIM?"#dc2626":t.d.at>=10?"#eab308":"#0f2e1a";e.style.background=cor;e.textContent=t.n+" ("+t.d.at+"/"+(t.d.m||0)+")";todos.appendChild(e);}}
+var t2=document.getElementById('top002');if(t2){t2.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:42px;height:42px;border-radius:6px;background:#1e40af;border:1px solid #60a5fa;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:16px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:8px;color:#93c5fd">'+t.c+'x</div>';t2.appendChild(d);}}
+var t3=document.getElementById('top003');if(t3){t3.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:48px;height:48px;border-radius:6px;background:#1e40af;border:1.5px solid #facc15;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:18px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:9px;color:#facc15;font-weight:900">'+Math.round(t.c/lista.length*100)+'%</div>';t3.appendChild(d);}}
+var ult=lista.length?lista[lista.length-1].n:null;
+if(ult!==null){
+ var cu=calc10(ult);
+ document.getElementById('numAval').textContent=ult;
+ document.getElementById('vizAval').textContent=cu.v[1]||"--";
+ document.getElementById('atual').textContent=cu.at+" rod";
+ document.getElementById('media').textContent=cu.m?cu.m+" rod":"--";
+ var gh=document.getElementById('gapHist');gh.innerHTML="";for(var g of cu.g.slice(-8)){var e=document.createElement('div');e.style.cssText="width:24px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff;background:"+(g>=LIM?"#dc2626":"#16a34a");e.textContent=g;gh.appendChild(e);}
+}
+var vr004=document.getElementById('vizRow004');if(vr004){vr004.innerHTML="";if(lista.length){var last=lista[lista.length-1].n;var c4=calc4(last);for(var v of c4.v){var e=document.createElement('div');e.style.cssText="width:38px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:"+(v==last?"#dc2626":"#eab308")+";color:"+(v==last?"#fff":"#000")+";border:1px solid #fff";e.textContent=v;vr004.appendChild(e);}}}
+var ls004=document.getElementById('listaS004');if(ls004){ls004.innerHTML="";var cand4=[];for(var n=0;n<=36;n++){var c=calc4(n);if(c.at>=13)cand4.push({n:n,c:c});}cand4.sort((a,b)=>b.c.at-a.c.at);for(var i=0;i<Math.min(5,cand4.length);i++){var s=cand4[i];var div=document.createElement('div');div.className='item';div.innerHTML='<div class="n">'+s.n+'</div><div class="vz">VIZ:'+s.c.v.join(",")+' Media '+s.c.m+'</div><div class="g">'+s.c.at+' ROD</div>';ls004.appendChild(div);}}
+if(!sinalTravado){gerarNovoSinal();}
+var ls=document.getElementById('listaS');if(ls){
+ ls.innerHTML="";
+ var cand=[];for(var n=0;n<=36;n++){var c=calc10(n);cand.push({n:n,c:c});}
+ cand.sort((a,b)=>b.c.at-a.c.at);
+ for(var i=0;i<Math.min(15,cand.length);i++){
+  var s=cand[i];
+  var div=document.createElement('div');div.className='item';
+  var bg=s.c.at>=LIM?"#ffaa00":"#0f2e1a";
+  var cor=s.c.at>=LIM?"#000":"#fff";
+  div.style.borderColor=s.c.at>=LIM?"#ffaa00":"#d4af37";
+  div.style.background=bg;
+  div.style.color=cor;
+  div.innerHTML='<div class="n" style="background:'+(s.c.at>=LIM?'#000':'#dc2626')+';color:'+(s.c.at>=LIM?'#ffaa00':'#fff')+'">'+s.n+'</div><div class="vz" style="color:'+cor+'">VIZ: '+s.c.v.join(",")+' Media '+s.c.m+' Max '+(s.c.g.length?Math.max(...s.c.g):0)+'</div><div class="g" style="background:'+(s.c.at>=LIM?'#000':'#1e40af')+';color:'+(s.c.at>=LIM?'#ffaa00':'#fff')+'">'+s.c.at+' ROD</div>';
+  ls.appendChild(div);
+ }
+}
+var todos=document.getElementById('todos');if(todos){
+ todos.innerHTML="";
+ var all=[];for(var n=0;n<=36;n++)all.push({n:n,d:calc10(n)});all.sort((a,b)=>b.d.at-a.d.at);
+ for(var t of all.slice(0,20)){var e=document.createElement('div');var cor=t.d.at>=LIM?"#ffaa00":t.d.at>=8?"#eab308":"#0f2e1a";var tc=t.d.at>=LIM?"#000":"#fff";e.style.background=cor;e.style.color=tc;e.textContent=t.n+" ("+t.d.at+"/"+(t.d.m||0)+")";todos.appendChild(e);}
+}
+var apostaGrid=document.getElementById('apostaGrid');
+var sinalN=document.getElementById('sinalN');
+var sinalT=document.getElementById('sinalT');
+var totalAposta=document.getElementById('totalAposta');
+var rodAposta=document.getElementById('rodAposta');
+var acertosEl=document.getElementById('acertos');
+if(acertosEl)acertosEl.textContent=acertosTotal;
+if(sinalTravado){
+ apostaGrid.innerHTML="";
+ for(var i=0;i<sinalTravado.expanded.length;i++){
+  var num=sinalTravado.expanded[i];
+  var isOriginal=sinalTravado.numeros.indexOf(num)>=0;
+  var d=document.createElement('div');
+  d.className='apostaNum'+(isOriginal?'':' viz');
+  d.innerHTML=num+'<small>'+(isOriginal?'NUM':'VIZ')+'</small>';
+  apostaGrid.appendChild(d);
+ }
+ sinalN.textContent="🔒 SINAL TRAVADO - "+sinalTravado.numeros.join(",")+" + VIZ";
+ sinalT.textContent="10 NUMEROS: "+sinalTravado.expanded.join(",")+" - "+sinalTravado.at+" ROD SEM SAIR - SO MUDA QUANDO ACERTAR - ACERTOS: "+acertosTotal;
+ totalAposta.textContent=sinalTravado.expanded.length;
+ rodAposta.textContent=sinalTravado.at+" ROD";
+ var disp=document.getElementById('disp');
+ if(pag=="005" && cur==""){
+  disp.textContent="🔒 SINAL TRAVADO - APOSTAR: "+sinalTravado.expanded.join(",")+" ("+sinalTravado.at+" ROD) - SO ATUALIZA QUANDO ACERTAR";
+  disp.className="disp amarelo";
+ }
+}else{
+ apostaGrid.innerHTML='<div style="grid-column:span 5;color:#ffaa00;text-align:center;font-size:10px;padding:8px">Aguardando 5 numeros com 10+ rodadas sem sair...</div>';
+ sinalN.textContent="AGUARDANDO 10+ RODADAS";
+ sinalT.textContent="Quando 5 numeros ficarem 10+ sem sair, trava o sinal - so atualiza quando acertar";
+ totalAposta.textContent="0";
+ rodAposta.textContent="--";
+}
 }catch(e){console.log(e);}
 }
-show();upd();go('004');
-limparVisual();
+var ex=[13,35,5,18,30,5,34,30,20,6,1,5,8,14,26,18,31,18,8,35,27,19,26,2,30,36,17,29,35,27,28,24,6,27,35,15,19,4,11,22,25,17,3,10,7,29,10,21,2,8,32,24,12,27,7,32,25,10,16,36,11,5,11,2,20,17,3,15,13,30,15,9,20,29,30,20,23,32,19,21,32,28,16,14,6,15,7,22,5,8,8,18,23,15,24,24,12,14,30,11,23,8,27,21];
+for(var n of ex)lista.push({n:n});
+show();upd();go('005');
 </script>
 </body>
 </html>

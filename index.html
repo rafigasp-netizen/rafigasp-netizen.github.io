@@ -3,152 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP FIX 001-004 COM BOTOES</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<title>RAFIGASP FIX 00 LIMPA</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818;overflow:hidden}body{display:flex;justify-content:center}.app{width:100%;max-width:480px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
-.topo{padding:6px 0 4px;text-align:center;background:#0a1f14;flex-shrink:0}
-.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;color:#e8c76a;line-height:1}
-.topoS{font-size:10px;letter-spacing:2px;color:#d4af37;font-weight:800}
-.navBar{display:flex;gap:3px;padding:5px 6px;background:#0a1f14;flex-shrink:0}
-.navBtn{flex:1;height:36px;border-radius:8px;border:2px solid #d4af37;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.navBtn.home{background:#f9e27a;color:#1a1000}
-.navBtn.pag{background:#0f2e1a;color:#d4af37}
-.navBtn.pag.ativo{background:#e8c76a;color:#1a1000;border-color:#fff;box-shadow:0 0 8px #e8c76a}
-.navBtn.sinal{background:linear-gradient(180deg,#60a5fa,#1e40af);color:#fff;border-color:#93c5fd}
-.navBtn.sinal.ativo{background:linear-gradient(180deg,#ff4444,#991b1b);color:#fff;border-color:#ff0000;box-shadow:0 0 8px #ff0000}
-.display{margin:4px 8px;background:#000;border:3px solid #d4af37;border-radius:10px;height:48px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:16px;flex-shrink:0;text-align:center;padding:4px}
-.display.vazio{color:#3a7a3a;font-size:14px}.display.sinal{background:#1e40af;color:#fff;border-color:#60a5fa;animation:piscaAzul 0.5s infinite alternate}.display.alerta{background:#dc2626;color:#fff;border-color:#ff0000;animation:piscaVermelho 0.5s infinite alternate}
-@keyframes piscaAzul{0%{background:#1e40af}100%{background:#3b82f6}}
-@keyframes piscaVermelho{0%{background:#dc2626}100%{background:#991b1b}}
-.painel{flex:1;display:none;flex-direction:column;overflow:hidden;padding:5px;gap:5px}.painel.ativo{display:flex}
-.card{background:#0f2e1a;border:2px solid #d4af37;border-radius:10px;padding:7px}
-.cardTitle{font-size:12px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:4px}
-.vizRow{display:flex;gap:4px;justify-content:center;margin:4px 0;flex-wrap:wrap}
-.vizBox{width:52px;height:40px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:#fff;background:#1e40af;border:2px solid #60a5fa}
-.vizBox.center{background:#dc2626;border-color:#ff4500}
-.vizBox.viz{background:#eab308;color:#000;border-color:#facc15}
-.statRow{display:flex;gap:4px;margin:3px 0}
-.stat{flex:1;background:#000;border-radius:7px;padding:5px;text-align:center;border:1px solid #d4af37}
-.statLabel{font-size:8px;color:#d4af37;font-weight:900}
-.statValue{font-size:15px;font-weight:900;color:#fff}
-.sinalCard{background:linear-gradient(180deg,#1e40af,#0a1f44);border:3px solid #60a5fa;border-radius:10px;padding:8px;text-align:center}
-.sinalCard.vermelho{background:linear-gradient(180deg,#dc2626,#991b1b);border-color:#ff0000;animation:piscaVermelho 0.6s infinite alternate}
-.sinalNum{font-size:18px;font-weight:900;color:#fff}
-.sinalTxt{font-size:11px;font-weight:900;color:#93c5fd;margin-top:2px}
-.listaSinais{display:flex;flex-direction:column;gap:3px;max-height:160px;overflow:auto}
-.sinalItem{display:flex;align-items:center;gap:4px;background:#000;border:2px solid #60a5fa;border-radius:7px;padding:4px}
-.sinalItem .num{width:30px;height:26px;background:#dc2626;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px}
-.sinalItem .vizs{flex:1;font-size:9px;color:#f9e27a;font-weight:900}
-.sinalItem .gap{font-size:11px;font-weight:900;color:#fff;background:#1e40af;padding:2px 5px;border-radius:4px}
-.histGaps{display:flex;gap:2px;flex-wrap:wrap;min-height:20px}
-.gapBox{width:30px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff}
-.menuGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
-.menuBtn2{background:linear-gradient(180deg,#f9e27a,#b8941f);border:2px solid #d4af37;border-radius:9px;padding:10px;text-align:center;font-weight:900;font-size:13px;color:#1a1000}
-.menuBtn2 small{display:block;font-size:9px;color:#000;margin-top:1px}
-.kb{padding:5px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 5px 5px 5px;border-radius:12px;border:2px solid #d4af37;height:32%;display:flex;flex-direction:column;gap:3px;flex-shrink:0}.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.k{width:100%;height:100%;border-radius:8px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0d2818}
+body{display:flex;justify-content:center;overflow:hidden}
+.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
+.topo{text-align:center;background:#0a1f14;padding:6px 0 4px;flex-shrink:0}
+.topoR{font-weight:900;font-size:26px;color:#e8c76a;line-height:1}
+.topoS{font-size:9px;letter-spacing:2px;color:#d4af37;font-weight:800}
+.nav{display:flex;gap:2px;padding:4px;background:#0a1f14;flex-shrink:0}
+.nav button{flex:1;height:32px;border-radius:6px;border:1.5px solid #d4af37;font-weight:900;font-size:11px}
+.nav .home{background:#f9e27a;color:#111}
+.nav .pg{background:#112a1a;color:#d4af37}
+.nav .pg.on{background:#e8c76a;color:#111;border-color:#fff}
+.nav .sinal{background:#1e40af;color:#fff;border-color:#60a5fa}
+.nav .sinal.on{background:#dc2626;border-color:#ff0000}
+.nav .limpar{background:#330000;color:#ffaaaa;border-color:#ff0000}
+.disp{margin:4px 6px;background:#000;border:2px solid #d4af37;border-radius:8px;min-height:40px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:13px;text-align:center;padding:4px;flex-shrink:0}
+.disp.sinal{background:#dc2626;color:#fff;animation:pisca 0.5s infinite alternate}
+@keyframes pisca{0%{background:#dc2626}100%{background:#991b1b}}
+.content{flex:1;overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:4px}
+.card{background:#0f2e1a;border:1.5px solid #d4af37;border-radius:8px;padding:5px}
+.cardT{font-size:11px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:3px}
+.vizs{display:flex;gap:3px;justify-content:center;flex-wrap:wrap}
+.vb{width:44px;height:32px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
+.vb.c{background:#dc2626;color:#fff;border:1.5px solid #ff5555}
+.vb.v{background:#eab308;color:#000;border:1.5px solid #facc15}
+.row{display:flex;gap:3px}
+.st{flex:1;background:#000;border-radius:5px;padding:3px;text-align:center;border:1px solid #d4af37}
+.stL{font-size:7px;color:#d4af37;font-weight:900}
+.stV{font-size:12px;font-weight:900;color:#fff}
+.sinalC{background:linear-gradient(180deg,#dc2626,#991b1b);border:2px solid #ff0000;border-radius:8px;padding:6px;text-align:center}
+.sinalN{font-size:14px;font-weight:900;color:#fff}
+.sinalT{font-size:9px;font-weight:900;color:#ffcccc;margin-top:2px}
+.lista{display:flex;flex-direction:column;gap:2px;max-height:140px;overflow:auto}
+.item{display:flex;align-items:center;gap:3px;background:#000;border:1.5px solid #60a5fa;border-radius:5px;padding:3px}
+.item .n{width:26px;height:22px;background:#dc2626;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:11px}
+.item .vz{flex:1;font-size:8px;color:#f9e27a;font-weight:900}
+.item .g{font-size:10px;font-weight:900;color:#fff;background:#1e40af;padding:2px 4px;border-radius:3px}
+.todos{display:flex;gap:2px;flex-wrap:wrap;max-height:80px;overflow:auto}
+.todos div{border:1px solid #d4af37;border-radius:4px;padding:2px 4px;font-size:9px;font-weight:900;color:#fff;min-width:44px;text-align:center}
+.kb{background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:4px;border-radius:10px;border:1.5px solid #d4af37;padding:4px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;height:34%;min-height:180px}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.k{border-radius:7px;border:1px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#b8941f);color:#1a1000}
+.k.apagar{background:linear-gradient(180deg,#ffaaaa,#cc0000);color:#fff;border-color:#ff0000}
+.painel{display:none;flex-direction:column;gap:4px}
+.painel.on{display:flex}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS" id="topoSub">MENU - BOTOES FIXOS</div></div>
-<div class="navBar">
-<div class="navBtn home" id="btn-000" onclick="irPagina('000')">🏠 MENU</div>
-<div class="navBtn pag" id="btn-001" onclick="irPagina('001')">001</div>
-<div class="navBtn pag" id="btn-002" onclick="irPagina('002')">002</div>
-<div class="navBtn pag" id="btn-003" onclick="irPagina('003')">003</div>
-<div class="navBtn sinal" id="btn-004" onclick="irPagina('004')">004 13x</div>
+<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS" id="sub">004 - SINAL 13 RODADAS</div></div>
+<div class="nav">
+<button class="home" onclick="go('000')">MENU</button>
+<button class="pg" id="b-001" onclick="go('001')">001</button>
+<button class="pg" id="b-002" onclick="go('002')">002</button>
+<button class="pg" id="b-003" onclick="go('003')">003</button>
+<button class="sinal" id="b-004" onclick="go('004')">004 13x</button>
+<button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 </div>
-<div class="display vazio" id="dig">BOTOES NO TOPO PRA MUDAR DE PAGINA</div>
-<div class="painel ativo" id="painel-000">
-<div class="card"><div class="cardTitle">RAFIGASP - MENU PRINCIPAL - COM BOTOES FIXOS</div>
-<div style="font-size:11px;color:#facc15;text-align:center;font-weight:900;margin-bottom:6px">AGORA E SO CLICAR NOS BOTOES DO TOPO - NAO PRECISA DIGITAR 001</div>
-<div class="menuGrid">
-<div class="menuBtn2" onclick="irPagina('001')">001 HIST AZUL<br><small>Historico base 108</small></div>
-<div class="menuBtn2" onclick="irPagina('002')">002 QUENTE AZUL<br><small>Top 6 letras grandes</small></div>
-<div class="menuBtn2" onclick="irPagina('003')">003 PREVISAO AZUL<br><small>Proximas 15</small></div>
-<div class="menuBtn2" onclick="irPagina('004')" style="background:linear-gradient(180deg,#60a5fa,#1e40af);color:#fff">004 SINAL 13x<br><small>Ele ou 3 vizinhos</small></div>
+<div class="disp" id="disp">BOTOES NO TOPO PRA MUDAR DE PAGINA</div>
+<div class="content">
+<div class="painel on" id="p-000">
+<div class="card"><div class="cardT">MENU PRINCIPAL - 00 AGORA LIMPA TUDO</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px">
+<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('001')">001 HIST AZUL</div>
+<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('002')">002 QUENTE</div>
+<div style="background:#f9e27a;border:2px solid #d4af37;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('003')">003 PREVISAO</div>
+<div style="background:#1e40af;color:#fff;border:2px solid #60a5fa;border-radius:7px;padding:8px;text-align:center;font-weight:900;font-size:12px" onclick="go('004')">004 SINAL 13x</div>
 </div>
-<div style="margin-top:6px;background:#000;border-radius:8px;padding:6px">
-<div style="font-size:11px;color:#f9e27a;font-weight:900;text-align:center">ULTIMOS NUMEROS (104 do seu print + novos):</div>
-<div id="histMenu" style="display:flex;gap:2px;flex-wrap:wrap;margin-top:4px;justify-content:center;min-height:24px"></div>
-</div>
-</div>
-</div>
-<div class="painel" id="painel-001">
-<div class="card"><div class="cardTitle">001 - HIST AZUL - BASE 108</div><div style="display:flex;gap:3px;flex-wrap:wrap;min-height:50px" id="grid001"></div></div>
-<div class="card"><div class="cardTitle">ESTATISTICA</div><div class="statRow"><div class="stat"><div class="statLabel">TOTAL</div><div class="statValue" id="total001">--</div></div><div class="stat"><div class="statLabel">AZUL</div><div class="statValue" id="azul001">--</div></div><div class="stat"><div class="statLabel">CLUSTER</div><div class="statValue" id="cluster001">--</div></div></div></div>
-</div>
-<div class="painel" id="painel-002">
-<div class="card"><div class="cardTitle">002 - TOP 6 NUMEROS - SINAL AZUL</div><div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center" id="top6-002"></div></div>
-<div class="card"><div class="cardTitle">QUENTE 35% | VIZ 25% | AZUL 55%</div><div style="font-size:11px;color:#f9e27a;text-align:center;font-weight:900">BASE 108 | GAP 5 | ULTIMO AZUL</div></div>
-</div>
-<div class="painel" id="painel-003">
-<div class="card" style="border-color:#60a5fa"><div class="cardTitle" style="color:#60a5fa;font-size:16px">PREVISAO AZUL - PROXIMAS 15 - LETRAS GRANDES</div><div style="text-align:center;color:#e8c76a;font-weight:900;font-size:11px">BASE 108 | GAP 5 | ULTIMO AZUL</div><div style="display:flex;gap:5px;margin-top:5px"><div style="flex:1;background:#dc2626;border-radius:7px;padding:6px;text-align:center"><div style="font-weight:900;color:#fff;font-size:11px">QUENTE 5 N</div><div style="font-weight:900;color:#f87171;font-size:18px">35%</div></div><div style="flex:1;background:#eab308;border-radius:7px;padding:6px;text-align:center"><div style="font-weight:900;color:#000;font-size:11px">VIZ 4 N</div><div style="font-weight:900;color:#000;font-size:18px">25%</div></div><div style="flex:1;background:#1e40af;border-radius:7px;padding:6px;text-align:center"><div style="font-weight:900;color:#fff;font-size:11px">AZUL</div><div style="font-weight:900;color:#60a5fa;font-size:18px">55%</div></div></div></div>
-<div class="card"><div class="cardTitle" style="color:#60a5fa">TOP 6 NUMEROS - SINAL AZUL</div><div id="top6-003" style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center"></div></div>
-<div class="card" style="background:#1e40af;border-color:#60a5fa"><div style="font-size:13px;font-weight:900;color:#60a5fa;text-align:center">ESTRATEGIA AZUL</div><div style="font-size:10px;color:#fff;text-align:center">Concentrar apostas em AZUL nos proximos 15 spins</div><div style="background:#fff;color:#1e40af;border-radius:5px;padding:5px;text-align:center;font-weight:900;font-size:14px;margin:3px 0">AZUL SAIU! ENTRAR CLUSTER</div></div>
-</div>
-<div class="painel" id="painel-004">
-<div class="card">
-<div class="cardTitle">ULTIMO NUMERO + 3 VIZINHOS - 004 - CONTA 13x</div>
-<div style="display:flex;justify-content:center;align-items:center;gap:6px">
-<div style="font-size:11px;color:#d4af37;font-weight:900">NUMERO:</div>
-<div id="numAval" style="font-size:32px;font-weight:900;color:#fff;background:#dc2626;border-radius:7px;padding:2px 10px;min-width:50px;text-align:center">--</div>
-<div style="font-size:11px;color:#d4af37;font-weight:900">VIZINHOS:</div>
-</div>
-<div class="vizRow" id="vizRow"></div>
-<div style="font-size:10px;color:#60a5fa;text-align:center;font-weight:900" id="ordemTxt">4 numeros: roleta real</div>
-</div>
-<div class="sinalCard" id="sinalPrincipal" style="display:none">
-<div class="sinalNum" id="sinalNum">--</div>
-<div class="sinalTxt" id="sinalTxt">AGUARDANDO</div>
-</div>
-<div class="card">
-<div class="cardTitle">CONTADOR 13 RODADAS - SINAIS ATIVOS</div>
-<div style="font-size:10px;color:#facc15;text-align:center;font-weight:900;margin-bottom:3px">QUANDO CONTA 13 SEM VOLTAR ELE OU VIZINHO = SINAL</div>
-<div class="listaSinais" id="listaSinais"></div>
-</div>
-<div class="card">
-<div class="cardTitle">AVALIACAO - CONTA 13x</div>
-<div class="statRow">
-<div class="stat"><div class="statLabel">JA CONTOU</div><div class="statValue" id="atualSem" style="color:#facc15">--</div></div>
-<div class="stat"><div class="statLabel">MEDIA VOLTA</div><div class="statValue" id="mediaGap">--</div></div>
-<div class="stat"><div class="statLabel">FALTA PRA 13</div><div class="statValue" id="falta13">--</div></div>
-</div>
-<div class="histGaps" id="gapHist"></div>
-</div>
-<div class="card">
-<div class="cardTitle">TODOS - QUEM PASSOU DE 13?</div>
-<div style="display:flex;gap:3px;flex-wrap:wrap;max-height:100px;overflow:auto" id="todosNumeros"></div>
+<div style="margin-top:6px;background:#000;border-radius:6px;padding:4px">
+<div style="font-size:10px;color:#f9e27a;font-weight:900;text-align:center">ULTIMOS NUMEROS: <span id="contTotal" style="color:#fff">0</span></div>
+<div id="hMenu" style="display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-top:3px;min-height:20px"></div>
+<div style="display:flex;gap:4px;margin-top:6px">
+<button onclick="apagarUltimo()" style="flex:1;background:#eab308;border:1px solid #d4af37;border-radius:5px;padding:6px;font-weight:900;font-size:11px">0 = APAGAR ULTIMO</button>
+<button onclick="limparTudo()" style="flex:1;background:#dc2626;color:#fff;border:1px solid #ff0000;border-radius:5px;padding:6px;font-weight:900;font-size:11px">00 = LIMPAR TUDO</button>
 </div>
 </div>
-<div style="font-size:8px;color:#d4af37;text-align:center;font-weight:800;padding:2px">BOTOES FIXOS NO TOPO | 0=APAGAR ULTIMO | 00=LIMPAR | NUMERO 0-36 + ENTER</div>
 </div>
-<div class="kb"><div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div><div class="kr"><button class="k" onclick="digitar('4')">4</button><button class="k" onclick="digitar('5')">5</button><button class="k" onclick="digitar('6')">6</button></div><div class="kr"><button class="k" onclick="digitar('7')">7</button><button class="k" onclick="digitar('8')">8</button><button class="k" onclick="digitar('9')">9</button></div><div class="kr"><button class="k" onclick="confirmar()">ENTER</button><button class="k" onclick="digitar('0')">0</button><button class="k" onclick="corrigir()">CORRIGIR</button></div></div>
+</div>
+<div class="painel" id="p-001">
+<div class="card"><div class="cardT">001 - HISTORICO AZUL</div><div id="g001" style="display:flex;gap:2px;flex-wrap:wrap;min-height:40px"></div></div>
+<div class="card"><div class="cardT">ESTATISTICA</div><div class="row"><div class="st"><div class="stL">TOTAL</div><div class="stV" id="t001">0</div></div><div class="st"><div class="stL">AZUL</div><div class="stV" id="a001">0</div></div><div class="st"><div class="stL">CLUSTER</div><div class="stV" id="c001">0</div></div></div></div>
+</div>
+<div class="painel" id="p-002">
+<div class="card"><div class="cardT">002 - TOP 6 NUMEROS</div><div id="top002" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div>
+</div>
+<div class="painel" id="p-003">
+<div class="card"><div class="cardT">003 - PREVISAO AZUL - PROXIMAS 15</div>
+<div style="display:flex;gap:4px;margin-top:3px"><div style="flex:1;background:#dc2626;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#fff;font-weight:900">QUENTE 5 N</div><div style="font-size:16px;color:#f87171;font-weight:900">35%</div></div><div style="flex:1;background:#eab308;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#000;font-weight:900">VIZ 4 N</div><div style="font-size:16px;color:#000;font-weight:900">25%</div></div><div style="flex:1;background:#1e40af;border-radius:5px;padding:4px;text-align:center"><div style="font-size:10px;color:#fff;font-weight:900">AZUL</div><div style="font-size:16px;color:#60a5fa;font-weight:900">55%</div></div></div>
+</div>
+<div class="card"><div class="cardT">TOP 6 - SINAL AZUL</div><div id="top003" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div>
+</div>
+<div class="painel" id="p-004">
+<div class="card"><div class="cardT">ULTIMO NUMERO + 3 VIZINHOS - CONTA 13x</div>
+<div style="display:flex;justify-content:center;align-items:center;gap:4px"><span style="font-size:10px;color:#d4af37;font-weight:900">NUM:</span><span id="numAval" style="font-size:28px;font-weight:900;color:#fff;background:#dc2626;border-radius:5px;padding:1px 8px;min-width:40px;text-align:center">--</span><span style="font-size:10px;color:#d4af37;font-weight:900">VIZ:</span></div>
+<div class="vizs" id="vizRow" style="margin-top:4px"></div>
+<div style="font-size:9px;color:#60a5fa;text-align:center;font-weight:900" id="ordTxt">4 numeros roleta real</div>
+</div>
+<div class="sinalC" id="sinalP" style="display:none"><div class="sinalN" id="sinalN">--</div><div class="sinalT" id="sinalT">--</div></div>
+<div class="card"><div class="cardT">SINAIS ATIVOS - PASSOU DE 13 RODADAS</div><div class="lista" id="listaS"></div></div>
+<div class="card"><div class="cardT">AVALIACAO - CONTA 13</div><div class="row"><div class="st"><div class="stL">JA CONTOU</div><div class="stV" id="atual">--</div></div><div class="st"><div class="stL">MEDIA</div><div class="stV" id="media">--</div></div><div class="st"><div class="stL">FALTA 13</div><div class="stV" id="falta">--</div></div></div><div style="display:flex;gap:2px;flex-wrap:wrap;margin-top:3px;min-height:18px" id="gapHist"></div></div>
+<div class="card"><div class="cardT">TODOS - QUEM PASSOU DE 13?</div><div class="todos" id="todos"></div></div>
+</div>
+</div>
+<div class="kb">
+<div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
+<div class="kr"><button class="k" onclick="dig('4')">4</button><button class="k" onclick="dig('5')">5</button><button class="k" onclick="dig('6')">6</button></div>
+<div class="kr"><button class="k" onclick="dig('7')">7</button><button class="k" onclick="dig('8')">8</button><button class="k" onclick="dig('9')">9</button></div>
+<div class="kr"><button class="k" onclick="ok()">ENTER</button><button class="k" onclick="dig('0')">0</button><button class="k apagar" onclick="corr()">CORRIGIR</button></div>
+</div>
 </div>
 <script>
-var ordemRoleta=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-var cur="",lista=[], paginaAtual="000", LIMITE=13;
-function getVizinhos(n){var idx=ordemRoleta.indexOf(n);if(idx==-1) return [n];return [ordemRoleta[(idx-1+ordemRoleta.length)%ordemRoleta.length], n, ordemRoleta[(idx+1)%ordemRoleta.length], ordemRoleta[(idx+2)%ordemRoleta.length]];}
-function calcularGapsVizinhos(alvo){var viz=getVizinhos(alvo);var gaps=[]; var last=-1;for(var i=0;i<lista.length;i++){if(viz.indexOf(lista[i].n)>=0){if(last!=-1) gaps.push(i-last);last=i;}}var atual= last==-1 ? lista.length : lista.length-1-last;var media=0,max=0;if(gaps.length>0){var soma=0; for(var g of gaps){soma+=g; if(g>max) max=g;} media=Math.round(soma/gaps.length*10)/10;}return {viz:viz,gaps:gaps,media:media,max:max,atual:atual,vezes:gaps.length};}
-function irPagina(p){paginaAtual=p;document.querySelectorAll('.painel').forEach(el=>el.classList.remove('ativo'));document.getElementById('painel-'+p).classList.add('ativo');document.querySelectorAll('.navBtn').forEach(el=>el.classList.remove('ativo'));var btn=document.getElementById('btn-'+p);if(btn) btn.classList.add('ativo');var nomes={"000":"MENU - BOTOES FIXOS","001":"001 - HIST AZUL","002":"002 - QUENTE AZUL","003":"003 - PREVISAO AZUL","004":"004 - SINAL 13x - VIZINHOS"};document.getElementById('topoSub').textContent=nomes[p]||p;mostrarDisplay();atualizar();}
-function mostrarDisplay(){var el=document.getElementById('dig');if(cur===""){ if(paginaAtual=="000") el.textContent="MENU - CLIQUE NOS BOTOES DO TOPO PRA MUDAR DE PAGINA";else el.textContent="PAG "+paginaAtual+" - DIGITE NUMERO 0-36 + ENTER | CLIQUE MENU PRA VOLTAR";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO + ENTER";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO + ENTER";el.className="display";}else{el.textContent="Numero: "+cur;el.className="display";}}
-function digitar(d){if(cur.length>=2){cur=d;}else{cur+=d;}mostrarDisplay();}
-function corrigir(){cur=cur.slice(0,-1);mostrarDisplay();}
-function confirmar(){if(cur===""){return;}if(cur==="0"){if(lista.length>0)lista.pop(); cur=""; mostrarDisplay(); atualizar(); return;}if(cur==="00"){lista=[]; cur=""; mostrarDisplay(); atualizar(); return;}var v=parseInt(cur);if(isNaN(v)||v<0||v>36){cur="";mostrarDisplay();return;}lista.push({n:v});cur=""; mostrarDisplay(); atualizar();}
-function atualizar(){
+var ordem=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
+var cur="",lista=[],pag="000",LIM=13;
+function viz(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[ordem[(i-1+ordem.length)%ordem.length],n,ordem[(i+1)%ordem.length],ordem[(i+2)%ordem.length]];}
+function calc(a){var v=viz(a);var gaps=[],last=-1;for(var i=0;i<lista.length;i++){if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}}var atual=last==-1?lista.length:lista.length-1-last;var media=0,max=0;if(gaps.length){var s=0;for(var g of gaps){s+=g;if(g>max)max=g;}media=Math.round(s/gaps.length*10)/10;}return{v:v,g:gaps,m:media,mx:max,at:atual,vez:gaps.length};}
+function go(p){pag=p;document.querySelectorAll('.painel').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('on'));var b=document.getElementById('b-'+p);if(b)b.classList.add('on');var nm={"000":"MENU - 00 LIMPA TUDO","001":"001 - HIST AZUL","002":"002 - QUENTE AZUL","003":"003 - PREVISAO AZUL","004":"004 - SINAL 13 RODADAS"};document.getElementById('sub').textContent=nm[p]||p;show();upd();}
+function show(){var d=document.getElementById('disp');if(cur==""){if(pag=="000")d.textContent="MENU - DIGITE NUMERO 0-36 + ENTER | 00 = LIMPAR TUDO";else d.textContent="PAG "+pag+" - DIGITE 0-36 + ENTER | 0=APAGA ULTIMO 00=LIMPA TUDO";d.className="disp";}else if(cur=="0")d.textContent="0 = APAGAR ULTIMO + ENTER",d.className="disp";else if(cur=="00")d.textContent="00 = LIMPAR TUDO + ENTER - VAI APAGAR HISTORICO GERAL!",d.className="disp sinal";else d.textContent="NUMERO: "+cur,d.className="disp";}
+function dig(v){if(cur=="00"){cur=v;show();return;}if(cur.length>=2)cur=v;else cur+=v;show();}
+function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
+function apagarUltimo(){if(lista.length){lista.pop();show();upd();}}
+function limparTudo(){if(confirm("LIMPAR TODO HISTORICO GERAL? "+lista.length+" numeros vao ser apagados!")){lista=[];cur="";show();upd();alert("HISTORICO LIMPO!");}}
+function ok(){
+if(cur===""){return;}
+if(cur==="00"){limparTudo();return;}
+if(cur==="0"){apagarUltimo();cur="";show();return;}
+var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}lista.push({n:n});cur="";show();upd();
+}
+function upd(){
 try{
-var histMenu=document.getElementById('histMenu');if(histMenu){histMenu.innerHTML="";for(var i=Math.max(0,lista.length-20);i<lista.length;i++){var d=document.createElement('div');d.style.cssText="width:28px;height:22px;border-radius:4px;background:#0f2e1a;border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff";d.textContent=lista[i].n;histMenu.appendChild(d);}}
-var grid001=document.getElementById('grid001');if(grid001){grid001.innerHTML="";for(var i=0;i<lista.length;i++){var d=document.createElement('div');d.style.cssText="width:26px;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;background:"+(i%2==0?"#1e40af":"#dc2626")+";border:1px solid #d4af37";d.textContent=lista[i].n;grid001.appendChild(d);}document.getElementById('total001').textContent=lista.length;document.getElementById('azul001').textContent=Math.round(lista.length*0.35);document.getElementById('cluster001').textContent=Math.round(lista.length*0.65);}
-var freq={};for(var it of lista){freq[it.n]=(freq[it.n]||0)+1;}var sorted=Object.keys(freq).map(k=>({n:parseInt(k),c:freq[k]})).sort((a,b)=>b.c-a.c);var top6El2=document.getElementById('top6-002');var top6El3=document.getElementById('top6-003');if(top6El2){top6El2.innerHTML=""; for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k]; var d=document.createElement('div'); d.style.cssText="width:56px;height:56px;border-radius:9px;background:#1e40af;border:2px solid #60a5fa;display:flex;flex-direction:column;align-items:center;justify-content:center"; d.innerHTML='<div style="font-size:22px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:10px;color:#93c5fd">'+t.c+'x</div>'; top6El2.appendChild(d);} if(sorted.length==0){top6El2.innerHTML='<div style="color:#3a7a3a">Digite numeros</div>';}}if(top6El3){top6El3.innerHTML=""; for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k]; var d=document.createElement('div'); d.style.cssText="width:64px;height:64px;border-radius:9px;background:#1e40af;border:3px solid #facc15;display:flex;flex-direction:column;align-items:center;justify-content:center"; d.innerHTML='<div style="font-size:26px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:11px;color:#facc15;font-weight:900">'+Math.round(t.c/lista.length*100)+'%</div>'; top6El3.appendChild(d);} if(sorted.length==0){top6El3.innerHTML='<div style="color:#3a7a3a">Digite numeros</div>';}}
-var ultimo = lista.length>0 ? lista[lista.length-1].n : null;var calcUltimo = ultimo!==null ? calcularGapsVizinhos(ultimo) : null;var numAvalEl=document.getElementById('numAval');if(numAvalEl && calcUltimo){numAvalEl.textContent=ultimo;var vizRow=document.getElementById('vizRow'); vizRow.innerHTML="";for(var i=0;i<calcUltimo.viz.length;i++){var d=document.createElement('div');d.className='vizBox '+(calcUltimo.viz[i]==ultimo?'center':'viz');d.textContent=calcUltimo.viz[i]; vizRow.appendChild(d);}document.getElementById('ordemTxt').textContent="4 numeros: "+calcUltimo.viz.join(" - ")+" | Roleta real";document.getElementById('atualSem').textContent=calcUltimo.atual+" rod";document.getElementById('mediaGap').textContent=calcUltimo.media?calcUltimo.media+" rod":"--";var falta = LIMITE - calcUltimo.atual;document.getElementById('falta13').textContent= falta<=0 ? "SINAL!" : falta+" rod";var gapHist=document.getElementById('gapHist'); gapHist.innerHTML="";for(var g of calcUltimo.gaps.slice(-12)){var d=document.createElement('div'); d.className='gapBox';d.style.background= g>=LIMITE ? "#dc2626" : g>=9 ? "#eab308" : "#16a34a";d.textContent=g; gapHist.appendChild(d);}}
-var listaSinais=document.getElementById('listaSinais');if(listaSinais){listaSinais.innerHTML="";var sinaisAtivos=[];for(var n=0;n<=36;n++){var c=calcularGapsVizinhos(n);if(c.atual>=LIMITE) sinaisAtivos.push({n:n,data:c});}sinaisAtivos.sort((a,b)=>b.data.atual-a.data.atual);var sinalPrincipal=document.getElementById('sinalPrincipal');var dig=document.getElementById('dig');if(sinaisAtivos.length>0 && paginaAtual=="004"){var top=sinaisAtivos[0];sinalPrincipal.style.display='block';sinalPrincipal.className='sinalCard vermelho';document.getElementById('sinalNum').textContent="🔵 SINAL! "+top.n+" + VIZ "+top.data.viz.join(",");document.getElementById('sinalTxt').textContent=top.data.atual+" RODADAS SEM SAIR - MEDIA "+top.data.media+" - ENTRAR 4 NUMEROS";if(cur===""){dig.textContent="🔵 SINAL 13x! ENTRAR: "+top.data.viz.join(",")+" ("+top.data.atual+" ROD)";dig.className="display sinal";}}else if(paginaAtual=="004"){if(sinaisAtivos.length==0){sinalPrincipal.style.display='none'; if(cur===""){dig.textContent="PAG 004 - DIGITE NUMERO 0-36 + ENTER | MENU NO TOPO";dig.className="display vazio";}}}for(var s of sinaisAtivos){var div=document.createElement('div'); div.className='sinalItem';div.innerHTML='<div class="num">'+s.n+'</div><div class="vizs">VIZ: '+s.data.viz.join(",")+'<br>Media '+s.data.media+' | Max '+s.data.max+'</div><div class="gap">'+s.data.atual+' ROD</div>';listaSinais.appendChild(div);}if(sinaisAtivos.length==0 && paginaAtual=="004"){listaSinais.innerHTML='<div style="color:#3a7a3a;font-weight:900;text-align:center;padding:6px">Nenhum numero passou de 13 rodadas ainda.<br>Media geral 9 rodadas pra voltar ele ou 3 vizinhos.</div>';}}
-var todosEl=document.getElementById('todosNumeros');if(todosEl){todosEl.innerHTML="";var todosNums=[]; for(var n=0;n<=36;n++){todosNums.push({n:n,data:calcularGapsVizinhos(n)});}todosNums.sort((a,b)=>b.data.atual-a.data.atual);for(var t of todosNums.slice(0,30)){var d=document.createElement('div');var cor = t.data.atual>=LIMITE ? "#dc2626" : t.data.atual>=10 ? "#eab308" : "#0f2e1a";d.style.cssText="border:1px solid #d4af37;border-radius:5px;padding:3px 5px;font-size:10px;font-weight:900;color:#fff;background:"+cor+";min-width:55px;text-align:center";d.textContent=t.n+" ("+t.data.atual+"/"+(t.data.media||0)+")"; todosEl.appendChild(d);}}
+var hm=document.getElementById('hMenu');if(hm){hm.innerHTML="";for(var i=Math.max(0,lista.length-18);i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:22px;height:18px;border-radius:3px;background:#0f2e1a;border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff";e.textContent=lista[i].n;hm.appendChild(e);}}
+var ct=document.getElementById('contTotal');if(ct)ct.textContent=lista.length;
+var g1=document.getElementById('g001');if(g1){g1.innerHTML="";for(var i=0;i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:22px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;background:"+(i%2==0?"#1e40af":"#dc2626")+";border:1px solid #d4af37";e.textContent=lista[i].n;g1.appendChild(e);}document.getElementById('t001').textContent=lista.length;document.getElementById('a001').textContent=Math.round(lista.length*0.35);document.getElementById('c001').textContent=Math.round(lista.length*0.65);}
+var freq={};for(var it of lista)freq[it.n]=(freq[it.n]||0)+1;var sorted=Object.keys(freq).map(k=>({n:parseInt(k),c:freq[k]})).sort((a,b)=>b.c-a.c);
+var t2=document.getElementById('top002');if(t2){t2.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:48px;height:48px;border-radius:7px;background:#1e40af;border:1.5px solid #60a5fa;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:18px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:9px;color:#93c5fd">'+t.c+'x</div>';t2.appendChild(d);}}
+var t3=document.getElementById('top003');if(t3){t3.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:54px;height:54px;border-radius:7px;background:#1e40af;border:2px solid #facc15;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:20px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:10px;color:#facc15;font-weight:900">'+Math.round(t.c/lista.length*100)+'%</div>';t3.appendChild(d);}}
+var ult=lista.length?lista[lista.length-1].n:null;var cu=ult!==null?calc(ult):null;if(cu){document.getElementById('numAval').textContent=ult;var vr=document.getElementById('vizRow');vr.innerHTML="";for(var i=0;i<cu.v.length;i++){var e=document.createElement('div');e.className='vb '+(cu.v[i]==ult?'c':'v');e.textContent=cu.v[i];vr.appendChild(e);}document.getElementById('ordTxt').textContent="4 numeros: "+cu.v.join(" - ")+" | Roleta real";document.getElementById('atual').textContent=cu.at+" rod";document.getElementById('media').textContent=cu.m?cu.m+" rod":"--";var falta=LIM-cu.at;document.getElementById('falta').textContent=falta<=0?"SINAL!":falta+" rod";var gh=document.getElementById('gapHist');gh.innerHTML="";for(var g of cu.g.slice(-10)){var e=document.createElement('div');e.style.cssText="width:26px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;background:"+(g>=LIM?"#dc2626":g>=9?"#eab308":"#16a34a");e.textContent=g;gh.appendChild(e);}}
+var ls=document.getElementById('listaS');if(ls){ls.innerHTML="";var ativos=[];for(var n=0;n<=36;n++){var c=calc(n);if(c.at>=LIM)ativos.push({n:n,d:c});}ativos.sort((a,b)=>b.d.at-a.d.at);var sp=document.getElementById('sinalP');var disp=document.getElementById('disp');if(ativos.length&&pag=="004"){var top=ativos[0];sp.style.display='block';document.getElementById('sinalN').textContent="🔵 SINAL! "+top.n+" + VIZ "+top.d.v.join(",");document.getElementById('sinalT').textContent=top.d.at+" ROD SEM SAIR - MEDIA "+top.d.m+" - ENTRAR 4 NUMS";if(cur==""){disp.textContent="🔵 SINAL 13x! ENTRAR: "+top.d.v.join(",")+" ("+top.d.at+" ROD)";disp.className="disp sinal";}}else if(pag=="004"){if(!ativos.length){sp.style.display='none';if(cur==""){disp.textContent="PAG 004 - DIGITE NUMERO 0-36 + ENTER | 00 LIMPA TUDO";disp.className="disp";}}}for(var s of ativos){var div=document.createElement('div');div.className='item';div.innerHTML='<div class="n">'+s.n+'</div><div class="vz">VIZ: '+s.d.v.join(",")+' Media '+s.d.m+' Max '+s.d.mx+'</div><div class="g">'+s.d.at+' ROD</div>';ls.appendChild(div);}if(!ativos.length&&pag=="004")ls.innerHTML='<div style="color:#3a7a3a;font-weight:900;text-align:center;padding:4px;font-size:10px">Nenhum passou de 13 ainda. Media geral 9 rodadas.</div>';}
+var todos=document.getElementById('todos');if(todos){todos.innerHTML="";var all=[];for(var n=0;n<=36;n++)all.push({n:n,d:calc(n)});all.sort((a,b)=>b.d.at-a.d.at);for(var t of all.slice(0,24)){var e=document.createElement('div');var cor=t.d.at>=LIM?"#dc2626":t.d.at>=10?"#eab308":"#0f2e1a";e.style.background=cor;e.textContent=t.n+" ("+t.d.at+"/"+(t.d.m||0)+")";todos.appendChild(e);}}
 }catch(e){console.log(e);}
 }
-var exemplo=[13,35,5,18,30,5,34,30,20,6,1,5,8,14,26,18,31,18,8,35,27,19,26,2,30,36,17,29,35,27,28,24,6,27,35,15,19,4,11,22,25,17,3,10,7,29,10,21,2,8,32,24,12,27,7,32,25,10,16,36,11,5,11,2,20,17,3,15,13,30,15,9,20,29,30,20,23,32,19,21,32,28,16,14,6,15,7,22,5,8,8,18,23,15,24,24,12,14,30,11,23,8,27,21];
-for(var n of exemplo) lista.push({n:n});
-mostrarDisplay(); atualizar(); irPagina('004');
+var ex=[13,35,5,18,30,5,34,30,20,6,1,5,8,14,26,18,31,18,8,35,27,19,26,2,30,36,17,29,35,27,28,24,6,27,35,15,19,4,11,22,25,17,3,10,7,29,10,21,2,8,32,24,12,27,7,32,25,10,16,36,11,5,11,2,20,17,3,15,13,30,15,9,20,29,30,20,23,32,19,21,32,28,16,14,6,15,7,22,5,8,8,18,23,15,24,24,12,14,30,11,23,8,27,21];
+for(var n of ex)lista.push({n:n});
+show();upd();go('004');
 </script>
 </body>
 </html>

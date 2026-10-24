@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - ANIMACAO GANHA PERDE</title>
+<title>RAFIGASP - SO DE 1 AO 36</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0e2f1c;overflow:hidden}
@@ -21,7 +21,10 @@ body{display:flex;justify-content:center}
 .display.alerta{background:linear-gradient(180deg,#ff4444,#990000);color:#fff;border-color:#ffff00;box-shadow:0 0 25px #ff0000;font-size:18px;animation:piscaAlerta 0.4s infinite alternate}
 .display.digitando{background:#000;border-color:#00ff00;box-shadow:0 0 20px #00ff00}
 .display.digitando .numGrande{font-size:52px;color:#fff;text-shadow:0 0 15px #00ff00;font-weight:900}
+.display.erro{background:#660000;border-color:#ff0000;box-shadow:0 0 20px #ff0000;animation:tremerErro 0.2s infinite}
+.display.erro .numGrande{font-size:20px;color:#ffaaaa}
 @keyframes piscaAlerta{0%{transform:scale(1)}100%{transform:scale(1.03)}}
+@keyframes tremerErro{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}}
 .page{flex:1;overflow-y:auto;padding:6px;display:flex;flex-direction:column;gap:6px;background:#0a2210;position:relative}
 .topBar{background:#000;border:2px solid #d4af37;border-radius:12px;padding:12px 10px;display:flex;gap:6px;min-height:66px;align-items:center;position:relative;margin-top:8px;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
 .topBar::-webkit-scrollbar{height:6px}
@@ -32,13 +35,15 @@ body{display:flex;justify-content:center}
 .nBox.red{background:#d80f0f;border-color:#ffaaaa}
 .nBox.blue{background:#1e40af;border-color:#fff}
 .nBox.primeiro{border:3px solid #ffff00;box-shadow:0 0 12px #ffff00}
+.nBox.new{animation:novo 0.5s}
+@keyframes novo{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
 .alertaGrande{background:linear-gradient(180deg,#1fbf3f,#0f8a2a);border:4px solid #00ff00;border-radius:18px;padding:16px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 20px rgba(0,255,0,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:180px;flex:1;position:relative;overflow:hidden}
 .alertaGrande.vermelho{background:linear-gradient(180deg,#ff4444,#cc0000);border:4px solid #ffff00;box-shadow:0 0 30px #ff0000;animation:tremerSinal 0.3s infinite}
 .alertaGrande.verde{background:linear-gradient(180deg,#1fbf3f,#0f8a2a);border:4px solid #00ff00}
 .alertaGrande.acertou{background:linear-gradient(180deg,#3aff6a 0%,#00ff00 30%,#006600 100%);border:4px solid #ffff00;box-shadow:0 0 60px #00ff00, 0 0 100px #00ff00;animation:ganhaPulo 0.5s infinite alternate, brilhoGanha 0.3s infinite alternate}
 .alertaGrande.errou{background:linear-gradient(180deg,#ff3333 0%,#990000 100%);border:4px solid #ff0000;box-shadow:0 0 60px #ff0000, 0 0 100px #ff0000;animation:perdeTremer 0.15s infinite, perdePisca 0.3s infinite alternate}
-@keyframes ganhaPulo{0%{transform:scale(1) rotate(0deg)}25%{transform:scale(1.05) rotate(1deg)}50%{transform:scale(1.08) rotate(-1deg)}75%{transform:scale(1.05) rotate(1deg)}100%{transform:scale(1) rotate(0deg)}}
-@keyframes brilhoGanha{0%{box-shadow:0 0 40px #00ff00, 0 0 80px #00ff00}100%{box-shadow:0 0 80px #00ff00, 0 0 120px #ffff00, 0 0 160px #00ff00}}
+@keyframes ganhaPulo{0%{transform:scale(1)}100%{transform:scale(1.05)}}
+@keyframes brilhoGanha{0%{box-shadow:0 0 40px #00ff00}100%{box-shadow:0 0 80px #00ff00, 0 0 120px #ffff00}}
 @keyframes perdeTremer{0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}100%{transform:translateX(0)}}
 @keyframes perdePisca{0%{background:linear-gradient(180deg,#ff0000,#660000)}100%{background:linear-gradient(180deg,#660000,#ff0000)}}
 @keyframes tremerSinal{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
@@ -54,10 +59,10 @@ body{display:flex;justify-content:center}
 .k:active{transform:scale(0.96);background:#fff}
 .paginasEscondidas{display:none !important}
 .confete{position:absolute;width:10px;height:10px;top:-10px;animation:cairConfete linear forwards;z-index:10;pointer-events:none}
-@keyframes cairConfete{0%{transform:translateY(-20px) rotate(0deg) translateX(0);opacity:1}100%{transform:translateY(400px) rotate(720deg) translateX(100px);opacity:0}}
-.confete.verde{background:#00ff00;box-shadow:0 0 5px #00ff00}
-.confete.dourado{background:#ffd700;box-shadow:0 0 5px #ffd700;border-radius:50%}
-.confete.branco{background:#fff;box-shadow:0 0 5px #fff}
+@keyframes cairConfete{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(400px) rotate(720deg);opacity:0}}
+.confete.verde{background:#00ff00}
+.confete.dourado{background:#ffd700;border-radius:50%}
+.confete.branco{background:#fff}
 .emojiGanha{position:absolute;font-size:30px;animation:emojiSubir 1.2s ease-out forwards;z-index:11;pointer-events:none}
 @keyframes emojiSubir{0%{transform:translateY(0) scale(0);opacity:0}20%{transform:translateY(-20px) scale(1.5);opacity:1}100%{transform:translateY(-150px) scale(0.5);opacity:0}}
 .emojiPerde{position:absolute;font-size:28px;animation:emojiPerdeCair 1s ease-out forwards;z-index:11;pointer-events:none}
@@ -165,7 +170,6 @@ function animarGanha(){
     conf.className='confete '+(i%3==0?'verde':i%3==1?'dourado':'branco');
     conf.style.left=(Math.random()*90)+'%';
     conf.style.animationDuration=(0.8+Math.random()*1.2)+'s';
-    conf.style.animationDelay=(Math.random()*0.3)+'s';
     el.appendChild(conf);
     setTimeout(function(){ conf.remove(); },2000);
    }, i*60);
@@ -209,6 +213,13 @@ function animarPerde(){
  }
  if(navigator.vibrate){ navigator.vibrate([200,100,200]); }
 }
+function mostrarErro(msg){
+ var d=document.getElementById('disp');
+ d.innerHTML='<span class="numGrande" style="font-size:18px">'+msg+'</span>';
+ d.className="display erro";
+ if(navigator.vibrate){ navigator.vibrate([100,50,100]); }
+ setTimeout(function(){ cur=""; show(); },1200);
+}
 function show(){
  var d=document.getElementById('disp');
  if(cur!=""){
@@ -221,7 +232,16 @@ function show(){
  else if(esperandoP2){ d.innerHTML="VEM COLUNA "+colunaP2; d.className="display alerta"; }
  else{ d.innerHTML=""; d.className="display vazio"; }
 }
-function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
+function dig(v){
+ if(cur=="0"||cur=="00"){ cur=v; show(); return; }
+ if(cur.length==0){ cur=v; show(); return; }
+ if(cur.length==1){
+  var combinado = parseInt(cur+v);
+  if(combinado>36){ mostrarErro("SÓ 1 AO 36!"); return; }
+  cur+=v; show(); return;
+ }
+ if(cur.length>=2){ var numNovo = parseInt(v); if(numNovo>36){ mostrarErro("SÓ 1 AO 36!"); return; } cur=v; show(); return; }
+}
 function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
 function apagarUltimo(){ if(lista.length>0){ lista.pop(); reconstruirTudo(); show();upd(); salvarTudo(); } }
 function limparTudo(){
@@ -253,7 +273,8 @@ function checarSinalP3(){
 }
 function ok(){
  if(cur===""){return;} if(cur==="00"){limparTudo();return;} if(cur==="0"){apagarUltimo();return;}
- var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
+ var n=parseInt(cur);
+ if(isNaN(n)||n<0||n>36){ mostrarErro("SÓ 1 AO 36!"); return; }
  if(esperandoP3){
   var colResultado=getCol(n); var colunasPermitidas=colunaP3.split('/'); var acertou=colunasPermitidas.indexOf(String(colResultado))>=0;
   if(acertou){ green++; setEstadoQuadrado('acertou','VEM COLUNA<br><div class="colunaNumero">✅ GANHOU!</div><div class="colunaNumero" style="font-size:36px">COLUNA '+colunaP3+'</div>'); animarGanha(); }

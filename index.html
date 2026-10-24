@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - PAGINA 2 COMECA NO AZUL LOOP</title>
+<title>RAFIGASP - P2 IGUAL + P3 VERMELHOS</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -27,6 +27,7 @@ body{display:flex;justify-content:center}
 @keyframes pisca{0%{background:#ffaa00}100%{background:#ff8800}}
 .page{flex:1;overflow-y:auto;padding:4px;display:none;flex-direction:column;gap:4px}
 .page.ativa{display:flex}
+.topBar{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:5px;display:flex;gap:3px;flex-wrap:wrap;min-height:36px;align-items:center}
 .patternFixed{background:#000;border:2.5px solid #d4af37;border-radius:10px;padding:10px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:110px;justify-content:flex-start}
 .sq{width:32px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333}
 .sq.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 4px #60a5fa;color:#fff}
@@ -38,18 +39,19 @@ body{display:flex;justify-content:center}
 .sq.active{transform:scale(1.2);border:2px solid #ffff00;box-shadow:0 0 12px #ffff00;z-index:2}
 .sq.new{animation:novo 0.5s}
 @keyframes novo{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
-.topBar{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:5px;display:flex;gap:3px;flex-wrap:wrap;min-height:36px;align-items:center}
 .nBox{height:26px;min-width:26px;padding:0 7px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}
 .nBox.green{background:#0f8a2a}
-.nBox.red{background:#d80f0f}
+.nBox.red{background:#d80f0f;border:2px solid #ff6666;box-shadow:0 0 4px #ff0000}
 .nBox.blue{background:#1e40af;border:2px solid #fff}
 .card{background:#0a2814;border:2px solid #d4af37;border-radius:10px;padding:6px;min-height:80px;display:flex;flex-direction:column}
 .cardTitle{font-size:8px;font-weight:900;color:#d4af37;letter-spacing:1px;margin-bottom:4px}
 .numGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1}
-.numGridBox{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff}
+.numGridBox{height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;transition:all 0.3s}
 .numGridBox.green{background:#0f8a2a}
-.numGridBox.red{background:#d80f0f}
+.numGridBox.red{background:#d80f0f;border:2px solid #ff6666;box-shadow:0 0 6px #ff0000}
 .numGridBox.blue{background:#1e40af}
+.numGridBox.empty{background:#000;border:1px solid #333;color:#555}
+.numGridBox.new{animation:novo 0.5s;border:2px solid #fff;box-shadow:0 0 10px #fff}
 .centerBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .jogarBtn{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:20px;padding:8px 14px;font-weight:900;font-size:12px;color:#111;border:2px solid #fff;min-width:90px;text-align:center}
 .jogarBtn.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;animation:pisca 0.6s infinite alternate;box-shadow:0 0 10px #ffaa00}
@@ -59,15 +61,17 @@ body{display:flex;justify-content:center}
 .k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 3px rgba(0,0,0,0.3)}
 .k:active{transform:scale(0.96);background:#fff}
 .infoBar{background:#111;border:1px solid #333;border-radius:6px;padding:6px;margin:2px 0;font-size:9px;color:#d4af37;text-align:center;line-height:1.3}
+.redListBar{background:#330000;border:2px solid #ff4444;border-radius:10px;padding:8px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:50px}
+.redCount{background:#ff0000;color:#fff;border-radius:12px;padding:2px 8px;font-weight:900;font-size:10px;margin-left:4px}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irPara(2)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - 10 PÁGINAS - SÓ PÁGINA 2 TEM QUADRADOS</div></div>
+<div class="topo" onclick="irPara(2)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - PAG 2 IGUAL + PAG 3 VERMELHOS</div></div>
 <div class="pagesNav" id="pagesNav">
 <button onclick="irPara(1)">1 INICIO</button>
 <button class="ativo" onclick="irPara(2)">2 PADRÃO</button>
-<button onclick="irPara(3)">3 NUM</button>
+<button onclick="irPara(3)">3 VERMELHO</button>
 <button onclick="irPara(4)">4 COLUNA</button>
 <button onclick="irPara(5)">5 ACERTO</button>
 <button onclick="irPara(6)">6 A HIST</button>
@@ -77,24 +81,28 @@ body{display:flex;justify-content:center}
 <button onclick="irPara(10)">10 PLACAR</button>
 </div>
 <div class="nav2">
-<button class="home" onclick="irPara(1)">🏠 INICIO</button>
+<button class="home" onclick="irPara(2)">🏠 PÁG 2</button>
 <button onclick="apagarUltimo()">⬅️ APAGAR</button>
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁGINA 2 - COMEÇA NO AZUL E CONTINUA NO LOOP</div>
+<div class="display inicial" id="disp">PÁG 2 - NÃO MEXE - PÁG 3 MOSTRA VERMELHOS</div>
 
-<div class="page" id="page1">
-<div class="topBar" id="topBar1"></div>
-<div class="card"><div class="cardTitle">PÁGINA 1 - INICIO - SEM QUADRADOS - LIMPA</div></div>
-</div>
+<div class="page" id="page1"><div class="topBar" id="topBar1"></div><div class="card"><div class="cardTitle">PÁGINA 1 - INICIO - SEM QUADRADOS</div></div></div>
 
 <div class="page ativa" id="page2">
 <div class="patternFixed" id="patternFixed2"></div>
-<div class="infoBar" id="infoBar2">Começa no quadrado AZUL 🟦 - depois vai pros brancos ⬜️ - quando chega no último, volta pro primeiro e continua em loop</div>
+<div class="infoBar" id="infoBar2">PÁGINA 2 - NÃO MEXE - Começa no AZUL 🟦 e continua em loop - Azul com número continua azul, branco vira 🟢/🔴</div>
 </div>
 
-<div class="page" id="page3"><div class="topBar" id="topBar3"></div><div class="card"><div class="cardTitle">PÁGINA 3 - NUMERO CHAMADO - SEM QUADRADOS</div><div class="numGrid" id="numGrid3"></div></div></div>
+<div class="page" id="page3">
+<div class="redListBar" id="redListBar3"></div>
+<div class="card">
+<div class="cardTitle">PÁGINA 3 - NÚMEROS VERMELHOS (C1) - QUANDO SAI VERMELHO NA PÁG 2, MOSTRA AQUI <span class="redCount" id="redCount3">0 vermelhos</span></div>
+<div class="numGrid" id="numGrid3"></div>
+</div>
+</div>
+
 <div class="page" id="page4"><div class="topBar" id="topBar4"></div><div class="card"><div class="cardTitle">PÁGINA 4 - JOGAR NA COLUNA</div><div class="centerBox"><div class="jogarBtn" id="jogarBtn4">AGUARDANDO</div><div style="font-size:9px;color:#d4af37" id="jogarSub4">-</div></div></div></div>
 <div class="page" id="page5"><div class="topBar" id="topBar5"></div><div class="card"><div class="cardTitle">PÁGINA 5 - ACERTO OU ERRO</div><div class="centerBox"><div class="jogarBtn" id="acertoBox5">-</div><div style="font-size:9px;color:#d4af37" id="acertoSub5">-</div></div></div></div>
 <div class="page" id="page6"><div class="topBar" id="topBar6"></div></div>
@@ -117,6 +125,7 @@ var green=0,red=0,ultimoSinal=null,ultimoResultado=null;
 var padraoBrancos=[1,2,2,3,4,5];
 var todosQuadrados=[];
 var indiceAtual=0;
+var vermelhosLista=[];
 function getCol(n){
  if(n==0) return 0;
  if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0) return 1;
@@ -140,9 +149,11 @@ function show(){
    d.className="display sinal";
   }else{
    if(paginaAtual==2){
-    d.textContent="PÁG 2 - COMEÇA NO AZUL 🟦 - "+(todosQuadrados.length-indiceAtual)+" vazios - Posição: "+(indiceAtual+1)+"/"+todosQuadrados.length+" - CONTINUA NO LOOP";
+    d.textContent="PÁG 2 - NÃO MEXE - COMEÇA NO AZUL 🟦 - Pos: "+(indiceAtual+1)+"/"+todosQuadrados.length+" - LOOP";
+   }else if(paginaAtual==3){
+    d.textContent="PÁG 3 - VERMELHOS C1 - "+vermelhosLista.length+" vermelhos - Quando sai vermelho na PÁG 2, mostra aqui";
    }else{
-    d.textContent="PÁGINA "+paginaAtual+" - DIGITE NÚMERO - SEM QUADRADOS";
+    d.textContent="PÁGINA "+paginaAtual+" - DIGITE NÚMERO";
    }
    d.className="display inicial";
   }
@@ -150,44 +161,38 @@ function show(){
  else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR TUDO";d.className="display vermelho";}
  else{d.textContent="P"+paginaAtual+" - NUM: "+cur;d.className="display inicial";}
 }
-function irInicio(){cur="";lista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;irPara(1);}
+function irInicio(){cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;irPara(2);}
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
 function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
 function apagarUltimo(){
  if(paginaAtual==2){
   if(indiceAtual>0 || lista.length>0){
-   if(indiceAtual==0){
-    indiceAtual=todosQuadrados.length-1;
-   }else{
-    indiceAtual--;
-   }
+   if(indiceAtual==0){indiceAtual=todosQuadrados.length-1;}else{indiceAtual--;}
    var sq=todosQuadrados[indiceAtual];
    if(sq){
-    if(sq.dataset.tipo=="blue"){
-     sq.textContent="";
-     sq.className="sq blue";
-    }else{
-     sq.textContent="";
-     sq.className="sq white vazio";
-    }
+    if(sq.dataset.tipo=="blue"){sq.textContent="";sq.className="sq blue";}
+    else{sq.textContent="";sq.className="sq white vazio";}
    }
-   if(lista.length>0) lista.pop();
+   if(lista.length>0){
+    var ultimo=lista[lista.length-1];
+    if(getCol(ultimo)==1){vermelhosLista.pop();}
+    lista.pop();
+   }
    show();upd();
   }
  }else{
-  if(lista.length>0){lista.pop();show();upd();}
+  if(lista.length>0){
+   var ultimo=lista[lista.length-1];
+   if(getCol(ultimo)==1){vermelhosLista.pop();}
+   lista.pop();show();upd();
+  }
  }
 }
 function limparTudo(){
- cur="";lista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;
+ cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;
  todosQuadrados.forEach(function(sq){
-  if(sq.dataset.tipo=="blue"){
-   sq.textContent="";
-   sq.className="sq blue";
-  }else{
-   sq.textContent="";
-   sq.className="sq white vazio";
-  }
+  if(sq.dataset.tipo=="blue"){sq.textContent="";sq.className="sq blue";}
+  else{sq.textContent="";sq.className="sq white vazio";}
  });
  irPara(paginaAtual);
  show();upd();
@@ -216,42 +221,34 @@ function ok(){
      var col=getCol(n);
      if(col==1){
       sq.className="sq red new";
+      vermelhosLista.push(n);
      }else{
       sq.className="sq green new";
      }
     }
     indiceAtual++;
-    if(indiceAtual>=todosQuadrados.length){
-     indiceAtual=0;
-    }
+    if(indiceAtual>=todosQuadrados.length){indiceAtual=0;}
     lista.push(n);
-    cur="";
-    show();upd();
+    cur="";show();upd();
     if(ultimoResultado){
      var d=document.getElementById('disp');
      if(ultimoResultado.tipo=='verde'){d.textContent="P2 - ✅ ACERTOU! "+n+" C"+getCol(n)+" - VERDE";d.className="display verde";}
-     else if(ultimoResultado.tipo=='vermelho'){d.textContent="P2 - ❌ ERROU! "+n+" C1 - VERMELHO";d.className="display vermelho";}
+     else if(ultimoResultado.tipo=='vermelho'){d.textContent="P2 - ❌ ERROU! "+n+" C1 - VERMELHO -> VAI PRA PÁG 3";d.className="display vermelho";}
      setTimeout(function(){show();},1500);
     }
     setTimeout(function(){
-     if(sq){
-      sq.classList.remove('new');
-      todosQuadrados.forEach(function(s){s.classList.remove('active');});
-      if(todosQuadrados[indiceAtual]){
-       todosQuadrados[indiceAtual].classList.add('active');
-      }
-     }
+     if(sq){sq.classList.remove('new');todosQuadrados.forEach(function(s){s.classList.remove('active');});if(todosQuadrados[indiceAtual]){todosQuadrados[indiceAtual].classList.add('active');}}
     },600);
    }
   }
  }else{
+  if(getCol(n)==1){vermelhosLista.push(n);}
   lista.push(n);
-  cur="";
-  show();upd();
+  cur="";show();upd();
   if(ultimoResultado && lista[lista.length-1]==n){
    var d=document.getElementById('disp');
    if(ultimoResultado.tipo=='verde'){d.textContent="P"+paginaAtual+" - ✅ ACERTOU! "+n+" VERDE";d.className="display verde";}
-   else if(ultimoResultado.tipo=='vermelho'){d.textContent="P"+paginaAtual+" - ❌ ERROU! "+n+" VERMELHO";d.className="display vermelho";}
+   else if(ultimoResultado.tipo=='vermelho'){d.textContent="P"+paginaAtual+" - ❌ ERROU! "+n+" VERMELHO - VAI PRA PÁG 3";d.className="display vermelho";}
    setTimeout(function(){show();},1500);
   }
  }
@@ -266,7 +263,7 @@ function criarQuadradosPagina2(){
   blueSq.className='sq blue';
   blueSq.dataset.tipo="blue";
   blueSq.textContent="";
-  blueSq.title="AZUL - COMEÇA AQUI - número entra aqui e continua azul";
+  blueSq.title="AZUL - COMEÇA AQUI";
   container.appendChild(blueSq);
   todosQuadrados.push(blueSq);
   for(var w=0;w<qtdBranco;w++){
@@ -274,17 +271,13 @@ function criarQuadradosPagina2(){
    whiteSq.className='sq white vazio';
    whiteSq.dataset.tipo="white";
    whiteSq.textContent="";
-   whiteSq.title="BRANCO - vira VERDE C2/3 ou VERMELHO C1";
+   whiteSq.title="BRANCO - vira VERDE ou VERMELHO";
    container.appendChild(whiteSq);
    todosQuadrados.push(whiteSq);
   }
-  var sep=document.createElement('div');
-  sep.style.width="12px";
-  container.appendChild(sep);
+  var sep=document.createElement('div');sep.style.width="12px";container.appendChild(sep);
  });
- if(todosQuadrados.length>0){
-  todosQuadrados[0].classList.add('active');
- }
+ if(todosQuadrados.length>0){todosQuadrados[0].classList.add('active');}
  indiceAtual=0;
  for(var i=0;i<lista.length;i++){
   if(i>=todosQuadrados.length) break;
@@ -293,9 +286,8 @@ function criarQuadradosPagina2(){
   if(!sq) continue;
   var isBlue=sq.dataset.tipo=="blue";
   sq.textContent=num;
-  if(isBlue){
-   sq.className='sq blue filled';
-  }else{
+  if(isBlue){sq.className='sq blue filled';}
+  else{
    var col=getCol(num);
    if(col==1) sq.className='sq red';
    else sq.className='sq green';
@@ -303,9 +295,7 @@ function criarQuadradosPagina2(){
  }
  indiceAtual=lista.length % todosQuadrados.length;
  todosQuadrados.forEach(function(s){s.classList.remove('active');});
- if(todosQuadrados[indiceAtual]){
-  todosQuadrados[indiceAtual].classList.add('active');
- }
+ if(todosQuadrados[indiceAtual]){todosQuadrados[indiceAtual].classList.add('active');}
 }
 function upd(){
  var eventos=[];var gatilhoSet=new Set();var i=0;
@@ -323,17 +313,56 @@ function upd(){
   var ev=eventos[eventos.length-1];
   if(lista.length==ev.pos+ev.vermelhos+1){ultimoSinal=ev;}
  }
- if(todosQuadrados.length==0){
-  criarQuadradosPagina2();
+ if(todosQuadrados.length==0){criarQuadradosPagina2();}
+ var redListBar3=document.getElementById('redListBar3');
+ var numGrid3=document.getElementById('numGrid3');
+ var redCount3=document.getElementById('redCount3');
+ if(redListBar3){
+  redListBar3.innerHTML="";
+  if(vermelhosLista.length==0){
+   var e=document.createElement('div');
+   e.style.cssText="font-size:10px;color:#ff8888;padding:4px";
+   e.textContent="Nenhum vermelho ainda - Quando sair número vermelho (C1) na Página 2, ele aparece aqui - C1 = 1,4,7,10,13,16,19,22,25,28,31,34";
+   redListBar3.appendChild(e);
+  }else{
+   var revVerm=vermelhosLista.slice().reverse();
+   revVerm.forEach(function(num, idx){
+    var box=document.createElement('div');
+    box.className='nBox red'+(idx==0?' new':'');
+    box.textContent=num;
+    box.title="Vermelho C1 - veio da Página 2";
+    redListBar3.appendChild(box);
+   });
+  }
  }
+ if(numGrid3){
+  numGrid3.innerHTML="";
+  var revVerm=vermelhosLista.slice().reverse().slice(0,9);
+  if(revVerm.length==0){
+   for(var i=0;i<9;i++){var e=document.createElement('div');e.className='numGridBox empty';e.textContent="-";numGrid3.appendChild(e);}
+  }else{
+   while(revVerm.length<9){revVerm.push("-");}
+   for(var i=0;i<9;i++){
+    var val=revVerm[i];
+    var e=document.createElement('div');
+    if(val=="-"){e.className='numGridBox empty';e.textContent="-";}
+    else{
+     e.className='numGridBox red'+(i==0?' new':'');
+     e.textContent=val;
+    }
+    numGrid3.appendChild(e);
+   }
+  }
+ }
+ if(redCount3){redCount3.textContent=vermelhosLista.length+" vermelhos";}
  var rev=lista.slice().reverse();
- ['topBar1','topBar3','topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
+ ['topBar1','topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
   var el=document.getElementById(id);
   if(!el) return;
   el.innerHTML="";
   var mostrar=rev.slice(0,12);
   if(mostrar.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent=id=="topBar1"?"PÁG 1 LIMPA - SEM QUADRADOS - vá para PÁG 2":"Sem números";el.appendChild(e);
+   var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent=id=="topBar1"?"PÁG 1 LIMPA - SEM QUADRADOS":"Sem números";el.appendChild(e);
   }else{
    mostrar.forEach(function(num,idx){
     var posOrig=lista.length-1-idx;
@@ -344,42 +373,18 @@ function upd(){
    });
   }
  });
- var numGrid3=document.getElementById('numGrid3');
- if(numGrid3){
-  numGrid3.innerHTML="";
-  var rev9=rev.slice(0,9);
-  if(rev9.length==0){for(var i=0;i<9;i++){var e=document.createElement('div');e.className='numGridBox green';e.textContent="-";e.style.opacity="0.3";numGrid3.appendChild(e);}}
-  else{
-   while(rev9.length<9){rev9.push("-");}
-   for(var i=0;i<9;i++){
-    var val=rev9[i];
-    var e=document.createElement('div');
-    if(val=="-"){e.className='numGridBox green';e.textContent="-";e.style.opacity="0.3";}
-    else{
-     var posOrig=lista.length-1-i;
-     var isGat=gatilhoSet.has(posOrig);
-     var col=getCol(val);
-     if(isGat) e.className='numGridBox blue';
-     else if(col==1) e.className='numGridBox red';
-     else e.className='numGridBox green';
-     e.textContent=val;
-    }
-    numGrid3.appendChild(e);
-   }
-  }
- }
  var jogarBtn4=document.getElementById('jogarBtn4');
  var jogarSub4=document.getElementById('jogarSub4');
  if(jogarBtn4){
   if(ultimoSinal){jogarBtn4.textContent="C2/3";jogarBtn4.className="jogarBtn sinal";jogarSub4.textContent=ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - JOGAR!";}
-  else{jogarBtn4.textContent="AGUARDANDO";jogarBtn4.className="jogarBtn";jogarSub4.textContent="PÁG 2 tem quadrados - outras páginas limpas";}
+  else{jogarBtn4.textContent="AGUARDANDO";jogarBtn4.className="jogarBtn";jogarSub4.textContent="PÁG 2 igual - PÁG 3 vermelhos";}
  }
  var acertoBox5=document.getElementById('acertoBox5');
  var acertoSub5=document.getElementById('acertoSub5');
  if(acertoBox5){
   if(ultimoResultado){
    if(ultimoResultado.tipo=='verde'){acertoBox5.textContent="✅ "+ultimoResultado.num+" VERDE";acertoBox5.className="jogarBtn verde";acertoSub5.textContent="ACERTOU! C"+getCol(ultimoResultado.num);}
-   else if(ultimoResultado.tipo=='vermelho'){acertoBox5.textContent="❌ "+ultimoResultado.num+" VERMELHO";acertoBox5.className="jogarBtn vermelho";acertoSub5.textContent="ERROU! C1";}
+   else if(ultimoResultado.tipo=='vermelho'){acertoBox5.textContent="❌ "+ultimoResultado.num+" VERMELHO -> PÁG 3";acertoBox5.className="jogarBtn vermelho";acertoSub5.textContent="ERROU! C1 - foi pra Página 3";}
   }else{acertoBox5.textContent=lista.length>0?lista[lista.length-1]:"-";acertoBox5.className="jogarBtn";acertoSub5.textContent=lista.length>0?"Ultimo: "+lista[lista.length-1]:"Sem jogadas";}
  }
  var placarBig10=document.getElementById('placarBig10');
@@ -388,7 +393,7 @@ function upd(){
  if(infoBar2){
   if(todosQuadrados.length>0){
    var proximoTipo=todosQuadrados[indiceAtual]?todosQuadrados[indiceAtual].dataset.tipo:"";
-   infoBar2.innerHTML="🔵 Começa no AZUL 🟦 - Próximo: "+(indiceAtual+1)+"/"+todosQuadrados.length+" ("+(proximoTipo=="blue"?"AZUL fixo":"BRANCO vira 🟢/🔴")+") - Quando chega no último, volta pro primeiro e <b>CONTINUA EM LOOP</b> - Total: "+lista.length+" números - Azul com número dentro continua azul, branco vira verde/vermelho";
+   infoBar2.innerHTML="🔵 PÁG 2 NÃO MEXE - Começa no AZUL 🟦 - Próximo: "+(indiceAtual+1)+"/"+todosQuadrados.length+" ("+(proximoTipo=="blue"?"AZUL":"BRANCO -> 🟢/🔴")+") - Quando sai 🔴 vermelho, mostra na PÁG 3 - Total: "+lista.length+" - Vermelhos: "+vermelhosLista.length;
   }
  }
  show();

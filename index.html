@@ -3,93 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - TABELA COLUNA 1=2/3 2=1/2 etc - P1 SO COLUNA JOGAR</title>
+<title>RAFIGASP - B+W 1VERMELHO=PAG2 2VERMELHOS=PAG1 TABELA COLUNA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:400px;height:100dvh;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37}
-.topo{text-align:center;background:linear-gradient(180deg,#e8c76a,#b8941f);padding:8px 0 4px;flex-shrink:0;cursor:pointer}
-.topoR{font-weight:900;font-size:32px;color:#111;letter-spacing:2px;line-height:1}
-.topoS{font-size:10px;letter-spacing:4px;color:#111;font-weight:900}
-.pagesNav{display:flex;gap:1px;padding:3px;background:#001a00;flex-shrink:0;overflow-x:auto}
-.pagesNav button{flex:0 0 38px;height:28px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:8px;background:#112a1a;color:#d4af37;white-space:nowrap}
-.pagesNav button.ativo{background:#e8c76a;color:#111;border-color:#fff;box-shadow:0 0 6px #e8c76a}
-.nav2{display:flex;gap:2px;padding:2px 3px;background:#001a00;flex-shrink:0}
-.nav2 button{flex:1;height:26px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:8px;background:#112a1a;color:#d4af37}
+.topo{text-align:center;background:linear-gradient(180deg,#e8c76a,#b8941f);padding:10px 0 6px;flex-shrink:0}
+.topoR{font-weight:900;font-size:34px;color:#111;letter-spacing:3px;line-height:1}
+.topoS{font-size:11px;letter-spacing:5px;color:#111;font-weight:900}
+.nav2{display:flex;gap:3px;padding:4px;background:#001a00;flex-shrink:0}
+.nav2 button{flex:1;height:30px;border-radius:6px;border:1.5px solid #d4af37;font-weight:900;font-size:9px;background:#112a1a;color:#d4af37}
 .nav2 button.home{background:#e8c76a;color:#111}
 .nav2 button.limpar{background:#330000;color:#ffaaaa}
-.display{margin:3px;background:#000;border:2px solid #d4af37;border-radius:8px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0;text-align:center;padding:2px;transition:all 0.3s}
-.display.inicial{color:#1a7a2a}
-.display.sinal{background:#ffaa00;color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate}
-.display.verde{background:#00aa00;color:#fff;border-color:#00ff00;box-shadow:0 0 10px #00ff00}
-.display.vermelho{background:#cc0000;color:#fff;border-color:#ff0000;box-shadow:0 0 10px #ff0000}
-.display.alerta{background:linear-gradient(180deg,#ff0000,#990000);color:#fff;border:3px solid #ffff00;animation:piscaAlerta 0.5s infinite alternate;font-size:11px}
-@keyframes pisca{0%{background:#ffaa00}100%{background:#ff8800}}
+.display{margin:4px;background:#000;border:2px solid #d4af37;border-radius:10px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;text-align:center;padding:2px;transition:all 0.3s;color:#1a7a2a}
+.display.alerta{background:linear-gradient(180deg,#ff0000,#990000);color:#fff;border:3px solid #ffff00;animation:piscaAlerta 0.5s infinite alternate;font-size:12px}
 @keyframes piscaAlerta{0%{background:#ff0000}100%{background:#cc0000}}
-.page{flex:1;overflow-y:auto;padding:4px;display:none;flex-direction:column;gap:6px}
-.page.ativa{display:flex}
-.topBar{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:8px;display:flex;gap:5px;flex-wrap:wrap;min-height:50px;align-items:center}
-.conjuntosContainer{display:flex;flex-direction:column;gap:10px}
-.conjuntoBox{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:12px 10px 10px;display:flex;flex-direction:column;gap:8px;position:relative;margin-top:10px}
-.conjuntoLabel{position:absolute;top:-9px;left:10px;background:#d4af37;color:#000;font-size:8px;font-weight:900;padding:3px 8px;border-radius:5px;letter-spacing:1px}
-.linhaPadrao{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-height:36px;padding:2px 0}
-.sq{width:34px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333;flex-shrink:0}
-.sq.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 6px #60a5fa;color:#fff}
-.sq.green{background:#0f8a2a;border:2px solid #00ff00;box-shadow:0 0 6px #00ff00;color:#fff}
-.sq.red{background:#d80f0f;border:2px solid #ff6666;box-shadow:0 0 8px #ff0000;color:#fff}
-.sq.new{animation:novo 0.5s}
-@keyframes novo{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
-.nBox{height:30px;min-width:30px;padding:0 8px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;transition:all 0.3s;border:1px solid #333}
-.nBox.green{background:#0f8a2a;border:1px solid #00ff00}
-.nBox.red{background:#d80f0f;border:2px solid #ff6666;box-shadow:0 0 4px #ff0000}
-.nBox.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 4px #60a5fa}
-.nBox.new{animation:novo 0.5s;border:2px solid #fff;box-shadow:0 0 10px #fff}
-.kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:2px solid #d4af37;padding:5px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;height:32%;min-height:180px}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 3px rgba(0,0,0,0.3)}
-.k:active{transform:scale(0.96);background:#fff}
-.infoBar{background:#111;border:1px solid #333;border-radius:6px;padding:6px;margin:2px 0;font-size:9px;color:#d4af37;text-align:center;line-height:1.3}
-.alertaGrande{background:linear-gradient(180deg,#0f8a2a,#065a18);border:4px solid #00ff00;border-radius:16px;padding:16px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 20px #00ff00;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-top:6px;min-height:160px;transition:all 0.5s}
+.page{flex:1;overflow-y:auto;padding:6px;display:flex;flex-direction:column;gap:8px;background:#0a2210}
+.topBar{background:#000;border:2px solid #d4af37;border-radius:12px;padding:10px;display:flex;gap:6px;flex-wrap:wrap;min-height:68px;align-items:center}
+.nBox{height:34px;min-width:34px;padding:0 10px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;border:1.5px solid #333}
+.nBox.green{background:#0f8a2a;border:1.5px solid #00ff00}
+.nBox.red{background:#d80f0f;border:2px solid #ff6666}
+.nBox.blue{background:#1e40af;border:2px solid #fff}
+.nBox.new{animation:novo 0.6s;border:2px solid #fff;box-shadow:0 0 12px #fff}
+@keyframes novo{0%{transform:scale(0)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.alertaGrande{background:linear-gradient(180deg,#0f8a2a,#065a18);border:4px solid #00ff00;border-radius:18px;padding:18px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 20px #00ff00;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;transition:all 0.5s;flex:1}
 .alertaGrande.vermelho{background:linear-gradient(180deg,#ff0000,#990000);border:4px solid #ffff00;box-shadow:0 0 30px #ff0000;animation:piscaAlertaGrande 0.5s infinite alternate}
-.alertaGrande.verde{background:linear-gradient(180deg,#0f8a2a,#065a18);border:4px solid #00ff00;box-shadow:0 0 20px #00ff00}
-.alertaGrande.acertou{background:linear-gradient(180deg,#00cc00,#006600);border:4px solid #00ff00;box-shadow:0 0 40px #00ff00, 0 0 80px rgba(0,255,0,0.5);animation:piscaAcertou 0.4s infinite alternate}
-.alertaGrande.errou{background:linear-gradient(180deg,#cc0000,#660000);border:4px solid #ff4444;box-shadow:0 0 40px #ff0000, 0 0 80px rgba(255,0,0,0.5);animation:piscaErrou 0.4s infinite alternate}
-@keyframes piscaAlertaGrande{0%{transform:scale(1)}100%{transform:scale(1.03)}}
-@keyframes piscaAcertou{0%{transform:scale(1);box-shadow:0 0 30px #00ff00}100%{transform:scale(1.05);box-shadow:0 0 60px #00ff00}}
-@keyframes piscaErrou{0%{transform:scale(1);box-shadow:0 0 30px #ff0000}100%{transform:scale(1.05);box-shadow:0 0 60px #ff0000}}
-.colunaGrande{font-size:26px;letter-spacing:1px;text-shadow:0 0 10px #fff;line-height:1.1;font-weight:900}
-.colunaNumero{font-size:48px;font-weight:900;color:#ffff00;text-shadow:0 0 20px #ffff00, 0 0 40px #fff;line-height:1}
-.placarSimples{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:10px;margin-top:10px;display:flex;justify-content:center;gap:20px;min-height:50px;width:100%}
-.placarItemSimples{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:70px}
-.placarLabelSimples{font-size:10px;color:#d4af37;letter-spacing:1px;font-weight:900}
-.placarValorSimples{font-size:22px;font-weight:900}
+.alertaGrande.verde{background:linear-gradient(180deg,#0f8a2a,#065a18);border:4px solid #00ff00}
+.alertaGrande.acertou{background:linear-gradient(180deg,#00cc00,#006600);border:4px solid #00ff00;box-shadow:0 0 50px #00ff00}
+.alertaGrande.errou{background:linear-gradient(180deg,#cc0000,#660000);border:4px solid #ff4444;box-shadow:0 0 50px #ff0000}
+@keyframes piscaAlertaGrande{0%{transform:scale(1)}100%{transform:scale(1.02)}}
+.colunaGrande{font-size:30px;text-shadow:0 0 12px #fff;line-height:1.1;font-weight:900}
+.colunaNumero{font-size:54px;font-weight:900;color:#ffff00;text-shadow:0 0 25px #ffff00, 0 0 50px #fff;line-height:1.1}
+.placarSimples{background:#000;border:2.5px solid #d4af37;border-radius:14px;padding:12px;margin-top:8px;display:flex;justify-content:center;gap:30px;min-height:60px;width:100%}
+.placarItemSimples{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:80px}
+.placarLabelSimples{font-size:11px;color:#d4af37;font-weight:900}
+.placarValorSimples{font-size:26px;font-weight:900}
+.kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:3px solid #d4af37;padding:6px;display:flex;flex-direction:column;gap:4px;flex-shrink:0;height:36%;min-height:220px}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.k{border-radius:10px;border:2px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
+.k:active{transform:scale(0.96);background:#fff}
+.paginasEscondidas{display:none !important}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irPara(1)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
-<div class="pagesNav" id="pagesNav">
-<button class="ativo" onclick="irPara(1)">1 INICIO</button>
-<button onclick="irPara(2)">2 PADRÃO</button>
-<button onclick="irPara(3)">3 VERMELHO</button>
-<button onclick="irPara(4)">4 COLUNA</button>
-<button onclick="irPara(5)">5 ACERTO</button>
-<button onclick="irPara(6)">6 A HIST</button>
-<button onclick="irPara(7)">7 B HIST</button>
-<button onclick="irPara(8)">8 C HIST</button>
-<button onclick="irPara(9)">9 D HIST</button>
-<button onclick="irPara(10)">10 PLACAR</button>
-</div>
+<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="nav2">
-<button class="home" onclick="irPara(1)">🏠 INICIO</button>
+<button class="home" onclick="limparTudo()">🏠 INICIO</button>
 <button onclick="apagarUltimo()">⬅️ APAGAR</button>
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
-<button onclick="proximaPagina()">➡️ PRÓX</button>
+<button onclick="irPara(1)">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">TABELA: 1=2/3 2=1/2 etc - P1 SO COLUNA DA TABELA</div>
-
-<div class="page ativa" id="page1">
+<div class="display inicial" id="disp">B+W 1VERMELHO=PAG2 2VERMELHOS=PAG1 - TABELA COLUNA</div>
+<div class="page" id="page1">
 <div class="topBar" id="topBar1"></div>
 <div class="alertaGrande verde" id="alertaGrande1">
 <div class="colunaGrande" id="colunaGrandeTexto1">AGUARDANDO<br>SINAL...</div>
@@ -99,39 +66,11 @@ body{display:flex;justify-content:center}
 </div>
 </div>
 </div>
-
-<div class="page" id="page2">
-<div class="conjuntosContainer" id="conjuntosP2"></div>
-<div class="alertaGrande verde" id="alertaGrande2">
-<div class="colunaGrande" id="colunaGrandeTexto2">AGUARDANDO<br>SINAL P2...</div>
-<div class="placarSimples" id="placarBox2">
-<div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou2">0</div></div>
-<div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou2">0</div></div>
+<div class="paginasEscondidas">
+<div id="conjuntosP2"></div><div id="conjuntosP3"></div>
+<div id="alertaGrande2"></div><div id="colunaGrandeTexto2"></div><div id="placarAcertou2">0</div><div id="placarErrou2">0</div>
+<div id="alertaGrande3"></div><div id="colunaGrandeTexto3"></div><div id="placarAcertou3">0</div><div id="placarErrou3">0</div>
 </div>
-</div>
-<div class="infoBar" id="infoBar2">PÁG 2 - 1 VERMELHO DEPOIS DO AZUL = COLUNA DA TABELA</div>
-</div>
-
-<div class="page" id="page3">
-<div class="conjuntosContainer" id="conjuntosP3"></div>
-<div class="alertaGrande verde" id="alertaGrande3">
-<div class="colunaGrande" id="colunaGrandeTexto3">AGUARDANDO<br>SINAL P3...</div>
-<div class="placarSimples" id="placarBox3">
-<div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou3">0</div></div>
-<div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou3">0</div></div>
-</div>
-</div>
-<div class="infoBar" id="infoBar3">PÁG 3 - 2 VERMELHOS DEPOIS DO AZUL = COLUNA DA TABELA AVISA P1</div>
-</div>
-
-<div class="page" id="page4"><div class="topBar" id="topBar4"></div><div class="infoBar">TABELA COLUNAS: 1=2/3 2=1/2 3=1/2 4=1/2 5=2/3 6=1/2 7=2/3 8=1/2 9=2/3 10=2/3 11=1/3 12=2/3 13=1/3 14=2/3 15=1/3 16=1/3 17=1/3 18=2/3 19=1/2 20=1/2 21=2/3 22=1/2 23=1/2 24=2/3 25=1/3 26=2/3 27=1/3 28=2/3 29=1/3 30=2/3 31=1/3 32=1/2 33=2/3 34=1/2 35=2/3 36=1/2</div></div>
-<div class="page" id="page5"><div class="topBar" id="topBar5"></div></div>
-<div class="page" id="page6"><div class="topBar" id="topBar6"></div></div>
-<div class="page" id="page7"><div class="topBar" id="topBar7"></div></div>
-<div class="page" id="page8"><div class="topBar" id="topBar8"></div></div>
-<div class="page" id="page9"><div class="topBar" id="topBar9"></div></div>
-<div class="page" id="page10"><div class="topBar" id="topBar10"></div></div>
-
 <div class="kb">
 <div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
 <div class="kr"><button class="k" onclick="dig('4')">4</button><button class="k" onclick="dig('5')">5</button><button class="k" onclick="dig('6')">6</button></div>
@@ -139,15 +78,13 @@ body{display:flex;justify-content:center}
 <div class="kr"><button class="k" onclick="ok()">ENTER</button><button class="k" onclick="dig('0')">0</button><button class="k" onclick="corr()">CORRIGIR</button></div>
 </div>
 </div>
-
 <script>
 var cur="",lista=[],paginaAtual=1;
 var green=0,red=0;
 var esperandoP2=false, esperandoP3=false;
 var colunaP2=null, colunaP3=null;
 var numeroAzulP2=null, numeroAzulP3=null;
-var linhasP2 = [];
-var linhasP3 = [];
+var linhasP2 = []; var linhasP3 = [];
 var tabelaColunas = {
  1:"2/3", 2:"1/2", 3:"1/2", 4:"1/2", 5:"2/3", 6:"1/2", 7:"2/3", 8:"1/2", 9:"2/3", 10:"2/3",
  11:"1/3", 12:"2/3", 13:"1/3", 14:"2/3", 15:"1/3", 16:"1/3", 17:"1/3", 18:"2/3", 19:"1/2", 20:"1/2",
@@ -160,193 +97,71 @@ function getCol(n){
  if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0) return 2;
  return 3;
 }
-function getColunasParaJogar(numeroAzul){
- return tabelaColunas[numeroAzul] || "-";
-}
+function getColunasParaJogar(numeroAzul){ return tabelaColunas[numeroAzul] || "-"; }
 function inicializar(){
- document.getElementById('conjuntosP2').innerHTML="";
- document.getElementById('conjuntosP3').innerHTML="";
- linhasP2=[];linhasP3=[];
- var containerP2=document.getElementById('conjuntosP2');
- var boxP2=document.createElement('div');boxP2.className='conjuntoBox';
- var labelP2=document.createElement('div');labelP2.className='conjuntoLabel';labelP2.textContent='PÁG 2 - 5 LINHAS - 1 VERMELHO = COLUNA TABELA';boxP2.appendChild(labelP2);
+ var divP2=document.getElementById('conjuntosP2'); var divP3=document.getElementById('conjuntosP3');
+ if(divP2) divP2.innerHTML=""; if(divP3) divP3.innerHTML=""; linhasP2=[];linhasP3=[];
  var brancosPorLinha = [1,2,3,4,5];
  for(var r=0;r<5;r++){
-  var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP2_'+r;
-  boxP2.appendChild(linhaDiv);
-  linhasP2.push({div:linhaDiv, itens:[], brancos:brancosPorLinha[r], linhaIdx:r});
+  linhasP2.push({div:document.createElement('div'), itens:[], brancos:brancosPorLinha[r]});
+  linhasP3.push({div:document.createElement('div'), itens:[], brancos:brancosPorLinha[r]});
  }
- containerP2.appendChild(boxP2);
- var containerP3=document.getElementById('conjuntosP3');
- var boxP3=document.createElement('div');boxP3.className='conjuntoBox';
- var labelP3=document.createElement('div');labelP3.className='conjuntoLabel';labelP3.textContent='PÁG 3 - 5 LINHAS - 2 VERMELHOS = COLUNA TABELA AVISA P1';boxP3.appendChild(labelP3);
- for(var r=0;r<5;r++){
-  var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP3_'+r;
-  boxP3.appendChild(linhaDiv);
-  linhasP3.push({div:linhaDiv, itens:[], brancos:brancosPorLinha[r], linhaIdx:r});
- }
- containerP3.appendChild(boxP3);
 }
 function setEstadoQuadrado(id, estado, textoGrande){
- var el=document.getElementById(id);
- var txt=document.getElementById(id.replace('alertaGrande','colunaGrandeTexto'));
- if(el){
-  el.className='alertaGrande '+estado;
-  if(txt) txt.innerHTML=textoGrande;
- }
+ var el=document.getElementById(id); var txt=document.getElementById(id.replace('alertaGrande','colunaGrandeTexto'));
+ if(el){ el.className='alertaGrande '+estado; if(txt) txt.innerHTML=textoGrande; }
 }
-function irPara(p){
- paginaAtual=p;
- document.querySelectorAll('.page').forEach(function(el){el.classList.remove('ativa')});
- document.getElementById('page'+p).classList.add('ativa');
- document.querySelectorAll('.pagesNav button').forEach(function(b,i){b.classList.toggle('ativo',i+1==p)});
- upd();
-}
-function proximaPagina(){irPara(paginaAtual%10+1);}
+function irPara(p){ paginaAtual=1; show();upd(); }
 function show(){
  var d=document.getElementById('disp');
  if(cur!=""){
-  if(cur=="0"){d.textContent="P"+paginaAtual+" - 0 = APAGAR";d.className="display vermelho";}
-  else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR";d.className="display vermelho";}
+  if(cur=="0"){d.textContent="0 = APAGAR";d.className="display vermelho";}
+  else if(cur=="00"){d.textContent="00 = LIMPAR";d.className="display vermelho";}
   else{
    if(esperandoP2 || esperandoP3){
-    var txt = "";
-    if(esperandoP3) txt += "P3 COL "+colunaP3+" ";
-    if(esperandoP2) txt += "P2 COL "+colunaP2;
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - RESULTADO! "+txt;
-    d.className="display sinal";
-   }else{
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER";
-    d.className="display inicial";
-   }
+    var col = esperandoP3 ? colunaP3 : colunaP2; var pag = esperandoP3 ? "P1" : "P2";
+    d.textContent="NUM: "+cur+" - RESULTADO "+pag+" COLUNA "+col; d.className="display sinal";
+   }else{ d.textContent="NUM: "+cur+" - ENTER"; d.className="display inicial"; }
   }
   return;
  }
- if(paginaAtual==1){
-  if(esperandoP3){
-   d.innerHTML="🔴 P3 SINAL - JOGAR COLUNA "+colunaP3+" (AZUL "+numeroAzulP3+")";
-   d.className="display alerta";
-  }else{
-   d.textContent="PÁG 1 - TABELA COLUNA - ✅:"+green+" ❌:"+red;
-   d.className="display inicial";
-  }
- }else if(paginaAtual==2){
-  if(esperandoP2){
-   d.innerHTML="🔴 P2 SINAL - JOGAR COLUNA "+colunaP2+" (AZUL "+numeroAzulP2+")";
-   d.className="display alerta";
-  }else{
-   d.textContent="PÁG 2 - 1 VERMELHO = COLUNA TABELA - ✅:"+green+" ❌:"+red;
-   d.className="display inicial";
-  }
- }else if(paginaAtual==3){
-  if(esperandoP3){
-   d.innerHTML="🔴 P3 SINAL - COLUNA "+colunaP3+" AVISA P1";
-   d.className="display alerta";
-  }else{
-   d.textContent="PÁG 3 - 2 VERMELHOS = COLUNA TABELA";
-   d.className="display inicial";
-  }
- }else{
-  d.textContent="PÁG "+paginaAtual+" - TABELA COLUNA";
-  d.className="display inicial";
- }
+ if(esperandoP3){ d.innerHTML="🔴 P1 SINAL 🟦🟥🟥 - COLUNA "+colunaP3; d.className="display alerta"; }
+ else if(esperandoP2){ d.innerHTML="🔵 P2 SINAL 🟦🟥 - COLUNA "+colunaP2; d.className="display alerta"; }
+ else{ d.textContent="TABELA COLUNA - 🟦🟥=P2 🟦🟥🟥=P1 - ✅:"+green+" ❌:"+red; d.className="display inicial"; }
 }
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
 function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
-function apagarUltimo(){
- if(lista.length>0){
-  lista.pop();
-  reconstruirTudo();
-  show();upd();
- }
-}
+function apagarUltimo(){ if(lista.length>0){ lista.pop(); reconstruirTudo(); show();upd(); } }
 function limparTudo(){
  cur="";lista=[];colunaP2=null;colunaP3=null;numeroAzulP2=null;numeroAzulP3=null;green=0;red=0;esperandoP2=false;esperandoP3=false;
- inicializar();
- setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...');
- setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...');
- setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...');
- irPara(paginaAtual);
- show();upd();
+ inicializar(); setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...'); show();upd();
 }
 function reconstruirTudo(){
- inicializar();
- var temp=lista.slice();
- lista=[];green=0;red=0;colunaP2=null;colunaP3=null;numeroAzulP2=null;numeroAzulP3=null;esperandoP2=false;esperandoP3=false;
- temp.forEach(function(n){
-  aplicarNumero(n,false);
- });
- checarSinais();
- lista=temp.slice();
+ inicializar(); var temp=lista.slice(); lista=[];green=0;red=0;colunaP2=null;colunaP3=null;esperandoP2=false;esperandoP3=false;
+ temp.forEach(function(n){ aplicarNumero(n,false); }); checarSinais(); lista=temp.slice();
 }
 function aplicarNumero(n, adicionarNaLista){
  for(var r=0;r<linhasP2.length;r++){
-  var linha=linhasP2[r];
-  var pos=linha.itens.length;
-  var brancos=linha.brancos;
-  var ciclo = brancos + 1;
-  var isAzul = (pos % ciclo == 0);
-  var sq=document.createElement('div');
-  if(isAzul){
-   sq.className='sq blue new';
-  }else{
-   var col=getCol(n);
-   if(col==1){sq.className='sq red new';}
-   else{sq.className='sq green new';}
-  }
-  sq.textContent=n;
-  linha.div.appendChild(sq);
-  linha.itens.push({valor:n, isAzul:isAzul, sq:sq});
+  var linha=linhasP2[r]; var pos=linha.itens.length; var ciclo = linha.brancos + 1; var isAzul = (pos % ciclo == 0);
+  linha.itens.push({valor:n, isAzul:isAzul});
  }
  for(var r=0;r<linhasP3.length;r++){
-  var linha=linhasP3[r];
-  var pos=linha.itens.length;
-  var brancos=linha.brancos;
-  var ciclo = brancos + 1;
-  var isAzul = (pos % ciclo == 0);
-  var sq=document.createElement('div');
-  if(isAzul){
-   sq.className='sq blue new';
-  }else{
-   var col=getCol(n);
-   if(col==1){sq.className='sq red new';}
-   else{sq.className='sq green new';}
-  }
-  sq.textContent=n;
-  linha.div.appendChild(sq);
-  linha.itens.push({valor:n, isAzul:isAzul, sq:sq});
+  var linha=linhasP3[r]; var pos=linha.itens.length; var ciclo = linha.brancos + 1; var isAzul = (pos % ciclo == 0);
+  linha.itens.push({valor:n, isAzul:isAzul});
  }
- if(adicionarNaLista){
-  lista.push(n);
- }
+ if(adicionarNaLista){ lista.push(n); }
 }
-function checarSinais(){
- checarSinalP2();
- checarSinalP3();
-}
+function checarSinais(){ checarSinalP3(); checarSinalP2(); }
 function checarSinalP2(){
- if(esperandoP2) return true;
+ if(esperandoP2 || esperandoP3) return false;
  for(var r=0;r<linhasP2.length;r++){
   var linha=linhasP2[r];
   for(var i=0;i<linha.itens.length-1;i++){
-   var itAzul=linha.itens[i];
-   var itVerm=linha.itens[i+1];
-   if(itAzul.isAzul && !itVerm.isAzul){
-    if(getCol(itVerm.valor)==1){
-     var colunas = getColunasParaJogar(itAzul.valor);
-     colunaP2=colunas;
-     numeroAzulP2=itAzul.valor;
-     esperandoP2=true;
-     setEstadoQuadrado('alertaGrande2','vermelho','COLUNA<br><div class="colunaNumero">'+colunaP2+'</div>');
-     return true;
-    }
-   }
-  }
- }
- if(!esperandoP2){
-  var el=document.getElementById('alertaGrande2');
-  if(el && !el.classList.contains('acertou') && !el.classList.contains('errou')){
-   setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...');
+   var itAzul=linha.itens[i]; var itVerm=linha.itens[i+1];
+   if(itAzul.isAzul && !itVerm.isAzul){ if(getCol(itVerm.valor)==1){
+     colunaP2=getColunasParaJogar(itAzul.valor); numeroAzulP2=itAzul.valor; esperandoP2=true;
+     setEstadoQuadrado('alertaGrande1','vermelho','P2<br>COLUNA<br><div class="colunaNumero">'+colunaP2+'</div>'); return true;
+   }}
   }
  }
  return false;
@@ -356,151 +171,61 @@ function checarSinalP3(){
  for(var r=0;r<linhasP3.length;r++){
   var linha=linhasP3[r];
   for(var i=0;i<linha.itens.length-2;i++){
-   var itAzul=linha.itens[i];
-   var itV1=linha.itens[i+1];
-   var itV2=linha.itens[i+2];
+   var itAzul=linha.itens[i]; var itV1=linha.itens[i+1]; var itV2=linha.itens[i+2];
    if(itAzul.isAzul && !itV1.isAzul && !itV2.isAzul){
     if(getCol(itV1.valor)==1 && getCol(itV2.valor)==1){
-     var colunas = getColunasParaJogar(itAzul.valor);
-     colunaP3=colunas;
-     numeroAzulP3=itAzul.valor;
-     esperandoP3=true;
-     setEstadoQuadrado('alertaGrande1','vermelho','COLUNA<br><div class="colunaNumero">'+colunaP3+'</div>');
-     setEstadoQuadrado('alertaGrande3','vermelho','COLUNA<br><div class="colunaNumero">'+colunaP3+'</div>');
-     return true;
+     colunaP3=getColunasParaJogar(itAzul.valor); numeroAzulP3=itAzul.valor; esperandoP3=true;
+     setEstadoQuadrado('alertaGrande1','vermelho','P1<br>COLUNA<br><div class="colunaNumero">'+colunaP3+'</div>'); return true;
     }
    }
   }
  }
- if(!esperandoP3){
-  var el1=document.getElementById('alertaGrande1');
-  var el3=document.getElementById('alertaGrande3');
-  if(el3 && !el3.classList.contains('acertou') && !el3.classList.contains('errou') && !esperandoP3){
-   setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...');
-  }
-  if(!esperandoP3 && !esperandoP2){
-   if(el1 && !el1.classList.contains('acertou') && !el1.classList.contains('errou')){
-    setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...');
-   }
+ if(!esperandoP3 && !esperandoP2){
+  var el=document.getElementById('alertaGrande1');
+  if(el && !el.classList.contains('acertou') && !el.classList.contains('errou')){
+   setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...');
   }
  }
  return false;
 }
 function ok(){
- if(cur===""){return;}
- if(cur==="00"){limparTudo();return;}
- if(cur==="0"){apagarUltimo();return;}
+ if(cur===""){return;} if(cur==="00"){limparTudo();return;} if(cur==="0"){apagarUltimo();return;}
  var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
  if(esperandoP3){
-  var colResultado=getCol(n);
-  var colunasPermitidas = colunaP3.split('/');
-  var acertou = colunasPermitidas.indexOf(String(colResultado)) >= 0;
-  if(acertou){
-   green++;
-   setEstadoQuadrado('alertaGrande1','acertou','ACERTOU<br><div class="colunaNumero">✅</div>COLUNA '+colunaP3);
-   setEstadoQuadrado('alertaGrande3','acertou','ACERTOU<br><div class="colunaNumero">✅</div>COLUNA '+colunaP3);
-  }else{
-   red++;
-   setEstadoQuadrado('alertaGrande1','errou','ERROU<br><div class="colunaNumero">❌</div>COLUNA '+colunaP3);
-   setEstadoQuadrado('alertaGrande3','errou','ERROU<br><div class="colunaNumero">❌</div>COLUNA '+colunaP3);
-  }
-  document.getElementById('placarAcertou1').textContent=green;
-  document.getElementById('placarErrou1').textContent=red;
-  document.getElementById('placarAcertou2').textContent=green;
-  document.getElementById('placarErrou2').textContent=red;
-  document.getElementById('placarAcertou3').textContent=green;
-  document.getElementById('placarErrou3').textContent=red;
-  esperandoP3=false;
-  colunaP3=null;
-  numeroAzulP3=null;
-  setTimeout(function(){
-   if(!esperandoP2){
-    setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...');
-   }
-   setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...');
-   show();
-  },3000);
-  aplicarNumero(n,true);
-  cur="";show();upd();
-  return;
+  var colResultado=getCol(n); var colunasPermitidas = colunaP3.split('/'); var acertou = colunasPermitidas.indexOf(String(colResultado)) >= 0;
+  if(acertou){ green++; setEstadoQuadrado('alertaGrande1','acertou','P1 ACERTOU<br><div class="colunaNumero">✅</div>COLUNA '+colunaP3); }
+  else{ red++; setEstadoQuadrado('alertaGrande1','errou','P1 ERROU<br><div class="colunaNumero">❌</div>COLUNA '+colunaP3); }
+  document.getElementById('placarAcertou1').textContent=green; document.getElementById('placarErrou1').textContent=red;
+  esperandoP3=false; colunaP3=null; numeroAzulP3=null;
+  setTimeout(function(){ if(!esperandoP2){ setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...'); } show(); },3000);
+  aplicarNumero(n,true); cur="";show();upd(); return;
  }
  if(esperandoP2){
-  var colResultado=getCol(n);
-  var colunasPermitidas = colunaP2.split('/');
-  var acertou = colunasPermitidas.indexOf(String(colResultado)) >= 0;
-  if(acertou){
-   green++;
-   setEstadoQuadrado('alertaGrande2','acertou','ACERTOU<br><div class="colunaNumero">✅</div>COLUNA '+colunaP2);
-  }else{
-   red++;
-   setEstadoQuadrado('alertaGrande2','errou','ERROU<br><div class="colunaNumero">❌</div>COLUNA '+colunaP2);
-  }
-  document.getElementById('placarAcertou1').textContent=green;
-  document.getElementById('placarErrou1').textContent=red;
-  document.getElementById('placarAcertou2').textContent=green;
-  document.getElementById('placarErrou2').textContent=red;
-  document.getElementById('placarAcertou3').textContent=green;
-  document.getElementById('placarErrou3').textContent=red;
-  esperandoP2=false;
-  colunaP2=null;
-  numeroAzulP2=null;
-  setTimeout(function(){
-   setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...');
-   show();
-  },3000);
-  aplicarNumero(n,true);
-  cur="";show();upd();
-  return;
+  var colResultado=getCol(n); var colunasPermitidas = colunaP2.split('/'); var acertou = colunasPermitidas.indexOf(String(colResultado)) >= 0;
+  if(acertou){ green++; setEstadoQuadrado('alertaGrande1','acertou','P2 ACERTOU<br><div class="colunaNumero">✅</div>COLUNA '+colunaP2); }
+  else{ red++; setEstadoQuadrado('alertaGrande1','errou','P2 ERROU<br><div class="colunaNumero">❌</div>COLUNA '+colunaP2); }
+  document.getElementById('placarAcertou1').textContent=green; document.getElementById('placarErrou1').textContent=red;
+  esperandoP2=false; colunaP2=null; numeroAzulP2=null;
+  setTimeout(function(){ setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...'); show(); },3000);
+  aplicarNumero(n,true); cur="";show();upd(); return;
  }
- aplicarNumero(n,true);
- cur="";show();upd();
- checarSinais();
+ aplicarNumero(n,true); cur="";show();upd(); checarSinais();
 }
 function upd(){
  var topBar1=document.getElementById('topBar1');
  if(topBar1){
   topBar1.innerHTML="";
   if(lista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:9px;color:#1a7a2a;padding:5px;text-align:center;width:100%";e.textContent="TABELA COLUNA: 1=2/3 2=1/2 11=1/3 etc - P1 SO COLUNA DA TABELA";
+   var e=document.createElement('div');e.style.cssText="font-size:11px;color:#0a5a1a;padding:8px;text-align:center;width:100%";e.textContent="HISTÓRICO - 🟦🟥=P2 🟦🟥🟥=P1 - TABELA COLUNA";
    topBar1.appendChild(e);
   }else{
-   var rev=lista.slice().reverse();
-   rev.forEach(function(num,idx){
-    var col=getCol(num);
-    var cor=(col==1?'red':(col==0?'blue':'green'));
-    var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;topBar1.appendChild(box);
-   });
+   var rev=lista.slice();
+   rev.forEach(function(num){ var col=getCol(num); var cor=(col==1?'red':(col==0?'blue':'green')); var box=document.createElement('div');box.className='nBox '+cor;box.textContent=num;topBar1.appendChild(box); });
   }
  }
- document.getElementById('placarAcertou1').textContent=green;
- document.getElementById('placarErrou1').textContent=red;
- document.getElementById('placarAcertou2').textContent=green;
- document.getElementById('placarErrou2').textContent=red;
- document.getElementById('placarAcertou3').textContent=green;
- document.getElementById('placarErrou3').textContent=red;
- ['topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
-  var el=document.getElementById(id);
-  if(!el) return;
-  el.innerHTML="";
-  var rev=lista.slice().reverse().slice(0,12);
-  if(rev.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent="Sem números";el.appendChild(e);}
-  else{rev.forEach(function(num,idx){var col=getCol(num);var cor=(col==1?'red':(col==0?'blue':'green'));var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);});}
- });
- var topBar10=document.getElementById('topBar10');
- if(topBar10){
-  topBar10.innerHTML="";
-  var div=document.createElement('div');
-  div.style.cssText="display:flex;gap:20px;padding:8px;color:#d4af37;font-size:14px;font-weight:900;justify-content:center";
-  div.innerHTML="<span style='color:#00ff00'>✅ ACERTOU: "+green+"</span> <span style='color:#ff4444'>❌ ERROU: "+red+"</span>";
-  topBar10.appendChild(div);
- }
- show();
+ document.getElementById('placarAcertou1').textContent=green; document.getElementById('placarErrou1').textContent=red; show();
 }
-inicializar();
-setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...');
-setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...');
-setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...');
-show();upd();
+inicializar(); setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...'); show();upd();
 </script>
 </body>
 </html>

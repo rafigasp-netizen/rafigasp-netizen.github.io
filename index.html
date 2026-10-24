@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - P2 IGUAL + P3 VERMELHOS</title>
+<title>RAFIGASP - P3 DETALHES VERMELHO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -49,13 +49,7 @@ body{display:flex;justify-content:center}
 .numGridBox{height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;transition:all 0.3s}
 .numGridBox.green{background:#0f8a2a}
 .numGridBox.red{background:#d80f0f;border:2px solid #ff6666;box-shadow:0 0 6px #ff0000}
-.numGridBox.blue{background:#1e40af}
 .numGridBox.empty{background:#000;border:1px solid #333;color:#555}
-.numGridBox.new{animation:novo 0.5s;border:2px solid #fff;box-shadow:0 0 10px #fff}
-.centerBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.jogarBtn{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:20px;padding:8px 14px;font-weight:900;font-size:12px;color:#111;border:2px solid #fff;min-width:90px;text-align:center}
-.jogarBtn.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;animation:pisca 0.6s infinite alternate;box-shadow:0 0 10px #ffaa00}
-.placarBig{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:12px;padding:10px;text-align:center;font-weight:900;font-size:18px;color:#111;border:2px solid #fff}
 .kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:2px solid #d4af37;padding:5px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;height:32%;min-height:180px}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
 .k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 3px rgba(0,0,0,0.3)}
@@ -63,15 +57,22 @@ body{display:flex;justify-content:center}
 .infoBar{background:#111;border:1px solid #333;border-radius:6px;padding:6px;margin:2px 0;font-size:9px;color:#d4af37;text-align:center;line-height:1.3}
 .redListBar{background:#330000;border:2px solid #ff4444;border-radius:10px;padding:8px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:50px}
 .redCount{background:#ff0000;color:#fff;border-radius:12px;padding:2px 8px;font-weight:900;font-size:10px;margin-left:4px}
+.detalhesBox{background:#000;border:2px solid #ff4444;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.detalhesTitulo{font-size:10px;font-weight:900;color:#ff4444;text-align:center;letter-spacing:1px}
+.detalhesLinha{display:flex;gap:4px;justify-content:center}
+.detalhesItem{flex:1;height:32px;border-radius:6px;border:1.5px solid #333;background:#111;color:#666;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px;transition:all 0.3s}
+.detalhesItem.ativo{background:#ff0000;border:2px solid #fff;box-shadow:0 0 8px #ff0000;color:#fff;transform:scale(1.05)}
+.detalhesItem.coluna{font-size:9px}
+.detalhesNum{font-size:12px;color:#d4af37;text-align:center;font-weight:900;margin-bottom:2px}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irPara(2)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - PAG 2 IGUAL + PAG 3 VERMELHOS</div></div>
+<div class="topo" onclick="irPara(2)"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - P2 IGUAL + P3 DETALHES</div></div>
 <div class="pagesNav" id="pagesNav">
 <button onclick="irPara(1)">1 INICIO</button>
-<button class="ativo" onclick="irPara(2)">2 PADRÃO</button>
-<button onclick="irPara(3)">3 VERMELHO</button>
+<button onclick="irPara(2)">2 PADRÃO</button>
+<button class="ativo" onclick="irPara(3)">3 VERMELHO</button>
 <button onclick="irPara(4)">4 COLUNA</button>
 <button onclick="irPara(5)">5 ACERTO</button>
 <button onclick="irPara(6)">6 A HIST</button>
@@ -86,25 +87,51 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG 2 - NÃO MEXE - PÁG 3 MOSTRA VERMELHOS</div>
+<div class="display inicial" id="disp">PÁG 3 - VERMELHOS COM DETALHES EM VERMELHO</div>
 
-<div class="page" id="page1"><div class="topBar" id="topBar1"></div><div class="card"><div class="cardTitle">PÁGINA 1 - INICIO - SEM QUADRADOS</div></div></div>
-
-<div class="page ativa" id="page2">
+<div class="page" id="page1"><div class="topBar" id="topBar1"></div></div>
+<div class="page" id="page2">
 <div class="patternFixed" id="patternFixed2"></div>
-<div class="infoBar" id="infoBar2">PÁGINA 2 - NÃO MEXE - Começa no AZUL 🟦 e continua em loop - Azul com número continua azul, branco vira 🟢/🔴</div>
+<div class="infoBar" id="infoBar2">PÁGINA 2 - NÃO MEXE</div>
 </div>
 
-<div class="page" id="page3">
+<div class="page ativa" id="page3">
 <div class="redListBar" id="redListBar3"></div>
 <div class="card">
 <div class="cardTitle">PÁGINA 3 - NÚMEROS VERMELHOS (C1) - QUANDO SAI VERMELHO NA PÁG 2, MOSTRA AQUI <span class="redCount" id="redCount3">0 vermelhos</span></div>
 <div class="numGrid" id="numGrid3"></div>
 </div>
+
+<div class="detalhesBox" id="detalhesBox3">
+<div class="detalhesNum" id="detalhesNum3">Nenhum número ainda</div>
+<div class="detalhesTitulo">MARQUE DE VERMELHO SE ELE É:</div>
+<div class="detalhesLinha">
+<div class="detalhesItem" id="det-par">PAR</div>
+<div class="detalhesItem" id="det-impar">ÍMPAR</div>
+</div>
+<div class="detalhesLinha">
+<div class="detalhesItem" id="det-baixo">BAIXO (1-18)</div>
+<div class="detalhesItem" id="det-alto">ALTO (19-36)</div>
+</div>
+<div class="detalhesLinha">
+<div class="detalhesItem" id="det-preto">PRETO</div>
+<div class="detalhesItem" id="det-vermelho-cor">VERMELHO</div>
+</div>
+<div class="detalhesLinha">
+<div class="detalhesItem coluna" id="det-col1">COLUNA 1</div>
+<div class="detalhesItem coluna" id="det-col2">COLUNA 2</div>
+<div class="detalhesItem coluna" id="det-col3">COLUNA 3</div>
+</div>
+<div class="detalhesLinha">
+<div class="detalhesItem coluna" id="det-duzia1">DÚZIA 1 (1-12)</div>
+<div class="detalhesItem coluna" id="det-duzia2">DÚZIA 2 (13-24)</div>
+<div class="detalhesItem coluna" id="det-duzia3">DÚZIA 3 (25-36)</div>
+</div>
+</div>
 </div>
 
-<div class="page" id="page4"><div class="topBar" id="topBar4"></div><div class="card"><div class="cardTitle">PÁGINA 4 - JOGAR NA COLUNA</div><div class="centerBox"><div class="jogarBtn" id="jogarBtn4">AGUARDANDO</div><div style="font-size:9px;color:#d4af37" id="jogarSub4">-</div></div></div></div>
-<div class="page" id="page5"><div class="topBar" id="topBar5"></div><div class="card"><div class="cardTitle">PÁGINA 5 - ACERTO OU ERRO</div><div class="centerBox"><div class="jogarBtn" id="acertoBox5">-</div><div style="font-size:9px;color:#d4af37" id="acertoSub5">-</div></div></div></div>
+<div class="page" id="page4"><div class="topBar" id="topBar4"></div><div class="card"><div class="cardTitle">PÁGINA 4 - COLUNA</div><div class="centerBox"><div class="jogarBtn" id="jogarBtn4">AGUARDANDO</div><div style="font-size:9px;color:#d4af37" id="jogarSub4">-</div></div></div></div>
+<div class="page" id="page5"><div class="topBar" id="topBar5"></div><div class="card"><div class="cardTitle">PÁGINA 5</div><div class="centerBox"><div class="jogarBtn" id="acertoBox5">-</div><div style="font-size:9px;color:#d4af37" id="acertoSub5">-</div></div></div></div>
 <div class="page" id="page6"><div class="topBar" id="topBar6"></div></div>
 <div class="page" id="page7"><div class="topBar" id="topBar7"></div></div>
 <div class="page" id="page8"><div class="topBar" id="topBar8"></div></div>
@@ -120,7 +147,7 @@ body{display:flex;justify-content:center}
 </div>
 
 <script>
-var cur="",lista=[],paginaAtual=2;
+var cur="",lista=[],paginaAtual=3;
 var green=0,red=0,ultimoSinal=null,ultimoResultado=null;
 var padraoBrancos=[1,2,2,3,4,5];
 var todosQuadrados=[];
@@ -132,6 +159,21 @@ function getCol(n){
  if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0) return 2;
  return 3;
 }
+function getDuzia(n){
+ if(n==0) return 0;
+ if(n>=1 && n<=12) return 1;
+ if(n>=13 && n<=24) return 2;
+ if(n>=25 && n<=36) return 3;
+ return 0;
+}
+function getCorRoleta(n){
+ if(n==0) return 0;
+ var vermelhos=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+ if(vermelhos.indexOf(n)>=0) return 2;
+ return 1;
+}
+function isPar(n){return n!=0 && n%2==0;}
+function isAlto(n){return n>=19;}
 function isGatilhoNum(n){return n==2||n==0;}
 function irPara(p){
  paginaAtual=p;
@@ -148,20 +190,16 @@ function show(){
    d.textContent="P"+paginaAtual+" - 🔴 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - JOGAR C2/3!";
    d.className="display sinal";
   }else{
-   if(paginaAtual==2){
-    d.textContent="PÁG 2 - NÃO MEXE - COMEÇA NO AZUL 🟦 - Pos: "+(indiceAtual+1)+"/"+todosQuadrados.length+" - LOOP";
-   }else if(paginaAtual==3){
-    d.textContent="PÁG 3 - VERMELHOS C1 - "+vermelhosLista.length+" vermelhos - Quando sai vermelho na PÁG 2, mostra aqui";
-   }else{
-    d.textContent="PÁGINA "+paginaAtual+" - DIGITE NÚMERO";
-   }
+   if(paginaAtual==2){d.textContent="PÁG 2 - NÃO MEXE - Pos: "+(indiceAtual+1)+"/"+todosQuadrados.length;}
+   else if(paginaAtual==3){d.textContent="PÁG 3 - VERMELHOS COM DETALHES - "+vermelhosLista.length+" vermelhos";}
+   else{d.textContent="PÁGINA "+paginaAtual+" - DIGITE NÚMERO";}
    d.className="display inicial";
   }
- }else if(cur=="0"){d.textContent="P"+paginaAtual+" - 0 = APAGAR ULTIMO";d.className="display vermelho";}
- else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR TUDO";d.className="display vermelho";}
+ }else if(cur=="0"){d.textContent="P"+paginaAtual+" - 0 = APAGAR";d.className="display vermelho";}
+ else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR";d.className="display vermelho";}
  else{d.textContent="P"+paginaAtual+" - NUM: "+cur;d.className="display inicial";}
 }
-function irInicio(){cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;irPara(2);}
+function irInicio(){cur="";lista=[];vermelhosLista=[];green=0;red=0;ultimoSinal=null;ultimoResultado=null;indiceAtual=0;irPara(3);}
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
 function corr(){if(cur=="0"){apagarUltimo();return;}if(cur=="00"){limparTudo();return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
 function apagarUltimo(){
@@ -215,25 +253,18 @@ function ok(){
    if(sq){
     var isBlue=sq.dataset.tipo=="blue";
     sq.textContent=n;
-    if(isBlue){
-     sq.className="sq blue filled new";
-    }else{
+    if(isBlue){sq.className="sq blue filled new";}
+    else{
      var col=getCol(n);
-     if(col==1){
-      sq.className="sq red new";
-      vermelhosLista.push(n);
-     }else{
-      sq.className="sq green new";
-     }
+     if(col==1){sq.className="sq red new";vermelhosLista.push(n);}
+     else{sq.className="sq green new";}
     }
-    indiceAtual++;
-    if(indiceAtual>=todosQuadrados.length){indiceAtual=0;}
-    lista.push(n);
-    cur="";show();upd();
+    indiceAtual++;if(indiceAtual>=todosQuadrados.length){indiceAtual=0;}
+    lista.push(n);cur="";show();upd();
     if(ultimoResultado){
      var d=document.getElementById('disp');
-     if(ultimoResultado.tipo=='verde'){d.textContent="P2 - ✅ ACERTOU! "+n+" C"+getCol(n)+" - VERDE";d.className="display verde";}
-     else if(ultimoResultado.tipo=='vermelho'){d.textContent="P2 - ❌ ERROU! "+n+" C1 - VERMELHO -> VAI PRA PÁG 3";d.className="display vermelho";}
+     if(ultimoResultado.tipo=='verde'){d.textContent="P2 - ✅ ACERTOU! "+n+" VERDE";d.className="display verde";}
+     else if(ultimoResultado.tipo=='vermelho'){d.textContent="P2 - ❌ ERROU! "+n+" VERMELHO -> PÁG 3";d.className="display vermelho";}
      setTimeout(function(){show();},1500);
     }
     setTimeout(function(){
@@ -243,12 +274,11 @@ function ok(){
   }
  }else{
   if(getCol(n)==1){vermelhosLista.push(n);}
-  lista.push(n);
-  cur="";show();upd();
+  lista.push(n);cur="";show();upd();
   if(ultimoResultado && lista[lista.length-1]==n){
    var d=document.getElementById('disp');
    if(ultimoResultado.tipo=='verde'){d.textContent="P"+paginaAtual+" - ✅ ACERTOU! "+n+" VERDE";d.className="display verde";}
-   else if(ultimoResultado.tipo=='vermelho'){d.textContent="P"+paginaAtual+" - ❌ ERROU! "+n+" VERMELHO - VAI PRA PÁG 3";d.className="display vermelho";}
+   else if(ultimoResultado.tipo=='vermelho'){d.textContent="P"+paginaAtual+" - ❌ ERROU! "+n+" VERMELHO";d.className="display vermelho";}
    setTimeout(function(){show();},1500);
   }
  }
@@ -259,43 +289,55 @@ function criarQuadradosPagina2(){
  container.innerHTML="";
  todosQuadrados=[];
  padraoBrancos.forEach(function(qtdBranco){
-  var blueSq=document.createElement('div');
-  blueSq.className='sq blue';
-  blueSq.dataset.tipo="blue";
-  blueSq.textContent="";
-  blueSq.title="AZUL - COMEÇA AQUI";
-  container.appendChild(blueSq);
-  todosQuadrados.push(blueSq);
-  for(var w=0;w<qtdBranco;w++){
-   var whiteSq=document.createElement('div');
-   whiteSq.className='sq white vazio';
-   whiteSq.dataset.tipo="white";
-   whiteSq.textContent="";
-   whiteSq.title="BRANCO - vira VERDE ou VERMELHO";
-   container.appendChild(whiteSq);
-   todosQuadrados.push(whiteSq);
-  }
+  var blueSq=document.createElement('div');blueSq.className='sq blue';blueSq.dataset.tipo="blue";blueSq.textContent="";container.appendChild(blueSq);todosQuadrados.push(blueSq);
+  for(var w=0;w<qtdBranco;w++){var whiteSq=document.createElement('div');whiteSq.className='sq white vazio';whiteSq.dataset.tipo="white";whiteSq.textContent="";container.appendChild(whiteSq);todosQuadrados.push(whiteSq);}
   var sep=document.createElement('div');sep.style.width="12px";container.appendChild(sep);
  });
  if(todosQuadrados.length>0){todosQuadrados[0].classList.add('active');}
  indiceAtual=0;
  for(var i=0;i<lista.length;i++){
   if(i>=todosQuadrados.length) break;
-  var num=lista[i];
-  var sq=todosQuadrados[i];
-  if(!sq) continue;
-  var isBlue=sq.dataset.tipo=="blue";
-  sq.textContent=num;
+  var num=lista[i];var sq=todosQuadrados[i];if(!sq) continue;
+  var isBlue=sq.dataset.tipo=="blue";sq.textContent=num;
   if(isBlue){sq.className='sq blue filled';}
-  else{
-   var col=getCol(num);
-   if(col==1) sq.className='sq red';
-   else sq.className='sq green';
-  }
+  else{var col=getCol(num);if(col==1) sq.className='sq red';else sq.className='sq green';}
  }
  indiceAtual=lista.length % todosQuadrados.length;
  todosQuadrados.forEach(function(s){s.classList.remove('active');});
  if(todosQuadrados[indiceAtual]){todosQuadrados[indiceAtual].classList.add('active');}
+}
+function atualizarDetalhesVermelho(num){
+ var detalhesNum=document.getElementById('detalhesNum3');
+ if(!detalhesNum) return;
+ if(num===null || num===undefined){
+  detalhesNum.textContent="Nenhum número ainda - Digite na Página 2";
+  ['det-par','det-impar','det-baixo','det-alto','det-preto','det-vermelho-cor','det-col1','det-col2','det-col3','det-duzia1','det-duzia2','det-duzia3'].forEach(function(id){
+   var el=document.getElementById(id);
+   if(el) el.classList.remove('ativo');
+  });
+  return;
+ }
+ detalhesNum.textContent="NÚMERO: "+num+" - MARCADO DE VERMELHO ABAIXO";
+ ['det-par','det-impar','det-baixo','det-alto','det-preto','det-vermelho-cor','det-col1','det-col2','det-col3','det-duzia1','det-duzia2','det-duzia3'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.classList.remove('ativo');
+ });
+ if(num==0){return;}
+ if(isPar(num)){document.getElementById('det-par').classList.add('ativo');}
+ else{document.getElementById('det-impar').classList.add('ativo');}
+ if(isAlto(num)){document.getElementById('det-alto').classList.add('ativo');}
+ else{document.getElementById('det-baixo').classList.add('ativo');}
+ var cor=getCorRoleta(num);
+ if(cor==1){document.getElementById('det-preto').classList.add('ativo');}
+ else if(cor==2){document.getElementById('det-vermelho-cor').classList.add('ativo');}
+ var col=getCol(num);
+ if(col==1) document.getElementById('det-col1').classList.add('ativo');
+ else if(col==2) document.getElementById('det-col2').classList.add('ativo');
+ else if(col==3) document.getElementById('det-col3').classList.add('ativo');
+ var duzia=getDuzia(num);
+ if(duzia==1) document.getElementById('det-duzia1').classList.add('ativo');
+ else if(duzia==2) document.getElementById('det-duzia2').classList.add('ativo');
+ else if(duzia==3) document.getElementById('det-duzia3').classList.add('ativo');
 }
 function upd(){
  var eventos=[];var gatilhoSet=new Set();var i=0;
@@ -320,71 +362,56 @@ function upd(){
  if(redListBar3){
   redListBar3.innerHTML="";
   if(vermelhosLista.length==0){
-   var e=document.createElement('div');
-   e.style.cssText="font-size:10px;color:#ff8888;padding:4px";
-   e.textContent="Nenhum vermelho ainda - Quando sair número vermelho (C1) na Página 2, ele aparece aqui - C1 = 1,4,7,10,13,16,19,22,25,28,31,34";
-   redListBar3.appendChild(e);
+   var e=document.createElement('div');e.style.cssText="font-size:10px;color:#ff8888;padding:4px";e.textContent="Nenhum vermelho ainda - Quando sair vermelho na PÁG 2, aparece aqui";redListBar3.appendChild(e);
   }else{
    var revVerm=vermelhosLista.slice().reverse();
    revVerm.forEach(function(num, idx){
-    var box=document.createElement('div');
-    box.className='nBox red'+(idx==0?' new':'');
-    box.textContent=num;
-    box.title="Vermelho C1 - veio da Página 2";
-    redListBar3.appendChild(box);
+    var box=document.createElement('div');box.className='nBox red'+(idx==0?' new':'');box.textContent=num;redListBar3.appendChild(box);
    });
   }
  }
  if(numGrid3){
   numGrid3.innerHTML="";
   var revVerm=vermelhosLista.slice().reverse().slice(0,9);
-  if(revVerm.length==0){
-   for(var i=0;i<9;i++){var e=document.createElement('div');e.className='numGridBox empty';e.textContent="-";numGrid3.appendChild(e);}
-  }else{
+  if(revVerm.length==0){for(var i=0;i<9;i++){var e=document.createElement('div');e.className='numGridBox empty';e.textContent="-";numGrid3.appendChild(e);}}
+  else{
    while(revVerm.length<9){revVerm.push("-");}
    for(var i=0;i<9;i++){
-    var val=revVerm[i];
-    var e=document.createElement('div');
+    var val=revVerm[i];var e=document.createElement('div');
     if(val=="-"){e.className='numGridBox empty';e.textContent="-";}
-    else{
-     e.className='numGridBox red'+(i==0?' new':'');
-     e.textContent=val;
-    }
+    else{e.className='numGridBox red'+(i==0?' new':'');e.textContent=val;}
     numGrid3.appendChild(e);
    }
   }
  }
  if(redCount3){redCount3.textContent=vermelhosLista.length+" vermelhos";}
+ if(vermelhosLista.length>0){
+  var ultimoVermelho=vermelhosLista[vermelhosLista.length-1];
+  atualizarDetalhesVermelho(ultimoVermelho);
+ }else{
+  atualizarDetalhesVermelho(null);
+ }
  var rev=lista.slice().reverse();
  ['topBar1','topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
   var el=document.getElementById(id);
   if(!el) return;
   el.innerHTML="";
   var mostrar=rev.slice(0,12);
-  if(mostrar.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent=id=="topBar1"?"PÁG 1 LIMPA - SEM QUADRADOS":"Sem números";el.appendChild(e);
-  }else{
-   mostrar.forEach(function(num,idx){
-    var posOrig=lista.length-1-idx;
-    var isGat=gatilhoSet.has(posOrig);
-    var col=getCol(num);
-    var cor=isGat?'blue':(col==1?'red':'green');
-    var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);
-   });
-  }
+  if(mostrar.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent=id=="topBar1"?"PÁG 1 LIMPA":"Sem números";el.appendChild(e);}
+  else{mostrar.forEach(function(num,idx){var posOrig=lista.length-1-idx;var isGat=gatilhoSet.has(posOrig);var col=getCol(num);var cor=isGat?'blue':(col==1?'red':'green');var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);});}
  });
  var jogarBtn4=document.getElementById('jogarBtn4');
  var jogarSub4=document.getElementById('jogarSub4');
  if(jogarBtn4){
-  if(ultimoSinal){jogarBtn4.textContent="C2/3";jogarBtn4.className="jogarBtn sinal";jogarSub4.textContent=ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - JOGAR!";}
-  else{jogarBtn4.textContent="AGUARDANDO";jogarBtn4.className="jogarBtn";jogarSub4.textContent="PÁG 2 igual - PÁG 3 vermelhos";}
+  if(ultimoSinal){jogarBtn4.textContent="C2/3";jogarBtn4.className="jogarBtn sinal";jogarSub4.textContent=ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho;}
+  else{jogarBtn4.textContent="AGUARDANDO";jogarBtn4.className="jogarBtn";jogarSub4.textContent="PÁG 2 igual - PÁG 3 vermelhos com detalhes";}
  }
  var acertoBox5=document.getElementById('acertoBox5');
  var acertoSub5=document.getElementById('acertoSub5');
  if(acertoBox5){
   if(ultimoResultado){
    if(ultimoResultado.tipo=='verde'){acertoBox5.textContent="✅ "+ultimoResultado.num+" VERDE";acertoBox5.className="jogarBtn verde";acertoSub5.textContent="ACERTOU! C"+getCol(ultimoResultado.num);}
-   else if(ultimoResultado.tipo=='vermelho'){acertoBox5.textContent="❌ "+ultimoResultado.num+" VERMELHO -> PÁG 3";acertoBox5.className="jogarBtn vermelho";acertoSub5.textContent="ERROU! C1 - foi pra Página 3";}
+   else if(ultimoResultado.tipo=='vermelho'){acertoBox5.textContent="❌ "+ultimoResultado.num+" VERMELHO -> PÁG 3";acertoBox5.className="jogarBtn vermelho";acertoSub5.textContent="ERROU! C1 - foi pra PÁG 3";}
   }else{acertoBox5.textContent=lista.length>0?lista[lista.length-1]:"-";acertoBox5.className="jogarBtn";acertoSub5.textContent=lista.length>0?"Ultimo: "+lista[lista.length-1]:"Sem jogadas";}
  }
  var placarBig10=document.getElementById('placarBig10');
@@ -393,7 +420,7 @@ function upd(){
  if(infoBar2){
   if(todosQuadrados.length>0){
    var proximoTipo=todosQuadrados[indiceAtual]?todosQuadrados[indiceAtual].dataset.tipo:"";
-   infoBar2.innerHTML="🔵 PÁG 2 NÃO MEXE - Começa no AZUL 🟦 - Próximo: "+(indiceAtual+1)+"/"+todosQuadrados.length+" ("+(proximoTipo=="blue"?"AZUL":"BRANCO -> 🟢/🔴")+") - Quando sai 🔴 vermelho, mostra na PÁG 3 - Total: "+lista.length+" - Vermelhos: "+vermelhosLista.length;
+   infoBar2.innerHTML="🔵 PÁG 2 NÃO MEXE - Próximo: "+(indiceAtual+1)+"/"+todosQuadrados.length+" ("+(proximoTipo=="blue"?"AZUL":"BRANCO")+") - Quando sai 🔴 vermelho, vai pra PÁG 3 com detalhes";
   }
  }
  show();

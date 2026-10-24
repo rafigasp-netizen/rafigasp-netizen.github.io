@@ -3,284 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP 005 - 5 NUM + 1 VIZ 10x</title>
+<title>RAFIGASP</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818}body{display:flex;justify-content:center;overflow:hidden}.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
-.topo{text-align:center;background:#0a1f14;padding:6px 0 4px;flex-shrink:0}.topoR{font-weight:900;font-size:24px;color:#e8c76a;line-height:1}.topoS{font-size:8px;letter-spacing:1px;color:#d4af37;font-weight:800}
-.nav{display:flex;gap:1px;padding:3px;background:#0a1f14;flex-shrink:0;flex-wrap:wrap}.nav button{flex:1;min-width:36px;height:30px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:10px}.nav .home{background:#f9e27a;color:#111}.nav .pg{background:#112a1a;color:#d4af37}.nav .pg.on{background:#e8c76a;color:#111}.nav .sinal{background:#1e40af;color:#fff;border-color:#60a5fa}.nav .sinal.on{background:#dc2626;border-color:#ff0000}.nav .limpar{background:#330000;color:#ffaaaa;border-color:#ff0000}.nav .nova{background:#00aa00;color:#fff;border-color:#00ff00}.nav .nova.on{background:#ffaa00;color:#000;border-color:#fff;box-shadow:0 0 6px #ffaa00}
-.disp{margin:3px 5px;background:#000;border:2px solid #d4af37;border-radius:7px;min-height:38px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:12px;text-align:center;padding:3px;flex-shrink:0}
-.disp.sinal{background:#dc2626;color:#fff;animation:pisca 0.5s infinite alternate}.disp.verde{background:#002200;color:#00ff00;border-color:#00ff00}.disp.amarelo{background:#332200;color:#ffcc00;border-color:#ffcc00}
-@keyframes pisca{0%{background:#dc2626}100%{background:#991b1b}}
-.content{flex:1;overflow-y:auto;padding:3px;display:flex;flex-direction:column;gap:3px}
-.card{background:#0f2e1a;border:1.5px solid #d4af37;border-radius:7px;padding:4px}
-.cardT{font-size:10px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:2px}
-.vizs{display:flex;gap:2px;justify-content:center;flex-wrap:wrap}
-.vb{width:38px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
-.vb.c{background:#dc2626;color:#fff;border:1px solid #ff5555}
-.vb.v{background:#eab308;color:#000;border:1px solid #facc15}
-.vb.big{width:52px;height:36px;font-size:18px;border:2px solid #fff;box-shadow:0 0 5px #fff}
-.row{display:flex;gap:2px}.st{flex:1;background:#000;border-radius:4px;padding:2px;text-align:center;border:1px solid #d4af37}.stL{font-size:6px;color:#d4af37;font-weight:900}.stV{font-size:11px;font-weight:900;color:#fff}
-.sinalC{background:linear-gradient(180deg,#ffaa00,#ff6600);border:2px solid #ffcc00;border-radius:7px;padding:5px;text-align:center;animation:piscaAm 1s infinite alternate}
-@keyframes piscaAm{0%{background:#ffaa00}100%{background:#ff8800}}
-.sinalN{font-size:13px;font-weight:900;color:#000}.sinalT{font-size:8px;font-weight:900;color:#330000;margin-top:1px}
-.lista{display:flex;flex-direction:column;gap:2px;max-height:120px;overflow:auto}
-.item{display:flex;align-items:center;gap:2px;background:#000;border:1px solid #60a5fa;border-radius:4px;padding:2px}
-.item .n{width:24px;height:20px;background:#dc2626;border-radius:3px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:10px}
-.item .vz{flex:1;font-size:7px;color:#f9e27a;font-weight:900}
-.item .g{font-size:9px;font-weight:900;color:#fff;background:#1e40af;padding:1px 3px;border-radius:3px}
-.todos{display:flex;gap:1px;flex-wrap:wrap;max-height:70px;overflow:auto}
-.todos div{border:1px solid #d4af37;border-radius:3px;padding:1px 3px;font-size:8px;font-weight:900;color:#fff;min-width:38px;text-align:center}
-.kb{background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:3px;border-radius:8px;border:1px solid #d4af37;padding:3px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;height:32%;min-height:160px}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.k{border-radius:6px;border:1px solid #8a6d1b;font-weight:900;font-size:16px;background:linear-gradient(180deg,#f9e27a,#b8941f);color:#1a1000}
-.painel{display:none;flex-direction:column;gap:3px}.painel.on{display:flex}
-.apostaGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:4px}
-.apostaNum{height:44px;border-radius:6px;border:2px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;background:#dc2626;color:#fff}
-.apostaNum small{font-size:7px;color:#ffcccc}
-.apostaNum.viz{background:#eab308;color:#000;border-color:#000}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0d2818;overflow:hidden}
+body{display:flex;justify-content:center}
+.app{width:100%;max-width:420px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}
+.topo{padding:10px 0 5px 0;text-align:center;background:#0a1f14;flex-shrink:0}
+.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:40px;color:#e8c76a;line-height:1}
+.topoS{font-size:9px;letter-spacing:4px;color:#d4af37;font-weight:800;margin-top:2px}
+.display{margin:6px 8px;background:#000;border:2px solid #d4af37;border-radius:10px;height:46px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:20px;flex-shrink:0}
+.display.vazio{color:#3a7a3a;font-size:13px}
+.painel{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;overflow:hidden}
+.box{border:1.5px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:6px;display:flex;flex-direction:column;overflow:hidden}
+.boxLabel{font-size:9px;font-weight:900;color:#d4af37;margin-bottom:4px}
+.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center;align-content:start;width:100%}
+.sq{width:100%;max-width:52px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff}
+.sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}
+.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:11px;padding:8px 14px;border-radius:20px;text-align:center;min-width:110px}
+.centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:6px}
+.kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 6px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.k{width:100%;height:100%;border-radius:9px;border:1px solid #8a6d1b;font-weight:900;font-size:20px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
+.painelDetalhe{flex:1;display:none;flex-direction:column;gap:4px;padding:6px;overflow:auto;background:#0d2818}
+.seqTop{display:flex;flex-wrap:wrap;gap:3px;background:#0a1a0a;border:1px solid #1a4d1a;border-radius:6px;padding:4px;min-height:28px}
+.ln{width:28px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;border:1px solid #000}
+.ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}
+.bl{background:#0e2a14;border:1px solid #1a4d1a;border-radius:6px;padding:4px;margin-bottom:3px}
+.blTitle{font-size:9px;font-weight:900;color:#f9e27a}
+.colHist{display:flex;flex-direction:column;gap:2px}
+.linha{display:flex;gap:2px;flex-wrap:wrap;background:rgba(0,0,0,0.2);border-radius:4px;padding:2px}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS" id="sub">005 - 5 NUM + 1 VIZ 10x - SO ATUALIZA QUANDO ACERTA</div></div>
-<div class="nav">
-<button class="home" onclick="go('000')">MENU</button>
-<button class="pg" id="b-001" onclick="go('001')">001</button>
-<button class="pg" id="b-002" onclick="go('002')">002</button>
-<button class="pg" id="b-003" onclick="go('003')">003</button>
-<button class="sinal" id="b-004" onclick="go('004')">004 13x</button>
-<button class="nova on" id="b-005" onclick="go('005')">005 5+1 10x</button>
-<button class="limpar" onclick="limparTudo()">🗑️</button>
-</div>
-<div class="disp" id="disp">005 - 5 NUMEROS + 1 VIZINHO COM 10+ RODADAS</div>
-<div class="content">
-<div class="painel" id="p-000">
-<div class="card"><div class="cardT">MENU - PAGINA 005 NOVA</div>
-<div style="background:#ffaa00;color:#000;border-radius:6px;padding:6px;text-align:center;font-weight:900;font-size:11px">NOVA 005: 5 NUMEROS + 1 VIZINHO CADA = 10 NUMEROS<br>SO ATUALIZA QUANDO ACERTA - 10+ RODADAS SEM SAIR</div>
-<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:4px">
-<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('001')">001 HIST</div>
-<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('002')">002 QUENTE</div>
-<div style="background:#f9e27a;border:1px solid #d4af37;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('003')">003 PREVISAO</div>
-<div style="background:#1e40af;color:#fff;border:1px solid #60a5fa;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px" onclick="go('004')">004 13x 4NUM</div>
-<div style="background:#ffaa00;color:#000;border:1px solid #fff;border-radius:5px;padding:6px;text-align:center;font-weight:900;font-size:11px;grid-column:span 2" onclick="go('005')">005 NOVA - 5 NUM + 1 VIZ 10x - SO ATUALIZA QUANDO ACERTA</div>
-</div>
-<div style="margin-top:4px;background:#000;border-radius:5px;padding:3px">
-<div style="font-size:9px;color:#f9e27a;font-weight:900;text-align:center">TOTAL: <span id="contTotal">0</span></div>
-<div id="hMenu" style="display:flex;gap:1px;flex-wrap:wrap;justify-content:center;margin-top:2px;min-height:18px"></div>
+<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
+<div class="display vazio" id="dig">DIGITE O NÚMERO</div>
+<div class="painel" id="painel1">
+<div class="grid">
+<div class="box"><div class="boxLabel">NUMERO CHAMADO</div><div class="sqs" id="boxNum"></div></div>
+<div class="box"><div class="boxLabel">JOGAR NA COLUNA</div><div class="centroBox"><span class="pill" id="pillCol">AGUARDANDO</span><div id="txtOrig" style="font-size:9px;color:#f9e27a;font-weight:900;text-align:center">-</div><div id="boxColNums" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
+<div class="box"><div class="boxLabel">ACERTO OU ERRO</div><div class="sqs" id="boxAcerto"></div></div>
+<div class="box"><div class="boxLabel">PLACAR</div><div class="centroBox"><span class="pill" id="pillPlacar">GREEN 0 x 0 RED</span><div style="font-weight:900;margin-top:4px"><span style="color:#4ade80" id="gCount">✅ 0</span> <span style="color:#f87171" id="rCount">❌ 0</span></div></div></div>
 </div>
 </div>
-</div>
-<div class="painel" id="p-001"><div class="card"><div class="cardT">001 - HIST</div><div id="g001" style="display:flex;gap:1px;flex-wrap:wrap;min-height:30px"></div></div></div>
-<div class="painel" id="p-002"><div class="card"><div class="cardT">002 - TOP 6</div><div id="top002" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
-<div class="painel" id="p-003"><div class="card"><div class="cardT">003 - PREVISAO</div><div id="top003" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div></div>
-<div class="painel" id="p-004">
-<div class="card"><div class="cardT">004 - 4 NUMEROS 13x</div><div class="vizs" id="vizRow004"></div><div id="listaS004" class="lista"></div></div>
-</div>
-<div class="painel on" id="p-005">
-<div class="card" style="border-color:#ffaa00;background:linear-gradient(180deg,#1a2a0a,#0f2e1a)">
-<div class="cardT" style="color:#ffaa00;font-size:13px">🚨 SINAL ALERTA - 5 NUM + 1 VIZINHO - 10x SEM SAIR</div>
-<div style="font-size:9px;color:#ffcc00;text-align:center;font-weight:900">SO ATUALIZA QUANDO ACERTA - TRAVADO ATE ACERTAR</div>
-<div class="sinalC" id="sinalP"><div class="sinalN" id="sinalN">AGUARDANDO 10+ RODADAS</div><div class="sinalT" id="sinalT">Digite numeros - quando 5 numeros ficarem 10+ sem sair, trava o sinal</div></div>
-<div style="font-size:9px;color:#fff;text-align:center;margin-top:3px;font-weight:900">APOSTA - 10 NUMEROS (5 + 1 VIZINHO CADA):</div>
-<div class="apostaGrid" id="apostaGrid"></div>
-<div style="display:flex;gap:2px;margin-top:3px">
-<div style="flex:1;background:#dc2626;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#fff">NUMEROS</div><div style="font-size:11px;font-weight:900;color:#fff" id="totalAposta">0</div></div>
-<div style="flex:1;background:#000;border:1px solid #ffaa00;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#ffaa00">RODADAS SEM SAIR</div><div style="font-size:11px;font-weight:900;color:#ffaa00" id="rodAposta">--</div></div>
-<div style="flex:1;background:#002200;border:1px solid #00ff00;border-radius:4px;padding:2px;text-align:center"><div style="font-size:7px;color:#00ff00">ACERTOS</div><div style="font-size:11px;font-weight:900;color:#00ff00" id="acertos">0</div></div>
-</div>
-</div>
-<div class="card"><div class="cardT">TOP 10 ATRASADOS - ELE + 1 VIZINHO - 10+ RODADAS</div><div class="lista" id="listaS"></div></div>
-<div class="card"><div class="cardT">AVALIACAO ULTIMO NUMERO</div>
-<div class="row"><div class="st"><div class="stL">NUM</div><div class="stV" id="numAval">--</div></div><div class="st"><div class="stL">VIZ 1</div><div class="stV" id="vizAval">--</div></div><div class="st"><div class="stL">JA CONTOU</div><div class="stV" id="atual">--</div></div><div class="st"><div class="stL">MEDIA</div><div class="stV" id="media">--</div></div></div>
-<div style="display:flex;gap:1px;flex-wrap:wrap;margin-top:2px;min-height:16px" id="gapHist"></div>
-</div>
-<div class="card"><div class="cardT">TODOS OS NUMEROS - ATRASO ATUAL</div><div class="todos" id="todos"></div></div>
-<div class="card" style="background:#330000;border-color:#ff0000"><div class="cardT" style="color:#ffaaaa">COMO FUNCIONA - 005</div>
-<div style="font-size:8px;color:#ffcccc;font-weight:900">
-• Sistema conta quantas rodadas cada numero + 1 vizinho esta sem sair<br>
-• Quando 5 numeros ficam 10+ rodadas sem sair = SINAL TRAVA<br>
-• Mostra 10 numeros pra apostar (5 numeros + 1 vizinho cada)<br>
-• SO ATUALIZA QUANDO ACERTA um dos 10 numeros<br>
-• Se nao acertar, continua no mesmo sinal - NAO MUDA<br>
-• Quando acerta, gera novo sinal com os proximos 5 mais atrasados
-</div></div>
-</div>
+<div class="painelDetalhe" id="painel2">
+<div class="seqTop" id="seqTop"></div>
+<div class="bl"><div class="blTitle">A HIST</div><div class="colHist" id="histA"></div></div>
+<div class="bl"><div class="blTitle">B HIST</div><div class="colHist" id="histB"></div></div>
+<div class="bl"><div class="blTitle">C HIST</div><div class="colHist" id="histC"></div></div>
 </div>
 <div class="kb">
-<div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
-<div class="kr"><button class="k" onclick="dig('4')">4</button><button class="k" onclick="dig('5')">5</button><button class="k" onclick="dig('6')">6</button></div>
-<div class="kr"><button class="k" onclick="dig('7')">7</button><button class="k" onclick="dig('8')">8</button><button class="k" onclick="dig('9')">9</button></div>
-<div class="kr"><button class="k" onclick="ok()">ENTER</button><button class="k" onclick="dig('0')">0</button><button class="k" onclick="corr()">CORRIGIR</button></div>
+<div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div>
+<div class="kr"><button class="k" onclick="digitar('4')">4</button><button class="k" onclick="digitar('5')">5</button><button class="k" onclick="digitar('6')">6</button></div>
+<div class="kr"><button class="k" onclick="digitar('7')">7</button><button class="k" onclick="digitar('8')">8</button><button class="k" onclick="digitar('9')">9</button></div>
+<div class="kr"><button class="k" onclick="confirmar()">ENTER</button><button class="k" onclick="digitar('0')">0</button><button class="k" onclick="corrigir()">CORRIGIR</button></div>
 </div>
 </div>
 <script>
-var ordem=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-var cur="",lista=[],pag="005",LIM=10;
-var sinalTravado=null;
-var acertosTotal=0;
-function viz1(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[n,ordem[(i+1)%ordem.length]];}
-function viz4(n){var i=ordem.indexOf(n);if(i==-1)return[n];return[ordem[(i-1+ordem.length)%ordem.length],n,ordem[(i+1)%ordem.length],ordem[(i+2)%ordem.length]];}
-function calc10(n){
- var v=viz1(n);
- var gaps=[],last=-1;
- for(var i=0;i<lista.length;i++){
-  if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}
- }
- var atual=last==-1?lista.length:lista.length-1-last;
- var media=0;if(gaps.length){var s=0;for(var g of gaps)s+=g;media=Math.round(s/gaps.length*10)/10;}
- return{v:v,g:gaps,m:media,at:atual};
-}
-function calc4(n){
- var v=viz4(n);
- var gaps=[],last=-1;
- for(var i=0;i<lista.length;i++){if(v.indexOf(lista[i].n)>=0){if(last!=-1)gaps.push(i-last);last=i;}}
- var atual=last==-1?lista.length:lista.length-1-last;
- var media=0;if(gaps.length){var s=0;for(var g of gaps)s+=g;media=Math.round(s/gaps.length*10)/10;}
- return{v:v,g:gaps,m:media,at:atual};
-}
-function go(p){pag=p;document.querySelectorAll('.painel').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('on'));var b=document.getElementById('b-'+p);if(b)b.classList.add('on');var nm={"000":"MENU","001":"001 HIST","002":"002 QUENTE","003":"003 PREVISAO","004":"004 13x 4NUM","005":"005 5+1 VIZ 10x SO ACERTA"};document.getElementById('sub').textContent=nm[p]||p;show();upd();}
-function show(){var d=document.getElementById('disp');if(cur==""){if(pag=="005"){if(sinalTravado)d.textContent="🔒 SINAL TRAVADO - "+sinalTravado.expanded.join(",")+" - SO MUDA QUANDO ACERTAR";else d.textContent="005 - 5 NUM + 1 VIZINHO 10+ RODADAS - AGUARDANDO SINAL";}else d.textContent="PAG "+pag+" - DIGITE 0-36 + ENTER";d.className="disp";}else if(cur=="0")d.textContent="0 = APAGAR ULTIMO + ENTER",d.className="disp";else if(cur=="00")d.textContent="00 = LIMPAR TUDO + ENTER",d.className="disp sinal";else d.textContent="NUM: "+cur,d.className="disp";}
-function dig(v){if(cur.length>=2)cur=v;else cur+=v;show();}
-function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
-function apagarUltimo(){if(lista.length){lista.pop();show();upd();}}
-function limparTudo(){lista=[];cur="";sinalTravado=null;acertosTotal=0;show();upd();document.getElementById('disp').textContent="✅ LIMPO - 0 NUMEROS";document.getElementById('disp').className="disp verde";}
-function gerarNovoSinal(){
- var candidatos=[];
- for(var n=0;n<=36;n++){var c=calc10(n);if(c.at>=LIM)candidatos.push({n:n,c:c});}
- candidatos.sort((a,b)=>b.c.at-a.c.at);
- if(candidatos.length>=5){
-  var top5=candidatos.slice(0,5);
-  var expanded=[];
-  var vizinhos=[];
-  for(var t of top5){for(var v of t.c.v){if(expanded.indexOf(v)==-1)expanded.push(v);} vizinhos.push(t.c.v);}
-  sinalTravado={numeros:top5.map(t=>t.n),viz:vizinhos,expanded:expanded,at:Math.min(...top5.map(t=>t.c.at)),geradoEm:lista.length};
-  return true;
- }
- return false;
-}
-function ok(){
-if(cur===""){return;}
-if(cur==="00"){limparTudo();return;}
-if(cur==="0"){apagarUltimo();cur="";show();return;}
-var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
-var acertou=false;
-if(sinalTravado && sinalTravado.expanded.indexOf(n)>=0){acertou=true;}
-lista.push({n:n});
-if(acertou){
- acertosTotal++;
- sinalTravado=null;
- gerarNovoSinal();
- var d=document.getElementById('disp');
- d.textContent="✅ ACERTOU! "+n+" ESTAVA NO SINAL! NOVO SINAL GERADO!";
- d.className="disp verde";
- setTimeout(function(){show();upd();},1500);
-}else{
- if(!sinalTravado){gerarNovoSinal();}
-}
-cur="";show();upd();
-}
-function upd(){
-if(lista.length==0){
- document.getElementById('contTotal').textContent="0";
- document.getElementById('hMenu').innerHTML="";
- document.getElementById('g001').innerHTML="";
- document.getElementById('top002').innerHTML='<div style="color:#ffaa00;text-align:center">Digite numeros</div>';
- document.getElementById('top003').innerHTML='<div style="color:#ffaa00;text-align:center">Digite numeros</div>';
- document.getElementById('numAval').textContent="--";
- document.getElementById('vizAval').textContent="--";
- document.getElementById('atual').textContent="--";
- document.getElementById('media').textContent="--";
- document.getElementById('gapHist').innerHTML="";
- document.getElementById('listaS').innerHTML='<div style="color:#ffaa00;text-align:center;padding:4px;font-size:10px">Aguardando 10+ rodadas sem sair...</div>';
- document.getElementById('todos').innerHTML="";
- document.getElementById('apostaGrid').innerHTML="";
- document.getElementById('totalAposta').textContent="0";
- document.getElementById('rodAposta').textContent="--";
- document.getElementById('acertos').textContent=acertosTotal;
- document.getElementById('sinalN').textContent="AGUARDANDO 10+ RODADAS";
- document.getElementById('sinalT').textContent="Digite numeros - quando 5 numeros ficarem 10+ sem sair, trava o sinal";
- document.getElementById('vizRow004').innerHTML="";
- document.getElementById('listaS004').innerHTML="";
- if(!sinalTravado) gerarNovoSinal();
- return;
-}
+var cur="",lista=[],green=0,red=0,hist=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,modo2=false;
+function getCol(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
+function getCols(s){try{return s.replace('C','').split('/').map(Number)}catch(e){return []}}
+function mostrarDisplay(){var el=document.getElementById('dig');if(!el)return;if(cur===""){el.textContent="DIGITE O NÚMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - SEGUNDA PAGINA";el.className="display";}else{el.textContent=cur;el.className="display";}}
+function atualizarTela(){
 try{
-var hm=document.getElementById('hMenu');if(hm){hm.innerHTML="";for(var i=Math.max(0,lista.length-15);i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:20px;height:16px;border-radius:3px;background:#0f2e1a;border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff";e.textContent=lista[i].n;hm.appendChild(e);}}
-document.getElementById('contTotal').textContent=lista.length;
-var g1=document.getElementById('g001');if(g1){g1.innerHTML="";for(var i=0;i<lista.length;i++){var e=document.createElement('div');e.style.cssText="width:20px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff;background:"+(i%2==0?"#1e40af":"#dc2626")+";border:1px solid #d4af37";e.textContent=lista[i].n;g1.appendChild(e);}}
-var freq={};for(var it of lista)freq[it.n]=(freq[it.n]||0)+1;var sorted=Object.keys(freq).map(k=>({n:parseInt(k),c:freq[k]})).sort((a,b)=>b.c-a.c);
-var t2=document.getElementById('top002');if(t2){t2.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:42px;height:42px;border-radius:6px;background:#1e40af;border:1px solid #60a5fa;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:16px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:8px;color:#93c5fd">'+t.c+'x</div>';t2.appendChild(d);}}
-var t3=document.getElementById('top003');if(t3){t3.innerHTML="";for(var k=0;k<Math.min(6,sorted.length);k++){var t=sorted[k];var d=document.createElement('div');d.style.cssText="width:48px;height:48px;border-radius:6px;background:#1e40af;border:1.5px solid #facc15;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML='<div style="font-size:18px;font-weight:900;color:#fff">'+t.n+'</div><div style="font-size:9px;color:#facc15;font-weight:900">'+Math.round(t.c/lista.length*100)+'%</div>';t3.appendChild(d);}}
-var ult=lista.length?lista[lista.length-1].n:null;
-if(ult!==null){
- var cu=calc10(ult);
- document.getElementById('numAval').textContent=ult;
- document.getElementById('vizAval').textContent=cu.v[1]||"--";
- document.getElementById('atual').textContent=cu.at+" rod";
- document.getElementById('media').textContent=cu.m?cu.m+" rod":"--";
- var gh=document.getElementById('gapHist');gh.innerHTML="";for(var g of cu.g.slice(-8)){var e=document.createElement('div');e.style.cssText="width:24px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#fff;background:"+(g>=LIM?"#dc2626":"#16a34a");e.textContent=g;gh.appendChild(e);}
+var bn=document.getElementById('boxNum');bn.innerHTML="";var m=lista.slice(-9);for(var i=m.length-1;i>=0;i--){var o=m[i];var d=document.createElement('div');d.className='sq '+(o.w===null?'b':o.w?'g':'r');d.textContent=o.raw;bn.appendChild(d);}
+var ba=document.getElementById('boxAcerto');ba.innerHTML="";var ma=logAcerto.slice(-9);for(var i=ma.length-1;i>=0;i--){var o=ma[i];var d=document.createElement('div');d.className='sq '+(o.acerto?'g':'r');d.textContent=o.raw;ba.appendChild(d);}
+document.getElementById('gCount').textContent="✅ "+green;document.getElementById('rCount').textContent="❌ "+red;document.getElementById('pillPlacar').textContent="GREEN "+green+" x "+red+" RED";
+var pc=document.getElementById('pillCol'),txt=document.getElementById('txtOrig'),cn=document.getElementById('boxColNums');
+if(sinal){pc.textContent=sinal.col;txt.textContent=sinal.orig;pc.style.background="linear-gradient(180deg,#ff6b6b,#dc2626)";pc.style.color="#fff";cn.innerHTML="";for(var i=0;i<sinal.tentativas.length;i++){var t=sinal.tentativas[i];var s=document.createElement('div');s.className='sq '+(t.acerto?'g':'r');s.style.width='32px';s.style.height='24px';s.textContent=t.num;cn.appendChild(s);}}else{pc.textContent="AGUARDANDO";txt.textContent="-";pc.style.background="linear-gradient(180deg,#f9e27a,#d4af37)";pc.style.color="#0a2a12";cn.innerHTML="";}
+var seq=document.getElementById('seqTop');if(seq){seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}}
+}catch(e){console.log(e)}
 }
-var vr004=document.getElementById('vizRow004');if(vr004){vr004.innerHTML="";if(lista.length){var last=lista[lista.length-1].n;var c4=calc4(last);for(var v of c4.v){var e=document.createElement('div');e.style.cssText="width:38px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:"+(v==last?"#dc2626":"#eab308")+";color:"+(v==last?"#fff":"#000")+";border:1px solid #fff";e.textContent=v;vr004.appendChild(e);}}}
-var ls004=document.getElementById('listaS004');if(ls004){ls004.innerHTML="";var cand4=[];for(var n=0;n<=36;n++){var c=calc4(n);if(c.at>=13)cand4.push({n:n,c:c});}cand4.sort((a,b)=>b.c.at-a.c.at);for(var i=0;i<Math.min(5,cand4.length);i++){var s=cand4[i];var div=document.createElement('div');div.className='item';div.innerHTML='<div class="n">'+s.n+'</div><div class="vz">VIZ:'+s.c.v.join(",")+' Media '+s.c.m+'</div><div class="g">'+s.c.at+' ROD</div>';ls004.appendChild(div);}}
-if(!sinalTravado){gerarNovoSinal();}
-var ls=document.getElementById('listaS');if(ls){
- ls.innerHTML="";
- var cand=[];for(var n=0;n<=36;n++){var c=calc10(n);cand.push({n:n,c:c});}
- cand.sort((a,b)=>b.c.at-a.c.at);
- for(var i=0;i<Math.min(15,cand.length);i++){
-  var s=cand[i];
-  var div=document.createElement('div');div.className='item';
-  var bg=s.c.at>=LIM?"#ffaa00":"#0f2e1a";
-  var cor=s.c.at>=LIM?"#000":"#fff";
-  div.style.borderColor=s.c.at>=LIM?"#ffaa00":"#d4af37";
-  div.style.background=bg;
-  div.style.color=cor;
-  div.innerHTML='<div class="n" style="background:'+(s.c.at>=LIM?'#000':'#dc2626')+';color:'+(s.c.at>=LIM?'#ffaa00':'#fff')+'">'+s.n+'</div><div class="vz" style="color:'+cor+'">VIZ: '+s.c.v.join(",")+' Media '+s.c.m+' Max '+(s.c.g.length?Math.max(...s.c.g):0)+'</div><div class="g" style="background:'+(s.c.at>=LIM?'#000':'#1e40af')+';color:'+(s.c.at>=LIM?'#ffaa00':'#fff')+'">'+s.c.at+' ROD</div>';
-  ls.appendChild(div);
- }
+function save(){try{hist.push({lista:JSON.parse(JSON.stringify(lista)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto))});if(hist.length>60)hist.shift();}catch(e){}}
+function digitar(d){
+try{
+if(cur.length>=2 && cur!=="0" && cur!=="00" && cur!=="000") return;
+if(cur===""&&d==="0"){cur="0";}
+else if(cur==="0"&&d==="0"){cur="00";}
+else if(cur==="00"&&d==="0"){cur="000";}
+else if(cur==="0"||cur==="00"){cur=d;}
+else{var t=cur+d;if(t!=="000" && parseInt(t)>36)return;cur=t;}
+mostrarDisplay();
+}catch(e){cur="";mostrarDisplay()}
 }
-var todos=document.getElementById('todos');if(todos){
- todos.innerHTML="";
- var all=[];for(var n=0;n<=36;n++)all.push({n:n,d:calc10(n)});all.sort((a,b)=>b.d.at-a.d.at);
- for(var t of all.slice(0,20)){var e=document.createElement('div');var cor=t.d.at>=LIM?"#ffaa00":t.d.at>=8?"#eab308":"#0f2e1a";var tc=t.d.at>=LIM?"#000":"#fff";e.style.background=cor;e.style.color=tc;e.textContent=t.n+" ("+t.d.at+"/"+(t.d.m||0)+")";todos.appendChild(e);}
+function confirmar(){
+try{
+if(cur==="")return;
+if(cur==="000"){modo2=!modo2;document.getElementById('painel1').style.display=modo2?'none':'flex';document.getElementById('painel2').style.display=modo2?'flex':'none';cur="";mostrarDisplay();return;}
+if(cur==="0"){save();if(lista.length>0)lista.pop();if(logAcerto.length>0 && lista.length===0)logAcerto=[];sinal=null;cur="";mostrarDisplay();atualizarTela();return;}
+if(cur==="00"){save();lista=[];green=0;red=0;sinal=null;logAcerto=[];cur="";mostrarDisplay();atualizarTela();return;}
+var raw=cur;var v=parseInt(cur);if(v>36||isNaN(v)){cur="";mostrarDisplay();return;}
+save();
+
+// SE TIVER SINAL, ESSE NUMERO É A TENTATIVA
+if(sinal){
+  var colNum=getCol(v);
+  var cols=getCols(sinal.col);
+  var acerto=cols.indexOf(colNum)>=0;
+  sinal.tentativas.push({num:raw,acerto:acerto});
+  if(acerto){green++;logAcerto.push({raw:raw,acerto:true});}
+  else{red++;logAcerto.push({raw:raw,acerto:false});}
+  sinal=null;
+  // adiciona numero na lista mesmo assim
+  var col=tb[v]||"C1/2";
+  var tipo=true;
+  if(lista.length>0){
+    var last=lista[lista.length-1];
+    var lastCol=tb[last.n]||"C1/2";
+    tipo=getCols(lastCol).indexOf(getCol(v))>=0;
+  }
+  lista.push({n:v,raw:raw,w:lista.length===0?null:tipo});
+  cur="";mostrarDisplay();atualizarTela();return;
 }
-var apostaGrid=document.getElementById('apostaGrid');
-var sinalN=document.getElementById('sinalN');
-var sinalT=document.getElementById('sinalT');
-var totalAposta=document.getElementById('totalAposta');
-var rodAposta=document.getElementById('rodAposta');
-var acertosEl=document.getElementById('acertos');
-if(acertosEl)acertosEl.textContent=acertosTotal;
-if(sinalTravado){
- apostaGrid.innerHTML="";
- for(var i=0;i<sinalTravado.expanded.length;i++){
-  var num=sinalTravado.expanded[i];
-  var isOriginal=sinalTravado.numeros.indexOf(num)>=0;
-  var d=document.createElement('div');
-  d.className='apostaNum'+(isOriginal?'':' viz');
-  d.innerHTML=num+'<small>'+(isOriginal?'NUM':'VIZ')+'</small>';
-  apostaGrid.appendChild(d);
- }
- sinalN.textContent="🔒 SINAL TRAVADO - "+sinalTravado.numeros.join(",")+" + VIZ";
- sinalT.textContent="10 NUMEROS: "+sinalTravado.expanded.join(",")+" - "+sinalTravado.at+" ROD SEM SAIR - SO MUDA QUANDO ACERTAR - ACERTOS: "+acertosTotal;
- totalAposta.textContent=sinalTravado.expanded.length;
- rodAposta.textContent=sinalTravado.at+" ROD";
- var disp=document.getElementById('disp');
- if(pag=="005" && cur==""){
-  disp.textContent="🔒 SINAL TRAVADO - APOSTAR: "+sinalTravado.expanded.join(",")+" ("+sinalTravado.at+" ROD) - SO ATUALIZA QUANDO ACERTAR";
-  disp.className="disp amarelo";
- }
-}else{
- apostaGrid.innerHTML='<div style="grid-column:span 5;color:#ffaa00;text-align:center;font-size:10px;padding:8px">Aguardando 5 numeros com 10+ rodadas sem sair...</div>';
- sinalN.textContent="AGUARDANDO 10+ RODADAS";
- sinalT.textContent="Quando 5 numeros ficarem 10+ sem sair, trava o sinal - so atualiza quando acertar";
- totalAposta.textContent="0";
- rodAposta.textContent="--";
+
+// SEM SINAL - adiciona normal e verifica se cria novo sinal
+var col=tb[v]||"C1/2";
+var w=null;
+if(lista.length>0){
+  var last=lista[lista.length-1];
+  var lastCol=tb[last.n]||"C1/2";
+  w=getCols(lastCol).indexOf(getCol(v))>=0;
+  // se deu RED, cria sinal para proxima jogada com a coluna do numero que falhou
+  if(!w){
+    sinal={col:col,orig:"ORIGEM A "+last.raw+" RED",tentativas:[],ganhou:false,maxTent:1};
+  }
 }
-}catch(e){console.log(e);}
+lista.push({n:v,raw:raw,w:lista.length===0?null:w});
+cur="";mostrarDisplay();atualizarTela();
+}catch(e){console.log(e);cur="";mostrarDisplay();atualizarTela();}
 }
-var ex=[13,35,5,18,30,5,34,30,20,6,1,5,8,14,26,18,31,18,8,35,27,19,26,2,30,36,17,29,35,27,28,24,6,27,35,15,19,4,11,22,25,17,3,10,7,29,10,21,2,8,32,24,12,27,7,32,25,10,16,36,11,5,11,2,20,17,3,15,13,30,15,9,20,29,30,20,23,32,19,21,32,28,16,14,6,15,7,22,5,8,8,18,23,15,24,24,12,14,30,11,23,8,27,21];
-for(var n of ex)lista.push({n:n});
-show();upd();go('005');
+function corrigir(){try{if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;atualizarTela();}}catch(e){}}
+mostrarDisplay();atualizarTela();
 </script>
 </body>
 </html>

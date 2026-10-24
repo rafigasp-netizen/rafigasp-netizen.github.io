@@ -3,72 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - ORIGINAL FINAL LIMPO</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<title>RAFIGASP - FIX EMPURRAR</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
 body{display:flex;justify-content:center}
 .app{width:100%;max-width:400px;height:100dvh;background:#0a2210;display:flex;flex-direction:column;padding:3px}
 .topo{text-align:center;padding:6px 0 4px;flex-shrink:0;cursor:pointer}
-.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:34px;color:#e8c76a;letter-spacing:2px;line-height:1}
-.topoS{font-size:9px;letter-spacing:5px;color:#d4af37;font-weight:800;margin-top:1px}
-.display{margin:4px 4px;background:#000;border:2.5px solid #d4af37;border-radius:10px;height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;letter-spacing:1px;transition:all 0.3s;text-align:center;padding:2px}
+.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:32px;color:#e8c76a;letter-spacing:2px;line-height:1}
+.topoS{font-size:9px;letter-spacing:4px;color:#d4af37;font-weight:800}
+.navSmall{display:flex;gap:2px;padding:3px 2px;flex-shrink:0}
+.navSmall button{flex:1;height:28px;border-radius:6px;border:1.5px solid #d4af37;font-weight:900;font-size:9px;background:#112a1a;color:#d4af37}
+.navSmall button.home{background:#e8c76a;color:#111;border-color:#fff}
+.navSmall button.limpar{background:#330000;color:#ffaaaa;border-color:#ff4444}
+.display{margin:4px 4px;background:#000;border:2.5px solid #d4af37;border-radius:10px;height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;text-align:center;padding:2px;transition:all 0.3s}
 .display.inicial{background:#000;color:#1a7a2a;border-color:#d4af37}
-.display.sinal{background:#ffaa00;color:#000;border-color:#fff;animation:piscaAmarelo 0.6s infinite alternate;font-size:12px}
+.display.sinal{background:#ffaa00;color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate}
 .display.verde{background:#00aa00;color:#fff;border-color:#00ff00;box-shadow:0 0 10px #00ff00}
 .display.vermelho{background:#cc0000;color:#fff;border-color:#ff0000;box-shadow:0 0 10px #ff0000}
-@keyframes piscaAmarelo{0%{background:#ffaa00}100%{background:#ff8800}}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;padding:0 2px;flex-shrink:0}
-.card{background:#0a2814;border:2px solid #d4af37;border-radius:10px;padding:5px;min-height:100px;display:flex;flex-direction:column}
+@keyframes pisca{0%{background:#ffaa00}100%{background:#ff8800}}
+.topHistBar{background:#000;border:1.5px solid #1a4a1a;border-radius:6px;margin:0 4px;padding:4px;display:flex;gap:2px;flex-wrap:wrap;min-height:32px;flex-shrink:0;align-items:center}
+.combinedPattern{background:#111;border:1.5px solid #d4af37;border-radius:6px;margin:0 4px;padding:4px;display:flex;gap:1px;flex-wrap:wrap;min-height:30px;flex-shrink:0;align-items:center}
+.histLabel{font-size:7px;color:#d4af37;font-weight:900;margin-right:3px}
+.nBox{height:26px;min-width:26px;padding:0 6px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.4s}
+.nBox.green{background:#0f8a2a;border:1px solid #00ff00}
+.nBox.red{background:#d80f0f;border:1px solid #ff5555}
+.nBox.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 6px #60a5fa;animation:entraAzul 0.5s}
+.nBox.new{animation:entraNovo 0.6s;border:2px solid #fff;box-shadow:0 0 10px #fff;transform:scale(1.1)}
+@keyframes entraNovo{0%{transform:scale(0) rotate(-180deg);background:#fff}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes entraAzul{0%{transform:scale(0)}100%{transform:scale(1)}}
+.nBox.acerto{background:#00ff00;color:#000;border:2px solid #fff;box-shadow:0 0 10px #00ff00}
+.nBox.erro{background:#ff0000;color:#fff;border:2px solid #fff;box-shadow:0 0 10px #ff0000}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;padding:0 2px;flex-shrink:0;margin-top:3px}
+.card{background:#0a2814;border:2px solid #d4af37;border-radius:10px;padding:5px;min-height:90px;display:flex;flex-direction:column}
 .cardTitle{font-size:8px;font-weight:900;color:#d4af37;letter-spacing:1px;margin-bottom:3px}
 .numGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1;align-content:start}
-.numBox{height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;transition:all 0.3s}
-.numBox.green{background:#0f8a2a}
-.numBox.red{background:#d80f0f;box-shadow:0 0 6px #ff0000;border:1.5px solid #ff5555}
-.numBox.blue{background:#1e40af;border:1.5px solid #60a5fa;box-shadow:0 0 4px #60a5fa}
-.numBox.acerto{background:#00ff00;color:#000;border:2px solid #fff;box-shadow:0 0 8px #00ff00;animation:piscaG 0.4s 3}
-.numBox.erro{background:#ff0000;color:#fff;border:2px solid #fff;box-shadow:0 0 8px #ff0000;animation:piscaR 0.4s 3}
-@keyframes piscaG{0%,100%{background:#0f8a2a}50%{background:#00ff00}}
-@keyframes piscaR{0%,100%{background:#d80f0f}50%{background:#ff0000}}
+.numBoxGrid{height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff}
+.numBoxGrid.green{background:#0f8a2a}
+.numBoxGrid.red{background:#d80f0f}
+.numBoxGrid.blue{background:#1e40af;border:1.5px solid #60a5fa}
+.numBoxGrid.acerto{background:#00ff00;color:#000;border:2px solid #fff}
+.numBoxGrid.erro{background:#ff0000;color:#fff;border:2px solid #fff}
 .centerBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-.aguardBtn{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:16px;padding:6px 12px;font-weight:900;font-size:11px;color:#111;border:1.5px solid #fff;min-width:100px;text-align:center;transition:all 0.3s}
-.aguardBtn.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;border-color:#fff;animation:piscaAmarelo 0.6s infinite alternate;box-shadow:0 0 10px #ffaa00}
+.aguardBtn{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:16px;padding:6px 12px;font-weight:900;font-size:11px;color:#111;border:1.5px solid #fff;min-width:90px;text-align:center}
+.aguardBtn.sinal{background:linear-gradient(180deg,#ffaa00,#ff6600);color:#000;border-color:#fff;animation:pisca 0.6s infinite alternate;box-shadow:0 0 10px #ffaa00}
 .aguardBtn.verde{background:linear-gradient(180deg,#00ff00,#008800);color:#fff;border-color:#00ff00;box-shadow:0 0 10px #00ff00}
 .aguardBtn.vermelho{background:linear-gradient(180deg,#ff4444,#cc0000);color:#fff;border-color:#ff0000;box-shadow:0 0 10px #ff0000}
-.placarBtn{background:linear-gradient(180deg,#f9e27a,#d4af37);border-radius:16px;padding:5px 8px;font-weight:900;font-size:9px;color:#111;border:1.5px solid #fff;text-align:center;min-width:110px}
-.scoreRow{display:flex;gap:6px;justify-content:center;align-items:center;margin-top:2px;font-weight:900;font-size:14px}
-.acertoBox{width:50px;height:32px;border-radius:6px;background:#0f8a2a;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#fff;border:1px solid #00ff00;transition:all 0.3s}
-.acertoBox.verde{background:#00ff00;color:#000;border-color:#fff;box-shadow:0 0 8px #00ff00}
-.acertoBox.vermelho{background:#ff0000;color:#fff;border-color:#fff;box-shadow:0 0 8px #ff0000}
-.histLine{background:#000;border:1px solid #1a4a1a;border-radius:5px;margin:3px 2px;padding:3px 4px;display:flex;gap:1px;flex-wrap:wrap;min-height:22px;align-items:center;flex-shrink:0}
-.histLabel{font-size:7px;color:#d4af37;font-weight:900;margin-right:3px;min-width:38px}
+.histLine{background:#000;border:1px solid #1a4a1a;border-radius:5px;margin:2px 2px;padding:3px 4px;display:flex;gap:1px;flex-wrap:wrap;min-height:22px;align-items:center;flex-shrink:0}
 .sq{width:14px;height:11px;border-radius:2px}
 .sq.blue{background:#1e40af;border:1px solid #fff}
 .sq.white{background:#fff;border:1px solid #999}
-.kb{margin-top:3px;background:linear-gradient(180deg,#e8c76a,#b8941f);border-radius:12px;border:2px solid #d4af37;padding:6px;display:flex;flex-direction:column;gap:4px;flex-shrink:0;height:36%;min-height:200px}
+.kb{margin-top:3px;background:linear-gradient(180deg,#e8c76a,#b8941f);border-radius:12px;border:2px solid #d4af37;padding:6px;display:flex;flex-direction:column;gap:4px;flex-shrink:0;height:34%;min-height:190px}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 3px rgba(0,0,0,0.3)}
 .k:active{transform:scale(0.96);background:#fff}
-.navSmall{display:flex;gap:2px;padding:2px 2px 3px;flex-shrink:0}
-.navSmall button{flex:1;height:24px;border-radius:5px;border:1px solid #d4af37;font-weight:900;font-size:8px;background:#112a1a;color:#d4af37}
-.navSmall button.home{background:#e8c76a;color:#111}
-.navSmall button.limpar{background:#330000;color:#ffaaaa}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irInicio()"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
+<div class="topo" onclick="irInicio()"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA - TOQUE PARA INICIO</div></div>
 <div class="navSmall">
 <button class="home" onclick="irInicio()">🏠 INICIO</button>
 <button onclick="apagarUltimo()">⬅️ APAGAR</button>
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
-<button onclick="document.getElementById('histWrap').style.display=document.getElementById('histWrap').style.display=='none'?'flex':'none'" style="background:#0a2a0a">👁️ HIST</button>
 </div>
-<div class="display inicial" id="disp">DIGITE O NÚMERO</div>
+<div class="display inicial" id="disp">DIGITE O NÚMERO - NOVO VAI NA FRENTE EMPURRANDO</div>
+<div class="combinedPattern" id="combinedPattern"></div>
+<div class="topHistBar" id="topHist"></div>
 <div class="grid2">
 <div class="card">
-<div class="cardTitle">NUMERO CHAMADO</div>
+<div class="cardTitle">NUMERO CHAMADO (NOVO NA FRENTE)</div>
 <div class="numGrid" id="numGrid"></div>
 </div>
 <div class="card">
@@ -78,24 +82,10 @@ body{display:flex;justify-content:center}
 <div style="font-size:7px;color:#d4af37;font-weight:900;text-align:center" id="jogarSub">-</div>
 </div>
 </div>
-<div class="card">
-<div class="cardTitle">ACERTO OU ERRO</div>
-<div class="centerBox">
-<div class="acertoBox" id="acertoBox">-</div>
-<div style="font-size:7px;color:#d4af37;font-weight:900" id="acertoSub">Ultimo</div>
-</div>
-</div>
-<div class="card">
-<div class="cardTitle">PLACAR</div>
-<div class="centerBox">
-<div class="placarBtn" id="placarBtn">GREEN 0 x 0 RED</div>
-<div class="scoreRow"><span style="color:#00ff00">✅</span><span id="greenScore" style="color:#00ff00">0</span><span style="color:#ff4444">❌</span><span id="redScore" style="color:#ff4444">0</span></div>
-</div>
-</div>
 </div>
 <div id="histWrap" style="display:flex;flex-direction:column;gap:2px;margin-top:3px;flex-shrink:0">
-<div class="histLine" id="line-A"><span class="histLabel">A (1+1)</span></div>
-<div class="histLine" id="line-B"><span class="histLabel">B (1+2)</span></div>
+<div class="histLine" id="line-A"><span class="histLabel">A (1+1) 🟦⬜️</span></div>
+<div class="histLine" id="line-B"><span class="histLabel">B (1+2) 🟦⬜️⬜️</span></div>
 </div>
 <div class="kb">
 <div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
@@ -115,15 +105,15 @@ function getCol(n){
  if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0) return 2;
  return 3;
 }
-function isGatilho(n){return n==2||n==0;}
+function isGatilhoNumero(n){return n==2||n==0;}
 function show(){
  var d=document.getElementById('disp');
  if(cur==""){
   if(ultimoSinal){
-   d.textContent="🔴 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - JOGAR NA COLUNA C2/3";
+   d.textContent="🔴 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - JOGAR C2/3";
    d.className="display sinal";
   }else{
-   d.textContent="DIGITE O NÚMERO";
+   d.textContent="DIGITE O NÚMERO - NOVO VAI NA FRENTE EMPURRANDO O 5";
    d.className="display inicial";
   }
  }else if(cur=="0"){
@@ -154,8 +144,9 @@ function apagarUltimo(){
  if(lista.length>0){
   lista.pop();
   cur="";
+  ultimoSinal=null;
   show();upd();
- }else{show();}
+ }
 }
 function limparTudo(){irInicio();}
 function ok(){
@@ -165,11 +156,10 @@ function ok(){
  var n=parseInt(cur);
  if(isNaN(n)||n<0||n>36){cur="";show();return;}
  var tinhaSinal=ultimoSinal!==null;
- var acertou=false, errou=false;
  if(tinhaSinal){
   var col=getCol(n);
-  if(col==2||col==3){acertou=true;green++;ultimoResultado={tipo:'verde', num:n};}
-  else if(col==1){errou=true;red++;ultimoResultado={tipo:'vermelho', num:n};}
+  if(col==2||col==3){green++;ultimoResultado={tipo:'verde', num:n};}
+  else if(col==1){red++;ultimoResultado={tipo:'vermelho', num:n};}
   else{ultimoResultado={tipo:'azul', num:n};}
   ultimoSinal=null;
  }
@@ -178,134 +168,34 @@ function ok(){
  show();upd();
  if(tinhaSinal){
   var disp=document.getElementById('disp');
-  if(acertou){
-   disp.textContent="✅ ACERTOU! "+n+" É C"+getCol(n)+" - VERDE - GANHOU C2/3";
+  if(ultimoResultado.tipo=='verde'){
+   disp.textContent="✅ ACERTOU! "+n+" É C"+getCol(n)+" - VERDE";
    disp.className="display verde";
-  }else if(errou){
-   disp.textContent="❌ ERROU! "+n+" É C1 - VERMELHO - PERDEU C2/3";
+  }else if(ultimoResultado.tipo=='vermelho'){
+   disp.textContent="❌ ERROU! "+n+" É C1 - VERMELHO";
    disp.className="display vermelho";
   }else{
    disp.textContent="🔵 ZERO! "+n;
    disp.className="display sinal";
   }
-  setTimeout(function(){show();},2000);
+  setTimeout(function(){show();},1800);
  }
 }
 function makeSquare(t){var e=document.createElement('div');e.className='sq '+t;return e;}
 function upd(){
- var grid=document.getElementById('numGrid');
- grid.innerHTML="";
- var ultimos=lista.slice(-9);
- if(ultimos.length==0){
-  for(var i=0;i<9;i++){var e=document.createElement('div');e.className='numBox green';e.textContent="-";e.style.opacity="0.3";grid.appendChild(e);}
- }else{
-  while(ultimos.length<9){ultimos.unshift("-");}
-  for(var i=0;i<ultimos.length;i++){
-   var val=ultimos[i];
-   var e=document.createElement('div');
-   if(val=="-"){e.className='numBox green';e.textContent="-";e.style.opacity="0.3";}
-   else{
-    var col=getCol(val);
-    var isGat=isGatilho(val);
-    var isUltimo=i==ultimos.length-1 && ultimoResultado && ultimoResultado.num==val;
-    if(isUltimo){
-     if(ultimoResultado.tipo=='verde'){e.className='numBox acerto';e.textContent=val;}
-     else if(ultimoResultado.tipo=='vermelho'){e.className='numBox erro';e.textContent=val;}
-     else{e.className='numBox blue';e.textContent=val;}
-    }else{
-     if(isGat){e.className='numBox blue';e.textContent=val;}
-     else if(col==1){e.className='numBox red';e.textContent=val;}
-     else if(col==0){e.className='numBox blue';e.textContent=val;}
-     else{e.className='numBox green';e.textContent=val;}
-    }
-   }
-   grid.appendChild(e);
-  }
- }
- var eventos=[];var i=0;
+ var combined=document.getElementById('combinedPattern');
+ combined.innerHTML='<span class="histLabel">PADRÃO: 🟦⬜️🟦⬜️⬜️🟦⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️🟦⬜️⬜️⬜️⬜️⬜️ = NOVO NA FRENTE</span>';
+ var eventos=[];
+ var gatilhoPosSet=new Set();
+ var i=0;
  while(i<lista.length){
   var n=lista[i];
-  if(isGatilho(n)){
+  if(isGatilhoNumero(n)){
    var verm=0;var j=i+1;
-   while(j<lista.length&&getCol(lista[j])==1){verm++;j++;}
-   if(verm>0)eventos.push({pos:i,vermelhos:verm,gatilho:n});
+   while(j<lista.length && getCol(lista[j])==1){verm++;j++;}
+   if(verm>0){
+    eventos.push({pos:i, vermelhos:verm, gatilho:n});
+    gatilhoPosSet.add(i);
+   }
    i=j;
-  }else{i++;}
- }
- ultimoSinal=null;
- if(eventos.length>0){
-  var ultimoEv=eventos[eventos.length-1];
-  var posDepois=ultimoEv.pos+1+ultimoEv.vermelhos;
-  if(posDepois==lista.length){
-   ultimoSinal=ultimoEv;
-  }
- }
- var jogarBtn=document.getElementById('jogarBtn');
- var jogarSub=document.getElementById('jogarSub');
- var acertoBox=document.getElementById('acertoBox');
- var acertoSub=document.getElementById('acertoSub');
- if(ultimoSinal){
-  jogarBtn.textContent="C2/3";
-  jogarBtn.className="aguardBtn sinal";
-  jogarSub.textContent=ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho;
-  jogarSub.style.color="#ffaa00";
- }else{
-  jogarBtn.textContent="AGUARDANDO";
-  jogarBtn.className="aguardBtn";
-  jogarSub.textContent="-";
-  jogarSub.style.color="#d4af37";
- }
- if(ultimoResultado){
-  if(ultimoResultado.tipo=='verde'){
-   acertoBox.textContent=ultimoResultado.num;
-   acertoBox.className="acertoBox verde";
-   acertoSub.textContent="ACERTOU!";
-   acertoSub.style.color="#00ff00";
-  }else if(ultimoResultado.tipo=='vermelho'){
-   acertoBox.textContent=ultimoResultado.num;
-   acertoBox.className="acertoBox vermelho";
-   acertoSub.textContent="ERROU!";
-   acertoSub.style.color="#ff4444";
-  }else{
-   acertoBox.textContent=ultimoResultado.num;
-   acertoBox.className="acertoBox";
-   acertoSub.textContent="ZERO";
-  }
- }else{
-  if(lista.length>0){
-   acertoBox.textContent=lista[lista.length-1];
-   acertoBox.className="acertoBox";
-   acertoSub.textContent="Ultimo";
-   acertoSub.style.color="#d4af37";
-  }else{
-   acertoBox.textContent="-";
-   acertoBox.className="acertoBox";
-   acertoSub.textContent="Ultimo";
-  }
- }
- document.getElementById('placarBtn').textContent="GREEN "+green+" x "+red+" RED";
- document.getElementById('greenScore').textContent=green;
- document.getElementById('redScore').textContent=red;
- var lineA=document.getElementById('line-A');
- var lineB=document.getElementById('line-B');
- lineA.innerHTML='<span class="histLabel">A (1+1)</span>';
- lineB.innerHTML='<span class="histLabel">B (1+2)</span>';
- var contadores=[0,0];
- for(var ev of eventos){if(ev.vermelhos>=1)contadores[0]++;if(ev.vermelhos>=2)contadores[1]++;}
- for(var c=0;c<(lista.length==0?3:Math.min(contadores[0],6));c++){
-  lineA.appendChild(makeSquare('blue'));
-  lineA.appendChild(makeSquare('white'));
-  var sep=document.createElement('div');sep.style.width="4px";lineA.appendChild(sep);
- }
- for(var c=0;c<(lista.length==0?2:Math.min(contadores[1],5));c++){
-  lineB.appendChild(makeSquare('blue'));
-  lineB.appendChild(makeSquare('white'));
-  lineB.appendChild(makeSquare('white'));
-  var sep=document.createElement('div');sep.style.width="4px";lineB.appendChild(sep);
- }
- show();
-}
-show();upd();
-</script>
-</body>
-</html>
+  }else{i++

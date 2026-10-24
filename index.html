@@ -3,70 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - FRENTE DA FOTO</title>
+<title>RAFIGASP - SIMPLES ORIGINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a2a0a;overflow:hidden}
 body{display:flex;justify-content:center;align-items:center}
-.app{width:100%;max-width:380px;height:100dvh;max-height:800px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden}
+.app{width:100%;max-width:380px;height:100dvh;max-height:800px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #000}
 .topo{text-align:center;background:linear-gradient(180deg,#f5e6a0,#d4af37 50%,#8a6d1b);padding:10px 0 7px;flex-shrink:0}
 .topoR{font-weight:900;font-size:28px;color:#0a2210;letter-spacing:2px;line-height:1;font-family:serif}
 .topoS{font-size:9px;letter-spacing:4px;color:#0a2210;font-weight:900}
 .nav2{display:flex;gap:3px;padding:5px;background:#0f1a0f;flex-shrink:0}
-.nav2 button{flex:1;height:28px;border-radius:7px;border:1.5px solid #d4af37;font-weight:900;font-size:7px;background:#1a2a1a;color:#d4af37;display:flex;align-items:center;justify-content:center}
+.nav2 button{flex:1;height:30px;border-radius:7px;border:1.5px solid #d4af37;font-weight:900;font-size:8px;background:#1a2a1a;color:#d4af37;display:flex;align-items:center;justify-content:center}
 .nav2 button.home{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#111}
 .nav2 button.limpar{background:#3a1a1a;color:#ffaaaa;border-color:#ff6666}
-.display{margin:4px;background:#000;border:2px solid #222;border-radius:9px;height:38px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;text-align:center;padding:2px;color:#fff}
+.display{margin:4px;background:#000;border:2px solid #222;border-radius:9px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;text-align:center;padding:2px;color:#fff;font-size:15px}
 .display.vazio{background:#000;border-color:#222}
-.display.alerta{background:linear-gradient(180deg,#ff4444,#990000);color:#fff;border-color:#ffff00;box-shadow:0 0 18px #ff0000;font-size:13px}
+.display.alerta{background:linear-gradient(180deg,#ff4444,#990000);color:#fff;border-color:#ffff00;box-shadow:0 0 18px #ff0000}
 .display.digitando{background:#000;border-color:#00ff00;box-shadow:0 0 18px #00ff00}
-.display.digitando .numGrande{font-size:36px;color:#fff;text-shadow:0 0 12px #00ff00;font-weight:900}
+.display.digitando .numGrande{font-size:40px;color:#fff;text-shadow:0 0 12px #00ff00;font-weight:900}
 .display.erro{background:#660000;border-color:#ff0000;animation:tremer 0.2s infinite}
 @keyframes tremer{0%{transform:translateX(0)}25%{transform:translateX(-3px)}50%{transform:translateX(3px)}100%{transform:translateX(0)}}
 .page{flex:1;overflow-y:auto;padding:5px;display:flex;flex-direction:column;gap:5px;background:#0a2210}
-.topBar{background:#000;border:1.5px solid #d4af37;border-radius:9px;padding:8px 6px;display:flex;gap:4px;min-height:46px;align-items:center;position:relative;margin-top:8px;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
-.topBar::-webkit-scrollbar{height:4px}
+.topBar{background:#000;border:1.5px solid #d4af37;border-radius:9px;padding:9px 8px;display:flex;gap:5px;min-height:50px;align-items:center;position:relative;margin-top:7px;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+.topBar::-webkit-scrollbar{height:5px}
 .topBar::-webkit-scrollbar-thumb{background:#d4af37;border-radius:2px}
-.topBar::before{content:'HISTÓRICO';position:absolute;top:-6px;left:10px;background:#d4af37;color:#000;font-size:6px;font-weight:900;padding:1px 5px;border-radius:3px}
-.nBox{height:28px;min-width:28px;padding:0 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;border:1.5px solid #333;flex-shrink:0}
+.topBar::before{content:'HISTÓRICO';position:absolute;top:-7px;left:12px;background:#d4af37;color:#000;font-size:6px;font-weight:900;padding:2px 6px;border-radius:3px}
+.nBox{height:30px;min-width:30px;padding:0 7px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;border:1.5px solid #333;flex-shrink:0}
 .nBox.green{background:#0f8a2a;border-color:#00ff00}
 .nBox.red{background:#d80f0f;border-color:#ffaaaa}
 .nBox.blue{background:#1e40af;border-color:#fff}
-.nBox.primeiro{border:2px solid #ffff00;box-shadow:0 0 8px #ffff00;transform:scale(1.05)}
-.alertaGrande{background:#0f8a2a;border:3px solid #00ff00;border-radius:12px;padding:10px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 15px rgba(0,255,0,0.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:130px;flex:1;position:relative;overflow:hidden}
+.nBox.primeiro{border:2px solid #ffff00;box-shadow:0 0 10px #ffff00;transform:scale(1.05)}
+.alertaGrande{background:#0f8a2a;border:3px solid #00ff00;border-radius:15px;padding:12px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 18px rgba(0,255,0,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:145px;flex:1;position:relative;overflow:hidden}
 .alertaGrande.verde{background:#0f8a2a;border:3px solid #00ff00}
-.alertaGrande.azul{background:linear-gradient(180deg,#4a9bff,#0a3a9a);border:3px solid #00ccff;box-shadow:0 0 20px #00ccff}
-.alertaGrande.vermelho{background:linear-gradient(180deg,#ff5555,#cc0000);border:3px solid #ffff00;box-shadow:0 0 20px #ff4444}
-.alertaGrande.acertou{background:linear-gradient(180deg,#3aff6a,#006600);border:3px solid #ffff00;box-shadow:0 0 40px #00ff00;animation:ganha 0.5s infinite alternate}
-.alertaGrande.errou{background:linear-gradient(180deg,#ff3333,#990000);border:3px solid #ff0000;box-shadow:0 0 40px #ff0000;animation:perde 0.15s infinite}
-@keyframes ganha{0%{transform:scale(1)}100%{transform:scale(1.03)}}
-@keyframes perde{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}100%{transform:translateX(0)}}
-.colunaGrande{font-size:16px;text-shadow:0 1px 2px #000;line-height:1.1;font-weight:900;z-index:2}
-.colunaNumero{font-size:42px;font-weight:900;color:#ffff00;text-shadow:0 0 12px #ffff00;line-height:1;z-index:2}
-.colunaSub{font-size:12px;color:#fff;z-index:2}
-.placarSimples{background:#000;border:1.5px solid #d4af37;border-radius:7px;padding:5px;margin-top:4px;display:flex;justify-content:space-around;align-items:center;width:100%;min-height:36px;z-index:2}
+.alertaGrande.vermelho{background:linear-gradient(180deg,#ff5555,#cc0000);border:3px solid #ffff00;box-shadow:0 0 22px #ff4444}
+.alertaGrande.acertou{background:linear-gradient(180deg,#3aff6a,#006600);border:3px solid #ffff00;box-shadow:0 0 50px #00ff00;animation:ganha 0.5s infinite alternate}
+.alertaGrande.errou{background:linear-gradient(180deg,#ff3333,#990000);border:3px solid #ff0000;box-shadow:0 0 50px #ff0000;animation:perde 0.15s infinite}
+@keyframes ganha{0%{transform:scale(1)}100%{transform:scale(1.04)}}
+@keyframes perde{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}100%{transform:translateX(0)}}
+.colunaGrande{font-size:22px;text-shadow:0 1px 3px #000;line-height:1.1;font-weight:900;z-index:2}
+.colunaNumero{font-size:52px;font-weight:900;color:#ffff00;text-shadow:0 0 15px #ffff00;line-height:1;z-index:2}
+.placarSimples{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:6px;margin-top:6px;display:flex;justify-content:space-around;align-items:center;width:100%;min-height:42px;z-index:2}
 .placarItemSimples{display:flex;flex-direction:column;align-items:center;gap:1px}
-.placarLabelSimples{font-size:7px;color:#d4af37;font-weight:900}
-.placarValorSimples{font-size:18px;font-weight:900}
-.kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:2px solid #d4af37;padding:4px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;height:34%;min-height:180px;max-height:240px}
-.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.k{border-radius:8px;border:1.5px solid #8a6d1b;font-weight:900;font-size:16px;background:linear-gradient(180deg,#f9e27a,#e8c86a);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
-.k:active{transform:scale(0.96);background:#fff}
+.placarLabelSimples{font-size:8px;color:#d4af37;font-weight:900}
+.placarValorSimples{font-size:22px;font-weight:900}
+.kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:2px solid #d4af37;padding:5px;display:flex;flex-direction:column;gap:4px;flex-shrink:0;height:36%;min-height:190px;max-height:260px}
+.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.k{border-radius:9px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.k:active{transform:scale(0.95);background:#fff}
 .paginasEscondidas{display:none !important}
-.confete{position:absolute;width:7px;height:7px;top:-10px;animation:cair linear forwards;z-index:10;pointer-events:none}
-@keyframes cair{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(300px) rotate(360deg);opacity:0}}
+.confete{position:absolute;width:8px;height:8px;top:-10px;animation:cair linear forwards;z-index:10;pointer-events:none}
+@keyframes cair{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(320px) rotate(360deg);opacity:0}}
 .confete.verde{background:#00ff00}
 .confete.dourado{background:#ffd700;border-radius:50%}
 .confete.branco{background:#fff}
-.emojiGanha{position:absolute;font-size:20px;animation:subir 1s ease-out forwards;z-index:11;pointer-events:none}
-@keyframes subir{0%{transform:translateY(0) scale(0);opacity:0}20%{transform:translateY(-15px) scale(1.2);opacity:1}100%{transform:translateY(-80px) scale(0.4);opacity:0}}
-.emojiPerde{position:absolute;font-size:18px;animation:cairE 0.8s ease-out forwards;z-index:11;pointer-events:none}
-@keyframes cairE{0%{transform:translateY(-30px) scale(0);opacity:0}20%{transform:translateY(0) scale(1.1);opacity:1}100%{transform:translateY(60px) scale(0.7);opacity:0}}
-.fundoFlash{position:absolute;inset:0;border-radius:12px;pointer-events:none;z-index:1;opacity:0}
+.emojiGanha{position:absolute;font-size:24px;animation:subir 1s ease-out forwards;z-index:11;pointer-events:none}
+@keyframes subir{0%{transform:translateY(0) scale(0);opacity:0}20%{transform:translateY(-15px) scale(1.3);opacity:1}100%{transform:translateY(-100px) scale(0.4);opacity:0}}
+.emojiPerde{position:absolute;font-size:22px;animation:cairE 0.8s ease-out forwards;z-index:11;pointer-events:none}
+@keyframes cairE{0%{transform:translateY(-30px) scale(0);opacity:0}20%{transform:translateY(0) scale(1.2);opacity:1}100%{transform:translateY(70px) scale(0.7);opacity:0}}
+.fundoFlash{position:absolute;inset:0;border-radius:15px;pointer-events:none;z-index:1;opacity:0}
 .fundoFlash.ganha{animation:flashG 0.4s ease-out}
 .fundoFlash.perde{animation:flashP 0.4s ease-out}
-@keyframes flashG{0%{background:rgba(0,255,0,0.5);opacity:1}100%{background:transparent;opacity:0}}
-@keyframes flashP{0%{background:rgba(255,0,0,0.5);opacity:1}100%{background:transparent;opacity:0}}
+@keyframes flashG{0%{background:rgba(0,255,0,0.6);opacity:1}100%{background:transparent;opacity:0}}
+@keyframes flashP{0%{background:rgba(255,0,0,0.6);opacity:1}100%{background:transparent;opacity:0}}
 </style>
 </head>
 <body>
@@ -74,7 +72,7 @@ body{display:flex;justify-content:center;align-items:center}
 <div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="nav2">
 <button class="home">🏠 INICIO</button>
-<button onclick="apagarUltimo()">↩️ APAGAR</button>
+<button onclick="apagarUltimo()">⬅️ APAGAR</button>
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button>➡️ PRÓX</button>
 </div>
@@ -95,7 +93,7 @@ body{display:flex;justify-content:center;align-items:center}
 <div class="kr"><button class="k" onclick="dig('1')">1</button><button class="k" onclick="dig('2')">2</button><button class="k" onclick="dig('3')">3</button></div>
 <div class="kr"><button class="k" onclick="dig('4')">4</button><button class="k" onclick="dig('5')">5</button><button class="k" onclick="dig('6')">6</button></div>
 <div class="kr"><button class="k" onclick="dig('7')">7</button><button class="k" onclick="dig('8')">8</button><button class="k" onclick="dig('9')">9</button></div>
-<div class="kr"><button class="k" onclick="ok()" style="font-size:14px">ENTER</button><button class="k" onclick="dig('0')">0</button><button class="k" onclick="corr()" style="font-size:12px">CORRIGIR</button></div>
+<div class="kr"><button class="k" onclick="ok()" style="font-size:15px">ENTER</button><button class="k" onclick="dig('0')">0</button><button class="k" onclick="corr()" style="font-size:13px">CORRIGIR</button></div>
 </div>
 </div>
 <script>
@@ -108,9 +106,9 @@ function getColunasParaJogar(numeroVermelho){return tabelaColunas[numeroVermelho
 function inicializar(){linhas=[];var brancosPorLinha=[1,2,3,4,5];for(var r=0;r<5;r++){linhas.push({itens:[],brancos:brancosPorLinha[r]});}}
 function setEstadoQuadrado(estado,textoGrande){var el=document.getElementById('alertaGrande1');var txt=document.getElementById('colunaGrandeTexto1');if(el){el.className='alertaGrande '+estado;if(txt)txt.innerHTML=textoGrande;}}
 function limparAnimacoes(){var el=document.getElementById('alertaGrande1');var confetes=el.querySelectorAll('.confete, .emojiGanha, .emojiPerde');confetes.forEach(function(c){c.remove();});}
-function animarGanha(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');flash.className='fundoFlash ganha';setTimeout(function(){flash.className='fundoFlash';},500);for(var i=0;i<15;i++){(function(i){setTimeout(function(){var conf=document.createElement('div');conf.className='confete '+(i%3==0?'verde':i%3==1?'dourado':'branco');conf.style.left=(Math.random()*90)+'%';conf.style.animationDuration=(0.6+Math.random()*0.8)+'s';el.appendChild(conf);setTimeout(function(){conf.remove();},1500);},i*40);})(i);}var emojis=['💰','✅','🎉'];for(var j=0;j<4;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiGanha';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(50+Math.random()*30)+'%';el.appendChild(em);setTimeout(function(){em.remove();},1000);},j*80);})(j);}if(navigator.vibrate){navigator.vibrate([80,40,80,40,120]);}}
-function animarPerde(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');flash.className='fundoFlash perde';setTimeout(function(){flash.className='fundoFlash';},500);var emojis=['❌','💥'];for(var j=0;j<3;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiPerde';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(20+Math.random()*50)+'%';el.appendChild(em);setTimeout(function(){em.remove();},900);},j*60);})(j);}if(navigator.vibrate){navigator.vibrate([120,60,120]);}}
-function mostrarErro(msg){var d=document.getElementById('disp');d.innerHTML='<span class="numGrande" style="font-size:13px">'+msg+'</span>';d.className="display erro";if(navigator.vibrate){navigator.vibrate([80,40,80]);}setTimeout(function(){cur="";show();},1000);}
+function animarGanha(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');flash.className='fundoFlash ganha';setTimeout(function(){flash.className='fundoFlash';},500);for(var i=0;i<20;i++){(function(i){setTimeout(function(){var conf=document.createElement('div');conf.className='confete '+(i%3==0?'verde':i%3==1?'dourado':'branco');conf.style.left=(Math.random()*90)+'%';conf.style.animationDuration=(0.6+Math.random()*0.8)+'s';el.appendChild(conf);setTimeout(function(){conf.remove();},1500);},i*50);})(i);}var emojis=['💰','✅','🎉','💸','🤑'];for(var j=0;j<6;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiGanha';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(50+Math.random()*30)+'%';el.appendChild(em);setTimeout(function(){em.remove();},1200);},j*90);})(j);}if(navigator.vibrate){navigator.vibrate([80,40,80,40,150]);}}
+function animarPerde(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');flash.className='fundoFlash perde';setTimeout(function(){flash.className='fundoFlash';},500);var emojis=['❌','💥','😵'];for(var j=0;j<5;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiPerde';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(20+Math.random()*50)+'%';el.appendChild(em);setTimeout(function(){em.remove();},1000);},j*70);})(j);}if(navigator.vibrate){navigator.vibrate([150,80,150]);}}
+function mostrarErro(msg){var d=document.getElementById('disp');d.innerHTML='<span class="numGrande" style="font-size:14px">'+msg+'</span>';d.className="display erro";if(navigator.vibrate){navigator.vibrate([80,40,80]);}setTimeout(function(){cur="";show();},1000);}
 function show(){var d=document.getElementById('disp');if(cur!=""){d.innerHTML='<span class="numGrande">'+cur+'</span>';d.className="display digitando";return;}if(colunaEsperando){d.innerHTML="VEM COLUNA "+colunaEsperando;d.className="display alerta";}else{d.innerHTML="";d.className="display vazio";}}
 function dig(v){if(cur=="0"||cur=="00"){cur=v;show();return;}if(cur.length==0){cur=v;show();return;}if(cur.length==1){var combinado=parseInt(cur+v);if(combinado>36){mostrarErro("SÓ 1 AO 36!");return;}cur+=v;show();return;}if(cur.length>=2){cur=v;show();return;}}
 function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
@@ -118,7 +116,7 @@ function apagarUltimo(){if(lista.length>0){lista.pop();reconstruirTudoComPlacar(
 function limparTudo(){if(!confirm("LIMPAR TUDO?"))return;cur="";lista=[];green=0;red=0;colunaEsperando=null;try{localStorage.clear();}catch(e){}inicializar();setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();upd();}
 function reconstruirTudoComPlacar(){
  inicializar();green=0;red=0;colunaEsperando=null;
- var temp=lista.slice();var ultimaColuna=null;var ultimoNum=null;var ultimoIsAzul=true;
+ var temp=lista.slice();var ultimaColuna=null;
  for(var i=0;i<temp.length;i++){
   var n=temp[i];
   var linha=linhas[0];var pos=linha.itens.length;var ciclo=linha.brancos+1;var isAzul=(pos%ciclo==0);
@@ -127,12 +125,11 @@ function reconstruirTudoComPlacar(){
    if(acertou){green++;}else{red++;}colunaEsperando=null;
   }
   for(var r=0;r<linhas.length;r++){var l=linhas[r];var p=l.itens.length;var c=l.brancos+1;var az=(p%c==0);l.itens.push({valor:n,isAzul:az});}
-  if(!isAzul){ultimaColuna=getColunasParaJogar(n);colunaEsperando=ultimaColuna;ultimoNum=n;ultimoIsAzul=false;}else{ultimoNum=n;ultimoIsAzul=true;}
+  if(!isAzul){ultimaColuna=getColunasParaJogar(n);colunaEsperando=ultimaColuna;}
  }
  lista=temp.slice();
  if(lista.length>0){
-  if(!ultimoIsAzul && ultimaColuna){setEstadoQuadrado('vermelho','Nº VERMELHO<br><div class="colunaNumero">'+ultimoNum+'</div><div class="colunaSub">MANDA JOGAR<br>VEM COLUNA '+ultimaColuna+'</div>');}
-  else if(ultimoIsAzul){setEstadoQuadrado('azul','Nº AZUL<br><div class="colunaNumero">'+ultimoNum+'</div><div class="colunaSub">AGUARDANDO VERMELHO...</div>');}
+  if(colunaEsperando){setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div>');}
   else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}
  }else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');colunaEsperando=null;}
 }
@@ -147,19 +144,20 @@ function ok(){
  var n=parseInt(cur);if(isNaN(n)||n<0||n>36){mostrarErro("SÓ 1 AO 36!");return;}
  if(colunaEsperando){
   var colResultado=getCol(n);var permitidas=colunaEsperando.split('/');var acertou=permitidas.indexOf(String(colResultado))>=0;
-  if(acertou){green++;setEstadoQuadrado('acertou','✅ GANHOU!<br><div class="colunaNumero">GANHOU!</div>');animarGanha();}else{red++;setEstadoQuadrado('errou','❌ PERDEU!<br><div class="colunaNumero">PERDEU</div>');animarPerde();}
+  if(acertou){green++;setEstadoQuadrado('acertou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">✅ GANHOU!</div>');animarGanha();}else{red++;setEstadoQuadrado('errou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">❌ PERDEU! VEIO '+colResultado+'</div>');animarPerde();}
   document.getElementById('placarAcertou1').textContent=green;document.getElementById('placarErrou1').textContent=red;
-  colunaEsperando=null;aplicarNumero(n,true);cur="";upd();salvarTudo();
-  setTimeout(function(){limparAnimacoes();var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','Nº VERMELHO<br><div class="colunaNumero">'+n+'</div><div class="colunaSub">MANDA JOGAR<br>VEM COLUNA '+col+'</div>');show();salvarTudo();}else{setEstadoQuadrado('azul','Nº AZUL<br><div class="colunaNumero">'+n+'</div><div class="colunaSub">AGUARDANDO VERMELHO...</div>');show();}},1500);
+  colunaEsperando=null;
+  aplicarNumero(n,true);cur="";upd();salvarTudo();
+  setTimeout(function(){limparAnimacoes();var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+col+'</div>');show();salvarTudo();}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();}},1800);
   return;
  }
  var info=aplicarNumero(n,true);
  if(!info.isAzul){
   var colunaParaJogar=getColunasParaJogar(n);
   colunaEsperando=colunaParaJogar;
-  setEstadoQuadrado('vermelho','Nº VERMELHO<br><div class="colunaNumero">'+n+'</div><div class="colunaSub">MANDA JOGAR<br>VEM COLUNA '+colunaParaJogar+'</div>');
+  setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaParaJogar+'</div>');
  }else{
-  setEstadoQuadrado('azul','Nº AZUL<br><div class="colunaNumero">'+n+'</div><div class="colunaSub">AGUARDANDO VERMELHO...</div>');
+  setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
  }
  cur="";upd();salvarTudo();
 }
@@ -167,8 +165,8 @@ function upd(){
  var topBar1=document.getElementById('topBar1');
  if(topBar1){
   topBar1.innerHTML="";
-  if(lista.length==0){var e=document.createElement('div');e.style.cssText="font-size:8px;color:#1a5a1a;padding:5px;text-align:center;width:100%;flex-shrink:0";e.textContent="HISTÓRICO VAZIO";topBar1.appendChild(e);}
-  else{var reverso=lista.slice().reverse();reverso.forEach(function(num,idx){var col=getCol(num);var cor=(col==1?'red':(col==0?'blue':'green'));var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' primeiro new':'');box.textContent=num;topBar1.appendChild(box);});setTimeout(function(){topBar1.scrollLeft=0;},80);}
+  if(lista.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#1a5a1a;padding:6px;text-align:center;width:100%;flex-shrink:0";e.textContent="HISTÓRICO VAZIO";topBar1.appendChild(e);}
+  else{var reverso=lista.slice().reverse();reverso.forEach(function(num,idx){var col=getCol(num);var cor=(col==1?'red':(col==0?'blue':'green'));var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' primeiro new':'');box.textContent=num;topBar1.appendChild(box);});setTimeout(function(){topBar1.scrollLeft=0;},100);}
  }
  document.getElementById('placarAcertou1').textContent=green;
  document.getElementById('placarErrou1').textContent=red;

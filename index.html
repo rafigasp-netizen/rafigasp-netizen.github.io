@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - PAG1 NUMEROS APARECENDO + AZUL JUNTO</title>
+<title>RAFIGASP - ALERTA COLUNA BEM GRANDE</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -56,11 +56,17 @@ body{display:flex;justify-content:center}
 .infoBar{background:#111;border:1px solid #333;border-radius:6px;padding:6px;margin:2px 0;font-size:9px;color:#d4af37;text-align:center;line-height:1.3}
 .alertaBox{background:linear-gradient(180deg,#ff0000,#990000);border:3px solid #ffff00;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:11px;color:#fff;box-shadow:0 0 15px #ff0000;display:none;margin-top:4px}
 .alertaBox.ativo{display:block;animation:piscaAlerta 0.6s infinite alternate}
+.alertaGrande{background:linear-gradient(180deg,#ff0000,#cc0000);border:4px solid #ffff00;border-radius:16px;padding:16px;text-align:center;font-weight:900;color:#fff;box-shadow:0 0 30px #ff0000, 0 0 60px rgba(255,0,0,0.5);display:none;margin-top:6px;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.alertaGrande.ativo{display:flex;animation:piscaAlertaGrande 0.5s infinite alternate}
+@keyframes piscaAlertaGrande{0%{background:linear-gradient(180deg,#ff0000,#990000);transform:scale(1);box-shadow:0 0 30px #ff0000}100%{background:linear-gradient(180deg,#ff3333,#cc0000);transform:scale(1.03);box-shadow:0 0 50px #ff0000, 0 0 80px rgba(255,255,0,0.6)}}
+.colunaGrande{font-size:34px;letter-spacing:2px;text-shadow:0 0 10px #ffff00, 0 0 20px #fff;line-height:1.1}
+.colunaSub{font-size:12px;opacity:0.9;font-weight:700}
+.colunaDetalhe{font-size:9px;opacity:0.7;margin-top:4px}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo" onclick="irPara(1)"><div class="topoR">RAFIGASP</div><div class="topoS">PAG1 NUMEROS + AZUL JUNTO P2 P3</div></div>
+<div class="topo" onclick="irPara(1)"><div class="topoR">RAFIGASP</div><div class="topoS">ALERTA BEM GRANDE COLUNA</div></div>
 <div class="pagesNav" id="pagesNav">
 <button class="ativo" onclick="irPara(1)">1 INICIO</button>
 <button onclick="irPara(2)">2 PADRÃO</button>
@@ -79,10 +85,15 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG 1 - NUMEROS APARECENDO - AZUL JUNTO 15,15,15,15,15</div>
+<div class="display inicial" id="disp">PÁG 1 - NUMEROS APARECENDO - ALERTA BEM GRANDE COLUNA</div>
 
 <div class="page ativa" id="page1">
 <div class="topBar" id="topBar1"></div>
+<div class="alertaGrande" id="alertaGrande1">
+<div class="colunaGrande" id="colunaGrandeTexto1">COLUNA 2 E 3</div>
+<div class="colunaSub" id="colunaSubTexto1">ENTRA TAMBÉM!</div>
+<div class="colunaDetalhe" id="colunaDetalheTexto1">2 VERMELHOS: 1,4 - AZUL=1</div>
+</div>
 <div class="alertaBox" id="alertaBox1"></div>
 </div>
 
@@ -94,6 +105,11 @@ body{display:flex;justify-content:center}
 <div class="page" id="page3">
 <div class="conjuntosContainer" id="conjuntosP3"></div>
 <div class="infoBar" id="infoBar3">PÁG 3: 🟦🟥🟦🟥🟦⬜️ / 🟦🟥🟥 / 🟦🟥🟥⬜️ / 🟦🟥🟥⬜️⬜️ / 🟦🟥🟥⬜️⬜️⬜️ - Azul junto 15,15,15 - 2🟥🟥 alerta P1</div>
+<div class="alertaGrande" id="alertaGrande3">
+<div class="colunaGrande" id="colunaGrandeTexto3">COLUNA 2 E 3</div>
+<div class="colunaSub" id="colunaSubTexto3">2 VERMELHOS!</div>
+<div class="colunaDetalhe" id="colunaDetalheTexto3">ENTRA</div>
+</div>
 <div class="alertaBox" id="alertaBox3"></div>
 </div>
 
@@ -118,6 +134,7 @@ var cur="",lista=[],paginaAtual=1;
 var green=0,red=0,ultimoSinal=null,ultimoResultado=null;
 var padraoP2 = [
   ['blue','white','blue','white','blue','white'],
+  ['blue','white','white'],
   ['blue','white','white','white'],
   ['blue','white','white','white','white'],
   ['blue','white','white','white','white','white']
@@ -221,14 +238,14 @@ function show(){
  if(cur!=""){
   if(cur=="0"){d.textContent="P"+paginaAtual+" - 0 = APAGAR";d.className="display vermelho";}
   else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR";d.className="display vermelho";}
-  else{d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER para confirmar - Azul vai marcar junto: "+cur+" "+cur+" "+cur+" "+cur+" "+cur;d.className="display inicial";}
+  else{d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER - Azul junto: "+cur+" "+cur+" "+cur+" "+cur+" "+cur;d.className="display inicial";}
   return;
  }
  if(paginaAtual==1){
   if(lista.length==0){
-   d.textContent="PÁG 1 - DIGITE NUMERO E DE ENTER - NUMEROS APARECEM AQUI NA HORIZONTAL - Azul marca junto P2 e P3: 15,15,15,15,15";
+   d.textContent="PÁG 1 - DIGITE E ENTER - Numeros aqui - Azul marca junto P2 e P3: 15,15,15,15,15 - Alerta bem grande coluna";
   }else{
-   d.textContent="PÁG 1 - "+lista.length+" numeros - Ultimo: "+lista[lista.length-1]+" - Azul: "+(azulValor!==null?azulValor:"nenhum")+" - Todos azuis = "+azulValor;
+   d.textContent="PÁG 1 - "+lista.length+" numeros - Ultimo: "+lista[lista.length-1]+" - Azul: "+(azulValor!==null?azulValor:"-");
   }
   d.className="display inicial";
  }else{
@@ -236,8 +253,8 @@ function show(){
    d.innerHTML="🚨 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - COLUNA 2/3";
    d.className="display alerta";
   }else{
-   if(paginaAtual==2){d.textContent="PÁG 2 - Azul junto: "+(azulValor!==null?azulValor:"-")+" - Conjuntos: "+conjuntosP2.length+" - Branco enche cria novo";}
-   else if(paginaAtual==3){d.textContent="PÁG 3 - Azul junto: "+(azulValor!==null?azulValor:"-")+" - Vermelhos: "+contarVermelhosP3()+" - 2🟥🟥 alerta P1";}
+   if(paginaAtual==2){d.textContent="PÁG 2 - Azul junto: "+(azulValor!==null?azulValor:"-")+" - Conjuntos: "+conjuntosP2.length;}
+   else if(paginaAtual==3){d.textContent="PÁG 3 - Azul junto: "+(azulValor!==null?azulValor:"-")+" - Vermelhos: "+contarVermelhosP3()+" - 2🟥🟥 alerta grande";}
    else{d.textContent="PÁG "+paginaAtual+" - "+lista.length+" numeros";}
    d.className="display inicial";
   }
@@ -402,7 +419,7 @@ function upd(){
  if(topBar1){
   topBar1.innerHTML="";
   if(lista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:12px;color:#1a7a2a;padding:8px;text-align:center;width:100%";e.textContent="PÁG 1 - NENHUM NUMERO AINDA - DIGITE E DE ENTER - Numeros aparecem aqui na horizontal: 15, 10, 7, 4, 1 ... - Azul marca junto P2 e P3: 15,15,15,15,15";
+   var e=document.createElement('div');e.style.cssText="font-size:12px;color:#1a7a2a;padding:8px;text-align:center;width:100%";e.textContent="PÁG 1 - NENHUM NUMERO AINDA - DIGITE E ENTER - Numeros aparecem aqui: 4,3,2,1... - Azul junto P2 P3: 15,15,15,15,15";
    topBar1.appendChild(e);
   }else{
    var rev=lista.slice().reverse();
@@ -415,8 +432,14 @@ function upd(){
    });
   }
  }
- var alertaBox1=document.getElementById('alertaBox1');
- var alertaBox3=document.getElementById('alertaBox3');
+ var alertaGrande1=document.getElementById('alertaGrande1');
+ var alertaGrande3=document.getElementById('alertaGrande3');
+ var colunaGrandeTexto1=document.getElementById('colunaGrandeTexto1');
+ var colunaSubTexto1=document.getElementById('colunaSubTexto1');
+ var colunaDetalheTexto1=document.getElementById('colunaDetalheTexto1');
+ var colunaGrandeTexto3=document.getElementById('colunaGrandeTexto3');
+ var colunaSubTexto3=document.getElementById('colunaSubTexto3');
+ var colunaDetalheTexto3=document.getElementById('colunaDetalheTexto3');
  var tem2Vermelhos=false;
  var seqVermelhos=[];
  var countSeq=0;
@@ -432,11 +455,21 @@ function upd(){
  }
  if(countSeq>=2) tem2Vermelhos=true;
  if(tem2Vermelhos){
-  if(alertaBox1){alertaBox1.classList.add('ativo');alertaBox1.innerHTML="🚨 2 VERMELHOS 🟥🟥 SEGUIDOS NA PÁG 3: "+seqVermelhos.join(", ")+" <br>👉 ENTRA TAMBÉM! JOGAR NA COLUNA 2 E 3! AZUL="+azulValor;}
-  if(alertaBox3){alertaBox3.classList.add('ativo');alertaBox3.innerHTML="🚨 2 VERMELHOS 🟥🟥: "+seqVermelhos.join(", ")+" <br>👉 ALERTA PÁG 1 - ENTRA TAMBÉM!";}
+  if(alertaGrande1){
+   alertaGrande1.classList.add('ativo');
+   if(colunaGrandeTexto1) colunaGrandeTexto1.textContent="COLUNA 2 E 3";
+   if(colunaSubTexto1) colunaSubTexto1.textContent="ENTRA TAMBÉM! - JOGAR!";
+   if(colunaDetalheTexto1) colunaDetalheTexto1.textContent="2 VERMELHOS: "+seqVermelhos.join(", ")+" - AZUL="+azulValor;
+  }
+  if(alertaGrande3){
+   alertaGrande3.classList.add('ativo');
+   if(colunaGrandeTexto3) colunaGrandeTexto3.textContent="COLUNA 2 E 3";
+   if(colunaSubTexto3) colunaSubTexto3.textContent="2 VERMELHOS: "+seqVermelhos.join(", ");
+   if(colunaDetalheTexto3) colunaDetalheTexto3.textContent="ENTRA TAMBÉM!";
+  }
  }else{
-  if(alertaBox1) alertaBox1.classList.remove('ativo');
-  if(alertaBox3) alertaBox3.classList.remove('ativo');
+  if(alertaGrande1) alertaGrande1.classList.remove('ativo');
+  if(alertaGrande3) alertaGrande3.classList.remove('ativo');
  }
  ['topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
   var el=document.getElementById(id);

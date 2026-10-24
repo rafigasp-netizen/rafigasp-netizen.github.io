@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - SEM NOME LINHA - SO QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</title>
+<title>RAFIGASP - P2 1 VERMELHO ALERTA P2 / P3 2 VERMELHOS ALERTA P1 - SEM NOME LINHA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -59,7 +59,7 @@ body{display:flex;justify-content:center}
 @keyframes piscaAlertaGrande{0%{transform:scale(1)}100%{transform:scale(1.03)}}
 @keyframes piscaAcertou{0%{transform:scale(1);box-shadow:0 0 30px #00ff00}100%{transform:scale(1.05);box-shadow:0 0 60px #00ff00}}
 @keyframes piscaErrou{0%{transform:scale(1);box-shadow:0 0 30px #ff0000}100%{transform:scale(1.05);box-shadow:0 0 60px #ff0000}}
-.colunaGrande{font-size:26px;letter-spacing:1px;text-shadow:0 0 10px #fff;line-height:1.1;font-weight:900}
+.colunaGrande{font-size:24px;letter-spacing:1px;text-shadow:0 0 10px #fff;line-height:1.1;font-weight:900}
 .placarSimples{background:#000;border:2.5px solid #d4af37;border-radius:12px;padding:10px;margin-top:10px;display:flex;justify-content:center;gap:20px;min-height:50px;width:100%}
 .placarItemSimples{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:70px}
 .placarLabelSimples{font-size:10px;color:#d4af37;letter-spacing:1px;font-weight:900}
@@ -87,12 +87,12 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG2 SEM NOME LINHA - SO QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</div>
+<div class="display inicial" id="disp">P2: 1 VERMELHO DEPOIS AZUL = ALERTA P2 / P3: 2 VERMELHOS DEPOIS AZUL = ALERTA P1</div>
 
 <div class="page ativa" id="page1">
 <div class="topBar" id="topBar1"></div>
 <div class="alertaGrande verde" id="alertaGrande1">
-<div class="colunaGrande" id="colunaGrandeTexto1">AGUARDANDO<br>SINAL...</div>
+<div class="colunaGrande" id="colunaGrandeTexto1">AGUARDANDO<br>SINAL...<br><span style="font-size:11px">PÁG 2: 1🔴 DEPOIS 🟦 = ALERTA P2<br>PÁG 3: 2🔴 DEPOIS 🟦 = ALERTA AQUI P1</span></div>
 <div class="placarSimples" id="placarBox1">
 <div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou1">0</div></div>
 <div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou1">0</div></div>
@@ -102,19 +102,26 @@ body{display:flex;justify-content:center}
 
 <div class="page" id="page2">
 <div class="conjuntosContainer" id="conjuntosP2"></div>
-<div class="infoBar" id="infoBar2">PÁG 2 - SEM NOME LINHA - SÓ QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA</div>
+<div class="alertaGrande verde" id="alertaGrande2">
+<div class="colunaGrande" id="colunaGrandeTexto2">AGUARDANDO<br>SINAL P2...<br><span style="font-size:11px">1🔴 DEPOIS 🟦 = JOGAR</span></div>
+<div class="placarSimples" id="placarBox2">
+<div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou2">0</div></div>
+<div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou2">0</div></div>
+</div>
+</div>
+<div class="infoBar" id="infoBar2">PÁG 2 - 1 VERMELHO DEPOIS DO AZUL = ALERTA AQUI NA PÁG 2 PARA JOGAR - COLUNA DO AZUL</div>
 </div>
 
 <div class="page" id="page3">
 <div class="conjuntosContainer" id="conjuntosP3"></div>
-<div class="infoBar" id="infoBar3">PÁG 3 - SEM NOME LINHA - 5 LINHAS - 2🟥🟥 manda jogar coluna do azul</div>
 <div class="alertaGrande verde" id="alertaGrande3">
-<div class="colunaGrande" id="colunaGrandeTexto3">AGUARDANDO<br>SINAL...</div>
+<div class="colunaGrande" id="colunaGrandeTexto3">AGUARDANDO<br>SINAL P3...<br><span style="font-size:11px">2🔴 DEPOIS 🟦 = ALERTA NA PÁG 1</span></div>
 <div class="placarSimples" id="placarBox3">
 <div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou3">0</div></div>
 <div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou3">0</div></div>
 </div>
 </div>
+<div class="infoBar" id="infoBar3">PÁG 3 - 2 VERMELHOS DEPOIS DO AZUL = AVISA NA PÁG 1 PARA JOGAR</div>
 </div>
 
 <div class="page" id="page4"><div class="topBar" id="topBar4"></div></div>
@@ -136,9 +143,9 @@ body{display:flex;justify-content:center}
 <script>
 var cur="",lista=[],paginaAtual=1;
 var green=0,red=0;
-var esperandoResultado=false;
-var colunaParaJogar=null;
-var numeroAzulAtual=null;
+var esperandoP2=false, esperandoP3=false;
+var colunaP2=null, numeroAzulP2=null;
+var colunaP3=null, numeroAzulP3=null;
 var linhasP2 = [];
 var linhasP3 = [];
 function getCol(n){
@@ -153,7 +160,7 @@ function inicializar(){
  linhasP2=[];linhasP3=[];
  var containerP2=document.getElementById('conjuntosP2');
  var boxP2=document.createElement('div');boxP2.className='conjuntoBox';
- var labelP2=document.createElement('div');labelP2.className='conjuntoLabel';labelP2.textContent='PÁG 2 - PADRÃO - 5 LINHAS - SEM NOME';boxP2.appendChild(labelP2);
+ var labelP2=document.createElement('div');labelP2.className='conjuntoLabel';labelP2.textContent='PÁG 2 - PADRÃO - 5 LINHAS - SEM NOME - 1 VERMELHO ALERTA P2';boxP2.appendChild(labelP2);
  var brancosPorLinha = [1,2,3,4,5];
  for(var r=0;r<5;r++){
   var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP2_'+r;
@@ -163,7 +170,7 @@ function inicializar(){
  containerP2.appendChild(boxP2);
  var containerP3=document.getElementById('conjuntosP3');
  var boxP3=document.createElement('div');boxP3.className='conjuntoBox';
- var labelP3=document.createElement('div');labelP3.className='conjuntoLabel';labelP3.textContent='PÁG 3 - VERMELHO - 5 LINHAS - SEM NOME';boxP3.appendChild(labelP3);
+ var labelP3=document.createElement('div');labelP3.className='conjuntoLabel';labelP3.textContent='PÁG 3 - VERMELHO - 5 LINHAS - SEM NOME - 2 VERMELHOS ALERTA P1';boxP3.appendChild(labelP3);
  for(var r=0;r<5;r++){
   var linhaDiv=document.createElement('div');linhaDiv.className='linhaPadrao';linhaDiv.id='linhaP3_'+r;
   boxP3.appendChild(linhaDiv);
@@ -171,18 +178,12 @@ function inicializar(){
  }
  containerP3.appendChild(boxP3);
 }
-function setEstadoQuadrado(estado, textoGrande){
- var el1=document.getElementById('alertaGrande1');
- var el3=document.getElementById('alertaGrande3');
- var txt1=document.getElementById('colunaGrandeTexto1');
- var txt3=document.getElementById('colunaGrandeTexto3');
- if(el1){
-  el1.className='alertaGrande '+estado;
-  if(txt1) txt1.innerHTML=textoGrande;
- }
- if(el3){
-  el3.className='alertaGrande '+estado;
-  if(txt3) txt3.innerHTML=textoGrande;
+function setEstadoQuadrado(id, estado, textoGrande){
+ var el=document.getElementById(id);
+ var txt=document.getElementById(id.replace('alertaGrande','colunaGrandeTexto'));
+ if(el){
+  el.className='alertaGrande '+estado;
+  if(txt) txt.innerHTML=textoGrande;
  }
 }
 function irPara(p){
@@ -199,8 +200,11 @@ function show(){
   if(cur=="0"){d.textContent="P"+paginaAtual+" - 0 = APAGAR";d.className="display vermelho";}
   else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR";d.className="display vermelho";}
   else{
-   if(esperandoResultado){
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - RESULTADO COLUNA DO AZUL "+colunaParaJogar;
+   if(esperandoP2 || esperandoP3){
+    var txt = "";
+    if(esperandoP3) txt += "P3: 2🔴 COL "+colunaP3+" AZUL "+numeroAzulP3+" ";
+    if(esperandoP2) txt += "P2: 1🔴 COL "+colunaP2+" AZUL "+numeroAzulP2;
+    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - RESULTADO! "+txt;
     d.className="display sinal";
    }else{
     d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER";
@@ -210,20 +214,31 @@ function show(){
   return;
  }
  if(paginaAtual==1){
-  if(esperandoResultado){
-   d.innerHTML="🔴 SINAL - JOGAR COLUNA "+colunaParaJogar+" DO AZUL "+numeroAzulAtual;
+  if(esperandoP3){
+   d.innerHTML="🔴 P3 SINAL 2🔴 DEPOIS 🟦 - JOGAR COLUNA "+colunaP3+" DO AZUL "+numeroAzulP3+"<br>👉 DIGITE PRÓXIMO NA P1";
    d.className="display alerta";
-  }else if(lista.length==0){
-   d.textContent="PÁG 1 - SEM NOME LINHA - VERDE AGUARDANDO";
-   d.className="display inicial";
   }else{
-   d.textContent="PÁG 1 - "+lista.length+" nums - ✅:"+green+" ❌:"+red;
+   d.textContent="PÁG 1 - AGUARDANDO - P2: 1🔴=ALERTA P2 / P3: 2🔴=ALERTA P1 - ✅:"+green+" ❌:"+red;
+   d.className="display inicial";
+  }
+ }else if(paginaAtual==2){
+  if(esperandoP2){
+   d.innerHTML="🔴 P2 SINAL 1🔴 DEPOIS 🟦 - JOGAR COLUNA "+colunaP2+" DO AZUL "+numeroAzulP2+"<br>👉 DIGITE PRÓXIMO";
+   d.className="display alerta";
+  }else{
+   d.textContent="PÁG 2 - 1 VERMELHO DEPOIS AZUL = ALERTA AQUI P2 - ✅:"+green+" ❌:"+red;
+   d.className="display inicial";
+  }
+ }else if(paginaAtual==3){
+  if(esperandoP3){
+   d.innerHTML="🔴 P3 SINAL 2🔴 DEPOIS 🟦 - AVISA NA P1 COLUNA "+colunaP3;
+   d.className="display alerta";
+  }else{
+   d.textContent="PÁG 3 - 2 VERMELHOS DEPOIS AZUL = AVISA NA P1 - COL: "+(colunaP3!==null?colunaP3:"-");
    d.className="display inicial";
   }
  }else{
-  if(paginaAtual==2){d.textContent="PÁG 2 - SEM NOME - SÓ QUADRADOS - 5 LINHAS CONTINUA MESMA LINHA";}
-  else if(paginaAtual==3){d.textContent="PÁG 3 - COLUNA DO AZUL: "+(colunaParaJogar!==null?colunaParaJogar:"-");}
-  else{d.textContent="PÁG "+paginaAtual+" - COACH DA ROLETA";}
+  d.textContent="PÁG "+paginaAtual+" - COACH DA ROLETA";
   d.className="display inicial";
  }
 }
@@ -237,20 +252,22 @@ function apagarUltimo(){
  }
 }
 function limparTudo(){
- cur="";lista=[];colunaParaJogar=null;numeroAzulAtual=null;green=0;red=0;esperandoResultado=false;
+ cur="";lista=[];colunaP2=null;numeroAzulP2=null;colunaP3=null;numeroAzulP3=null;green=0;red=0;esperandoP2=false;esperandoP3=false;
  inicializar();
- setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
+ setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...<br><span style="font-size:11px">PÁG 2: 1🔴=ALERTA P2<br>PÁG 3: 2🔴=ALERTA P1</span>');
+ setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...<br><span style="font-size:11px">1🔴 DEPOIS 🟦 = JOGAR</span>');
+ setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...<br><span style="font-size:11px">2🔴 DEPOIS 🟦 = ALERTA NA PÁG 1</span>');
  irPara(paginaAtual);
  show();upd();
 }
 function reconstruirTudo(){
  inicializar();
  var temp=lista.slice();
- lista=[];green=0;red=0;colunaParaJogar=null;numeroAzulAtual=null;esperandoResultado=false;
+ lista=[];green=0;red=0;colunaP2=null;numeroAzulP2=null;colunaP3=null;numeroAzulP3=null;esperandoP2=false;esperandoP3=false;
  temp.forEach(function(n){
   aplicarNumero(n,false);
  });
- checarSinal();
+ checarSinais();
  lista=temp.slice();
 }
 function aplicarNumero(n, adicionarNaLista){
@@ -294,36 +311,70 @@ function aplicarNumero(n, adicionarNaLista){
   lista.push(n);
  }
 }
-function checarSinal(){
- for(var r=0;r<linhasP3.length;r++){
-  var linha=linhasP3[r];
+function checarSinais(){
+ checarSinalP2();
+ checarSinalP3();
+}
+function checarSinalP2(){
+ if(esperandoP2) return true;
+ for(var r=0;r<linhasP2.length;r++){
+  var linha=linhasP2[r];
   for(var i=0;i<linha.itens.length-1;i++){
-   var it1=linha.itens[i];
-   var it2=linha.itens[i+1];
-   if(!it1.isAzul && !it2.isAzul){
-    if(getCol(it1.valor)==1 && getCol(it2.valor)==1){
-     for(var k=i-1;k>=0;k--){
-      var itAzul=linha.itens[k];
-      if(itAzul.isAzul){
-       var colAzul=getCol(itAzul.valor);
-       if(colAzul==0) colAzul=3;
-       colunaParaJogar=colAzul;
-       numeroAzulAtual=itAzul.valor;
-       esperandoResultado=true;
-       setEstadoQuadrado('vermelho','ATENÇÃO<br>VEM<br>COLUNA<br>'+colunaParaJogar+'<br><span style="font-size:11px">AZUL: '+numeroAzulAtual+' COL '+colAzul+'</span>');
-       return true;
-      }
-     }
+   var itAzul=linha.itens[i];
+   var itVerm=linha.itens[i+1];
+   if(itAzul.isAzul && !itVerm.isAzul){
+    if(getCol(itVerm.valor)==1){
+     var colAzul=getCol(itAzul.valor);
+     if(colAzul==0) colAzul=3;
+     colunaP2=colAzul;
+     numeroAzulP2=itAzul.valor;
+     esperandoP2=true;
+     setEstadoQuadrado('alertaGrande2','vermelho','ATENÇÃO P2<br>VEM<br>COLUNA<br>'+colunaP2+'<br><span style="font-size:11px">1🔴 DEPOIS 🟦<br>AZUL: '+numeroAzulP2+' COL '+colAzul+'</span>');
+     return true;
     }
    }
   }
  }
- if(!esperandoResultado){
+ if(!esperandoP2){
+  var el=document.getElementById('alertaGrande2');
+  if(el && !el.classList.contains('acertou') && !el.classList.contains('errou')){
+   setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...<br><span style="font-size:11px">1🔴 DEPOIS 🟦 = JOGAR</span>');
+  }
+ }
+ return false;
+}
+function checarSinalP3(){
+ if(esperandoP3) return true;
+ for(var r=0;r<linhasP3.length;r++){
+  var linha=linhasP3[r];
+  for(var i=0;i<linha.itens.length-2;i++){
+   var itAzul=linha.itens[i];
+   var itV1=linha.itens[i+1];
+   var itV2=linha.itens[i+2];
+   if(itAzul.isAzul && !itV1.isAzul && !itV2.isAzul){
+    if(getCol(itV1.valor)==1 && getCol(itV2.valor)==1){
+     var colAzul=getCol(itAzul.valor);
+     if(colAzul==0) colAzul=3;
+     colunaP3=colAzul;
+     numeroAzulP3=itAzul.valor;
+     esperandoP3=true;
+     setEstadoQuadrado('alertaGrande1','vermelho','ATENÇÃO P1<br>VEM DE P3<br>COLUNA<br>'+colunaP3+'<br><span style="font-size:11px">2🔴 DEPOIS 🟦 P3<br>AZUL: '+numeroAzulP3+' COL '+colAzul+'</span>');
+     setEstadoQuadrado('alertaGrande3','vermelho','AVISO P3<br>2🔴 DEPOIS 🟦<br>COLUNA '+colunaP3+'<br><span style="font-size:11px">AVISA NA PÁG 1<br>AZUL: '+numeroAzulP3+'</span>');
+     return true;
+    }
+   }
+  }
+ }
+ if(!esperandoP3){
   var el1=document.getElementById('alertaGrande1');
-  if(el1 && !el1.classList.contains('acertou') && !el1.classList.contains('errou')){
-   setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
-   colunaParaJogar=null;
-   numeroAzulAtual=null;
+  var el3=document.getElementById('alertaGrande3');
+  if(el3 && !el3.classList.contains('acertou') && !el3.classList.contains('errou') && !esperandoP3){
+   setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...<br><span style="font-size:11px">2🔴 DEPOIS 🟦 = ALERTA NA PÁG 1</span>');
+  }
+  if(!esperandoP3 && !esperandoP2){
+   if(el1 && !el1.classList.contains('acertou') && !el1.classList.contains('errou')){
+    setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...<br><span style="font-size:11px">PÁG 2: 1🔴=ALERTA P2<br>PÁG 3: 2🔴=ALERTA P1</span>');
+   }
   }
  }
  return false;
@@ -333,26 +384,61 @@ function ok(){
  if(cur==="00"){limparTudo();return;}
  if(cur==="0"){apagarUltimo();return;}
  var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
- if(esperandoResultado){
+ if(esperandoP3){
   var colResultado=getCol(n);
-  var acertou = (colResultado==colunaParaJogar);
-  if(colunaParaJogar==0){acertou = (colResultado==0);}
+  var acertou = (colResultado==colunaP3);
+  if(colunaP3==0){acertou = (colResultado==0);}
   if(acertou){
    green++;
-   setEstadoQuadrado('acertou','ACERTOU!<br>✅<br>COLUNA<br>'+colunaParaJogar+'<br>Nº '+n+'<br>AZUL '+numeroAzulAtual);
+   setEstadoQuadrado('alertaGrande1','acertou','ACERTOU P1!<br>✅<br>COLUNA<br>'+colunaP3+'<br>Nº '+n+'<br>AZUL P3 '+numeroAzulP3);
+   setEstadoQuadrado('alertaGrande3','acertou','ACERTOU P3!<br>✅<br>COLUNA '+colunaP3+'<br>Nº '+n);
   }else{
    red++;
-   setEstadoQuadrado('errou','ERROU!<br>❌<br>Nº '+n+' COL '+colResultado+'<br>COL '+colunaParaJogar+' AZUL '+numeroAzulAtual);
+   setEstadoQuadrado('alertaGrande1','errou','ERROU P1!<br>❌<br>Nº '+n+' COL '+colResultado+'<br>COL '+colunaP3+' AZUL P3 '+numeroAzulP3);
+   setEstadoQuadrado('alertaGrande3','errou','ERROU P3!<br>❌<br>Nº '+n+' COL '+colResultado);
   }
   document.getElementById('placarAcertou1').textContent=green;
   document.getElementById('placarErrou1').textContent=red;
+  document.getElementById('placarAcertou2').textContent=green;
+  document.getElementById('placarErrou2').textContent=red;
   document.getElementById('placarAcertou3').textContent=green;
   document.getElementById('placarErrou3').textContent=red;
-  esperandoResultado=false;
-  colunaParaJogar=null;
-  numeroAzulAtual=null;
+  esperandoP3=false;
+  colunaP3=null;
+  numeroAzulP3=null;
   setTimeout(function(){
-   setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
+   if(!esperandoP2){
+    setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...<br><span style="font-size:11px">PÁG 2: 1🔴=ALERTA P2<br>PÁG 3: 2🔴=ALERTA P1</span>');
+   }
+   setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...<br><span style="font-size:11px">2🔴 DEPOIS 🟦 = ALERTA NA PÁG 1</span>');
+   show();
+  },3500);
+  aplicarNumero(n,true);
+  cur="";show();upd();
+  return;
+ }
+ if(esperandoP2){
+  var colResultado=getCol(n);
+  var acertou = (colResultado==colunaP2);
+  if(colunaP2==0){acertou = (colResultado==0);}
+  if(acertou){
+   green++;
+   setEstadoQuadrado('alertaGrande2','acertou','ACERTOU P2!<br>✅<br>COLUNA<br>'+colunaP2+'<br>Nº '+n+'<br>AZUL P2 '+numeroAzulP2);
+  }else{
+   red++;
+   setEstadoQuadrado('alertaGrande2','errou','ERROU P2!<br>❌<br>Nº '+n+' COL '+colResultado+'<br>COL '+colunaP2+' AZUL P2 '+numeroAzulP2);
+  }
+  document.getElementById('placarAcertou1').textContent=green;
+  document.getElementById('placarErrou1').textContent=red;
+  document.getElementById('placarAcertou2').textContent=green;
+  document.getElementById('placarErrou2').textContent=red;
+  document.getElementById('placarAcertou3').textContent=green;
+  document.getElementById('placarErrou3').textContent=red;
+  esperandoP2=false;
+  colunaP2=null;
+  numeroAzulP2=null;
+  setTimeout(function(){
+   setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...<br><span style="font-size:11px">1🔴 DEPOIS 🟦 = JOGAR</span>');
    show();
   },3500);
   aplicarNumero(n,true);
@@ -361,14 +447,14 @@ function ok(){
  }
  aplicarNumero(n,true);
  cur="";show();upd();
- checarSinal();
+ checarSinais();
 }
 function upd(){
  var topBar1=document.getElementById('topBar1');
  if(topBar1){
   topBar1.innerHTML="";
   if(lista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:10px;color:#1a7a2a;padding:6px;text-align:center;width:100%";e.textContent="PÁG 1 - DIGITE - PÁG2 SEM NOME LINHA - SÓ QUADRADOS";
+   var e=document.createElement('div');e.style.cssText="font-size:9px;color:#1a7a2a;padding:5px;text-align:center;width:100%";e.textContent="PÁG 1 - DIGITE - P2: 1🔴 DEPOIS 🟦=ALERTA P2 / P3: 2🔴 DEPOIS 🟦=ALERTA P1 - COLUNA DO AZUL";
    topBar1.appendChild(e);
   }else{
    var rev=lista.slice().reverse();
@@ -381,6 +467,8 @@ function upd(){
  }
  document.getElementById('placarAcertou1').textContent=green;
  document.getElementById('placarErrou1').textContent=red;
+ document.getElementById('placarAcertou2').textContent=green;
+ document.getElementById('placarErrou2').textContent=red;
  document.getElementById('placarAcertou3').textContent=green;
  document.getElementById('placarErrou3').textContent=red;
  ['topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
@@ -402,7 +490,9 @@ function upd(){
  show();
 }
 inicializar();
-setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
+setEstadoQuadrado('alertaGrande1','verde','AGUARDANDO<br>SINAL...<br><span style="font-size:11px">PÁG 2: 1🔴=ALERTA P2<br>PÁG 3: 2🔴=ALERTA P1</span>');
+setEstadoQuadrado('alertaGrande2','verde','AGUARDANDO<br>SINAL P2...<br><span style="font-size:11px">1🔴 DEPOIS 🟦 = JOGAR</span>');
+setEstadoQuadrado('alertaGrande3','verde','AGUARDANDO<br>SINAL P3...<br><span style="font-size:11px">2🔴 DEPOIS 🟦 = ALERTA NA PÁG 1</span>');
 show();upd();
 </script>
 </body>

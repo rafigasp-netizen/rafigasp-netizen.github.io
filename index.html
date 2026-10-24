@@ -3,365 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP AZUL GRANDE</title>
+<title>RAFIGASP 004 - SINAL 13 RODADAS</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818;overflow:hidden}body{display:flex;justify-content:center}.app{width:100%;max-width:480px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}.topo{padding:10px 0 5px;text-align:center;background:#0a1f14;flex-shrink:0}.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:38px;color:#e8c76a;line-height:1}.topoS{font-size:11px;letter-spacing:4px;color:#d4af37;font-weight:800}.display{margin:6px 12px;background:#000;border:3px solid #d4af37;border-radius:12px;height:56px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:20px;flex-shrink:0;text-align:center;padding:5px}.display.vazio{color:#3a7a3a;font-size:16px}.display.alerta{background:#ef4444;color:#fff;border-color:#ff0000;animation:piscaAlerta 0.5s infinite alternate}.display.azul{background:#1e40af;color:#fff;border-color:#60a5fa;animation:piscaAzul 0.6s infinite alternate}.painel{flex:1;display:flex;flex-direction:column;overflow:hidden}.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;overflow:hidden}.box{border:2px solid #d4af37;border-radius:12px;background:#0f2e1a;padding:8px;display:flex;flex-direction:column;overflow:hidden}.boxLabel{font-size:13px;font-weight:900;color:#d4af37;margin-bottom:5px}.sqs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;justify-items:center}.sq{width:100%;max-width:72px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff}.sq.g{background:#16a34a}.sq.r{background:#dc2626}.sq.b{background:#1e40af}.pill{background:linear-gradient(180deg,#f9e27a,#d4af37);color:#0a2a12;font-weight:900;font-size:16px;padding:10px 14px;border-radius:20px;text-align:center;min-width:120px}.centroBox{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}.kb{padding:8px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 8px 8px 8px;border-radius:14px;border:2px solid #d4af37;height:38%;display:flex;flex-direction:column;gap:5px;flex-shrink:0}.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.k{width:100%;height:100%;border-radius:12px;border:1px solid #8a6d1b;font-weight:900;font-size:26px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
-.painel2,.painel3,.painel4,.painel5{flex:1;display:none;flex-direction:column;overflow:hidden;padding:6px;gap:6px}
-.seqTop{display:flex;gap:4px;background:#000;border:2px solid #d4af37;border-radius:10px;padding:6px;flex-wrap:wrap;min-height:42px}
-.ln{width:42px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff}.ln.b{background:#1e40af}.ln.g{background:#16a34a}.ln.r{background:#dc2626}.ln.y{background:#eab308;color:#000}
-.histRow{border:1px solid #1a4d1a;background:#0f2e1a;border-radius:10px;padding:6px 8px;display:flex;align-items:center;gap:5px;min-height:38px}.histLabel{font-size:14px;font-weight:900;color:#e8c76a;width:90px;flex-shrink:0}.histNums{display:flex;gap:4px;flex-wrap:wrap;flex:1}
-.rouleteWrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0a1f14;border:2px solid #d4af37;border-radius:12px;padding:6px}
-#canvasRoleta{max-width:100%;max-height:100%}
-.legenda{display:flex;gap:6px;margin-top:4px;font-size:12px;font-weight:900;color:#f9e27a;align-items:center;flex-wrap:wrap;justify-content:center}
-.dot{width:12px;height:12px;border-radius:50%}.dot.verde{background:#22c55e;box-shadow:0 0 6px #22c55e;animation:piscar 0.6s infinite alternate}.dot.quente{background:#ff4500;box-shadow:0 0 8px #ff4500}.dot.frio{background:#3b82f6;box-shadow:0 0 8px #3b82f6}.dot.viz{background:#facc15;box-shadow:0 0 6px #facc15}
-@keyframes piscar{0%{transform:scale(1)}100%{transform:scale(1.3)}}
-@keyframes piscaSeta{0%{opacity:1}50%{opacity:0.6}100%{opacity:1}}
-@keyframes piscaAlerta{0%{background:#ef4444}100%{background:#991b1b}}
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#0d2818;overflow:hidden}body{display:flex;justify-content:center}.app{width:100%;max-width:480px;height:100dvh;background:#0d2818;display:flex;flex-direction:column}.topo{padding:10px 0 5px;text-align:center;background:#0a1f14;flex-shrink:0}.topoR{font-family:'Montserrat',sans-serif;font-weight:900;font-size:32px;color:#e8c76a;line-height:1}.topoS{font-size:11px;letter-spacing:3px;color:#d4af37;font-weight:800}.display{margin:6px 12px;background:#000;border:3px solid #d4af37;border-radius:12px;height:58px;display:flex;align-items:center;justify-content:center;color:#f9e27a;font-weight:900;font-size:19px;flex-shrink:0;text-align:center;padding:5px}.display.vazio{color:#3a7a3a;font-size:16px}.display.sinal{background:#1e40af;color:#fff;border-color:#60a5fa;animation:piscaAzul 0.5s infinite alternate;font-size:17px}.display.alerta{background:#dc2626;color:#fff;border-color:#ff0000;animation:piscaVermelho 0.5s infinite alternate}
 @keyframes piscaAzul{0%{background:#1e40af}100%{background:#3b82f6}}
-.hotcoldBox{display:flex;gap:4px;width:100%;margin-top:3px}
-.hc{flex:1;border-radius:6px;padding:6px;text-align:center;font-size:13px;font-weight:900}
-.hc.q{background:linear-gradient(180deg,#ff6a33,#dc2626);color:#fff;border:1px solid #ff4500}
-.hc.f{background:linear-gradient(180deg,#60a5fa,#1e40af);color:#fff;border:1px solid #3b82f6}
-.hc.v{background:linear-gradient(180deg,#fde047,#eab308);color:#000;border:1px solid #facc15}
-.transBox{background:#000;border:2px solid #d4af37;border-radius:10px;padding:6px;margin-top:4px}
-.transRow{display:flex;gap:4px;margin-bottom:4px}
-.transLabel{width:100px;font-size:13px;font-weight:900;color:#e8c76a;display:flex;align-items:center}
-.transVal{flex:1;background:#0f2e1a;border-radius:6px;padding:6px;text-align:center;font-size:14px;font-weight:900;color:#fff}
-.transVal.q{background:#dc2626}.transVal.m{background:#eab308;color:#000}.transVal.c{background:#16a34a}
-.prevCard{background:linear-gradient(180deg,#0f2e1a,#0a1f14);border:2px solid #d4af37;border-radius:12px;padding:8px}
-.prevTitle{font-size:16px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:6px}
-.prevGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.prevNum{background:#000;border:1px solid #d4af37;border-radius:8px;padding:6px;text-align:center}
-.prevNum.hot{border-color:#ff4500;background:linear-gradient(180deg,#ff6a33,#991b1b)}
-.prevNum.viz{border-color:#facc15;background:linear-gradient(180deg,#fde047,#a16207)}
-.prevNum.frio{border-color:#60a5fa;background:linear-gradient(180deg,#1e40af,#0a1f44)}
-.prevN{font-size:22px;font-weight:900;color:#fff}
-.prevP{font-size:13px;font-weight:900;color:#f9e27a}
+@keyframes piscaVermelho{0%{background:#dc2626}100%{background:#991b1b}}
+.painel6{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:6px;gap:6px}
+.card{background:#0f2e1a;border:2px solid #d4af37;border-radius:12px;padding:8px}
+.cardTitle{font-size:14px;font-weight:900;color:#f9e27a;text-align:center;margin-bottom:6px}
+.vizRow{display:flex;gap:5px;justify-content:center;margin:6px 0;flex-wrap:wrap}
+.vizBox{width:58px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#fff;background:#1e40af;border:2px solid #60a5fa}
+.vizBox.center{background:#dc2626;border-color:#ff4500;box-shadow:0 0 10px #ff4500}
+.vizBox.viz{background:#eab308;color:#000;border-color:#facc15}
+.statRow{display:flex;gap:5px;margin:5px 0}
+.stat{flex:1;background:#000;border-radius:8px;padding:7px;text-align:center;border:1px solid #d4af37}
+.statLabel{font-size:10px;color:#d4af37;font-weight:900}
+.statValue{font-size:18px;font-weight:900;color:#fff}
+.sinalCard{background:linear-gradient(180deg,#1e40af,#0a1f44);border:3px solid #60a5fa;border-radius:12px;padding:10px;text-align:center;animation:piscaAzul 0.6s infinite alternate}
+.sinalCard.vermelho{background:linear-gradient(180deg,#dc2626,#991b1b);border-color:#ff0000;animation:piscaVermelho 0.6s infinite alternate}
+.sinalNum{font-size:28px;font-weight:900;color:#fff}
+.sinalTxt{font-size:13px;font-weight:900;color:#93c5fd;margin-top:4px}
+.listaSinais{display:flex;flex-direction:column;gap:4px;max-height:220px;overflow:auto}
+.sinalItem{display:flex;align-items:center;gap:6px;background:#000;border:2px solid #60a5fa;border-radius:8px;padding:6px}
+.sinalItem .num{width:36px;height:32px;background:#dc2626;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px}
+.sinalItem .vizs{flex:1;font-size:11px;color:#f9e27a;font-weight:900}
+.sinalItem .gap{font-size:14px;font-weight:900;color:#fff;background:#1e40af;padding:4px 8px;border-radius:6px}
+.histGaps{display:flex;gap:3px;flex-wrap:wrap;min-height:28px}
+.gapBox{width:38px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
+.kb{padding:7px;background:linear-gradient(180deg,#e8c76a,#c9a84a);margin:0 6px 6px 6px;border-radius:14px;border:2px solid #d4af37;height:36%;display:flex;flex-direction:column;gap:4px;flex-shrink:0}.kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.k{width:100%;height:100%;border-radius:10px;border:1px solid #8a6d1b;font-weight:900;font-size:24px;background:linear-gradient(180deg,#f9e27a,#e8c86a 50%,#b8941f 100%);color:#1a1000;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">LETRAS GRANDES AZUL</div></div>
-<div class="display vazio" id="dig">DIGITE O NÚMERO</div>
-<div class="painel" id="painel1">
-<div class="grid">
-<div class="box"><div class="boxLabel">NUMERO CHAMADO</div><div class="sqs" id="boxNum"></div></div>
-<div class="box"><div class="boxLabel">JOGAR NA COLUNA</div><div class="centroBox"><span class="pill" id="pillCol">AGUARDANDO</span><div id="txtOrig" style="font-size:12px;color:#f9e27a;font-weight:900;text-align:center">-</div></div></div>
-<div class="box"><div class="boxLabel">ACERTO OU ERRO</div><div class="sqs" id="boxAcerto"></div></div>
-<div class="box"><div class="boxLabel">PLACAR</div><div class="centroBox"><span class="pill" id="pillPlacar">GREEN 0 x 0 RED</span><div style="font-weight:900;margin-top:2px;font-size:16px"><span style="color:#4ade80" id="gCount">✅ 0</span> <span style="color:#f87171" id="rCount">❌ 0</span></div></div></div>
+<div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">004 - SINAL 13 RODADAS - VIZINHOS</div></div>
+<div class="display vazio" id="dig">DIGITE O NUMERO - 004 = SINAL 13x</div>
+<div class="painel6" id="painel6">
+<div class="card">
+<div class="cardTitle">ULTIMO NUMERO + 3 VIZINHOS NA ROLETA REAL</div>
+<div style="display:flex;justify-content:center;align-items:center;gap:8px">
+<div style="font-size:12px;color:#d4af37;font-weight:900">NUMERO:</div>
+<div id="numAval" style="font-size:36px;font-weight:900;color:#fff;background:#dc2626;border-radius:8px;padding:2px 12px;min-width:60px;text-align:center">--</div>
+<div style="font-size:12px;color:#d4af37;font-weight:900">VIZINHOS:</div>
 </div>
+<div class="vizRow" id="vizRow"></div>
+<div style="font-size:11px;color:#60a5fa;text-align:center;font-weight:900" id="ordemTxt">Ordem roleta europeia - 4 numeros</div>
 </div>
-<div class="painel2" id="painel2"><div class="seqTop" id="seqTop"></div><div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:4px"><div class="histRow"><div class="histLabel">A HIST</div><div class="histNums" id="hA"></div></div><div class="histRow"><div class="histLabel">B HIST</div><div class="histNums" id="hB"></div></div><div class="histRow"><div class="histLabel">C HIST</div><div class="histNums" id="hC"></div></div><div class="histRow"><div class="histLabel">D HIST</div><div class="histNums" id="hD"></div></div><div class="histRow"><div class="histLabel">E HIST</div><div class="histNums" id="hE"></div></div><div class="histRow"><div class="histLabel">F HIST</div><div class="histNums" id="hF"></div></div></div></div>
-<div class="painel3" id="painel3">
-<div class="rouleteWrap">
-<canvas id="canvasRoleta" width="340" height="340"></canvas>
-<div class="hotcoldBox"><div class="hc q" id="hcQuente">QUENTE: --</div><div class="hc f" id="hcFrio">FRIO: --</div></div>
-<div class="hotcoldBox"><div class="hc v" id="hcViz">VIZINHOS: --</div><div class="hc q" id="hcCluster">CLUSTER: --</div></div>
-<div id="setaAposta" style="width:100%;text-align:center;font-size:14px;font-weight:900;color:#000;background:#facc15;border:2px solid #eab308;border-radius:8px;padding:5px;margin-top:3px;display:none">ENTRADA</div>
-<div id="gapInfo" style="width:100%;text-align:center;font-size:13px;font-weight:900;color:#fff;background:#000;border:2px solid #d4af37;border-radius:8px;padding:3px;margin-top:3px">GAP: 0</div>
-<div class="legenda"><div style="display:flex;align-items:center;gap:2px"><div class="dot quente"></div> QUENTE</div><div style="display:flex;align-items:center;gap:2px"><div class="dot viz"></div> VIZ</div><div style="display:flex;align-items:center;gap:2px"><div class="dot frio"></div> FRIO/AZUL</div><div style="display:flex;align-items:center;gap:2px"><div class="dot verde"></div> ATUAL</div><div id="labelAtual" style="color:#22c55e;margin-left:2px">-</div></div>
-<div style="font-size:9px;color:#d4af37;font-weight:800">000=A-F 001=ROLETA 002=HIST 003=PREVISAO AZUL</div>
+<div class="sinalCard" id="sinalPrincipal" style="display:none">
+<div class="sinalNum" id="sinalNum">--</div>
+<div class="sinalTxt" id="sinalTxt">AGUARDANDO</div>
 </div>
+<div class="card">
+<div class="cardTitle">CONTADOR 13 RODADAS - SINAIS ATIVOS</div>
+<div style="font-size:11px;color:#facc15;text-align:center;font-weight:900;margin-bottom:4px">QUANDO CONTA 13 SEM VOLTAR ELE OU VIZINHO = SINAL</div>
+<div class="listaSinais" id="listaSinais"></div>
 </div>
-<div class="painel4" id="painel4">
-<div style="background:#000;border:2px solid #d4af37;border-radius:10px;padding:5px;display:flex;gap:4px;flex-wrap:wrap">
-<div style="flex:1;min-width:90px;background:linear-gradient(180deg,#ff6a33,#dc2626);border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;font-weight:900;color:#fff">QUENTE</div><div style="font-size:16px;font-weight:900;color:#fff" id="statQ">0x 0%</div><div style="font-size:10px;color:#fff" id="statQnums">--</div></div>
-<div style="flex:1;min-width:90px;background:linear-gradient(180deg,#fde047,#eab308);border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;font-weight:900;color:#000">VIZINHOS</div><div style="font-size:16px;font-weight:900;color:#000" id="statV">0x 0%</div><div style="font-size:10px;color:#000" id="statVnums">--</div></div>
-<div style="flex:1;min-width:90px;background:linear-gradient(180deg,#ff6a33,#991b1b);border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;font-weight:900;color:#fff">CLUSTER 9</div><div style="font-size:16px;font-weight:900;color:#fff" id="statC">0x 0%</div><div style="font-size:10px;color:#fff" id="statCgap">GAP 0</div></div>
-<div style="flex:1;min-width:90px;background:linear-gradient(180deg,#60a5fa,#1e40af);border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;font-weight:900;color:#fff">AZUL/FORA</div><div style="font-size:16px;font-weight:900;color:#fff" id="statF">0x 0%</div><div style="font-size:10px;color:#fff" id="statFnums">--</div></div>
+<div class="card">
+<div class="cardTitle">AVALIACAO DO NUMERO ATUAL</div>
+<div class="statRow">
+<div class="stat"><div class="statLabel">JA CONTOU</div><div class="statValue" id="atualSem" style="color:#facc15">--</div></div>
+<div class="stat"><div class="statLabel">MEDIA VOLTA</div><div class="statValue" id="mediaGap">--</div></div>
+<div class="stat"><div class="statLabel">FALTA PRA 13</div><div class="statValue" id="falta13">--</div></div>
 </div>
-<div class="transBox">
-<div style="font-size:14px;font-weight:900;color:#facc15;text-align:center;margin-bottom:4px">DEPOIS QUE CAI AZUL, PRA ONDE VAI?</div>
-<div class="transRow"><div class="transLabel">DEPOIS Q</div><div class="transVal q" id="tQ_q">Q 0%</div><div class="transVal m" id="tQ_m">M 0%</div><div class="transVal c" id="tQ_c">CLUSTER 0%</div></div>
-<div class="transRow"><div class="transLabel">DEPOIS M</div><div class="transVal q" id="tM_q">Q 0%</div><div class="transVal m" id="tM_m">M 0%</div><div class="transVal c" id="tM_c">CLUSTER 0%</div></div>
-<div class="transRow"><div class="transLabel" style="color:#60a5fa">DEPOIS FRIO/AZUL</div><div class="transVal q" id="tF_q">Q 0%</div><div class="transVal m" id="tF_m">M 0%</div><div class="transVal c" id="tF_c">CLUSTER 0%</div></div>
-<div class="transRow"><div class="transLabel" style="color:#60a5fa">DEPOIS FORA/AZUL</div><div class="transVal q" id="tO_q">Q 0%</div><div class="transVal m" id="tO_m">M 0%</div><div class="transVal c" id="tO_c">CLUSTER 0%</div></div>
-<div style="font-size:12px;color:#60a5fa;text-align:center;margin-top:3px;font-weight:900" id="melhorDica">DICA: AGUARDANDO AZUL</div>
+<div style="font-size:11px;color:#d4af37;text-align:center;font-weight:900;margin-top:4px" id="historicoGapsLabel">Historico de voltas:</div>
+<div class="histGaps" id="gapHist"></div>
 </div>
-<div style="background:#0f2e1a;border:2px solid #d4af37;border-radius:8px;padding:4px;margin-top:4px">
-<div style="font-size:12px;font-weight:900;color:#facc15;margin-bottom:2px">SEQUENCIA CLASSIFICADA - AZUL=FORA</div>
-<div id="seqClass" style="display:flex;gap:2px;flex-wrap:wrap;min-height:28px"></div>
+<div class="card">
+<div class="cardTitle">TODOS OS NUMEROS - QUEM JA PASSOU DE 13?</div>
+<div style="display:flex;gap:4px;flex-wrap:wrap;max-height:140px;overflow:auto" id="todosNumeros"></div>
 </div>
-<div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:3px;margin-top:4px">
-<div class="histRow"><div class="histLabel">GAP QUENTE</div><div class="histNums" id="hGap"></div></div>
-<div class="histRow"><div class="histLabel">SO QUENTE</div><div class="histNums" id="hOnlyQ"></div></div>
-<div class="histRow"><div class="histLabel">SO VIZINHOS</div><div class="histNums" id="hOnlyV"></div></div>
-<div class="histRow"><div class="histLabel">CLUSTER</div><div class="histNums" id="hCluster"></div></div>
-<div class="histRow"><div class="histLabel">AZUL/FORA</div><div class="histNums" id="hAzul"></div></div>
-</div>
-</div>
-<div class="painel5" id="painel5">
-<div class="prevCard">
-<div class="prevTitle">PREVISAO AZUL - PROXIMAS 15 - LETRAS GRANDES</div>
-<div style="font-size:12px;color:#60a5fa;text-align:center;margin-bottom:4px">BASE <span id="totalBase">0</span> | GAP <span id="gapPrev">0</span> | ULTIMO <span id="ultimoAzul">-</span></div>
-<div style="display:flex;gap:4px;margin-bottom:4px">
-<div style="flex:1;background:#dc2626;border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;color:#fff">QUENTE 5 N</div><div style="font-size:18px;font-weight:900;color:#fff" id="prevQpct">20%</div><div style="font-size:11px;color:#fff" id="prevQexp">~3 em 15</div></div>
-<div style="flex:1;background:#eab308;border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;color:#000">VIZ 4 N</div><div style="font-size:18px;font-weight:900;color:#000" id="prevMpct">13%</div><div style="font-size:11px;color:#000" id="prevMexp">~2 em 15</div></div>
-<div style="flex:1;background:linear-gradient(180deg,#1e40af,#60a5fa);border-radius:8px;padding:6px;text-align:center"><div style="font-size:11px;color:#fff">AZUL 55%</div><div style="font-size:18px;font-weight:900;color:#fff" id="prevCpct">33%</div><div style="font-size:11px;color:#fff" id="prevCexp">~5 em 15</div></div>
-</div>
-<div style="font-size:14px;font-weight:900;color:#60a5fa;margin:5px 0 3px">TOP 6 NUMEROS - SINAL AZUL</div>
-<div class="prevGrid" id="top6Grid"></div>
-<div style="margin-top:5px;background:#000;border:2px solid #60a5fa;border-radius:8px;padding:6px">
-<div style="font-size:12px;font-weight:900;color:#60a5fa">ESTRATEGIA AZUL:</div>
-<div style="font-size:13px;color:#fff;margin-top:3px;line-height:1.4" id="estrategiaTxt">Aguardando azul...</div>
-</div>
-<div style="margin-top:5px;background:#0a1f44;border:2px solid #3b82f6;border-radius:10px;padding:6px">
-<div style="font-size:12px;font-weight:900;color:#60a5fa">ENTRADA AZUL RECOMENDADA:</div>
-<div style="font-size:16px;font-weight:900;color:#fff;text-align:center;margin-top:3px" id="entradaRec">AGUARDANDO AZUL</div>
-<div style="font-size:11px;color:#93c5fd;text-align:center" id="entradaNums">--</div>
-</div>
-</div>
-<div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:3px;margin-top:4px">
-<div class="histRow"><div class="histLabel">ULTIMAS 15</div><div class="histNums" id="hLast15"></div></div>
-<div class="histRow"><div class="histLabel">FREQ AZUL</div><div class="histNums" id="hFreq15"></div></div>
-<div class="histRow"><div class="histLabel">SEQ AZUL</div><div class="histNums" id="hSeqAzul"></div></div>
-</div>
+<div style="font-size:9px;color:#d4af37;text-align:center;font-weight:800">004=SINAL 13 RODADAS | 0=APAGAR ULTIMO | 00=LIMPAR TUDO | DIGITE NUMERO+ENTER</div>
 </div>
 <div class="kb"><div class="kr"><button class="k" onclick="digitar('1')">1</button><button class="k" onclick="digitar('2')">2</button><button class="k" onclick="digitar('3')">3</button></div><div class="kr"><button class="k" onclick="digitar('4')">4</button><button class="k" onclick="digitar('5')">5</button><button class="k" onclick="digitar('6')">6</button></div><div class="kr"><button class="k" onclick="digitar('7')">7</button><button class="k" onclick="digitar('8')">8</button><button class="k" onclick="digitar('9')">9</button></div><div class="kr"><button class="k" onclick="confirmar()">ENTER</button><button class="k" onclick="digitar('0')">0</button><button class="k" onclick="corrigir()">CORRIGIR</button></div></div>
 </div>
 <script>
 var ordemRoleta=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-var vermelhos=[32,19,21,25,34,27,36,30,23,5,16,1,14,9,18,7,12,3];
-function corRoleta(n){if(n===0)return "#16a34a";return vermelhos.indexOf(n)>=0?"#dc2626":"#1f2937";}
-var cur="",lista=[],green=0,red=0,hist=[],logAcerto=[],tb={1:"C2/3",2:"C1/2",3:"C1/2",4:"C1/2",5:"C2/3",6:"C1/2",7:"C2/3",8:"C1/2",9:"C2/3",10:"C2/3",11:"C1/3",12:"C2/3",13:"C1/3",14:"C2/3",15:"C1/3",16:"C1/3",17:"C1/3",18:"C2/3",19:"C1/2",20:"C1/2",21:"C2/3",22:"C1/2",23:"C1/2",24:"C2/3",25:"C1/3",26:"C2/3",27:"C1/3",28:"C2/3",29:"C1/3",30:"C2/3",31:"C1/3",32:"C1/2",33:"C2/3",34:"C1/2",35:"C2/3",36:"C1/2"},sinal=null,paginaAtual=0;
-function getCol(n){if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0)return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].indexOf(n)>=0)return 2;return 3;}
-function getCols(s){try{return s.replace('C','').split('/').map(Number)}catch(e){return []}}
-function mostrarDisplay(){var el=document.getElementById('dig');if(cur===""){el.textContent="DIGITE O NUMERO";el.className="display vazio";}else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}else if(cur==="000"){el.textContent="000 - HIST A-F";el.className="display";}else if(cur==="001"){el.textContent="001 - MAPA ROLETA";el.className="display";}else if(cur==="002"){el.textContent="002 - HIST QUENTE AZUL";el.className="display";}else if(cur==="003"){el.textContent="003 - PREVISAO AZUL GRANDE";el.className="display";}else{el.textContent=cur;el.className="display";}}
-function calcularHotCold(){
- if(lista.length<4)return null;
- var counts=new Array(ordemRoleta.length).fill(0);
- for(var i=0;i<lista.length;i++){var idx=ordemRoleta.indexOf(lista[i].n);if(idx>=0)counts[idx]++;}
- var janela=4; var dens=[];
- for(var i=0;i<ordemRoleta.length;i++){ var s=0; for(var d=-janela;d<=janela;d++){var j=(i+d+ordemRoleta.length)%ordemRoleta.length;s+=counts[j];} dens.push(s); }
- var maxIdx=0,minIdx=0;var maxV=dens[0],minV=dens[0];
- for(var i=1;i<dens.length;i++){if(dens[i]>maxV){maxV=dens[i];maxIdx=i;}if(dens[i]<minV){minV=dens[i];minIdx=i;}}
- var quentes=[];for(var d=-2;d<=2;d++){quentes.push(ordemRoleta[(maxIdx+d+ordemRoleta.length)%ordemRoleta.length]);}
- var frios=[];for(var d=-2;d<=2;d++){frios.push(ordemRoleta[(minIdx+d+ordemRoleta.length)%ordemRoleta.length]);}
- var vizSet=new Set(); for(var q=0;q<quentes.length;q++){var idx=ordemRoleta.indexOf(quentes[q]); for(var d=-2;d<=2;d++){ if(d===0) continue; var nid=(idx+d+ordemRoleta.length)%ordemRoleta.length; vizSet.add(ordemRoleta[nid]); }}
- var vizinhos=[]; vizSet.forEach(function(v){ if(quentes.indexOf(v)===-1) vizinhos.push(v); });
- var cluster=quentes.concat(vizinhos);
- var cntQuente=0,cntViz=0,cntCluster=0,cntAzul=0;
- for(var i=0;i<lista.length;i++){ var n=lista[i].n; if(quentes.indexOf(n)>=0) cntQuente++; else if(vizinhos.indexOf(n)>=0) cntViz++; else cntAzul++; if(cluster.indexOf(n)>=0) cntCluster++; }
- var freq={}; for(var i=0;i<lista.length;i++){ var n=lista[i].n; freq[n]=(freq[n]||0)+1; }
- var topNums=Object.keys(freq).map(function(k){return {n:parseInt(k),c:freq[k]}}).sort(function(a,b){return b.c-a.c}).slice(0,6);
- return {hotIdx:maxIdx,coldIdx:minIdx,quentes:quentes,frios:frios,vizinhos:vizinhos,cluster:cluster,cntQuente:cntQuente,cntViz:cntViz,cntCluster:cntCluster,cntAzul:cntAzul,freq:freq,top:topNums};
+var cur="",lista=[], LIMITE=13;
+function getVizinhos(n){
+ var idx=ordemRoleta.indexOf(n);
+ if(idx==-1) return [n];
+ var viz=[];
+ viz.push(ordemRoleta[(idx-1+ordemRoleta.length)%ordemRoleta.length]);
+ viz.push(n);
+ viz.push(ordemRoleta[(idx+1)%ordemRoleta.length]);
+ viz.push(ordemRoleta[(idx+2)%ordemRoleta.length]);
+ return viz;
 }
-function getGapQuente(){ var hc=calcularHotCold(); if(!hc) return 0; var gap=0; for(var i=lista.length-1;i>=0;i--){ if(hc.quentes.indexOf(lista[i].n)>=0) break; gap++; } return gap; }
-function classificar(n,hc){ if(!hc) return "OUTRO"; if(hc.quentes.indexOf(n)>=0) return "QUENTE"; if(hc.vizinhos.indexOf(n)>=0) return "MORNO"; if(hc.frios.indexOf(n)>=0) return "FRIO"; return "OUTRO"; }
-function isAzul(n,hc){ if(!hc) return false; return hc.cluster.indexOf(n)===-1; }
-function calcularTransicoes(){
- var hc=calcularHotCold(); if(!hc||lista.length<2) return null;
- var trans={QUENTE:{QUENTE:0,MORNO:0,FRIO:0,OUTRO:0},MORNO:{QUENTE:0,MORNO:0,FRIO:0,OUTRO:0},FRIO:{QUENTE:0,MORNO:0,FRIO:0,OUTRO:0},OUTRO:{QUENTE:0,MORNO:0,FRIO:0,OUTRO:0}};
- for(var i=0;i<lista.length-1;i++){ var cur=classificar(lista[i].n,hc); var nxt=classificar(lista[i+1].n,hc); trans[cur][nxt]++; }
- return trans;
-}
-function desenharRoleta(pulse){
- var canvas=document.getElementById('canvasRoleta');if(!canvas)return;
- var ctx=canvas.getContext('2d');var W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=130,r2=80;
- ctx.clearRect(0,0,W,H);
- var total=ordemRoleta.length;var anguloPor=2*Math.PI/total;var inicio=-Math.PI/2 - anguloPor/2;
- var hc=calcularHotCold(); var gap=hc?getGapQuente():0;
- for(var i=0;i<total;i++){
-  var n=ordemRoleta[i];var a0=inicio+i*anguloPor;var a1=a0+anguloPor;
-  ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R,a0,a1);ctx.closePath();
-  var isHot=false,isCold=false,isViz=false,isAzul=false;
-  if(hc){ var distHot=Math.min(Math.abs(i-hc.hotIdx),total-Math.abs(i-hc.hotIdx)); var distCold=Math.min(Math.abs(i-hc.coldIdx),total-Math.abs(i-hc.coldIdx)); if(distHot<=2) isHot=true; else if(distCold<=2) isCold=true; else if(hc.vizinhos.indexOf(n)>=0) isViz=true; else isAzul=true; }
-  if(isHot){ctx.fillStyle=gap>=5?"#ff0000":"#ff4500";}else if(isViz){ctx.fillStyle="#eab308";}else if(isCold||isAzul){ctx.fillStyle="#1e3a8a";}else{ctx.fillStyle=corRoleta(n);}
-  ctx.fill(); if(isHot){ctx.shadowColor=gap>=5?"#ff0000":"#ff4500";ctx.shadowBlur=gap>=5?20:12;ctx.fill();ctx.shadowBlur=0;}
-  if(isViz){ctx.strokeStyle="#facc15";ctx.lineWidth=1.8;}else if(isCold||isAzul){ctx.strokeStyle="#60a5fa";ctx.lineWidth=1.4;}else{ctx.strokeStyle="#e8c76a";ctx.lineWidth=0.8;}ctx.stroke();
-  var am=(a0+a1)/2;var rx=cx+(R-14)*Math.cos(am);var ry=cy+(R-14)*Math.sin(am);
-  ctx.save();ctx.translate(rx,ry);ctx.rotate(am+Math.PI/2);ctx.fillStyle=isViz?"#000":"#fff";ctx.font="bold 12px Montserrat, Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(n,0,0);ctx.restore();
- }
- ctx.beginPath();ctx.arc(cx,cy,r2,0,Math.PI*2);ctx.fillStyle="#0a1f14";ctx.fill();ctx.strokeStyle="#d4af37";ctx.lineWidth=2;ctx.stroke();
- ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.fillStyle="#e8c76a";ctx.fill();
- var gapEl=document.getElementById('gapInfo');
- if(hc){
-  document.getElementById('hcQuente').textContent="QUENTE: "+hc.quentes.join(",")+" ("+hc.cntQuente+"x)";
-  document.getElementById('hcFrio').textContent="AZUL/FORA: "+hc.cntAzul+"x - "+hc.frios.join(",");
-  document.getElementById('hcViz').textContent="VIZ: "+(hc.vizinhos.join(",")||"--")+" ("+hc.cntViz+"x)";
-  document.getElementById('hcCluster').textContent="CLUSTER: "+hc.cntCluster+"x "+Math.round(hc.cntCluster/lista.length*100)+"%";
-  if(gapEl){gapEl.textContent="GAP: "+gap+(gap>=5?" - ALERTA!":"");}
-  var elSeta=document.getElementById('setaAposta');
-  if(elSeta){
-   var ultimo=lista.length>0?lista[lista.length-1].n:null;
-   var azul=isAzul(ultimo,hc);
-   if(azul && gap>=3){ elSeta.style.display='block'; elSeta.style.background="#1e40af"; elSeta.style.color="#fff"; elSeta.textContent="AZUL SAIU - 75% VOLTA CLUSTER: "+hc.cluster.slice(0,3).join(","); }
-   else if(gap>=5){ elSeta.style.display='block'; elSeta.style.background="#ff0000"; elSeta.style.color="#fff"; elSeta.textContent="GAP "+gap+" SEM QUENTE - ENTRAR: "+hc.quentes.slice(0,3).join(","); }
-   else { elSeta.style.display='block'; elSeta.style.background="#facc15"; elSeta.style.color="#000"; elSeta.textContent="Q:"+hc.quentes.slice(0,3).join(",")+" GAP "+gap+(azul?" AZUL":""); }
+function calcularGapsVizinhos(alvo){
+ var viz=getVizinhos(alvo);
+ var gaps=[]; var last=-1;
+ for(var i=0;i<lista.length;i++){
+  if(viz.indexOf(lista[i].n)>=0){
+   if(last!=-1) gaps.push(i-last);
+   last=i;
   }
- }else{
-  document.getElementById('hcQuente').textContent="QUENTE: --";document.getElementById('hcFrio').textContent="AZUL: --";
-  document.getElementById('hcViz').textContent="VIZINHOS: --";document.getElementById('hcCluster').textContent="CLUSTER: --";
-  document.getElementById('setaAposta').style.display='none'; if(gapEl) gapEl.textContent="GAP: 0";
  }
- if(lista.length>0){
-  var pontos=[]; for(var j=0;j<lista.length;j++){ var num=lista[j].n;var idx=ordemRoleta.indexOf(num);if(idx<0)continue; var am=inicio+idx*anguloPor+anguloPor/2;var dist=R+10; var bx=cx+dist*Math.cos(am);var by=cy+dist*Math.sin(am); pontos.push({x:bx,y:by}); }
-  if(pontos.length>1){ ctx.beginPath(); for(var k=0;k<pontos.length;k++){if(k===0)ctx.moveTo(pontos[k].x,pontos[k].y);else ctx.lineTo(pontos[k].x,pontos[k].y);} ctx.strokeStyle="#60a5fa";ctx.lineWidth=1.2;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]); }
-  for(var j=0;j<pontos.length;j++){ var p=pontos[j];var ultimo=j===pontos.length-1;var raio=ultimo?8:4; ctx.beginPath();ctx.arc(p.x,p.y,raio,0,Math.PI*2);ctx.fillStyle=ultimo?(isAzul(lista[j].n,hc)?"#1e40af":"#22c55e"):"#ef4444";ctx.fill(); if(ultimo){ctx.strokeStyle="#fff";ctx.lineWidth=1.5;ctx.stroke();} }
-  document.getElementById('labelAtual').textContent="ATUAL: "+lista[lista.length-1].raw+(isAzul(lista[lista.length-1].n,hc)?" AZUL":"");
- } else {document.getElementById('labelAtual').textContent="SEM NUMEROS";}
+ var atual= last==-1 ? lista.length : lista.length-1-last;
+ var media=0,max=0;
+ if(gaps.length>0){
+  var soma=0; for(var g of gaps){soma+=g; if(g>max) max=g;}
+  media=Math.round(soma/gaps.length*10)/10;
+ }
+ return {viz:viz,gaps:gaps,media:media,max:max,atual:atual,vezes:gaps.length};
 }
-var animTime=0;function loopAnim(){animTime+=0.08;if(paginaAtual===2){var pulse=Math.abs(Math.sin(animTime));desenharRoleta(pulse);}requestAnimationFrame(loopAnim);}
-function atualizarTela(){
+function mostrarDisplay(){
+ var el=document.getElementById('dig');
+ if(cur===""){el.textContent="DIGITE O NUMERO - PAG 004 = 13 RODADAS";el.className="display vazio";}
+ else if(cur==="0"){el.textContent="0 - APAGAR ULTIMO";el.className="display";}
+ else if(cur==="00"){el.textContent="00 - APAGAR TUDO";el.className="display";}
+ else{el.textContent=cur;el.className="display";}
+}
+function digitar(d){
+ if(cur==="0"&&d==="0"){cur="00";}else if(cur.length>=2){cur=d;}else{cur+=d;}
+ mostrarDisplay();
+}
+function corrigir(){cur=cur.slice(0,-1);mostrarDisplay();}
+function confirmar(){
+ if(cur===""){return;}
+ if(cur==="0"){if(lista.length>0)lista.pop(); cur=""; mostrarDisplay(); atualizar(); return;}
+ if(cur==="00"){lista=[]; cur=""; mostrarDisplay(); atualizar(); return;}
+ var v=parseInt(cur);
+ if(isNaN(v)||v>36){cur="";mostrarDisplay();return;}
+ lista.push({n:v}); cur=""; mostrarDisplay(); atualizar();
+}
+function atualizar(){
  try{
-  var bn=document.getElementById('boxNum');bn.innerHTML="";var m=lista.slice(-9);for(var i=m.length-1;i>=0;i--){var o=m[i];var d=document.createElement('div');d.className='sq '+(o.w===null?'b':o.w?'g':'r');d.textContent=o.raw;bn.appendChild(d);}
-  var ba=document.getElementById('boxAcerto');ba.innerHTML="";var ma=logAcerto.slice(-9);for(var i=ma.length-1;i>=0;i--){var o=ma[i];var d=document.createElement('div');d.className='sq '+(o.acerto?'g':'r');d.textContent=o.raw;ba.appendChild(d);}
-  document.getElementById('gCount').textContent="✅ "+green;document.getElementById('rCount').textContent="❌ "+red;document.getElementById('pillPlacar').textContent="GREEN "+green+" x "+red+" RED";
-  var pc=document.getElementById('pillCol'),txt=document.getElementById('txtOrig'); var gap=getGapQuente(); var digEl=document.getElementById('dig');
-  var hcCheck=calcularHotCold(); var ultimoAzul=false; if(hcCheck && lista.length>0){ ultimoAzul=isAzul(lista[lista.length-1].n,hcCheck); }
-  if(ultimoAzul && gap>=3 && paginaAtual===0 && cur===""){ digEl.textContent="AZUL SAIU! "+gap+" SEM QUENTE - ENTRAR: "+hcCheck.cluster.slice(0,3).join(",")+" 75%"; digEl.className="display azul"; }
-  else if(gap>=5 && paginaAtual===0 && cur===""){ var hc=calcularHotCold(); if(hc){ digEl.textContent="GAP "+gap+" SEM QUENTE! ENTRAR: "+hc.quentes.slice(0,3).join(","); digEl.className="display alerta"; } } else { if((digEl.classList.contains('alerta')||digEl.classList.contains('azul')) && cur===""){ mostrarDisplay(); } }
-  if(lista.length>0){ var last=lista[lista.length-1]; if(last.w===false){var col=tb[last.n]||"C1/2";pc.textContent=col;txt.textContent="ENTRADA APÓS RED "+last.raw;pc.style.background="#ef4444";pc.style.color="#fff";} else if(sinal){pc.textContent=sinal.col;txt.textContent=sinal.orig;pc.style.background="";pc.style.color="";pc.style.backgroundImage="linear-gradient(180deg,#f9e27a,#d4af37)";} else{pc.textContent="AGUARDANDO";txt.textContent=gap>=1?"GAP: "+gap+(ultimoAzul?" AZUL":""):"-";pc.style.background="";pc.style.color="";pc.style.backgroundImage="linear-gradient(180deg,#f9e27a,#d4af37)";}} else {pc.textContent="AGUARDANDO";txt.textContent="-";}
-  var seq=document.getElementById('seqTop');seq.innerHTML="";for(var i=0;i<lista.length;i++){var l=lista[i];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;seq.appendChild(d);}
-  var groups={A:[],B:[],C:[],D:[],E:[],F:[]};for(var i=0;i<lista.length;i++){var key=["A","B","C","D","E","F"][i%6];groups[key].push(lista[i]);}
-  for(var k in groups){var el=document.getElementById('h'+k);if(el){el.innerHTML="";for(var j=0;j<groups[k].length;j++){var l=groups[k][j];var d=document.createElement('div');d.className='ln '+(l.w===null?'b':l.w?'g':'r');d.textContent=l.raw;el.appendChild(d);}}}
-  var hc2=calcularHotCold();
-  if(hc2){
-    var total=lista.length||1;
-    var pctQ=Math.round(hc2.cntQuente/total*100);
-    var pctV=Math.round(hc2.cntViz/total*100);
-    var pctC=Math.round(hc2.cntCluster/total*100);
-    var pctA=Math.round(hc2.cntAzul/total*100);
-    var elQ=document.getElementById('statQ'); if(elQ) elQ.textContent=hc2.cntQuente+"x "+pctQ+"%";
-    var elQn=document.getElementById('statQnums'); if(elQn) elQn.textContent=hc2.quentes.join(",");
-    var elV=document.getElementById('statV'); if(elV) elV.textContent=hc2.cntViz+"x "+pctV+"%";
-    var elVn=document.getElementById('statVnums'); if(elVn) elVn.textContent=hc2.vizinhos.join(",")||"--";
-    var elC=document.getElementById('statC'); if(elC) elC.textContent=hc2.cntCluster+"x "+pctC+"%";
-    var elCg=document.getElementById('statCgap'); if(elCg) elCg.textContent="GAP "+getGapQuente()+" ROD";
-    var elF=document.getElementById('statF'); if(elF) elF.textContent=hc2.cntAzul+"x "+pctA+"%";
-    var elFn=document.getElementById('statFnums'); if(elFn) elFn.textContent=hc2.frios.join(",");
-    var seqEl=document.getElementById('seqClass');
-    if(seqEl){
-      seqEl.innerHTML="";
-      for(var i=0;i<lista.length;i++){
-        var n=lista[i].n; var cls="b";
-        if(hc2.quentes.indexOf(n)>=0){ cls="r"; }
-        else if(hc2.vizinhos.indexOf(n)>=0){ cls="y"; }
-        else { cls="b"; }
-        var d=document.createElement('div'); d.className='ln '+cls; d.textContent=lista[i].raw; seqEl.appendChild(d);
-      }
-    }
-    var hGap=document.getElementById('hGap');
-    if(hGap){ hGap.innerHTML=""; var gaps=[]; var last=-1; for(var i=0;i<lista.length;i++){ if(hc2.quentes.indexOf(lista[i].n)>=0){ if(last!=-1) gaps.push(i-last); last=i; } } for(var i=0;i<gaps.length;i++){ var d=document.createElement('div'); d.className='ln '+(gaps[i]>=5?'r':'g'); d.textContent=gaps[i]; hGap.appendChild(d); } }
-    var hOnlyQ=document.getElementById('hOnlyQ');
-    if(hOnlyQ){ hOnlyQ.innerHTML=""; for(var i=0;i<lista.length;i++){ if(hc2.quentes.indexOf(lista[i].n)>=0){ var d=document.createElement('div'); d.className='ln r'; d.textContent=lista[i].raw; hOnlyQ.appendChild(d);} } }
-    var hOnlyV=document.getElementById('hOnlyV');
-    if(hOnlyV){ hOnlyV.innerHTML=""; for(var i=0;i<lista.length;i++){ if(hc2.vizinhos.indexOf(lista[i].n)>=0){ var d=document.createElement('div'); d.className='ln y'; d.textContent=lista[i].raw; hOnlyV.appendChild(d);} } }
-    var hCluster=document.getElementById('hCluster');
-    if(hCluster){ hCluster.innerHTML=""; for(var i=0;i<lista.length;i++){ if(hc2.cluster.indexOf(lista[i].n)>=0){ var d=document.createElement('div'); d.className='ln '+(hc2.quentes.indexOf(lista[i].n)>=0?'r':'y'); d.textContent=lista[i].raw; hCluster.appendChild(d);} } }
-    var hAzul=document.getElementById('hAzul');
-    if(hAzul){ hAzul.innerHTML=""; for(var i=0;i<lista.length;i++){ if(isAzul(lista[i].n,hc2)){ var d=document.createElement('div'); d.className='ln b'; d.textContent=lista[i].raw; hAzul.appendChild(d);} } }
-    var trans=calcularTransicoes();
-    if(trans){
-      function fmt(tipo,alvo){
-        var tot=trans[tipo].QUENTE+trans[tipo].MORNO+trans[tipo].FRIO+trans[tipo].OUTRO;
-        if(tot==0) return "0%";
-        if(alvo==="CLUSTER"){ var c=trans[tipo].QUENTE+trans[tipo].MORNO; return c+"x "+Math.round(c/tot*100)+"%"; }
-        return trans[tipo][alvo]+"x "+Math.round(trans[tipo][alvo]/tot*100)+"%";
-      }
-      var el=document.getElementById('tQ_q'); if(el) el.textContent="Q "+fmt("QUENTE","QUENTE");
-      el=document.getElementById('tQ_m'); if(el) el.textContent="M "+fmt("QUENTE","MORNO");
-      el=document.getElementById('tQ_c'); if(el) el.textContent="CLUSTER "+fmt("QUENTE","CLUSTER");
-      el=document.getElementById('tM_q'); if(el) el.textContent="Q "+fmt("MORNO","QUENTE");
-      el=document.getElementById('tM_m'); if(el) el.textContent="M "+fmt("MORNO","MORNO");
-      el=document.getElementById('tM_c'); if(el) el.textContent="CLUSTER "+fmt("MORNO","CLUSTER");
-      el=document.getElementById('tF_q'); if(el) el.textContent="Q "+fmt("FRIO","QUENTE");
-      el=document.getElementById('tF_m'); if(el) el.textContent="M "+fmt("FRIO","MORNO");
-      el=document.getElementById('tF_c'); if(el) el.textContent="CLUSTER "+fmt("FRIO","CLUSTER");
-      el=document.getElementById('tO_q'); if(el) el.textContent="Q "+fmt("OUTRO","QUENTE");
-      el=document.getElementById('tO_m'); if(el) el.textContent="M "+fmt("OUTRO","MORNO");
-      el=document.getElementById('tO_c'); if(el) el.textContent="CLUSTER "+fmt("OUTRO","CLUSTER");
-      var dica=document.getElementById('melhorDica');
-      if(dica){
-        var bestLado=""; var bestPct=0;
-        for(var lado of ["QUENTE","MORNO","FRIO","OUTRO"]){
-          var tot=trans[lado].QUENTE+trans[lado].MORNO+trans[lado].FRIO+trans[lado].OUTRO;
-          if(tot>0){ var pct=(trans[lado].QUENTE+trans[lado].MORNO)/tot*100; if(pct>bestPct){bestPct=pct; bestLado=lado;} }
-        }
-        dica.textContent="MELHOR: DEPOIS DE "+bestLado+" => "+Math.round(bestPct)+"% CLUSTER - AZUL!";
-      }
-    }
-    var totalBaseEl=document.getElementById('totalBase'); if(totalBaseEl) totalBaseEl.textContent=total;
-    var gapPrevEl=document.getElementById('gapPrev'); if(gapPrevEl) gapPrevEl.textContent=getGapQuente();
-    var ultimoAzulEl=document.getElementById('ultimoAzul'); if(ultimoAzulEl){ ultimoAzulEl.textContent=ultimoAzul?"AZUL "+lista[lista.length-1].raw:"QUENTE/VIZ"; }
-    var pq=document.getElementById('prevQpct'); if(pq) pq.textContent=pctQ+"%";
-    var pqE=document.getElementById('prevQexp'); if(pqE) pqE.textContent="~"+Math.round(pctQ/100*15)+" em 15";
-    var pm=document.getElementById('prevMpct'); if(pm) pm.textContent=pctV+"%";
-    var pmE=document.getElementById('prevMexp'); if(pmE) pmE.textContent="~"+Math.round(pctV/100*15)+" em 15";
-    var pcEl=document.getElementById('prevCpct'); if(pcEl) pcEl.textContent=pctA+"% AZUL";
-    var pcE=document.getElementById('prevCexp'); if(pcE) pcE.textContent=pctC+"% CLUSTER";
-    var topGrid=document.getElementById('top6Grid');
-    if(topGrid){
-      topGrid.innerHTML="";
-      for(var i=0;i<hc2.top.length;i++){
-        var item=hc2.top[i];
-        var isHot=hc2.quentes.indexOf(item.n)>=0;
-        var isViz=hc2.vizinhos.indexOf(item.n)>=0;
-        var azul=isAzul(item.n,hc2);
-        var d=document.createElement('div'); d.className='prevNum '+(isHot?'hot':isViz?'viz':azul?'frio':'');
-        d.innerHTML="<div class='prevN'>"+item.n+"</div><div class='prevP'>"+item.c+"x "+Math.round(item.c/total*100)+"%</div>";
-        topGrid.appendChild(d);
-      }
-    }
-    var last15=lista.slice(-15);
-    var hLast15=document.getElementById('hLast15');
-    if(hLast15){ hLast15.innerHTML=""; for(var i=0;i<last15.length;i++){ var d=document.createElement('div'); d.className='ln '+(hc2.quentes.indexOf(last15[i].n)>=0?'r':hc2.vizinhos.indexOf(last15[i].n)>=0?'y':'b'); d.textContent=last15[i].raw; hLast15.appendChild(d); } }
-    var hFreq15=document.getElementById('hFreq15');
-    if(hFreq15){
-      hFreq15.innerHTML="";
-      var freq15={};
-      for(var i=0;i<last15.length;i++){ freq15[last15[i].n]=(freq15[last15[i].n]||0)+1; }
-      var sorted=Object.keys(freq15).map(function(k){return {n:k,c:freq15[k]}}).sort(function(a,b){return b.c-a.c});
-      for(var i=0;i<sorted.length;i++){ var d=document.createElement('div'); d.className='ln '+(hc2.quentes.indexOf(parseInt(sorted[i].n))>=0?'r':hc2.vizinhos.indexOf(parseInt(sorted[i].n))>=0?'y':'b'); d.textContent=sorted[i].n+"("+sorted[i].c+")"; hFreq15.appendChild(d); }
-    }
-    var hSeqAzul=document.getElementById('hSeqAzul');
-    if(hSeqAzul){
-      hSeqAzul.innerHTML="";
-      for(var i=0;i<last15.length;i++){
-        var n=last15[i].n;
-        if(isAzul(n,hc2)){
-          var d=document.createElement('div'); d.className='ln b'; d.textContent=last15[i].raw; hSeqAzul.appendChild(d);
-        }
-      }
-    }
-    var estrat=document.getElementById('estrategiaTxt');
-    if(estrat){
-      var expCluster=Math.round(pctC/100*15);
-      var transInfo=calcularTransicoes();
-      var pctAzulCluster=0;
-      if(transInfo){
-        var totF=transInfo.FRIO.QUENTE+transInfo.FRIO.MORNO+transInfo.FRIO.FRIO+transInfo.FRIO.OUTRO;
-        if(totF>0) pctAzulCluster=Math.round((transInfo.FRIO.QUENTE+transInfo.FRIO.MORNO)/totF*100);
-      }
-      estrat.textContent="ULTIMO "+(ultimoAzul?"AZUL":"QUENTE")+" | CLUSTER 9 numeros ("+hc2.cluster.join(", ")+") acertou "+pctC+"% | AZUL "+pctA+"% | DEPOIS DE AZUL, "+pctAzulCluster+"% VOLTA CLUSTER | Esperado ~"+expCluster+" cluster | TOP: "+hc2.top.map(function(x){return x.n+"("+x.c+"x)"}).join(", ");
-    }
-    var entradaRec=document.getElementById('entradaRec');
-    var entradaNums=document.getElementById('entradaNums');
-    if(entradaRec){
-      if(ultimoAzul && gap>=3){
-        entradaRec.textContent="AZUL SAIU! ENTRAR CLUSTER";
-        entradaRec.style.color="#60a5fa";
-        if(entradaNums) entradaNums.textContent=hc2.cluster.join(", ")+" | GAP "+gap;
-      } else if(gap>=5){
-        entradaRec.textContent="GAP "+gap+" SEM QUENTE - ENTRAR CLUSTER";
-        entradaRec.style.color="#ff4444";
-        if(entradaNums) entradaNums.textContent=hc2.cluster.slice(0,6).join(", ")+" | 9 N";
-      } else {
-        entradaRec.textContent="AGUARDANDO AZUL - GAP "+gap+" (PRECISA >=3 AZUL)";
-        entradaRec.style.color="#f9e27a";
-        if(entradaNums) entradaNums.textContent="CLUSTER: "+hc2.cluster.join(", ");
-      }
-    }
+ var ultimo = lista.length>0 ? lista[lista.length-1].n : null;
+ var calcUltimo = ultimo!==null ? calcularGapsVizinhos(ultimo) : null;
+ if(calcUltimo){
+  document.getElementById('numAval').textContent=ultimo;
+  var vizRow=document.getElementById('vizRow'); vizRow.innerHTML="";
+  for(var i=0;i<calcUltimo.viz.length;i++){
+   var d=document.createElement('div');
+   d.className='vizBox '+(calcUltimo.viz[i]==ultimo?'center':'viz');
+   d.textContent=calcUltimo.viz[i]; vizRow.appendChild(d);
   }
-  desenharRoleta(0);
- }catch(e){ console.log(e); }
+  document.getElementById('ordemTxt').textContent="4 numeros: "+calcUltimo.viz.join(" - ")+" | Roleta real";
+  document.getElementById('atualSem').textContent=calcUltimo.atual+" rod";
+  document.getElementById('mediaGap').textContent=calcUltimo.media?calcUltimo.media+" rod":"--";
+  var falta = LIMITE - calcUltimo.atual;
+  document.getElementById('falta13').textContent= falta<=0 ? "SINAL!" : falta+" rod";
+  var gapHist=document.getElementById('gapHist'); gapHist.innerHTML="";
+  for(var g of calcUltimo.gaps.slice(-12)){
+   var d=document.createElement('div'); d.className='gapBox';
+   d.style.background= g>=LIMITE ? "#dc2626" : g>=9 ? "#eab308" : "#16a34a";
+   d.textContent=g; gapHist.appendChild(d);
+  }
+ }
+ var listaSinais=document.getElementById('listaSinais'); listaSinais.innerHTML="";
+ var sinaisAtivos=[];
+ for(var n=0;n<=36;n++){
+  var c=calcularGapsVizinhos(n);
+  if(c.atual>=LIMITE) sinaisAtivos.push({n:n,data:c});
+ }
+ sinaisAtivos.sort((a,b)=>b.data.atual-a.data.atual);
+ var sinalPrincipal=document.getElementById('sinalPrincipal');
+ var dig=document.getElementById('dig');
+ if(sinaisAtivos.length>0){
+  var top=sinaisAtivos[0];
+  sinalPrincipal.style.display='block';
+  sinalPrincipal.className='sinalCard vermelho';
+  document.getElementById('sinalNum').textContent="🔵 SINAL! "+top.n+" + VIZ "+top.data.viz.join(",");
+  document.getElementById('sinalTxt').textContent=top.data.atual+" RODADAS SEM SAIR - MEDIA "+top.data.media+" - ENTRAR AGORA! 4 NUMEROS - "+top.data.viz.join(",");
+  dig.textContent="🔵 SINAL 13x! ENTRAR: "+top.data.viz.join(",")+" ("+top.data.atual+" ROD)";
+  dig.className="display sinal";
+ }else{
+  sinalPrincipal.style.display='none';
+ }
+ for(var s of sinaisAtivos){
+  var div=document.createElement('div'); div.className='sinalItem';
+  div.innerHTML='<div class="num">'+s.n+'</div><div class="vizs">VIZ: '+s.data.viz.join(",")+'<br>Media '+s.data.media+' | Max '+s.data.max+'</div><div class="gap">'+s.data.atual+' ROD</div>';
+  listaSinais.appendChild(div);
+ }
+ if(sinaisAtivos.length==0){
+  listaSinais.innerHTML='<div style="color:#3a7a3a;font-weight:900;text-align:center;padding:10px">Nenhum numero passou de 13 rodadas ainda. Continue digitando.<br>Media geral e 9 rodadas.</div>';
+ }
+ var todosEl=document.getElementById('todosNumeros'); todosEl.innerHTML="";
+ var todosNums=[]; for(var n=0;n<=36;n++){todosNums.push({n:n,data:calcularGapsVizinhos(n)});}
+ todosNums.sort((a,b)=>b.data.atual-a.data.atual);
+ for(var t of todosNums){
+  var d=document.createElement('div');
+  var cor = t.data.atual>=LIMITE ? "#dc2626" : t.data.atual>=10 ? "#eab308" : "#0f2e1a";
+  d.style.cssText="border:2px solid #d4af37;border-radius:8px;padding:5px 7px;font-size:12px;font-weight:900;color:#fff;background:"+cor+";min-width:68px;text-align:center";
+  d.textContent=t.n+" ("+t.data.atual+"/"+(t.data.media||0)+")"; todosEl.appendChild(d);
+ }
+ }catch(e){console.log(e);}
 }
-function save(){try{hist.push({lista:JSON.parse(JSON.stringify(lista)),green:green,red:red,sinal:sinal?JSON.parse(JSON.stringify(sinal)):null,logAcerto:JSON.parse(JSON.stringify(logAcerto))});if(hist.length>60)hist.shift();}catch(e){}}
-function digitar(d){try{if(cur==="0"&&d==="0"){cur="00";}else if(cur==="00"&&d==="0"){cur="000";}else if(cur==="00"&&(d==="1"||d==="2"||d==="3")){cur="00"+d;}else if(cur==="0"||cur==="00"){cur=d;}else if(cur==="000"||cur==="001"||cur==="002"||cur==="003"){cur=d;}else{var t=cur+d;if(t!=="000"&&t!=="001"&&t!=="002"&&t!=="003"&&parseInt(t)>36&&t.length<=2)return;cur=t;}mostrarDisplay();}catch(e){cur="";mostrarDisplay()}}
-function confirmar(){try{if(cur==="")return;if(cur==="000"){paginaAtual=1;document.getElementById('painel1').style.display='none';document.getElementById('painel2').style.display='flex';document.getElementById('painel3').style.display='none';document.getElementById('painel4').style.display='none';document.getElementById('painel5').style.display='none';cur="";mostrarDisplay();atualizarTela();return;}if(cur==="001"){paginaAtual=2;document.getElementById('painel1').style.display='none';document.getElementById('painel2').style.display='none';document.getElementById('painel3').style.display='flex';document.getElementById('painel4').style.display='none';document.getElementById('painel5').style.display='none';cur="";mostrarDisplay();atualizarTela();return;}if(cur==="002"){paginaAtual=3;document.getElementById('painel1').style.display='none';document.getElementById('painel2').style.display='none';document.getElementById('painel3').style.display='none';document.getElementById('painel4').style.display='flex';document.getElementById('painel5').style.display='none';cur="";mostrarDisplay();atualizarTela();return;}if(cur==="003"){paginaAtual=4;document.getElementById('painel1').style.display='none';document.getElementById('painel2').style.display='none';document.getElementById('painel3').style.display='none';document.getElementById('painel4').style.display='none';document.getElementById('painel5').style.display='flex';cur="";mostrarDisplay();atualizarTela();return;}if(paginaAtual!==0){paginaAtual=0;document.getElementById('painel1').style.display='flex';document.getElementById('painel2').style.display='none';document.getElementById('painel3').style.display='none';document.getElementById('painel4').style.display='none';document.getElementById('painel5').style.display='none';}if(cur==="0"){save();if(lista.length>0)lista.pop();sinal=null;cur="";mostrarDisplay();atualizarTela();return;}if(cur==="00"){save();lista=[];green=0;red=0;sinal=null;logAcerto=[];cur="";mostrarDisplay();atualizarTela();return;}var raw=cur;var v=parseInt(cur);if(v>36||isNaN(v)){cur="";mostrarDisplay();return;}save();if(sinal){var colNum=getCol(v);var cols=getCols(sinal.col);var acerto=cols.indexOf(colNum)>=0;if(acerto){green++;logAcerto.push({raw:raw,acerto:true});}else{red++;logAcerto.push({raw:raw,acerto:false});}sinal=null;var col=tb[v]||"C1/2";var tipo=true;if(lista.length>0){var last=lista[lista.length-1];var lastCol=tb[last.n]||"C1/2";tipo=getCols(lastCol).indexOf(getCol(v))>=0;}lista.push({n:v,raw:raw,w:lista.length===0?null:tipo});cur="";mostrarDisplay();atualizarTela();return;}var col=tb[v]||"C1/2";var w=null;if(lista.length>0){var last=lista[lista.length-1];var lastCol=tb[last.n]||"C1/2";w=getCols(lastCol).indexOf(getCol(v))>=0;if(!w){sinal={col:col,orig:"ORIGEM A "+last.raw+" RED"};}}lista.push({n:v,raw:raw,w:lista.length===0?null:w});cur="";mostrarDisplay();atualizarTela();}catch(e){cur="";mostrarDisplay();atualizarTela();}}
-function corrigir(){try{if(cur!==""){cur=cur.slice(0,-1);mostrarDisplay();return;}if(hist.length>0){var p=hist.pop();lista=p.lista;green=p.green;red=p.red;sinal=p.sinal;logAcerto=p.logAcerto;atualizarTela();}}catch(e){}}
-mostrarDisplay();desenharRoleta();atualizarTela();loopAnim();
+var exemplo=[13,35,5,18,30,5,34,30,20,6,1,5,8,14,26,18,31,18,8,35,27,19,26,2,30,36,17,29,35,27,28,24,6,27,35,15,19,4,11,22,25,17,3,10,7,29,10,21,2,8,32,24,12,27,7,32,25,10,16,36,11,5,11,2,20,17,3,15,13,30,15,9,20,29,30,20,23,32,19,21,32,28,16,14,6,15,7,22,5,8,8,18,23,15,24,24,12,14,30,11,23,8,27,21];
+for(var n of exemplo) lista.push({n:n});
+mostrarDisplay(); atualizar();
 </script>
 </body>
-  </html>
+</html>

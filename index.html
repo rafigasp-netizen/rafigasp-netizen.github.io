@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - VERDE AGUARDANDO / VERMELHO SINAL / PLACAR ACERTO ERRO</title>
+<title>RAFIGASP - AZUL SEQUENCIA NORMAL + COLUNA DO AZUL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a1f12;overflow:hidden}
@@ -36,7 +36,7 @@ body{display:flex;justify-content:center}
 .linhaPadrao{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .sq{width:34px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;transition:all 0.3s;position:relative;border:1.5px solid #333;flex-shrink:0}
 .sq.blue{background:#1e40af;border:2px solid #fff;box-shadow:0 0 5px #60a5fa;color:#fff}
-.sq.blue.filled{background:#0a3cc4;border:2px solid #ffff00;box-shadow:0 0 12px #ffff00;color:#fff;transform:scale(1.05)}
+.sq.blue.filled{background:#1e40af;border:2px solid #fff;box-shadow:0 0 8px #60a5fa;color:#fff}
 .sq.white{background:#fff;border:1.5px solid #999;color:#000}
 .sq.white.vazio{background:#111;border:1px dashed #555;color:#444}
 .sq.green{background:#0f8a2a;border:2px solid #00ff00;box-shadow:0 0 6px #00ff00;color:#fff}
@@ -90,7 +90,7 @@ body{display:flex;justify-content:center}
 <button class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
 <button onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display inicial" id="disp">PÁG 1 - COACH DA ROLETA - AGUARDANDO SINAL - QUADRADO VERDE</div>
+<div class="display inicial" id="disp">PÁG 1 - COACH DA ROLETA - AZUL SEQUENCIA NORMAL</div>
 
 <div class="page ativa" id="page1">
 <div class="topBar" id="topBar1"></div>
@@ -105,12 +105,12 @@ body{display:flex;justify-content:center}
 
 <div class="page" id="page2">
 <div class="conjuntosContainer" id="conjuntosP2"></div>
-<div class="infoBar" id="infoBar2">PÁG 2: 🟦⬜️🟦⬜️🟦⬜️ / 🟦⬜️⬜️ / 🟦⬜️⬜️⬜️ / 🟦⬜️⬜️⬜️⬜️ / 🟦⬜️⬜️⬜️⬜️⬜️ - Azul marca junto</div>
+<div class="infoBar" id="infoBar2">PÁG 2: 🟦⬜️🟦⬜️🟦⬜️ / 🟦⬜️⬜️ / 🟦⬜️⬜️⬜️ / 🟦⬜️⬜️⬜️⬜️ / 🟦⬜️⬜️⬜️⬜️⬜️ - AZUL SEQUENCIA NORMAL (não fica pausado)</div>
 </div>
 
 <div class="page" id="page3">
 <div class="conjuntosContainer" id="conjuntosP3"></div>
-<div class="infoBar" id="infoBar3">PÁG 3: 🟦🟥🟦🟥🟦⬜️ / 🟦🟥🟥 / 🟦🟥🟥⬜️ / 🟦🟥🟥⬜️⬜️ / 🟦🟥🟥⬜️⬜️⬜️ - Azul junto - 2🟥🟥 ATENÇÃO VEM COLUNA 2/3</div>
+<div class="infoBar" id="infoBar3">PÁG 3: 🟦🟥🟦🟥🟦⬜️ / 🟦🟥🟥 / 🟦🟥🟥⬜️ / 🟦🟥🟥⬜️⬜️ / 🟦🟥🟥⬜️⬜️⬜️ - AZUL SEQUENCIA NORMAL - 2🟥🟥 manda jogar coluna do azul</div>
 <div class="alertaGrande verde" id="alertaGrande3">
 <div class="colunaGrande" id="colunaGrandeTexto3">AGUARDANDO<br>SINAL...</div>
 <div class="placarSimples" id="placarBox3">
@@ -140,6 +140,8 @@ body{display:flex;justify-content:center}
 var cur="",lista=[],paginaAtual=1;
 var green=0,red=0,ultimoSinal=null;
 var esperandoResultado=false;
+var colunaParaJogar=null;
+var numeroAzulAtual=null;
 var padraoP2 = [
   ['blue','white','blue','white','blue','white'],
   ['blue','white','white','white'],
@@ -155,7 +157,6 @@ var padraoP3 = [
 ];
 var conjuntosP2 = [];
 var conjuntosP3 = [];
-var azulValor = null;
 function getCol(n){
  if(n==0) return 0;
  if([1,4,7,10,13,16,19,22,25,28,31,34].indexOf(n)>=0) return 1;
@@ -211,27 +212,6 @@ function inicializar(){
  criarConjuntoP2(0);
  criarConjuntoP3(0);
 }
-function atualizarTodosAzuis(valor){
- azulValor=valor;
- conjuntosP2.forEach(function(conj){
-  conj.forEach(function(item){
-   if(item.tipo=='blue'){
-    item.sq.textContent=valor;
-    item.sq.className='sq blue filled';
-    item.valor=valor;
-   }
-  });
- });
- conjuntosP3.forEach(function(conj){
-  conj.forEach(function(item){
-   if(item.tipo=='blue'){
-    item.sq.textContent=valor;
-    item.sq.className='sq blue filled';
-    item.valor=valor;
-   }
-  });
- });
-}
 function setEstadoQuadrado(estado, textoGrande){
  var el1=document.getElementById('alertaGrande1');
  var el3=document.getElementById('alertaGrande3');
@@ -261,10 +241,10 @@ function show(){
   else if(cur=="00"){d.textContent="P"+paginaAtual+" - 00 = LIMPAR";d.className="display vermelho";}
   else{
    if(esperandoResultado){
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - É O RESULTADO! DIGITE PARA VER SE ACERTOU OU ERROU";
+    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - RESULTADO! COLUNA DO AZUL ERA "+colunaParaJogar+" - Nº AZUL "+numeroAzulAtual;
     d.className="display sinal";
    }else{
-    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER - Azul junto: "+cur;
+    d.textContent="P"+paginaAtual+" - NUM: "+cur+" - ENTER - AZUL SEQUENCIA NORMAL";
     d.className="display inicial";
    }
   }
@@ -272,25 +252,20 @@ function show(){
  }
  if(paginaAtual==1){
   if(esperandoResultado){
-   d.innerHTML="🔴 SINAL ATIVO - COLUNA 2/3<br>👉 DIGITE O PRÓXIMO NÚMERO PARA VER ACERTOU/ERROU";
+   d.innerHTML="🔴 SINAL - JOGAR COLUNA "+colunaParaJogar+" (DO AZUL "+numeroAzulAtual+")<br>👉 DIGITE PRÓXIMO NÚMERO";
    d.className="display alerta";
   }else if(lista.length==0){
-   d.textContent="PÁG 1 - COACH DA ROLETA - QUADRADO VERDE - AGUARDANDO SINAL...";
+   d.textContent="PÁG 1 - COACH DA ROLETA - AZUL SEQUENCIA NORMAL - AGUARDANDO SINAL - VERDE";
    d.className="display inicial";
   }else{
-   d.textContent="PÁG 1 - COACH DA ROLETA - "+lista.length+" numeros - ✅:"+green+" ❌:"+red+" - QUADRADO VERDE AGUARDANDO SINAL";
+   d.textContent="PÁG 1 - "+lista.length+" nums - Azul seq normal - ✅:"+green+" ❌:"+red+" - VERDE AGUARDANDO";
    d.className="display inicial";
   }
  }else{
-  if(ultimoSinal){
-   d.innerHTML="🚨 "+ultimoSinal.vermelhos+" VERMELHO(S) DEPOIS DO 🟦 "+ultimoSinal.gatilho+" - COLUNA 2/3";
-   d.className="display alerta";
-  }else{
-   if(paginaAtual==2){d.textContent="PÁG 2 - COACH DA ROLETA - Azul junto: "+(azulValor!==null?azulValor:"-")+" - Conj: "+conjuntosP2.length;}
-   else if(paginaAtual==3){d.textContent="PÁG 3 - COACH DA ROLETA - Azul junto: "+(azulValor!==null?azulValor:"-")+" - ATENÇÃO VEM COLUNA 2/3";}
-   else{d.textContent="PÁG "+paginaAtual+" - COACH DA ROLETA";}
-   d.className="display inicial";
-  }
+  if(paginaAtual==2){d.textContent="PÁG 2 - Azul seq normal (não pausado) - Conj: "+conjuntosP2.length+" - Azul atual: "+(numeroAzulAtual!==null?numeroAzulAtual:"-");}
+  else if(paginaAtual==3){d.textContent="PÁG 3 - Azul seq normal - 2🟥🟥 manda jogar coluna do azul ("+(colunaParaJogar!==null?colunaParaJogar:"-")+")";}
+  else{d.textContent="PÁG "+paginaAtual+" - COACH DA ROLETA";}
+  d.className="display inicial";
  }
 }
 function dig(v){if(cur=="0"||cur=="00"){cur=v;}else if(cur.length>=2){cur=v;}else{cur+=v;}show();}
@@ -299,29 +274,136 @@ function apagarUltimo(){
  if(lista.length>0){
   lista.pop();
   reconstruirTudo();
-  if(!temSinalAtivo()){
-   esperandoResultado=false;
-   setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
-  }
   show();upd();
  }
 }
-function temSinalAtivo(){
- var countSeq=0;
- for(var c=conjuntosP3.length-1;c>=0 && countSeq<2;c--){
-  var conj=conjuntosP3[c];
-  for(var k=conj.length-1;k>=0 && countSeq<2;k--){
-   if(conj[k].valor!==null && conj[k].tipo!='blue'){
-    if(getCol(conj[k].valor)==1){
-     countSeq++;
-    }else{countSeq=0;break;}
+function encontrarProximoVazioP2(){
+ for(var c=0;c<conjuntosP2.length;c++){
+  var conj=conjuntosP2[c];
+  for(var i=0;i<conj.length;i++){
+   if(conj[i].valor==null){
+    return {conjIdx:c, idx:i, item:conj[i]};
    }
   }
  }
- return countSeq>=2;
+ var novoIdx=conjuntosP2.length;
+ var novoConj=criarConjuntoP2(novoIdx);
+ criarConjuntoP3(novoIdx);
+ return {conjIdx:novoIdx, idx:0, item:novoConj[0]};
+}
+function encontrarProximoVazioP3(){
+ for(var c=0;c<conjuntosP3.length;c++){
+  var conj=conjuntosP3[c];
+  for(var i=0;i<conj.length;i++){
+   if(conj[i].valor==null){
+    return {conjIdx:c, idx:i, item:conj[i]};
+   }
+  }
+ }
+ var novoIdx=conjuntosP3.length;
+ criarConjuntoP2(novoIdx);
+ var novoConj=criarConjuntoP3(novoIdx);
+ return {conjIdx:novoIdx, idx:0, item:novoConj[0]};
+}
+function reconstruirTudo(){
+ document.getElementById('conjuntosP2').innerHTML="";
+ document.getElementById('conjuntosP3').innerHTML="";
+ conjuntosP2=[];conjuntosP3=[];colunaParaJogar=null;numeroAzulAtual=null;esperandoResultado=false;green=0;red=0;
+ criarConjuntoP2(0);criarConjuntoP3(0);
+ var temp=lista.slice();
+ lista=[];green=0;red=0;
+ temp.forEach(function(n){
+  aplicarNumero(n,false);
+ });
+ checarSinal();
+}
+function aplicarNumero(n, adicionarNaLista){
+ var posP2=encontrarProximoVazioP2();
+ if(posP2){
+  var item=posP2.item;
+  item.sq.textContent=n;
+  if(item.tipo=='blue'){
+   item.sq.className='sq blue filled new';
+  }else{
+   var col=getCol(n);
+   if(col==1){item.sq.className='sq red new';}
+   else{item.sq.className='sq green new';}
+  }
+  item.valor=n;
+ }
+ var posP3=encontrarProximoVazioP3();
+ if(posP3){
+  var item3=posP3.item;
+  item3.sq.textContent=n;
+  if(item3.tipo=='blue'){
+   item3.sq.className='sq blue filled new';
+  }else if(item3.tipo=='red'){
+   var col=getCol(n);
+   if(col==1){item3.sq.className='sq red new';}
+   else{item3.sq.className='sq green new';}
+  }else{
+   var col=getCol(n);
+   if(col==1){item3.sq.className='sq red new';}
+   else{item3.sq.className='sq green new';}
+  }
+  item3.valor=n;
+ }
+ if(adicionarNaLista){
+  lista.push(n);
+ }
+}
+function checarSinal(){
+ var seqInfo = encontrarSequencia2Vermelhos();
+ if(seqInfo){
+  colunaParaJogar = seqInfo.colunaAzul;
+  numeroAzulAtual = seqInfo.numeroAzul;
+  esperandoResultado = true;
+  setEstadoQuadrado('vermelho','ATENÇÃO<br>VEM<br>COLUNA<br>'+colunaParaJogar+'<br><span style="font-size:14px">AZUL: '+numeroAzulAtual+' (COL '+colunaParaJogar+')</span>');
+  return true;
+ }else{
+  var el1=document.getElementById('alertaGrande1');
+  if(el1 && !el1.classList.contains('acertou') && !el1.classList.contains('errou') && !esperandoResultado){
+   setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
+   colunaParaJogar=null;
+   numeroAzulAtual=null;
+  }
+  return false;
+ }
+}
+function encontrarSequencia2Vermelhos(){
+ for(var c=0;c<conjuntosP3.length;c++){
+  var conj=conjuntosP3[c];
+  for(var i=0;i<conj.length-1;i++){
+   var item1=conj[i];
+   var item2=conj[i+1];
+   if(item1.valor!==null && item2.valor!==null){
+    if(getCol(item1.valor)==1 && getCol(item2.valor)==1){
+     for(var k=i-1;k>=0;k--){
+      if(conj[k].tipo=='blue' && conj[k].valor!==null){
+       var colAzul=getCol(conj[k].valor);
+       if(colAzul==0) colAzul=3;
+       return {numeroAzul:conj[k].valor, colunaAzul:colAzul, posVermelhos:[i,i+1], azulPos:k};
+      }
+     }
+     for(var cc=c;cc>=0;cc--){
+      var conjAnt=conjuntosP3[cc];
+      var startIdx = (cc==c)?i-1:conjAnt.length-1;
+      for(var kk=startIdx;kk>=0;kk--){
+       if(conjAnt[kk].tipo=='blue' && conjAnt[kk].valor!==null){
+        var colAzul=getCol(conjAnt[kk].valor);
+        if(colAzul==0) colAzul=3;
+        return {numeroAzul:conjAnt[kk].valor, colunaAzul:colAzul, posVermelhos:[i,i+1], azulPos:kk};
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+ return null;
 }
 function limparTudo(){
- cur="";lista=[];azulValor=null;green=0;red=0;ultimoSinal=null;esperandoResultado=false;
+ cur="";lista=[];colunaParaJogar=null;numeroAzulAtual=null;green=0;red=0;ultimoSinal=null;esperandoResultado=false;
  document.getElementById('conjuntosP2').innerHTML="";
  document.getElementById('conjuntosP3').innerHTML="";
  conjuntosP2=[];conjuntosP3=[];
@@ -330,182 +412,53 @@ function limparTudo(){
  irPara(paginaAtual);
  show();upd();
 }
-function encontrarProximoBrancoP2(){
- for(var c=0;c<conjuntosP2.length;c++){
-  var conj=conjuntosP2[c];
-  for(var i=0;i<conj.length;i++){
-   if(conj[i].tipo=='white' && conj[i].valor==null){
-    return {conjIdx:c, idx:i, item:conj[i]};
-   }
-  }
- }
- var novoIdx=conjuntosP2.length;
- var novoConj=criarConjuntoP2(novoIdx);
- criarConjuntoP3(novoIdx);
- if(azulValor!==null){
-  novoConj.forEach(function(item){
-   if(item.tipo=='blue'){item.sq.textContent=azulValor;item.sq.className='sq blue filled';item.valor=azulValor;}
-  });
-  var conjP3=conjuntosP3[novoIdx];
-  conjP3.forEach(function(item){
-   if(item.tipo=='blue'){item.sq.textContent=azulValor;item.sq.className='sq blue filled';item.valor=azulValor;}
-  });
- }
- for(var i=0;i<novoConj.length;i++){
-  if(novoConj[i].tipo=='white' && novoConj[i].valor==null){
-   return {conjIdx:novoIdx, idx:i, item:novoConj[i]};
-  }
- }
- return null;
-}
-function reconstruirTudo(){
- document.getElementById('conjuntosP2').innerHTML="";
- document.getElementById('conjuntosP3').innerHTML="";
- conjuntosP2=[];conjuntosP3=[];azulValor=null;green=0;red=0;
- criarConjuntoP2(0);criarConjuntoP3(0);
- var temp=lista.slice();
- lista=[];green=0;red=0;
- temp.forEach(function(n){
-  aplicarNumero(n,false);
- });
- if(temSinalAtivo()){
-  esperandoResultado=true;
-  setEstadoQuadrado('vermelho','ATENÇÃO<br>VEM<br>COLUNA<br>2 / 3');
- }else{
-  esperandoResultado=false;
-  setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
- }
-}
-function aplicarNumero(n, adicionarNaLista){
- var col=getCol(n);
- if(azulValor===null){
-  atualizarTodosAzuis(n);
- }
- var posP2=encontrarProximoBrancoP2();
- if(posP2){
-  var item=posP2.item;
-  if(item.tipo=='white'){
-   item.sq.textContent=n;
-   if(col==1){item.sq.className='sq red new';}
-   else{item.sq.className='sq green new';}
-   item.valor=n;
-  }
- }
- if(col==1){
-  var posP3=null;
-  for(var c=0;c<conjuntosP3.length;c++){
-   var conj=conjuntosP3[c];
-   for(var i=0;i<conj.length;i++){
-    if((conj[i].tipo=='red' || conj[i].tipo=='white') && conj[i].valor==null){
-     posP3={conjIdx:c, idx:i, item:conj[i]};
-     break;
-    }
-   }
-   if(posP3) break;
-  }
-  if(posP3){
-   var itemP3=posP3.item;
-   itemP3.sq.textContent=n;
-   itemP3.sq.className='sq red new';
-   itemP3.valor=n;
-  }
- }
- if(adicionarNaLista){
-  lista.push(n);
- }
-}
 function ok(){
  if(cur===""){return;}
  if(cur==="00"){limparTudo();return;}
  if(cur==="0"){apagarUltimo();return;}
  var n=parseInt(cur);if(isNaN(n)||n<0||n>36){cur="";show();return;}
  if(esperandoResultado){
-  var col=getCol(n);
-  var acertou = (col==2 || col==3);
+  var colResultado=getCol(n);
+  var acertou = (colResultado==colunaParaJogar);
+  if(colunaParaJogar==0){acertou = (colResultado==0);}
   if(acertou){
    green++;
-   setEstadoQuadrado('acertou','ACERTOU!<br>✅<br>COLUNA<br>2 / 3<br>Nº '+n);
+   setEstadoQuadrado('acertou','ACERTOU!<br>✅<br>COLUNA<br>'+colunaParaJogar+'<br>Nº '+n+'<br>AZUL ERA '+numeroAzulAtual);
   }else{
    red++;
-   setEstadoQuadrado('errou','ERROU!<br>❌<br>Nº '+n+'<br>COLUNA '+col);
+   setEstadoQuadrado('errou','ERROU!<br>❌<br>Nº '+n+' COL '+colResultado+'<br>ESPERAVA COL '+colunaParaJogar+'<br>AZUL '+numeroAzulAtual);
   }
   document.getElementById('placarAcertou1').textContent=green;
   document.getElementById('placarErrou1').textContent=red;
   document.getElementById('placarAcertou3').textContent=green;
   document.getElementById('placarErrou3').textContent=red;
   esperandoResultado=false;
+  colunaParaJogar=null;
+  numeroAzulAtual=null;
   setTimeout(function(){
    setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
    show();
-  },3000);
-  var posAtual=null;
-  for(var c=0;c<conjuntosP2.length;c++){
-   var conj=conjuntosP2[c];
-   for(var i=0;i<conj.length;i++){
-    if(conj[i].valor==null){
-     posAtual=conj[i];
-     break;
-    }
-   }
-   if(posAtual) break;
-  }
-  if(posAtual && posAtual.tipo=='blue'){
-   atualizarTodosAzuis(n);
-  }
+  },3500);
   aplicarNumero(n,true);
   cur="";show();upd();
   return;
  }
- var posAtual=null;
- for(var c=0;c<conjuntosP2.length;c++){
-  var conj=conjuntosP2[c];
-  for(var i=0;i<conj.length;i++){
-   if(conj[i].valor==null){
-    posAtual=conj[i];
-    break;
-   }
-  }
-  if(posAtual) break;
- }
- if(posAtual && posAtual.tipo=='blue'){
-  atualizarTodosAzuis(n);
- }
  aplicarNumero(n,true);
  cur="";show();upd();
- if(temSinalAtivo()){
-  esperandoResultado=true;
-  setEstadoQuadrado('vermelho','ATENÇÃO<br>VEM<br>COLUNA<br>2 / 3');
- }
+ checarSinal();
 }
 function upd(){
- var eventos=[];var gatilhoSet=new Set();var i=0;
- while(i<lista.length){
-  var n=lista[i];
-  if(isGatilhoNum(n)){
-   var verm=0;var j=i+1;
-   while(j<lista.length && getCol(lista[j])==1){verm++;j++;}
-   if(verm>0){eventos.push({pos:i,vermelhos:verm,gatilho:n});gatilhoSet.add(i);}
-   i=j;
-  }else{i++;}
- }
- ultimoSinal=null;
- if(eventos.length>0){
-  var ev=eventos[eventos.length-1];
-  if(lista.length==ev.pos+ev.vermelhos+1){ultimoSinal=ev;}
- }
  var topBar1=document.getElementById('topBar1');
  if(topBar1){
   topBar1.innerHTML="";
   if(lista.length==0){
-   var e=document.createElement('div');e.style.cssText="font-size:12px;color:#1a7a2a;padding:8px;text-align:center;width:100%";e.textContent="PÁG 1 - COACH DA ROLETA - QUADRADO VERDE AGUARDANDO SINAL - DIGITE E ENTER - Numeros: 4,3,2,1... - Azul junto: 15,15,15,15,15";
+   var e=document.createElement('div');e.style.cssText="font-size:12px;color:#1a7a2a;padding:8px;text-align:center;width:100%";e.textContent="PÁG 1 - COACH DA ROLETA - AZUL SEQUENCIA NORMAL (não pausado) - DIGITE: 4,3,2,1... - 2🟥🟥 manda jogar coluna do azul";
    topBar1.appendChild(e);
   }else{
    var rev=lista.slice().reverse();
    rev.forEach(function(num,idx){
-    var posOrig=lista.length-1-idx;
-    var isGat=gatilhoSet.has(posOrig);
     var col=getCol(num);
-    var cor=isGat?'blue':(col==1?'red':'green');
+    var cor=(col==1?'red':(col==0?'blue':'green'));
     var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;topBar1.appendChild(box);
    });
   }
@@ -514,26 +467,13 @@ function upd(){
  document.getElementById('placarErrou1').textContent=red;
  document.getElementById('placarAcertou3').textContent=green;
  document.getElementById('placarErrou3').textContent=red;
- if(!esperandoResultado){
-  var el1=document.getElementById('alertaGrande1');
-  if(el1 && !el1.classList.contains('acertou') && !el1.classList.contains('errou')){
-   if(temSinalAtivo()){
-    esperandoResultado=true;
-    setEstadoQuadrado('vermelho','ATENÇÃO<br>VEM<br>COLUNA<br>2 / 3');
-   }else{
-    if(!el1.classList.contains('verde') || document.getElementById('colunaGrandeTexto1').innerHTML.indexOf('AGUARDANDO')==-1){
-     setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
-    }
-   }
-  }
- }
  ['topBar4','topBar5','topBar6','topBar7','topBar8','topBar9','topBar10'].forEach(function(id){
   var el=document.getElementById(id);
   if(!el) return;
   el.innerHTML="";
   var rev=lista.slice().reverse().slice(0,12);
   if(rev.length==0){var e=document.createElement('div');e.style.cssText="font-size:9px;color:#888;padding:2px";e.textContent="Sem números";el.appendChild(e);}
-  else{rev.forEach(function(num,idx){var posOrig=lista.length-1-idx;var isGat=gatilhoSet.has(posOrig);var col=getCol(num);var cor=isGat?'blue':(col==1?'red':'green');var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);});}
+  else{rev.forEach(function(num,idx){var col=getCol(num);var cor=(col==1?'red':(col==0?'blue':'green'));var box=document.createElement('div');box.className='nBox '+cor+(idx==0?' new':'');box.textContent=num;el.appendChild(box);});}
  });
  var topBar10=document.getElementById('topBar10');
  if(topBar10){

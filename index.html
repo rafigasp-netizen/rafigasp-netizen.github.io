@@ -13,20 +13,25 @@ body{background:#000;display:flex;justify-content:center}
 .menu{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3px;padding:3px;flex-shrink:0}
 .menu button{height:28px;border-radius:5px;border:1px solid #d4af37;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:9px;font-weight:800}
 .barra-verm{background:#ffff00;border:1px solid gold;text-align:center;color:#000;font-weight:900;padding:2px;margin:0 3px;border-radius:5px;min-height:30px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hist{display:flex;gap:3px;padding:3px;overflow-x:auto;background:#111;min-height:34px;flex-shrink:0}
-.chip{min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:1px solid gold;font-size:12px;flex-shrink:0}
+/* HISTORICO DE CIMA - 1 LINHA SO */
+.hist{display:flex;gap:4px;padding:4px;overflow-x:auto;overflow-y:hidden;background:#111;min-height:36px;flex-shrink:0;flex-wrap:nowrap;white-space:nowrap;scrollbar-width:none}
+.hist::-webkit-scrollbar{display:none}
+.chip{min-width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:1px solid gold;font-size:12px;flex-shrink:0}
 .chip.C{background:#00c800}.chip.E{background:#c80000}
-.card-verm{margin:3px;background:linear-gradient(180deg,#ff4444,#cc0000);border:1px solid #d4af37;border-radius:8px;padding:5px;text-align:center;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.card-verm{margin:3px;background:linear-gradient(180deg,#ff4444,#cc0000);border:1px solid #d4af37;border-radius:8px;padding:5px;text-align:center;flex-shrink:0}
 .big{color:#ffff00;font-size:32px;font-weight:900;line-height:1}
 .placar{display:flex;justify-content:space-between;background:#000;border-radius:5px;padding:3px 8px;margin-top:3px}
 .verde{color:#00ff00;font-size:18px;font-weight:900}.verm{color:#ff3333;font-size:18px;font-weight:900}
-.hist-result{background:#000;border-radius:5px;padding:3px;display:flex;gap:3px;overflow-x:auto;min-height:32px;border:1px solid #333;flex-wrap:wrap;margin-top:3px;flex:1}
-.hr-quad{min-width:26px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff;border:1px solid #fff}
+/* HISTORICO DE BAIXO - 1 LINHA SO EMPURRANDO */
+.hist-result{background:#000;border-radius:5px;padding:4px;display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;min-height:36px;border:1px solid #333;flex-wrap:nowrap;white-space:nowrap;margin-top:4px;scrollbar-width:none}
+.hist-result::-webkit-scrollbar{display:none}
+.hr-quad{min-width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;border:1px solid #fff;flex-shrink:0}
 .hr-quad.C{background:#00c800}.hr-quad.E{background:#c80000}
-.teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:3px;background:#1a1a0a;border-top:1px solid #d4af37;flex-shrink:0;padding-bottom:6px}
-.b{height:38px;border-radius:6px;border:1px solid #8a6a1a;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:18px;font-weight:900}
-.pagina{display:none;flex:1;min-height:0}.pagina.ativa{display:flex;flex-direction:column}
-#lista-geral{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+/* TECLADO GRANDE - TAMANHO DO QUADRADO AZUL */
+.teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:5px;background:#1a1a0a;border-top:1px solid #d4af37;flex:1;min-height:0}
+.b{border-radius:8px;border:1px solid #8a6a1a;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:22px;font-weight:900;height:100%;min-height:40px}
+.pagina{display:none;flex:1;min-height:0;flex-shrink:0}.pagina.ativa{display:flex;flex-direction:column}
+#lista-geral{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;margin-top:4px}
 </style>
 </head>
 <body>
@@ -36,14 +41,15 @@ body{background:#000;display:flex;justify-content:center}
 <div id="pag1" class="pagina ativa"><div class="barra-verm" id="barra"></div><div class="hist" id="hist-top"></div>
 <div class="card-verm"><div style="color:#fff;font-size:10px;font-weight:900">VEM COLUNA</div><div class="big" id="sinal">2/3</div>
 <div class="placar"><div><b style="font-size:8px;color:gold">✅ ACERTOU</b><div class="verde" id="ac">0</div></div><div><b style="font-size:8px;color:gold">❌ ERROU</b><div class="verm" id="er">0</div></div></div>
-<div class="hist-result" id="hist-result"></div></div></div>
-<div id="pag3" class="pagina"><h2 style="color:gold;text-align:center;font-size:12px">PAGINA 3 - GERAL</h2><div id="lista-geral"></div><button onclick="limparGeral()" style="margin-top:6px;height:28px;background:#333;color:#fff;border:1px solid gold;border-radius:5px;font-size:11px">🗑️ LIMPAR</button></div>
+<div class="hist-result" id="hist-result"></div></div>
 <div class="teclado">
 <button class="b" onclick="dig(1)">1</button><button class="b" onclick="dig(2)">2</button><button class="b" onclick="dig(3)">3</button>
 <button class="b" onclick="dig(4)">4</button><button class="b" onclick="dig(5)">5</button><button class="b" onclick="dig(6)">6</button>
 <button class="b" onclick="dig(7)">7</button><button class="b" onclick="dig(8)">8</button><button class="b" onclick="dig(9)">9</button>
-<button class="b" style="font-size:12px" onclick="enter()">ENTER</button><button class="b" onclick="dig(0)">0</button><button class="b" style="font-size:12px" onclick="corrigir()">CORRIGIR</button>
+<button class="b" style="font-size:13px" onclick="enter()">ENTER</button><button class="b" onclick="dig(0)">0</button><button class="b" style="font-size:13px" onclick="corrigir()">CORRIGIR</button>
 </div>
+</div>
+<div id="pag3" class="pagina"><h2 style="color:gold;text-align:center;font-size:12px">PAGINA 3 - GERAL</h2><div id="lista-geral"></div><button onclick="limparGeral()" style="margin-top:6px;height:28px;background:#333;color:#fff;border:1px solid gold;border-radius:5px;font-size:11px">🗑️ LIMPAR</button></div>
 </div>
 <script>
 let buf="";let ac=0,er=0;let colunaAlvo="2/3";let paginaAtual=1;
@@ -60,7 +66,7 @@ function apagar(){buf=""; atualizaBarra();}
 function limpar(){document.getElementById('hist-top').innerHTML='';document.getElementById('hist-result').innerHTML='';ac=0;er=0;historicoNumeros=[];document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;atualizaSinal();atualizaBarra();}
 function limparGeral(){geral=[];localStorage.setItem('rafigasp_geral',JSON.stringify(geral));renderGeral();}
 function renderGeral(){let div=document.getElementById('lista-geral');div.innerHTML='';geral.forEach(item=>{let q=document.createElement('div');q.className='hr-quad '+(item.acertou?'C':'E');q.textContent=item.num;div.appendChild(q);});}
-function enter(){if(!buf)return;let num=parseInt(buf);if(num<0||num>36){buf="";atualizaBarra();return;}let col=getColuna(num);let alvo=colunaAlvo.split('/').map(Number);let acertou=alvo.includes(col);let h=document.getElementById('hist-top');let d=document.createElement('div');d.className='chip '+(acertou?'C':'E');d.textContent=num;h.appendChild(d);h.scrollLeft=h.scrollWidth;let hr=document.getElementById('hist-result');let quad=document.createElement('div');quad.className='hr-quad '+(acertou?'C':'E');quad.textContent=num;hr.appendChild(quad);if(acertou)ac++;else er++;document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;geral.push({num:num,acertou:acertou});localStorage.setItem('rafigasp_geral',JSON.stringify(geral));historicoNumeros.push(num);buf="";atualizaSinal();atualizaBarra();}
+function enter(){if(!buf)return;let num=parseInt(buf);if(num<0||num>36){buf="";atualizaBarra();return;}let col=getColuna(num);let alvo=colunaAlvo.split('/').map(Number);let acertou=alvo.includes(col);let h=document.getElementById('hist-top');let d=document.createElement('div');d.className='chip '+(acertou?'C':'E');d.textContent=num;h.appendChild(d);h.scrollLeft=h.scrollWidth;let hr=document.getElementById('hist-result');let quad=document.createElement('div');quad.className='hr-quad '+(acertou?'C':'E');quad.textContent=num;hr.appendChild(quad);hr.scrollLeft=hr.scrollWidth;if(acertou)ac++;else er++;document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;geral.push({num:num,acertou:acertou});localStorage.setItem('rafigasp_geral',JSON.stringify(geral));historicoNumeros.push(num);buf="";atualizaSinal();atualizaBarra();}
 atualizaSinal();atualizaBarra();renderGeral();
 </script>
 </body>

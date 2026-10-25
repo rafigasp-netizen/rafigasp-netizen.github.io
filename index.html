@@ -11,7 +11,7 @@ body{background:#001a00;display:flex;justify-content:center}
 .topo h1{font-size:30px;font-weight:900}.topo span{font-size:10px;letter-spacing:3px;font-weight:700}
 .menu{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:8px}
 .menu button{height:42px;border-radius:8px;border:1px solid #d4af37;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:11px;font-weight:800}
-.barra-verm{background:linear-gradient(180deg,#ff3333,#991111);border:1px solid #d4af37;text-align:center;color:#fff;font-weight:900;padding:10px;margin:0 6px;border-radius:8px;min-height:44px}
+.barra-verm{background:linear-gradient(180deg,#ff3333,#991111);border:2px solid gold;text-align:center;color:#fff;font-weight:900;padding:10px;margin:0 6px;border-radius:8px;min-height:50px;font-size:28px;display:flex;align-items:center;justify-content:center}
 .hist{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#111;min-height:54px}
 .chip{min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:2px solid #d4af37;flex-shrink:0}
 .r{background:#991b1b}.p{background:#222}
@@ -32,7 +32,7 @@ body{background:#001a00;display:flex;justify-content:center}
 <div class="app">
 <div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
 <div class="menu"><button onclick="irPara(1)">🏠 INICIO</button><button onclick="apagar()">⬅️ APAGAR</button><button onclick="limpar()">🗑️ LIMPAR</button><button onclick="proximaPagina()">➡️ PROX</button></div>
-<div id="pag1" class="pagina ativa"><div class="barra-verm" id="barra">VEM COLUNA 2/3</div><div class="hist" id="hist-top"></div>
+<div id="pag1" class="pagina ativa"><div class="barra-verm" id="barra"></div><div class="hist" id="hist-top"></div>
 <div class="card-verm"><div style="color:#fff;font-size:14px;font-weight:900">VEM COLUNA</div><div class="big" id="sinal">2/3</div>
 <div class="placar"><div><b style="font-size:10px;color:gold">✅ ACERTOU</b><div class="verde" id="ac">0</div></div><div><b style="font-size:10px;color:gold">❌ ERROU</b><div class="verm" id="er">0</div></div></div>
 <div class="hist-result" id="hist-result"></div></div></div>
@@ -45,7 +45,20 @@ let geral=JSON.parse(localStorage.getItem('rafigasp_geral')||'[]');
 function getColuna(n){if(n==0)return 0; if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1; if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2; return 3;}
 function irPara(n){document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa')); document.getElementById('pag'+n).classList.add('ativa'); paginaAtual=n; if(n==3)renderGeral();}
 function proximaPagina(){irPara(paginaAtual>=3?1:paginaAtual+1);}
-function atualizaBarra(){let el=document.getElementById('barra'); if(buf.length>0){el.innerText="DIGITANDO: "+buf; el.style.background="#ffff00"; el.style.color="#000";}else{el.innerText="VEM COLUNA "+colunaAlvo; el.style.background=""; el.style.color="#fff";}}
+function atualizaBarra(){
+  let el=document.getElementById('barra'); 
+  if(buf.length>0){
+    el.innerText=buf; // SÓ O NÚMERO 1 AO 36
+    el.style.background="#ffff00"; 
+    el.style.color="#000";
+    el.style.fontSize="38px";
+  }else{
+    el.innerHTML="<span style='font-size:18px'>VEM COLUNA "+colunaAlvo+"</span>";
+    el.style.background=""; 
+    el.style.color="#fff";
+    el.style.fontSize="28px";
+  }
+}
 function dig(n){if(buf.length<2)buf+=n; atualizaBarra();}
 function corrigir(){buf=buf.slice(0,-1); atualizaBarra();}
 function apagar(){buf=""; atualizaBarra();}
@@ -53,7 +66,7 @@ function limpar(){document.getElementById('hist-top').innerHTML='';document.getE
 function limparGeral(){geral=[];localStorage.setItem('rafigasp_geral',JSON.stringify(geral));renderGeral();}
 function renderGeral(){let div=document.getElementById('lista-geral');div.innerHTML='';geral.forEach(item=>{let q=document.createElement('div');q.className='hr-quad '+(item.acertou?'C':'E');q.textContent=item.num;div.appendChild(q);});}
 function enter(){if(!buf)return;let num=parseInt(buf);let h=document.getElementById('hist-top');let d=document.createElement('div');d.className='chip '+(num%2==0?'p':'r');d.textContent=num;h.appendChild(d);h.scrollLeft=h.scrollWidth;let col=getColuna(num);let alvo=colunaAlvo.split('/').map(Number);let acertou=alvo.includes(col);let hr=document.getElementById('hist-result');let quad=document.createElement('div');quad.className='hr-quad '+(acertou?'C':'E');quad.textContent=num;hr.appendChild(quad);if(acertou)ac++;else er++;document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;geral.push({num:num,acertou:acertou});localStorage.setItem('rafigasp_geral',JSON.stringify(geral));buf="";atualizaBarra();}
-renderGeral();
+atualizaBarra();renderGeral();
 </script>
 </body>
 </html>

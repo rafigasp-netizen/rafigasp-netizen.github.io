@@ -2,94 +2,74 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>RAFIGASP - COACH DA ROLETA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAFIGASP COACH DA ROLETA</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{background:#050508;display:flex;justify-content:center}
-.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(180deg,#0f0f18,#050508);padding:14px;display:flex;flex-direction:column;gap:12px}
-
-/* RAFIGASP PRETO */
-.placa{height:68px;background:linear-gradient(180deg,#f7e8a5,#d4af37 50%,#b8962e);border:2px solid #d4af37;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(212,175,55,.4)}
-.placa h1{color:#000;font-size:48px;font-weight:900;letter-spacing:3px}
-.sub{color:#d4af37;text-align:center;letter-spacing:4px;font-size:16px;font-weight:600;margin-top:2px}
-
-/* ROLETA REAL EM CSS - SEM LINK EXTERNO */
-.roleta-wrap{background:#000;border-radius:14px;padding:12px;display:flex;justify-content:center;border:1px solid rgba(212,175,55,.3)}
-.roleta{
- width:310px;height:310px;border-radius:50%;
- background: radial-gradient(circle at center, #2a1f10 0%, #000 30%, transparent 30%),
- conic-gradient(#b91c1c 0deg 10deg, #111 10deg 20deg, #b91c1c 20deg 30deg, #111 30deg 40deg, #b91c1c 40deg 50deg, #111 50deg 60deg, #166534 60deg 75deg, #b91c1c 75deg 85deg, #111 85deg 95deg, #b91c1c 95deg 105deg, #111 105deg 115deg, #b91c1c 115deg 125deg, #111 125deg 135deg, #b91c1c 135deg 145deg, #111 145deg 155deg, #b91c1c 155deg 165deg, #111 165deg 175deg, #b91c1c 175deg 185deg, #111 185deg 195deg, #b91c1c 195deg 205deg, #111 205deg 215deg, #b91c1c 215deg 225deg, #111 225deg 235deg, #b91c1c 235deg 245deg, #111 245deg 255deg, #b91c1c 255deg 265deg, #111 265deg 275deg, #b91c1c 275deg 285deg, #111 285deg 295deg, #b91c1c 295deg 305deg, #111 305deg 315deg, #b91c1c 315deg 325deg, #111 325deg 335deg, #b91c1c 335deg 345deg, #111 345deg 360deg);
- border:7px solid #d4af37;box-shadow:0 0 0 2px #000, 0 0 25px rgba(212,175,55,.5), inset 0 0 20px rgba(0,0,0,.8);
- position:relative;display:flex;align-items:center;justify-content:center
-}
-.roleta::after{content:"";width:90px;height:90px;background:radial-gradient(circle,#f7e8a5,#d4af37);border-radius:50%;border:3px solid #000;box-shadow:0 0 10px #000}
-.roleta::before{content:"✦";position:absolute;font-size:22px;color:gold;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2}
-
-/* SINAL */
-.sinal{color:#f0d060;text-align:center;font-size:30px;font-weight:900;letter-spacing:1px;text-shadow:0 0 12px rgba(240,208,96,.6)}
-
-/* HISTORICO ORGANIZADO */
-.hist{border:1.5px solid #d4af37;border-radius:12px;padding:10px;display:flex;gap:8px;justify-content:space-between;background:rgba(0,0,0,.4)}
-.chip{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff;border:2px solid #d4af37}
-.chip.g{background:linear-gradient(180deg,#22c55e,#052e16)}
-.chip.r{background:linear-gradient(180deg,#ef4444,#7f1d1d)}
-.chip.p{background:linear-gradient(180deg,#444,#000)}
-.placar-mini{text-align:center;color:#d4af37;font-size:12px;letter-spacing:2px;opacity:.7}
-
-/* TECLADO - 0 EMBAIXO DO 8 */
-.teclado{background:linear-gradient(180deg,#1c1c22,#0f0f14);border:1.5px solid #d4af37;border-radius:16px;padding:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.b{height:64px;border-radius:12px;border:2px solid #9a7c24;background:linear-gradient(180deg,#f7e8a5,#d4af37 55%,#b8962e);font-size:32px;font-weight:900;color:#2e2400;box-shadow:0 4px 0 #6b5418;cursor:pointer}
-.b:active{transform:translateY(3px);box-shadow:0 1px 0 #6b5418}
-.b-a{font-size:17px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0a1a0a;display:flex;justify-content:center}
+.app{width:100%;max-width:400px;background:#000;display:flex;flex-direction:column;min-height:100vh}
+.topo{height:64px;background:linear-gradient(180deg,#f7e8a5,#d4af37);display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #d4af37}
+.topo h1{color:#000;font-size:30px;font-weight:900;letter-spacing:2px;line-height:1}
+.topo span{color:#000;font-size:10px;letter-spacing:3px;font-weight:700}
+.menu{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:8px;background:#000}
+.menu button{height:38px;border-radius:8px;border:1px solid #d4af37;background:linear-gradient(#f7e8a5,#d4af37);font-size:11px;font-weight:800;color:#000}
+.barra-verm{background:linear-gradient(180deg,#ff3333,#991111);border:1px solid #d4af37;text-align:center;color:#fff;font-weight:900;padding:10px;font-size:18px;margin:0 6px;border-radius:8px}
+.hist{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#111;border-top:1px solid #333;border-bottom:1px solid #333;scrollbar-width:none}
+.hist::-webkit-scrollbar{display:none}
+.chip{min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;border:2px solid #d4af37;flex-shrink:0}
+.chip.sel{box-shadow:0 0 10px gold}
+.r{background:#991b1b}.p{background:#222}
+.card-verm{margin:8px;background:linear-gradient(180deg,#ff4444,#cc0000);border:2px solid #d4af37;border-radius:14px;padding:12px;text-align:center}
+.card-verm h2{color:#fff;font-size:22px;text-shadow:0 2px 2px #000}
+.card-verm .big{color:#ffff00;font-size:56px;font-weight:900;line-height:1;text-shadow:0 0 10px #000}
+.placar{display:flex;justify-content:space-between;background:#000;border-radius:8px;padding:8px 12px;margin-top:10px}
+.placar b{font-size:12px;color:#d4af37}
+.placar .verde{color:#00ff00;font-size:28px;font-weight:900}
+.placar .verm{color:#ff3333;font-size:28px;font-weight:900}
+.teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;background:#1a1a0a;border-top:2px solid #d4af37}
+.b{height:62px;border-radius:10px;border:1px solid #8a6a1a;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:28px;font-weight:900;color:#000;box-shadow:0 3px 0 #5a4510}
+.b:active{transform:translateY(2px)}
+.b-a{font-size:16px}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="placa"><h1>RAFIGASP</h1></div>
-  <div class="sub">COACH DA ROLETA</div>
-
-  <div class="roleta-wrap"><div class="roleta"></div></div>
-
-  <div class="sinal">VEM COLUNA 2/3</div>
-
-  <div class="hist" id="hist">
-    <div class="chip g">12</div>
-    <div class="chip p">3</div>
-    <div class="chip r">23</div>
-    <div class="chip p">7</div>
-    <div class="chip r">18</div>
-    <div class="chip r">32</div>
-  </div>
-  <div class="placar-mini">ACERTOU 12 • ERROU 3</div>
-
-  <div class="teclado">
-    <button class="b" onclick="dig(1)">1</button>
-    <button class="b" onclick="dig(2)">2</button>
-    <button class="b" onclick="dig(3)">3</button>
-    <button class="b" onclick="dig(4)">4</button>
-    <button class="b" onclick="dig(5)">5</button>
-    <button class="b" onclick="dig(6)">6</button>
-    <button class="b" onclick="dig(7)">7</button>
-    <button class="b" onclick="dig(8)">8</button>
-    <button class="b" onclick="dig(9)">9</button>
-    <button class="b b-a" onclick="ent()">ENTER</button>
-    <button class="b" onclick="dig(0)">0</button>
-    <button class="b b-a" onclick="corr()">CORRIGIR</button>
-  </div>
+<div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
+<div class="menu">
+<button>🏠 INICIO</button><button>⬅️ APAGAR</button><button>🗑️ LIMPAR</button><button>➡️ PROX</button>
+</div>
+<div class="barra-verm">VEM COLUNA 2/3</div>
+<div class="hist" id="hist">
+<div class="chip r sel">5</div><div class="chip p">2</div><div class="chip r">1</div><div class="chip r">1</div><div class="chip r">1</div><div class="chip p">2</div><div class="chip r">1</div><div class="chip r">3</div><div class="chip p">2</div><div class="chip p">8</div>
+</div>
+<div class="card-verm">
+<h2>VEM COLUNA</h2>
+<div class="big">2/3</div>
+<div class="placar">
+<div><b>✅ ACERTOU</b><div class="verde" id="ac">4</div></div>
+<div><b>❌ ERROU</b><div class="verm" id="er">3</div></div>
+</div>
+</div>
+<div class="teclado">
+<button class="b" onclick="dig(1)">1</button><button class="b" onclick="dig(2)">2</button><button class="b" onclick="dig(3)">3</button>
+<button class="b" onclick="dig(4)">4</button><button class="b" onclick="dig(5)">5</button><button class="b" onclick="dig(6)">6</button>
+<button class="b" onclick="dig(7)">7</button><button class="b" onclick="dig(8)">8</button><button class="b" onclick="dig(9)">9</button>
+<button class="b b-a" onclick="go()">ENTER</button><button class="b" onclick="dig(0)">0</button><button class="b b-a" onclick="corr()">CORRIGIR</button>
+</div>
 </div>
 <script>
 let buf="";
-function dig(n){buf+=n;}
-function ent(){
+function dig(n){if(buf.length<2)buf+=n;}
+function go(){
  if(!buf)return;
  let num=parseInt(buf);
+ if(num<0||num>36){buf="";return;}
  let h=document.getElementById('hist');
  let d=document.createElement('div');
- d.className='chip '+(num==0?'g':num%2==0?'p':'r');
+ d.className='chip '+(num==0?'r':num%2==0?'p':'r');
  d.textContent=num;
  h.appendChild(d);
- if(h.children.length>6)h.removeChild(h.firstChild);
+ h.scrollLeft=h.scrollWidth;
  buf="";
 }
 function corr(){buf=buf.slice(0,-1);}

@@ -26,10 +26,10 @@ body{background:#000;display:flex;justify-content:center}
 .teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:5px;background:#1a1a0a;border-top:1px solid #d4af37;flex:1;min-height:0}
 .b{border-radius:8px;border:1px solid #8a6a1a;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:22px;font-weight:900;height:100%;min-height:40px}
 .pagina{display:none;flex:1;flex-direction:column;min-height:0}.pagina.ativa{display:flex}
-.boasorte{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#111,#000);padding:20px;text-align:center}
-.boasorte h2{color:gold;font-size:40px;font-weight:900;margin-bottom:10px;text-shadow:0 0 10px gold}
-.boasorte p{color:#fff;font-size:14px;margin-bottom:20px}
-.btn-jogar{width:80%;height:50px;background:linear-gradient(180deg,#f7e8a5,#d4af37);border:2px solid gold;border-radius:10px;font-size:18px;font-weight:900}
+/* CAPA NOVA COM SUA IMAGEM */
+.boasorte{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background-image:url('capa.jpg');background-size:cover;background-position:center top;padding:20px;padding-bottom:60px;position:relative}
+.boasorte::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.7));}
+.btn-jogar{position:relative;z-index:2;width:90%;height:56px;background:linear-gradient(180deg,#f7e8a5,#d4af37);border:2px solid gold;border-radius:12px;font-size:18px;font-weight:900;color:#000;box-shadow:0 0 20px gold}
 </style>
 </head>
 <body>
@@ -37,16 +37,12 @@ body{background:#000;display:flex;justify-content:center}
 <div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
 <div class="menu"><button onclick="irPara(1)">🏠 INICIO</button><button onclick="apagar()">⬅️ APAGAR</button><button onclick="limpar()">🗑️ LIMPAR</button><button onclick="proximaPagina()">➡️ PROX</button></div>
 
-<!-- PAGINA 1 - BOA SORTE -->
 <div id="pag1" class="pagina ativa">
 <div class="boasorte">
-<h2>BOA SORTE</h2>
-<p>BEM VINDO AO RAFIGASP<br>COACH DA ROLETA</p>
-<button class="btn-jogar" onclick="irPara(2)">🎲 COMEÇAR JOGO</button>
+<button class="btn-jogar" onclick="irPara(2)">Começar a jogar</button>
 </div>
 </div>
 
-<!-- PAGINA 2 - JOGO (ONDE VOCE CIRCULOU) -->
 <div id="pag2" class="pagina">
 <div class="barra-verm" id="barra">BOA SORTE</div>
 <div class="hist" id="hist-top"></div>
@@ -61,8 +57,7 @@ body{background:#000;display:flex;justify-content:center}
 </div>
 </div>
 
-<!-- PAGINA 3 - GERAL -->
-<div id="pag3" class="pagina"><h2 style="color:gold;text-align:center;font-size:12px;padding:5px">PAGINA 3 - GERAL</h2><div id="lista-geral" style="display:flex;gap:4px;flex-wrap:wrap;padding:5px"></div><button onclick="limparGeral()" style="margin:5px;height:28px;background:#333;color:#fff;border:1px solid gold;border-radius:5px">LIMPAR GERAL</button></div>
+<div id="pag3" class="pagina"><h2 style="color:gold;text-align:center;font-size:12px;padding:5px">GERAL</h2><div id="lista-geral" style="display:flex;gap:4px;flex-wrap:wrap;padding:5px"></div><button onclick="limparGeral()" style="margin:5px;height:28px;background:#333;color:#fff;border:1px solid gold;border-radius:5px">LIMPAR</button></div>
 </div>
 
 <script>
@@ -73,39 +68,15 @@ let historicoNumeros=[];
 function getColunaReal(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].includes(n))return 1;if([2,5,8,11,14,17,20,23,26,29,32,35].includes(n))return 2;return 3;}
 function irPara(n){document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));document.getElementById('pag'+n).classList.add('ativa');paginaAtual=n;if(n==3)renderGeral();}
 function proximaPagina(){irPara(paginaAtual>=3?1:paginaAtual+1);}
-function atualizaSinal(){
-  if(historicoNumeros.length>0){colunaAlvo=TABELA[historicoNumeros[0]]||"BOA SORTE";}
-  else{colunaAlvo="BOA SORTE";}
-  document.getElementById('sinal').innerText=colunaAlvo;
-  document.getElementById('barra').innerText=colunaAlvo=="BOA SORTE"?"BOA SORTE":"VEM COLUNA "+colunaAlvo;
-}
-function atualizaBarra(){
-  let el=document.getElementById('barra');
-  if(buf.length>0){let num=parseInt(buf);if(!isNaN(num)&&TABELA[num]){el.innerHTML=num+" > "+TABELA[num];}else el.innerHTML=buf; el.style.background="#ffff00";el.style.color="#000";el.style.fontSize="20px";}
-  else{el.innerHTML=colunaAlvo=="BOA SORTE"?"BOA SORTE":"VEM COLUNA "+colunaAlvo;el.style.background="linear-gradient(180deg,#ff3333,#991111)";el.style.color="#fff";el.style.fontSize="16px";}
-}
+function atualizaSinal(){if(historicoNumeros.length>0){colunaAlvo=TABELA[historicoNumeros[0]]||"BOA SORTE";}else{colunaAlvo="BOA SORTE";}document.getElementById('sinal').innerText=colunaAlvo;document.getElementById('barra').innerText=colunaAlvo=="BOA SORTE"?"BOA SORTE":"VEM COLUNA "+colunaAlvo;}
+function atualizaBarra(){let el=document.getElementById('barra');if(buf.length>0){let num=parseInt(buf);if(!isNaN(num)&&TABELA[num]){el.innerHTML=num+" > "+TABELA[num];}else el.innerHTML=buf;el.style.background="#ffff00";el.style.color="#000";el.style.fontSize="20px";}else{el.innerHTML=colunaAlvo=="BOA SORTE"?"BOA SORTE":"VEM COLUNA "+colunaAlvo;el.style.background="linear-gradient(180deg,#ff3333,#991111)";el.style.color="#fff";el.style.fontSize="16px";}}
 function dig(n){if(buf.length<2)buf+=n;atualizaBarra();}
 function corrigir(){buf=buf.slice(0,-1);atualizaBarra();}
 function apagar(){buf="";atualizaBarra();}
 function limpar(){document.getElementById('hist-top').innerHTML='';document.getElementById('hist-result').innerHTML='';ac=0;er=0;historicoNumeros=[];document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;colunaAlvo="BOA SORTE";atualizaSinal();atualizaBarra();}
 function limparGeral(){geral=[];localStorage.setItem('rafigasp_geral',JSON.stringify(geral));renderGeral();}
 function renderGeral(){let div=document.getElementById('lista-geral');div.innerHTML='';geral.forEach(item=>{let q=document.createElement('div');q.className='hr-quad '+(item.acertou?'C':'E');q.textContent=item.num;div.appendChild(q);});}
-function enter(){
-  if(!buf)return;let num=parseInt(buf);if(num<0||num>36){buf="";atualizaBarra();return;}
-  let colReal=getColunaReal(num);
-  let acertou=false;
-  if(historicoNumeros.length>0){
-    let alvoAnterior=colunaAlvo.split('/').map(Number);
-    if(!isNaN(alvoAnterior[0])) acertou=alvoAnterior.includes(colReal);
-  }
-  let h=document.getElementById('hist-top');let d=document.createElement('div');d.className='chip '+(historicoNumeros.length==0?'C':(acertou?'C':'E'));d.textContent=num;h.prepend(d);
-  let hr=document.getElementById('hist-result');let quad=document.createElement('div');quad.className='hr-quad '+(historicoNumeros.length==0?'C':(acertou?'C':'E'));quad.textContent=num;hr.prepend(quad);
-  if(historicoNumeros.length>0){if(acertou)ac++;else er++;}
-  document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;
-  geral.unshift({num:num,acertou:acertou});localStorage.setItem('rafigasp_geral',JSON.stringify(geral));
-  historicoNumeros.unshift(num);buf="";atualizaSinal();atualizaBarra();
-  if(paginaAtual==1) irPara(2);
-}
+function enter(){if(!buf)return;let num=parseInt(buf);if(num<0||num>36){buf="";atualizaBarra();return;}let colReal=getColunaReal(num);let acertou=false;if(historicoNumeros.length>0){let alvoAnterior=colunaAlvo.split('/').map(Number);if(!isNaN(alvoAnterior[0]))acertou=alvoAnterior.includes(colReal);}let h=document.getElementById('hist-top');let d=document.createElement('div');d.className='chip '+(historicoNumeros.length==0?'C':(acertou?'C':'E'));d.textContent=num;h.prepend(d);let hr=document.getElementById('hist-result');let quad=document.createElement('div');quad.className='hr-quad '+(historicoNumeros.length==0?'C':(acertou?'C':'E'));quad.textContent=num;hr.prepend(quad);if(historicoNumeros.length>0){if(acertou)ac++;else er++;}document.getElementById('ac').innerText=ac;document.getElementById('er').innerText=er;geral.unshift({num:num,acertou:acertou});localStorage.setItem('rafigasp_geral',JSON.stringify(geral));historicoNumeros.unshift(num);buf="";atualizaSinal();atualizaBarra();if(paginaAtual==1)irPara(2);}
 atualizaSinal();atualizaBarra();renderGeral();
 </script>
 </body>

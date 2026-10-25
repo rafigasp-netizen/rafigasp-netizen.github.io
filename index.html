@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - P1 P2 LIBERADAS V2</title>
+<title>RAFIGASP - 10 PAGINAS</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a2a0a;overflow:hidden}
 body{display:flex;justify-content:center;align-items:center}
-.app{width:100%;max-width:380px;height:100dvh;max-height:800px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #000}
+.app{width:100%;max-width:380px;height:100dvh;max-height:820px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #000}
 .topo{text-align:center;background:linear-gradient(180deg,#f5e6a0,#d4af37 50%,#8a6d1b);padding:10px 0 7px;flex-shrink:0}
 .topoR{font-weight:900;font-size:28px;color:#0a2210;letter-spacing:2px;line-height:1;font-family:serif}
 .topoS{font-size:9px;letter-spacing:4px;color:#0a2210;font-weight:900}
 .nav2{display:flex;gap:3px;padding:5px;background:#0f1a0f;flex-shrink:0}
 .nav2 button{flex:1;height:34px;border-radius:7px;border:1.5px solid #d4af37;font-weight:900;font-size:8px;background:#1a2a1a;color:#d4af37;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.nav2 button.home{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#111;border-color:#8a6d1b}
+.nav2 button.home{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#111}
 .nav2 button.limpar{background:#3a1a1a;color:#ffaaaa;border-color:#ff6666}
 .display{margin:4px;background:#000;border:2px solid #d4af37;border-radius:9px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;text-align:center;padding:2px;color:#ffff00;font-size:14px;box-shadow:0 0 10px rgba(212,175,55,0.3)}
 .display.vazio{background:#000;border-color:#333;color:#fff}
@@ -49,69 +49,36 @@ body{display:flex;justify-content:center;align-items:center}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .k{border-radius:9px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);cursor:pointer}
 .k:active{transform:scale(0.95);background:#fff}
-.p1Box{background:linear-gradient(180deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:12px;padding:15px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1}
-.p1Titulo{font-size:24px;color:#d4af37;font-weight:900;text-shadow:0 0 10px #d4af37}
-.p1Sub{font-size:13px;color:#fff}
-.p1Btn{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#000;border:2px solid #8a6d1b;border-radius:10px;padding:13px 25px;font-weight:900;font-size:15px;margin-top:8px;cursor:pointer;width:90%;box-shadow:0 3px 8px rgba(0,0,0,0.4)}
-.p1Btn:active{transform:scale(0.96)}
-.confete{position:absolute;width:8px;height:8px;top:-10px;animation:cair linear forwards;z-index:10;pointer-events:none}
-@keyframes cair{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(320px) rotate(360deg);opacity:0}}
-.confete.verde{background:#00ff00}
-.confete.dourado{background:#ffd700;border-radius:50%}
-.confete.branco{background:#fff}
-.emojiGanha{position:absolute;font-size:24px;animation:subir 1s ease-out forwards;z-index:11;pointer-events:none}
-@keyframes subir{0%{transform:translateY(0) scale(0);opacity:0}20%{transform:translateY(-15px) scale(1.3);opacity:1}100%{transform:translateY(-100px) scale(0.4);opacity:0}}
-.emojiPerde{position:absolute;font-size:22px;animation:cairE 0.8s ease-out forwards;z-index:11;pointer-events:none}
-@keyframes cairE{0%{transform:translateY(-30px) scale(0);opacity:0}20%{transform:translateY(0) scale(1.2);opacity:1}100%{transform:translateY(70px) scale(0.7);opacity:0}}
-.fundoFlash{position:absolute;inset:0;border-radius:15px;pointer-events:none;z-index:1;opacity:0}
-.fundoFlash.ganha{animation:flashG 0.4s ease-out}
-.fundoFlash.perde{animation:flashP 0.4s ease-out}
-@keyframes flashG{0%{background:rgba(0,255,0,0.6);opacity:1}100%{background:transparent;opacity:0}}
-@keyframes flashP{0%{background:rgba(255,0,0,0.6);opacity:1}100%{background:transparent;opacity:0}}
+.pBox{background:linear-gradient(180deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:12px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;flex:1}
+.pTitulo{font-size:22px;color:#d4af37;font-weight:900;text-shadow:0 0 8px #d4af37}
+.pSub{font-size:12px;color:#fff}
+.pBtn{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#000;border:2px solid #8a6d1b;border-radius:10px;padding:11px 20px;font-weight:900;font-size:13px;cursor:pointer;width:88%;box-shadow:0 3px 8px rgba(0,0,0,0.4)}
+.pBtn:active{transform:scale(0.96)}
+.pBtn.green{background:linear-gradient(180deg,#6aff8a,#0f8a2a);color:#fff;border-color:#00ff00}
+.pBtn.dark{background:#1a1a1a;color:#d4af37;border-color:#d4af37}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="nav2">
-<button type="button" class="home" id="btnInicio">🏠 INICIO</button>
-<button type="button" id="btnApagar">⬅️ APAGAR</button>
-<button type="button" class="limpar" id="btnLimpar">🗑️ LIMPAR</button>
-<button type="button" id="btnProx">➡️ PRÓX</button>
+<button type="button" class="home" onclick="irPara(1)">🏠 INICIO</button>
+<button type="button" onclick="apagarUltimo()">⬅️ APAGAR</button>
+<button type="button" class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
+<button type="button" onclick="proximaPagina()">➡️ PRÓX</button>
 </div>
-<div class="display" id="disp">PÁGINA 1 - INÍCIO</div>
+<div class="display" id="disp">PÁGINA 1</div>
 
-<!-- PÁGINA 1 NOVA - INICIO -->
-<div class="page ativa" id="page1">
-<div class="p1Box">
-<div class="p1Titulo">PÁGINA 1<br>INÍCIO</div>
-<div class="p1Sub">✅ NOVA PÁGINA CRIADA!<br>Como você pediu no início</div>
-<div class="p1Sub" style="color:#00ff00;margin-top:8px">Sua página da foto<br><span style="color:#fff">4 5 25 6 3 3 2</span><br>agora é a PÁGINA 5</div>
-<button type="button" class="p1Btn" id="btnP1paraP5">IR PARA PÁGINA 5 →</button>
-<button type="button" class="p1Btn" style="background:linear-gradient(180deg,#6aff8a,#0f8a2a);color:#fff;border-color:#00ff00" id="btnP1Prox">PRÓX PÁGINA →</button>
-<div class="p1Sub" style="font-size:10px;margin-top:10px;color:#d4af37">INICIO = P1 | PRÓX = 1→2→3→4→5→1</div>
-</div>
-</div>
+<!-- PAGINA 1 A 10 -->
+<div class="page ativa" id="page1"><div class="pBox"><div class="pTitulo">PÁGINA 1</div><div class="pSub">Página 1 livre para montar<br>App vai ser montado aqui</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 2</button><button type="button" class="pBtn" onclick="irPara(5)">IR P/ PÁGINA 5 (SUA)</button></div></div>
+<div class="page" id="page2"><div class="pBox"><div class="pTitulo">PÁGINA 2</div><div class="pSub">Página 2 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 3</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page3"><div class="pBox"><div class="pTitulo">PÁGINA 3</div><div class="pSub">Página 3 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 4</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page4"><div class="pBox"><div class="pTitulo">PÁGINA 4</div><div class="pSub">Página 4 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 5</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
 
-<!-- PÁGINA 2 -->
-<div class="page" id="page2">
-<div class="p1Box">
-<div class="p1Titulo">PÁGINA 2</div>
-<div class="p1Sub">✅ PÁGINA 2 EXISTE!<br>Tá liberada!</div>
-<div class="p1Sub" style="color:#00ff00">Você pediu e eu criei</div>
-<button type="button" class="p1Btn" id="btnP2Prox">PRÓX → PÁGINA 3</button>
-<button type="button" class="p1Btn" style="background:#1a1a1a;color:#d4af37" id="btnP2Inicio">INICIO</button>
-</div>
-</div>
-
-<div class="page" id="page3"><div class="p1Box"><div class="p1Titulo">PÁGINA 3</div><div class="p1Sub">Página 3</div><button type="button" class="p1Btn" id="btnP3Prox">PRÓX → 4</button><button type="button" class="p1Btn" id="btnP3Inicio">INICIO</button></div></div>
-<div class="page" id="page4"><div class="p1Box"><div class="p1Titulo">PÁGINA 4</div><div class="p1Sub">Página 4</div><button type="button" class="p1Btn" id="btnP4Prox">PRÓX → 5</button><button type="button" class="p1Btn" id="btnP4Inicio">INICIO</button></div></div>
-
-<!-- PÁGINA 5 - SUA PÁGINA ORIGINAL DA FOTO - NÃO MEXI -->
+<!-- PAGINA 5 - SUA PAGINA ORIGINAL - NAO MEXI -->
 <div class="page" id="page5">
 <div class="topBar" id="topBar1"></div>
 <div class="alertaGrande verde" id="alertaGrande1">
-<div class="fundoFlash" id="fundoFlash"></div>
 <div class="colunaGrande" id="colunaGrandeTexto1">AGUARDANDO<br>SINAL...</div>
 <div class="placarSimples">
 <div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou1">0</div></div>
@@ -119,6 +86,12 @@ body{display:flex;justify-content:center;align-items:center}
 </div>
 </div>
 </div>
+
+<div class="page" id="page6"><div class="pBox"><div class="pTitulo">PÁGINA 6</div><div class="pSub">Página 6 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 7</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page7"><div class="pBox"><div class="pTitulo">PÁGINA 7</div><div class="pSub">Página 7 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 8</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page8"><div class="pBox"><div class="pTitulo">PÁGINA 8</div><div class="pSub">Página 8 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 9</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page9"><div class="pBox"><div class="pTitulo">PÁGINA 9</div><div class="pSub">Página 9 livre para montar</div><button type="button" class="pBtn green" onclick="proximaPagina()">PRÓX → PÁGINA 10</button><button type="button" class="pBtn dark" onclick="irPara(1)">INICIO</button></div></div>
+<div class="page" id="page10"><div class="pBox"><div class="pTitulo">PÁGINA 10</div><div class="pSub">Última página para montar<br>Depois criamos a Inicial!</div><button type="button" class="pBtn green" onclick="irPara(1)">VOLTAR AO INICIO →</button><button type="button" class="pBtn" onclick="irPara(5)">IR P/ PÁGINA 5 (SUA)</button></div></div>
 
 <div class="kb">
 <div class="kr"><button type="button" class="k" onclick="dig('1')">1</button><button type="button" class="k" onclick="dig('2')">2</button><button type="button" class="k" onclick="dig('3')">3</button></div>
@@ -128,10 +101,8 @@ body{display:flex;justify-content:center;align-items:center}
 </div>
 </div>
 <script>
-// SISTEMA DE PAGINAS 100% FUNCIONAL
 var paginaAtual=1;
 function irPara(n){
- console.log('INDO PARA PAGINA '+n);
  var pages=document.querySelectorAll('.page');
  for(var i=0;i<pages.length;i++){pages[i].classList.remove('ativa');}
  var alvo=document.getElementById('page'+n);
@@ -139,38 +110,16 @@ function irPara(n){
  var d=document.getElementById('disp');
  if(d){
   if(n==5){
-   if(lista.length==0){d.textContent='PÁGINA 5 - SUA PÁGINA';d.className='display';}
+   if(lista.length==0){d.textContent='PÁGINA 5 - SUA PÁGINA 4 5 25 6 3 3 2';}
    else{show();}
   }else{
-   d.textContent='PÁGINA '+n+(n==1?' - INÍCIO':n==2?' - PÁGINA 2':n==5?' - SUA PÁGINA':'');
-   d.className='display';
+   d.textContent='PÁGINA '+n+(n==5?' - SUA PÁGINA':'');
   }
+  d.className='display';
  }
 }
-function proximaPagina(){
- var prox=paginaAtual+1;
- if(prox>5)prox=1;
- irPara(prox);
-}
-// BOTOES COM EVENT LISTENER GARANTIDO
-document.addEventListener('DOMContentLoaded', function(){
- document.getElementById('btnInicio').addEventListener('click', function(){irPara(1);});
- document.getElementById('btnProx').addEventListener('click', function(){proximaPagina();});
- document.getElementById('btnApagar').addEventListener('click', function(){apagarUltimo();});
- document.getElementById('btnLimpar').addEventListener('click', function(){limparTudo();});
- document.getElementById('btnP1paraP5').addEventListener('click', function(){irPara(5);});
- document.getElementById('btnP1Prox').addEventListener('click', function(){proximaPagina();});
- document.getElementById('btnP2Prox').addEventListener('click', function(){irPara(3);});
- document.getElementById('btnP2Inicio').addEventListener('click', function(){irPara(1);});
- document.getElementById('btnP3Prox').addEventListener('click', function(){irPara(4);});
- document.getElementById('btnP3Inicio').addEventListener('click', function(){irPara(1);});
- document.getElementById('btnP4Prox').addEventListener('click', function(){irPara(5);});
- document.getElementById('btnP4Inicio').addEventListener('click', function(){irPara(1);});
-});
-// PARA CHAMADAS INLINE TAMBEM
-window.irPara=irPara;
-window.proximaPagina=proximaPagina;
-
+function proximaPagina(){var prox=paginaAtual+1;if(prox>10)prox=1;irPara(prox);}
+window.irPara=irPara;window.proximaPagina=proximaPagina;
 var cur="",lista=[];var green=0,red=0;var colunaEsperando=null;var linhas=[];
 var tabelaColunas={1:"2/3",2:"1/2",3:"1/2",4:"1/2",5:"2/3",6:"1/2",7:"2/3",8:"1/2",9:"2/3",10:"2/3",11:"1/3",12:"2/3",13:"1/3",14:"2/3",15:"1/3",16:"1/3",17:"1/3",18:"2/3",19:"1/2",20:"1/2",21:"2/3",22:"1/2",23:"1/2",24:"2/3",25:"1/3",26:"2/3",27:"1/3",28:"2/3",29:"1/3",30:"2/3",31:"1/3",32:"1/2",33:"2/3",34:"1/2",35:"2/3",36:"1/2",0:"0"};
 function salvarTudo(){try{localStorage.setItem('rafigasp_lista',JSON.stringify(lista));localStorage.setItem('rafigasp_green',String(green));localStorage.setItem('rafigasp_red',String(red));localStorage.setItem('rafigasp_colunaEsperando',colunaEsperando||'');}catch(e){}}
@@ -179,61 +128,39 @@ function getCol(n){if(n==0)return 0;if([1,4,7,10,13,16,19,22,25,28,31,34].indexO
 function getColunasParaJogar(numeroVermelho){return tabelaColunas[numeroVermelho]||"-";}
 function inicializar(){linhas=[];var brancosPorLinha=[1,2,3,4,5];for(var r=0;r<5;r++){linhas.push({itens:[],brancos:brancosPorLinha[r]});}}
 function setEstadoQuadrado(estado,textoGrande){var el=document.getElementById('alertaGrande1');var txt=document.getElementById('colunaGrandeTexto1');if(el){el.className='alertaGrande '+estado;if(txt)txt.innerHTML=textoGrande;}}
-function limparAnimacoes(){var el=document.getElementById('alertaGrande1');if(!el)return;var confetes=el.querySelectorAll('.confete, .emojiGanha, .emojiPerde');confetes.forEach(function(c){c.remove();});}
-function animarGanha(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');if(!el)return;flash.className='fundoFlash ganha';setTimeout(function(){flash.className='fundoFlash';},500);for(var i=0;i<20;i++){(function(i){setTimeout(function(){var conf=document.createElement('div');conf.className='confete '+(i%3==0?'verde':i%3==1?'dourado':'branco');conf.style.left=(Math.random()*90)+'%';conf.style.animationDuration=(0.6+Math.random()*0.8)+'s';el.appendChild(conf);setTimeout(function(){conf.remove();},1500);},i*50);})(i);}var emojis=['💰','✅','🎉','💸','🤑'];for(var j=0;j<6;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiGanha';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(50+Math.random()*30)+'%';el.appendChild(em);setTimeout(function(){em.remove();},1200);},j*90);})(j);}if(navigator.vibrate){navigator.vibrate([80,40,80,40,150]);}}
-function animarPerde(){limparAnimacoes();var el=document.getElementById('alertaGrande1');var flash=document.getElementById('fundoFlash');if(!el)return;flash.className='fundoFlash perde';setTimeout(function(){flash.className='fundoFlash';},500);var emojis=['❌','💥','😵'];for(var j=0;j<5;j++){(function(j){setTimeout(function(){var em=document.createElement('div');em.className='emojiPerde';em.textContent=emojis[Math.floor(Math.random()*emojis.length)];em.style.left=(10+Math.random()*80)+'%';em.style.top=(20+Math.random()*50)+'%';el.appendChild(em);setTimeout(function(){em.remove();},1000);},j*70);})(j);}if(navigator.vibrate){navigator.vibrate([150,80,150]);}}
-function mostrarErro(msg){var d=document.getElementById('disp');d.innerHTML='<span class="numGrande" style="font-size:14px">'+msg+'</span>';d.className="display erro";if(navigator.vibrate){navigator.vibrate([80,40,80]);}setTimeout(function(){cur="";show();},1000);}
 function show(){var d=document.getElementById('disp');if(paginaAtual!=5){return;}if(cur!=""){d.innerHTML='<span class="numGrande">'+cur+'</span>';d.className="display digitando";return;}if(colunaEsperando){d.innerHTML="VEM COLUNA "+colunaEsperando;d.className="display alerta";}else{d.textContent='PÁGINA 5 - SUA PÁGINA';d.className='display';}}
-function dig(v){if(paginaAtual!=5){irPara(5);return;}if(cur=="0"||cur=="00"){cur=v;show();return;}if(cur.length==0){cur=v;show();return;}if(cur.length==1){var combinado=parseInt(cur+v);if(combinado>36){mostrarErro("SÓ 1 AO 36!");return;}cur+=v;show();return;}if(cur.length>=2){cur=v;show();return;}}
+function dig(v){if(paginaAtual!=5){irPara(5);return;}if(cur=="0"||cur=="00"){cur=v;show();return;}if(cur.length==0){cur=v;show();return;}if(cur.length==1){var combinado=parseInt(cur+v);if(combinado>36){cur=v;show();return;}cur+=v;show();return;}if(cur.length>=2){cur=v;show();return;}}
 function corr(){if(paginaAtual!=5){irPara(5);return;}if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
 function apagarUltimo(){if(paginaAtual!=5){irPara(5);return;}if(lista.length>0){lista.pop();reconstruirTudoComPlacar();show();upd();salvarTudo();}}
-function limparTudo(){if(!confirm("LIMPAR TUDO?"))return;cur="";lista=[];green=0;red=0;colunaEsperando=null;try{localStorage.removeItem('rafigasp_lista');localStorage.removeItem('rafigasp_green');localStorage.removeItem('rafigasp_red');localStorage.removeItem('rafigasp_colunaEsperando');}catch(e){}inicializar();setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();upd();}
+function limparTudo(){if(!confirm("LIMPAR TUDO?"))return;cur="";lista=[];green=0;red=0;colunaEsperando=null;try{localStorage.clear();}catch(e){}inicializar();setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();upd();}
 function reconstruirTudoComPlacar(){
  inicializar();green=0;red=0;colunaEsperando=null;
- var temp=lista.slice();var ultimaColuna=null;
+ var temp=lista.slice();
  for(var i=0;i<temp.length;i++){
   var n=temp[i];
   var linha=linhas[0];var pos=linha.itens.length;var ciclo=linha.brancos+1;var isAzul=(pos%ciclo==0);
-  if(colunaEsperando){
-   var colResultado=getCol(n);var permitidas=colunaEsperando.split('/');var acertou=permitidas.indexOf(String(colResultado))>=0;
-   if(acertou){green++;}else{red++;}colunaEsperando=null;
-  }
+  if(colunaEsperando){var colResultado=getCol(n);var permitidas=colunaEsperando.split('/');var acertou=permitidas.indexOf(String(colResultado))>=0;if(acertou){green++;}else{red++;}colunaEsperando=null;}
   for(var r=0;r<linhas.length;r++){var l=linhas[r];var p=l.itens.length;var c=l.brancos+1;var az=(p%c==0);l.itens.push({valor:n,isAzul:az});}
-  if(!isAzul){ultimaColuna=getColunasParaJogar(n);colunaEsperando=ultimaColuna;}
+  if(!isAzul){colunaEsperando=getColunasParaJogar(n);}
  }
  lista=temp.slice();
- if(lista.length>0){
-  if(colunaEsperando){setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div>');}
-  else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}
- }else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');colunaEsperando=null;}
+ if(lista.length>0){if(colunaEsperando){setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div>');}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');colunaEsperando=null;}
 }
-function aplicarNumero(n,adicionarNaLista){
- var info=null;
- for(var r=0;r<linhas.length;r++){var linha=linhas[r];var pos=linha.itens.length;var ciclo=linha.brancos+1;var isAzul=(pos%ciclo==0);linha.itens.push({valor:n,isAzul:isAzul});if(r==0) info={valor:n,isAzul:isAzul};}
- if(adicionarNaLista){lista.push(n);}return info;
-}
+function aplicarNumero(n,adicionarNaLista){var info=null;for(var r=0;r<linhas.length;r++){var linha=linhas[r];var pos=linha.itens.length;var ciclo=linha.brancos+1;var isAzul=(pos%ciclo==0);linha.itens.push({valor:n,isAzul:isAzul});if(r==0)info={valor:n,isAzul:isAzul};}if(adicionarNaLista){lista.push(n);}return info;}
 function ok(){
  if(paginaAtual!=5){irPara(5);return;}
  if(cur===""){return;}if(cur==="00"){limparTudo();return;}if(cur==="0"){apagarUltimo();return;}
- var n=parseInt(cur);if(isNaN(n)||n<0||n>36){mostrarErro("SÓ 1 AO 36!");return;}
+ var n=parseInt(cur);if(isNaN(n)||n<0||n>36){return;}
  if(colunaEsperando){
   var colResultado=getCol(n);var permitidas=colunaEsperando.split('/');var acertou=permitidas.indexOf(String(colResultado))>=0;
-  if(acertou){green++;setEstadoQuadrado('acertou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">✅ GANHOU!</div>');animarGanha();}else{red++;setEstadoQuadrado('errou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">❌ PERDEU! VEIO '+colResultado+'</div>');animarPerde();}
-  var a=document.getElementById('placarAcertou1');if(a)a.textContent=green;
-  var b=document.getElementById('placarErrou1');if(b)b.textContent=red;
-  colunaEsperando=null;
-  aplicarNumero(n,true);cur="";upd();salvarTudo();
-  setTimeout(function(){limparAnimacoes();var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+col+'</div>');show();salvarTudo();}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();}},1800);
+  if(acertou){green++;setEstadoQuadrado('acertou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">✅ GANHOU!</div>');}else{red++;setEstadoQuadrado('errou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">❌ PERDEU! VEIO '+colResultado+'</div>');}
+  document.getElementById('placarAcertou1').textContent=green;document.getElementById('placarErrou1').textContent=red;
+  colunaEsperando=null;aplicarNumero(n,true);cur="";upd();salvarTudo();
+  setTimeout(function(){var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+col+'</div>');show();salvarTudo();}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();}},1500);
   return;
  }
  var info=aplicarNumero(n,true);
- if(!info.isAzul){
-  var colunaParaJogar=getColunasParaJogar(n);
-  colunaEsperando=colunaParaJogar;
-  setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaParaJogar+'</div>');
- }else{
-  setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');
- }
+ if(!info.isAzul){var colunaParaJogar=getColunasParaJogar(n);colunaEsperando=colunaParaJogar;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaParaJogar+'</div>');}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}
  cur="";upd();salvarTudo();
 }
 function upd(){

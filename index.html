@@ -3,27 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RAFIGASP - 000 CORRIGIDO</title>
+<title>RAFIGASP - TOPO SO NUMERO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a2a0a;overflow:hidden}
 body{display:flex;justify-content:center;align-items:center}
-.app{width:100%;max-width:380px;height:100dvh;max-height:850px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #000}
+.app{width:100%;max-width:380px;height:100dvh;max-height:900px;background:#0a2210;display:flex;flex-direction:column;border:2px solid #d4af37;border-radius:10px;overflow:hidden;box-shadow:0 0 30px #000}
 .topo{text-align:center;background:linear-gradient(180deg,#f5e6a0,#d4af37 50%,#8a6d1b);padding:10px 0 7px;flex-shrink:0}
 .topoR{font-weight:900;font-size:28px;color:#0a2210;letter-spacing:2px;line-height:1;font-family:serif}
 .topoS{font-size:9px;letter-spacing:4px;color:#0a2210;font-weight:900}
-.nav2{display:none;gap:3px;padding:5px;background:#0f1a0f;flex-shrink:0}
+.nav2{display:none;flex-direction:column;gap:3px;padding:5px;background:#0f1a0f;flex-shrink:0;border-bottom:2px solid #d4af37}
 .nav2.visivel{display:flex !important}
-.nav2 button{flex:1;height:34px;border-radius:7px;border:1.5px solid #d4af37;font-weight:900;font-size:8px;background:#1a2a1a;color:#d4af37;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.navLinha{display:flex;gap:3px}
+.nav2 button{flex:1;height:32px;border-radius:7px;border:1.5px solid #d4af37;font-weight:900;font-size:8px;background:#1a2a1a;color:#d4af37;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .nav2 button.home{background:linear-gradient(180deg,#f5e6a0,#d4af37);color:#111}
 .nav2 button.limpar{background:#3a1a1a;color:#ffaaaa;border-color:#ff6666}
-.display{margin:4px;background:#000;border:2px solid #00ff00;border-radius:9px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;text-align:center;padding:2px;color:#fff;font-size:15px;box-shadow:0 0 18px #00ff00}
-.display.vazio{background:#000;border-color:#333;color:#555;font-size:10px}
-.display.alerta{background:linear-gradient(180deg,#ff4444,#990000);color:#fff;border-color:#ffff00;box-shadow:0 0 18px #ff0000;font-size:16px}
-.display.digitando{background:#000;border-color:#00ff00;box-shadow:0 0 18px #00ff00}
-.display.digitando .numGrande{font-size:42px;color:#fff;text-shadow:0 0 12px #00ff00;font-weight:900}
+.nav2 button.pagina{background:#000;color:#fff;border-color:#555;font-size:9px}
+.nav2 button.pagina.ativa{background:#d4af37;color:#000;border-color:#ffff00}
+.display{margin:4px;background:#000;border:2px solid #00ff00;border-radius:9px;height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;text-align:center;padding:2px;color:#fff;font-size:15px;box-shadow:0 0 18px #00ff00}
+.display.vazio{border-color:#333;color:#555;font-size:11px}
+.display.alerta{border-color:#333;color:#555}
+.display.digitando{border-color:#00ff00;box-shadow:0 0 18px #00ff00}
+.display.digitando .numGrande{font-size:44px;color:#fff;text-shadow:0 0 12px #00ff00;font-weight:900}
 .page{flex:1;overflow-y:auto;padding:5px;display:flex;flex-direction:column;gap:5px;background:#0a2210}
-.topBar{background:#000;border:1.5px solid #d4af37;border-radius:9px;padding:9px 8px;display:flex;gap:5px;min-height:52px;align-items:center;position:relative;margin-top:7px;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+.topBar{background:#000;border:1.5px solid #d4af37;border-radius:9px;padding:9px 8px;display:flex;gap:5px;min-height:52px;align-items:center;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
 .topBar::-webkit-scrollbar{height:5px}
 .topBar::-webkit-scrollbar-thumb{background:#d4af37;border-radius:2px}
 .nBox{height:32px;min-width:32px;padding:0 7px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#fff;border:1.5px solid #555;flex-shrink:0}
@@ -31,17 +34,24 @@ body{display:flex;justify-content:center;align-items:center}
 .nBox.preto{background:linear-gradient(180deg,#333,#000);border-color:#888;color:#fff}
 .nBox.verde{background:linear-gradient(180deg,#00cc00,#006600);border-color:#00ff00;color:#fff}
 .nBox.primeiro{border:2px solid #ffff00;box-shadow:0 0 12px #ffff00;transform:scale(1.08);z-index:2}
-.alertaGrande{border:3px solid #ffff00;border-radius:15px;padding:10px;text-align:center;font-weight:900;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:130px;flex:1;position:relative;overflow:hidden}
+.alertaGrande{border:3px solid #ffff00;border-radius:15px;padding:10px;text-align:center;font-weight:900;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:160px;flex:1;position:relative;overflow:hidden}
 .alertaGrande.verde{background:linear-gradient(180deg,#1a8a2a,#0a4a0a);border:3px solid #00ff00}
 .alertaGrande.vermelho{background:linear-gradient(180deg,#ff5555,#cc0000);border:3px solid #ffff00;box-shadow:0 0 22px #ff4444}
 .alertaGrande.acertou{background:linear-gradient(180deg,#3aff6a,#006600);border:3px solid #ffff00;box-shadow:0 0 50px #00ff00}
 .alertaGrande.errou{background:linear-gradient(180deg,#ff3333,#990000);border:3px solid #ff0000;box-shadow:0 0 50px #ff0000}
 .colunaGrande{font-size:20px;text-shadow:0 1px 3px #000;line-height:1.1;font-weight:900;z-index:2}
-.colunaNumero{font-size:48px;font-weight:900;color:#ffff00;text-shadow:0 0 15px #ffff00;line-height:1;z-index:2}
+.colunaNumero{font-size:52px;font-weight:900;color:#ffff00;text-shadow:0 0 15px #ffff00;line-height:1;z-index:2}
 .placarSimples{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:6px;margin-top:2px;display:flex;justify-content:space-around;align-items:center;width:100%;min-height:40px;z-index:2}
 .placarItemSimples{display:flex;flex-direction:column;align-items:center;gap:1px}
 .placarLabelSimples{font-size:8px;color:#d4af37;font-weight:900}
 .placarValorSimples{font-size:22px;font-weight:900}
+.historicoGE{background:#000;border:1.5px solid #d4af37;border-radius:8px;padding:6px;width:100%;min-height:34px;display:flex;gap:4px;align-items:center;overflow-x:auto;flex-wrap:nowrap;z-index:2;margin-top:3px}
+.historicoGE::-webkit-scrollbar{height:4px}
+.historicoGE::-webkit-scrollbar-thumb{background:#d4af37;border-radius:2px}
+.histItem{height:24px;min-width:24px;padding:0 6px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff;flex-shrink:0;border:1px solid #555}
+.histItem.acerto{background:#0f8a2a;border-color:#00ff00;color:#00ff00}
+.histItem.erro{background:#8a0f0f;border-color:#ff6666;color:#ffaaaa}
+.histVazio{font-size:8px;color:#555;width:100%;text-align:center}
 .kb{background:linear-gradient(180deg,#e8c76a,#b8941f);border-top:2px solid #d4af37;padding:5px;display:flex;flex-direction:column;gap:4px;flex-shrink:0;height:42%;min-height:210px;max-height:300px}
 .kr{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .k{border-radius:9px;border:1.5px solid #8a6d1b;font-weight:900;font-size:18px;background:linear-gradient(180deg,#f9e27a,#e8c86a);color:#1a1000;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);cursor:pointer}
@@ -52,10 +62,24 @@ body{display:flex;justify-content:center;align-items:center}
 <div class="app">
 <div class="topo"><div class="topoR">RAFIGASP</div><div class="topoS">COACH DA ROLETA</div></div>
 <div class="nav2" id="navAzul">
-<button type="button" class="home" onclick="if(confirm('IR PRO INICIO?')){localStorage.clear();location.reload();}">🏠 INICIO</button>
+<div class="navLinha">
+<button type="button" class="home" onclick="toggleNavAzul()">🏠 FECHAR</button>
 <button type="button" onclick="apagarUltimo()">⬅️ APAGAR</button>
 <button type="button" class="limpar" onclick="limparTudo()">🗑️ LIMPAR</button>
-<button type="button" onclick="location.reload()">➡️ PROX</button>
+<button type="button" onclick="irPara(1)">➡️ INICIO</button>
+</div>
+<div class="navLinha">
+<button type="button" class="pagina" onclick="irPara(1)">P1</button>
+<button type="button" class="pagina" onclick="irPara(2)">P2</button>
+<button type="button" class="pagina" onclick="irPara(3)">P3</button>
+<button type="button" class="pagina" onclick="irPara(4)">P4</button>
+<button type="button" class="pagina ativa" onclick="irPara(5)">P5</button>
+<button type="button" class="pagina" onclick="irPara(6)">P6</button>
+<button type="button" class="pagina" onclick="irPara(7)">P7</button>
+<button type="button" class="pagina" onclick="irPara(8)">P8</button>
+<button type="button" class="pagina" onclick="irPara(9)">P9</button>
+<button type="button" class="pagina" onclick="irPara(10)">P10</button>
+</div>
 </div>
 <div class="display vazio" id="disp">AGUARDANDO...</div>
 <div class="page" id="page5">
@@ -66,6 +90,7 @@ body{display:flex;justify-content:center;align-items:center}
 <div class="placarItemSimples"><div class="placarLabelSimples">✅ ACERTOU</div><div class="placarValorSimples" style="color:#00ff00" id="placarAcertou1">0</div></div>
 <div class="placarItemSimples"><div class="placarLabelSimples">❌ ERROU</div><div class="placarValorSimples" style="color:#ff4444" id="placarErrou1">0</div></div>
 </div>
+<div class="historicoGE" id="historicoGE"><div class="histVazio">HISTÓRICO G/E VAZIO</div></div>
 </div>
 </div>
 <div class="kb">
@@ -76,7 +101,9 @@ body{display:flex;justify-content:center;align-items:center}
 </div>
 </div>
 <script>
+var paginaAtual=5;
 var navVisivel=false;
+function irPara(n){paginaAtual=n;var pages=document.querySelectorAll('.page');for(var i=0;i<pages.length;i++){pages[i].style.display='none';}var alvo=document.getElementById('page'+n);if(alvo)alvo.style.display='flex';var btns=document.querySelectorAll('.pagina');for(var j=0;j<btns.length;j++){btns[j].classList.remove('ativa');if(btns[j].textContent=='P'+n)btns[j].classList.add('ativa');}show();upd();}
 function toggleNavAzul(){
  var nav=document.getElementById('navAzul');
  if(!nav)return;
@@ -98,11 +125,9 @@ function setEstadoQuadrado(estado,textoGrande){var el=document.getElementById('a
 function show(){
  var d=document.getElementById('disp');
  if(cur!=""){d.innerHTML='<span class="numGrande">'+cur+'</span>';d.className="display digitando";return;}
- if(colunaEsperando){d.innerHTML="VEM COLUNA "+colunaEsperando;d.className="display alerta";}
- else{d.innerHTML="AGUARDANDO...";d.className="display vazio";}
+ d.innerHTML="AGUARDANDO...";d.className="display vazio";
 }
 function dig(v){
- // CORRIGIDO PARA ACEITAR 000
  if(v=='0'){
   if(cur==""){cur="0";show();return;}
   if(cur=="0"){cur="00";show();return;}
@@ -115,8 +140,21 @@ function dig(v){
  if(cur.length>=2){cur=v;show();return;}
 }
 function corr(){if(cur!=""){cur=cur.slice(0,-1);show();}else{apagarUltimo();}}
-function apagarUltimo(){if(lista.length>0){lista.pop();reconstruirTudoComPlacar();show();upd();salvarTudo();}}
-function limparTudo(){if(!confirm("LIMPAR TUDO?"))return;cur="";lista=[];green=0;red=0;colunaEsperando=null;historicoGE=[];try{localStorage.clear();}catch(e){}inicializar();setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();upd();}
+function apagarUltimo(){if(lista.length>0){lista.pop();reconstruirTudoComPlacar();show();upd();updGE();salvarTudo();}}
+function limparTudo(){if(!confirm("LIMPAR TUDO?"))return;cur="";lista=[];green=0;red=0;colunaEsperando=null;historicoGE=[];try{localStorage.clear();}catch(e){}inicializar();setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();upd();updGE();}
+function updGE(){
+ var el=document.getElementById('historicoGE');
+ if(!el)return;
+ el.innerHTML="";
+ if(historicoGE.length==0){var v=document.createElement('div');v.className='histVazio';v.textContent='HISTÓRICO G/E VAZIO';el.appendChild(v);return;}
+ historicoGE.slice().reverse().forEach(function(item,idx){
+  var d=document.createElement('div');
+  d.className='histItem '+(item=='G'?'acerto':'erro');
+  d.textContent=item;
+  el.appendChild(d);
+ });
+ setTimeout(function(){el.scrollLeft=0;},50);
+}
 function reconstruirTudoComPlacar(){
  inicializar();green=0;red=0;colunaEsperando=null;historicoGE=[];
  var temp=lista.slice();
@@ -133,23 +171,19 @@ function reconstruirTudoComPlacar(){
  }
  lista=temp.slice();
  if(lista.length>0){if(colunaEsperando){setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div>');}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');colunaEsperando=null;}
+ updGE();
 }
 function aplicarNumero(n,adicionarNaLista){var info=null;for(var r=0;r<linhas.length;r++){var linha=linhas[r];var pos=linha.itens.length;var ciclo=linha.brancos+1;var isAzul=(pos%ciclo==0);linha.itens.push({valor:n,isAzul:isAzul});if(r==0)info={valor:n,isAzul:isAzul};}if(adicionarNaLista){lista.push(n);}return info;}
 function ok(){
- // 000 + ENTER = MOSTRA AZUL - CORRIGIDO
- if(cur==="000"){
-  toggleNavAzul();
-  cur="";show();
-  return;
- }
+ if(cur==="000"){toggleNavAzul();cur="";show();return;}
  if(cur===""){return;}if(cur==="00"){limparTudo();return;}if(cur==="0"){apagarUltimo();return;}
  var n=parseInt(cur);if(isNaN(n)||n<0||n>36){return;}
  if(colunaEsperando){
   var colResultado=getCol(n);var permitidas=colunaEsperando.split('/');var acertou=permitidas.indexOf(String(colResultado))>=0;
   if(acertou){green++;historicoGE.push('G');setEstadoQuadrado('acertou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">✅ GANHOU!</div>');}else{red++;historicoGE.push('E');setEstadoQuadrado('errou','VEM COLUNA<br><div class="colunaNumero">'+colunaEsperando+'</div><div class="colunaSub">❌ PERDEU! VEIO '+colResultado+'</div>');}
   document.getElementById('placarAcertou1').textContent=green;document.getElementById('placarErrou1').textContent=red;
-  colunaEsperando=null;aplicarNumero(n,true);cur="";upd();salvarTudo();
-  setTimeout(function(){var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+col+'</div>');show();salvarTudo();}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');show();}},1500);
+  colunaEsperando=null;aplicarNumero(n,true);cur="";upd();updGE();salvarTudo();
+  setTimeout(function(){var ultimo=linhas[0].itens[linhas[0].itens.length-1];if(!ultimo.isAzul){var col=getColunasParaJogar(n);colunaEsperando=col;setEstadoQuadrado('vermelho','VEM COLUNA<br><div class="colunaNumero">'+col+'</div>');}else{setEstadoQuadrado('verde','AGUARDANDO<br>SINAL...');}},1500);
   return;
  }
  var info=aplicarNumero(n,true);
@@ -177,7 +211,7 @@ function upd(){
  var b=document.getElementById('placarErrou1');if(b)b.textContent=red;
  show();
 }
-carregarTudo();inicializar();if(lista.length>0){reconstruirTudoComPlacar();}upd();
+carregarTudo();inicializar();if(lista.length>0){reconstruirTudoComPlacar();}upd();updGE();irPara(5);
 </script>
 </body>
 </html>

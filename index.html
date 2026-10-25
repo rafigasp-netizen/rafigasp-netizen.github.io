@@ -3,32 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAFIGASP COACH DA ROLETA</title>
+<title>RAFIGASP - COACH DA ROLETA</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#0a1a0a;display:flex;justify-content:center}
-.app{width:100%;max-width:400px;background:#000;display:flex;flex-direction:column;min-height:100vh}
+.app{width:100%;max-width:400px;background:#000;min-height:100vh;display:flex;flex-direction:column}
 .topo{height:64px;background:linear-gradient(180deg,#f7e8a5,#d4af37);display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #d4af37}
-.topo h1{color:#000;font-size:30px;font-weight:900;letter-spacing:2px;line-height:1}
+.topo h1{color:#000;font-size:30px;font-weight:900}
 .topo span{color:#000;font-size:10px;letter-spacing:3px;font-weight:700}
-.menu{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:8px;background:#000}
-.menu button{height:38px;border-radius:8px;border:1px solid #d4af37;background:linear-gradient(#f7e8a5,#d4af37);font-size:11px;font-weight:800;color:#000}
-.barra-verm{background:linear-gradient(180deg,#ff3333,#991111);border:1px solid #d4af37;text-align:center;color:#fff;font-weight:900;padding:10px;font-size:18px;margin:0 6px;border-radius:8px}
-.hist{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#111;border-top:1px solid #333;border-bottom:1px solid #333;scrollbar-width:none}
-.hist::-webkit-scrollbar{display:none}
-.chip{min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;border:2px solid #d4af37;flex-shrink:0}
-.chip.sel{box-shadow:0 0 10px gold}
+.menu{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:8px}
+.menu button{height:42px;border-radius:8px;border:1px solid #d4af37;background:linear-gradient(#f7e8a5,#d4af37);font-weight:800}
+.barra-verm{background:linear-gradient(#ff3333,#991111);border:1px solid #d4af37;text-align:center;color:#fff;font-weight:900;padding:10px;border-radius:8px;margin:0 6px}
+.hist{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#111}
+.chip{min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;border:2px solid #d4af37;flex-shrink:0}
 .r{background:#991b1b}.p{background:#222}
-.card-verm{margin:8px;background:linear-gradient(180deg,#ff4444,#cc0000);border:2px solid #d4af37;border-radius:14px;padding:12px;text-align:center}
-.card-verm h2{color:#fff;font-size:22px;text-shadow:0 2px 2px #000}
-.card-verm .big{color:#ffff00;font-size:56px;font-weight:900;line-height:1;text-shadow:0 0 10px #000}
-.placar{display:flex;justify-content:space-between;background:#000;border-radius:8px;padding:8px 12px;margin-top:10px}
-.placar b{font-size:12px;color:#d4af37}
-.placar .verde{color:#00ff00;font-size:28px;font-weight:900}
-.placar .verm{color:#ff3333;font-size:28px;font-weight:900}
+.card-verm{margin:8px;background:linear-gradient(#ff4444,#cc0000);border:2px solid #d4af37;border-radius:14px;padding:12px;text-align:center;flex:1}
+.card-verm .big{color:#ffff00;font-size:56px;font-weight:900}
+.placar{display:flex;justify-content:space-between;background:#000;border-radius:8px;padding:8px;margin-top:10px}
+.placar .verde{color:#00ff00;font-size:28px;font-weight:900}.placar .verm{color:#ff3333;font-size:28px;font-weight:900}
 .teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;background:#1a1a0a;border-top:2px solid #d4af37}
-.b{height:62px;border-radius:10px;border:1px solid #8a6a1a;background:linear-gradient(180deg,#f7e8a5,#d4af37);font-size:28px;font-weight:900;color:#000;box-shadow:0 3px 0 #5a4510}
-.b:active{transform:translateY(2px)}
+.b{height:62px;border-radius:10px;border:1px solid #8a6a1a;background:linear-gradient(#f7e8a5,#d4af37);font-size:28px;font-weight:900}
 .b-a{font-size:16px}
 </style>
 </head>
@@ -36,43 +30,44 @@ body{background:#0a1a0a;display:flex;justify-content:center}
 <div class="app">
 <div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div>
 <div class="menu">
-<button>🏠 INICIO</button><button>⬅️ APAGAR</button><button>🗑️ LIMPAR</button><button>➡️ PROX</button>
+<button onclick="inicio()">🏠 INICIO</button>
+<button onclick="apagar()">⬅️ APAGAR</button>
+<button onclick="limpar()">🗑️ LIMPAR</button>
+<button onclick="prox()">➡️ PROX</button>
 </div>
-<div class="barra-verm">VEM COLUNA 2/3</div>
+<div class="barra-verm" id="barra">VEM COLUNA 2/3</div>
 <div class="hist" id="hist">
-<div class="chip r sel">5</div><div class="chip p">2</div><div class="chip r">1</div><div class="chip r">1</div><div class="chip r">1</div><div class="chip p">2</div><div class="chip r">1</div><div class="chip r">3</div><div class="chip p">2</div><div class="chip p">8</div>
+<div class="chip r">2</div><div class="chip r">1</div><div class="chip r">3</div><div class="chip p">2</div><div class="chip p">8</div><div class="chip r">1</div><div class="chip r">1</div><div class="chip r">25</div><div class="chip p">26</div>
 </div>
 <div class="card-verm">
-<h2>VEM COLUNA</h2>
-<div class="big">2/3</div>
-<div class="placar">
-<div><b>✅ ACERTOU</b><div class="verde" id="ac">4</div></div>
-<div><b>❌ ERROU</b><div class="verm" id="er">3</div></div>
-</div>
+<h2>VEM COLUNA</h2><div class="big">2/3</div>
+<div class="placar"><div><b>✅ ACERTOU</b><div class="verde">4</div></div><div><b>❌ ERROU</b><div class="verm">3</div></div></div>
 </div>
 <div class="teclado">
 <button class="b" onclick="dig(1)">1</button><button class="b" onclick="dig(2)">2</button><button class="b" onclick="dig(3)">3</button>
 <button class="b" onclick="dig(4)">4</button><button class="b" onclick="dig(5)">5</button><button class="b" onclick="dig(6)">6</button>
 <button class="b" onclick="dig(7)">7</button><button class="b" onclick="dig(8)">8</button><button class="b" onclick="dig(9)">9</button>
-<button class="b b-a" onclick="go()">ENTER</button><button class="b" onclick="dig(0)">0</button><button class="b b-a" onclick="corr()">CORRIGIR</button>
+<button class="b b-a" onclick="enter()">ENTER</button><button class="b" onclick="dig(0)">0</button><button class="b b-a" onclick="corrigir()">CORRIGIR</button>
 </div>
 </div>
 <script>
 let buf="";
-function dig(n){if(buf.length<2)buf+=n;}
-function go(){
+function dig(n){if(buf.length<3)buf+=n; document.getElementById('barra').innerText=buf? 'DIGITANDO: '+buf:'VEM COLUNA 2/3';}
+function corrigir(){buf=buf.slice(0,-1); document.getElementById('barra').innerText=buf? 'DIGITANDO: '+buf:'VEM COLUNA 2/3';}
+function apagar(){buf=""; document.getElementById('barra').innerText='VEM COLUNA 2/3';}
+function limpar(){document.getElementById('hist').innerHTML=''; buf='';}
+function inicio(){window.location.href='index.html';}
+function prox(){window.location.href='https://sp-netizen.github.io/proxima.html'; /* TROQUE SEU LINK AQUI */}
+function enter(){
  if(!buf)return;
- let num=parseInt(buf);
- if(num<0||num>36){buf="";return;}
- let h=document.getElementById('hist');
- let d=document.createElement('div');
- d.className='chip '+(num==0?'r':num%2==0?'p':'r');
- d.textContent=num;
- h.appendChild(d);
- h.scrollLeft=h.scrollWidth;
- buf="";
+ if(buf==='000'){ 
+   // LINK SECRETO PARA ENTRAR
+   window.location.href='https://sp-netizen.github.io/menu.html'; // <-- TROQUE AQUI SEU LINK DE ENTRADA
+   return;
+ }
+ let num=parseInt(buf); if(num<0||num>36){buf='';return;}
+ let h=document.getElementById('hist'); let d=document.createElement('div'); d.className='chip '+(num%2==0?'p':'r'); d.textContent=num; h.appendChild(d); h.scrollLeft=h.scrollWidth; buf=''; document.getElementById('barra').innerText='VEM COLUNA 2/3';
 }
-function corr(){buf=buf.slice(0,-1);}
 </script>
 </body>
 </html>

@@ -6,13 +6,13 @@
 .cell.green{background:#1a8a1a;color:#fff;font-size:10px}.cell.red{background:#cc0000;color:#fff}.cell.black{background:#111;color:#fff}.cell.zero{grid-column:3/6;background:#1a8a1a;color:#fff;font-size:18px}.cell.doz{font-size:9px}
 .cell.marcado{outline:3px solid gold;outline-offset:-2px;background:#ffff00!important;color:#000!important;box-shadow:0 0 10px gold;z-index:2}
 .cell.marcado::after{content:attr(data-vezes);position:absolute;top:-6px;right:-6px;background:gold;color:#000;font-size:9px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #000}
-.bloco10{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0;justify-content:center;align-items:center;min-height:36px;border-bottom:1px dashed #222}
+.bloco10{display:grid;grid-template-columns:repeat(10, 1fr);gap:5px;padding:8px 3px;justify-items:center;align-items:center;min-height:40px;border-bottom:1px dashed #222;width:100%}
 </style></head><body><div class="app"><div class="topo"><h1>RAFIGASP</h1><span>COACH DA ROLETA</span></div><div class="menu"><button onclick="irPara(1)">🏠 INICIO</button><button onclick="apagar()">⬅️ APAGAR</button><button onclick="limparTudoGeral()">🗑️ LIMPAR</button><button onclick="proximaPagina()">➡️ PROX</button></div><div id="pag1" class="pagina ativa"><div class="boasorte"><button class="btn-jogar" onclick="irPara(2)">Começar a jogar</button></div></div><div id="pag2" class="pagina"><div class="barra-verm" id="barra">BOA SORTE</div><div class="hist" id="hist-top"></div><div class="card-verm"><div style="color:#fff;font-size:9px;font-weight:900">VEM COLUNA</div><div class="big" id="sinal">BOA SORTE</div><div class="placar"><div><b style="font-size:8px;color:gold">✅ ACERTOU</b><div class="verde" id="ac">0</div></div><div><b style="font-size:8px;color:gold">❌ ERROU</b><div class="verm" id="er">0</div></div></div><div class="hist-result" id="hist-result"></div></div><div class="teclado">
 <button class="b" onclick="dig(1)">1</button><button class="b" onclick="dig(2)">2</button><button class="b" onclick="dig(3)">3</button>
 <button class="b" onclick="dig(4)">4</button><button class="b" onclick="dig(5)">5</button><button class="b" onclick="dig(6)">6</button>
 <button class="b" onclick="dig(7)">7</button><button class="b" onclick="dig(8)">8</button><button class="b" onclick="dig(9)">9</button>
 <button class="b" style="font-size:13px" onclick="enter()">ENTER</button><button class="b" style="background:linear-gradient(180deg,#00cc00,#006600);color:#fff;border:2px solid gold;font-size:28px" onclick="dig(0)">0</button><button class="b" style="font-size:12px" onclick="corrigir()">CORRIGIR</button>
-</div></div><div id="pag3" class="pagina"><div id="lista-geral" style="display:flex;flex-direction:column;padding:8px 4px;flex:1;overflow-y:auto;align-content:center;justify-content:flex-start"></div><div class="barra-dig"><div class="esq" id="num-col"><span id="txt-col">_</span><div class="chips-mini" id="chips-col"></div></div><div class="dir-black" id="mkt-val">R$: 0,10</div></div><div class="teclado">
+</div></div><div id="pag3" class="pagina"><div id="lista-geral" style="display:flex;flex-direction:column;padding:0 4px;flex:1;overflow-y:auto;align-items:center;justify-content:flex-start;background:#000"></div><div class="barra-dig"><div class="esq" id="num-col"><span id="txt-col">_</span><div class="chips-mini" id="chips-col"></div></div><div class="dir-black" id="mkt-val">R$: 0,10</div></div><div class="teclado">
 <button class="b" onclick="dig(1)">1</button><button class="b" onclick="dig(2)">2</button><button class="b" onclick="dig(3)">3</button>
 <button class="b" onclick="dig(4)">4</button><button class="b" onclick="dig(5)">5</button><button class="b" onclick="dig(6)">6</button>
 <button class="b" onclick="dig(7)">7</button><button class="b" onclick="dig(8)">8</button><button class="b" onclick="dig(9)">9</button>
@@ -67,11 +67,6 @@ let q=document.createElement('div');
 q.className=cls;
 q.textContent=item.num;
 blocoDiv.prepend(q);
-if((i+1)%2==0 && (i+1)%10!=0 && i!=total-1){
-let sep=document.createElement('div');
-sep.className='chip-sep';
-blocoDiv.prepend(sep);
-}
 }
 }
 function renderNumeros(){let div=document.getElementById('lista-numeros');if(!div) return;div.innerHTML='';for(let n=1;n<=36;n++){let col=TABELA[n];let hist=stats[n]||[];let row=document.createElement('div');row.className='linha-num';let b=document.createElement('b');b.textContent=n+"> "+col;let seqDiv=document.createElement('div');seqDiv.className='seq';hist.slice(-8).forEach(v=>{let s=document.createElement('div');s.className='hr-quad '+(v?'C':'E');s.textContent=v?'✔':'✖';s.style.width='22px';s.style.height='22px';s.style.fontSize='10px';seqDiv.appendChild(s);});row.appendChild(b);row.appendChild(seqDiv);div.appendChild(row);}}

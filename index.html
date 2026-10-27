@@ -9,15 +9,15 @@
 body{background:#000;color:#fff;overflow-x:hidden}
 .topo{background:linear-gradient(#ffd700,#b8860b);color:#000;text-align:center;padding:6px}
 .topo b{display:block;font-size:22px}.topo span{font-size:10px;letter-spacing:2px}
-.botoes{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;padding:5px}
-.botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:10px 2px;font-weight:bold;font-size:11px}
-.titulo{color:#ffff00;text-align:center;font-weight:bold;padding:6px;font-size:15px;background:#c00000;margin:5px;border-radius:5px}
-#lista-geral, #lista-vermelho{display:flex;flex-direction:column;gap:3px;padding:4px}
+.botoes{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;padding:4px}
+.botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:9px 1px;font-weight:bold;font-size:10px}
+.titulo{color:#ffff00;text-align:center;font-weight:bold;padding:6px;font-size:13px;background:#c00000;margin:4px;border-radius:5px}
+.sub{color:#ccc;text-align:center;font-size:10px;padding:2px}
+#lista-geral,#lista-1v,#lista-2v,#lista-3v{display:flex;flex-direction:column;gap:3px;padding:4px}
 .bloco10{display:flex;flex-wrap:wrap;gap:3px}
 .par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:8px;padding:2px;background:rgba(255,255,0,0.05)}
 .q{width:34px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;color:#fff;border:1px solid #fff}
 .q.C{background:#00b050}.q.E{background:#c00000}.q.zero{background:#00b050}
-.q-label{width:100%;text-align:center;font-size:10px;color:gold;margin-top:2px}
 .barra-amarela{display:grid;grid-template-columns:1fr 90px;gap:5px;margin:5px}
 .barra-amarela .txt{background:#ffeb00;color:#000;padding:10px;border-radius:8px;font-weight:bold}
 .mkt{background:#000;border:2px solid #fff;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold}
@@ -25,29 +25,34 @@ body{background:#000;color:#fff;overflow-x:hidden}
 .teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:16px;font-size:20px;font-weight:bold}
 .teclado button.verde{background:linear-gradient(#00d000,#006000);color:#fff}
 .pagina{display:none}.pagina.ativa{display:block}
-@media(max-width:380px){.q{width:29px;height:26px;font-size:11px}}
+@media(max-width:380px){.q{width:28px;height:25px;font-size:11px}.par{gap:1px;padding:1px}.bloco10{gap:2px}}
 </style>
 </head>
 <body>
 <div class="topo"><b>RAFIGASP</b><span>COACH DA ROLETA</span></div>
 <div class="botoes">
-<button onclick="irPara(1)">🏠 INICIO</button>
-<button onclick="irPara(2)">🔴 APOS VERMELHO</button>
+<button onclick="irPara(1)">1 VERMELHO<br>R$0,50</button>
+<button onclick="irPara(2)">2 VERMELHOS<br>R$1,00</button>
+<button onclick="irPara(3)">3 VERMELHOS<br>R$2,00</button>
 <button onclick="limpar()">🗑️ LIMPAR</button>
-<button onclick="proximaPagina()">➡️ PROX</button>
 </div>
 
-<!-- PAGINA 1 - TUDO -->
 <div id="pag1" class="pagina ativa">
-<div class="titulo" id="titulo1">BOA SORTE</div>
-<div id="lista-geral"></div>
+<div class="titulo" id="t1">BOA SORTE - AGUARDANDO 1 VERMELHO</div>
+<div class="sub">Só mostra entrada quando tiver 1 vermelho seguido - R$0,50</div>
+<div id="lista-1v"></div>
 </div>
 
-<!-- PAGINA 2 - SO DEPOIS DO VERMELHO -->
 <div id="pag2" class="pagina">
-<div class="titulo" id="titulo2">ENTRADA SO APOS VERMELHO</div>
-<div style="text-align:center;font-size:11px;color:#ccc;padding:2px">Só mostra jogada quando errou antes. Marketing R$0,50</div>
-<div id="lista-vermelho"></div>
+<div class="titulo" id="t2">BOA SORTE - AGUARDANDO 2 VERMELHOS</div>
+<div class="sub">Só mostra entrada quando tiver 2 vermelhos seguidos - R$1,00</div>
+<div id="lista-2v"></div>
+</div>
+
+<div id="pag3" class="pagina">
+<div class="titulo" id="t3">BOA SORTE - AGUARDANDO 3 VERMELHOS</div>
+<div class="sub">Só mostra entrada quando tiver 3 vermelhos seguidos - R$2,00</div>
+<div id="lista-3v"></div>
 </div>
 
 <div class="barra-amarela"><div class="txt" id="txt">_</div><div class="mkt" id="mkt">R$: 0,10</div></div>
@@ -61,43 +66,50 @@ body{background:#000;color:#fff;overflow-x:hidden}
 
 <script>
 const TABELA={1:"2/3",2:"1/2",3:"1/2",4:"1/2",5:"2/3",6:"1/2",7:"2/3",8:"1/2",9:"2/3",10:"2/3",11:"1/3",12:"2/3",13:"1/3",14:"2/3",15:"1/3",16:"1/3",17:"1/3",18:"2/3",19:"1/2",20:"1/2",21:"2/3",22:"1/2",23:"1/2",24:"2/3",25:"1/3",26:"2/3",27:"1/3",28:"2/3",29:"1/3",30:"2/3",31:"1/3",32:"1/2",33:"2/3",34:"1/2",35:"2/3",36:"1/2",0:"ZERO"};
-let buf="",geral=JSON.parse(localStorage.getItem('g')||'[]'),histN=[],histD=[],ultimo="_",mkt=0.10,paginaAtual=1;
+let buf="",geral=JSON.parse(localStorage.getItem('g3')||'[]'),histN=[],histD=[],ultimo="_",mkt=0.10,pag=1;
 function getCol(n){if(n==0)return 0;const c1=[1,4,7,10,13,16,19,22,25,28,31,34],c2=[2,5,8,11,14,17,20,23,26,29,32,35];if(c1.includes(n))return 1;if(c2.includes(n))return 2;return 3;}
-function calcMkt(){let s=0;for(let it of histD){if(it.num==0)continue;if(it.ok)break;s++;}if(s==0)mkt=0.10;else if(s==1)mkt=0.50;else mkt=0.10;document.getElementById('mkt').innerText="R$: "+mkt.toFixed(2).replace(',',',');}
-function irPara(n){document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));document.getElementById('pag'+n).classList.add('ativa');paginaAtual=n;render();}
-function proximaPagina(){irPara(paginaAtual==1?2:1);}
-function limpar(){geral=[];histN=[];histD=[];ultimo="_";localStorage.setItem('g','[]');render();calcMkt();document.getElementById('txt').innerText="_";document.getElementById('titulo1').innerText="BOA SORTE";document.getElementById('titulo2').innerText="ENTRADA SO APOS VERMELHO";}
-function render(){
-  // PAGINA 1 - TUDO
-  let div=document.getElementById('lista-geral');div.innerHTML='';
-  if(geral.length){let ord=[...geral].reverse(),chunks=[];for(let i=0;i<ord.length;i+=10)chunks.push(ord.slice(i,i+10));
-  for(let c=chunks.length-1;c>=0;c--){let chunk=chunks[c],pares=[];for(let i=0;i<chunk.length;i+=2)pares.push(chunk.slice(i,i+2));pares=pares.reverse().map(p=>[...p].reverse());
-  let b=document.createElement('div');b.className='bloco10';pares.forEach(par=>{let pd=document.createElement('div');pd.className='par';par.forEach(it=>{let q=document.createElement('div');q.className='q '+(it.num==0?'zero':(it.ok?'C':'E'));q.textContent=it.num;pd.appendChild(q);});b.appendChild(pd);});div.appendChild(b);}}
+function calcMkt(){let s=0;for(let it of histD){if(it.num==0)continue;if(it.ok)break;s++;}if(s==0)mkt=0.10;else if(s==1)mkt=0.50;else if(s==2)mkt=1.00;else if(s>=3)mkt=2.00;document.getElementById('mkt').innerText="R$: "+mkt.toFixed(2).replace('.',',');}
+function irPara(n){document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));document.getElementById('pag'+n).classList.add('ativa');pag=n;render();}
+function limpar(){geral=[];histN=[];histD=[];ultimo="_";localStorage.setItem('g3','[]');render();calcMkt();document.getElementById('txt').innerText="_";}
 
-  // PAGINA 2 - SO APOS VERMELHO
-  let div2=document.getElementById('lista-vermelho');div2.innerHTML='';
-  if(geral.length){
-    let filtrado=[];
-    for(let i=0;i<geral.length-1;i++){
-      let anterior=geral[i+1];
-      if(anterior && anterior.ok===false){
-        filtrado.push(geral[i]);
-      }
+function filtraPorVermelhos(qtd){
+  let filtrado=[];
+  for(let i=0;i<geral.length;i++){
+    let streak=0;
+    for(let j=i+1;j<geral.length;j++){
+      if(geral[j].num==0) continue;
+      if(geral[j].ok===false) streak++; else break;
+      if(streak>=10) break;
     }
-    if(filtrado.length==0){
-      div2.innerHTML='<div style="text-align:center;color:#888;padding:20px">Nenhum vermelho ainda. Quando der vermelho, a próxima jogada aparece aqui com R$0,50</div>';
-    }else{
-      let ord=[...filtrado].reverse(),chunks=[];for(let i=0;i<ord.length;i+=10)chunks.push(ord.slice(i,i+10));
-      for(let c=chunks.length-1;c>=0;c--){let chunk=chunks[c],pares=[];for(let i=0;i<chunk.length;i+=2)pares.push(chunk.slice(i,i+2));pares=pares.reverse().map(p=>[...p].reverse());
-      let b=document.createElement('div');b.className='bloco10';pares.forEach(par=>{let pd=document.createElement('div');pd.className='par';par.forEach(it=>{let q=document.createElement('div');q.className='q '+(it.num==0?'zero':(it.ok?'C':'E'));q.textContent=it.num;pd.appendChild(q);});b.appendChild(pd);});div2.appendChild(b);}
+    if(streak>=qtd){
+      filtrado.push(geral[i]);
     }
   }
+  return filtrado;
 }
+
+function desenhaLista(id, lista){
+  let div=document.getElementById(id);div.innerHTML='';
+  if(lista.length==0){div.innerHTML='<div style="text-align:center;color:#666;padding:15px;font-size:12px">Aguardando '+id.replace('lista-','')+'...<br>Quando der os vermelhos, aparece aqui</div>';return;}
+  let ord=[...lista].reverse(),chunks=[];for(let i=0;i<ord.length;i+=10)chunks.push(ord.slice(i,i+10));
+  for(let c=chunks.length-1;c>=0;c--){let chunk=chunks[c],pares=[];for(let i=0;i<chunk.length;i+=2)pares.push(chunk.slice(i,i+2));pares=pares.reverse().map(p=>[...p].reverse());
+  let b=document.createElement('div');b.className='bloco10';pares.forEach(par=>{let pd=document.createElement('div');pd.className='par';par.forEach(it=>{let q=document.createElement('div');q.className='q '+(it.num==0?'zero':(it.ok?'C':'E'));q.textContent=it.num;pd.appendChild(q);});b.appendChild(pd);});div.appendChild(b);}
+}
+
+function render(){
+  desenhaLista('lista-1v', filtraPorVermelhos(1));
+  desenhaLista('lista-2v', filtraPorVermelhos(2));
+  desenhaLista('lista-3v', filtraPorVermelhos(3));
+}
+
 function dig(n){if(buf.length<2)buf+=n;if(parseInt(buf)>36)buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;}
-function corrigir(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;return;}if(histD.length>0){histD.shift();histN.shift();geral.shift();localStorage.setItem('g',JSON.stringify(geral));if(histN.length>0)ultimo=histN[0]+"> "+(TABELA[histN[0]]||"");else ultimo="_";render();calcMkt();document.getElementById('txt').innerText=ultimo;}}
-function enter(){if(buf=="")return;let num=parseInt(buf);if(isNaN(num)||num<0||num>36){buf="";return;}let colReal=getCol(num),ok=false,t1=document.getElementById('titulo1').innerText;if(histN.length>0&&t1.includes("COLUNA")){let a=t1.replace("VEM COLUNA ","").split('/').map(Number);ok=a.includes(colReal);}let txt=num+"> "+(TABELA[num]||"ZERO");ultimo=txt;histN.unshift(num);histD.unshift({num:num,ok:ok});geral.unshift({num:num,ok:ok});localStorage.setItem('g',JSON.stringify(geral));buf="";render();calcMkt();document.getElementById('txt').innerText=txt;
-// atualiza titulo
-let alvo="BOA SORTE";if(histN.length>0){let n=histN[0];alvo=n==0?"ZERO":(TABELA[n]||"BOA SORTE");alvo=alvo=="ZERO"||alvo=="BOA SORTE"?alvo:"VEM COLUNA "+alvo;}document.getElementById('titulo1').innerText=alvo;document.getElementById('titulo2').innerText=alvo+" (0,50)";}
+function corrigir(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;return;}if(histD.length>0){histD.shift();histN.shift();geral.shift();localStorage.setItem('g3',JSON.stringify(geral));if(histN.length>0)ultimo=histN[0]+"> "+(TABELA[histN[0]]||"");else ultimo="_";render();calcMkt();document.getElementById('txt').innerText=ultimo;}}
+function enter(){if(buf=="")return;let num=parseInt(buf);if(isNaN(num)||num<0||num>36){buf="";return;}let colReal=getCol(num),ok=false;if(histN.length>0){let tAtual=document.getElementById('t'+pag).innerText;if(tAtual.includes("COLUNA")){let a=tAtual.replace(/.*COLUNA /,"").split('/').map(Number);ok=a.includes(colReal);}}let txt=num+"> "+(TABELA[num]||"ZERO");ultimo=txt;histN.unshift(num);histD.unshift({num:num,ok:ok});geral.unshift({num:num,ok:ok});localStorage.setItem('g3',JSON.stringify(geral));buf="";render();calcMkt();document.getElementById('txt').innerText=txt;
+let alvo="BOA SORTE";if(histN.length>0){let n=histN[0];alvo=n==0?"ZERO":(TABELA[n]||"BOA SORTE");alvo=alvo=="ZERO"||alvo=="BOA SORTE"?alvo:"VEM COLUNA "+alvo;}
+document.getElementById('t1').innerText=alvo+" | APOS 1V = R$0,50";
+document.getElementById('t2').innerText=alvo+" | APOS 2V = R$1,00";
+document.getElementById('t3').innerText=alvo+" | APOS 3V = R$2,00";
+}
 
 render();calcMkt();
 </script>

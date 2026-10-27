@@ -57,19 +57,23 @@ function renderGeral(){
 let div=document.getElementById('lista-geral');
 div.innerHTML='';
 if(geral.length==0)return;
-let bloco=null;
-geral.forEach((item, idx)=>{
-if(idx%10==0){
-bloco=document.createElement('div');
+let ordered=[...geral].reverse();
+let chunks=[];
+for(let i=0;i<ordered.length;i+=10){chunks.push(ordered.slice(i,i+10));}
+for(let c=chunks.length-1;c>=0;c--){
+let chunk=chunks[c];
+let displayChunk=[...chunk].reverse();
+let bloco=document.createElement('div');
 bloco.className='bloco10';
-div.appendChild(bloco);
-}
+displayChunk.forEach(item=>{
 let cls='hr-quad '+(item.num===0?'zero':(item.acertou?'C':'E'));
 let q=document.createElement('div');
 q.className=cls;
 q.textContent=item.num;
 bloco.appendChild(q);
 });
+div.appendChild(bloco);
+}
 }
 function renderNumeros(){let div=document.getElementById('lista-numeros');if(!div) return;div.innerHTML='';for(let n=1;n<=36;n++){let col=TABELA[n];let hist=stats[n]||[];let row=document.createElement('div');row.className='linha-num';let b=document.createElement('b');b.textContent=n+"> "+col;let seqDiv=document.createElement('div');seqDiv.className='seq';hist.slice(-8).forEach(v=>{let s=document.createElement('div');s.className='hr-quad '+(v?'C':'E');s.textContent=v?'✔':'✖';s.style.width='22px';s.style.minWidth='22px';s.style.height='22px';s.style.marginRight='0';s.style.marginBottom='0';s.style.fontSize='10px';seqDiv.appendChild(s);});row.appendChild(b);row.appendChild(seqDiv);div.appendChild(row);}}
 function renderTapete(){let tapete=document.getElementById('tapete');if(!tapete) return;let existentes=document.querySelectorAll('.cell.num');existentes.forEach(e=>e.remove());for(let r=0;r<12;r++){for(let c=0;c<3;c++){let num=r*3 + c + 1;let div=document.createElement('div');div.className='cell num '+CORES[num];div.id='cell-'+num;div.textContent=num;div.style.gridColumn=(3+c);div.style.gridRow=(2+r);if(contagem[num]){div.classList.add('marcado');div.setAttribute('data-vezes',contagem[num]);}if(historicoNumeros[0]==num)div.classList.add('ultimo');tapete.appendChild(div);}}let cell0=document.getElementById('cell-0');if(cell0){if(contagem[0]){cell0.classList.add('marcado');cell0.setAttribute('data-vezes',contagem[0]);}else{cell0.classList.remove('marcado');}if(historicoNumeros[0]==0)cell0.classList.add('ultimo');else cell0.classList.remove('ultimo');}}

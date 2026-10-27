@@ -61,22 +61,32 @@ let chunks=[];
 for(let i=0;i<ordered.length;i+=10){chunks.push(ordered.slice(i,i+10));}
 for(let c=chunks.length-1;c>=0;c--){
 let chunk=chunks[c];
-let displayChunk=[...chunk].reverse();
+// chunk está em ordem mais antigo -> mais novo (ex: [1,2,3])
+// Agora vamos agrupar 2 em 2 a partir dos mais antigos
+let pares=[];
+for(let i=0;i<chunk.length;i+=2){
+let par = chunk.slice(i,i+2); // ex: [1,2] ou [3]
+pares.push(par);
+}
+// Inverte os pares para o mais novo ficar na frente: [3] [1,2]
+pares = pares.reverse();
+// Dentro de cada par, inverte para mostrar o mais novo primeiro: [2,1]
+pares = pares.map(p=>[...p].reverse());
+
 let bloco=document.createElement('div');
 bloco.className='bloco10';
-for(let i=0;i<displayChunk.length;i+=2){
-let par=document.createElement('div');
-par.className='par';
-for(let j=i;j<i+2 && j<displayChunk.length;j++){
-let item=displayChunk[j];
+pares.forEach(par=>{
+let parDiv=document.createElement('div');
+parDiv.className='par';
+par.forEach(item=>{
 let cls='hr-quad '+(item.num===0?'zero':(item.acertou?'C':'E'));
 let q=document.createElement('div');
 q.className=cls;
 q.textContent=item.num;
-par.appendChild(q);
-}
-bloco.appendChild(par);
-}
+parDiv.appendChild(q);
+});
+bloco.appendChild(parDiv);
+});
 div.appendChild(bloco);
 }
 }

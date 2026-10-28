@@ -13,16 +13,18 @@ html,body{height:100%;background:#111;display:flex;justify-content:center}
 .botoes{display:none;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;padding:4px;flex-shrink:0}
 .botoes.visivel{display:grid}
 .botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:8px 2px;font-weight:bold;font-size:11px}
-.titulo-alerta{display:none;text-align:center;font-weight:900;padding:8px;font-size:14px;letter-spacing:1px;flex-shrink:0}
+.titulo-alerta{display:none;text-align:center;font-weight:900;padding:8px;font-size:14px;flex-shrink:0}
 .titulo-alerta.piscando{display:block;color:#ffff00;background:#8b0000;margin:4px;border-radius:6px;border:2px solid gold;animation:pisca .6s infinite}
 @keyframes pisca{0%{background:#8b0000;color:#ffff00}50%{background:#ffff00;color:#8b0000}100%{background:#8b0000;color:#ffff00}}
-#lista-geral{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:6px}
-.bloco10{display:flex;flex-wrap:wrap;gap:6px}
-.par{display:flex;gap:2px;border:2px solid #ffcc00;border-radius:10px;padding:3px}
-.q{width:48px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:#fff;border:1.5px solid #fff}
+#lista-geral{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:4px}
+/* NUMEROS VOLTARAM NORMAL 10 EM 10 COMO ANTES */
+.bloco10{display:flex;flex-wrap:wrap;gap:4px}
+.par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:7px;padding:2px}
+.q{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff}
 .q.C{background:#00b050}.q.E{background:#c00000}
+/* BARRA AZUL AUMENTADA */
 .barra{display:flex;margin:4px;flex-shrink:0}
-.barra .amarela{flex:1;background:#ffeb00;color:#000;padding:12px 10px;border-radius:6px;font-weight:bold;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.barra .amarela{flex:1;background:#ffeb00;color:#000;padding:16px 12px;border-radius:8px;font-weight:900;font-size:16px;display:flex;justify-content:space-between;align-items:center}
 .teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:4px;background:#000;flex-shrink:0}
 .teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:18px;font-size:22px;font-weight:bold}
 .teclado button.verde{background:linear-gradient(#00d000,#006000);color:#fff}

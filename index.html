@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>RAFIGASP</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffcc00">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black,Arial}
 html,body{height:100%;background:#111;display:flex;justify-content:center}
@@ -18,7 +21,6 @@ html,body{height:100%;background:#111;display:flex;justify-content:center}
 .titulo-alerta.piscando{display:block;color:#ffff00;background:#8b0000;margin:4px;border-radius:6px;border:2px solid gold;animation:pisca .6s infinite}
 @keyframes pisca{0%{background:#8b0000;color:#ffff00}50%{background:#ffff00;color:#8b0000}100%{background:#8b0000;color:#ffff00}}
 #lista-geral{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:6px;align-items:flex-start}
-/* AGORA DESCENDO NA VERTICAL */
 .bloco10{display:flex;flex-direction:column;gap:6px}
 .par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:7px;padding:2px}
 .q{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff;font-family:Arial}
@@ -76,6 +78,11 @@ function limpar(){geral=[];histN=[];histD=[];ultimo="-";sinal=null;perdas=0;loca
 function dig(n){let teste=buf+String(n);if(teste==="000"){document.getElementById('botoes').classList.toggle('visivel');buf="";document.getElementById('txtLeft').innerText=ultimo;return;}if(buf.length<2)buf+=String(n);if(parseInt(buf)>36)buf=buf.slice(0,-1);document.getElementById('txtLeft').innerText=buf||ultimo;}
 function corrigir(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txtLeft').innerText=buf||ultimo;return;}if(histD.length>0){histD.shift();histN.shift();geral.shift();localStorage.setItem('g',JSON.stringify(geral));let s=0;for(let it of histD){if(!it.ok)s++;else break;}perdas=s;if(perdas>=2 && histN.length>0)sinal=TAB[histN[0]];else if(perdas===0)sinal=null;if(histN.length>0){ultimo=histN[0]+"> "+TAB[histN[0]];document.getElementById('txtLeft').innerText=ultimo;}else{ultimo="-";document.getElementById('txtLeft').innerText="-";document.getElementById('miniCor').style.display='none';}render();atualizaAlerta();}}
 function enter(){if(buf==="")return;let num=parseInt(buf);if(isNaN(num)||num<0||num>36){buf="";return;}let ok=true;if(histN.length>0){let prev=histN[0];let alvo=TAB[prev].split('/').map(Number);let colReal=COL[num];if(num===0){ok=false;}else{ok=alvo.includes(colReal);}}else{ok=true;}let txt=num+"> "+TAB[num];ultimo=txt;if(ok){perdas=0;sinal=null;}else{perdas++;sinal=TAB[num];}histN.unshift(num);histD.unshift({num:num,ok:ok});geral.unshift({num:num,ok:ok});localStorage.setItem('g',JSON.stringify(geral));buf="";render();document.getElementById('txtLeft').innerText=txt;document.getElementById('miniCor').style.display='inline-block';document.getElementById('miniCor').style.background=ok?'#00b050':'#c00000';atualizaAlerta();}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(()=>console.log('Offline OK'));
+}
 </script>
 </body>
 </html>

@@ -1,1 +1,90 @@
-function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let box=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(box){if(c>0)box.classList.add('marcado');else box.classList.remove('marcado');}}let c0=counts[0]||0;let el0=document.getElementById('cnt0');let zbox=document.getElementById('zeroBox');if(el0)el0.textContent=c0>0?c0+'x':'';if(zbox){if(c0>0)zbox.classList.add('marcado');else zbox.classList.remove('marcado');}}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>RAFIGASP</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black,Arial}
+body{background:#000;height:100dvh;display:flex;flex-direction:column}
+.topo{background:#ffcc00;text-align:center;padding:6px}
+.topo b{font-size:26px}.topo span{font-size:10px;letter-spacing:3px;font-family:Arial}
+.meio{flex:1;display:flex;gap:4px;padding:4px;overflow:hidden}
+.esq{width:92px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+.par{display:flex;gap:2px;border:1.5px solid #ffcc00;border-radius:6px;padding:2px;background:#111}
+.q{flex:1;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.C{background:#00a000}.E{background:#c00000}
+.dir{flex:1;background:#0a3d0a;border:2px solid #ffcc00;border-radius:8px;padding:2px;display:flex;flex-direction:column}
+.row0{display:flex;height:100%;gap:1px}
+.zero{width:26px;background:#0a3d0a;border:1px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;writing-mode:vertical-rl}
+.zero.marcado{background:#ffcc00!important;color:#000!important}
+.gridNums{flex:1;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(3,1fr);gap:1px}
+.cell{border:1px solid #ccc;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:10px}
+.cell.red{background:#b00}.cell.black{background:#111}
+.cell.marcado{background:#ffcc00!important;color:#000!important}
+.cell .cnt{font-size:7px;background:#000;color:#ffcc00;border-radius:3px}
+.zero .cnt{font-size:7px;margin-left:2px}
+.baixo{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:2px}
+.baixo div{background:#0a3d0a;border:1px solid #fff;color:#fff;text-align:center;font-size:8px;padding:3px 0}
+.barra{background:#ffcc00;margin:4px;border-radius:8px;padding:10px;display:flex;justify-content:space-between;font-weight:900;font-size:13px}
+.teclado{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px}
+.teclado button{padding:14px;border:0;border-radius:8px;font-size:20px;font-weight:900;background:linear-gradient(#ffe88a,#c89a00)}
+</style>
+</head>
+<body>
+<div class="topo"><b>RAFIGASP</b><span>COACH DA ROLETA</span></div>
+<div class="meio"><div class="esq" id="lista"></div><div class="dir"><div class="row0"><div class="zero" id="zeroBox">0<span class="cnt" id="cnt0"></span></div><div class="gridNums" id="grid"></div></div><div class="baixo"><div>1st 12</div><div>2nd 12</div><div>3rd 12</div></div></div></div>
+<div class="barra"><span id="left">-</span><span id="placar">ACERTO 0 X 0 ERRO</span></div>
+<div class="teclado"><button onclick="d(1)">1</button><button onclick="d(2)">2</button><button onclick="d(3)">3</button><button onclick="d(4)">4</button><button onclick="d(5)">5</button><button onclick="d(6)">6</button><button onclick="d(7)">7</button><button onclick="d(8)">8</button><button onclick="d(9)">9</button><button onclick="go()">ENTER</button><button onclick="d(0)">0</button><button onclick="corr()">CORRIGIR</button></div>
+<script>
+const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
+const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};
+let layout=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
+let order=[];for(let c=0;c<12;c++)for(let r=0;r<3;r++)order.push(layout[r][c]);
+let counts=JSON.parse(localStorage.getItem('cnt36')||'{}');
+let grid=document.getElementById('grid');
+order.forEach(n=>{
+  let div=document.createElement('div');
+  div.className='cell '+(REDS.includes(n)?'red':'black');
+  div.id='c'+n;
+  div.innerHTML=n+'<span class="cnt" id="cnt'+n+'"></span>';
+  grid.appendChild(div);
+});
+function atualiza(){
+  for(let i=0;i<=36;i++){
+    let c=counts[i]||0;
+    let el=document.getElementById('cnt'+i);
+    let box=document.getElementById('c'+i);
+    if(el) el.textContent=c>0?c+'x':'';
+    if(box){ if(c>0) box.classList.add('marcado'); else box.classList.remove('marcado'); }
+  }
+  let c0=counts[0]||0;
+  let el0=document.getElementById('cnt0');
+  let zbox=document.getElementById('zeroBox');
+  if(el0) el0.textContent=c0>0?c0+'x':'';
+  if(zbox){ if(c0>0) zbox.classList.add('marcado'); else zbox.classList.remove('marcado'); }
+}
+atualiza();
+let buf="";let geral=JSON.parse(localStorage.getItem('g')||'[]');
+function render(){
+  let l=document.getElementById('lista');l.innerHTML="";
+  let a=0,e=0;geral.forEach(it=>it.ok?a++:e++);
+  document.getElementById('placar').innerText='ACERTO '+a+' X '+e+' ERRO';
+  let rev=[...geral].reverse();
+  for(let i=0;i<rev.length;i+=2){
+    let p1=rev[i];let p2=rev[i+1];
+    let div=document.createElement('div');div.className='par';
+    let q1=document.createElement('div');q1.className='q '+(p1.ok?'C':'E');q1.textContent=p1.num;div.appendChild(q1);
+    if(p2){let q2=document.createElement('div');q2.className='q '+(p2.ok?'C':'E');q2.textContent=p2.num;div.appendChild(q2);}
+    l.appendChild(div);
+  }
+}
+render();
+if(geral.length) document.getElementById('left').innerText=geral[0].num+"> "+TAB[geral[0].num];
+function d(n){if(buf.length<2)buf+=String(n);if(parseInt(buf)>36)buf=buf.slice(0,-1);document.getElementById('left').innerText=buf||"-";}
+function corr(){if(buf){buf=buf.slice(0,-1);document.getElementById('left').innerText=buf||"-";return;}if(geral.length){let rem=geral.shift();counts[rem.num]=Math.max(0,(counts[rem.num]||1)-1);localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));render();atualiza();}}
+function go(){if(!buf)return;let num=parseInt(buf);buf="";let ok=true;if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=false;else ok=alvo.includes(COL[num]);}geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));document.getElementById('left').innerText=num+"> "+TAB[num];render();atualiza();}
+</script>
+</body>
+</html>

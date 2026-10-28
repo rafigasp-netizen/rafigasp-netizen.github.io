@@ -11,59 +11,104 @@ html,body{height:100%}body{background:#000;color:#fff;display:flex;flex-directio
 .topo b{display:block;font-size:22px}.topo span{font-size:10px;letter-spacing:2px}
 .botoes{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;padding:5px;flex-shrink:0}
 .botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:10px 2px;font-weight:bold;font-size:12px}
-.titulo{background:#ffff00;margin:5px;border-radius:6px;border:1px solid gold;padding:10px;text-align:center;display:flex;justify-content:center;align-items:center;gap:10px;flex-shrink:0}
-.titulo .fixo{color:#000;font-weight:900;font-size:16px}
-.titulo .piscando{color:#c00000;font-weight:900;font-size:16px;display:none}
+.titulo{background:#ffff00;margin:5px;border-radius:6px;border:1px solid gold;padding:10px;text-align:center;display:flex;justify-content:center;align-items:center;gap:8px;flex-shrink:0}
+.titulo .fixo{color:#000;font-weight:900;font-size:15px}
+.titulo .piscando{color:#c00000;font-weight:900;font-size:15px;display:none}
 .titulo .piscando.ativo{display:inline-block;animation:pisca 0.7s infinite}
-@keyframes pisca{0%{background:#ffff00;color:#c00000}50%{background:#c00000;color:#ffff00;padding:2px 6px;border-radius:4px}100%{background:#ffff00;color:#c00000}}
+@keyframes pisca{0%{background:#ffff00;color:#c00000}50%{background:#c00000;color:#ffff00;padding:2px 8px;border-radius:4px}100%{background:#ffff00;color:#c00000}}
 #lista-geral{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding:4px}
-.bloco10{display:flex;flex-wrap:wrap;gap:3px}
-.par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:8px;padding:2px}
-.q{width:32px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff}
-.q.C{background:#00b050}.q.E{background:#c00000}
+.bloco10{display:flex;flex-wrap:wrap;gap:3px}.par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:8px;padding:2px}
+.q{width:32px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff}.q.C{background:#00b050}.q.E{background:#c00000}
 .barra-amarela{margin:5px;flex-shrink:0}.barra-amarela .txt{background:#ffeb00;color:#000;padding:12px;border-radius:8px;font-weight:bold;font-size:16px}
 .teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:5px;flex-shrink:0;background:#000}
-.teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:18px;font-size:22px;font-weight:bold}
-.teclado button.verde{background:linear-gradient(#00d000,#006000);color:#fff}
+.teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:8px;padding:18px;font-size:22px;font-weight:bold}.teclado button.verde{background:linear-gradient(#00d000,#006000);color:#fff}
+.pagina{display:none;flex-direction:column;height:100%}.pagina.ativa{display:flex}
+#pag2Lista{flex:1;overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:4px;background:#111}
+.linha-p2{display:flex;gap:4px;padding:6px;background:#222;border-radius:6px;border-left:4px solid gold}
 </style>
 </head>
 <body>
 <div class="topo"><b>RAFIGASP</b><span>COACH DA ROLETA</span></div>
-<div class="botoes"><button>🏠 INICIO</button><button onclick="apagar()">⬅️ APAGAR</button><button onclick="limpar()">🗑️ LIMPAR</button><button>➡️ PROX</button></div>
-
-<div class="titulo" id="titulo">
-<span class="fixo">BOA SORTE</span>
-<span class="piscando" id="colPisca"></span>
+<div class="botoes">
+<button onclick="ir(1)">🏠 INICIO</button>
+<button onclick="apagar()">⬅️ APAGAR</button>
+<button onclick="limpar()">🗑️ LIMPAR</button>
+<button onclick="ir(2)">➡️ PROX</button>
 </div>
 
+<div id="pag1" class="pagina ativa">
+<div class="titulo">
+<span class="piscando" id="colPisca1"></span>
+<span class="fixo">BOA SORTE</span>
+</div>
 <div id="lista-geral"></div>
-<div class="barra-amarela"><div class="txt" id="txt">_</div></div>
+<div class="barra-amarela"><div class="txt" id="txt1">_</div></div>
 <div class="teclado">
 <button onclick="dig(1)">1</button><button onclick="dig(2)">2</button><button onclick="dig(3)">3</button>
 <button onclick="dig(4)">4</button><button onclick="dig(5)">5</button><button onclick="dig(6)">6</button>
 <button onclick="dig(7)">7</button><button onclick="dig(8)">8</button><button onclick="dig(9)">9</button>
 <button onclick="enter()">ENTER</button><button class="verde" onclick="dig(0)">0</button><button onclick="corrigir()">CORRIGIR</button>
 </div>
+</div>
+
+<div id="pag2" class="pagina">
+<div class="titulo" style="background:#111;border-color:#333">
+<span class="piscando" id="colPisca2"></span>
+<span class="fixo" style="color:gold">BOA SORTE</span>
+</div>
+<div id="pag2Lista"></div>
+<div class="barra-amarela"><div class="txt" id="txt2">_</div></div>
+<div class="teclado">
+<button onclick="dig(1)">1</button><button onclick="dig(2)">2</button><button onclick="dig(3)">3</button>
+<button onclick="dig(4)">4</button><button onclick="dig(5)">5</button><button onclick="dig(6)">6</button>
+<button onclick="dig(7)">7</button><button onclick="dig(8)">8</button><button onclick="dig(9)">9</button>
+<button onclick="enter()">ENTER</button><button class="verde" onclick="dig(0)">0</button><button onclick="corrigir()">CORRIGIR</button>
+</div>
+</div>
+
 <script>
 const TABELA={1:"2/3",2:"1/2",3:"1/2",4:"1/2",5:"2/3",6:"1/2",7:"2/3",8:"1/2",9:"2/3",10:"2/3",11:"1/3",12:"2/3",13:"1/3",14:"2/3",15:"1/3",16:"1/3",17:"1/3",18:"2/3",19:"1/2",20:"1/2",21:"2/3",22:"1/2",23:"1/2",24:"2/3",25:"1/3",26:"2/3",27:"1/3",28:"2/3",29:"1/3",30:"2/3",31:"1/3",32:"1/2",33:"2/3",34:"1/2",35:"2/3",36:"1/2",0:"ZERO"};
-let buf="",geral=JSON.parse(localStorage.getItem('g')||'[]'),histN=[],histD=[],ultimo="_";
+let buf="",geral=JSON.parse(localStorage.getItem('g')||'[]'),histN=[],histD=[],ultimo="_",sinalAtivo=null;
+function getColReal(n){if(n==0)return 0;const c1=[1,4,7,10,13,16,19,22,25,28,31,34],c2=[2,5,8,11,14,17,20,23,26,29,32,35];if(c1.includes(n))return 1;if(c2.includes(n))return 2;return 3;}
+function ir(n){document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));document.getElementById('pag'+n).classList.add('ativa');}
 function render(){
-let div=document.getElementById('lista-geral');div.innerHTML='';if(!geral.length)return;
+let div=document.getElementById('lista-geral');div.innerHTML='';
+let div2=document.getElementById('pag2Lista');div2.innerHTML='';
+if(!geral.length)return;
 let ord=[...geral].reverse(),chunks=[];for(let i=0;i<ord.length;i+=10)chunks.push(ord.slice(i,i+10));
-for(let c=chunks.length-1;c>=0;c--){let chunk=chunks[c],pares=[];for(let i=0;i<chunk.length;i+=2)pares.push(chunk.slice(i,i+2));pares=pares.reverse().map(p=>[...p].reverse());let b=document.createElement('div');b.className='bloco10';pares.forEach(par=>{let pd=document.createElement('div');pd.className='par';par.forEach(it=>{let q=document.createElement('div');q.className='q '+(it.num==0?'zero':(it.ok?'C':'E'));q.textContent=it.num;pd.appendChild(q);});b.appendChild(pd);});div.appendChild(b);}
+for(let c=chunks.length-1;c>=0;c--){let chunk=chunks[c],pares=[];for(let i=0;i<chunk.length;i+=2)pares.push(chunk.slice(i,i+2));pares=pares.reverse().map(p=>[...p].reverse());let b=document.createElement('div');b.className='bloco10';pares.forEach(par=>{let pd=document.createElement('div');pd.className='par';par.forEach(it=>{let q=document.createElement('div');q.className='q '+(it.num==0?'C':(it.ok?'C':'E'));q.textContent=it.num;pd.appendChild(q);});b.appendChild(pd);});div.appendChild(b);}
+geral.slice().reverse().forEach((it)=>{
+let row=document.createElement('div');row.className='linha-p2';row.innerHTML=`<div class="q ${it.ok?'C':'E'}" style="min-width:32px">${it.num}</div><div style="color:#fff;font-size:13px">${it.num}> ${TABELA[it.num]||'ZERO'} - ${it.ok?'✅ ACERTOU':'❌ ERROU'}</div>`;div2.appendChild(row);
+});
 }
 function atualizarTitulo(){
-let streak=0;for(let it of histD){if(it.num==0)continue;if(it.ok===false)streak++;else break;}
-let el=document.getElementById('colPisca');
+let streak=0;for(let it of histD){if(it.num==0)continue;if(!it.ok)streak++;else break;}
+let el1=document.getElementById('colPisca1');let el2=document.getElementById('colPisca2');
 if(streak>=2 && histN.length>0){
-let col=TABELA[histN[0]]||"";el.textContent="| VEM COLUNA "+col;el.classList.add('ativo');
-}else{el.textContent="";el.classList.remove('ativo');}
+let col=TABELA[histN[0]]||"";sinalAtivo=col;
+el1.textContent="VEM COLUNA "+col+" |";el1.classList.add('ativo');
+el2.textContent="VEM COLUNA "+col+" |";el2.classList.add('ativo');
+}else{
+if(streak==0){sinalAtivo=null;}
+el1.textContent="";el1.classList.remove('ativo');
+el2.textContent="";el2.classList.remove('ativo');
 }
-function apagar(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;}}
-function limpar(){geral=[];histN=[];histD=[];ultimo="_";localStorage.setItem('g','[]');render();document.getElementById('txt').innerText="_";atualizarTitulo();}
-function dig(n){if(buf.length<2)buf+=n;if(parseInt(buf)>36)buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;}
-function corrigir(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt').innerText=buf||ultimo;return;}if(histD.length>0){histD.shift();histN.shift();geral.shift();localStorage.setItem('g',JSON.stringify(geral));if(histN.length>0)ultimo=histN[0]+"> "+(TABELA[histN[0]]||"");else ultimo="_";render();document.getElementById('txt').innerText=ultimo;atualizarTitulo();}}
-function enter(){if(buf=="")return;let num=parseInt(buf);if(isNaN(num)||num<0||num>36){buf="";return;}let txt=num+"> "+(TABELA[num]||"ZERO");ultimo=txt;histN.unshift(num);histD.unshift({num:num,ok:false});geral.unshift({num:num,ok:false});localStorage.setItem('g',JSON.stringify(geral));buf="";render();document.getElementById('txt').innerText=txt;atualizarTitulo();}
+}
+function apagar(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt1').innerText=buf||ultimo;document.getElementById('txt2').innerText=buf||ultimo;}}
+function limpar(){geral=[];histN=[];histD=[];ultimo="_";sinalAtivo=null;localStorage.setItem('g','[]');render();document.getElementById('txt1').innerText="_";document.getElementById('txt2').innerText="_";atualizarTitulo();}
+function dig(n){if(buf.length<2)buf+=n;if(parseInt(buf)>36)buf=buf.slice(0,-1);document.getElementById('txt1').innerText=buf||ultimo;document.getElementById('txt2').innerText=buf||ultimo;}
+function corrigir(){if(buf.length>0){buf=buf.slice(0,-1);document.getElementById('txt1').innerText=buf||ultimo;document.getElementById('txt2').innerText=buf||ultimo;return;}if(histD.length>0){histD.shift();histN.shift();geral.shift();localStorage.setItem('g',JSON.stringify(geral));if(histN.length>0)ultimo=histN[0]+"> "+(TABELA[histN[0]]||"");else ultimo="_";render();document.getElementById('txt1').innerText=ultimo;document.getElementById('txt2').innerText=ultimo;atualizarTitulo();}}
+function enter(){
+if(buf=="")return;let num=parseInt(buf);if(isNaN(num)||num<0||num>36){buf="";return;}
+let colReal=getColReal(num);let ok=false;
+if(sinalAtivo){let alvo=sinalAtivo.split('/').map(Number);ok=alvo.includes(colReal);}
+let txt=num+"> "+(TABELA[num]||"ZERO");ultimo=txt;
+histN.unshift(num);histD.unshift({num:num,ok:ok});geral.unshift({num:num,ok:ok});
+localStorage.setItem('g',JSON.stringify(geral));buf="";render();
+document.getElementById('txt1').innerText=txt;document.getElementById('txt2').innerText=txt;
+if(ok){sinalAtivo=null;document.getElementById('colPisca1').textContent="";document.getElementById('colPisca1').classList.remove('ativo');document.getElementById('colPisca2').textContent="";document.getElementById('colPisca2').classList.remove('ativo');}
+atualizarTitulo();
+}
 render();atualizarTitulo();
 </script>
 </body>

@@ -5,28 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>RAFIGASP</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black,Arial}
 html,body{height:100%;background:#111;display:flex;justify-content:center}
 .app{width:100%;max-width:420px;height:100dvh;background:#000;display:flex;flex-direction:column}
-.topo{background:linear-gradient(#ffd700,#b8860b);color:#000;text-align:center;padding:6px;flex-shrink:0}
-.topo b{display:block;font-size:22px}.topo span{font-size:10px;letter-spacing:2px}
+.topo{background:linear-gradient(180deg,#ffe66a 0%,#ffcc00 45%,#d4a500 100%);color:#000;text-align:center;padding:10px 6px 8px 6px;flex-shrink:0;border-bottom:3px solid #000}
+.topo b{display:block;font-size:34px;font-weight:900;letter-spacing:1.5px;line-height:1;color:#000;text-shadow:0 1px 0 #fff8,0 2px 3px #0005}
+.topo span{display:block;font-size:11px;letter-spacing:3.5px;font-weight:700;margin-top:3px;font-family:Arial}
 .botoes{display:none;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;padding:4px;flex-shrink:0}
 .botoes.visivel{display:grid}
-.botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:8px 2px;font-weight:bold;font-size:11px}
+.botoes button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:8px 2px;font-weight:bold;font-size:11px;font-family:Arial}
 .titulo-alerta{display:none;text-align:center;font-weight:900;padding:8px;font-size:14px;flex-shrink:0}
 .titulo-alerta.piscando{display:block;color:#ffff00;background:#8b0000;margin:4px;border-radius:6px;border:2px solid gold;animation:pisca .6s infinite}
 @keyframes pisca{0%{background:#8b0000;color:#ffff00}50%{background:#ffff00;color:#8b0000}100%{background:#8b0000;color:#ffff00}}
 #lista-geral{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:4px}
-/* NUMEROS VOLTARAM NORMAL 10 EM 10 COMO ANTES */
 .bloco10{display:flex;flex-wrap:wrap;gap:4px}
 .par{display:flex;gap:1px;border:1.5px solid #ffcc00;border-radius:7px;padding:2px}
-.q{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff}
+.q{width:32px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;color:#fff;border:1px solid #fff;font-family:Arial}
 .q.C{background:#00b050}.q.E{background:#c00000}
-/* BARRA AZUL AUMENTADA */
 .barra{display:flex;margin:4px;flex-shrink:0}
-.barra .amarela{flex:1;background:#ffeb00;color:#000;padding:16px 12px;border-radius:8px;font-weight:900;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+.barra .amarela{flex:1;background:#ffeb00;color:#000;padding:16px 12px;border-radius:8px;font-weight:900;font-size:16px;display:flex;justify-content:space-between;align-items:center;font-family:Arial}
 .teclado{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:4px;background:#000;flex-shrink:0}
-.teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:18px;font-size:22px;font-weight:bold}
+.teclado button{background:linear-gradient(#ffe27a,#c89a00);border:0;border-radius:6px;padding:18px;font-size:22px;font-weight:bold;font-family:Arial}
 .teclado button.verde{background:linear-gradient(#00d000,#006000);color:#fff}
 .mini{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid #000;margin-left:6px}
 </style>

@@ -16,6 +16,7 @@ for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(
 function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
 atualiza();
 let geral=JSON.parse(localStorage.getItem('g')||'[]');
+let emAlerta = localStorage.getItem('emAlerta')==='1';
 function render(){
   let l=document.getElementById('lista');l.innerHTML="";
   let boxAzul=document.getElementById('boxAzul');
@@ -30,16 +31,34 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  let alerta=false;
-  // LINHA A: 2 vermelhos lado a lado = alerta
-  for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) alerta=true;}
-  // LINHA B: 2 vermelhos lado a lado = alerta (igual você circulou 15 e 13)
-  for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) alerta=true;}
-  if(alerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
+  // Se não está em alerta, verifica Linha A e B se tem 2 vermelhos
+  if(!emAlerta){
+    let tem=false;
+    for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem=true;}
+    for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem=true;}
+    if(tem){emAlerta=true;localStorage.setItem('emAlerta','1');}
+  }
+  if(emAlerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }
 render();
 if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';
-function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1);localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));render();atualiza();if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';else document.getElementById('left').innerText="-";}}
-function goNum(num){let ok=true;if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=true;else ok=alvo.includes(COL[num]);}geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));document.getElementById('left').innerHTML=num+'> <span>'+TAB[num]+'</span>';render();atualiza();}
+function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1);if(geral.length===0){emAlerta=false;localStorage.setItem('emAlerta','0');}localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));render();atualiza();if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';else document.getElementById('left').innerText="-";}}
+function goNum(num){
+  let ok=true;
+  if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=true;else ok=alvo.includes(COL[num]);}
+  // Se estava em alerta, verifica se acertou ou errou
+  if(emAlerta){
+    if(ok){ // ACERTOU -> volta a ficar azul
+      emAlerta=false;localStorage.setItem('emAlerta','0');
+    }else{ // ERROU -> volta pra linha pra dar alerta de novo
+      emAlerta=false;localStorage.setItem('emAlerta','0');
+    }
+  }
+  geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;
+  localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));
+  document.getElementById('left').innerHTML=num+'> <span>'+TAB[num]+'</span>';
+  render();atualiza();
+  // Depois de render, se errou e ainda tem 2 vermelhos na linha, vai dar alerta de novo automaticamente
+}
 function pick(n){goNum(n);}
 </script></body></html>

@@ -33,9 +33,10 @@ function render(){
     l.appendChild(col);
   });
   let alerta=false;
-  for(let i=0;i<linhaCima.length-1;i++){let c=linhaCima[i],n=linhaCima[i+1];if(c&&n&&REDS.includes(c.num)&&REDS.includes(n.num)) alerta=true;}
-  for(let i=0;i<linhaBaixo.length-1;i++){let c=linhaBaixo[i],n=linhaBaixo[i+1];if(c&&n&&REDS.includes(c.num)&&REDS.includes(n.num)) alerta=true;}
-  for(let i=0;i<pares.length;i++){let top=linhaCima[i],bot=linhaBaixo[i];if(top&&bot&&REDS.includes(top.num)&&REDS.includes(bot.num)) alerta=true;}
+  // NOVO: alerta quando do lado for vermelho (1 vermelho do lado de qualquer um)
+  for(let i=0;i<linhaCima.length-1;i++){let c=linhaCima[i],n=linhaCima[i+1];if(c&&n){if(REDS.includes(c.num) || REDS.includes(n.num)) alerta=true;}}
+  for(let i=0;i<linhaBaixo.length-1;i++){let c=linhaBaixo[i],n=linhaBaixo[i+1];if(c&&n){if(REDS.includes(c.num) || REDS.includes(n.num)) alerta=true;}}
+  for(let i=0;i<pares.length;i++){let top=linhaCima[i],bot=linhaBaixo[i];if(top&&bot){if(REDS.includes(top.num) || REDS.includes(bot.num)) alerta=true;}}
   if(alerta) alertaAtivo=true;
   if(geral.length>0 && geral[0].ok) alertaAtivo=false;
   localStorage.setItem('alertaAtivo', alertaAtivo?'1':'0');

@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;height:100dvh;display:flex;justify-content:center;align-items:flex-start;overflow:hidden} #app{width:96%;max-width:380px;height:100dvh;background:#0a2e1e;display:flex;flex-direction:column;gap:1px;margin:0 auto} .topo{background:#ffcc00;text-align:center;padding:4px;font-size:12px}
 .verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:4px;min-height:62px;overflow-x:auto;display:flex;align-items:center;gap:4px}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.hist{width:42px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff}.C{background:#00a000}.E{background:#c00000}
-.vermelho{flex:1;margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:flex;flex-direction:column;overflow:hidden}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;align-content:start}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;font-size:18px;min-height:32px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
-.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:4px 0;font-size:11px;border-radius:3px}
+.vermelho{flex:1;margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:flex;flex-direction:column;justify-content:center;align-items:center}.grid{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;align-content:center;justify-content:center}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;font-size:18px;min-height:32px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
+.doisparaum{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:16px;font-weight:900;border-radius:4px}
 .azul{margin:1px 3px;background:#001a8a;border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:15px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta-total{background:#cc0000!important;box-shadow:0 0 15px #ff0000;animation:piscaAzul .5s infinite alternate}@keyframes piscaAzul{from{background:#cc0000}to{background:#ff0000}}
 .btns{display:flex;gap:3px;padding:3px}.btns button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo"><b>RAFIGASP COACH DA ROLETA</b></div>
 <div class="verde" id="boxVerde"><div class="historico" id="lista"></div></div>
-<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1st 12</div><div>2nd 12</div><div>3rd 12</div></div></div>
+<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
 <div class="azul" id="boxAzul"><div id="left">-</div><div id="placar">ACERTO 0 X 0 ERRO</div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Limpar?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
 </div><script>
@@ -60,6 +60,8 @@ function render(){
     }
     replay.push(cron[k]);
   }
+  localStorage.setItem('placarAcerto',acerto);
+  localStorage.setItem('placarErro',erro);
   document.getElementById('placar').innerHTML='ACERTO <span>'+acerto+' X '+erro+'</span> ERRO';
   let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
   pares.reverse();

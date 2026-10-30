@@ -10,14 +10,12 @@
 <div class="azul" id="boxAzul"><div id="left">-</div><div id="placar">ACERTO 0 X 0 ERRO</div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Limpar?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
 <script>
-const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};
-let order=[];for(let i=1;i<=36;i++)order.push(i);
+const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 let counts=JSON.parse(localStorage.getItem('cnt36')||'{}');let grid=document.getElementById('grid');
-order.forEach(n=>{let d=document.createElement('div');d.className='cell '+(REDS.includes(n)?'red':'black');d.id='c'+n;d.onclick=()=>pick(n);d.innerHTML='<span>'+n+'</span><span class="badge" id="cnt'+n+'"></span>';grid.appendChild(d);});
+for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
 function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
 atualiza();
 let geral=JSON.parse(localStorage.getItem('g')||'[]');
-let alertaAtivo = localStorage.getItem('alertaAtivo')==='1';
 function render(){
   let l=document.getElementById('lista');l.innerHTML="";
   let boxAzul=document.getElementById('boxAzul');
@@ -25,25 +23,21 @@ function render(){
   document.getElementById('placar').innerHTML='ACERTO <span>'+a+' X '+e+'</span> ERRO';
   let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
   pares.reverse();
-  let linhaCima=[],linhaBaixo=[];
   pares.forEach(par=>{
     let col=document.createElement('div');col.className='coluna';
-    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);linhaCima.push(par[0]);}else{linhaCima.push(null);}
-    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaBaixo.push(par[1]);}else{linhaBaixo.push(null);}
+    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);}
+    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);}
     l.appendChild(col);
   });
-  let alerta=false;
-  // CORRETO: só alerta quando for vermelho + vermelho do lado (igual você marcou 9 e 19)
-  for(let i=0;i<linhaCima.length-1;i++){let c=linhaCima[i],n=linhaCima[i+1];if(c&&n&&REDS.includes(c.num)&&REDS.includes(n.num)) alerta=true;}
-  for(let i=0;i<linhaBaixo.length-1;i++){let c=linhaBaixo[i],n=linhaBaixo[i+1];if(c&&n&&REDS.includes(c.num)&&REDS.includes(n.num)) alerta=true;}
-  if(alerta) alertaAtivo=true;
-  if(geral.length>0 && geral[0].ok) alertaAtivo=false;
-  localStorage.setItem('alertaAtivo', alertaAtivo?'1':'0');
-  if(alertaAtivo) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
+  // NOVO: Se tiver qualquer ERRO (vermelho no verde) = azul fica vermelho
+  // Se der ACERTO = azul volta a ficar azul
+  let temErro = geral.length>0 && !geral[0].ok;
+  if(temErro) boxAzul.classList.add('alerta-total');
+  else boxAzul.classList.remove('alerta-total');
 }
 render();
 if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';
-function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1);localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));if(geral.length===0){alertaAtivo=false;localStorage.setItem('alertaAtivo','0');}render();atualiza();if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';else document.getElementById('left').innerText="-";}}
+function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1);localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));render();atualiza();if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';else document.getElementById('left').innerText="-";}}
 function goNum(num){let ok=true;if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=true;else ok=alvo.includes(COL[num]);}geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));document.getElementById('left').innerHTML=num+'> <span>'+TAB[num]+'</span>';render();atualiza();}
 function pick(n){goNum(n);}
 </script></body></html>

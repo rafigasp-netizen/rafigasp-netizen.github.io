@@ -30,24 +30,25 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  // NOVA REGRA: 2 vermelhos lado a lado só dá alerta se NÃO tiver verde mais novo na mesma linha
-  // Linha A: da esquerda pra direita = mais novo pra mais velho
+  // REGRA FINAL: Só alerta se tiver 2 vermelhos lado a lado SEM verde mais novo na frente
+  // Linha A e Linha B - da esquerda pra direita = mais novo pro mais velho
   let alerta=false;
+  // Linha A
   for(let i=0;i<linhaA.length-1;i++){
     let c=linhaA[i],n=linhaA[i+1];
-    if(c&&n&&!c.ok&&!n.ok){
-      // Tem 2 vermelhos em A nas posições i,i+1. Verifica se tem verde mais novo (j < i)
+    if(c&&n&&!c.ok&&!n.ok){ // 2 vermelhos lado a lado
       let temVerdeNovo=false;
       for(let j=0;j<i;j++){if(linhaA[j]&&linhaA[j].ok) temVerdeNovo=true;}
-      if(!temVerdeNovo) alerta=true;
+      if(!temVerdeNovo){alerta=true;console.log('Alerta Linha A em',i,c.num,n.num);}
     }
   }
+  // Linha B
   for(let i=0;i<linhaB.length-1;i++){
     let c=linhaB[i],n=linhaB[i+1];
     if(c&&n&&!c.ok&&!n.ok){
       let temVerdeNovo=false;
       for(let j=0;j<i;j++){if(linhaB[j]&&linhaB[j].ok) temVerdeNovo=true;}
-      if(!temVerdeNovo) alerta=true;
+      if(!temVerdeNovo){alerta=true;console.log('Alerta Linha B em',i,c.num,n.num);}
     }
   }
   if(alerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');

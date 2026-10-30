@@ -3,7 +3,19 @@
 .vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
 .doisparaum{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:7px 0;font-size:16px;font-weight:900;border-radius:4px}
 .azul{margin:1px 3px;background:#001a8a;border-radius:8px;padding:10px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:15px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta-total{background:#cc0000!important;box-shadow:0 0 20px #ff0000;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#cc0000}to{background:#ff0000}}
-.btns{display:flex;gap:3px;padding:3px 3px 8px 3px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}</style></head><body><div id="app">
+.btns{display:flex;gap:3px;padding:3px 3px 8px 3px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}
+
+/* SO NO COMPUTADOR - DEIXA MENOR SEM MEXER NO CELULAR */
+@media (min-width:600px){
+  #app{max-width:300px; min-height:auto; margin-top:10px; margin-bottom:10px; border-radius:8px; overflow:hidden}
+  .cell{min-height:30px; font-size:16px}
+  .doisparaum div{padding:5px 0; font-size:14px}
+  .verde{min-height:48px}
+  .hist{width:38px;height:24px;font-size:11px}
+  .azul{padding:7px 8px; font-size:13px}
+  .btns button{padding:9px; font-size:13px}
+}
+</style></head><body><div id="app">
 <div class="topo"><b>RAFIGASP COACH DA ROLETA</b></div>
 <div class="verde"><div class="historico" id="lista"></div></div>
 <div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>

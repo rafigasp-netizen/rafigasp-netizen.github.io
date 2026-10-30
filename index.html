@@ -1,8 +1,8 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;min-height:100dvh;display:flex;justify-content:center} #app{width:100%;max-width:430px;min-height:100dvh;background:#0a2e1e;display:flex;flex-direction:column;gap:2px} .topo{background:#ffcc00;text-align:center;padding:7px;font-size:14px}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;min-height:100dvh;display:flex;justify-content:center;align-items:flex-start} #app{width:100%;max-width:430px;min-height:100dvh;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;margin:0 auto} .topo{background:#ffcc00;text-align:center;padding:7px;font-size:14px}
 .verde{margin:2px 4px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:88px;overflow-x:auto;display:flex;align-items:center;gap:8px}.historico{display:flex;gap:6px}.coluna{display:flex;flex-direction:column;gap:6px}.hist{width:52px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;border:2px solid #fff}.C{background:#00a000}.E{background:#c00000}
-.vermelho{flex:1;margin:2px 4px;background:#0a3d1f;border-radius:8px;padding:8px;display:flex;flex-direction:column;overflow-y:auto}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.cell{border:2px solid #d4af37;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;font-size:28px;min-height:46px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-8px;right:-6px;background:#000;color:#ffcc00;font-size:14px;padding:3px 6px;border-radius:12px;border:1.5px solid #ffcc00}
+.vermelho{flex:1;margin:2px 4px;background:#0a3d1f;border-radius:8px;padding:8px;display:flex;flex-direction:column}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;align-content:start}.cell{border:2px solid #d4af37;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;font-size:28px;min-height:46px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-8px;right:-6px;background:#000;color:#ffcc00;font-size:14px;padding:3px 6px;border-radius:12px;border:1.5px solid #ffcc00}
 .doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:8px 0;font-size:13px;border-radius:4px}
-.azul{margin:2px 4px;background:#001a8a;border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:22px;font-weight:900;transition:.4s}.azul span{color:#ffcc00}.azul.alerta-total{background:#cc0000!important;box-shadow:0 0 25px #ff0000;animation:piscaAzul .5s infinite alternate}@keyframes piscaAzul{from{background:#cc0000}to{background:#ff0000}}
+.azul{margin:2px 4px;background:#001a8a;border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:22px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta-total{background:#cc0000!important;box-shadow:0 0 25px #ff0000;animation:piscaAzul .5s infinite alternate}@keyframes piscaAzul{from{background:#cc0000}to{background:#ff0000}}
 .btns{display:flex;gap:4px;padding:4px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:16px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo"><b>RAFIGASP COACH DA ROLETA</b></div>
 <div class="verde" id="boxVerde"><div class="historico" id="lista"></div></div>
@@ -16,8 +16,6 @@ for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(
 function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
 atualiza();
 let geral=JSON.parse(localStorage.getItem('g')||'[]');
-
-// FUNCAO QUE CALCULA SE TEM ALERTA VERMELHO PRA UM HISTORICO QUALQUER
 function calculaAlerta(geralArr){
   if(geralArr.length===0) return false;
   let cron=[...geralArr].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
@@ -49,14 +47,11 @@ function calculaAlerta(geralArr){
   if(!proximoEhA && temValidoB) return true;
   return false;
 }
-
 function render(){
   let l=document.getElementById('lista');l.innerHTML="";
   let boxAzul=document.getElementById('boxAzul');
-  
-  // CALCULA PLACAR SÓ QUANDO TEVE ALERTA
   let acerto=0,erro=0;
-  let cron=[...geral].reverse(); // mais velho pro mais novo
+  let cron=[...geral].reverse();
   let replay=[];
   for(let k=0;k<cron.length;k++){
     let alertaAntes = calculaAlerta(replay);
@@ -66,7 +61,6 @@ function render(){
     replay.push(cron[k]);
   }
   document.getElementById('placar').innerHTML='ACERTO <span>'+acerto+' X '+erro+'</span> ERRO';
-
   let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
   pares.reverse();
   pares.forEach(par=>{
@@ -75,7 +69,6 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);}
     l.appendChild(col);
   });
-
   let alertaAtual = calculaAlerta(geral);
   if(alertaAtual) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }

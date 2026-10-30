@@ -1,9 +1,11 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#0a2e1e;height:100dvh;display:flex;flex-direction:column}.topo{background:#ffcc00;text-align:center;padding:6px;font-size:13px}
-.verde{margin:4px;background:#0a5a2e;border:2px solid #00ff33;border-radius:10px;padding:6px;min-height:72px;overflow-x:auto;display:flex}.historico{display:flex;gap:4px;flex-direction:row}.coluna{display:flex;flex-direction:column;gap:4px}.hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;border:1px solid #fff}.C{background:#00a000}.E{background:#c00000}
-.vermelho{flex:1;margin:4px;background:#0a3d1f;border:2px solid #ff0000;border-radius:8px;padding:6px;display:flex;flex-direction:column;overflow:hidden}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(12,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-4px;right:-4px;background:#000;color:#ffcc00;font-size:7px;padding:1px 3px;border-radius:8px}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:5px 0;font-size:10px;border-radius:3px}
-.azul{margin:4px;background:#001a8a;border:2px solid #00aaff;border-radius:8px;padding:10px;display:flex;justify-content:space-between;color:#fff;font-size:13px}.azul span{color:#ffcc00}.btns{display:flex;gap:4px;padding:4px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;background:#ffcc00}</style></head><body>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#0a2e1e;height:100dvh;display:flex;flex-direction:column}.topo{background:#ffcc00;text-align:center;padding:7px;font-size:14px}
+.verde{margin:4px;background:#0a5a2e;border:3px solid #00ff33;border-radius:10px;padding:8px;min-height:88px;overflow-x:auto;display:flex}.verde.alerta{border-color:#ff0000;animation:pisca .5s infinite alternate}@keyframes pisca{from{box-shadow:0 0 5px red}to{box-shadow:0 0 20px red}}
+.historico{display:flex;gap:6px}.coluna{display:flex;flex-direction:column;gap:6px}.hist{width:52px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;border:2px solid #fff}.C{background:#00a000}.E{background:#c00000}.E.alerta2{background:#ff0000;box-shadow:0 0 10px yellow}
+.vermelho{flex:1;margin:4px;background:#0a3d1f;border:2px solid #ff0000;border-radius:8px;padding:6px;display:flex;flex-direction:column;overflow:hidden}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(12,1fr);gap:4px}.cell{border:2px solid #d4af37;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important;transform:scale(1.05)}.cell.alerta-verm{border:3px solid #ff0000!important;box-shadow:0 0 8px yellow;animation:pisca .4s infinite}.cell .badge{position:absolute;top:-6px;right:-6px;background:#000;color:#ffcc00;font-size:9px;padding:2px 4px;border-radius:10px}
+.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:12px;border-radius:3px}
+.azul{margin:4px;background:#001a8a;border:3px solid #00aaff;border-radius:10px;padding:14px;display:flex;justify-content:space-between;color:#fff;font-size:18px;font-weight:900}.azul span{color:#ffcc00}.btns{display:flex;gap:4px;padding:4px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:16px;background:#ffcc00}</style></head><body>
 <div class="topo"><b>RAFIGASP COACH DA ROLETA</b></div>
-<div class="verde"><div class="historico" id="lista"></div></div>
+<div class="verde" id="boxVerde"><div class="historico" id="lista"></div></div>
 <div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1st 12</div><div>2nd 12</div><div>3rd 12</div></div></div>
 <div class="azul"><div id="left">-</div><div id="placar">ACERTO 0 X 0 ERRO</div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Limpar?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
@@ -16,18 +18,23 @@ function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.ge
 atualiza();
 let geral=JSON.parse(localStorage.getItem('g')||'[]');
 function render(){
-  let l=document.getElementById('lista');l.innerHTML="";
+  let l=document.getElementById('lista');l.innerHTML="";let box=document.getElementById('boxVerde');
   let a=0,e=0;geral.forEach(it=>it.ok?a++:e++);
-  document.getElementById('placar').innerHTML='ACERTO <span>'+a+' X '+e+'</span> ERRO';
-  let cron=[...geral].reverse();
-  let pares=[];
-  for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
+  let alerta2=false;
+  if(geral.length>=2){if(REDS.includes(geral[0].num) && REDS.includes(geral[1].num)) alerta2=true;}
+  if(alerta2){box.classList.add('alerta');}else{box.classList.remove('alerta');}
+  let txtAcerto='ACERTO <span>'+a+' X '+e+'</span> ERRO';
+  if(alerta2) txtAcerto='⚠️ 2 VERMELHO! '+txtAcerto;
+  document.getElementById('placar').innerHTML=txtAcerto;
+  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
   pares.reverse().forEach(par=>{
     let col=document.createElement('div');col.className='coluna';
-    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);}
-    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);}
+    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E')+(alerta2 && REDS.includes(par[0].num)?' alerta2':'');d.textContent=par[0].num;col.appendChild(d);}
+    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E')+(alerta2 && REDS.includes(par[1].num)?' alerta2':'');d.textContent=par[1].num;col.appendChild(d);}
     l.appendChild(col);
   });
+  document.querySelectorAll('.cell').forEach(c=>c.classList.remove('alerta-verm'));
+  if(alerta2){REDS.forEach(n=>{let el=document.getElementById('c'+n); if(el) el.classList.add('alerta-verm');});}
 }
 render();
 if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';

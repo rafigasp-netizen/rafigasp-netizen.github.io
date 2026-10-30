@@ -30,27 +30,34 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  // REGRA FINAL: Só alerta se tiver 2 vermelhos lado a lado SEM verde mais novo na frente
-  // Linha A e Linha B - da esquerda pra direita = mais novo pro mais velho
+  // REGRA FINAL COMBINADA QUE VOCÊ FALOU:
+  // 1. Só considera 2 vermelhos se NÃO tiver verde mais novo na frente
+  // 2. Só dá alerta se o PRÓXIMO número for cair na linha que tem os 2 vermelhos
+  let proximoEhA = (geral.length % 2 === 0); // true = próximo é A, false = próximo é B
   let alerta=false;
-  // Linha A
+  // Verifica Linha A
+  let tem2VermelhosValidoA=false;
   for(let i=0;i<linhaA.length-1;i++){
     let c=linhaA[i],n=linhaA[i+1];
-    if(c&&n&&!c.ok&&!n.ok){ // 2 vermelhos lado a lado
+    if(c&&n&&!c.ok&&!n.ok){
       let temVerdeNovo=false;
       for(let j=0;j<i;j++){if(linhaA[j]&&linhaA[j].ok) temVerdeNovo=true;}
-      if(!temVerdeNovo){alerta=true;console.log('Alerta Linha A em',i,c.num,n.num);}
+      if(!temVerdeNovo) tem2VermelhosValidoA=true;
     }
   }
-  // Linha B
+  // Verifica Linha B
+  let tem2VermelhosValidoB=false;
   for(let i=0;i<linhaB.length-1;i++){
     let c=linhaB[i],n=linhaB[i+1];
     if(c&&n&&!c.ok&&!n.ok){
       let temVerdeNovo=false;
       for(let j=0;j<i;j++){if(linhaB[j]&&linhaB[j].ok) temVerdeNovo=true;}
-      if(!temVerdeNovo){alerta=true;console.log('Alerta Linha B em',i,c.num,n.num);}
+      if(!temVerdeNovo) tem2VermelhosValidoB=true;
     }
   }
+  // Só alerta se o próximo for cair na linha que tem os 2 vermelhos
+  if(proximoEhA && tem2VermelhosValidoA) alerta=true;
+  if(!proximoEhA && tem2VermelhosValidoB) alerta=true;
   if(alerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }
 render();

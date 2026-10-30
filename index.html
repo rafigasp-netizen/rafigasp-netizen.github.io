@@ -17,7 +17,6 @@ function atualiza(){for(let i=0;i<=36;i++){let c=counts[i]||0;let el=document.ge
 atualiza();
 let geral=JSON.parse(localStorage.getItem('g')||'[]');
 let emAlerta = localStorage.getItem('emAlerta')==='1';
-let acabouDeAcertar = false;
 function render(){
   let l=document.getElementById('lista');l.innerHTML="";
   let boxAzul=document.getElementById('boxAzul');
@@ -32,14 +31,26 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  // Só verifica novo alerta se NÃO acabou de acertar
-  if(!emAlerta && !acabouDeAcertar){
-    let tem=false;
-    for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem=true;}
-    for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem=true;}
-    if(tem){emAlerta=true;localStorage.setItem('emAlerta','1');}
+  // LÓGICA NOVA QUE VOCÊ FALOU:
+  // Próximo número vai pra onde? Se qtd é par, próximo é Linha A, se ímpar, Linha B
+  let proximoEhA = (geral.length % 2 === 0);
+  let tem2VermelhosA=false, tem2VermelhosB=false;
+  for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem2VermelhosA=true;}
+  for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem2VermelhosB=true;}
+  let deveAlertar=false;
+  if(proximoEhA){ // Próximo é Linha A, só alerta se Linha A tiver 2 vermelhos
+    if(tem2VermelhosA) deveAlertar=true;
+  }else{ // Próximo é Linha B, só alerta se Linha B tiver 2 vermelhos
+    if(tem2VermelhosB) deveAlertar=true;
   }
-  if(acabouDeAcertar){acabouDeAcertar=false;}
+  if(deveAlertar) emAlerta=true;
+  // Se estava em alerta e acertou, volta azul
+  if(geral.length>0 && geral[0].ok && emAlerta){
+    // Se acertou, limpa alerta
+    // Mas só limpa se o acerto foi na linha que deu alerta? Simplifica: acerto sempre limpa
+    emAlerta=false;
+  }
+  localStorage.setItem('emAlerta', emAlerta?'1':'0');
   if(emAlerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }
 render();
@@ -48,16 +59,8 @@ function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.n
 function goNum(num){
   let ok=true;
   if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=true;else ok=alvo.includes(COL[num]);}
-  // Se estava em alerta
-  if(emAlerta){
-    if(ok){ // ACERTOU -> volta azul
-      emAlerta=false;acabouDeAcertar=true;localStorage.setItem('emAlerta','0');
-    }else{
-      // ERROU -> continua em alerta? Não, volta pra linha
-      emAlerta=false;localStorage.setItem('emAlerta','0');
-    }
-  }
   geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;
+  // Se estava em alerta e acertou, já vai limpar no render
   localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));
   document.getElementById('left').innerHTML=num+'> <span>'+TAB[num]+'</span>';
   render();atualiza();

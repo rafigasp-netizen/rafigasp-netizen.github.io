@@ -31,21 +31,10 @@ function render(){
     l.appendChild(col);
   });
   let alerta=false;
-  // 1. Se já tem 2 lado a lado com 1 vermelho (erro)
-  for(let i=0;i<linhaCima.length-1;i++){let c=linhaCima[i],n=linhaCima[i+1];if(c&&n&&(!c.ok||!n.ok)) alerta=true;}
-  for(let i=0;i<linhaBaixo.length-1;i++){let c=linhaBaixo[i],n=linhaBaixo[i+1];if(c&&n&&(!c.ok||!n.ok)) alerta=true;}
-  // 2. ANTECIPADO: Próximo vai cair do lado do 13 vermelho (seu caso da foto)
-  // Se tem qtd ímpar (3 números: 17,1,13), o próximo cai embaixo do 17, do lado do 13
-  if(geral.length%2===1){
-    let ultimoBaixo = linhaBaixo[0];
-    if(ultimoBaixo && !ultimoBaixo.ok) alerta=true; // tem vermelho embaixo, próximo vai do lado
-  }else{
-    // Se par, próximo cai em cima, do lado do último de cima
-    let ultimoCima = linhaCima[linhaCima.length-1];
-    if(ultimoCima && !ultimoCima.ok) alerta=true;
-  }
-  // Se deu acerto agora, limpa alerta
-  if(geral.length>0 && geral[0].ok) alerta=false;
+  // REGRA QUE VOCÊ QUER: 2 vermelhos (erro) lado a lado = alerta
+  for(let i=0;i<linhaCima.length-1;i++){let c=linhaCima[i],n=linhaCima[i+1];if(c&&n&&!c.ok&&!n.ok) alerta=true;}
+  for(let i=0;i<linhaBaixo.length-1;i++){let c=linhaBaixo[i],n=linhaBaixo[i+1];if(c&&n&&!c.ok&&!n.ok) alerta=true;}
+  // Se tem 14 e 13 vermelhos lado a lado, já fica vermelho e continua vermelho depois do 19
   if(alerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }
 render();

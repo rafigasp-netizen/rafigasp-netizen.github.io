@@ -1,15 +1,15 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#0a2e1e;height:100dvh;display:flex;flex-direction:column;gap:2px}.topo{background:#ffcc00;text-align:center;padding:7px;font-size:14px}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;min-height:100dvh;display:flex;justify-content:center} #app{width:100%;max-width:430px;min-height:100dvh;background:#0a2e1e;display:flex;flex-direction:column;gap:2px} .topo{background:#ffcc00;text-align:center;padding:7px;font-size:14px}
 .verde{margin:2px 4px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:88px;overflow-x:auto;display:flex;align-items:center;gap:8px}.letra{color:#fff;font-size:22px;line-height:36px}.historico{display:flex;gap:6px}.coluna{display:flex;flex-direction:column;gap:6px}.hist{width:52px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;border:2px solid #fff}.C{background:#00a000}.E{background:#c00000}
 .vermelho{flex:1;margin:2px 4px;background:#0a3d1f;border-radius:8px;padding:8px;display:flex;flex-direction:column;overflow-y:auto}.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.cell{border:2px solid #d4af37;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:900;font-size:28px;min-height:46px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.cell .badge{position:absolute;top:-8px;right:-6px;background:#000;color:#ffcc00;font-size:14px;padding:3px 6px;border-radius:12px;border:1.5px solid #ffcc00}
 .doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:8px 0;font-size:13px;border-radius:4px}
 .azul{margin:2px 4px;background:#001a8a;border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:22px;font-weight:900;transition:.4s}.azul span{color:#ffcc00}.azul.alerta-total{background:#cc0000!important;box-shadow:0 0 25px #ff0000;animation:piscaAzul .5s infinite alternate}@keyframes piscaAzul{from{background:#cc0000}to{background:#ff0000}}
-.btns{display:flex;gap:4px;padding:4px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:16px;background:#ffcc00}</style></head><body>
+.btns{display:flex;gap:4px;padding:4px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:16px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo"><b>RAFIGASP COACH DA ROLETA</b></div>
 <div class="verde" id="boxVerde"><div style="display:flex;flex-direction:column;gap:6px"><div class="letra">A</div><div class="letra">B</div></div><div class="historico" id="lista"></div></div>
 <div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1st 12</div><div>2nd 12</div><div>3rd 12</div></div></div>
 <div class="azul" id="boxAzul"><div id="left">-</div><div id="placar">ACERTO 0 X 0 ERRO</div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Limpar?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
-<script>
+</div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 let counts=JSON.parse(localStorage.getItem('cnt36')||'{}');let grid=document.getElementById('grid');
 for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
@@ -30,9 +30,6 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  // REGRA FINAL QUE VOCÊ FALOU AGORA:
-  // Último foi 18 (Linha B), próximo vai pra Linha A, e na Linha A tem 17 e 11 vermelhos = tem que dar alerta!
-  // Só considera 2 vermelhos se NÃO tiver verde mais novo na frente (da esquerda pra direita = mais novo pra mais velho)
   let proximoEhA = (geral.length % 2 === 0);
   let temValidoA=false,temValidoB=false;
   for(let i=0;i<linhaA.length-1;i++){

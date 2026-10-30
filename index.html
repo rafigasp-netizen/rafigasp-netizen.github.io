@@ -31,24 +31,15 @@ function render(){
     if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaB.push(par[1]);}else{linhaB.push(null);}
     l.appendChild(col);
   });
-  // LÓGICA NOVA QUE VOCÊ FALOU:
-  // Próximo número vai pra onde? Se qtd é par, próximo é Linha A, se ímpar, Linha B
-  let proximoEhA = (geral.length % 2 === 0);
-  let tem2VermelhosA=false, tem2VermelhosB=false;
-  for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem2VermelhosA=true;}
-  for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem2VermelhosB=true;}
-  let deveAlertar=false;
-  if(proximoEhA){ // Próximo é Linha A, só alerta se Linha A tiver 2 vermelhos
-    if(tem2VermelhosA) deveAlertar=true;
-  }else{ // Próximo é Linha B, só alerta se Linha B tiver 2 vermelhos
-    if(tem2VermelhosB) deveAlertar=true;
-  }
-  if(deveAlertar) emAlerta=true;
-  // Se estava em alerta e acertou, volta azul
-  if(geral.length>0 && geral[0].ok && emAlerta){
-    // Se acertou, limpa alerta
-    // Mas só limpa se o acerto foi na linha que deu alerta? Simplifica: acerto sempre limpa
-    emAlerta=false;
+  // Se já está em alerta, mantém até acertar o próximo
+  // Se não está em alerta, verifica se o PRÓXIMO vai cair numa linha que tem 2 vermelhos
+  if(!emAlerta){
+    let proximoEhA = (geral.length % 2 === 0);
+    let tem2A=false,tem2B=false;
+    for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem2A=true;}
+    for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem2B=true;}
+    if(proximoEhA && tem2A) emAlerta=true;
+    if(!proximoEhA && tem2B) emAlerta=true;
   }
   localStorage.setItem('emAlerta', emAlerta?'1':'0');
   if(emAlerta) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
@@ -59,11 +50,29 @@ function corr(){if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.n
 function goNum(num){
   let ok=true;
   if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num===0)ok=true;else ok=alvo.includes(COL[num]);}
+  // Se estava em alerta e ACERTOU o número do alerta, volta azul
+  if(emAlerta && ok){
+    emAlerta=false;
+  } else if(emAlerta && !ok){
+    // Se estava em alerta e ERROU, volta pra linha (apaga alerta pra procurar de novo)
+    emAlerta=false;
+  }
   geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;
-  // Se estava em alerta e acertou, já vai limpar no render
   localStorage.setItem('g',JSON.stringify(geral));localStorage.setItem('cnt36',JSON.stringify(counts));
   document.getElementById('left').innerHTML=num+'> <span>'+TAB[num]+'</span>';
   render();atualiza();
+  // Depois de render, verifica de novo se o PRÓXIMO tem que dar alerta (igual seu caso do 20)
+  // O render já faz isso, mas precisa forçar segunda verificação pro próximo
+  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);pares.reverse();
+  let linhaA=[],linhaB=[];pares.forEach(p=>{linhaA.push(p[0]);linhaB.push(p[1]);});
+  let proximoEhA = (geral.length % 2 === 0);
+  let tem2A=false,tem2B=false;
+  for(let i=0;i<linhaA.length-1;i++){let c=linhaA[i],n=linhaA[i+1];if(c&&n&&!c.ok&&!n.ok) tem2A=true;}
+  for(let i=0;i<linhaB.length-1;i++){let c=linhaB[i],n=linhaB[i+1];if(c&&n&&!c.ok&&!n.ok) tem2B=true;}
+  if((proximoEhA && tem2A) || (!proximoEhA && tem2B)){
+    emAlerta=true;localStorage.setItem('emAlerta','1');
+    document.getElementById('boxAzul').classList.add('alerta-total');
+  }
 }
 function pick(n){goNum(n);}
 </script></body></html>

@@ -21,16 +21,20 @@ function render(){
   let l=document.getElementById('lista');l.innerHTML="";
   let boxAzul=document.getElementById('boxAzul');
   let a=0,e=0;geral.forEach(it=>it.ok?a++:e++);
-  let alerta2=false;if(geral.length>=2){if(REDS.includes(geral[0].num) && REDS.includes(geral[1].num)) alerta2=true;}
-  if(alerta2){boxAzul.classList.add('alerta-total');}else{boxAzul.classList.remove('alerta-total');}
   document.getElementById('placar').innerHTML='ACERTO <span>'+a+' X '+e+'</span> ERRO';
   let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);
-  pares.reverse().forEach(par=>{
+  pares.reverse();
+  let linhaCima=[],linhaBaixo=[];
+  pares.forEach(par=>{
     let col=document.createElement('div');col.className='coluna';
-    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);}
-    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);}
+    if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);linhaCima.push(par[0]);}else{linhaCima.push(null);}
+    if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);linhaBaixo.push(par[1]);}else{linhaBaixo.push(null);}
     l.appendChild(col);
   });
+  let alertaLinha=false;
+  for(let i=0;i<linhaCima.length-1;i++){let cur=linhaCima[i],nxt=linhaCima[i+1];if(cur && nxt){if(REDS.includes(cur.num) && REDS.includes(nxt.num)) alertaLinha=true;}}
+  for(let i=0;i<linhaBaixo.length-1;i++){let cur=linhaBaixo[i],nxt=linhaBaixo[i+1];if(cur && nxt){if(REDS.includes(cur.num) && REDS.includes(nxt.num)) alertaLinha=true;}}
+  if(alertaLinha) boxAzul.classList.add('alerta-total'); else boxAzul.classList.remove('alerta-total');
 }
 render();
 if(geral.length)document.getElementById('left').innerHTML=geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';

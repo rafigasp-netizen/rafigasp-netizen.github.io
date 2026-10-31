@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center} #app{width:98%;max-width:380px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;min-height:100dvh;padding-bottom:8px} .topo{background:#ffcc00;text-align:center;padding:8px;font-size:13px;cursor:pointer;user-select:none} .topo:active{transform:scale(.98)}
-.verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;align-items:center;overflow-x:auto;gap:4px} .historico{display:flex;gap:4px} .coluna{display:flex;flex-direction:column;gap:3px}
-.boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent;display:none} .boxLinha.ativa{border-color:#ff00ff;box-shadow:0 0 12px #ff00ff} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center} #app{width:98%;max-width:380px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;min-height:100dvh;padding-bottom:8px} .topo{background:#ffcc00;text-align:center;padding:8px;font-size:12px;cursor:pointer} .topo b{pointer-events:none}
+.verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px} .historico{display:flex;gap:4px} .coluna{display:flex;flex-direction:column;gap:3px}
+.boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent;display:none} .boxLinha.ativa{border-color:#ff00ff;box-shadow:0 0 12px #ff00ff;display:block} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}
 .hist{width:44px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}
 .vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
 .doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:7px 0;font-size:16px;font-weight:900;border-radius:4px}
@@ -8,80 +8,91 @@
 .btns{display:flex;gap:3px;padding:3px 3px 8px 3px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}
 @media(min-width:600px){#app{max-width:300px} .cell{min-height:30px;font-size:16px}}
 </style></head><body><div id="app">
-<div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP COACH - CLIQUE AQUI: INICIAL</b></div>
+<div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP - CLIQUE: INICIAL (A+B)</b></div>
 
-<!-- MODO INICIAL - A E B JUNTO IGUAL ANTES -->
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
-
-<!-- MODO A E B SEPARADO -->
-<div class="boxLinha" id="boxA"><h3>🔵 LINHA A - 1º, 3º, 5º número</h3><div class="historico" id="listaA"></div></div>
-<div class="boxLinha" id="boxB"><h3>🟢 LINHA B - 2º, 4º, 6º número</h3><div class="historico" id="listaB"></div></div>
+<div class="boxLinha" id="boxA"><h3>🔵 LINHA A - Só A</h3><div class="historico" id="listaA"></div></div>
+<div class="boxLinha" id="boxB"><h3>🟢 LINHA B - Só B</h3><div class="historico" id="listaB"></div></div>
 
 <div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
-
 <div class="azulBox">
 <div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">ACERTO 0 X 0 ERRO</div></div>
 <div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">ACERTO 0 X 0 ERRO</div></div>
 </div>
-
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
 </div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
-let modo = localStorage.getItem('modoAB') || 'INICIAL';
-let counts=JSON.parse(localStorage.getItem('cntAB')||'{}');let grid=document.getElementById('grid');
+let modo=localStorage.getItem('modoAB')||'INICIAL';
+let counts=JSON.parse(localStorage.getItem('cntAB')||'{}');
+let histA=JSON.parse(localStorage.getItem('histA')||'[]');
+let histB=JSON.parse(localStorage.getItem('histB')||'[]');
+let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
+let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
+let grid=document.getElementById('grid');
 for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
 function atualiza(){for(let i=1;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
 atualiza();
-let geral=JSON.parse(localStorage.getItem('gAB')||'[]');
-let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
-let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
-function calculaAlertaLinha(linha){if(linha.length<2) return false;for(let i=0;i<linha.length-1;i++){let c=linha[i],n=linha[i+1];if(c&&n&&!c.ok&&!n.ok){let temVerde=false;for(let j=0;j<i;j++){if(linha[j]&&linha[j].ok) temVerde=true;}if(!temVerde) return true;}}return false;}
-function mudaModo(){ if(modo==='INICIAL') modo='A'; else if(modo==='A') modo='B'; else modo='INICIAL'; localStorage.setItem('modoAB',modo); render(); }
+function calcAlerta(arr){if(arr.length<2) return false;for(let i=0;i<arr.length-1;i++){let c=arr[i],n=arr[i+1];if(c&&n&&!c.ok&&!n.ok){let temVerde=false;for(let j=0;j<i;j++){if(arr[j]&&arr[j].ok) temVerde=true;}if(!temVerde) return true;}}return false;}
+function mudaModo(){if(modo==='INICIAL') modo='A';else if(modo==='A') modo='B';else modo='INICIAL';localStorage.setItem('modoAB',modo);render();}
 function render(){
-  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);pares.reverse();
-  let linhaA=[],linhaB=[];pares.forEach(par=>{ if(par[0]) linhaA.push(par[0]); if(par[1]) linhaB.push(par[1]); });
-  
-  document.getElementById('tituloTopo').textContent='RAFIGASP - CLIQUE: '+modo+(modo==='INICIAL'?' (A+B JUNTO)': modo==='A'?' (SÓ LINHA A)':' (SÓ LINHA B)');
-  
-  let ini=document.getElementById('verdeInicial'), bA=document.getElementById('boxA'), bB=document.getElementById('boxB');
-  ini.style.display = modo==='INICIAL' ? 'flex' : 'none';
-  bA.style.display = modo==='A' ? 'block' : 'none';
-  bB.style.display = modo==='B' ? 'block' : 'none';
-  if(modo==='A') bA.classList.add('ativa'); else bA.classList.remove('ativa');
-  if(modo==='B') bB.classList.add('ativa'); else bB.classList.remove('ativa');
+  document.getElementById('tituloTopo').textContent='RAFIGASP - CLIQUE: '+modo+(modo==='INICIAL'?' (A+B JUNTO)':modo==='A'?' (SÓ LINHA A)':' (SÓ LINHA B)');
+  let ini=document.getElementById('verdeInicial'),bA=document.getElementById('boxA'),bB=document.getElementById('boxB');
+  ini.style.display= modo==='INICIAL'?'flex':'none';
+  bA.style.display= modo==='A'?'block':'none';
+  bB.style.display= modo==='B'?'block':'none';
+  bA.classList.toggle('ativa',modo==='A'); bB.classList.toggle('ativa',modo==='B');
 
-  // INICIAL - mostra colunas igual antes
   let lIni=document.getElementById('listaInicial'); lIni.innerHTML="";
-  pares.forEach(par=>{ let col=document.createElement('div'); col.className='coluna'; if(par[0]){let d=document.createElement('div');d.className='hist '+(par[0].ok?'C':'E');d.textContent=par[0].num;col.appendChild(d);} if(par[1]){let d=document.createElement('div');d.className='hist '+(par[1].ok?'C':'E');d.textContent=par[1].num;col.appendChild(d);} lIni.appendChild(col); });
-
-  let lA=document.getElementById('listaA');lA.innerHTML=""; linhaA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
-  let lB=document.getElementById('listaB');lB.innerHTML=""; linhaB.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
+  let max=Math.max(histA.length,histB.length);
+  for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[max-1-i],b=histB[max-1-i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length) lIni.appendChild(col);}
+  
+  let lA=document.getElementById('listaA');lA.innerHTML=""; [...histA].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
+  let lB=document.getElementById('listaB');lB.innerHTML=""; [...histB].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
 
   document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
   document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
-  let alertaA=calculaAlertaLinha(linhaA),alertaB=calculaAlertaLinha(linhaB);
-  let proximoEhA = (geral.length % 2 === 0);
-  document.getElementById('azulA').classList.toggle('alerta', alertaA && proximoEhA);
-  document.getElementById('azulB').classList.toggle('alerta', alertaB && !proximoEhA);
-  if(geral.length){
-    document.getElementById('leftA').innerHTML='A: '+geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';
-    document.getElementById('leftB').innerHTML='B: '+geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';
-  }
+  
+  let alertaA=calcAlerta(histA),alertaB=calcAlerta(histB);
+  let total=histA.length+histB.length;
+  let vezA = (modo==='A') || (modo==='INICIAL' && histA.length<=histB.length);
+  let vezB = (modo==='B') || (modo==='INICIAL' && histA.length>histB.length);
+  document.getElementById('azulA').classList.toggle('alerta', alertaA && vezA);
+  document.getElementById('azulB').classList.toggle('alerta', alertaB && vezB);
+  if(histA.length) document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>';
+  if(histB.length) document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>';
+  if(!histA.length) document.getElementById('leftA').textContent='A: -';
+  if(!histB.length) document.getElementById('leftB').textContent='B: -';
 }
 render();
-function corr(){ if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1); if(r.foiApostaA){ if(r.ok) acertoA=Math.max(0,acertoA-1); else erroA=Math.max(0,erroA-1); localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);} if(r.foiApostaB){ if(r.ok) acertoB=Math.max(0,acertoB-1); else erroB=Math.max(0,erroB-1); localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);} localStorage.setItem('gAB',JSON.stringify(geral));localStorage.setItem('cntAB',JSON.stringify(counts));render();atualiza();}}
+function corr(){
+  if(modo==='A' && histA.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
+  else if(modo==='B' && histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
+  else if(modo==='INICIAL'){if(histA.length>histB.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}}
+  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntAB',JSON.stringify(counts));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();atualiza();
+}
 function goNum(num){
-  let ok=true;if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
-  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);pares.reverse();
-  let linhaA=[],linhaB=[];pares.forEach(par=>{ if(par[0]) linhaA.push(par[0]); if(par[1]) linhaB.push(par[1]); });
-  let proximoEhA=(geral.length%2===0);
-  let alertaA=calculaAlertaLinha(linhaA),alertaB=calculaAlertaLinha(linhaB);
-  let foiA=false,foiB=false;
-  if(proximoEhA && alertaA){ foiA=true; if(ok) acertoA++; else erroA++; localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);}
-  if(!proximoEhA && alertaB){ foiB=true; if(ok) acertoB++; else erroB++; localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);}
-  geral.unshift({num:num,ok:ok,foiApostaA:foiA,foiApostaB:foiB});counts[num]=(counts[num]||0)+1;
-  localStorage.setItem('gAB',JSON.stringify(geral));localStorage.setItem('cntAB',JSON.stringify(counts));
-  render();atualiza();
+  if(modo==='A'){
+    let ok=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
+    let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(ok) acertoA++;else erroA++;}
+    histA.unshift({num:num,ok:ok,foiAposta:foi});counts[num]=(counts[num]||0)+1;
+  }else if(modo==='B'){
+    let ok=true;if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
+    let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(ok) acertoB++;else erroB++;}
+    histB.unshift({num:num,ok:ok,foiAposta:foi});counts[num]=(counts[num]||0)+1;
+  }else{
+    // INICIAL - alterna A e B
+    if(histA.length<=histB.length){
+      let ok=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
+      let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(ok) acertoA++;else erroA++;}
+      histA.unshift({num:num,ok:ok,foiAposta:foi});
+    }else{
+      let ok=true;if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
+      let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(ok) acertoB++;else erroB++;}
+      histB.unshift({num:num,ok:ok,foiAposta:foi});
+    }
+    counts[num]=(counts[num]||0)+1;
+  }
+  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntAB',JSON.stringify(counts));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();atualiza();
 }
 function pick(n){goNum(n);}
 </script></body></html>

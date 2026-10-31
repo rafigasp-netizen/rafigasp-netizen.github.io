@@ -39,9 +39,9 @@ function render(){
   bA.classList.toggle('ativa',modo==='A'); bB.classList.toggle('ativa',modo==='B');
   let lIni=document.getElementById('listaInicial'); lIni.innerHTML="";
   let max=Math.max(histA.length,histB.length);
-  for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[max-1-i],b=histB[max-1-i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length) lIni.appendChild(col);}
-  let lA=document.getElementById('listaA');lA.innerHTML=""; [...histA].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
-  let lB=document.getElementById('listaB');lB.innerHTML=""; [...histB].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
+  for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[i],b=histB[i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length) lIni.appendChild(col);}
+  let lA=document.getElementById('listaA');lA.innerHTML=""; histA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
+  let lB=document.getElementById('listaB');lB.innerHTML=""; histB.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
   document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
   document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
   let alertaA=calcAlerta(histA),alertaB=calcAlerta(histB);
@@ -51,7 +51,7 @@ function render(){
   document.getElementById('azulB').classList.toggle('alerta', alertaB && vezB);
   if(histA.length) document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>'; else document.getElementById('leftA').textContent='A: -';
   if(histB.length) document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>'; else document.getElementById('leftB').textContent='B: -';
-  setTimeout(()=>{ document.getElementById('verdeInicial').scrollLeft=99999; document.getElementById('boxA').scrollLeft=99999; document.getElementById('boxB').scrollLeft=99999; document.getElementById('listaA').parentElement?.scrollTo?.(9999,0); },50);
+  setTimeout(()=>{ document.getElementById('verdeInicial').scrollLeft=0; document.getElementById('boxA').scrollLeft=0; document.getElementById('boxB').scrollLeft=0; },30);
 }
 render();
 function corr(){

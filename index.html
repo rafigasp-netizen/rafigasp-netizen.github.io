@@ -2,7 +2,7 @@
 .verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;scroll-behavior:smooth} .historico{display:flex;gap:4px} .coluna{display:flex;flex-direction:column;gap:3px}
 .boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent;display:none;overflow-x:auto;scroll-behavior:smooth} .boxLinha.ativa{border-color:#ff00ff;box-shadow:0 0 12px #ff00ff;display:block} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}
 .hist{width:44px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}
-.vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
+.vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffea00!important;color:#000!important}.cell.marcadoB{background:#00e5ff!important;color:#000!important}.cell.marcadoAB{background:linear-gradient(45deg,#ffea00 50%,#00e5ff 50%)!important;color:#000!important}.badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
 .doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:7px 0;font-size:16px;font-weight:900;border-radius:4px}
 .azulBox{display:flex;gap:3px;margin:1px 3px} .azul{flex:1;background:#001a8a;border-radius:6px;padding:7px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900} .azul span{color:#ffcc00} .azul.alerta{background:#cc0000!important;box-shadow:0 0 15px #ff0000;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#cc0000}to{background:#ff0000}}
 .btns{display:flex;gap:3px;padding:3px 3px 8px 3px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}
@@ -21,19 +21,28 @@
 </div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 let modo=localStorage.getItem('modoAB')||'INICIAL';
-let counts=JSON.parse(localStorage.getItem('cntAB')||'{}');
+let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');
+let countsB=JSON.parse(localStorage.getItem('cntB')||'{}');
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');
 let histB=JSON.parse(localStorage.getItem('histB')||'[]');
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
 let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
 let grid=document.getElementById('grid');
 for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
-function atualiza(){for(let i=1;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
+function atualiza(){
+  for(let i=1;i<=36;i++){
+    let ca=countsA[i]||0, cb=countsB[i]||0;
+    let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);
+    if(modo==='A'){ el.textContent=ca>0?ca+'x':''; b.className='cell '+(REDS.includes(i)?'red':'black')+(ca>0?' marcadoA':''); }
+    else if(modo==='B'){ el.textContent=cb>0?cb+'x':''; b.className='cell '+(REDS.includes(i)?'red':'black')+(cb>0?' marcadoB':''); }
+    else { let tot=ca+cb; el.textContent=tot>0?tot+'x':''; let cls='cell '+(REDS.includes(i)?'red':'black'); if(ca>0&&cb>0) cls+=' marcadoAB'; else if(ca>0) cls+=' marcadoA'; else if(cb>0) cls+=' marcadoB'; b.className=cls; }
+  }
+}
 atualiza();
 function calcAlerta(arr){if(arr.length<2) return false;for(let i=0;i<arr.length-1;i++){let c=arr[i],n=arr[i+1];if(c&&n&&!c.ok&&!n.ok){let temVerde=false;for(let j=0;j<i;j++){if(arr[j]&&arr[j].ok) temVerde=true;}if(!temVerde) return true;}}return false;}
 function mudaModo(){if(modo==='INICIAL') modo='A';else if(modo==='A') modo='B';else modo='INICIAL';localStorage.setItem('modoAB',modo);render();}
 function render(){
-  document.getElementById('tituloTopo').textContent='RAFIGASP - CLIQUE: '+modo+(modo==='INICIAL'?' (A+B JUNTO)':modo==='A'?' (SÓ LINHA A)':' (SÓ LINHA B)');
+  document.getElementById('tituloTopo').textContent='RAFIGASP - CLIQUE: '+modo+(modo==='INICIAL'?' (A+B)':modo==='A'?' (SÓ LINHA A)':' (SÓ LINHA B)');
   let ini=document.getElementById('verdeInicial'),bA=document.getElementById('boxA'),bB=document.getElementById('boxB');
   ini.style.display= modo==='INICIAL'?'flex':'none'; bA.style.display= modo==='A'?'block':'none'; bB.style.display= modo==='B'?'block':'none';
   bA.classList.toggle('ativa',modo==='A'); bB.classList.toggle('ativa',modo==='B');
@@ -51,37 +60,37 @@ function render(){
   document.getElementById('azulB').classList.toggle('alerta', alertaB && vezB);
   if(histA.length) document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>'; else document.getElementById('leftA').textContent='A: -';
   if(histB.length) document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>'; else document.getElementById('leftB').textContent='B: -';
+  atualiza();
   setTimeout(()=>{ document.getElementById('verdeInicial').scrollLeft=0; document.getElementById('boxA').scrollLeft=0; document.getElementById('boxB').scrollLeft=0; },30);
 }
 render();
 function corr(){
-  if(modo==='A' && histA.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
-  else if(modo==='B' && histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
-  else if(modo==='INICIAL'){if(histA.length>histB.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}} else if(histA.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);}}
-  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntAB',JSON.stringify(counts));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();atualiza();
+  if(modo==='A' && histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
+  else if(modo==='B' && histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
+  else if(modo==='INICIAL'){if(histA.length>histB.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}} else if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);}}
+  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();
 }
 function goNum(num){
   if(modo==='A'){
     let ok=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
     let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(ok) acertoA++;else erroA++;}
-    histA.unshift({num:num,ok:ok,foiAposta:foi});counts[num]=(counts[num]||0)+1;
+    histA.unshift({num:num,ok:ok,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;
   }else if(modo==='B'){
     let ok=true;if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
     let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(ok) acertoB++;else erroB++;}
-    histB.unshift({num:num,ok:ok,foiAposta:foi});counts[num]=(counts[num]||0)+1;
+    histB.unshift({num:num,ok:ok,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;
   }else{
     if(histA.length<=histB.length){
       let ok=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
       let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(ok) acertoA++;else erroA++;}
-      histA.unshift({num:num,ok:ok,foiAposta:foi});
+      histA.unshift({num:num,ok:ok,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;
     }else{
       let ok=true;if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
       let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(ok) acertoB++;else erroB++;}
-      histB.unshift({num:num,ok:ok,foiAposta:foi});
+      histB.unshift({num:num,ok:ok,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;
     }
-    counts[num]=(counts[num]||0)+1;
   }
-  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntAB',JSON.stringify(counts));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();atualiza();
+  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();
 }
 function pick(n){goNum(n);}
 </script></body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP A e B</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center} #app{width:98%;max-width:380px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;min-height:100dvh;padding-bottom:8px} .topo{background:#ffcc00;text-align:center;padding:6px;font-size:13px}
+.vez{background:#fff;color:#000;text-align:center;padding:8px;font-size:16px;border-radius:6px;margin:1px 3px} .vez.A{ background:#00d0ff; color:#000; box-shadow:0 0 15px #00d0ff} .vez.B{ background:#ff00ff; color:#fff; box-shadow:0 0 15px #ff00ff}
+.boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent} .boxLinha.ativaA{border-color:#00d0ff; box-shadow:0 0 10px #00d0ff} .boxLinha.ativaB{border-color:#ff00ff; box-shadow:0 0 10px #ff00ff} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px} .linhaHist{display:flex;gap:3px;overflow-x:auto;padding:2px} .hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0} .C{background:#00a000}.E{background:#c00000}
+.vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;min-height:36px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.badge{position:absolute;top:-5px;right:-3px;background:#000;color:#ffcc00;font-size:9px;padding:1px 3px;border-radius:10px;border:1px solid #ffcc00}
+.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:15px;font-weight:900;border-radius:4px}
+.azulBox{display:flex;gap:3px;margin:1px 3px} .azul{flex:1;background:#001a8a;border-radius:6px;padding:7px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900} .azul span{color:#ffcc00} .azul.alerta{background:#cc0000!important;box-shadow:0 0 15px #ff0000;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#cc0000}to{background:#ff0000}}
+.btns{display:flex;gap:3px;padding:3px 3px 8px 3px}.btns button{flex:1;padding:11px;border:0;border-radius:6px;font-weight:900;font-size:13px;background:#ffcc00}
+@media(min-width:600px){#app{max-width:300px} .cell{min-height:30px;font-size:16px}}
+</style></head><body><div id="app">
+<div class="topo"><b>RAFIGASP LINHA A E B SEPARADAS</b></div>
+<div class="vez" id="vezTxt">COMECE - VEZ DA LINHA A</div>
+
+<div class="boxLinha" id="boxA"><h3>🔵 LINHA A - 1º, 3º, 5º número</h3><div class="linhaHist" id="listaA"></div></div>
+<div class="boxLinha" id="boxB"><h3>🟢 LINHA B - 2º, 4º, 6º número</h3><div class="linhaHist" id="listaB"></div></div>
+
+<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
+
+<div class="azulBox">
+<div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">ACERTO 0 X 0 ERRO</div></div>
+<div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">ACERTO 0 X 0 ERRO</div></div>
+</div>
+
+<div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
+</div><script>
+const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+let counts=JSON.parse(localStorage.getItem('cntAB')||'{}');let grid=document.getElementById('grid');
+for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
+function atualiza(){for(let i=1;i<=36;i++){let c=counts[i]||0;let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(el)el.textContent=c>0?c+'x':'';if(b){if(c>0)b.classList.add('marcado');else b.classList.remove('marcado');}}}
+atualiza();
+let geral=JSON.parse(localStorage.getItem('gAB')||'[]');
+let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
+let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
+function calculaAlertaLinha(linha){if(linha.length<2) return false;for(let i=0;i<linha.length-1;i++){let c=linha[i],n=linha[i+1];if(c&&n&&!c.ok&&!n.ok){let temVerde=false;for(let j=0;j<i;j++){if(linha[j]&&linha[j].ok) temVerde=true;}if(!temVerde) return true;}}return false;}
+function render(){
+  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);pares.reverse();
+  let linhaA=[],linhaB=[];pares.forEach(par=>{ if(par[0]) linhaA.push(par[0]); if(par[1]) linhaB.push(par[1]); });
+  let lA=document.getElementById('listaA');lA.innerHTML=""; linhaA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
+  let lB=document.getElementById('listaB');lB.innerHTML=""; linhaB.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
+  document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
+  document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
+  let alertaA=calculaAlertaLinha(linhaA),alertaB=calculaAlertaLinha(linhaB);
+  let proximoEhA = (geral.length % 2 === 0);
+  let vezTxt=document.getElementById('vezTxt');
+  let boxA=document.getElementById('boxA'),boxB=document.getElementById('boxB');
+  if(proximoEhA){ vezTxt.textContent='👉 AGORA É VEZ DA LINHA A - JOGA NA A'; vezTxt.className='vez A'; boxA.className='boxLinha ativaA'; boxB.className='boxLinha'; }
+  else{ vezTxt.textContent='👉 AGORA É VEZ DA LINHA B - JOGA NA B'; vezTxt.className='vez B'; boxB.className='boxLinha ativaB'; boxA.className='boxLinha'; }
+  document.getElementById('azulA').classList.toggle('alerta', alertaA && proximoEhA);
+  document.getElementById('azulB').classList.toggle('alerta', alertaB && !proximoEhA);
+  if(geral.length){
+    if(proximoEhA){document.getElementById('leftA').innerHTML='A: '+geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';}
+    else{document.getElementById('leftB').innerHTML='B: '+geral[0].num+'> <span>'+TAB[geral[0].num]+'</span>';}
+  }
+}
+render();
+function corr(){ if(geral.length){let r=geral.shift();if(counts[r.num])counts[r.num]=Math.max(0,counts[r.num]-1);localStorage.setItem('gAB',JSON.stringify(geral));localStorage.setItem('cntAB',JSON.stringify(counts));location.reload();}}
+function goNum(num){
+  let ok=true;if(geral.length){let alvo=TAB[geral[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
+  let cron=[...geral].reverse();let pares=[];for(let i=0;i<cron.length;i+=2) pares.push([cron[i],cron[i+1]]);pares.reverse();
+  let linhaA=[],linhaB=[];pares.forEach(par=>{ if(par[0]) linhaA.push(par[0]); if(par[1]) linhaB.push(par[1]); });
+  let proximoEhA=(geral.length%2===0);
+  let alertaA=calculaAlertaLinha(linhaA),alertaB=calculaAlertaLinha(linhaB);
+  if(proximoEhA && alertaA){ if(ok) acertoA++; else erroA++; localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);}
+  if(!proximoEhA && alertaB){ if(ok) acertoB++; else erroB++; localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);}
+  geral.unshift({num:num,ok:ok});counts[num]=(counts[num]||0)+1;
+  localStorage.setItem('gAB',JSON.stringify(geral));localStorage.setItem('cntAB',JSON.stringify(counts));
+  render();atualiza();
+}
+function pick(n){goNum(n);}
+</script></body></html>

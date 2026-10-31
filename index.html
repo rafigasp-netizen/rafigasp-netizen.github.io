@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center} #app{width:98%;max-width:380px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;min-height:100dvh;padding-bottom:8px} .topo{background:#ffcc00;text-align:center;padding:8px;font-size:12px;cursor:pointer} .topo b{pointer-events:none}
-.verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px} .historico{display:flex;gap:4px} .coluna{display:flex;flex-direction:column;gap:3px}
-.boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent;display:none} .boxLinha.ativa{border-color:#ff00ff;box-shadow:0 0 12px #ff00ff;display:block} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center} #app{width:98%;max-width:380px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;min-height:100dvh;padding-bottom:8px} .topo{background:#ffcc00;text-align:center;padding:8px;font-size:12px;cursor:pointer} 
+.verde{margin:1px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;scroll-behavior:smooth} .historico{display:flex;gap:4px} .coluna{display:flex;flex-direction:column;gap:3px}
+.boxLinha{background:#0a3d1f;border-radius:8px;margin:1px 3px;padding:6px;border:2px solid transparent;display:none;overflow-x:auto;scroll-behavior:smooth} .boxLinha.ativa{border-color:#ff00ff;box-shadow:0 0 12px #ff00ff;display:block} .boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}
 .hist{width:44px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}
 .vermelho{margin:1px 3px;background:#0a3d1f;border-radius:8px;padding:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcado{background:#ffea00!important;color:#000!important}.badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 4px;border-radius:10px;border:1px solid #ffcc00}
 .doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:7px 0;font-size:16px;font-weight:900;border-radius:4px}
@@ -9,11 +9,9 @@
 @media(min-width:600px){#app{max-width:300px} .cell{min-height:30px;font-size:16px}}
 </style></head><body><div id="app">
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP - CLIQUE: INICIAL (A+B)</b></div>
-
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
 <div class="boxLinha" id="boxA"><h3>🔵 LINHA A - Só A</h3><div class="historico" id="listaA"></div></div>
 <div class="boxLinha" id="boxB"><h3>🟢 LINHA B - Só B</h3><div class="historico" id="listaB"></div></div>
-
 <div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
 <div class="azulBox">
 <div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">ACERTO 0 X 0 ERRO</div></div>
@@ -37,37 +35,29 @@ function mudaModo(){if(modo==='INICIAL') modo='A';else if(modo==='A') modo='B';e
 function render(){
   document.getElementById('tituloTopo').textContent='RAFIGASP - CLIQUE: '+modo+(modo==='INICIAL'?' (A+B JUNTO)':modo==='A'?' (SÓ LINHA A)':' (SÓ LINHA B)');
   let ini=document.getElementById('verdeInicial'),bA=document.getElementById('boxA'),bB=document.getElementById('boxB');
-  ini.style.display= modo==='INICIAL'?'flex':'none';
-  bA.style.display= modo==='A'?'block':'none';
-  bB.style.display= modo==='B'?'block':'none';
+  ini.style.display= modo==='INICIAL'?'flex':'none'; bA.style.display= modo==='A'?'block':'none'; bB.style.display= modo==='B'?'block':'none';
   bA.classList.toggle('ativa',modo==='A'); bB.classList.toggle('ativa',modo==='B');
-
   let lIni=document.getElementById('listaInicial'); lIni.innerHTML="";
   let max=Math.max(histA.length,histB.length);
   for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[max-1-i],b=histB[max-1-i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length) lIni.appendChild(col);}
-  
   let lA=document.getElementById('listaA');lA.innerHTML=""; [...histA].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});
   let lB=document.getElementById('listaB');lB.innerHTML=""; [...histB].reverse().forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});
-
   document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
   document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
-  
   let alertaA=calcAlerta(histA),alertaB=calcAlerta(histB);
-  let total=histA.length+histB.length;
   let vezA = (modo==='A') || (modo==='INICIAL' && histA.length<=histB.length);
   let vezB = (modo==='B') || (modo==='INICIAL' && histA.length>histB.length);
   document.getElementById('azulA').classList.toggle('alerta', alertaA && vezA);
   document.getElementById('azulB').classList.toggle('alerta', alertaB && vezB);
-  if(histA.length) document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>';
-  if(histB.length) document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>';
-  if(!histA.length) document.getElementById('leftA').textContent='A: -';
-  if(!histB.length) document.getElementById('leftB').textContent='B: -';
+  if(histA.length) document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>'; else document.getElementById('leftA').textContent='A: -';
+  if(histB.length) document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>'; else document.getElementById('leftB').textContent='B: -';
+  setTimeout(()=>{ document.getElementById('verdeInicial').scrollLeft=99999; document.getElementById('boxA').scrollLeft=99999; document.getElementById('boxB').scrollLeft=99999; document.getElementById('listaA').parentElement?.scrollTo?.(9999,0); },50);
 }
 render();
 function corr(){
   if(modo==='A' && histA.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
   else if(modo==='B' && histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
-  else if(modo==='INICIAL'){if(histA.length>histB.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}}
+  else if(modo==='INICIAL'){if(histA.length>histB.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);if(r.foiAposta){if(r.ok) acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}} else if(histA.length){let r=histA.shift();counts[r.num]=Math.max(0,(counts[r.num]||0)-1);}}
   localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntAB',JSON.stringify(counts));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();atualiza();
 }
 function goNum(num){
@@ -80,7 +70,6 @@ function goNum(num){
     let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(ok) acertoB++;else erroB++;}
     histB.unshift({num:num,ok:ok,foiAposta:foi});counts[num]=(counts[num]||0)+1;
   }else{
-    // INICIAL - alterna A e B
     if(histA.length<=histB.length){
       let ok=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0) ok=alvo.includes(COL[num]);}
       let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(ok) acertoA++;else erroA++;}

@@ -1,22 +1,19 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:14px 6px;font-size:15px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxLinha{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;border:2px solid transparent;display:none}.boxLinha.ativa{display:block;border-color:#ff00ff;box-shadow:0 0 12px #ff00ff}.boxLinha h3{color:#ffcc00;font-size:11px;margin-bottom:4px}.hist{width:44px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:28px}.q{width:28px;height:24px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
-.pistaWrap{margin:2px 3px;background:#0a3d1f;border-radius:10px;padding:6px;display:none}.pistaWrap.ativa{display:block}
-.pistaR{width:100%;background:#0f3a0a;border:2px solid #fff;border-radius:140px 140px 90px 90px;padding:10px 6px;display:flex;flex-direction:column;align-items:center}
-.rtTop{display:flex;gap:8px;justify-content:center;margin-bottom:6px}.rtBody{display:flex;width:100%;justify-content:space-between}.rtLeft,.rtRight{display:flex;flex-direction:column;gap:4px}.rtMid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:6px 4px}
-.rtMid div{color:#fff;font-size:10px;text-align:center;line-height:11px;border-top:1px solid #fff;border-bottom:1px solid #fff;padding:8px 4px;width:92%}
-.rtBottom{display:flex;gap:8px;margin-top:6px}
-.num{width:46px;height:30px;border-radius:7px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;cursor:pointer;position:relative;opacity:1;transition:0.2s}
-.num.red{background:#c00000}.num.black{background:#111}.num.green{background:#00a000}
-.num.dim{opacity:0.25}
-.num.mA{border-color:#ffea00;box-shadow:0 0 8px #ffea00}
-.num.mB{border-color:#00e5ff;box-shadow:0 0 8px #00e5ff}
-.num .badge{position:absolute;top:-8px;right:-6px;background:#ffea00;color:#000;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #000}
-.num .badgeB{background:#00e5ff}
-.vermelho{margin:2px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:none}.vermelho.ativa{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:40px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffea00!important;color:#000!important}.cell.marcadoB{background:#00e5ff!important;color:#000!important}.cell.marcadoAB{background:linear-gradient(45deg,#ffea00 50%,#00e5ff 50%)!important;color:#000!important}.badge{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:7px 0;font-size:16px;font-weight:900;border-radius:4px}.azulBox{display:flex;gap:3px;margin:2px 3px}.azul{flex:1;background:#001a8a;border-radius:6px;padding:7px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta{background:#cc0000!important;box-shadow:0 0 15px #f00;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#c00}to{background:#f00}}.btns{display:flex;gap:3px;padding:4px 3px}.btns button{flex:1;padding:12px;border:0;border-radius:6px;font-weight:900;font-size:14px;background:#ffcc00}</style></head><body><div id="app">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:14px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxLinha{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;border:2px solid transparent;display:none}.boxLinha.ativa{display:block;border-color:#ff00ff;box-shadow:0 0 10px #ff00ff}.boxLinha h3{color:#ffcc00;font-size:10px;margin-bottom:4px}.hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
+.pistaWrap{margin:2px 3px;background:#0a3d1f;border-radius:10px;padding:12px;display:none;justify-content:center}.pistaWrap.ativa{display:flex}
+.pistaReal{width:240px;position:relative}
+.pistaReal img{width:100%;display:block;border-radius:20px}
+.mapArea{position:absolute;cursor:pointer}
+.mapArea .badge{position:absolute;top:-6px;right:-4px;background:#ffea00;color:#000;font-size:10px;padding:1px 5px;border-radius:8px;border:1px solid #000}
+.mapArea .badgeB{background:#00e5ff}
+.mapArea.sel{outline:3px solid #ffea00;outline-offset:-2px;box-shadow:0 0 8px #ffea00}
+.mapArea.selB{outline:3px solid #00e5ff;box-shadow:0 0 8px #00e5ff}
+.mapArea.dim{opacity:0.2}
+.vermelho{margin:2px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:none}.vermelho.ativa{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffea00!important;color:#000!important}.cell.marcadoB{background:#00e5ff!important;color:#000!important}.cell.marcadoAB{background:linear-gradient(45deg,#ffea00 50%,#00e5ff 50%)!important;color:#000!important}.badgeG{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:14px;font-weight:900;border-radius:4px}.azulBox{display:flex;gap:3px;margin:2px 3px}.azul{flex:1;background:#001a8a;border-radius:6px;padding:6px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:10px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta{background:#cc0000!important;box-shadow:0 0 12px #f00;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#c00}to{background:#f00}}.btns{display:flex;gap:3px;padding:4px 3px}.btns button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:900;font-size:13px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP GERAL</b></div>
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
 <div class="boxLinha" id="boxA"></div><div class="boxLinha" id="boxB"></div>
-<div class="boxHist" id="boxH"><div class="linhaH"><h3>1/2 🟥🟩</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩</h3><div class="faixa" id="f23"></div></div></div>
-<div class="pistaWrap" id="pistaWrap"><div class="pistaR" id="pistaR"></div></div>
+<div class="boxHist" id="boxH"><div class="linhaH"><h3>1/2</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3</h3><div class="faixa" id="f23"></div></div></div>
+<div class="pistaWrap" id="pistaWrap"><div class="pistaReal" id="pistaReal"><img src="pista.png" id="imgPista"><div id="map"></div></div></div>
 <div class="vermelho" id="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
 <div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">0 X 0</div></div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
@@ -34,26 +31,37 @@ let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(l
 let hist123=JSON.parse(localStorage.getItem('hist123')||'[]');let ultimo123=localStorage.getItem('ultimo123')?parseInt(localStorage.getItem('ultimo123')):null;
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
 let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
-function buildPista(){
- let pr=document.getElementById('pistaR');pr.innerHTML="";
- let top=document.createElement('div');top.className='rtTop';
- [26,0,3].forEach(n=>{let d=document.createElement('div');d.className='num '+(n===0?'green':REDS.includes(n)?'red':'black');d.id='p'+n;d.innerHTML='<span>'+n+'</span>';d.onclick=()=>pick(n);top.appendChild(d);});
- pr.appendChild(top);
- let body=document.createElement('div');body.className='rtBody';
- let left=document.createElement('div');left.className='rtLeft';
- [35,12,28,7,29,18,22,9,31,14,20,1,33,16,24,5].forEach(n=>{let d=document.createElement('div');d.className='num '+(REDS.includes(n)?'red':'black');d.id='p'+n;d.innerHTML='<span>'+n+'</span>';d.onclick=()=>pick(n);left.appendChild(d);});
- let mid=document.createElement('div');mid.className='rtMid';
- mid.innerHTML='<div>ZERO SPIEL<br>0 32 15</div><div>SERIE 0/2/3<br>4 21 2 25<br>22 18 29 7<br>28 12 35 3 26</div><div>ORPHELINS<br>9 31 14 20<br>1 6 34 17</div><div>SERIE 5/8<br>5 24 16 33 1<br>20 14 31 9<br>22 18 29 7<br>28 12 35</div>';
- let right=document.createElement('div');right.className='rtRight';
- [32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8].forEach(n=>{let d=document.createElement('div');d.className='num '+(REDS.includes(n)?'red':'black');d.id='p'+n;d.innerHTML='<span>'+n+'</span>';d.onclick=()=>pick(n);right.appendChild(d);});
- body.appendChild(left);body.appendChild(mid);body.appendChild(right);pr.appendChild(body);
- let bottom=document.createElement('div');bottom.className='rtBottom';
- [10,23].forEach(n=>{let d=document.createElement('div');d.className='num '+(n===0?'green':REDS.includes(n)?'red':'black');d.id='p'+n;d.innerHTML='<span>'+n+'</span>';d.onclick=()=>pick(n);bottom.appendChild(d);});
- pr.appendChild(bottom);
+// posições % para clicar em cima da imagem - centralizado pequeno
+const POS={
+26:{l:38,t:1,w:24,h:9}, 0:{l:65,t:5,w:28,h:10}, 3:{l:8,t:5,w:28,h:10},
+35:{l:8,t:18,w:22,h:6}, 32:{l:70,t:18,w:22,h:6},
+12:{l:8,t:25,w:22,h:6}, 15:{l:70,t:25,w:22,h:6},
+28:{l:8,t:32,w:22,h:6}, 19:{l:70,t:32,w:22,h:6},
+7:{l:8,t:39,w:22,h:6}, 4:{l:70,t:39,w:22,h:6},
+29:{l:8,t:46,w:22,h:6}, 21:{l:70,t:46,w:22,h:6},
+18:{l:8,t:53,w:22,h:6}, 2:{l:70,t:53,w:22,h:6},
+22:{l:8,t:60,w:22,h:6}, 25:{l:70,t:60,w:22,h:6},
+9:{l:8,t:67.5,w:22,h:6}, 17:{l:70,t:67.5,w:22,h:6},
+31:{l:8,t:72.5,w:22,h:6}, 34:{l:70,t:72.5,w:22,h:6},
+14:{l:8,t:77.5,w:22,h:6}, 6:{l:70,t:77.5,w:22,h:6},
+20:{l:8,t:82.5,w:22,h:6}, 27:{l:70,t:82.5,w:22,h:6},
+1:{l:8,t:87.5,w:22,h:6}, 13:{l:70,t:87.5,w:22,h:6},
+33:{l:8,t:90.5,w:22,h:5}, 36:{l:70,t:90.5,w:22,h:5},
+16:{l:8,t:93.5,w:22,h:5}, 11:{l:70,t:93.5,w:22,h:5},
+24:{l:8,t:96.2,w:22,h:5}, 30:{l:70,t:96.2,w:22,h:5},
+5:{l:8,t:99,w:14,h:5}, 8:{l:78,t:99,w:14,h:5}, 10:{l:26,t:101,w:18,h:6}, 23:{l:56,t:101,w:18,h:6}
+};
+function buildMap(){
+ let map=document.getElementById('map');map.innerHTML="";
+ for(let n in POS){
+  let p=POS[n];let d=document.createElement('div');d.className='mapArea';d.id='p'+n;
+  d.style.left=p.l+'%';d.style.top=p.t+'%';d.style.width=p.w+'%';d.style.height=p.h+'%';
+  d.onclick=()=>pick(parseInt(n));map.appendChild(d);
+ }
 }
-buildPista();
-let grid=document.getElementById('grid');
-for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badge" id="cnt'+i+'"></span>';grid.appendChild(d);}
+buildMap();
+let gridEl=document.getElementById('grid');
+for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';gridEl.appendChild(d);}
 function atualiza(){
  for(let i=0;i<=36;i++){
   let ca=countsA[i]||0,cb=countsB[i]||0;
@@ -63,21 +71,20 @@ function atualiza(){
    else{let tot=ca+cb;if(el)el.textContent=tot>0?tot+'x':'';let cls='cell '+(REDS.includes(i)?'red':'black');if(ca>0&&cb>0)cls+=' marcadoAB';else if(ca>0)cls+=' marcadoA';else if(cb>0)cls+=' marcadoB';b.className=cls;}
   }
   if(pb){
-   let base='num '+(i===0?'green':REDS.includes(i)?'red':'black');
-   let dim=''; let mark=''; let badge='';
+   let dim='', sel='', badge='';
    if(modo.includes('LADO_A')){
      if(!PISTA_A.includes(i)) dim=' dim';
-     if(ca>0){mark=' mA'; badge='<span class="badge">'+ca+'x</span>';}
+     if(ca>0){sel=' sel'; badge='<span class="badge">'+ca+'x</span>';}
    } else if(modo.includes('LADO_B')){
      if(!PISTA_B.includes(i)) dim=' dim';
-     if(cb>0){mark=' mB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
-   } else if(modo==='GERAL'){
-     if(ca>0&&cb>0){mark=' mAB'; badge='<span class="badge">'+(ca+cb)+'x</span>';}
-     else if(ca>0){mark=' mA'; badge='<span class="badge">'+ca+'x</span>';}
-     else if(cb>0){mark=' mB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
+     if(cb>0){sel=' selB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
+   } else {
+     if(ca>0&&cb>0){sel=' sel'; badge='<span class="badge">'+(ca+cb)+'x</span>';}
+     else if(ca>0){sel=' sel'; badge='<span class="badge">'+ca+'x</span>';}
+     else if(cb>0){sel=' selB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
    }
-   pb.className=base+dim+mark;
-   pb.innerHTML='<span>'+i+'</span>'+badge;
+   pb.className='mapArea'+dim+sel;
+   pb.innerHTML=badge;
   }
  }
 }
@@ -91,7 +98,7 @@ function render(){
  else if(modo.includes('LADO_A')){bA.classList.add('ativa');pw.classList.add('ativa');}
  else if(modo.includes('LADO_B')){bB.classList.add('ativa');pw.classList.add('ativa');}
  else if(modo==='COLUNAS'){bH.classList.add('ativa');vm.classList.add('ativa');}
- bA.innerHTML='<h3>🔵 LINHA A - VOISINS (17 nums) ZERO SPIEL+SERIE 0/2/3</h3><div class="historico" id="listaA"></div>'; bB.innerHTML='<h3>🟢 LINHA B - TIERS (20 nums) ORPHELINS+SERIE 5/8</h3><div class="historico" id="listaB"></div>';
+ bA.innerHTML='<h3>🔵 LINHA A - ZERO SPIEL+SERIE 0/2/3</h3><div class="historico" id="listaA"></div>'; bB.innerHTML='<h3>🟢 LINHA B - ORPHELINS+SERIE 5/8</h3><div class="historico" id="listaB"></div>';
  let lIni=document.getElementById('listaInicial');lIni.innerHTML="";let max=Math.max(histA.length,histB.length);for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[i],b=histB[i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length)lIni.appendChild(col);}
  let lA=document.getElementById('listaA');if(lA){lA.innerHTML="";histA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});}
  let lB=document.getElementById('listaB');if(lB){lB.innerHTML="";histB.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});}

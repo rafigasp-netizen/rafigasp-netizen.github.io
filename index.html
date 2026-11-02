@@ -1,32 +1,8 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:13px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxLinha{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;border:2px solid transparent;display:none}.boxLinha.ativa{display:block;border-color:#ff00ff;box-shadow:0 0 10px #ff00ff}.boxLinha h3{color:#ffcc00;font-size:10px;margin-bottom:4px}.hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px;flex-wrap:wrap}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
-.pistaWrap{margin:2px 3px;background:#0a3d1f;border-radius:10px;padding:10px;display:none;justify-content:center}.pistaWrap.ativa{display:flex}
-.pistaR{width:240px;background:#10400c;border:3px solid #fff;border-radius:85px 85px 65px 65px;overflow:hidden;display:flex;flex-direction:column}
-.pTop{width:100%;display:flex;justify-content:center;background:#10400c}
-.pTop .num{width:60px;height:40px;font-size:16px;border:2.5px solid #fff;margin:0 -1px}
-.pTop .num:first-child{border-radius:60px 0 0 0}
-.pTop .num:last-child{border-radius:0 60px 0 0}
-.sec{width:100%;display:grid;grid-template-columns:56px 1fr 56px;border-top:2px solid #fff}
-.sec:first-child{border-top:0}
-.sec .leftCol,.sec .rightCol{display:flex;flex-direction:column}
-.sec .midLabel{display:flex;align-items:center;justify-content:center;border-left:2px solid #fff;border-right:2px solid #fff;color:#fff;font-size:10px;text-align:center;line-height:10px;padding:2px}
-.num{width:56px;height:26px;border:2px solid #fff;border-top:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px;cursor:pointer;position:relative}
-.num.red{background:#c00}.num.black{background:#000}.num.green{background:#080}
-.num.dim{opacity:0.18}
-.num.mA{box-shadow:inset 0 0 0 3px #ffea00}
-.num.mB{box-shadow:inset 0 0 0 3px #00e5ff}
-.num .badge{position:absolute;top:-6px;right:-4px;background:#ffea00;color:#000;font-size:9px;padding:1px 4px;border-radius:8px;border:1px solid #000;z-index:2}
-.num .badgeB{background:#00e5ff}
-.pBottom{width:100%;display:flex;justify-content:center;background:#10400c}
-.pBottom .num{width:65px;height:34px;border:2.5px solid #fff;border-top:0;margin:0 -1px;font-size:15px}
-.pBottom .num:first-child{border-radius:0 0 0 50px}
-.pBottom .num:last-child{border-radius:0 0 50px 0}
-.diag{width:100%;height:2px;background:#fff;transform:rotate(-18deg);transform-origin:left;margin:8px 0 8px 12px}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:14px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px;flex-wrap:wrap}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
 .vermelho{margin:2px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:none}.vermelho.ativa{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffea00!important;color:#000!important}.cell.marcadoB{background:#00e5ff!important;color:#000!important}.cell.marcadoAB{background:linear-gradient(45deg,#ffea00 50%,#00e5ff 50%)!important;color:#000!important}.badgeG{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:14px;font-weight:900;border-radius:4px}.azulBox{display:flex;gap:3px;margin:2px 3px}.azul{flex:1;background:#001a8a;border-radius:6px;padding:6px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:10px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta{background:#cc0000!important;box-shadow:0 0 12px #f00;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#c00}to{background:#f00}}.btns{display:flex;gap:3px;padding:4px 3px}.btns button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:900;font-size:13px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP GERAL</b></div>
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
-<div class="boxLinha" id="boxA"></div><div class="boxLinha" id="boxB"></div>
 <div class="boxHist" id="boxH"></div>
-<div class="pistaWrap" id="pistaWrap"><div class="pistaR" id="pistaR"></div></div>
 <div class="vermelho" id="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
 <div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">0 X 0</div></div></div>
 <div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
@@ -36,9 +12,9 @@ const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const PISTA_A=[0,2,3,4,7,12,15,18,19,21,22,25,26,28,29,32,35];
 const PISTA_B=[1,5,6,8,9,10,11,13,14,16,17,20,23,24,27,30,31,33,34,36];
-const NOMES=["RAFIGASP GERAL","RAFIGASP LADO A","RAFIGASP LADO B","RAFIGASP COLUNAS","RAFIGASP LADO A","RAFIGASP LADO B","RAFIGASP 123 GERAL","RAFIGASP 123 A","RAFIGASP 123 B"];
-const MODOS=["GERAL","LADO_A","LADO_B","COLUNAS","LADO_A2","LADO_B2","123_GERAL","123_A","123_B"];
-let modoIdx=parseInt(localStorage.getItem('modoIdx')||'0');let modo=MODOS[modoIdx];
+const NOMES=["RAFIGASP GERAL","RAFIGASP COLUNAS","RAFIGASP 123 GERAL","RAFIGASP 123 A","RAFIGASP 123 B"];
+const MODOS=["GERAL","COLUNAS","123_GERAL","123_A","123_B"];
+let modoIdx=parseInt(localStorage.getItem('modoIdx')||'0');if(modoIdx>=MODOS.length)modoIdx=0;let modo=MODOS[modoIdx];
 let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');let countsB=JSON.parse(localStorage.getItem('cntB')||'{}');
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
 let hist123=JSON.parse(localStorage.getItem('hist123')||'[]');let ultimo123=localStorage.getItem('ultimo123')?parseInt(localStorage.getItem('ultimo123')):null;
@@ -47,71 +23,15 @@ let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(
 let acerto123=parseInt(localStorage.getItem('acerto123')||'0'),erro123=parseInt(localStorage.getItem('erro123')||'0');
 let acerto123A=parseInt(localStorage.getItem('acerto123A')||'0'),erro123A=parseInt(localStorage.getItem('erro123A')||'0');
 let acerto123B=parseInt(localStorage.getItem('acerto123B')||'0'),erro123B=parseInt(localStorage.getItem('erro123B')||'0');
-function mkNum(n){
- let c=n===0?'green':REDS.includes(n)?'red':'black';
- let d=document.createElement('div');d.className='num '+c;d.id='p'+n;d.innerHTML='<span>'+n+'</span>';d.onclick=()=>pick(n);return d;
-}
-function buildPista(){
- let pr=document.getElementById('pistaR');pr.innerHTML="";
- let top=document.createElement('div');top.className='pTop';
- [26,0,3].forEach(n=>top.appendChild(mkNum(n)));
- pr.appendChild(top);
- let s1=document.createElement('div');s1.className='sec';
- let l1=document.createElement('div');l1.className='leftCol';[35,12].forEach(n=>l1.appendChild(mkNum(n)));
- let m1=document.createElement('div');m1.className='midLabel';m1.innerHTML='ZERO SPIEL';
- let r1=document.createElement('div');r1.className='rightCol';[32,15].forEach(n=>r1.appendChild(mkNum(n)));
- s1.appendChild(l1);s1.appendChild(m1);s1.appendChild(r1);pr.appendChild(s1);
- pr.appendChild(Object.assign(document.createElement('div'),{style:'height:2px;background:#fff;width:100%'}));
- let s2=document.createElement('div');s2.className='sec';
- let l2=document.createElement('div');l2.className='leftCol';[28,7,29,18,22].forEach(n=>l2.appendChild(mkNum(n)));
- let m2=document.createElement('div');m2.className='midLabel';m2.innerHTML='SERIE 0/2/3';
- let r2=document.createElement('div');r2.className='rightCol';[19,4,21,2,25].forEach(n=>r2.appendChild(mkNum(n)));
- s2.appendChild(l2);s2.appendChild(m2);s2.appendChild(r2);pr.appendChild(s2);
- pr.appendChild(Object.assign(document.createElement('div'),{style:'height:2px;background:#fff;width:100%'}));
- let s3=document.createElement('div');s3.className='sec';
- let l3=document.createElement('div');l3.className='leftCol';[9,31,14,20].forEach(n=>l3.appendChild(mkNum(n)));
- let m3=document.createElement('div');m3.className='midLabel';m3.innerHTML='ORPHELINS';
- let r3=document.createElement('div');r3.className='rightCol';[17,34,6,27].forEach(n=>r3.appendChild(mkNum(n)));
- s3.appendChild(l3);s3.appendChild(m3);s3.appendChild(r3);pr.appendChild(s3);
- let diag=document.createElement('div');diag.className='diag';pr.appendChild(diag);
- let s4=document.createElement('div');s4.className='sec';
- let l4=document.createElement('div');l4.className='leftCol';[1,33,16,24,5].forEach(n=>l4.appendChild(mkNum(n)));
- let m4=document.createElement('div');m4.className='midLabel';m4.innerHTML='SERIE 5/8';
- let r4=document.createElement('div');r4.className='rightCol';[13,36,11,30,8].forEach(n=>r4.appendChild(mkNum(n)));
- s4.appendChild(l4);s4.appendChild(m4);s4.appendChild(r4);pr.appendChild(s4);
- let bottom=document.createElement('div');bottom.className='pBottom';
- [10,23].forEach(n=>bottom.appendChild(mkNum(n)));
- pr.appendChild(bottom);
-}
-buildPista();
 let gridEl=document.getElementById('grid');
 for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';gridEl.appendChild(d);}
 function atualiza(){
  for(let i=0;i<=36;i++){
   let ca=countsA[i]||0,cb=countsB[i]||0;
-  let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);let pb=document.getElementById('p'+i);
+  let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);
   if(b){
-   if(modo.includes('LADO_A')||modo.includes('LADO_B')){if(el)el.textContent='';b.className='cell '+(REDS.includes(i)?'red':'black');}
-   else if(modo.startsWith('123')){let cls='cell '+(REDS.includes(i)?'red':'black');b.className=cls;if(el)el.textContent='';}
+   if(modo.startsWith('123')){let cls='cell '+(REDS.includes(i)?'red':'black');b.className=cls;if(el)el.textContent='';}
    else{let tot=ca+cb;if(el)el.textContent=tot>0?tot+'x':'';let cls='cell '+(REDS.includes(i)?'red':'black');if(ca>0&&cb>0)cls+=' marcadoAB';else if(ca>0)cls+=' marcadoA';else if(cb>0)cls+=' marcadoB';b.className=cls;}
-  }
-  if(pb){
-   let col=REDS.includes(i)?'red':(i===0?'green':'black');
-   let base='num '+col;
-   let dim='', sel='', badge='';
-   if(modo.includes('LADO_A')){
-     if(!PISTA_A.includes(i)) dim=' dim';
-     if(ca>0){sel=' mA'; badge='<span class="badge">'+ca+'x</span>';}
-   } else if(modo.includes('LADO_B')){
-     if(!PISTA_B.includes(i)) dim=' dim';
-     if(cb>0){sel=' mB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
-   } else {
-     if(ca>0&&cb>0){sel=' mA'; badge='<span class="badge">'+(ca+cb)+'x</span>';}
-     else if(ca>0){sel=' mA'; badge='<span class="badge">'+ca+'x</span>';}
-     else if(cb>0){sel=' mB'; badge='<span class="badge badgeB">'+cb+'x</span>';}
-   }
-   pb.className=base+dim+sel;
-   pb.innerHTML='<span>'+i+'</span>'+badge;
   }
  }
 }
@@ -120,17 +40,11 @@ function calcAlerta123(arr){if(arr.length<2)return false;let vermelho=0;for(let 
 function mudaModo(){modoIdx=(modoIdx+1)%NOMES.length;modo=MODOS[modoIdx];localStorage.setItem('modoIdx',modoIdx);render();}
 function render(){
  document.getElementById('tituloTopo').textContent=NOMES[modoIdx];
- let ini=document.getElementById('verdeInicial'),bA=document.getElementById('boxA'),bB=document.getElementById('boxB'),bH=document.getElementById('boxH'),pw=document.getElementById('pistaWrap'),vm=document.getElementById('vermelho');
- ini.classList.remove('ativa');bA.classList.remove('ativa');bB.classList.remove('ativa');bH.classList.remove('ativa');pw.classList.remove('ativa');vm.classList.remove('ativa');
- if(modo==='GERAL'){ini.classList.add('ativa');vm.classList.add('ativa');}
- else if(modo.includes('LADO_A')){bA.classList.add('ativa');pw.classList.add('ativa');}
- else if(modo.includes('LADO_B')){bB.classList.add('ativa');pw.classList.add('ativa');}
+ let ini=document.getElementById('verdeInicial'),bH=document.getElementById('boxH'),vm=document.getElementById('vermelho');
+ ini.classList.remove('ativa');bH.classList.remove('ativa');vm.classList.remove('ativa');
+ if(modo==='GERAL'){ini.classList.add('ativa');bH.classList.add('ativa');vm.classList.add('ativa');}
  else if(modo==='COLUNAS' || modo.startsWith('123')){bH.classList.add('ativa');vm.classList.add('ativa');}
- bA.innerHTML='<h3>🔵 LINHA A - ZERO SPIEL+SERIE 0/2/3</h3><div class="historico" id="listaA"></div>'; bB.innerHTML='<h3>🟢 LINHA B - ORPHELINS+SERIE 5/8</h3><div class="historico" id="listaB"></div>';
  let lIni=document.getElementById('listaInicial');lIni.innerHTML="";let max=Math.max(histA.length,histB.length);for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[i],b=histB[i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length)lIni.appendChild(col);}
- let lA=document.getElementById('listaA');if(lA){lA.innerHTML="";histA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});}
- let lB=document.getElementById('listaB');if(lB){lB.innerHTML="";histB.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lB.appendChild(d);});}
- // PLACAR PISTA ou 123
  if(modo.startsWith('123')){
    let txtA='A: -', txtB='B: -';
    let filteredA = hist123.filter(h=>PISTA_A.includes(h.prev));
@@ -155,7 +69,6 @@ function render(){
      document.getElementById('placarA').innerHTML='GERAL <span>'+acerto123+' X '+erro123+'</span>';
      document.getElementById('placarB').innerHTML='A/B <span>'+(acerto123A+acerto123B)+' X '+(erro123A+erro123B)+'</span>';
    }
-   // alerta vermelho no 123
    let alertaA = modo==='123_A'? calcAlerta123(filteredA) : modo==='123_B'? calcAlerta123(filteredB) : calcAlerta123(hist123);
    document.getElementById('azulA').classList.toggle('alerta', alertaA);
    document.getElementById('azulB').classList.remove('alerta');
@@ -163,22 +76,20 @@ function render(){
    document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
    document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
    let alertaA=calcAlerta(histA),alertaB=calcAlerta(histB);
-   let vezA=modo.includes('LADO_A')||(modo==='GERAL'&&histA.length<=histB.length);
-   let vezB=modo.includes('LADO_B')||(modo==='GERAL'&&histA.length>histB.length);
+   let vezA=histA.length<=histB.length;
+   let vezB=histA.length>histB.length;
    document.getElementById('azulA').classList.toggle('alerta',alertaA&&vezA);
    document.getElementById('azulB').classList.toggle('alerta',alertaB&&vezB);
    if(histA.length)document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>';else document.getElementById('leftA').textContent='A: -';
    if(histB.length)document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>';else document.getElementById('leftB').textContent='B: -';
  }
  let boxH=document.getElementById('boxH');boxH.innerHTML="";
- if(modo==='123_GERAL' || modo==='COLUNAS'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 GERAL</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 GERAL</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 GERAL</h3><div class="faixa" id="f23"></div></div>';
- } else if(modo==='123_A'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO A (pista A)</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO A</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO A</h3><div class="faixa" id="f23"></div></div>';
- } else if(modo==='123_B'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO B (pista B)</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO B</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO B</h3><div class="faixa" id="f23"></div></div>';
- } else {
+ if(modo==='123_GERAL' || modo==='COLUNAS' || modo==='GERAL'){
    boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩</h3><div class="faixa" id="f23"></div></div>';
+ } else if(modo==='123_A'){
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO A</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO A</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO A</h3><div class="faixa" id="f23"></div></div>';
+ } else if(modo==='123_B'){
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO B</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO B</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO B</h3><div class="faixa" id="f23"></div></div>';
  }
  let f12=document.getElementById('f12'),f13=document.getElementById('f13'),f23=document.getElementById('f23');
  if(f12){
@@ -193,14 +104,11 @@ function render(){
  }
  atualiza();
 }render();
-function corr(){if(modo.startsWith('123') || modo==='COLUNAS'){if(hist123.length){let r=hist123.shift();ultimo123=r.prev;if(!r.ok){if(PISTA_A.includes(r.prev) || PISTA_A.includes(r.curr)) acerto123A=Math.max(0,acerto123A- (r.ok?1:0)), erro123A=Math.max(0,erro123A- (r.ok?0:1)); if(PISTA_B.includes(r.prev) || PISTA_B.includes(r.curr)) acerto123B=Math.max(0,acerto123B- (r.ok?1:0)), erro123B=Math.max(0,erro123B- (r.ok?0:1)); acerto123=Math.max(0,acerto123- (r.ok?1:0)); erro123=Math.max(0,erro123- (r.ok?0:1));} else {acerto123=Math.max(0,acerto123-1); if(PISTA_A.includes(r.curr)) acerto123A=Math.max(0,acerto123A-1); if(PISTA_B.includes(r.curr)) acerto123B=Math.max(0,acerto123B-1);} localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);render();}return;}if(modo.includes('LADO_A')&&histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(modo.includes('LADO_B')&&histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(modo==='GERAL'){if(histA.length>histB.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);}}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
+function corr(){if(modo.startsWith('123') || modo==='COLUNAS'){if(hist123.length){let r=hist123.shift();ultimo123=r.prev;if(!r.ok){acerto123=Math.max(0,acerto123-0); erro123=Math.max(0,erro123-1); if(PISTA_A.includes(r.curr)) erro123A=Math.max(0,erro123A-1); if(PISTA_B.includes(r.curr)) erro123B=Math.max(0,erro123B-1);} else {acerto123=Math.max(0,acerto123-1); if(PISTA_A.includes(r.curr)) acerto123A=Math.max(0,acerto123A-1); if(PISTA_B.includes(r.curr)) acerto123B=Math.max(0,acerto123B-1);} localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);render();}return;}if(histA.length>histB.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
 function goNum(num){
- let tabAnt = ultimo123!==null? TAB[ultimo123] : null;
- if(ultimo123===null){ultimo123=num;}else{let tab=TAB[ultimo123];if(tab!=="ZERO"){let ok=COL[num]===COL[ultimo123] || (tab.includes('/')? tab.split('/').map(Number).includes(COL[num]) : false);let alvo = TAB[ultimo123];let okReal = false;if(alvo!=="ZERO"){let cols = alvo.split('/').map(Number);okReal = cols.includes(COL[num]);}hist123.unshift({prev:ultimo123,tab:alvo,curr:num,ok:okReal});if(okReal){acerto123++; if(PISTA_A.includes(num)) acerto123A++; if(PISTA_B.includes(num)) acerto123B++;} else {let temAlerta = calcAlerta123(hist123.slice(1));if(temAlerta){erro123++; if(PISTA_A.includes(num)) erro123A++; if(PISTA_B.includes(num)) erro123B++;}}}ultimo123=num;}localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
+ if(ultimo123===null){ultimo123=num;}else{let tab=TAB[ultimo123];if(tab!=="ZERO"){let okReal = false;let cols = tab.split('/').map(Number);okReal = cols.includes(COL[num]);hist123.unshift({prev:ultimo123,tab:tab,curr:num,ok:okReal});if(okReal){acerto123++; if(PISTA_A.includes(num)) acerto123A++; if(PISTA_B.includes(num)) acerto123B++;} else {let temAlerta = calcAlerta123(hist123.slice(1));if(temAlerta){erro123++; if(PISTA_A.includes(num)) erro123A++; if(PISTA_B.includes(num)) erro123B++;}}}ultimo123=num;}localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
  let okA=true,okB=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}
- if(modo.includes('LADO_A')){let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}
- else if(modo.includes('LADO_B')){let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}
- else {if(histA.length<=histB.length){let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}else{let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}}
+ if(histA.length<=histB.length){let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}else{let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}
  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();
 }
 function pick(n){goNum(n);}

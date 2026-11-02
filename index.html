@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:14px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxLinha{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;border:2px solid transparent;display:none}.boxLinha.ativa{display:block;border-color:#ff00ff;box-shadow:0 0 10px #ff00ff}.boxLinha h3{color:#ffcc00;font-size:10px;margin-bottom:4px}.hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:13px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:5px;min-height:58px;display:flex;overflow-x:auto;gap:4px;display:none}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.boxLinha{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;border:2px solid transparent;display:none}.boxLinha.ativa{display:block;border-color:#ff00ff;box-shadow:0 0 10px #ff00ff}.boxLinha h3{color:#ffcc00;font-size:10px;margin-bottom:4px}.hist{width:40px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.C{background:#00a000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px;flex-wrap:wrap}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
 .pistaWrap{margin:2px 3px;background:#0a3d1f;border-radius:10px;padding:10px;display:none;justify-content:center}.pistaWrap.ativa{display:flex}
 .pistaR{width:240px;background:#10400c;border:3px solid #fff;border-radius:85px 85px 65px 65px;overflow:hidden;display:flex;flex-direction:column}
 .pTop{width:100%;display:flex;justify-content:center;background:#10400c}
@@ -25,7 +25,7 @@
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP GERAL</b></div>
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
 <div class="boxLinha" id="boxA"></div><div class="boxLinha" id="boxB"></div>
-<div class="boxHist" id="boxH"><div class="linhaH"><h3>1/2</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3</h3><div class="faixa" id="f23"></div></div></div>
+<div class="boxHist" id="boxH"></div>
 <div class="pistaWrap" id="pistaWrap"><div class="pistaR" id="pistaR"></div></div>
 <div class="vermelho" id="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div>1</div><div>2</div><div>3</div></div></div>
 <div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">0 X 0</div></div></div>
@@ -36,8 +36,8 @@ const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const PISTA_A=[0,2,3,4,7,12,15,18,19,21,22,25,26,28,29,32,35];
 const PISTA_B=[1,5,6,8,9,10,11,13,14,16,17,20,23,24,27,30,31,33,34,36];
-const NOMES=["RAFIGASP GERAL","RAFIGASP LADO A","RAFIGASP LADO B","RAFIGASP COLUNAS","RAFIGASP LADO A","RAFIGASP LADO B"];
-const MODOS=["GERAL","LADO_A","LADO_B","COLUNAS","LADO_A2","LADO_B2"];
+const NOMES=["RAFIGASP GERAL","RAFIGASP LADO A","RAFIGASP LADO B","RAFIGASP COLUNAS","RAFIGASP LADO A","RAFIGASP LADO B","RAFIGASP 123 GERAL","RAFIGASP 123 A","RAFIGASP 123 B"];
+const MODOS=["GERAL","LADO_A","LADO_B","COLUNAS","LADO_A2","LADO_B2","123_GERAL","123_A","123_B"];
 let modoIdx=parseInt(localStorage.getItem('modoIdx')||'0');let modo=MODOS[modoIdx];
 let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');let countsB=JSON.parse(localStorage.getItem('cntB')||'{}');
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
@@ -53,30 +53,24 @@ function buildPista(){
  let top=document.createElement('div');top.className='pTop';
  [26,0,3].forEach(n=>top.appendChild(mkNum(n)));
  pr.appendChild(top);
- // ZERO SPIEL
  let s1=document.createElement('div');s1.className='sec';
  let l1=document.createElement('div');l1.className='leftCol';[35,12].forEach(n=>l1.appendChild(mkNum(n)));
  let m1=document.createElement('div');m1.className='midLabel';m1.innerHTML='ZERO SPIEL';
  let r1=document.createElement('div');r1.className='rightCol';[32,15].forEach(n=>r1.appendChild(mkNum(n)));
  s1.appendChild(l1);s1.appendChild(m1);s1.appendChild(r1);pr.appendChild(s1);
- // linha depois do 12/15 - sua marcação 1
  pr.appendChild(Object.assign(document.createElement('div'),{style:'height:2px;background:#fff;width:100%'}));
- // SERIE 0/2/3
  let s2=document.createElement('div');s2.className='sec';
  let l2=document.createElement('div');l2.className='leftCol';[28,7,29,18,22].forEach(n=>l2.appendChild(mkNum(n)));
  let m2=document.createElement('div');m2.className='midLabel';m2.innerHTML='SERIE 0/2/3';
  let r2=document.createElement('div');r2.className='rightCol';[19,4,21,2,25].forEach(n=>r2.appendChild(mkNum(n)));
  s2.appendChild(l2);s2.appendChild(m2);s2.appendChild(r2);pr.appendChild(s2);
  pr.appendChild(Object.assign(document.createElement('div'),{style:'height:2px;background:#fff;width:100%'}));
- // ORPHELINS
  let s3=document.createElement('div');s3.className='sec';
  let l3=document.createElement('div');l3.className='leftCol';[9,31,14,20].forEach(n=>l3.appendChild(mkNum(n)));
  let m3=document.createElement('div');m3.className='midLabel';m3.innerHTML='ORPHELINS';
  let r3=document.createElement('div');r3.className='rightCol';[17,34,6,27].forEach(n=>r3.appendChild(mkNum(n)));
  s3.appendChild(l3);s3.appendChild(m3);s3.appendChild(r3);pr.appendChild(s3);
- // linha diagonal
  let diag=document.createElement('div');diag.className='diag';pr.appendChild(diag);
- // SERIE 5/8
  let s4=document.createElement('div');s4.className='sec';
  let l4=document.createElement('div');l4.className='leftCol';[1,33,16,24,5].forEach(n=>l4.appendChild(mkNum(n)));
  let m4=document.createElement('div');m4.className='midLabel';m4.innerHTML='SERIE 5/8';
@@ -94,7 +88,8 @@ function atualiza(){
   let ca=countsA[i]||0,cb=countsB[i]||0;
   let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);let pb=document.getElementById('p'+i);
   if(b){
-   if(modo.includes('LADO_A')||modo.includes('LADO_B')||modo==='COLUNAS'){if(el)el.textContent='';b.className='cell '+(REDS.includes(i)?'red':'black');}
+   if(modo.includes('LADO_A')||modo.includes('LADO_B')){if(el)el.textContent='';b.className='cell '+(REDS.includes(i)?'red':'black');}
+   else if(modo.startsWith('123')){let col=COL[i];let cls='cell '+(REDS.includes(i)?'red':'black');b.className=cls;if(el)el.textContent='';}
    else{let tot=ca+cb;if(el)el.textContent=tot>0?tot+'x':'';let cls='cell '+(REDS.includes(i)?'red':'black');if(ca>0&&cb>0)cls+=' marcadoAB';else if(ca>0)cls+=' marcadoA';else if(cb>0)cls+=' marcadoB';b.className=cls;}
   }
   if(pb){
@@ -126,7 +121,7 @@ function render(){
  if(modo==='GERAL'){ini.classList.add('ativa');vm.classList.add('ativa');}
  else if(modo.includes('LADO_A')){bA.classList.add('ativa');pw.classList.add('ativa');}
  else if(modo.includes('LADO_B')){bB.classList.add('ativa');pw.classList.add('ativa');}
- else if(modo==='COLUNAS'){bH.classList.add('ativa');vm.classList.add('ativa');}
+ else if(modo==='COLUNAS' || modo.startsWith('123')){bH.classList.add('ativa');vm.classList.add('ativa');}
  bA.innerHTML='<h3>🔵 LINHA A - ZERO SPIEL+SERIE 0/2/3</h3><div class="historico" id="listaA"></div>'; bB.innerHTML='<h3>🟢 LINHA B - ORPHELINS+SERIE 5/8</h3><div class="historico" id="listaB"></div>';
  let lIni=document.getElementById('listaInicial');lIni.innerHTML="";let max=Math.max(histA.length,histB.length);for(let i=0;i<max;i++){let col=document.createElement('div');col.className='coluna';let a=histA[i],b=histB[i];if(a){let d=document.createElement('div');d.className='hist '+(a.ok?'C':'E');d.textContent=a.num;col.appendChild(d);}if(b){let d=document.createElement('div');d.className='hist '+(b.ok?'C':'E');d.textContent=b.num;col.appendChild(d);}if(col.children.length)lIni.appendChild(col);}
  let lA=document.getElementById('listaA');if(lA){lA.innerHTML="";histA.forEach(h=>{let d=document.createElement('div');d.className='hist '+(h.ok?'C':'E');d.textContent=h.num;lA.appendChild(d);});}
@@ -140,11 +135,30 @@ function render(){
  document.getElementById('azulB').classList.toggle('alerta',alertaB&&vezB);
  if(histA.length)document.getElementById('leftA').innerHTML='A: '+histA[0].num+'> <span>'+TAB[histA[0].num]+'</span>';else document.getElementById('leftA').textContent='A: -';
  if(histB.length)document.getElementById('leftB').innerHTML='B: '+histB[0].num+'> <span>'+TAB[histB[0].num]+'</span>';else document.getElementById('leftB').textContent='B: -';
- let f12=document.getElementById('f12'),f13=document.getElementById('f13'),f23=document.getElementById('f23');f12.innerHTML="";f13.innerHTML="";f23.innerHTML="";
- hist123.forEach(h=>{let q=document.createElement('div');q.className='q '+(h.ok?'C':'E');q.textContent=h.ok?'🟩':'🟥';if(h.tab==='1/2')f12.appendChild(q);if(h.tab==='1/3')f13.appendChild(q);if(h.tab==='2/3')f23.appendChild(q);});
+ let boxH=document.getElementById('boxH');boxH.innerHTML="";
+ if(modo==='123_GERAL' || modo==='COLUNAS'){
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 GERAL</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 GERAL</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 GERAL</h3><div class="faixa" id="f23"></div></div>';
+ } else if(modo==='123_A'){
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO A (só números da pista A)</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO A</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO A</h3><div class="faixa" id="f23"></div></div>';
+ } else if(modo==='123_B'){
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO B (só números da pista B)</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO B</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO B</h3><div class="faixa" id="f23"></div></div>';
+ } else {
+   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩</h3><div class="faixa" id="f23"></div></div>';
+ }
+ let f12=document.getElementById('f12'),f13=document.getElementById('f13'),f23=document.getElementById('f23');
+ if(f12){
+   f12.innerHTML="";f13.innerHTML="";f23.innerHTML="";
+   let filtro = hist123;
+   if(modo==='123_A') filtro = hist123.filter(h=>PISTA_A.includes(h.curr) || PISTA_A.includes(h.prev));
+   if(modo==='123_B') filtro = hist123.filter(h=>PISTA_B.includes(h.curr) || PISTA_B.includes(h.prev));
+   filtro.forEach(h=>{
+     let q=document.createElement('div');q.className='q '+(h.ok?'C':'E');q.textContent=h.ok?'🟩':'🟥';
+     if(h.tab==='1/2')f12.appendChild(q);if(h.tab==='1/3')f13.appendChild(q);if(h.tab==='2/3')f23.appendChild(q);
+   });
+ }
  atualiza();
 }render();
-function corr(){if(modo==='COLUNAS'){if(hist123.length){let r=hist123.shift();ultimo123=r.prev;localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);render();}return;}if(modo.includes('LADO_A')&&histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(modo.includes('LADO_B')&&histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(modo==='GERAL'){if(histA.length>histB.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);}}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
+function corr(){if(modo.startsWith('123') || modo==='COLUNAS'){if(hist123.length){let r=hist123.shift();ultimo123=r.prev;localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);render();}return;}if(modo.includes('LADO_A')&&histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(modo.includes('LADO_B')&&histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(modo==='GERAL'){if(histA.length>histB.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);}}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
 function goNum(num){
  if(ultimo123===null){ultimo123=num;}else{let tab=TAB[ultimo123];if(tab!=="ZERO"){let ok=COL[num]===COL[ultimo123];hist123.unshift({prev:ultimo123,tab:tab,curr:num,ok:ok});}ultimo123=num;}localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);
  let okA=true,okB=true;if(histA.length){let alvo=TAB[histA[0].num].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}if(histB.length){let alvo=TAB[histB[0].num].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}

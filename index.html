@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:14px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:6px;min-height:62px;display:none;overflow-x:auto}.verde.ativa{display:flex}.historico{display:flex;gap:5px}.coluna{display:flex;flex-direction:column;gap:4px}.hist{width:38px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.C{background:#00c000;box-shadow:0 0 5px #0f0}.E{background:#c00000;box-shadow:0 0 5px #f00}
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;display:flex;justify-content:center}#app{width:98%;max-width:400px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;min-height:100dvh;padding-bottom:8px}.topo{background:#ffcc00;text-align:center;padding:12px 6px;font-size:14px;cursor:pointer;border-radius:0 0 8px 8px}.verde{margin:2px 3px;background:#0a5a2e;border-radius:8px;padding:6px;min-height:62px;display:none;overflow-x:auto}.verde.ativa{display:flex}.historico{display:flex;gap:5px}.coluna{display:flex;flex-direction:column;gap:4px}.hist{width:38px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.C{background:#00c000}.E{background:#c00000}
 .boxHist{background:#0a3d1f;border-radius:8px;margin:2px 3px;padding:6px;display:none}.boxHist.ativa{display:block}.linhaH{background:#001a1a;border-radius:6px;padding:6px;margin-bottom:4px}.linhaH h3{color:#ffcc00;font-size:11px}.faixa{display:flex;gap:3px;overflow-x:auto;min-height:26px;flex-wrap:wrap}.q{width:26px;height:22px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;border:1px solid #fff}.q.C{background:#00a000}.q.E{background:#c00000}
-.vermelho{margin:2px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:none}.vermelho.ativa{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffea00!important;color:#000!important}.cell.marcadoB{background:#00e5ff!important;color:#000!important}.cell.marcadoAB{background:linear-gradient(45deg,#ffea00 50%,#00e5ff 50%)!important;color:#000!important}.badgeG{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:14px;font-weight:900;border-radius:4px}.azulBox{display:flex;gap:3px;margin:2px 3px}.azul{flex:1;background:#001a8a;border-radius:6px;padding:6px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:10px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta{background:#cc0000!important;box-shadow:0 0 12px #f00;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#c00}to{background:#f00}}.btns{display:flex;gap:3px;padding:4px 3px}.btns button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:900;font-size:13px;background:#ffcc00}</style></head><body><div id="app">
+.vermelho{margin:2px 3px;background:#0a3d1f;border-radius:8px;padding:4px;display:none}.vermelho.ativa{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.cell{border:1.5px solid #d4af37;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;min-height:38px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.badgeG{position:absolute;top:-6px;right:-4px;background:#000;color:#ffcc00;font-size:10px;padding:1px 5px;border-radius:10px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:14px;font-weight:900;border-radius:4px}.azulBox{display:flex;gap:3px;margin:2px 3px}.azul{flex:1;background:#001a8a;border-radius:6px;padding:6px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:10px;font-weight:900}.azul span{color:#ffcc00}.azul.alerta{background:#cc0000!important;box-shadow:0 0 12px #f00;animation:pisca .5s infinite alternate}@keyframes pisca{from{background:#c00}to{background:#f00}}.btns{display:flex;gap:3px;padding:4px 3px}.btns button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:900;font-size:13px;background:#ffcc00}</style></head><body><div id="app">
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP GERAL</b></div>
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
 <div class="boxHist" id="boxH"></div>
@@ -18,7 +18,12 @@ const MODOS=["GERAL","123_GERAL","123_A","123_B"];
 let modoIdx=parseInt(localStorage.getItem('modoIdx')||'0');if(modoIdx>=MODOS.length)modoIdx=0;let modo=MODOS[modoIdx];
 let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');let countsB=JSON.parse(localStorage.getItem('cntB')||'{}');
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
-let hist123=JSON.parse(localStorage.getItem('hist123')||'[]');let ultimo123=localStorage.getItem('ultimo123')?parseInt(localStorage.getItem('ultimo123')):null;
+let hist123=JSON.parse(localStorage.getItem('hist123')||'[]');
+let hist123A=JSON.parse(localStorage.getItem('hist123A')||'[]');
+let hist123B=JSON.parse(localStorage.getItem('hist123B')||'[]');
+let ultimo123=localStorage.getItem('ultimo123')?parseInt(localStorage.getItem('ultimo123')):null;
+let ultimo123A=localStorage.getItem('ultimo123A')?parseInt(localStorage.getItem('ultimo123A')):null;
+let ultimo123B=localStorage.getItem('ultimo123B')?parseInt(localStorage.getItem('ultimo123B')):null;
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');
 let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
 let acerto123=parseInt(localStorage.getItem('acerto123')||'0'),erro123=parseInt(localStorage.getItem('erro123')||'0');
@@ -32,7 +37,7 @@ function atualiza(){
   let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);
   if(b){
    if(modo.startsWith('123')){let cls='cell '+(REDS.includes(i)?'red':'black');b.className=cls;if(el)el.textContent='';}
-   else{let tot=ca+cb;if(el)el.textContent=tot>0?tot+'x':'';let cls='cell '+(REDS.includes(i)?'red':'black');if(ca>0&&cb>0)cls+=' marcadoAB';else if(ca>0)cls+=' marcadoA';else if(cb>0)cls+=' marcadoB';b.className=cls;}
+   else{let tot=ca+cb;if(el)el.textContent=tot>0?tot+'x':'';let cls='cell '+(REDS.includes(i)?'red':'black');if(ca>0&&cb>0)cls='cell marcadoAB';else if(ca>0)cls='cell marcadoA';else if(cb>0)cls='cell marcadoB';b.className=cls;}
   }
  }
 }
@@ -50,74 +55,53 @@ function render(){
  for(let i=0;i<max;i++){
    let col=document.createElement('div');col.className='coluna';
    let a=histA[i],b=histB[i];
-   if(a){
-     let d=document.createElement('div');
-     let ok = (typeof a==='object')? a.ok : true;
-     let num = (typeof a==='object')? a.num : a;
-     d.className='hist '+(ok?'C':'E'); d.textContent=num;
-     col.appendChild(d);
-   }
-   if(b){
-     let d=document.createElement('div');
-     let ok = (typeof b==='object')? b.ok : true;
-     let num = (typeof b==='object')? b.num : b;
-     d.className='hist '+(ok?'C':'E'); d.textContent=num;
-     col.appendChild(d);
-   }
+   if(a){let d=document.createElement('div');let ok=(typeof a==='object')?a.ok:true;let num=(typeof a==='object')?a.num:a;d.className='hist '+(ok?'C':'E');d.textContent=num;col.appendChild(d);}
+   if(b){let d=document.createElement('div');let ok=(typeof b==='object')?b.ok:true;let num=(typeof b==='object')?b.num:b;d.className='hist '+(ok?'C':'E');d.textContent=num;col.appendChild(d);}
    if(col.children.length) lIni.appendChild(col);
  }
- if(modo.startsWith('123')){
+ if(modo==='123_A'){
+   let txtA='A: -'; if(hist123A.length) txtA='A: '+hist123A[0].prev+'> '+hist123A[0].tab;
+   document.getElementById('leftA').textContent=txtA;
+   document.getElementById('placarA').innerHTML='ACERTO <span>'+acerto123A+' X '+erro123A+'</span> ERRO';
+   document.getElementById('leftB').textContent='B: -'; document.getElementById('placarB').innerHTML='0 X 0';
+   document.getElementById('azulA').classList.toggle('alerta', calcAlerta123(hist123A));
+   document.getElementById('azulB').classList.remove('alerta');
+ } else if(modo==='123_B'){
+   let txtB='B: -'; if(hist123B.length) txtB='B: '+hist123B[0].prev+'> '+hist123B[0].tab;
+   document.getElementById('leftA').textContent='A: -'; document.getElementById('placarA').innerHTML='0 X 0';
+   document.getElementById('leftB').textContent=txtB;
+   document.getElementById('placarB').innerHTML='ACERTO <span>'+acerto123B+' X '+erro123B+'</span> ERRO';
+   document.getElementById('azulA').classList.remove('alerta');
+   document.getElementById('azulB').classList.toggle('alerta', calcAlerta123(hist123B));
+ } else if(modo==='123_GERAL'){
    let txtA='A: -', txtB='B: -';
-   let filteredA = hist123.filter(h=>PISTA_A.includes(h.prev));
-   let filteredB = hist123.filter(h=>PISTA_B.includes(h.prev));
-   if(modo==='123_A'){
-     if(filteredA.length) txtA='A: '+filteredA[0].prev+'> '+filteredA[0].tab;
-     document.getElementById('leftA').textContent=txtA;
-     document.getElementById('placarA').innerHTML='ACERTO <span>'+acerto123A+' X '+erro123A+'</span> ERRO';
-     document.getElementById('leftB').textContent='B: -';
-     document.getElementById('placarB').innerHTML='ACERTO <span>0 X 0</span> ERRO';
-   } else if(modo==='123_B'){
-     if(filteredB.length) txtB='B: '+filteredB[0].prev+'> '+filteredB[0].tab;
-     document.getElementById('leftA').textContent='A: -';
-     document.getElementById('placarA').innerHTML='ACERTO <span>0 X 0</span> ERRO';
-     document.getElementById('leftB').textContent=txtB;
-     document.getElementById('placarB').innerHTML='ACERTO <span>'+acerto123B+' X '+erro123B+'</span> ERRO';
-   } else {
-     if(hist123.length) txtA='A: '+hist123[0].prev+'> '+hist123[0].tab;
-     if(hist123.length>1) txtB='B: '+hist123[1].prev+'> '+hist123[1].tab;
-     document.getElementById('leftA').textContent=txtA;
-     document.getElementById('leftB').textContent=txtB;
-     document.getElementById('placarA').innerHTML='GERAL <span>'+acerto123+' X '+erro123+'</span>';
-     document.getElementById('placarB').innerHTML='A/B <span>'+(acerto123A+acerto123B)+' X '+(erro123A+erro123B)+'</span>';
-   }
-   let alertaA = modo==='123_A'? calcAlerta123(filteredA) : modo==='123_B'? calcAlerta123(filteredB) : calcAlerta123(hist123);
-   document.getElementById('azulA').classList.toggle('alerta', alertaA);
+   if(hist123.length) txtA='A: '+hist123[0].prev+'> '+hist123[0].tab;
+   if(hist123.length>1) txtB='B: '+hist123[1].prev+'> '+hist123[1].tab;
+   document.getElementById('leftA').textContent=txtA; document.getElementById('leftB').textContent=txtB;
+   document.getElementById('placarA').innerHTML='GERAL <span>'+acerto123+' X '+erro123+'</span>';
+   document.getElementById('placarB').innerHTML='A/B <span>'+(acerto123A+acerto123B)+' X '+(erro123A+erro123B)+'</span>';
+   document.getElementById('azulA').classList.toggle('alerta', calcAlerta123(hist123));
    document.getElementById('azulB').classList.remove('alerta');
  } else {
    document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';
    document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
    let alertaA=calcAlerta(histA),alertaB=calcAlerta(histB);
-   let vezA=histA.length<=histB.length;
-   let vezB=histA.length>histB.length;
-   document.getElementById('azulA').classList.toggle('alerta',alertaA&&vezA);
-   document.getElementById('azulB').classList.toggle('alerta',alertaB&&vezB);
+   document.getElementById('azulA').classList.toggle('alerta',alertaA&&(histA.length<=histB.length));
+   document.getElementById('azulB').classList.toggle('alerta',alertaB&&(histA.length>histB.length));
    if(histA.length){let n=(typeof histA[0]==='object')?histA[0].num:histA[0];document.getElementById('leftA').innerHTML='A: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftA').textContent='A: -';
    if(histB.length){let n=(typeof histB[0]==='object')?histB[0].num:histB[0];document.getElementById('leftB').innerHTML='B: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftB').textContent='B: -';
  }
  let boxH=document.getElementById('boxH');boxH.innerHTML="";
- if(modo==='123_GERAL'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 GERAL</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 GERAL</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 GERAL</h3><div class="faixa" id="f23"></div></div>';
- } else if(modo==='123_A'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO A</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO A</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO A</h3><div class="faixa" id="f23"></div></div>';
- } else if(modo==='123_B'){
-   boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 LADO B</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 LADO B</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 LADO B</h3><div class="faixa" id="f23"></div></div>';
- }
+ if(modo==='123_GERAL'){boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 GERAL</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 GERAL</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 GERAL</h3><div class="faixa" id="f23"></div></div>';}
+ else if(modo==='123_A'){boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 SÓ LINHA A</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 SÓ LINHA A</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 SÓ LINHA A</h3><div class="faixa" id="f23"></div></div>';}
+ else if(modo==='123_B'){boxH.innerHTML='<div class="linhaH"><h3>1/2 🟥🟩 SÓ LINHA B</h3><div class="faixa" id="f12"></div></div><div class="linhaH"><h3>1/3 🟥🟩 SÓ LINHA B</h3><div class="faixa" id="f13"></div></div><div class="linhaH"><h3>2/3 🟥🟩 SÓ LINHA B</h3><div class="faixa" id="f23"></div></div>';}
  let f12=document.getElementById('f12'),f13=document.getElementById('f13'),f23=document.getElementById('f23');
  if(f12){
    f12.innerHTML="";f13.innerHTML="";f23.innerHTML="";
-   let filtro = hist123;
-   if(modo==='123_A') filtro = hist123.filter(h=>PISTA_A.includes(h.curr) || PISTA_A.includes(h.prev));
-   if(modo==='123_B') filtro = hist123.filter(h=>PISTA_B.includes(h.curr) || PISTA_B.includes(h.prev));
+   let filtro=[];
+   if(modo==='123_A') filtro=hist123A;
+   else if(modo==='123_B') filtro=hist123B;
+   else filtro=hist123;
    filtro.forEach(h=>{
      let q=document.createElement('div');q.className='q '+(h.ok?'C':'E');q.textContent=h.ok?'🟩':'🟥';
      if(h.tab==='1/2')f12.appendChild(q);if(h.tab==='1/3')f13.appendChild(q);if(h.tab==='2/3')f23.appendChild(q);
@@ -125,9 +109,26 @@ function render(){
  }
  atualiza();
 }render();
-function corr(){if(modo.startsWith('123')){if(hist123.length){let r=hist123.shift();ultimo123=r.prev;if(!r.ok){erro123=Math.max(0,erro123-1); if(PISTA_A.includes(r.curr)) erro123A=Math.max(0,erro123A-1); if(PISTA_B.includes(r.curr)) erro123B=Math.max(0,erro123B-1);} else {acerto123=Math.max(0,acerto123-1); if(PISTA_A.includes(r.curr)) acerto123A=Math.max(0,acerto123A-1); if(PISTA_B.includes(r.curr)) acerto123B=Math.max(0,acerto123B-1);} localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);render();}return;}if(histA.length>histB.length){let r=histA.shift();let num=(typeof r==='object')?r.num:r;countsA[num]=Math.max(0,(countsA[num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();let num=(typeof r==='object')?r.num:r;countsB[num]=Math.max(0,(countsB[num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();let num=(typeof r==='object')?r.num:r;countsA[num]=Math.max(0,(countsA[num]||0)-1);}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
+function corr(){
+ if(modo==='123_A' && hist123A.length){let r=hist123A.shift();ultimo123A=r.prev;if(r.ok)acerto123A=Math.max(0,acerto123A-1);else erro123A=Math.max(0,erro123A-1);localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('ultimo123A',ultimo123A);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);render();return;}
+ if(modo==='123_B' && hist123B.length){let r=hist123B.shift();ultimo123B=r.prev;if(r.ok)acerto123B=Math.max(0,acerto123B-1);else erro123B=Math.max(0,erro123B-1);localStorage.setItem('hist123B',JSON.stringify(hist123B));localStorage.setItem('ultimo123B',ultimo123B);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);render();return;}
+ if(modo.startsWith('123') && hist123.length){let r=hist123.shift();ultimo123=r.prev;if(r.ok)acerto123=Math.max(0,acerto123-1);else erro123=Math.max(0,erro123-1);localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);render();return;}
+ if(histA.length>histB.length){let r=histA.shift();let num=(typeof r==='object')?r.num:r;countsA[num]=Math.max(0,(countsA[num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}else if(histB.length){let r=histB.shift();let num=(typeof r==='object')?r.num:r;countsB[num]=Math.max(0,(countsB[num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}else if(histA.length){let r=histA.shift();let num=(typeof r==='object')?r.num:r;countsA[num]=Math.max(0,(countsA[num]||0)-1);}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();
+}
 function goNum(num){
- if(ultimo123===null){ultimo123=num;}else{let tab=TAB[ultimo123];if(tab!=="ZERO"){let okReal = false;let cols = tab.split('/').map(Number);okReal = cols.includes(COL[num]);hist123.unshift({prev:ultimo123,tab:tab,curr:num,ok:okReal});if(okReal){acerto123++; if(PISTA_A.includes(num)) acerto123A++; if(PISTA_B.includes(num)) acerto123B++;} else {let temAlerta = calcAlerta123(hist123.slice(1));if(temAlerta){erro123++; if(PISTA_A.includes(num)) erro123A++; if(PISTA_B.includes(num)) erro123B++;}}}ultimo123=num;}localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
+ // 123 GERAL - todos numeros
+ if(ultimo123===null){ultimo123=num;}else{let tab=TAB[ultimo123];if(tab!=="ZERO"){let ok=false;let cols=tab.split('/').map(Number);ok=cols.includes(COL[num]);hist123.unshift({prev:ultimo123,tab:tab,curr:num,ok:ok});if(ok)acerto123++;else{let temAlerta=calcAlerta123(hist123.slice(1));if(temAlerta)erro123++;}}ultimo123=num;}
+ // 123 A - só numeros da PISTA A
+ if(PISTA_A.includes(num)){
+   if(ultimo123A===null){ultimo123A=num;}else{let tab=TAB[ultimo123A];if(tab!=="ZERO"){let ok=false;let cols=tab.split('/').map(Number);ok=cols.includes(COL[num]);hist123A.unshift({prev:ultimo123A,tab:tab,curr:num,ok:ok});if(ok)acerto123A++;else{let temAlerta=calcAlerta123(hist123A.slice(1));if(temAlerta)erro123A++;}}ultimo123A=num;}
+ }
+ // 123 B - só numeros da PISTA B
+ if(PISTA_B.includes(num)){
+   if(ultimo123B===null){ultimo123B=num;}else{let tab=TAB[ultimo123B];if(tab!=="ZERO"){let ok=false;let cols=tab.split('/').map(Number);ok=cols.includes(COL[num]);hist123B.unshift({prev:ultimo123B,tab:tab,curr:num,ok:ok});if(ok)acerto123B++;else{let temAlerta=calcAlerta123(hist123B.slice(1));if(temAlerta)erro123B++;}}ultimo123B=num;}
+ }
+ localStorage.setItem('hist123',JSON.stringify(hist123));localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('hist123B',JSON.stringify(hist123B));
+ localStorage.setItem('ultimo123',ultimo123);localStorage.setItem('ultimo123A',ultimo123A);localStorage.setItem('ultimo123B',ultimo123B);
+ localStorage.setItem('acerto123',acerto123);localStorage.setItem('erro123',erro123);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
  let okA=true,okB=true;if(histA.length){let alvo=TAB[(typeof histA[0]==='object')?histA[0].num:histA[0]].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}if(histB.length){let alvo=TAB[(typeof histB[0]==='object')?histB[0].num:histB[0]].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}
  if(histA.length<=histB.length){let alerta=calcAlerta(histA);let foi=false;if(alerta){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}else{let alerta=calcAlerta(histB);let foi=false;if(alerta){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}
  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();

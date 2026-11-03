@@ -1,16 +1,103 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>RAFIGASP - LEITOR</title><script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}body{background:#000;color:#ffcc00;display:flex;justify-content:center;padding:10px;min-height:100vh}#app{width:100%;max-width:460px;background:#0a2e1e;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:6px}.topo{background:#ffcc00;color:#000;text-align:center;padding:12px;border-radius:8px;font-size:16px}.btn{padding:14px;border:0;border-radius:8px;font-weight:900;font-size:14px;background:#ffcc00;color:#000}.btn2{background:#0066ff;color:#fff;margin-top:4px}.placar{background:#000;border-radius:8px;padding:10px;font-size:14px;line-height:22px;white-space:pre-line;min-height:120px}.preview{width:100%;border-radius:8px;display:none;max-height:300px;object-fit:contain;background:#000}.info{font-size:11px;color:#fff;text-align:center}.lista{font-size:10px;color:#aaa;background:#001a0a;padding:6px;border-radius:6px;max-height:80px;overflow:auto}</style></head><body><div id="app"><div class="topo"><b>RAFIGASP - LEITOR DE FOTO</b><br><span style="font-size:11px">LÊ O PRINT DOS ÚLTIMOS 500</span></div><button class="btn" onclick="document.getElementById('inputFoto').click()">📷 ESCOLHER FOTO</button><img id="preview" class="preview"><div id="placar" class="placar">Aguardando foto...
-
-A 1/2 🟩 [0] 🟥 [0]
-B 1/3 🟩 [0] 🟥 [0]
-C 2/3 🟩 [0] 🟥 [0]</div><div id="info" class="info"></div><div id="listaNum" class="lista" style="display:none"></div><button class="btn btn2" onclick="location.href='index.html'">VOLTAR PARA RAFIGASP</button><input type="file" id="inputFoto" accept="image/*" style="display:none" onchange="lerFoto(this)"></div><script>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LEITOR V2 - ORDEM CERTA</title><script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script><style>body{background:#000;color:#ffcc00;font-family:Arial Black;display:flex;justify-content:center;padding:8px}#app{width:100%;max-width:480px;background:#0a2e1e;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:8px}.topo{background:#ffcc00;color:#000;text-align:center;padding:10px;border-radius:8px}.btn{padding:14px;border:0;border-radius:8px;font-weight:900;background:#ffcc00;font-size:14px}.btn2{background:#00c000;color:#fff}.btn3{background:#0066ff;color:#fff}.placar{background:#000;border-radius:8px;padding:10px;font-size:13px;white-space:pre-line;line-height:22px}textarea{width:100%;height:80px;background:#001a0a;color:#fff;border:1px solid #ffcc00;border-radius:6px;padding:6px;font-size:12px}img{width:100%;border-radius:8px;display:none;max-height:400px;object-fit:contain}label{font-size:11px;color:#fff;text-align:center}</style></head><body><div id="app">
+<div class="topo">RAFIGASP - LEITOR V2<br><span style="font-size:11px">LÊ NA ORDEM DA FOTO + PREENCHE</span></div>
+<button class="btn" onclick="document.getElementById('f').click()">📷 ESCOLHER PRINT ÚLTIMOS 500</button>
+<img id="img">
+<label><input type="checkbox" id="inv" checked> Foto está com o MAIS NOVO em CIMA (padrão) - desmarca se o mais novo for embaixo</label>
+<div id="placar" class="placar">Aguardando foto...</div>
+<textarea id="edit" placeholder="Números na ordem CORRETA (velho -> novo) - pode editar aqui"></textarea>
+<button class="btn btn2" onclick="preencher()">✅ PREENCHER AUTOMÁTICO NO RAFIGASP GERAL (A+B)</button>
+<button class="btn btn3" onclick="location.href='index.html'">VOLTAR PARA RAFIGASP</button>
+<input type="file" id="f" accept="image/*" hidden onchange="ler(this)">
+</div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};
-async function lerFoto(input){let file=input.files[0];if(!file)return;let prev=document.getElementById('preview');prev.src=URL.createObjectURL(file);prev.style.display='block';let box=document.getElementById('placar');box.textContent='📷 LENDO... AGUARDE 5s';try{let r=await Tesseract.recognize(file,'eng');let t=r.data.text;let nums=t.match(/\b([0-9]|[12][0-9]|3[0-6])\b/g);if(!nums){box.textContent='❌ NÃO ACHOU NÚMEROS';return;}let list=nums.map(n=>parseInt(n)).filter(n=>n>=0&&n<=36);if(list.length>500)list=list.slice(0,500);let ordem=list.slice().reverse();let stats={"1/2":{g:0,r:0},"1/3":{g:0,r:0},"2/3":{g:0,r:0}};let alerta={"1/2":{g:0,r:0},"1/3":{g:0,r:0},"2/3":{g:0,r:0}};let last={"1/2":[],"1/3":[],"2/3":[]};for(let i=0;i<ordem.length-1;i++){let p=ordem[i],c=ordem[i+1];if(p==0||c==0)continue;let tab=TAB[p];let ok=tab.split('/').map(Number).includes(COL[c]);if(ok)stats[tab].g++;else stats[tab].r++;let arr=last[tab];if(arr.length>=2&&!arr[arr.length-1]&&!arr[arr.length-2]){if(ok)alerta[tab].g++;else alerta[tab].r++;}arr.push(ok);}box.textContent=`📸 ${list.length} NÚMEROS LIDOS
-A 1/2 🟩 [${stats["1/2"].g}] 🟥 [${stats["1/2"].r}]
-B 1/3 🟩 [${stats["1/3"].g}] 🟥 [${stats["1/3"].r}]
-C 2/3 🟩 [${stats["2/3"].g}] 🟥 [${stats["2/3"].r}]
-NOVO (depois 2 red):
-A 1/2 🟩 [${alerta["1/2"].g}] 🟥 [${alerta["1/2"].r}]
-B 1/3 🟩 [${alerta["1/3"].g}] 🟥 [${alerta["1/3"].r}]
-C 2/3 🟩 [${alerta["2/3"].g}] 🟥 [${alerta["2/3"].r}]`;document.getElementById('listaNum').style.display='block';document.getElementById('listaNum').textContent=ordem.slice(0,100).join(', ');}catch(e){document.getElementById('placar').textContent='❌ ERRO: '+e.message;}}
+
+async function ler(input){
+ let file=input.files[0];if(!file)return;
+ document.getElementById('img').src=URL.createObjectURL(file);
+ document.getElementById('img').style.display='block';
+ let box=document.getElementById('placar');box.textContent='📷 LENDO NA ORDEM VISUAL... aguarde 8s';
+ try{
+   let r=await Tesseract.recognize(file,'eng',{tessedit_char_whitelist:'0123456789',psm:6});
+   // Pega palavras com posição Y,X para ordenar
+   let words=r.data.words||[];
+   let nums=[];
+   words.forEach(w=>{
+     let n=parseInt(w.text.replace(/[^0-9]/g,''));
+     if(!isNaN(n)&&n>=0&&n<=36) nums.push({n:n, y:w.bbox.y0, x:w.bbox.x0});
+   });
+   // Se não tem bbox, usa regex fallback
+   if(nums.length<20){
+     let txt=r.data.text;
+     let m=txt.match(/\b([0-9]|[12][0-9]|3[0-6])\b/g)||[];
+     nums=m.map((v,i)=>({n:parseInt(v), y:Math.floor(i/9)*30, x:(i%9)*30})).filter(o=>o.n>=0&&o.n<=36);
+   }
+   // Ordena por Y (topo pra baixo) depois X (esquerda pra direita) = ordem visual da foto
+   nums.sort((a,b)=> a.y!==b.y ? a.y-b.y : a.x-b.x);
+   let listaVisual=nums.map(o=>o.n);
+   // Remove duplicados de leitura do header (o 9 grande no topo)
+   if(listaVisual.length>200) listaVisual=listaVisual.slice(0,200);
+
+   let maisNovoEmCima=document.getElementById('inv').checked;
+   let ordemVelhoParaNovo = maisNovoEmCima ? listaVisual.slice().reverse() : listaVisual.slice();
+
+   // Placar
+   let s={"1/2":{g:0,r:0},"1/3":{g:0,r:0},"2/3":{g:0,r:0}};
+   let a2={"1/2":{g:0,r:0},"1/3":{g:0,r:0},"2/3":{g:0,r:0}};
+   let last={"1/2":[],"1/3":[],"2/3":[]};
+   for(let i=0;i<ordemVelhoParaNovo.length-1;i++){
+     let p=ordemVelhoParaNovo[i],c=ordemVelhoParaNovo[i+1];
+     if(p==0||c==0)continue;
+     let tab=TAB[p];let ok=tab.split('/').map(Number).includes(COL[c]);
+     if(ok)s[tab].g++;else s[tab].r++;
+     let arr=last[tab];
+     if(arr.length>=2&&!arr[arr.length-1]&&!arr[arr.length-2]){ if(ok)a2[tab].g++;else a2[tab].r++; }
+     arr.push(ok);
+   }
+   box.textContent=`📷 ${listaVisual.length} NÚMEROS (ordem visual topo->baixo)\nA 1/2 🟩 [${s["1/2"].g}] 🟥 [${s["1/2"].r}]\nB 1/3 🟩 [${s["1/3"].g}] 🟥 [${s["1/3"].r}]\nC 2/3 🟩 [${s["2/3"].g}] 🟥 [${s["2/3"].r}]\nNOVO (depois 2 red):\nA 1/2 🟩 [${a2["1/2"].g}] 🟥 [${a2["1/2"].r}]\nB 1/3 🟩 [${a2["1/3"].g}] 🟥 [${a2["1/3"].r}]\nC 2/3 🟩 [${a2["2/3"].g}] 🟥 [${a2["2/3"].r}]`;
+
+   document.getElementById('edit').value=ordemVelhoParaNovo.join(', ');
+   window._ultimaLista=ordemVelhoParaNovo;
+ }catch(e){document.getElementById('placar').textContent='ERRO: '+e.message;}
+}
+
+function preencher(){
+ let txt=document.getElementById('edit').value;
+ let lista=txt.split(/[^0-9]+/).map(v=>parseInt(v)).filter(n=>!isNaN(n)&&n>=0&&n<=36);
+ if(lista.length<5){alert('Edita a lista primeiro, tem poucos números');return;}
+ // Limpa e preenche igual v265 - salva e empurra pra direita
+ localStorage.clear();
+ let histA=[],histB=[],hist123A=[],hist123B=[],hist123Geral=[];
+ let countsA={},countsB={},ultimoA=null,ultimoB=null,acertoA=0,erroA=0,acertoB=0,erroB=0,acerto123A=0,erro123A=0,acerto123B=0,erro123B=0;
+ function calcAlerta(arr){if(!arr||arr.length<2)return false;let u=arr[0],p=arr[1];if(u&&u.ok)return false;if(u&&p&&!u.ok&&!p.ok)return true;return false;}
+
+ for(let num of lista){
+   let vaiA = histA.length <= histB.length;
+   let tabNum=TAB[num];
+   if(vaiA){
+     if(ultimoA===null){let e={prev:null,tab:tabNum,curr:num,ok:true,linha:'A',isPrimeiro:true};hist123A.unshift(e);hist123Geral.unshift(e);ultimoA=num;}
+     else{let tab=TAB[ultimoA];let ok=tab==="ZERO"?true:tab.split('/').map(Number).includes(COL[num]);let e={prev:ultimoA,tab:tab,curr:num,ok:ok,linha:'A',isPrimeiro:false};hist123A.unshift(e);hist123Geral.unshift(e);if(ok)acerto123A++;else{ if(calcAlerta(hist123A.slice(1))) erro123A++; }ultimoA=num;}
+   }else{
+     if(ultimoB===null){let e={prev:null,tab:tabNum,curr:num,ok:true,linha:'B',isPrimeiro:true};hist123B.unshift(e);hist123Geral.unshift(e);ultimoB=num;}
+     else{let tab=TAB[ultimoB];let ok=tab==="ZERO"?true:tab.split('/').map(Number).includes(COL[num]);let e={prev:ultimoB,tab:tab,curr:num,ok:ok,linha:'B',isPrimeiro:false};hist123B.unshift(e);hist123Geral.unshift(e);if(ok)acerto123B++;else{ if(calcAlerta(hist123B.slice(1))) erro123B++; }ultimoB=num;}
+   }
+   let okA=true,okB=true;
+   if(histA.length){let alvo=TAB[(typeof histA[0]==='object')?histA[0].num:histA[0]].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}
+   if(histB.length){let alvo=TAB[(typeof histB[0]==='object')?histB[0].num:histB[0]].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}
+   if(vaiA){let al=calcAlerta(histA);let foi=false;if(al){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}
+   else{let al=calcAlerta(histB);let foi=false;if(al){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}
+ }
+ localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
+ localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));
+ localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('hist123B',JSON.stringify(hist123B));
+ localStorage.setItem('hist123Geral',JSON.stringify(hist123Geral));
+ localStorage.setItem('ultimo123A',ultimoA);localStorage.setItem('ultimo123B',ultimoB);
+ localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);
+ localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);
+ localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);
+ localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
+ localStorage.setItem('modoIdx','1');
+ alert('✅ '+lista.length+' números preenchidos! Indo para RAFIGASP 123 GERAL...');
+ location.href='index.html';
+}
 </script></body></html>

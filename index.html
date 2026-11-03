@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes"><title>RAFIGASP v275 - SEM LEITOR</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}html,body{background:#000;min-height:100vh}body{display:block;overflow:auto;padding:4px}#app{width:98%;max-width:460px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;border-radius:10px;padding:3px;margin:0 auto;min-height:98vh;height:auto;overflow:visible}.topo{background:#ffcc00;text-align:center;padding:10px 6px;font-size:15px;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:40px}.verde{margin:2px;background:#0a5a2e;border-radius:6px;padding:4px;min-height:50px;display:none;overflow-x:auto}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.hist{width:32px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;border:1.5px solid #fff}.C{background:#00c000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:6px;margin:2px;padding:4px;display:block;min-height:80px}.linhaH{background:#001a1a;border-radius:5px;padding:4px;margin-bottom:3px;border:2px solid transparent}.linhaH h3{color:#ffcc00;font-size:10px}.linhaH.piscaAmarelo{background:#ffcc00!important;border:2px solid #fff!important;animation:piscaAmarelo 0.6s infinite}.linhaH.piscaAmarelo h3{color:#000!important}.linhaH.piscaAzul{background:#0066ff!important;border:2px solid #00ffff!important;animation:piscaAzul 0.6s infinite}.linhaH.piscaAzul h3{color:#fff!important}.faixa{display:flex;gap:6px;min-height:32px;flex-wrap:nowrap;overflow-x:auto;flex-direction:row;align-items:center}.q{width:34px;min-width:34px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.q.C{background:#00a000}.q.E{background:#c00000}.grupo{display:flex;gap:2px;padding:3px;border:2px solid #ffcc00;border-radius:6px;background:#002200;flex-shrink:0;margin-right:4px}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:3px 2px;padding:6px;display:flex;gap:5px;overflow-x:auto;min-height:44px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:9px;margin-right:6px;white-space:nowrap}.numGeral{min-width:32px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.primeiro{border:2px solid #ff0000;box-shadow:0 0 6px #ff0000}.vermelho{margin:2px;background:#0a3d1f;border-radius:6px;padding:3px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;flex:1}.cell{border:1px solid #d4af37;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;min-height:36px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffcc00!important;color:#000!important;border:2px solid #fff!important}.cell.marcadoB{background:#0066ff!important;color:#fff!important;border:2px solid #fff!important}.cell.marcadoAB{background:linear-gradient(135deg,#ffcc00 50%,#0066ff 50%)!important;color:#000!important;border:2px solid #fff!important}.cell.jogarA{border:3px solid #ffcc00!important;box-shadow:0 0 8px #ffcc00!important;transform:scale(1.05)}.cell.jogarB{border:3px solid #00ffff!important;box-shadow:0 0 8px #00ffff!important;transform:scale(1.05)}.badgeG{position:absolute;top:-5px;right:-3px;background:#000;color:#ffcc00;font-size:8px;padding:1px 4px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:13px;font-weight:900;border-radius:3px}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important;border:2px solid #fff!important}.doisparaum div.ativoB{background:#0066ff!important;color:#fff!important;border:2px solid #00ffff!important}.azulBox{display:flex;gap:4px;margin:4px 2px;perspective:600px}.azul{flex:1;background:#001a8a;border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:9px;font-weight:900;transition:all 0.3s ease;transform:scale(0.85);opacity:0.4}.azul span{color:#ffcc00}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:10;box-shadow:0 6px 20px rgba(255,204,0,0.8)!important;border:3px solid #fff!important}.azul.jogarB{background:#0066ff!important;color:#fff!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:10;box-shadow:0 6px 20px rgba(0,102,255,0.8)!important;border:3px solid #00ffff!important}.azul.alerta{background:#ff0000!important;color:#ffff00!important;animation:piscaAlerta 0.4s infinite!important;border:3px solid #ffff00!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:11}.azul.inativo{transform:scale(0.75) translateY(4px);opacity:0.25}.azul.sumi{opacity:0!important;height:0;padding:0;margin:0;overflow:hidden;transform:scale(0)}.btns{display:flex;gap:2px;padding:6px}.btns button{flex:1;padding:12px;border:0;border-radius:5px;font-weight:900;font-size:12px;background:#ffcc00}@keyframes piscaAlerta{0%,50%{background:#ff0000!important}51%,100%{background:#ffff00!important;color:#ff0000!important}}@keyframes piscaAzul{0%,50%{background:#0044ff!important}51%,100%{background:#001a8a!important}}@keyframes piscaAmarelo{0%,50%{background:#ffcc00!important}51%,100%{background:#b89600!important}}</style></head><body><div id="app">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes"><title>RAFIGASP v276 - AZUL MARCA IGUAL AMARELO</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}html,body{background:#000;min-height:100vh}body{display:block;overflow:auto;padding:4px}#app{width:98%;max-width:460px;background:#0a2e1e;display:flex;flex-direction:column;gap:2px;border-radius:10px;padding:3px;margin:0 auto;min-height:98vh;height:auto;overflow:visible}.topo{background:#ffcc00;text-align:center;padding:10px 6px;font-size:15px;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:40px}.verde{margin:2px;background:#0a5a2e;border-radius:6px;padding:4px;min-height:50px;display:none;overflow-x:auto}.verde.ativa{display:flex}.historico{display:flex;gap:4px}.coluna{display:flex;flex-direction:column;gap:3px}.hist{width:32px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;border:1.5px solid #fff}.C{background:#00c000}.E{background:#c00000}.boxHist{background:#0a3d1f;border-radius:6px;margin:2px;padding:4px;display:block;min-height:80px}.linhaH{background:#001a1a;border-radius:5px;padding:4px;margin-bottom:3px;border:2px solid transparent}.linhaH h3{color:#ffcc00;font-size:10px}.linhaH.piscaAmarelo{background:#ffcc00!important;border:2px solid #fff!important;animation:piscaAmarelo 0.6s infinite}.linhaH.piscaAmarelo h3{color:#000!important}.linhaH.piscaAzul{background:#0066ff!important;border:2px solid #00ffff!important;animation:piscaAzul 0.6s infinite}.linhaH.piscaAzul h3{color:#fff!important}.faixa{display:flex;gap:6px;min-height:32px;flex-wrap:nowrap;overflow-x:auto;flex-direction:row;align-items:center}.q{width:34px;min-width:34px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.q.C{background:#00a000}.q.E{background:#c00000}.grupo{display:flex;gap:2px;padding:3px;border:2px solid #ffcc00;border-radius:6px;background:#002200;flex-shrink:0;margin-right:4px}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:3px 2px;padding:6px;display:flex;gap:5px;overflow-x:auto;min-height:44px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:9px;margin-right:6px;white-space:nowrap}.numGeral{min-width:32px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.primeiro{border:2px solid #ff0000;box-shadow:0 0 6px #ff0000}.vermelho{margin:2px;background:#0a3d1f;border-radius:6px;padding:3px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;flex:1}.cell{border:1px solid #d4af37;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;min-height:36px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffcc00!important;color:#000!important;border:2px solid #fff!important}.cell.marcadoB{background:#0066ff!important;color:#fff!important;border:2px solid #fff!important}.cell.marcadoAB{background:linear-gradient(135deg,#ffcc00 50%,#0066ff 50%)!important;color:#000!important;border:2px solid #fff!important}.cell.jogarA{border:3px solid #ffcc00!important;box-shadow:0 0 12px #ffcc00!important;transform:scale(1.08);z-index:2}.cell.jogarB{border:3px solid #00ffff!important;box-shadow:0 0 12px #00ffff!important;transform:scale(1.08);z-index:2;background:#0044ff!important;color:#fff!important}.badgeG{position:absolute;top:-5px;right:-3px;background:#000;color:#ffcc00;font-size:8px;padding:1px 4px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3px}.doisparaum div{background:#0a5a2e;border:1px solid #d4af37;color:#d4d46a;text-align:center;padding:6px 0;font-size:13px;font-weight:900;border-radius:3px}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important;border:2px solid #fff!important;box-shadow:0 0 10px #ffcc00}.doisparaum div.ativoB{background:#0066ff!important;color:#fff!important;border:2px solid #00ffff!important;box-shadow:0 0 10px #00ffff}.azulBox{display:flex;gap:4px;margin:4px 2px;perspective:600px}.azul{flex:1;background:#001a8a;border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:9px;font-weight:900;transition:all 0.3s ease;transform:scale(0.85);opacity:0.4}.azul span{color:#ffcc00}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:10;box-shadow:0 6px 20px rgba(255,204,0,0.8)!important;border:3px solid #fff!important}.azul.jogarB{background:#0066ff!important;color:#fff!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:10;box-shadow:0 6px 20px rgba(0,102,255,0.8)!important;border:3px solid #00ffff!important}.azul.alerta{background:#ff0000!important;color:#ffff00!important;animation:piscaAlerta 0.4s infinite!important;border:3px solid #ffff00!important;transform:scale(1.15) translateY(-6px)!important;opacity:1!important;z-index:11}.azul.inativo{transform:scale(0.75) translateY(4px);opacity:0.25}.btns{display:flex;gap:2px;padding:6px}.btns button{flex:1;padding:12px;border:0;border-radius:5px;font-weight:900;font-size:12px;background:#ffcc00}@keyframes piscaAlerta{0%,50%{background:#ff0000!important}51%,100%{background:#ffff00!important;color:#ff0000!important}}@keyframes piscaAzul{0%,50%{background:#0044ff!important}51%,100%{background:#001a8a!important}}@keyframes piscaAmarelo{0%,50%{background:#ffcc00!important}51%,100%{background:#b89600!important}}</style></head><body><div id="app">
 <div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP GERAL</b></div>
 <div class="verde" id="verdeInicial"><div class="historico" id="listaInicial"></div></div>
 <div class="boxHist" id="boxH"></div>
@@ -21,16 +21,15 @@ let histGeralCron=JSON.parse(localStorage.getItem('histGeralCron')||'[]');
 let ultimo123A=localStorage.getItem('ultimo123A')?parseInt(localStorage.getItem('ultimo123A')):null;let ultimo123B=localStorage.getItem('ultimo123B')?parseInt(localStorage.getItem('ultimo123B')):null;
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
 let acerto123A=parseInt(localStorage.getItem('acerto123A')||'0'),erro123A=parseInt(localStorage.getItem('erro123A')||'0');let acerto123B=parseInt(localStorage.getItem('acerto123B')||'0'),erro123B=parseInt(localStorage.getItem('erro123B')||'0');
-let mostraAmarelo=localStorage.getItem('mostraAmarelo')==='false'?false:true;let mostraAzul=localStorage.getItem('mostraAzul')==='false'?false:true;
 let gridEl=document.getElementById('grid');for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';gridEl.appendChild(d);}
 function atualiza(){for(let i=1;i<=36;i++){let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(!b)continue;let ca=countsA[i]||0,cb=countsB[i]||0;let base='cell '+(REDS.includes(i)?'red':'black');let tot=0;if(modo==='123_A'){tot=ca;if(ca>0)base='cell marcadoA';}else if(modo==='123_B'){tot=cb;if(cb>0)base='cell marcadoB';}else{tot=ca+cb;if(ca>0&&cb>0)base='cell marcadoAB';else if(ca>0)base='cell marcadoA';else if(cb>0)base='cell marcadoB';}if(el)el.textContent=tot>0?tot+'x':'';b.className=base;}}
 function calcAlerta(arr){if(!arr||arr.length<2)return false;let ult=arr[0],pen=arr[1];if(ult&&ult.ok)return false;if(ult&&pen&&!ult.ok&&!pen.ok)return true;return false;}
 function mudaModo(){modoIdx=(modoIdx+1)%4;modo=MODOS[modoIdx];localStorage.setItem('modoIdx',modoIdx);render();}
 function criaGrupo(lista3){let g=document.createElement('div');g.className='grupo';lista3.forEach(h=>{let q=document.createElement('div');q.className='q '+(h.ok?'C':'E');q.textContent=h.curr;g.appendChild(q);});return g;}
-function marcaOndeJogar(tab,vezAmarela,mostrar){
+function marcaOndeJogar(tab,vezAmarela){
  document.querySelectorAll('.cell').forEach(c=>{c.classList.remove('jogarA','jogarB');});
  document.getElementById('d1').className='';document.getElementById('d2').className='';document.getElementById('d3').className='';
- if(!tab || !mostrar) return;
+ if(!tab) return;
  let cols=tab.split('/').map(Number);
  cols.forEach(col=>{let el=document.getElementById('d'+col);if(el)el.classList.add(vezAmarela?'ativoA':'ativoB');});
  for(let i=1;i<=36;i++){if(cols.includes(COL[i])){let el=document.getElementById('c'+i);if(el)el.classList.add(vezAmarela?'jogarA':'jogarB');}}
@@ -45,22 +44,22 @@ function render(){
    let d=document.createElement('div');d.className='numGeral '+h.linha+(idx===0?' primeiro':'');d.textContent=h.num;listaGeralEl.appendChild(d);
  });
  let azulAEl=document.getElementById('azulA'),azulBEl=document.getElementById('azulB');azulAEl.className='azul';azulBEl.className='azul';
- let tabParaMarcar=null;let vezAmarela=true;let mostrar=true;
+ let tabParaMarcar=null;let vezAmarela=true;
  let vezA_Geral = histA.length <= histB.length;
  if(modo==='123_A'){
    let tabA=ultimo123A!==null?TAB[ultimo123A]:null;
    document.getElementById('leftA').innerHTML='A: '+ (ultimo123A||'-')+' > <span>'+(tabA||'-')+'</span> JOGAR '+(tabA||'');
    document.getElementById('placarA').innerHTML='ACERTO <span>'+acerto123A+' X '+erro123A+'</span> ERRO';
-   tabParaMarcar=tabA;vezAmarela=true;mostrar=mostraAmarelo;
-   if(mostrar){azulAEl.classList.add(calcAlerta(hist123A)?'alerta':'jogarA');}else{azulAEl.classList.add('sumi');}
+   tabParaMarcar=tabA;vezAmarela=true;
+   azulAEl.classList.add(calcAlerta(hist123A)?'alerta':'jogarA');
    azulBEl.classList.add('inativo');
  }
  else if(modo==='123_B'){
    let tabB=ultimo123B!==null?TAB[ultimo123B]:null;
    document.getElementById('leftB').innerHTML='B: '+ (ultimo123B||'-')+' > <span>'+(tabB||'-')+'</span> JOGAR '+(tabB||'');
    document.getElementById('placarB').innerHTML='ACERTO <span>'+acerto123B+' X '+erro123B+'</span> ERRO';
-   tabParaMarcar=tabB;vezAmarela=false;mostrar=mostraAzul;
-   if(mostrar){azulBEl.classList.add(calcAlerta(hist123B)?'alerta':'jogarB');}else{azulBEl.classList.add('sumi');}
+   tabParaMarcar=tabB;vezAmarela=false;
+   azulBEl.classList.add(calcAlerta(hist123B)?'alerta':'jogarB');
    azulAEl.classList.add('inativo');
  }
  else if(modo==='123_GERAL'){
@@ -69,12 +68,12 @@ function render(){
      document.getElementById('leftA').innerHTML='A: JOGAR <span>'+(tabA||'-')+'</span> ('+(ultimo123A||'-')+')';document.getElementById('leftB').innerHTML='B: AGUARDANDO';
      document.getElementById('placarA').innerHTML='VEZ DO <span>A - '+(tabA||'-')+'</span>';document.getElementById('placarB').innerHTML='A:'+acerto123A+'/'+erro123A+' B:'+acerto123B+'/'+erro123B;
      azulAEl.classList.add(calcAlerta(hist123A)?'alerta':'jogarA');azulBEl.classList.add('inativo');
-     tabParaMarcar=tabA;vezAmarela=true;mostrar=true;
+     tabParaMarcar=tabA;vezAmarela=true;
    }else{
      document.getElementById('leftA').innerHTML='A: AGUARDANDO';document.getElementById('leftB').innerHTML='B: JOGAR <span>'+(tabB||'-')+'</span> ('+(ultimo123B||'-')+')';
      document.getElementById('placarA').innerHTML='VEZ DO <span>B - '+(tabB||'-')+'</span>';document.getElementById('placarB').innerHTML='A:'+acerto123A+'/'+erro123A+' B:'+acerto123B+'/'+erro123B;
      azulBEl.classList.add(calcAlerta(hist123B)?'alerta':'jogarB');azulAEl.classList.add('inativo');
-     tabParaMarcar=tabB;vezAmarela=false;mostrar=true;
+     tabParaMarcar=tabB;vezAmarela=false;
    }
  }
  else{
@@ -82,7 +81,6 @@ function render(){
    let alA=calcAlerta(histA),alB=calcAlerta(histB);if(alA)azulAEl.classList.add('alerta');if(alB)azulBEl.classList.add('alerta');
    if(histA.length){let n=(typeof histA[0]==='object')?histA[0].num:histA[0];document.getElementById('leftA').innerHTML='A: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftA').textContent='A: -';
    if(histB.length){let n=(typeof histB[0]==='object')?histB[0].num:histB[0];document.getElementById('leftB').innerHTML='B: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftB').textContent='B: -';
-   mostrar=false;
  }
  let boxH=document.getElementById('boxH');
  if(modo==='123_A' || modo==='123_B' || modo==='123_GERAL'){
@@ -108,7 +106,7 @@ function render(){
      let lh12=document.getElementById('lh12'),lh13=document.getElementById('lh13'),lh23=document.getElementById('lh23');
      if(lh12){
        lh12.classList.remove('piscaAmarelo','piscaAzul');lh13.classList.remove('piscaAmarelo','piscaAzul');lh23.classList.remove('piscaAmarelo','piscaAzul');
-       if(tabParaMarcar && mostrar){
+       if(tabParaMarcar){
          if(tabParaMarcar==='1/2')(vezAmarela?lh12.classList.add('piscaAmarelo'):lh12.classList.add('piscaAzul'));
          if(tabParaMarcar==='1/3')(vezAmarela?lh13.classList.add('piscaAmarelo'):lh13.classList.add('piscaAzul'));
          if(tabParaMarcar==='2/3')(vezAmarela?lh23.classList.add('piscaAmarelo'):lh23.classList.add('piscaAzul'));
@@ -116,7 +114,7 @@ function render(){
      }
    }
  }
- atualiza();marcaOndeJogar(tabParaMarcar,vezAmarela,mostrar);
+ atualiza();marcaOndeJogar(tabParaMarcar,vezAmarela);
 }render();
 function corr(){
  if(histGeralCron.length===0) return;
@@ -134,7 +132,6 @@ function corr(){
        if(r.isPrimeiro) ultimo123A=null;
      }
    }
-   mostraAmarelo=true;
  }else{
    if(histB.length){let r=histB.shift();let n=(typeof r==='object')?r.num:r;countsB[n]=Math.max(0,(countsB[n]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
    if(hist123Geral.length){
@@ -146,7 +143,6 @@ function corr(){
        if(r.isPrimeiro) ultimo123B=null;
      }
    }
-   mostraAzul=true;
  }
  localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));
  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
@@ -155,14 +151,11 @@ function corr(){
  localStorage.setItem('ultimo123A',ultimo123A);localStorage.setItem('ultimo123B',ultimo123B);
  localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);
  localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
- localStorage.setItem('mostraAmarelo',mostraAmarelo);localStorage.setItem('mostraAzul',mostraAzul);
  render();
 }
 function goNum(num){
  let vaiA = histA.length <= histB.length;
  histGeralCron.unshift({num:num,linha:vaiA?'A':'B'});localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));
- if(modo==='123_A'){mostraAmarelo=!mostraAmarelo;localStorage.setItem('mostraAmarelo',mostraAmarelo);}
- if(modo==='123_B'){mostraAzul=!mostraAzul;localStorage.setItem('mostraAzul',mostraAzul);}
  let tabNum = TAB[num];
  if(vaiA){if(ultimo123A===null){let entry={prev:null, tab:tabNum, curr:num, ok:true, linha:'A', isPrimeiro:true};hist123A.unshift(entry); hist123Geral.unshift(entry); ultimo123A=num;}else{let tab=TAB[ultimo123A];let ok=true;if(tab!=="ZERO"){ ok=tab.split('/').map(Number).includes(COL[num]); }let entry={prev:ultimo123A, tab:tab, curr:num, ok:ok, linha:'A', isPrimeiro:false};hist123A.unshift(entry); hist123Geral.unshift(entry);if(ok) acerto123A++; else { let ta=calcAlerta(hist123A.slice(1)); if(ta) erro123A++; }ultimo123A=num;}}else{if(ultimo123B===null){let entry={prev:null, tab:tabNum, curr:num, ok:true, linha:'B', isPrimeiro:true};hist123B.unshift(entry); hist123Geral.unshift(entry); ultimo123B=num;}else{let tab=TAB[ultimo123B];let ok=true;if(tab!=="ZERO"){ ok=tab.split('/').map(Number).includes(COL[num]); }let entry={prev:ultimo123B, tab:tab, curr:num, ok:ok, linha:'B', isPrimeiro:false};hist123B.unshift(entry); hist123Geral.unshift(entry);if(ok) acerto123B++; else { let ta=calcAlerta(hist123B.slice(1)); if(ta) erro123B++; }ultimo123B=num;}}localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('hist123B',JSON.stringify(hist123B));localStorage.setItem('hist123Geral',JSON.stringify(hist123Geral));localStorage.setItem('ultimo123A',ultimo123A);localStorage.setItem('ultimo123B',ultimo123B);localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);let okA=true,okB=true;if(histA.length){let alvo=TAB[(typeof histA[0]==='object')?histA[0].num:histA[0]].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}if(histB.length){let alvo=TAB[(typeof histB[0]==='object')?histB[0].num:histB[0]].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}if(vaiA){let al=calcAlerta(histA);let foi=false;if(al){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}else{let al=calcAlerta(histB);let foi=false;if(al){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
 function pick(n){goNum(n);}

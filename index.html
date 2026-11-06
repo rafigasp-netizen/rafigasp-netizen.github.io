@@ -1,5 +1,6 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP COACH DA ROLETA</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black;-webkit-tap-highlight-color:transparent}html,body{background:#000;min-height:100vh}body{padding:4px;touch-action:manipulation}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:70px;display:flex;flex-direction:column;gap:8px;overflow-x:hidden;border:3px solid #00ff00}.linha4{display:flex;gap:6px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:12px 6px;min-height:56px;border-radius:12px;background:#002a2a;border:3px solid #ffcc00}.linha4.A{border-color:#ffcc00}.linha4.B{border-color:#00ffff;background:#001a33}.linha4 .titulo4{font-size:20px;min-width:30px;color:#ffcc00}.linha4.B .titulo4{color:#00ffff}.num4{width:42px;min-width:42px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;border:2px solid #fff;flex-shrink:0;font-weight:900}.num4.C{background:#00a000!important}.num4.E{background:#c00000!important}.num4.pos1,.num4.pos4{border-width:3px!important;transform:scale(1.12)}.num4.pos1::after,.num4.pos4::after{display:none!important}.jogadaBox{background:#000;border:4px solid #00ff00;border-radius:12px;margin:2px;padding:14px;text-align:center;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center}.jogadaBox .quem{font-size:11px;color:#ffcc00}.jogadaBox span{color:#00ff00;font-size:24px;font-weight:900}.jogadaBox.B{border-color:#00ffff}.jogadaBox.B span{color:#00ffff}.faixaEntre{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:10px;display:flex;gap:6px;overflow-x:auto;min-height:52px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:12px}.numGeral{min-width:40px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00!important;color:#000!important}.numGeral.B{background:#0066ff!important;color:#fff!important}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:54px;position:relative;cursor:pointer;overflow:hidden}.cell.red{background:#b50000}.cell.black{background:#222}.cell.jogar{border:4px solid #ffcc00!important;box-shadow:0 0 14px #ffcc00!important;border-radius:8px;transform:scale(1.02);z-index:1}.cell.temA{background:#ffcc00!important;color:#000!important}.cell.temB{background:#0066ff!important;color:#fff!important}.cell.temAB{background:linear-gradient(135deg,#ffcc00 50%,#0066ff 50%)!important;color:#fff!important}.cell.temAB span{color:#fff!important;text-shadow:0 0 4px #000}.badge{position:absolute;top:1px;right:1px;background:#000;color:#fff;font-size:9px;padding:1px 4px;border-radius:10px;border:1px solid #fff;font-weight:900;z-index:2}.badge.A{background:#ffcc00;color:#000;border-color:#000}.badge.B{background:#0066ff;color:#fff}.badge.AB{background:#000;color:#ffcc00;border-color:#ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:12px 0;font-size:16px;font-weight:900}.doisparaum div.ativo{background:#ffcc00!important;color:#000!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00}</style></head><body><div id="app">
-<div class="topo" onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}"><b>RAFIGASP COACH DA ROLETA</b></div>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP COACH DA ROLETA</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black;-webkit-tap-highlight-color:transparent}html,body{background:#000;min-height:100vh}body{padding:4px;touch-action:manipulation}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.placar{display:flex;gap:4px;margin:2px}.placar div{flex:1;background:#000;border:2px solid #ffcc00;border-radius:8px;padding:8px 4px;text-align:center;color:#fff;font-size:11px;line-height:1.3}.placar div.A{border-color:#ffcc00}.placar div.B{border-color:#00ffff}.placar div b{font-size:16px;display:block}.placar div .win{color:#00ff00}.placar div .loss{color:#ff4444}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:70px;display:flex;flex-direction:column;gap:8px;overflow-x:hidden;border:3px solid #00ff00}.linha4{display:flex;gap:6px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:12px 6px;min-height:56px;border-radius:12px;background:#002a2a;border:3px solid #ffcc00}.linha4.A{border-color:#ffcc00}.linha4.B{border-color:#00ffff;background:#001a33}.linha4 .titulo4{font-size:20px;min-width:30px;color:#ffcc00}.linha4.B .titulo4{color:#00ffff}.num4{width:42px;min-width:42px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;border:2px solid #fff;flex-shrink:0;font-weight:900}.num4.C{background:#00a000!important}.num4.E{background:#c00000!important}.num4.pos1,.num4.pos4{transform:scale(1.12)}.num4.pos1::after,.num4.pos4::after{display:none!important}.jogadaBox{background:#000;border:4px solid #00ff00;border-radius:12px;margin:2px;padding:14px;text-align:center;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center}.jogadaBox .quem{font-size:11px;color:#ffcc00}.jogadaBox span{color:#00ff00;font-size:22px;font-weight:900}.jogadaBox.B{border-color:#00ffff}.jogadaBox.B span{color:#00ffff}.faixaEntre{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:10px;display:flex;gap:6px;overflow-x:auto;min-height:52px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:12px}.numGeral{min-width:40px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00!important;color:#000!important}.numGeral.B{background:#0066ff!important;color:#fff!important}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:54px;position:relative;cursor:pointer;overflow:hidden}.cell.red{background:#b50000}.cell.black{background:#222}.cell.pisca1{animation:piscaAmarelo 0.7s infinite;border:4px solid #ffff00!important;box-shadow:0 0 20px #ffff00!important;background:#ffcc00!important;color:#000!important;transform:scale(1.08);z-index:5;border-radius:8px}.cell.pisca2{animation:piscaAzul 0.7s infinite;border:4px solid #00ffff!important;box-shadow:0 0 20px #00ffff!important;background:#0066ff!important;color:#fff!important;transform:scale(1.08);z-index:5;border-radius:8px}.cell.pisca3{animation:piscaVerde 0.7s infinite;border:4px solid #00ff00!important;box-shadow:0 0 20px #00ff00!important;background:#00a000!important;color:#fff!important;transform:scale(1.08);z-index:5;border-radius:8px}.badge{position:absolute;top:1px;right:1px;background:#000;color:#fff;font-size:9px;padding:1px 4px;border-radius:10px;border:1px solid #fff;font-weight:900;z-index:2}.badge.A{background:#ffcc00;color:#000}.badge.B{background:#0066ff}.badge.AB{background:#000;color:#ffcc00;border-color:#ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:12px 0;font-size:16px;font-weight:900}.doisparaum div.ativo{background:#ffcc00!important;color:#000!important;box-shadow:0 0 15px #ffcc00}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00}@keyframes piscaAmarelo{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6);transform:scale(1.15)}}@keyframes piscaAzul{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6);transform:scale(1.15)}}@keyframes piscaVerde{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6);transform:scale(1.15)}}</style></head><body><div id="app">
+<div class="topo" onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}"><b>RAFIGASP COACH DA ROLETA</b></div>
+<div class="placar" id="placar"></div>
 <div class="verde" id="verdeInicial"></div>
 <div class="jogadaBox" id="jogadaBox"><div class="quem">-</div><span>JOGAR COLUNA -</span></div>
 <div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
@@ -8,10 +9,15 @@
 </div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+const PISCA_C1=[10,34,13,22,31];
+const PISCA_C2=[26,14,17];
+const PISCA_C3=[9,6,12,15,18,21,24,27];
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
 let histGeralCron=JSON.parse(localStorage.getItem('histGeralCron')||'[]');
 let activeA=JSON.parse(localStorage.getItem('activeA')||'null');let activeB=JSON.parse(localStorage.getItem('activeB')||'null');
 let cntA=JSON.parse(localStorage.getItem('cntA')||'{}');let cntB=JSON.parse(localStorage.getItem('cntB')||'{}');
+let acertoA=parseInt(localStorage.getItem('acertoA')||'0'),erroA=parseInt(localStorage.getItem('erroA')||'0');
+let acertoB=parseInt(localStorage.getItem('acertoB')||'0'),erroB=parseInt(localStorage.getItem('erroB')||'0');
 let gridEl=document.getElementById('grid');
 for(let i=1;i<=36;i++){
   let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;
@@ -20,13 +26,22 @@ for(let i=1;i<=36;i++){
 }
 function calcula(n1,n4){if(!n1||!n4) return null;let c1=COL[n1],c4=COL[n4];if(!c1||!c4) return null;if(c1===c4)return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[1,2,3].filter(c=>c!==c1)};else return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[c1,c4].sort((a,b)=>a-b)}}
 function marca(jogada){
- document.querySelectorAll('.cell').forEach(c=>c.classList.remove('jogar'));
+ document.querySelectorAll('.cell').forEach(c=>{c.classList.remove('pisca1','pisca2','pisca3');});
  document.getElementById('d1').className='';document.getElementById('d2').className='';document.getElementById('d3').className='';
  if(!jogada) return;
  jogada.jogar.forEach(col=>document.getElementById('d'+col).classList.add('ativo'));
- for(let i=1;i<=36;i++) if(jogada.jogar.includes(COL[i])) document.getElementById('c'+i).classList.add('jogar');
+ jogada.jogar.forEach(col=>{
+   let lista=col===1?PISCA_C1:col===2?PISCA_C2:PISCA_C3;
+   let cls=col===1?'pisca1':col===2?'pisca2':'pisca3';
+   lista.forEach(num=>{let el=document.getElementById('c'+num);if(el) el.classList.add(cls);});
+ });
 }
 function render(){
+ let placarEl=document.getElementById('placar');
+ let totalA=acertoA+erroA,totalB=acertoB+erroB;
+ let percA=totalA>0?Math.round(acertoA/totalA*100):0;
+ let percB=totalB>0?Math.round(acertoB/totalB*100):0;
+ placarEl.innerHTML='<div class="A"><b>A</b><span class="win">✅ '+acertoA+'</span> <span class="loss">❌ '+erroA+'</span><br>'+percA+'%</div><div class="B"><b>B</b><span class="win">✅ '+acertoB+'</span> <span class="loss">❌ '+erroB+'</span><br>'+percB+'%</div><div style="border-color:#00ff00"><b>TOTAL</b><span class="win">✅ '+(acertoA+acertoB)+'</span> <span class="loss">❌ '+(erroA+erroB)+'</span><br>'+(totalA+totalB>0?Math.round((acertoA+acertoB)/(totalA+totalB)*100):0)+'%</div>';
  let verdeEl=document.getElementById('verdeInicial');verdeEl.innerHTML="";
  function linha(titulo,arr,classe){
    let l=document.createElement('div');l.className='linha4 '+classe;
@@ -40,22 +55,14 @@ function render(){
  if(vezA) verdeEl.appendChild(linha('A:',histA,'A')); else verdeEl.appendChild(linha('B:',histB,'B'));
  let jog=vezA?activeA:activeB;
  let box=document.getElementById('jogadaBox');
- if(jog){box.className='jogadaBox '+(vezA?'A':'B');box.innerHTML='<div class="quem">'+(vezA?'A - VEZ DO A':'B - VEZ DO B')+'</div><span>'+(vezA?'A':'B')+': JOGAR COLUNA '+jog.jogar.join('/')+'</span>';}
+ if(jog){box.className='jogadaBox '+(vezA?'A':'B');box.innerHTML='<div class="quem">'+(vezA?'A - VEZ DO A':'B - VEZ DO B')+' - PISCANDO '+jog.jogar.join('/')+'</div><span>'+(vezA?'A':'B')+': JOGAR COLUNA '+jog.jogar.join('/')+'</span>';}
  else{box.className='jogadaBox '+(vezA?'A':'B');let arr=vezA?histA:histB;box.innerHTML='<div class="quem">'+(vezA?'A':'B')+'</div><span>'+(arr.length<4?'FALTAM '+(4-arr.length):'JOGAR -')+'</span>';}
  let g=document.getElementById('listaGeral');g.innerHTML="";histGeralCron.slice(0,30).forEach(h=>{let d=document.createElement('div');d.className='numGeral '+(h.linha==='A'?'A':'B');d.textContent=h.num;g.appendChild(d);});
- // PINTA ROLETA IGUAL SEU PRINT - AMARELO A / AZUL B + 1x 2x
  for(let i=1;i<=36;i++){
-   let c=document.getElementById('c'+i);
-   c.classList.remove('temA','temB','temAB');
-   let a=cntA[i]||0,b=cntB[i]||0,tot=a+b;
+   let tot=(cntA[i]||0)+(cntB[i]||0);
    let badge=document.getElementById('b'+i);
-   if(tot===0){badge.textContent='';badge.className='badge';}
-   else{
-     badge.textContent=tot+'x';
-     if(a>0&&b>0){c.classList.add('temAB');badge.className='badge AB';}
-     else if(a>0){c.classList.add('temA');badge.className='badge A';}
-     else{c.classList.add('temB');badge.className='badge B';}
-   }
+   if(tot===0) badge.textContent='';
+   else{badge.textContent=tot+'x';badge.className='badge '+((cntA[i]&&cntB[i])?'AB':cntA[i]?'A':'B');}
  }
  marca(jog);
 }
@@ -63,23 +70,29 @@ render();
 function corr(){
  if(histGeralCron.length===0) return;
  let u=histGeralCron.shift();
- if(u.linha==='A'){if(histA.length)histA.shift();cntA[u.num]=Math.max(0,(cntA[u.num]||1)-1);if(cntA[u.num]===0)delete cntA[u.num];if(u.foiAposta&&u.ok)activeA=null;}
- else{if(histB.length)histB.shift();cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1);if(cntB[u.num]===0)delete cntB[u.num];if(u.foiAposta&&u.ok)activeB=null;}
+ if(u.linha==='A'){
+   if(histA.length){let r=histA.shift();if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);if(r.ok)activeA=null;}}
+   cntA[u.num]=Math.max(0,(cntA[u.num]||1)-1);if(cntA[u.num]===0)delete cntA[u.num];
+ }else{
+   if(histB.length){let r=histB.shift();if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);if(r.ok)activeB=null;}}
+   cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1);if(cntB[u.num]===0)delete cntB[u.num];
+ }
  localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
  localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
  localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
+ localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
  render();
 }
 function goNum(num){
  let vaiA=histA.length<=histB.length;
  let col=COL[num];let ok=true,foi=false;
  if(vaiA){
-   if(activeA){foi=true;ok=activeA.jogar.includes(col);if(ok)activeA=null;}
+   if(activeA){foi=true;ok=activeA.jogar.includes(col);if(ok){acertoA++;activeA=null;}else erroA++;}
    histA.unshift({num:num,ok:ok,foiAposta:foi});cntA[num]=(cntA[num]||0)+1;
    histGeralCron.unshift({num:num,linha:'A',ok:ok,foiAposta:foi});
    if(!activeA&&histA.length>=4)activeA=calcula(histA[0].num,histA[3].num);
  }else{
-   if(activeB){foi=true;ok=activeB.jogar.includes(col);if(ok)activeB=null;}
+   if(activeB){foi=true;ok=activeB.jogar.includes(col);if(ok){acertoB++;activeB=null;}else erroB++;}
    histB.unshift({num:num,ok:ok,foiAposta:foi});cntB[num]=(cntB[num]||0)+1;
    histGeralCron.unshift({num:num,linha:'B',ok:ok,foiAposta:foi});
    if(!activeB&&histB.length>=4)activeB=calcula(histB[0].num,histB[3].num);
@@ -87,6 +100,7 @@ function goNum(num){
  localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
  localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
  localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
+ localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
  render();
 }
 function pick(n){goNum(n);}

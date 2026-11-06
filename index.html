@@ -1,11 +1,11 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP COACH v309 FIX</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black; -webkit-tap-highlight-color: transparent;}html,body{background:#000;min-height:100vh}body{display:block;overflow:auto;padding:4px;touch-action: manipulation;}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:70px;display:flex;flex-direction:column;gap:8px;overflow-x:auto;border:3px solid #00ff00}.linha4{display:flex;gap:5px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 6px;min-height:46px;border-radius:12px;background:#002a2a;border:3px solid #ffcc00}.linha4 .titulo4{font-size:18px;min-width:26px;flex-shrink:0;color:#ffcc00}.num4{width:38px;min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;border:2px solid #fff;flex-shrink:0;font-weight:900}.num4.C{background:#00a000!important}.num4.E{background:#c00000!important}.num4.neutro{background:#444!important}.num4.destaque{border:3px solid #ffff00!important;box-shadow:0 0 12px #ffff00;transform:scale(1.15)}.jogadaBox{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:12px;text-align:center;color:#fff;font-size:14px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.jogadaBox span{color:#00ff00;font-size:19px;font-weight:900}.jogadaBox.igual{border-color:#ff0000;background:#2a0000}.jogadaBox.diferente{border-color:#00ff00;background:#002a00}.jogadaBox.acerto{box-shadow:0 0 20px #00ff00}.jogadaBox.erro{box-shadow:0 0 20px #ff0000}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:2px;padding:8px;display:flex;gap:6px;overflow-x:auto;min-height:46px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:11px;white-space:nowrap}.numGeral{min-width:36px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.C{border-color:#00ff00;background:#00a000}.numGeral.E{border-color:#ff0000;background:#c00000}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;min-height:54px;position:relative;cursor:pointer;user-select:none}.cell:active{transform:scale(0.92)}.cell.red{background:#b50000}.cell.black{background:#222}.cell.jogarA{border:4px solid #ffcc00!important;box-shadow:0 0 20px #ffcc00!important;transform:scale(1.06);z-index:3;border-radius:10px}.cell.jogarB{border:4px solid #00ffff!important;box-shadow:0 0 20px #00ffff!important;transform:scale(1.06);z-index:3;background:#0044ff!important}.badgeG{position:absolute;top:2px;right:2px;background:#000;color:#ffcc00;font-size:9px;padding:1px 5px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:14px 0;font-size:16px;font-weight:900;cursor:pointer}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important}.doisparaum div.ativoB{background:#0066ff!important;color:#fff!important}.azulBox{display:flex;gap:4px;margin:4px 2px}.azul{flex:1;background:#001a8a;border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.1);border:3px solid #fff!important}.azul.jogarB{background:#0066ff!important;color:#fff!important;transform:scale(1.1);border:3px solid #00ffff!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00;cursor:pointer}.btns button:active{transform:scale(0.95)}</style></head><body><div id="app">
-<div class="topo" onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}"><b>RAFIGASP COACH DA ROLETA - TOQUE AQUI P/ LIMPAR</b></div>
-<div class="verde" id="verdeInicial"><div class="linha4"><div class="titulo4">A:</div><span style="color:#fff;font-size:12px">TOQUE NOS NÚMEROS ABAIXO</span></div></div>
-<div class="jogadaBox" id="jogadaBox">TOQUE 2 NÚMEROS ABAIXO<br><small>Ex: 24+6 mesma coluna C3 → JOGA 1/2 (VERDE=ACERTO VERMELHO=ERRO)</small></div>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP v310 1+4</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black;-webkit-tap-highlight-color:transparent}html,body{background:#000;min-height:100vh}body{padding:4px;touch-action:manipulation}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:14px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:70px;display:flex;flex-direction:column;gap:8px;overflow-x:auto;border:3px solid #00ff00}.linha4{display:flex;gap:6px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 6px;min-height:50px;border-radius:12px;background:#002a2a;border:3px solid #ffcc00}.linha4 .titulo4{font-size:18px;min-width:26px;flex-shrink:0;color:#ffcc00}.num4{width:40px;min-width:40px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;border:2px solid #fff;flex-shrink:0;font-weight:900;position:relative}.num4.C{background:#00a000!important}.num4.E{background:#c00000!important}.num4.neutro{background:#444!important}.num4.pos1{border:4px solid #ff0000!important;box-shadow:0 0 15px #ff0000!important;transform:scale(1.25);z-index:3;background:#ffff00!important;color:#000!important}.num4.pos4{border:4px solid #ff0000!important;box-shadow:0 0 15px #ff0000!important;transform:scale(1.25);z-index:3;background:#ffff00!important;color:#000!important}.num4.pos1::after{content:'1º';position:absolute;top:-10px;left:-4px;background:#ff0000;color:#fff;font-size:8px;padding:1px 4px;border-radius:4px}.num4.pos4::after{content:'4º';position:absolute;top:-10px;left:-4px;background:#ff0000;color:#fff;font-size:8px;padding:1px 4px;border-radius:4px}.jogadaBox{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:12px;text-align:center;color:#fff;font-size:14px;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.jogadaBox span{color:#00ff00;font-size:20px;font-weight:900}.jogadaBox.igual{border-color:#ff0000;background:#2a0000;animation:pisca 0.8s infinite}.jogadaBox.diferente{border-color:#00ff00;background:#002a00}.jogadaBox.acerto{box-shadow:0 0 20px #00ff00}.jogadaBox.erro{box-shadow:0 0 20px #ff0000}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:2px;padding:8px;display:flex;gap:6px;overflow-x:auto;min-height:46px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:11px;white-space:nowrap}.numGeral{min-width:36px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.C{border-color:#00ff00;background:#00a000}.numGeral.E{border-color:#ff0000;background:#c00000}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;min-height:54px;position:relative;cursor:pointer;user-select:none}.cell:active{transform:scale(0.92)}.cell.red{background:#b50000}.cell.black{background:#222}.cell.jogarA{border:5px solid #ffcc00!important;box-shadow:0 0 22px #ffcc00!important;transform:scale(1.08);z-index:3;border-radius:10px;animation:piscaJ 0.5s infinite}.badgeG{position:absolute;top:2px;right:2px;background:#000;color:#ffcc00;font-size:9px;padding:1px 5px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:14px 0;font-size:16px;font-weight:900}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important;animation:piscaJ 0.5s infinite}.azulBox{display:flex;gap:4px;margin:4px 2px}.azul{flex:1;background:#001a8a;border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.1);border:3px solid #fff!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00;cursor:pointer}@keyframes pisca{0%,50%{background:#2a0000}51%,100%{background:#550000}}@keyframes piscaJ{0%,50%{transform:scale(1.08)}51%,100%{transform:scale(1.12)}}</style></head><body><div id="app">
+<div class="topo" onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}"><b>RAFIGASP - 1º+4º NÚMERO - TOQUE P/ LIMPAR</b></div>
+<div class="verde" id="verdeInicial"></div>
+<div class="jogadaBox" id="jogadaBox">TOQUE 4 NÚMEROS...<br><small>Vai pegar 1º + 4º como você riscou</small></div>
 <div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
-<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1" onclick="pickCol(1)">1</div><div id="d2" onclick="pickCol(2)">2</div><div id="d3" onclick="pickCol(3)">3</div></div></div>
+<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div></div></div>
 <div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: VEZ</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: ESPERA</div><div id="placarB">0 X 0</div></div></div>
-<div class="btns"><button onclick="corr()">↩️ CORRIGIR ÚLTIMO</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">🗑️ LIMPAR TUDO</button></div>
+<div class="btns"><button onclick="corr()">↩️ CORRIGIR</button><button onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}">🗑️ LIMPAR</button></div>
 </div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
@@ -13,26 +13,18 @@ let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');let countsB=JSON.pars
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
 let histGeralCron=JSON.parse(localStorage.getItem('histGeralCron')||'[]');
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
-// LIMPA FORMATO ANTIGO QUE QUEBRAVA CLIQUE
-try{ if(histA.length>0 && typeof histA[0]==='number') { localStorage.clear(); histA=[]; histB=[]; histGeralCron=[]; countsA={}; countsB={}; acertoA=0;erroA=0;acertoB=0;erroB=0; } }catch(e){}
+try{ if(histA.length>0 && typeof histA[0]==='number'){ localStorage.clear(); histA=[]; histB=[]; histGeralCron=[]; countsA={}; countsB={}; acertoA=0;erroA=0;acertoB=0;erroB=0; } }catch(e){}
 let gridEl=document.getElementById('grid');
-for(let i=1;i<=36;i++){
-  let d=document.createElement('div');
-  d.className='cell '+(REDS.includes(i)?'red':'black');
-  d.id='c'+i;
-  d.setAttribute('onclick','pick('+i+')');
-  d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';
-  gridEl.appendChild(d);
-}
-function calculaJogada(n1,n2){
-  let c1=COL[n1],c2=COL[n2];
-  if(!c1||!c2||c1===0||c2===0) return null;
-  if(c1===c2){
+for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.setAttribute('onclick','pick('+i+')');d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';gridEl.appendChild(d);}
+function calculaJogada1e4(n1,n4){
+  let c1=COL[n1],c4=COL[n4];
+  if(!c1||!c4||c1===0||c4===0) return null;
+  if(c1===c4){
     let jogar=[1,2,3].filter(c=>c!==c1);
-    return {tipo:'IGUAL',c1:c1,c2:c2,jogar:jogar,txt:'IGUAL C'+c1+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
+    return {tipo:'IGUAL',c1:c1,c4:c4,jogar:jogar,txt:'IGUAL C'+c1+' (7 e 7) → JOGAR '+jogar.join('/'), n1:n1,n4:n4};
   }else{
-    let jogar=[c1,c2].sort((a,b)=>a-b);
-    return {tipo:'DIFERENTE',c1:c1,c2:c2,jogar:jogar,txt:'DIFERENTE C'+c1+'/C'+c2+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
+    let jogar=[c1,c4].sort((a,b)=>a-b);
+    return {tipo:'DIFERENTE',c1:c1,c4:c4,jogar:jogar,txt:'DIFERENTE C'+c1+'/C'+c4+' → JOGAR '+jogar.join('/'), n1:n1,n4:n4};
   }
 }
 function marcaOndeJogar(jogada){
@@ -43,15 +35,17 @@ function marcaOndeJogar(jogada){
  for(let i=1;i<=36;i++){if(jogada.jogar.includes(COL[i])){let el=document.getElementById('c'+i);if(el)el.classList.add('jogarA');}}
 }
 function render(){
- let verdeEl=document.getElementById('verdeInicial');
- verdeEl.innerHTML="";
+ let verdeEl=document.getElementById('verdeInicial');verdeEl.innerHTML="";
  function criaLinha(titulo, arr){
    let linha=document.createElement('div');linha.className='linha4';
    let t=document.createElement('div');t.className='titulo4';t.textContent=titulo;linha.appendChild(t);
    arr.slice(0,20).forEach((item, idx)=>{
-     let num=item.num;let ok=item.ok;let foi=item.foiAposta;
-     let cls='num4 '+(idx<2?'neutro':(ok?'C':'E'));
-     if(idx===0) cls+=' destaque';
+     let num=item.num;let ok=item.ok;
+     let cls='num4 ';
+     if(idx<4) cls+='neutro';
+     else cls+=(ok?'C':'E');
+     if(idx===0) cls+=' pos1';
+     if(idx===3) cls+=' pos4';
      let d=document.createElement('div');d.className=cls;d.textContent=num;linha.appendChild(d);
    });
    return linha;
@@ -60,30 +54,31 @@ function render(){
  let jogadaAtual=null;let acertoAtual=null;
  if(vezA){
    if(histA.length>0) verdeEl.appendChild(criaLinha('A:',histA));
-   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">A:</div><span style="color:#fff;font-size:13px">VEZ DO A - TOQUE UM NÚMERO ABAIXO</span></div>';
-   if(histA.length>=2){
-     let n1=histA[0].num, n2=histA[1].num;
-     jogadaAtual=calculaJogada(n1,n2);
-     if(histA.length>=3) acertoAtual=histA[0].ok;
+   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">A:</div><span style="color:#fff;font-size:13px">VEZ DO A - TOQUE 4 NÚMEROS</span></div>';
+   if(histA.length>=4){
+     let n1=histA[0].num, n4=histA[3].num;
+     jogadaAtual=calculaJogada1e4(n1,n4);
+     if(histA.length>=5) acertoAtual=histA[0].ok;
    }
  }else{
    if(histB.length>0) verdeEl.appendChild(criaLinha('B:',histB));
-   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">B:</div><span style="color:#fff;font-size:13px">VEZ DO B - TOQUE UM NÚMERO ABAIXO</span></div>';
-   if(histB.length>=2){
-     let n1=histB[0].num, n2=histB[1].num;
-     jogadaAtual=calculaJogada(n1,n2);
-     if(histB.length>=3) acertoAtual=histB[0].ok;
+   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">B:</div><span style="color:#fff;font-size:13px">VEZ DO B - TOQUE 4 NÚMEROS</span></div>';
+   if(histB.length>=4){
+     let n1=histB[0].num, n4=histB[3].num;
+     jogadaAtual=calculaJogada1e4(n1,n4);
+     if(histB.length>=5) acertoAtual=histB[0].ok;
    }
  }
  let box=document.getElementById('jogadaBox');
  if(jogadaAtual){
    let statusTxt = acertoAtual===null?'':(acertoAtual?' ✅ VERDE ACERTOU!':' ❌ VERMELHO ERROU!');
    box.className='jogadaBox '+(jogadaAtual.tipo==='IGUAL'?'igual':'diferente')+(acertoAtual!==null?(acertoAtual?' acerto':' erro'):'');
-   box.innerHTML='<div>'+jogadaAtual.n1+'(C'+jogadaAtual.c1+') + '+jogadaAtual.n2+'(C'+jogadaAtual.c2+') = '+jogadaAtual.txt+'</div><span>JOGAR COLUNA '+jogadaAtual.jogar.join('/')+statusTxt+'</span>';
+   box.innerHTML='<div>1º='+jogadaAtual.n1+'(C'+jogadaAtual.c1+') + 4º='+jogadaAtual.n4+'(C'+jogadaAtual.c4+') = '+jogadaAtual.txt+'</div><span>JOGAR COLUNA '+jogadaAtual.jogar.join('/')+statusTxt+'</span>';
  }else{
    box.className='jogadaBox';
-   if((vezA?histA.length:histB.length)===0) box.innerHTML='TOQUE 2 NÚMEROS ABAIXO<br><small>24(C3)+6(C3) IGUAL → JOGA 1/2</small>';
-   else if((vezA?histA.length:histB.length)===1) box.innerHTML='FALTA 1 NÚMERO...<br><small>Toque mais um pra formar a dupla</small>';
+   let qtd = vezA?histA.length:histB.length;
+   if(qtd===0) box.innerHTML='TOQUE 4 NÚMEROS...<br><small>Vai pegar 1º + 4º como você riscou em vermelho</small>';
+   else box.innerHTML='FALTAM '+(4-qtd)+' NÚMEROS...<br><small>Atual: '+qtd+'/4 - Precisa do 1º e 4º</small>';
  }
  let listaGeralEl=document.getElementById('listaGeral');listaGeralEl.innerHTML="";
  histGeralCron.slice(0,20).forEach((h)=>{
@@ -116,15 +111,15 @@ function goNum(num){
  let colNum=COL[num];
  let ok=true;let foiAposta=false;
  if(vaiA){
-   if(histA.length>=2){
-     let jogada=calculaJogada(histA[0].num,histA[1].num);
+   if(histA.length>=4){
+     let jogada=calculaJogada1e4(histA[0].num,histA[3].num);
      if(jogada){foiAposta=true;ok=jogada.jogar.includes(colNum);if(ok)acertoA++;else erroA++;}
    }
    histA.unshift({num:num,ok:ok,foiAposta:foiAposta});countsA[num]=(countsA[num]||0)+1;
    histGeralCron.unshift({num:num,linha:'A',ok:ok,foiAposta:foiAposta});
  }else{
-   if(histB.length>=2){
-     let jogada=calculaJogada(histB[0].num,histB[1].num);
+   if(histB.length>=4){
+     let jogada=calculaJogada1e4(histB[0].num,histB[3].num);
      if(jogada){foiAposta=true;ok=jogada.jogar.includes(colNum);if(ok)acertoB++;else erroB++;}
    }
    histB.unshift({num:num,ok:ok,foiAposta:foiAposta});countsB[num]=(countsB[num]||0)+1;
@@ -136,6 +131,5 @@ function goNum(num){
  localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);
  render();
 }
-function pick(n){console.log('pick',n); goNum(n);}
-function pickCol(c){console.log('col',c);}
+function pick(n){goNum(n);}
 </script></body></html>

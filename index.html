@@ -1,223 +1,141 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAFIGASP COACH DA ROLETA v307 - 2 NUM COLUNA</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black}html,body{background:#000;min-height:100vh}body{display:block;overflow:auto;padding:4px}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:10px 4px;font-size:15px;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:40px}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:6px;min-height:70px;display:none;flex-direction:column;gap:8px;overflow-x:auto}.verde.ativa{display:flex}.linha4{display:flex;gap:4px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 6px;min-height:44px;border-radius:12px;border:3px solid #00ffff;box-shadow:0 0 15px #00ffff;background:#002a2a}.linha4.ativoA{border:3px solid #fff!important;background:#ffcc00!important;box-shadow:0 0 25px #ffcc00!important}.linha4.ativoB{border:3px solid #00ffff!important;background:#0066ff!important;box-shadow:0 0 25px #0066ff!important}.linha4 .titulo4{font-size:16px;min-width:24px;flex-shrink:0}.linha4.ativoA .titulo4{color:#000!important}.linha4.ativoB .titulo4{color:#fff!important}.num4{width:32px;min-width:32px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;border:1.5px solid #fff;flex-shrink:0}.num4.C{background:#00a000}.num4.E{background:#c00000}.num4.novo{transform:scale(1.2);border:2px solid #fff;box-shadow:0 0 12px #fff;z-index:2}.num4.destaque{border:3px solid #ff0000!important;box-shadow:0 0 15px #ff0000!important;transform:scale(1.25)!important}.jogadaBox{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:10px;text-align:center;color:#fff;font-size:13px;min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.jogadaBox span{color:#00ff00;font-size:18px}.jogadaBox.igual{background:#ff0000;color:#fff;border-color:#fff;animation:piscaVermelho 0.8s infinite}.jogadaBox.diferente{background:#00a000;color:#fff;border-color:#00ff00}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:2px;padding:8px;display:flex;gap:5px;overflow-x:auto;min-height:44px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:10px;white-space:nowrap}.numGeral{min-width:34px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:1.5px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.primeiro{border:2px solid #ff0000}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:46px;position:relative}.cell.red{background:#b50000}.cell.black{background:#111}.cell.marcadoA{background:#ffcc00!important;color:#000!important}.cell.marcadoB{background:#0066ff!important;color:#fff!important}.cell.marcadoAB{background:linear-gradient(135deg,#ffcc00 50%,#0066ff 50%)!important;color:#000!important}.cell.jogarA{border:4px solid #ffcc00!important;box-shadow:0 0 18px #ffcc00!important;transform:scale(1.08);z-index:3;border-radius:8px;animation:piscaJogar 0.6s infinite}.cell.jogarB{border:4px solid #00ffff!important;box-shadow:0 0 18px #00ffff!important;transform:scale(1.08);z-index:3;background:#0044ff!important;color:#fff!important;border-radius:8px;animation:piscaJogar 0.6s infinite}.badgeG{position:absolute;top:2px;right:2px;background:#000;color:#ffcc00;font-size:9px;padding:1px 5px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:12px 0;font-size:15px;font-weight:900}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important;animation:piscaJogar 0.6s infinite}.doisparaum div.ativoB{background:#0066ff!important;color:#fff!important;animation:piscaJogar 0.6s infinite}.azulBox{display:flex;gap:4px;margin:4px 2px}.azul{flex:1;background:#001a8a;border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:10px;font-weight:900;transform:scale(0.85);opacity:0.4}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.2) translateY(-8px)!important;opacity:1!important;z-index:10;box-shadow:0 8px 25px rgba(255,204,0,0.9)!important;border:3px solid #fff!important}.azul.jogarB{background:#0066ff!important;color:#fff!important;transform:scale(1.2) translateY(-8px)!important;opacity:1!important;z-index:10;box-shadow:0 8px 25px rgba(0,102,255,0.9)!important;border:3px solid #00ffff!important}.azul.alerta{background:#ff0000!important;color:#ffff00!important;animation:piscaAlerta 0.4s infinite!important;border:3px solid #ffff00!important;transform:scale(1.2) translateY(-8px)!important;opacity:1!important;z-index:11}.azul.inativo{transform:scale(0.7) translateY(6px);opacity:0.2}.btns{display:flex;gap:2px;padding:6px}.btns button{flex:1;padding:12px;border:0;border-radius:5px;font-weight:900;font-size:12px;background:#ffcc00}@keyframes piscaAlerta{0%,50%{background:#ff0000!important}51%,100%{background:#ffff00!important;color:#ff0000!important}}@keyframes piscaJogar{0%,50%{transform:scale(1.08)}51%,100%{transform:scale(1.12)}}@keyframes piscaVermelho{0%,50%{background:#ff0000}51%,100%{background:#aa0000}}</style></head><body><div id="app">
-<div class="topo" onclick="mudaModo()"><b id="tituloTopo">RAFIGASP COACH DA ROLETA</b></div>
-<div class="verde" id="verdeInicial"></div>
-<div class="jogadaBox" id="jogadaBox">AGUARDANDO 2 NÚMEROS...</div>
-<div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:5px"></div></div>
-<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div></div></div>
-<div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: -</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: -</div><div id="placarB">0 X 0</div></div></div>
-<div class="btns"><button onclick="corr()">CORRIGIR</button><button onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}">LIMPAR</button></div>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP COACH v309 FIX</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black; -webkit-tap-highlight-color: transparent;}html,body{background:#000;min-height:100vh}body{display:block;overflow:auto;padding:4px;touch-action: manipulation;}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:3px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.verde{margin:2px;background:#0a5a2e;border-radius:10px;padding:8px;min-height:70px;display:flex;flex-direction:column;gap:8px;overflow-x:auto;border:3px solid #00ff00}.linha4{display:flex;gap:5px;flex-wrap:nowrap;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 6px;min-height:46px;border-radius:12px;background:#002a2a;border:3px solid #ffcc00}.linha4 .titulo4{font-size:18px;min-width:26px;flex-shrink:0;color:#ffcc00}.num4{width:38px;min-width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;border:2px solid #fff;flex-shrink:0;font-weight:900}.num4.C{background:#00a000!important}.num4.E{background:#c00000!important}.num4.neutro{background:#444!important}.num4.destaque{border:3px solid #ffff00!important;box-shadow:0 0 12px #ffff00;transform:scale(1.15)}.jogadaBox{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:12px;text-align:center;color:#fff;font-size:14px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.jogadaBox span{color:#00ff00;font-size:19px;font-weight:900}.jogadaBox.igual{border-color:#ff0000;background:#2a0000}.jogadaBox.diferente{border-color:#00ff00;background:#002a00}.jogadaBox.acerto{box-shadow:0 0 20px #00ff00}.jogadaBox.erro{box-shadow:0 0 20px #ff0000}.faixaEntre{background:#000;border:2px solid #ffcc00;border-radius:8px;margin:2px;padding:8px;display:flex;gap:6px;overflow-x:auto;min-height:46px;align-items:center}.faixaEntre h4{color:#ffcc00;font-size:11px;white-space:nowrap}.numGeral{min-width:36px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00;color:#000}.numGeral.B{background:#0066ff}.numGeral.C{border-color:#00ff00;background:#00a000}.numGeral.E{border-color:#ff0000;background:#c00000}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px;min-height:54px;position:relative;cursor:pointer;user-select:none}.cell:active{transform:scale(0.92)}.cell.red{background:#b50000}.cell.black{background:#222}.cell.jogarA{border:4px solid #ffcc00!important;box-shadow:0 0 20px #ffcc00!important;transform:scale(1.06);z-index:3;border-radius:10px}.cell.jogarB{border:4px solid #00ffff!important;box-shadow:0 0 20px #00ffff!important;transform:scale(1.06);z-index:3;background:#0044ff!important}.badgeG{position:absolute;top:2px;right:2px;background:#000;color:#ffcc00;font-size:9px;padding:1px 5px;border-radius:8px;border:1px solid #ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:14px 0;font-size:16px;font-weight:900;cursor:pointer}.doisparaum div.ativoA{background:#ffcc00!important;color:#000!important}.doisparaum div.ativoB{background:#0066ff!important;color:#fff!important}.azulBox{display:flex;gap:4px;margin:4px 2px}.azul{flex:1;background:#001a8a;border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;color:#fff;font-size:11px;font-weight:900}.azul.jogarA{background:#ffcc00!important;color:#000!important;transform:scale(1.1);border:3px solid #fff!important}.azul.jogarB{background:#0066ff!important;color:#fff!important;transform:scale(1.1);border:3px solid #00ffff!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00;cursor:pointer}.btns button:active{transform:scale(0.95)}</style></head><body><div id="app">
+<div class="topo" onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}"><b>RAFIGASP COACH DA ROLETA - TOQUE AQUI P/ LIMPAR</b></div>
+<div class="verde" id="verdeInicial"><div class="linha4"><div class="titulo4">A:</div><span style="color:#fff;font-size:12px">TOQUE NOS NÚMEROS ABAIXO</span></div></div>
+<div class="jogadaBox" id="jogadaBox">TOQUE 2 NÚMEROS ABAIXO<br><small>Ex: 24+6 mesma coluna C3 → JOGA 1/2 (VERDE=ACERTO VERMELHO=ERRO)</small></div>
+<div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
+<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1" onclick="pickCol(1)">1</div><div id="d2" onclick="pickCol(2)">2</div><div id="d3" onclick="pickCol(3)">3</div></div></div>
+<div class="azulBox"><div class="azul" id="azulA"><div id="leftA">A: VEZ</div><div id="placarA">0 X 0</div></div><div class="azul" id="azulB"><div id="leftB">B: ESPERA</div><div id="placarB">0 X 0</div></div></div>
+<div class="btns"><button onclick="corr()">↩️ CORRIGIR ÚLTIMO</button><button onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">🗑️ LIMPAR TUDO</button></div>
 </div><script>
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
-const TAB={0:"ZERO",1:"2/3",2:"1/3",3:"1/2",4:"2/3",5:"1/3",6:"1/2",7:"2/3",8:"1/3",9:"1/2",10:"2/3",11:"1/3",12:"1/2",13:"2/3",14:"1/3",15:"1/2",16:"2/3",17:"1/3",18:"1/2",19:"2/3",20:"1/3",21:"1/2",22:"2/3",23:"1/3",24:"1/2",25:"2/3",26:"1/3",27:"1/2",28:"2/3",29:"1/3",30:"1/2",31:"2/3",32:"1/3",33:"1/2",34:"2/3",35:"1/3",36:"1/2"};
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
-const NOMES=["RAFIGASP COACH DA ROLETA","RAFIGASP COACH DA ROLETA - 123","RAFIGASP COACH DA ROLETA - A","RAFIGASP COACH DA ROLETA - B"];
-const MODOS=["GERAL","123_GERAL","123_A","123_B"];
-let modoIdx=parseInt(localStorage.getItem('modoIdx')||'0');if(modoIdx>=4)modoIdx=0;let modo=MODOS[modoIdx];
 let countsA=JSON.parse(localStorage.getItem('cntA')||'{}');let countsB=JSON.parse(localStorage.getItem('cntB')||'{}');
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
-let hist123A=JSON.parse(localStorage.getItem('hist123A')||'[]');let hist123B=JSON.parse(localStorage.getItem('hist123B')||'[]');
-let hist123Geral=JSON.parse(localStorage.getItem('hist123Geral')||'[]');
 let histGeralCron=JSON.parse(localStorage.getItem('histGeralCron')||'[]');
-let pendA=localStorage.getItem('pendA')?parseInt(localStorage.getItem('pendA')):null;
-let pendB=localStorage.getItem('pendB')?parseInt(localStorage.getItem('pendB')):null;
 let acertoA=parseInt(localStorage.getItem('placarAcertoA')||'0'),erroA=parseInt(localStorage.getItem('placarErroA')||'0');let acertoB=parseInt(localStorage.getItem('placarAcertoB')||'0'),erroB=parseInt(localStorage.getItem('placarErroB')||'0');
-let acerto123A=parseInt(localStorage.getItem('acerto123A')||'0'),erro123A=parseInt(localStorage.getItem('erro123A')||'0');let acerto123B=parseInt(localStorage.getItem('acerto123B')||'0'),erro123B=parseInt(localStorage.getItem('erro123B')||'0');
-let gridEl=document.getElementById('grid');for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.onclick=()=>pick(i);d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';gridEl.appendChild(d);}
-function atualiza(){for(let i=1;i<=36;i++){let el=document.getElementById('cnt'+i);let b=document.getElementById('c'+i);if(!b)continue;let ca=countsA[i]||0,cb=countsB[i]||0;let base='cell '+(REDS.includes(i)?'red':'black');let tot=0;if(modo==='123_A'){tot=ca;if(ca>0)base='cell marcadoA';}else if(modo==='123_B'){tot=cb;if(cb>0)base='cell marcadoB';}else{tot=ca+cb;if(ca>0&&cb>0)base='cell marcadoAB';else if(ca>0)base='cell marcadoA';else if(cb>0)base='cell marcadoB';}if(el)el.textContent=tot>0?tot+'x':'';b.className=base;}}
-function calcAlerta(arr){if(!arr||arr.length<2)return false;let ult=arr[0],pen=arr[1];if(ult&&ult.ok)return false;if(ult&&pen&&!ult.ok&&!pen.ok)return true;return false;}
-function mudaModo(){modoIdx=(modoIdx+1)%4;modo=MODOS[modoIdx];localStorage.setItem('modoIdx',modoIdx);render();}
+// LIMPA FORMATO ANTIGO QUE QUEBRAVA CLIQUE
+try{ if(histA.length>0 && typeof histA[0]==='number') { localStorage.clear(); histA=[]; histB=[]; histGeralCron=[]; countsA={}; countsB={}; acertoA=0;erroA=0;acertoB=0;erroB=0; } }catch(e){}
+let gridEl=document.getElementById('grid');
+for(let i=1;i<=36;i++){
+  let d=document.createElement('div');
+  d.className='cell '+(REDS.includes(i)?'red':'black');
+  d.id='c'+i;
+  d.setAttribute('onclick','pick('+i+')');
+  d.innerHTML='<span>'+i+'</span><span class="badgeG" id="cnt'+i+'"></span>';
+  gridEl.appendChild(d);
+}
 function calculaJogada(n1,n2){
   let c1=COL[n1],c2=COL[n2];
-  if(c1===0||c2===0) return null;
+  if(!c1||!c2||c1===0||c2===0) return null;
   if(c1===c2){
     let jogar=[1,2,3].filter(c=>c!==c1);
-    return {tipo:'IGUAL',c1:c1,c2:c2,jogar:jogar,txt:'COLUNA IGUAL C'+c1+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
+    return {tipo:'IGUAL',c1:c1,c2:c2,jogar:jogar,txt:'IGUAL C'+c1+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
   }else{
     let jogar=[c1,c2].sort((a,b)=>a-b);
-    return {tipo:'DIFERENTE',c1:c1,c2:c2,jogar:jogar,txt:'COLUNA DIFERENTE C'+c1+'/C'+c2+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
+    return {tipo:'DIFERENTE',c1:c1,c2:c2,jogar:jogar,txt:'DIFERENTE C'+c1+'/C'+c2+' → JOGAR '+jogar.join('/'), n1:n1,n2:n2};
   }
 }
-function marcaOndeJogar(jogada,vezAmarela){
+function marcaOndeJogar(jogada){
  document.querySelectorAll('.cell').forEach(c=>{c.classList.remove('jogarA','jogarB');});
  document.getElementById('d1').className='';document.getElementById('d2').className='';document.getElementById('d3').className='';
  if(!jogada) return;
- jogada.jogar.forEach(col=>{let el=document.getElementById('d'+col);if(el)el.classList.add(vezAmarela?'ativoA':'ativoB');});
- for(let i=1;i<=36;i++){if(jogada.jogar.includes(COL[i])){let el=document.getElementById('c'+i);if(el)el.classList.add(vezAmarela?'jogarA':'jogarB');}}
+ jogada.jogar.forEach(col=>{let el=document.getElementById('d'+col);if(el)el.classList.add('ativoA');});
+ for(let i=1;i<=36;i++){if(jogada.jogar.includes(COL[i])){let el=document.getElementById('c'+i);if(el)el.classList.add('jogarA');}}
 }
 function render(){
- document.getElementById('tituloTopo').textContent=NOMES[modoIdx];
- let ini=document.getElementById('verdeInicial'),bH=document.getElementById('boxH');
- if(modo==='GERAL'){ini.classList.add('ativa');bH.classList.remove('ativa');}else{ini.classList.remove('ativa');bH.classList.add('ativa');}
- let verdeEl=document.getElementById('verdeInicial');verdeEl.innerHTML="";
- function criaLinha4Junta(titulo, arr, classeAtivo){
-   let linha=document.createElement('div');linha.className='linha4 '+classeAtivo;
+ let verdeEl=document.getElementById('verdeInicial');
+ verdeEl.innerHTML="";
+ function criaLinha(titulo, arr){
+   let linha=document.createElement('div');linha.className='linha4';
    let t=document.createElement('div');t.className='titulo4';t.textContent=titulo;linha.appendChild(t);
-   let paraMostrar = arr.slice();
-   paraMostrar.forEach((item, idx)=>{
-     let num=(typeof item==='object')?item.num:item;
-     let ok=(typeof item==='object')?item.ok:true;
-     let d=document.createElement('div');d.className='num4 '+(ok?'C':'E')+(idx===0||idx===1?' destaque':'')+(idx===0?' novo':'');d.textContent=num;linha.appendChild(d);
+   arr.slice(0,20).forEach((item, idx)=>{
+     let num=item.num;let ok=item.ok;let foi=item.foiAposta;
+     let cls='num4 '+(idx<2?'neutro':(ok?'C':'E'));
+     if(idx===0) cls+=' destaque';
+     let d=document.createElement('div');d.className=cls;d.textContent=num;linha.appendChild(d);
    });
    return linha;
  }
- let vezA_Geral = histA.length <= histB.length;
- let jogadaAtual=null;
- if(modo==='GERAL'){
-   if(vezA_Geral){
-     if(histA.length>=2){
-       let n1=(typeof histA[0]==='object'?histA[0].num:histA[0]);
-       let n2=(typeof histA[1]==='object'?histA[1].num:histA[1]);
-       jogadaAtual=calculaJogada(n1,n2);
-       verdeEl.appendChild(criaLinha4Junta('A:',histA,'ativoA'));
-     }else if(histA.length>0){
-       verdeEl.appendChild(criaLinha4Junta('A:',histA,'ativoA'));
-     }else{
-       verdeEl.innerHTML='<div class="linha4 ativoA"><div class="titulo4">A:</div><span style="color:#000;font-size:12px">VEZ DO A - TOQUE 2 NÚMEROS</span></div>';
-     }
-   }else{
-     if(histB.length>=2){
-       let n1=(typeof histB[0]==='object'?histB[0].num:histB[0]);
-       let n2=(typeof histB[1]==='object'?histB[1].num:histB[1]);
-       jogadaAtual=calculaJogada(n1,n2);
-       verdeEl.appendChild(criaLinha4Junta('B:',histB,'ativoB'));
-     }else if(histB.length>0){
-       verdeEl.appendChild(criaLinha4Junta('B:',histB,'ativoB'));
-     }else{
-       verdeEl.innerHTML='<div class="linha4 ativoB"><div class="titulo4">B:</div><span style="color:#fff;font-size:12px">VEZ DO B - TOQUE 2 NÚMEROS</span></div>';
-     }
+ let vezA = histA.length <= histB.length;
+ let jogadaAtual=null;let acertoAtual=null;
+ if(vezA){
+   if(histA.length>0) verdeEl.appendChild(criaLinha('A:',histA));
+   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">A:</div><span style="color:#fff;font-size:13px">VEZ DO A - TOQUE UM NÚMERO ABAIXO</span></div>';
+   if(histA.length>=2){
+     let n1=histA[0].num, n2=histA[1].num;
+     jogadaAtual=calculaJogada(n1,n2);
+     if(histA.length>=3) acertoAtual=histA[0].ok;
    }
  }else{
-   if(histA.length>0) verdeEl.appendChild(criaLinha4Junta('A:',histA,''));
-   if(histB.length>0) verdeEl.appendChild(criaLinha4Junta('B:',histB,''));
-   if(histA.length>=2){
-     let n1=(typeof histA[0]==='object'?histA[0].num:histA[0]);
-     let n2=(typeof histA[1]==='object'?histA[1].num:histA[1]);
+   if(histB.length>0) verdeEl.appendChild(criaLinha('B:',histB));
+   else verdeEl.innerHTML='<div class="linha4"><div class="titulo4">B:</div><span style="color:#fff;font-size:13px">VEZ DO B - TOQUE UM NÚMERO ABAIXO</span></div>';
+   if(histB.length>=2){
+     let n1=histB[0].num, n2=histB[1].num;
      jogadaAtual=calculaJogada(n1,n2);
-   }else if(histB.length>=2){
-     let n1=(typeof histB[0]==='object'?histB[0].num:histB[0]);
-     let n2=(typeof histB[1]==='object'?histB[1].num:histB[1]);
-     jogadaAtual=calculaJogada(n1,n2);
+     if(histB.length>=3) acertoAtual=histB[0].ok;
    }
  }
- let boxJogada=document.getElementById('jogadaBox');
+ let box=document.getElementById('jogadaBox');
  if(jogadaAtual){
-   boxJogada.className='jogadaBox '+(jogadaAtual.tipo==='IGUAL'?'igual':'diferente');
-   boxJogada.innerHTML='<div>'+jogadaAtual.n1+' (C'+jogadaAtual.c1+') + '+jogadaAtual.n2+' (C'+jogadaAtual.c2+')</div><span>'+jogadaAtual.txt+'</span>';
+   let statusTxt = acertoAtual===null?'':(acertoAtual?' ✅ VERDE ACERTOU!':' ❌ VERMELHO ERROU!');
+   box.className='jogadaBox '+(jogadaAtual.tipo==='IGUAL'?'igual':'diferente')+(acertoAtual!==null?(acertoAtual?' acerto':' erro'):'');
+   box.innerHTML='<div>'+jogadaAtual.n1+'(C'+jogadaAtual.c1+') + '+jogadaAtual.n2+'(C'+jogadaAtual.c2+') = '+jogadaAtual.txt+'</div><span>JOGAR COLUNA '+jogadaAtual.jogar.join('/')+statusTxt+'</span>';
  }else{
-   boxJogada.className='jogadaBox';
-   boxJogada.innerHTML='AGUARDANDO 2 NÚMEROS...<br><small style="font-size:10px">Se igual (24=C3 + 6=C3) → joga 1/2<br>Se diferente (10=C1 + 29=C2) → joga 1/2</small>';
+   box.className='jogadaBox';
+   if((vezA?histA.length:histB.length)===0) box.innerHTML='TOQUE 2 NÚMEROS ABAIXO<br><small>24(C3)+6(C3) IGUAL → JOGA 1/2</small>';
+   else if((vezA?histA.length:histB.length)===1) box.innerHTML='FALTA 1 NÚMERO...<br><small>Toque mais um pra formar a dupla</small>';
  }
  let listaGeralEl=document.getElementById('listaGeral');listaGeralEl.innerHTML="";
- histGeralCron.slice().forEach((h,idx)=>{
-   let d=document.createElement('div');d.className='numGeral '+h.linha+(idx===0?' primeiro':'');d.textContent=h.num;listaGeralEl.appendChild(d);
+ histGeralCron.slice(0,20).forEach((h)=>{
+   let d=document.createElement('div');d.className='numGeral '+h.linha+(h.foiAposta?(h.ok?' C':' E'):'');d.textContent=h.num;listaGeralEl.appendChild(d);
  });
- let azulAEl=document.getElementById('azulA'),azulBEl=document.getElementById('azulB');azulAEl.className='azul';azulBEl.className='azul';
- let tabParaMarcar=null;let vezAmarela=true;
- if(modo==='123_A'){
-   let tabA=pendA!==null?TAB[pendA]:null;
-   if(tabA) document.getElementById('leftA').innerHTML='A: <span>'+tabA+'</span> JOGAR'; else document.getElementById('leftA').innerHTML='A: MARCAR NOVO';
-   document.getElementById('placarA').innerHTML='ACERTO <span>'+acerto123A+' X '+erro123A+'</span> ERRO';
-   azulAEl.classList.add(calcAlerta(hist123A)?'alerta':'jogarA');
-   azulBEl.classList.add('inativo');
- }
- else if(modo==='123_B'){
-   let tabB=pendB!==null?TAB[pendB]:null;
-   if(tabB) document.getElementById('leftB').innerHTML='B: <span>'+tabB+'</span> JOGAR'; else document.getElementById('leftB').innerHTML='B: MARCAR NOVO';
-   document.getElementById('placarB').innerHTML='ACERTO <span>'+acerto123B+' X '+erro123B+'</span> ERRO';
-   azulBEl.classList.add(calcAlerta(hist123B)?'alerta':'jogarB');
-   azulAEl.classList.add('inativo');
- }
- else if(modo==='123_GERAL'){
-   let tabA=pendA!==null?TAB[pendA]:null;let tabB=pendB!==null?TAB[pendB]:null;
-   if(vezA_Geral){
-     if(tabA) document.getElementById('leftA').innerHTML='A: JOGAR <span>'+tabA+'</span> ('+pendA+')'; else document.getElementById('leftA').innerHTML='A: MARCAR NOVO';
-     document.getElementById('leftB').innerHTML='B: PRÓXIMO AZUL';
-     document.getElementById('placarA').innerHTML='VEZ DO <span>A - '+(tabA||'-')+'</span>';document.getElementById('placarB').innerHTML='PRÓXIMO: B - '+(tabB||'-');
-     azulAEl.classList.add(calcAlerta(hist123A)?'alerta':'jogarA');azulBEl.classList.add('inativo');
-     vezAmarela=true;
-   }else{
-     document.getElementById('leftA').innerHTML='A: PRÓXIMO AMARELO';
-     if(tabB) document.getElementById('leftB').innerHTML='B: JOGAR <span>'+tabB+'</span> ('+pendB+')'; else document.getElementById('leftB').innerHTML='B: MARCAR NOVO';
-     document.getElementById('placarA').innerHTML='PRÓXIMO: A - '+(tabA||'-');document.getElementById('placarB').innerHTML='VEZ DO <span>B - '+(tabB||'-')+'</span>';
-     azulBEl.classList.add(calcAlerta(hist123B)?'alerta':'jogarB');azulAEl.classList.add('inativo');
-     vezAmarela=false;
-   }
- }
- else{
-   document.getElementById('placarA').innerHTML='ACERTO <span>'+acertoA+' X '+erroA+'</span> ERRO';document.getElementById('placarB').innerHTML='ACERTO <span>'+acertoB+' X '+erroB+'</span> ERRO';
-   let alA=calcAlerta(histA),alB=calcAlerta(histB);if(alA)azulAEl.classList.add('alerta');if(alB)azulBEl.classList.add('alerta');
-   if(histA.length){let n=(typeof histA[0]==='object')?histA[0].num:histA[0];document.getElementById('leftA').innerHTML='A: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftA').textContent='A: -';
-   if(histB.length){let n=(typeof histB[0]==='object')?histB[0].num:histB[0];document.getElementById('leftB').innerHTML='B: '+n+'> <span>'+TAB[n]+'</span>';}else document.getElementById('leftB').textContent='B: -';
- }
- atualiza();marcaOndeJogar(jogadaAtual,vezAmarela);
-}render();
+ document.getElementById('placarA').innerHTML=acertoA+' X '+erroA;
+ document.getElementById('placarB').innerHTML=acertoB+' X '+erroB;
+ document.getElementById('leftA').textContent=vezA?'A: VEZ':'A: ESPERA';
+ document.getElementById('leftB').textContent=!vezA?'B: VEZ':'B: ESPERA';
+ marcaOndeJogar(jogadaAtual);
+}
+render();
 function corr(){
  if(histGeralCron.length===0) return;
- let ultimo = histGeralCron[0];
+ let ultimo = histGeralCron.shift();
  let linhaErrada = ultimo.linha;
- histGeralCron.shift();
  if(linhaErrada==='A'){
-   if(histA.length){let r=histA.shift();let n=(typeof r==='object')?r.num:r;countsA[n]=Math.max(0,(countsA[n]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
-   if(hist123A.length>0){
-     let r=hist123A.shift();
-     pendA=r.prev;
-     if(r.ok) acerto123A=Math.max(0,acerto123A-1); else erro123A=Math.max(0,erro123A-1);
-   }else{
-     if(pendA!==null) pendA=null;
-   }
+   if(histA.length){let r=histA.shift();countsA[r.num]=Math.max(0,(countsA[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);}}
  }else{
-   if(histB.length){let r=histB.shift();let n=(typeof r==='object')?r.num:r;countsB[n]=Math.max(0,(countsB[n]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
-   if(hist123B.length>0){
-     let r=hist123B.shift();
-     pendB=r.prev;
-     if(r.ok) acerto123B=Math.max(0,acerto123B-1); else erro123B=Math.max(0,erro123B-1);
-   }else{
-     if(pendB!==null) pendB=null;
-   }
+   if(histB.length){let r=histB.shift();countsB[r.num]=Math.max(0,(countsB[r.num]||0)-1);if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);}}
  }
  localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));
  localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
  localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));
- localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('hist123B',JSON.stringify(hist123B));localStorage.setItem('hist123Geral',JSON.stringify(hist123Geral));
- localStorage.setItem('pendA',pendA);localStorage.setItem('pendB',pendB);
  localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);
- localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
  render();
 }
 function goNum(num){
  let vaiA = histA.length <= histB.length;
- histGeralCron.unshift({num:num,linha:vaiA?'A':'B'});localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));
- let tabNum = TAB[num];
+ let colNum=COL[num];
+ let ok=true;let foiAposta=false;
  if(vaiA){
-   if(pendA===null){
-     pendA=num;
-     let entry={prev:null, tab:tabNum, curr:num, ok:true, linha:'A', isPrimeiro:true};
-     hist123Geral.unshift(entry);
-   }else{
-     let tab=TAB[pendA];
-     let ok=true;if(tab!=="ZERO"){ ok=tab.split('/').map(Number).includes(COL[num]); }
-     let entry={prev:pendA, tab:tab, curr:num, ok:ok, linha:'A', isPrimeiro:false};
-     hist123A.unshift(entry); hist123Geral.unshift(entry);
-     if(ok) acerto123A++; else erro123A++;
-     pendA=null;
+   if(histA.length>=2){
+     let jogada=calculaJogada(histA[0].num,histA[1].num);
+     if(jogada){foiAposta=true;ok=jogada.jogar.includes(colNum);if(ok)acertoA++;else erroA++;}
    }
+   histA.unshift({num:num,ok:ok,foiAposta:foiAposta});countsA[num]=(countsA[num]||0)+1;
+   histGeralCron.unshift({num:num,linha:'A',ok:ok,foiAposta:foiAposta});
  }else{
-   if(pendB===null){
-     pendB=num;
-     let entry={prev:null, tab:tabNum, curr:num, ok:true, linha:'B', isPrimeiro:true};
-     hist123Geral.unshift(entry);
-   }else{
-     let tab=TAB[pendB];
-     let ok=true;if(tab!=="ZERO"){ ok=tab.split('/').map(Number).includes(COL[num]); }
-     let entry={prev:pendB, tab:tab, curr:num, ok:ok, linha:'B', isPrimeiro:false};
-     hist123B.unshift(entry); hist123Geral.unshift(entry);
-     if(ok) acerto123B++; else erro123B++;
-     pendB=null;
+   if(histB.length>=2){
+     let jogada=calculaJogada(histB[0].num,histB[1].num);
+     if(jogada){foiAposta=true;ok=jogada.jogar.includes(colNum);if(ok)acertoB++;else erroB++;}
    }
+   histB.unshift({num:num,ok:ok,foiAposta:foiAposta});countsB[num]=(countsB[num]||0)+1;
+   histGeralCron.unshift({num:num,linha:'B',ok:ok,foiAposta:foiAposta});
  }
- localStorage.setItem('hist123A',JSON.stringify(hist123A));localStorage.setItem('hist123B',JSON.stringify(hist123B));localStorage.setItem('hist123Geral',JSON.stringify(hist123Geral));
- localStorage.setItem('pendA',pendA);localStorage.setItem('pendB',pendB);
- localStorage.setItem('acerto123A',acerto123A);localStorage.setItem('erro123A',erro123A);localStorage.setItem('acerto123B',acerto123B);localStorage.setItem('erro123B',erro123B);
- let okA=true,okB=true;if(histA.length){let alvo=TAB[(typeof histA[0]==='object')?histA[0].num:histA[0]].split('/').map(Number);if(num!==0)okA=alvo.includes(COL[num]);}if(histB.length){let alvo=TAB[(typeof histB[0]==='object')?histB[0].num:histB[0]].split('/').map(Number);if(num!==0)okB=alvo.includes(COL[num]);}if(vaiA){let al=calcAlerta(histA);let foi=false;if(al){foi=true;if(okA)acertoA++;else erroA++;}histA.unshift({num:num,ok:okA,foiAposta:foi});countsA[num]=(countsA[num]||0)+1;}else{let al=calcAlerta(histB);let foi=false;if(al){foi=true;if(okB)acertoB++;else erroB++;}histB.unshift({num:num,ok:okB,foiAposta:foi});countsB[num]=(countsB[num]||0)+1;}localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);render();}
-function pick(n){goNum(n);}
+ localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));
+ localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
+ localStorage.setItem('cntA',JSON.stringify(countsA));localStorage.setItem('cntB',JSON.stringify(countsB));
+ localStorage.setItem('placarAcertoA',acertoA);localStorage.setItem('placarErroA',erroA);localStorage.setItem('placarAcertoB',acertoB);localStorage.setItem('placarErroB',erroB);
+ render();
+}
+function pick(n){console.log('pick',n); goNum(n);}
+function pickCol(c){console.log('col',c);}
 </script></body></html>

@@ -1,14 +1,19 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>RAFIGASP COACH DA ROLETA</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black;-webkit-tap-highlight-color:transparent}html,body{background:#000;min-height:100vh}body{padding:4px;touch-action:manipulation}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:4px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh}.topo{background:#ffcc00;text-align:center;padding:12px 4px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}.placar{display:flex;gap:6px;margin:2px}.placar div{flex:1;background:#000;border:3px solid #ffcc00;border-radius:12px;padding:12px 6px;text-align:center;color:#fff;font-size:13px;line-height:1.2}.placar div.A{border-color:#ffcc00}.placar div.B{border-color:#00ffff}.placar div b{font-size:20px;display:block;margin-bottom:2px}.placar div .win{color:#00ff00;font-size:14px}.placar div .loss{color:#ff4444;font-size:14px}.topHist{background:#000;border:3px solid #00ff00;border-radius:12px;margin:2px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;min-height:56px}.topHist .esq{display:flex;align-items:center;gap:10px}.topHist .numBig{color:#fff;font-size:30px;font-weight:900;min-width:36px}.topHist .sqs{display:flex;gap:6px;flex-wrap:wrap}.topHist .sqs span{width:34px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:2px solid #fff}.topHist .sqs .g{background:#00a000!important}.topHist .sqs .r{background:#c00000!important}.topHist .sqs .vazio{background:#333!important;color:#888!important;border-color:#555!important}.topHist .lado{color:#ffcc00;font-size:18px;font-weight:900;background:#111;border-radius:8px;padding:4px 10px;border:2px solid #ffcc00;flex-shrink:0}.topHist.B{border-color:#00ffff}.topHist.B .lado{color:#00ffff;border-color:#00ffff}.topHist.A{border-color:#ffcc00}.verde{display:none!important}.jogadaBox{background:#000;border:4px solid #00ff00;border-radius:12px;margin:2px;padding:16px;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center}.jogadaBox span{color:#00ff00;font-size:26px;font-weight:900;text-shadow:0 0 10px #00ff00}.jogadaBox.B{border-color:#00ffff}.jogadaBox.B span{color:#00ffff}.faixaEntre{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:8px 10px;display:flex;gap:6px;overflow-x:auto;min-height:46px;align-items:center;scrollbar-width:none}.faixaEntre::-webkit-scrollbar{display:none}.faixaEntre.verdevermelho{border-color:#00ff00}.faixaEntre.verdevermelho h4{color:#00ff00}.faixaEntre h4{color:#ffcc00;font-size:12px;white-space:nowrap;flex-shrink:0}.numGeral{min-width:40px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00!important;color:#000!important}.numGeral.B{background:#0066ff!important;color:#fff!important}.numGeral.C{background:#00a000!important}.numGeral.E{background:#c00000!important}.vermelho{margin:2px;background:#0a3d1f;border-radius:10px;padding:4px;display:flex;flex:1;flex-direction:column}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:52px;position:relative;cursor:pointer}.cell.red{background:#b50000}.cell.black{background:#222}.cell.pisca{animation:piscaForte 0.6s infinite;border:4px solid #ffff00!important;box-shadow:0 0 25px #ffff00!important;transform:scale(1.07);z-index:5;border-radius:8px}.cell.pisca.B{border-color:#00ffff!important;box-shadow:0 0 25px #00ffff!important}.badge{position:absolute;top:1px;right:1px;background:#000;color:#fff;font-size:9px;padding:1px 4px;border-radius:10px;border:1px solid #fff;font-weight:900}.badge.A{background:#ffcc00;color:#000}.badge.B{background:#0066ff}.badge.AB{background:#000;color:#ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:12px 0;font-size:16px;font-weight:900}.doisparaum div.ativo{background:#ffcc00!important;color:#000!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00}@keyframes piscaForte{0%,100%{transform:scale(1.07)}50%{transform:scale(1.14);filter:brightness(1.8)}}</style></head><body><div id="app">
-<div class="topo" onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}"><b>RAFIGASP COACH DA ROLETA</b></div>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes"><title>RAFIGASP COACH DA ROLETA</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial Black;-webkit-tap-highlight-color:transparent}html,body{background:#000;min-height:100vh;overflow-x:hidden}body{padding:2px;touch-action:manipulation}#app{width:98%;max-width:480px;background:#0a2e1e;display:flex;flex-direction:column;gap:4px;border-radius:10px;padding:4px;margin:0 auto;min-height:98vh;transform-origin:top center;transition:transform 0.2s}.topo{background:#ffcc00;text-align:center;padding:10px 8px;font-size:15px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;min-height:44px;cursor:pointer;gap:6px}.topo b{flex:1}.topo .zoomBtn{width:36px;height:32px;background:#000;color:#ffcc00;border:2px solid #000;border-radius:8px;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}.topo .zoomBtn:active{transform:scale(0.9)}.placar{display:flex;gap:6px;margin:2px}.placar div{flex:1;background:#000;border:3px solid #ffcc00;border-radius:12px;padding:12px 6px;text-align:center;color:#fff;font-size:13px;line-height:1.2}.placar div.A{border-color:#ffcc00}.placar div.B{border-color:#00ffff}.placar div b{font-size:20px;display:block;margin-bottom:2px}.placar div .win{color:#00ff00;font-size:14px}.placar div .loss{color:#ff4444;font-size:14px}.topHist{background:#000;border:3px solid #00ff00;border-radius:12px;margin:2px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;min-height:56px}.topHist .esq{display:flex;align-items:center;gap:10px;flex:1;overflow-x:auto;scrollbar-width:none}.topHist .esq::-webkit-scrollbar{display:none}.topHist .numBig{color:#fff;font-size:30px;font-weight:900;min-width:36px}.topHist .sqs{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.topHist .sqs::-webkit-scrollbar{display:none}.topHist .sqs span{width:36px;min-width:36px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.topHist .sqs .g{background:#00a000!important}.topHist .sqs .r{background:#c00000!important}.topHist .sqs .vazio{background:#333!important;color:#888!important;border-color:#555!important}.topHist .lado{color:#ffcc00;font-size:18px;font-weight:900;background:#111;border-radius:8px;padding:4px 10px;border:2px solid #ffcc00;flex-shrink:0;margin-left:8px}.topHist.B{border-color:#00ffff}.topHist.B .lado{color:#00ffff;border-color:#00ffff}.topHist.A{border-color:#ffcc00}.verde{display:none!important}.jogadaBox{background:#000;border:4px solid #00ff00;border-radius:12px;margin:2px;padding:16px;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center}.jogadaBox span{color:#00ff00;font-size:26px;font-weight:900;text-shadow:0 0 10px #00ff00}.jogadaBox.B{border-color:#00ffff}.jogadaBox.B span{color:#00ffff}.faixaEntre{background:#000;border:3px solid #ffcc00;border-radius:10px;margin:2px;padding:8px 10px;display:flex;gap:6px;overflow-x:auto;min-height:46px;align-items:center;scrollbar-width:none;white-space:nowrap}.faixaEntre::-webkit-scrollbar{display:none}.faixaEntre.verdevermelho{border-color:#00ff00}.faixaEntre.verdevermelho h4{color:#00ff00}.faixaEntre h4{color:#ffcc00;font-size:12px;white-space:nowrap;flex-shrink:0}.numGeral{min-width:40px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;border:2px solid #fff;flex-shrink:0}.numGeral.A{background:#ffcc00!important;color:#000!important}.numGeral.B{background:#0066ff!important;color:#fff!important}.numGeral.C{background:#00a000!important}.numGeral.E{background:#c00000!important}.vermelho{margin:0 2px;background:#0a3d1f;border-radius:10px;padding:0;display:flex;flex:1;flex-direction:column;gap:0}.zeroBtn{background:#00a000;color:#fff;text-align:center;padding:14px 0;font-size:22px;font-weight:900;border-radius:10px 10px 0 0;cursor:pointer;border:3px solid #00ff00;border-bottom:none}.zeroBtn.pisca{animation:piscaForte 0.6s infinite;border-color:#ffff00!important;box-shadow:0 0 25px #ffff00!important;transform:scale(1.02);z-index:5}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#0a3d1f;border-radius:0 0 10px 10px;overflow:hidden;padding:3px}.cell{border:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;min-height:52px;position:relative;cursor:pointer}.cell.red{background:#b50000}.cell.black{background:#222}.cell.pisca{animation:piscaForte 0.6s infinite;border:4px solid #ffff00!important;box-shadow:0 0 25px #ffff00!important;transform:scale(1.07);z-index:5;border-radius:8px}.cell.pisca.B{border-color:#00ffff!important;box-shadow:0 0 25px #00ffff!important}.badge{position:absolute;top:1px;right:1px;background:#000;color:#fff;font-size:9px;padding:1px 4px;border-radius:10px;border:1px solid #fff;font-weight:900}.badge.A{background:#ffcc00;color:#000}.badge.B{background:#0066ff}.badge.AB{background:#000;color:#ffcc00}.doisparaum{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px;background:#0a3d1f;border-radius:10px;overflow:hidden}.doisparaum div{background:#0a5a2e;color:#d4d46a;text-align:center;padding:12px 0;font-size:16px;font-weight:900}.doisparaum div.ativo{background:#ffcc00!important;color:#000!important}.btns{display:flex;gap:4px;padding:8px}.btns button{flex:1;padding:14px;border:0;border-radius:8px;font-weight:900;font-size:13px;background:#ffcc00}@keyframes piscaForte{0%,100%{transform:scale(1.07)}50%{transform:scale(1.14);filter:brightness(1.8)}}</style></head><body><div id="app">
+<div class="topo"><div class="zoomBtn" onclick="zoomMenos(event)" title="Diminuir">🔍-</div><b onclick="if(confirm('Zerar tudo?')){localStorage.clear();location.reload()}">RAFIGASP COACH DA ROLETA</b><div class="zoomBtn" onclick="zoomMais(event)" title="Aumentar">🔍+</div></div>
 <div class="placar" id="placar"></div>
 <div class="topHist" id="topHist"><div class="esq"><div class="numBig">-</div><div class="sqs"></div></div><div class="lado">-</div></div>
 <div class="verde" id="verdeInicial"></div>
 <div class="jogadaBox" id="jogadaBox"><span>JOGAR COLUNA -</span></div>
 <div class="faixaEntre verdevermelho" id="faixaHistColor"><h4>HIST A+B:</h4><div id="listaHistColor" style="display:flex;gap:6px"></div></div>
-<div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
-<div class="vermelho"><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div></div></div>
+<div class="faixaEntre" id="faixaEntre"><h4>GERAL 50+:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
+<div class="vermelho"><div class="zeroBtn" id="zeroBtn" onclick="pick(0)">0</div><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div></div></div>
 <div class="btns"><button onclick="corr()">↩️ CORRIGIR</button><button onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}">🗑️ LIMPAR</button></div>
 </div><script>
+let zoomLevel=parseFloat(localStorage.getItem('zoomLevel')||'1');
+function aplicaZoom(){document.getElementById('app').style.transform='scale('+zoomLevel+')';localStorage.setItem('zoomLevel',zoomLevel);}
+function zoomMais(e){if(e)e.stopPropagation();zoomLevel=Math.min(1.6,zoomLevel+0.1);aplicaZoom();}
+function zoomMenos(e){if(e)e.stopPropagation();zoomLevel=Math.max(0.7,zoomLevel-0.1);aplicaZoom();}
+aplicaZoom();
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 let histA=JSON.parse(localStorage.getItem('histA')||'[]');let histB=JSON.parse(localStorage.getItem('histB')||'[]');
@@ -19,44 +24,22 @@ let acertoA=parseInt(localStorage.getItem('acertoA')||'0'),erroA=parseInt(localS
 let acertoB=parseInt(localStorage.getItem('acertoB')||'0'),erroB=parseInt(localStorage.getItem('erroB')||'0');
 let gridEl=document.getElementById('grid');
 for(let i=1;i<=36;i++){let d=document.createElement('div');d.className='cell '+(REDS.includes(i)?'red':'black');d.id='c'+i;d.innerHTML='<span>'+i+'</span><span class="badge" id="b'+i+'"></span>';d.addEventListener('click',()=>pick(i));gridEl.appendChild(d);}
-function calcula(n1,n4){if(!n1||!n4) return null;let c1=COL[n1],c4=COL[n4];if(!c1||!c4) return null;if(c1===c4)return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[1,2,3].filter(c=>c!==c1)};else return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[c1,c4].sort((a,b)=>a-b)}}
+function calcula(n1,n4){if(!n1 && n1!==0||!n4 && n4!==0) return null;let c1=COL[n1],c4=COL[n4];if(!c1||!c4) return null;if(c1===c4)return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[1,2,3].filter(c=>c!==c1)};else return {n1:n1,n4:n4,c1:c1,c4:c4,jogar:[c1,c4].sort((a,b)=>a-b)}}
 function marca(jogada,vezA){
  document.querySelectorAll('.cell').forEach(c=>{c.classList.remove('pisca','B');});
+ document.getElementById('zeroBtn').classList.remove('pisca');
  document.getElementById('d1').className='';document.getElementById('d2').className='';document.getElementById('d3').className='';
  if(!jogada) return;
  jogada.jogar.forEach(col=>document.getElementById('d'+col).classList.add('ativo'));
  for(let num=1;num<=36;num++){if(jogada.jogar.includes(COL[num])){let el=document.getElementById('c'+num);if(el){el.classList.add('pisca');if(!vezA)el.classList.add('B');}}}
 }
 function getHistDoNumero(num){
-  let allA=[...histA];
-  let allB=[...histB];
-  let useA=[],useB=[];
-  for(let i=0;i<allA.length;i++){
-    if(allA[i].num===num){
-      let proximo = i>0 ? allA[i-1].num : null;
-      useA.push({ok:allA[i].ok, proximo:proximo});
-    }
-  }
-  for(let i=0;i<allB.length;i++){
-    if(allB[i].num===num){
-      let proximo = i>0 ? allB[i-1].num : null;
-      useB.push({ok:allB[i].ok, proximo:proximo});
-    }
-  }
-  let use = useA.length>=useB.length?useA:useB;
-  let linha = useA.length>=useB.length?'A':'B';
-  if(use.length===0){
-    let geral=[...histGeralCron];
-    let temp=[];
-    for(let i=0;i<geral.length;i++){
-      if(geral[i].num===num){
-        let proximo = i>0 ? geral[i-1].num : null;
-        temp.push({ok:geral[i].ok, proximo:proximo});
-      }
-    }
-    use=temp; linha=geral[0]?.linha||'A';
-  }
-  return {hist:use.slice(0,6), linha:linha};
+  let allA=[...histA];let allB=[...histB];let useA=[],useB=[];
+  for(let i=0;i<allA.length;i++){if(allA[i].num===num){let proximo=i>0?allA[i-1].num:null;useA.push({ok:allA[i].ok,proximo:proximo});}}
+  for(let i=0;i<allB.length;i++){if(allB[i].num===num){let proximo=i>0?allB[i-1].num:null;useB.push({ok:allB[i].ok,proximo:proximo});}}
+  let use=useA.length>=useB.length?useA:useB;let linha=useA.length>=useB.length?'A':'B';
+  if(use.length===0){let geral=[...histGeralCron];let temp=[];for(let i=0;i<geral.length;i++){if(geral[i].num===num){let proximo=i>0?geral[i-1].num:null;temp.push({ok:geral[i].ok,proximo:proximo});}}use=temp;linha=geral[0]?.linha||'A';}
+  return {hist:use.slice(0,10),linha:linha};
 }
 function render(){
  let placarEl=document.getElementById('placar');
@@ -64,45 +47,30 @@ function render(){
  let percA=totalA>0?Math.round(acertoA/totalA*100):0;
  let percB=totalB>0?Math.round(acertoB/totalB*100):0;
  placarEl.innerHTML='<div class="A"><b>A</b><span class="win">✅ '+acertoA+'</span> <span class="loss">❌ '+erroA+'</span><br>'+percA+'%</div><div class="B"><b>B</b><span class="win">✅ '+acertoB+'</span> <span class="loss">❌ '+erroB+'</span><br>'+percB+'%</div><div style="border-color:#00ff00"><b>TOTAL</b><span class="win">✅ '+(acertoA+acertoB)+'</span> <span class="loss">❌ '+(erroA+erroB)+'</span><br>'+(totalA+totalB>0?Math.round((acertoA+acertoB)/(totalA+totalB)*100):0)+'%</div>';
- let vezA=histA.length<=histB.length;
- let jog=vezA?activeA:activeB;
+ let vezA=histA.length<=histB.length;let jog=vezA?activeA:activeB;
  let topHistEl=document.getElementById('topHist');
  if(histGeralCron.length>0){
-   let ultimo=histGeralCron[0];
-   let info=getHistDoNumero(ultimo.num);
+   let ultimo=histGeralCron[0];let info=getHistDoNumero(ultimo.num);
    topHistEl.className='topHist '+info.linha;
-   let numBigEl=topHistEl.querySelector('.numBig');
-   let sqsEl=topHistEl.querySelector('.sqs');
-   let ladoEl=topHistEl.querySelector('.lado');
-   numBigEl.textContent=ultimo.num;
-   sqsEl.innerHTML='';
-   // MOSTRA SÓ QUEM JÁ TEM PRÓXIMO NÚMERO, NÃO MOSTRA "-"
-   let comProximo = info.hist.filter(h=>h.proximo!==null);
-   if(comProximo.length===0){
-     // se ainda não tem próximo, mostra 1 quadrado vazio aguardando
-     let s=document.createElement('span');s.className='vazio';s.textContent='...';sqsEl.appendChild(s);
-   } else {
-     comProximo.slice(0,5).forEach(h=>{
-       let s=document.createElement('span');
-       s.className=h.ok?'g':'r';
-       s.textContent=h.proximo;
-       sqsEl.appendChild(s);
-     });
-   }
+   let numBigEl=topHistEl.querySelector('.numBig');let sqsEl=topHistEl.querySelector('.sqs');let ladoEl=topHistEl.querySelector('.lado');
+   numBigEl.textContent=ultimo.num;sqsEl.innerHTML='';
+   let comProximo=info.hist.filter(h=>h.proximo!==null);
+   if(comProximo.length===0){let s=document.createElement('span');s.className='vazio';s.textContent='...';sqsEl.appendChild(s);}
+   else{comProximo.slice(0,10).forEach(h=>{let s=document.createElement('span');s.className=h.ok?'g':'r';s.textContent=h.proximo;sqsEl.appendChild(s);});}
    ladoEl.textContent=info.linha;
  } else {
-   topHistEl.className='topHist';
-   topHistEl.querySelector('.numBig').textContent='-';
-   topHistEl.querySelector('.sqs').innerHTML='';
-   topHistEl.querySelector('.lado').textContent='-';
+   topHistEl.className='topHist';topHistEl.querySelector('.numBig').textContent='-';topHistEl.querySelector('.sqs').innerHTML='';topHistEl.querySelector('.lado').textContent='-';
  }
  let box=document.getElementById('jogadaBox');
  if(jog){box.className='jogadaBox '+(vezA?'A':'B');box.innerHTML='<span>'+(vezA?'A':'B')+': JOGAR COLUNA '+jog.jogar.join('/')+'</span>';}
  else{box.className='jogadaBox '+(vezA?'A':'B');box.innerHTML='<span>'+(vezA&&histA.length<4||!vezA&&histB.length<4?'FALTAM '+(4-(vezA?histA.length:histB.length)):'JOGAR COLUNA -')+'</span>';}
  let histColor=document.getElementById('listaHistColor');histColor.innerHTML="";
- histGeralCron.slice(0,20).forEach(h=>{let d=document.createElement('div');d.className='numGeral '+(h.ok?'C':'E');d.textContent=h.num;histColor.appendChild(d);});
- let g=document.getElementById('listaGeral');g.innerHTML="";histGeralCron.slice(0,30).forEach(h=>{let d=document.createElement('div');d.className='numGeral '+(h.linha==='A'?'A':'B');d.textContent=h.num;g.appendChild(d);});
+ histGeralCron.slice(0,50).forEach(h=>{let d=document.createElement('div');d.className='numGeral '+(h.linha==='0'?'C':h.ok?'C':'E');d.textContent=h.num;histColor.appendChild(d);});
+ let g=document.getElementById('listaGeral');g.innerHTML="";
+ histGeralCron.slice(0,60).forEach(h=>{let d=document.createElement('div');d.className='numGeral '+(h.linha==='A'?'A':h.linha==='B'?'B':'C');d.textContent=h.num;g.appendChild(d);});
  for(let i=1;i<=36;i++){let tot=(cntA[i]||0)+(cntB[i]||0);let badge=document.getElementById('b'+i);if(tot===0)badge.textContent='';else{badge.textContent=tot+'x';badge.className='badge '+((cntA[i]&&cntB[i])?'AB':cntA[i]?'A':'B');}}
+ let totZero=(cntA[0]||0)+(cntB[0]||0);
+ if(totZero>0){let zb=document.getElementById('zeroBtn');zb.textContent='0 ('+totZero+'x)';}else{document.getElementById('zeroBtn').textContent='0';}
  marca(jog,vezA);
 }
 render();
@@ -110,7 +78,8 @@ function corr(){
  if(histGeralCron.length===0) return;
  let u=histGeralCron.shift();
  if(u.linha==='A'){if(histA.length){let r=histA.shift();if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);if(r.ok)activeA=null;}}cntA[u.num]=Math.max(0,(cntA[u.num]||1)-1);if(cntA[u.num]===0)delete cntA[u.num];}
- else{if(histB.length){let r=histB.shift();if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);if(r.ok)activeB=null;}}cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1);if(cntB[u.num]===0)delete cntB[u.num];}
+ else if(u.linha==='B'){if(histB.length){let r=histB.shift();if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);if(r.ok)activeB=null;}}cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1);if(cntB[u.num]===0)delete cntB[u.num];}
+ else {cntA[u.num]=Math.max(0,(cntA[u.num]||1)-1); if(cntA[u.num]===0)delete cntA[u.num]; cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1); if(cntB[u.num]===0)delete cntB[u.num];}
  localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
  localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
  localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
@@ -118,8 +87,18 @@ function corr(){
  render();
 }
 function goNum(num){
- let vaiA=histA.length<=histB.length;
- let col=COL[num];let ok=true,foi=false;
+ if(num===0){
+   let vaiA=histA.length<=histB.length;
+   let col=0;let ok=false,foi=false;
+   if(vaiA){if(activeA){foi=true;ok=false;erroA++;}histA.unshift({num:0,ok:ok,foiAposta:foi});cntA[0]=(cntA[0]||0)+1;histGeralCron.unshift({num:0,linha:'A',ok:false,foiAposta:foi});}
+   else{if(activeB){foi=true;ok=false;erroB++;}histB.unshift({num:0,ok:ok,foiAposta:foi});cntB[0]=(cntB[0]||0)+1;histGeralCron.unshift({num:0,linha:'B',ok:false,foiAposta:foi});}
+   localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
+   localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
+   localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
+   localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
+   render(); return;
+ }
+ let vaiA=histA.length<=histB.length;let col=COL[num];let ok=true,foi=false;
  if(vaiA){if(activeA){foi=true;ok=activeA.jogar.includes(col);if(ok){acertoA++;activeA=null;}else erroA++;}histA.unshift({num:num,ok:ok,foiAposta:foi});cntA[num]=(cntA[num]||0)+1;histGeralCron.unshift({num:num,linha:'A',ok:ok,foiAposta:foi});if(!activeA&&histA.length>=4)activeA=calcula(histA[0].num,histA[3].num);}
  else{if(activeB){foi=true;ok=activeB.jogar.includes(col);if(ok){acertoB++;activeB=null;}else erroB++;}histB.unshift({num:num,ok:ok,foiAposta:foi});cntB[num]=(cntB[num]||0)+1;histGeralCron.unshift({num:num,linha:'B',ok:ok,foiAposta:foi});if(!activeB&&histB.length>=4)activeB=calcula(histB[0].num,histB[3].num);}
  localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));

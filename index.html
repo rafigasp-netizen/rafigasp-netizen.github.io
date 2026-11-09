@@ -5,7 +5,7 @@
 <div class="verde" id="verdeInicial"></div>
 <div class="jogadaBox" id="jogadaBox"><span>FALTAM 4</span></div>
 <div class="faixaEntre verdevermelho" id="faixaHistColor"><h4>HIST A+B:</h4><div id="listaHistColor" style="display:flex;gap:6px"></div></div>
-<div class="faixaEntre" id="faixaEntre"><h4>GERAL 50+:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
+<div class="faixaEntre" id="faixaEntre"><h4>GERAL:</h4><div id="listaGeral" style="display:flex;gap:6px"></div></div>
 <div class="vermelho"><div class="zeroBtn" id="zeroBtn" onclick="pick(0)">0</div><div class="grid" id="grid"></div><div class="doisparaum"><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div></div></div>
 <div class="btns"><button onclick="corr()">↩️ CORRIGIR</button><button onclick="if(confirm('Zerar?')){localStorage.clear();location.reload()}">🗑️ LIMPAR</button></div>
 </div></div><div class="zoomInfo" id="zoomInfo"></div><script>
@@ -13,16 +13,11 @@ let zoomLevel=parseFloat(localStorage.getItem('zoomLevel')||'1');
 const viewport=document.getElementById('viewport');
 const app=document.getElementById('app');
 function aplicaZoom(){
-  // USA ZOOM NATIVO que permite scroll até embaixo
   app.style.zoom = zoomLevel;
   app.style.transform = 'none';
-  // fallback para quem não suporta zoom
   if(!app.style.zoom || app.style.zoom===''){
     app.style.transform='scale('+zoomLevel+')';
     app.style.transformOrigin='top center';
-    // cria espaço extra embaixo pro scroll funcionar
-    let baseH = 1200; // altura base aproximada
-    viewport.style.minHeight = (baseH * zoomLevel + 200) + 'px';
   }
   localStorage.setItem('zoomLevel',zoomLevel);
   let info=document.getElementById('zoomInfo');
@@ -53,12 +48,16 @@ function marca(jogada,vezA){
  for(let num=1;num<=36;num++){if(jogada.jogar.includes(COL[num])){let el=document.getElementById('c'+num);if(el){el.classList.add('pisca');if(!vezA)el.classList.add('B');}}}
 }
 function getHistDoNumero(num){
-  let allA=[...histA];let allB=[...histB];let useA=[],useB=[];
-  for(let i=0;i<allA.length;i++){if(allA[i].num===num){let proximo=i>0?allA[i-1].num:null;useA.push({ok:allA[i].ok,proximo:proximo});}}
-  for(let i=0;i<allB.length;i++){if(allB[i].num===num){let proximo=i>0?allB[i-1].num:null;useB.push({ok:allB[i].ok,proximo:proximo});}}
-  let use=useA.length>=useB.length?useA:useB;let linha=useA.length>=useB.length?'A':'B';
-  if(use.length===0){let geral=[...histGeralCron];let temp=[];for(let i=0;i<geral.length;i++){if(geral[i].num===num){let proximo=i>0?geral[i-1].num:null;temp.push({ok:geral[i].ok,proximo:proximo});}}use=temp;linha=geral[0]?.linha||'A';}
-  return {hist:use.slice(0,10),linha:linha};
+  let geral=[...histGeralCron];
+  let hist=[];
+  for(let i=0;i<geral.length;i++){
+    if(geral[i].num===num){
+      let proximo = i>0 ? geral[i-1].num : null;
+      hist.push({proximo:proximo, ok: geral[i-1]?.ok || false});
+    }
+  }
+  let linha = geral.find(h=>h.num===num)?.linha || 'A';
+  return {hist:hist.filter(h=>h.proximo!==null).slice(0,10), linha:linha};
 }
 function render(){
  let placarEl=document.getElementById('placar');
@@ -73,9 +72,8 @@ function render(){
    topHistEl.className='topHist '+info.linha;
    let numBigEl=topHistEl.querySelector('.numBig');let sqsEl=topHistEl.querySelector('.sqs');let ladoEl=topHistEl.querySelector('.lado');
    numBigEl.textContent=ultimo.num;sqsEl.innerHTML='';
-   let comProximo=info.hist.filter(h=>h.proximo!==null);
-   if(comProximo.length===0){let s=document.createElement('span');s.className='vazio';s.textContent='...';sqsEl.appendChild(s);}
-   else{comProximo.slice(0,10).forEach(h=>{let s=document.createElement('span');s.className=h.ok?'g':'r';s.textContent=h.proximo;sqsEl.appendChild(s);});}
+   if(info.hist.length===0){let s=document.createElement('span');s.className='vazio';s.textContent='...';sqsEl.appendChild(s);}
+   else{info.hist.slice(0,10).forEach(h=>{let s=document.createElement('span');s.className=h.ok?'g':'r';s.textContent=h.proximo;sqsEl.appendChild(s);});}
    ladoEl.textContent=info.linha;
  } else {
    topHistEl.className='topHist';topHistEl.querySelector('.numBig').textContent='-';topHistEl.querySelector('.sqs').innerHTML='';topHistEl.querySelector('.lado').textContent='-';

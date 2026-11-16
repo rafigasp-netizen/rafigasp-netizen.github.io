@@ -156,10 +156,33 @@ function render(){
 render();
 function corr(){
  if(histGeralCron.length===0) return;
- let cronologico = [...histGeralCron].reverse().map(h=>h.num);
- cronologico.pop();
- if(cronologico.length===0){ localStorage.clear(); location.reload(); return; }
- preencherComLista(cronologico);
+ // PEGA O ULTIMO DIGITADO (o mais novo)
+ let removido = histGeralCron[0];
+ let linha = removido.linha;
+ // Remove do geral
+ histGeralCron.shift();
+ // Remove do A ou B mantendo o lado original
+ if(linha==='A'){
+   if(histA.length>0) histA.shift();
+   if(cntA[removido.num]){ cntA[removido.num]--; if(cntA[removido.num]<=0) delete cntA[removido.num]; }
+   // Se era aposta, remove da aposta
+   if(removido.foiAposta && histApostas.length>0){
+     let ap = histApostas.shift();
+     if(ap.ok) acertoA=Math.max(0,acertoA-1); else erroA=Math.max(0,erroA-1);
+   }
+   // Recalcula active A baseado no que sobrou
+   if(histA.length>=4) activeA=calcula(histA[0].num,histA[3].num); else activeA=null;
+ }else{
+   if(histB.length>0) histB.shift();
+   if(cntB[removido.num]){ cntB[removido.num]--; if(cntB[removido.num]<=0) delete cntB[removido.num]; }
+   if(removido.foiAposta && histApostas.length>0){
+     let ap = histApostas.shift();
+     if(ap.ok) acertoB=Math.max(0,acertoB-1); else erroB=Math.max(0,erroB-1);
+   }
+   if(histB.length>=4) activeB=calcula(histB[0].num,histB[3].num); else activeB=null;
+ }
+ salvar();
+ render();
 }
 function goNum(num){
  if(num===0){

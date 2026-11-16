@@ -116,12 +116,15 @@ function preencherComLista(lista){
       }
     }
   }
+  salvar();
+  render();
+}
+function salvar(){
   localStorage.setItem('histApostas',JSON.stringify(histApostas));
   localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
   localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
   localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
   localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
-  render();
 }
 function render(){
  let placarEl=document.getElementById('placar');
@@ -154,25 +157,13 @@ function render(){
 }
 render();
 function corr(){
- if(histApostas.length>0){
-   let uA = histApostas.shift();
-   if(histGeralCron.length>0 && histGeralCron[0].foiAposta) histGeralCron.shift();
-   if(uA.linha==='A'){
-     if(histA.length){let r=histA.shift();if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);if(r.ok)activeA=null;}}cntA[uA.num]=Math.max(0,(cntA[uA.num]||1)-1);if(cntA[uA.num]===0)delete cntA[uA.num];
-   } else {
-     if(histB.length){let r=histB.shift();if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);if(r.ok)activeB=null;}}cntB[uA.num]=Math.max(0,(cntB[uA.num]||1)-1);if(cntB[uA.num]===0)delete cntB[uA.num];
-   }
- } else if(histGeralCron.length>0){
-   let u=histGeralCron.shift();
-   if(u.linha==='A'){if(histA.length){let r=histA.shift();if(r.foiAposta){if(r.ok)acertoA=Math.max(0,acertoA-1);else erroA=Math.max(0,erroA-1);if(r.ok)activeA=null;}}cntA[u.num]=Math.max(0,(cntA[u.num]||1)-1);if(cntA[u.num]===0)delete cntA[u.num];}
-   else {if(histB.length){let r=histB.shift();if(r.foiAposta){if(r.ok)acertoB=Math.max(0,acertoB-1);else erroB=Math.max(0,erroB-1);if(r.ok)activeB=null;}}cntB[u.num]=Math.max(0,(cntB[u.num]||1)-1);if(cntB[u.num]===0)delete cntB[u.num];}
+ if(histGeralCron.length===0) return;
+ let numerosRestantes = [...histGeralCron].reverse().map(h=>h.num);
+ numerosRestantes.pop();
+ if(numerosRestantes.length===0){
+   localStorage.clear(); location.reload(); return;
  }
- localStorage.setItem('histApostas',JSON.stringify(histApostas));
- localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
- localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
- localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
- localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
- render();
+ preencherComLista(numerosRestantes);
 }
 function goNum(num){
  if(num===0){
@@ -180,12 +171,7 @@ function goNum(num){
    let ok=false,foi=false, jogar=[];
    if(vaiA){if(activeA){foi=true; jogar=activeA.jogar; erroA++; histApostas.unshift({num:0, col:0, ok:false, jogar:jogar, linha:'A'});} histA.unshift({num:0,ok:false,foiAposta:foi});cntA[0]=(cntA[0]||0)+1;histGeralCron.unshift({num:0,linha:'A',ok:false,foiAposta:foi});}
    else{if(activeB){foi=true; jogar=activeB.jogar; erroB++; histApostas.unshift({num:0, col:0, ok:false, jogar:jogar, linha:'B'});} histB.unshift({num:0,ok:false,foiAposta:foi});cntB[0]=(cntB[0]||0)+1;histGeralCron.unshift({num:0,linha:'B',ok:false,foiAposta:foi});}
-   localStorage.setItem('histApostas',JSON.stringify(histApostas));
-   localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
-   localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
-   localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
-   localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
-   render(); return;
+   salvar(); render(); return;
  }
  let vaiA=histA.length<=histB.length;let col=COL[num];let ok=true,foi=false;
  if(vaiA){
@@ -204,12 +190,7 @@ function goNum(num){
    }
    histB.unshift({num:num,ok:ok,foiAposta:foi});cntB[num]=(cntB[num]||0)+1;histGeralCron.unshift({num:num,linha:'B',ok:ok,foiAposta:foi});if(!activeB&&histB.length>=4)activeB=calcula(histB[0].num,histB[3].num);
  }
- localStorage.setItem('histApostas',JSON.stringify(histApostas));
- localStorage.setItem('cntA',JSON.stringify(cntA));localStorage.setItem('cntB',JSON.stringify(cntB));
- localStorage.setItem('activeA',JSON.stringify(activeA));localStorage.setItem('activeB',JSON.stringify(activeB));
- localStorage.setItem('histGeralCron',JSON.stringify(histGeralCron));localStorage.setItem('histA',JSON.stringify(histA));localStorage.setItem('histB',JSON.stringify(histB));
- localStorage.setItem('acertoA',acertoA);localStorage.setItem('erroA',erroA);localStorage.setItem('acertoB',acertoB);localStorage.setItem('erroB',erroB);
- render();
+ salvar(); render();
 }
 function pick(n){goNum(n);}
 </script></body></html>

@@ -157,7 +157,7 @@ render();
 function corr(){
  if(histGeralCron.length===0) return;
  let cronologico = [...histGeralCron].reverse().map(h=>h.num);
- cronologico.shift();
+ cronologico.pop();
  if(cronologico.length===0){ localStorage.clear(); location.reload(); return; }
  preencherComLista(cronologico);
 }

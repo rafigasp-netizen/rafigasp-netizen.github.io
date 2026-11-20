@@ -130,7 +130,7 @@ body{touch-action:pan-x pan-y}
     </div>
     <div class="pista-bottom" id="pistaBottom"></div>
   </div>
-  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 33 AMARELO PARADO</span><span>🟢 GRUPO 1-5 VERDE</span></div>
+  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 33 AMARELO PARADO</span><span>🟢 GRUPO 1-10 VERDE</span></div>
   <div id="pistaVerde" style="display:none;background:#00C853;color:#fff;font-weight:900;font-size:13px;text-align:center;padding:6px 10px;border-radius:8px"></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
     <button class="btn-grupo" id="btnG1" onclick="forcarGrupo(1)">GRUPO 1 🟢</button>
@@ -138,6 +138,11 @@ body{touch-action:pan-x pan-y}
     <button class="btn-grupo" id="btnG3" onclick="forcarGrupo(3)">GRUPO 3 🟢</button>
     <button class="btn-grupo" id="btnG4" onclick="forcarGrupo(4)">GRUPO 4 🟢</button>
     <button class="btn-grupo" id="btnG5" onclick="forcarGrupo(5)">GRUPO 5 🟢</button>
+    <button class="btn-grupo" id="btnG6" onclick="forcarGrupo(6)">GRUPO 6 🟢</button>
+    <button class="btn-grupo" id="btnG7" onclick="forcarGrupo(7)">GRUPO 7 🟢</button>
+    <button class="btn-grupo" id="btnG8" onclick="forcarGrupo(8)">GRUPO 8 🟢</button>
+    <button class="btn-grupo" id="btnG9" onclick="forcarGrupo(9)">GRUPO 9 🟢</button>
+    <button class="btn-grupo" id="btnG10" onclick="forcarGrupo(10)">GRUPO 10 🟢</button>
   </div>
   <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
   <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
@@ -170,19 +175,24 @@ const SETORES={
   serie023:{nome:'SERIE 0/2/3', nums:[22,18,29,7,28,12,35,25,2,21,4,19,15]},
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
-// SEUS GRUPOS 1 A 5 - VERDES
+// SEUS 10 GRUPOS - VERDES
 const GRUPOS_VERDE={
   1:[13,14,15,16,29,30,31,32,33,34,35,36],
   2:[9,10,11,12,13,14,15,16,29,30,31,32],
   3:[9,10,11,12,13,14,15,16,29,30,31,32,33,34,35,36],
   4:[13,14,15,16,17,18,19,20,21,22,23,24,29,30,31,32],
-  5:[17,18,19,20,26,27,28,29,30,31,32]
+  5:[17,18,19,20,26,27,28,29,30,31,32],
+  6:[9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28],
+  7:[9,10,11,12,21,22,23,24,25,26,27,28],
+  8:[13,14,15,16,21,22,23,24,25,26,27,28,33,34,35,36],
+  9:[13,14,15,16,21,22,23,24,29,30,31,32,33,34,35,36],
+  10:[9,10,11,12,17,18,19,20,25,26,27,28,29,30,31,32]
 };
 let grupoVerdeForcado=null;
 function getGrupoVerde(){
   if(grupoVerdeForcado) return grupoVerdeForcado;
   let ultimo = hist.length? hist[hist.length-1] : null;
-  if(ultimo>=1 && ultimo<=5) return ultimo;
+  if(ultimo>=1 && ultimo<=10) return ultimo;
   return null;
 }
 function forcarGrupo(g){
@@ -230,7 +240,7 @@ function montarPista(){
   let pv=document.getElementById('pistaVerde');
   if(g){ pv.style.display='block'; pv.innerText='🟢 SAIU '+ (grupoVerdeForcado? 'FORÇADO ' : '') + g + ' • GRUPO '+g+' VERDE: '+GRUPOS_VERDE[g].join(', '); }
   else { pv.style.display='none'; }
-  for(let i=1;i<=5;i++){ let b=document.getElementById('btnG'+i); if(b) b.classList.toggle('ativo', g===i); }
+  for(let i=1;i<=10;i++){ let b=document.getElementById('btnG'+i); if(b) b.classList.toggle('ativo', g===i); }
 }
 function clicarSetor(setor, el){
   setorAtivo = setorAtivo===setor ? null : setor;
@@ -327,16 +337,16 @@ function render(){
 }
 function pick(n){
   let acertou = previsaoAtual.includes(n);
-  if(n>=1 && n<=5) grupoVerdeForcado=null;
+  if(n>=1 && n<=10) grupoVerdeForcado=null;
   hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
   if(acertou){
     let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
     let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
     let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
     gerarNovos33(hot);
-    if(n>=1 && n<=5) alert('🟢 SAIU '+n+'! GRUPO '+n+' FICOU VERDE: '+GRUPOS_VERDE[n].join(', '));
+    if(n>=1 && n<=10) alert('🟢 SAIU '+n+'! GRUPO '+n+' FICOU VERDE: '+GRUPOS_VERDE[n].join(', '));
     else alert('✅ ACERTOU! Saiu '+n+' que estava nos 33! Novos 33 gerados: '+previsaoAtual.join(' - '));
-  } else if(n>=1 && n<=5){
+  } else if(n>=1 && n<=10){
     alert('🟢 SAIU '+n+'! GRUPO '+n+' FICOU VERDE: '+GRUPOS_VERDE[n].join(', '));
   }
   render();

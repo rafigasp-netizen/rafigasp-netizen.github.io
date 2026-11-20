@@ -9,7 +9,7 @@
 html,body{background:#0a0f1a;color:#fff;height:100%;overflow:hidden}
 body{touch-action:pan-x pan-y}
 #wrap{width:100%;height:100vh;height:100dvh;overflow:auto;-webkit-overflow-scrolling:touch}
-#app{width:100%;height:100%;min-height:100%;display:flex;flex-direction:column;padding:5px;gap:5px;transform-origin:top left}
+#app{width:100%;height:100%;min-height:100%;display:flex;flex-direction:column;padding:5px;gap:5px;transform-origin:top left;will-change:transform}
 .topo{display:flex;gap:6px;align-items:center;height:52px;flex-shrink:0}
 .logo{font-size:14px;font-weight:900;color:#D4AF37;line-height:1.1;white-space:nowrap}
 .logo small{font-size:9px;color:#888;font-weight:400;display:block}
@@ -43,7 +43,7 @@ body{touch-action:pan-x pan-y}
 .hotcold{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px;min-height:0;overflow:hidden}
 .hot-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:10px;line-height:1;min-height:0}
 .bola-hot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #fff;font-size:13px}
-.bola-hot.red{background:#b50000}.bola-hot.black{background:#222}.bola-hot.green{background:#00a000}
+.bola-hot.red{background:#b50000}.bola-hot.black{background:#222}.bola-hot.green{background:#00a000}.bola-hot.vazia{background:#333;color:#888;border-color:#555}
 .btn-prever{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px;border-radius:8px;font-weight:900;cursor:pointer;text-align:center;font-size:11px;margin-top:4px;flex-shrink:0}
 #virar{display:none;position:fixed;inset:0;background:#0a0f1a;z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:12px}
 @media (orientation: portrait){ #virar{display:flex} }
@@ -59,7 +59,7 @@ body{touch-action:pan-x pan-y}
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
     <button class="btn-voltar" onclick="limparTudo()">🗑️ LIMPAR</button>
   </div>
-  <div class="previsao-top"><b>🎯 8 NÚMEROS QUE PODEM SAIR &nbsp; <span class="conf" id="confPct">70%</span></b><div class="bolas" id="prevBolas"></div><span style="font-size:12px">🧠 IA RAFIGASP</span></div>
+  <div class="previsao-top"><b>🎯 8 NÚMEROS QUE PODEM SAIR &nbsp; <span class="conf" id="confPct">--%</span></b><div class="bolas" id="prevBolas"></div><span style="font-size:12px">🧠 IA RAFIGASP</span></div>
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
     <div class="mesa">
@@ -74,20 +74,29 @@ body{touch-action:pan-x pan-y}
 </div></div>
 <div class="zoomInfo" id="zoomInfo"></div>
 <script>
+// ===== ZOOM QUE NÃO DEFORMA - USA transform scale, fica PAUSADO =====
 let zoomLevel=parseFloat(localStorage.getItem('zoomPaisagem')||'1');
-function aplicaZoom(){ document.getElementById('app').style.zoom=zoomLevel; localStorage.setItem('zoomPaisagem',zoomLevel); let i=document.getElementById('zoomInfo'); i.textContent='Zoom '+Math.round(zoomLevel*100)+'%'; i.style.display='block'; setTimeout(()=>i.style.display='none',1000); }
+function aplicaZoom(){
+  let app=document.getElementById('app');
+  app.style.transform='scale('+zoomLevel+')';
+  app.style.width=(100/zoomLevel)+'%';
+  app.style.height=(100/zoomLevel)+'%';
+  localStorage.setItem('zoomPaisagem',zoomLevel);
+  let i=document.getElementById('zoomInfo'); i.textContent='Zoom '+Math.round(zoomLevel*100)+'%'; i.style.display='block'; setTimeout(()=>i.style.display='none',1000);
+}
 function zoomMais(e){e&&e.stopPropagation();zoomLevel=Math.min(2.5,zoomLevel+0.15);aplicaZoom();}
 function zoomMenos(e){e&&e.stopPropagation();zoomLevel=Math.max(0.5,zoomLevel-0.15);aplicaZoom();}
 aplicaZoom();
+// PINCH 2 DEDOS - só muda o scale, não recalcula a mesa
 let pinchDist=0,pinchStart=1; let wrap=document.getElementById('wrap');
 wrap.addEventListener('touchstart',e=>{ if(e.touches.length===2){ let dx=e.touches[0].clientX-e.touches[1].clientX, dy=e.touches[0].clientY-e.touches[1].clientY; pinchDist=Math.sqrt(dx*dx+dy*dy); pinchStart=zoomLevel; } },{passive:true});
-wrap.addEventListener('touchmove',e=>{ if(e.touches.length===2&&pinchDist>0){ let dx=e.touches[0].clientX-e.touches[1].clientX, dy=e.touches[0].clientY-e.touches[1].clientY; let d=Math.sqrt(dx*dx+dy*dy); zoomLevel=Math.min(2.5,Math.max(0.5,pinchStart*(d/pinchDist))); document.getElementById('app').style.zoom=zoomLevel; localStorage.setItem('zoomPaisagem',zoomLevel); } },{passive:true});
+wrap.addEventListener('touchmove',e=>{ if(e.touches.length===2&&pinchDist>0){ let dx=e.touches[0].clientX-e.touches[1].clientX, dy=e.touches[0].clientY-e.touches[1].clientY; let d=Math.sqrt(dx*dx+dy*dy); zoomLevel=Math.min(2.5,Math.max(0.5,pinchStart*(d/pinchDist))); let app=document.getElementById('app'); app.style.transform='scale('+zoomLevel+')'; app.style.width=(100/zoomLevel)+'%'; app.style.height=(100/zoomLevel)+'%'; localStorage.setItem('zoomPaisagem',zoomLevel); } },{passive:true});
 let lastTap=0; wrap.addEventListener('touchend',()=>{ let n=Date.now(); if(n-lastTap<350){ zoomLevel=1; aplicaZoom(); } lastTap=n; });
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
-let previsaoAtual=[3,6,15,18,22,29,31,36];
+let previsaoAtual=[];
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
 function bolaHTML(n, cls='bola-top'){ return `<div class="${cls} ${cor(n)}">${n}</div>`; }
 function render(){
@@ -95,7 +104,7 @@ function render(){
   let ult5 = hist.slice(-5);
   document.getElementById('histTop').innerHTML = ult5.length ? ult5.map(n=>bolaHTML(n)).join('') : '<span style="color:#888;font-size:11px">Sem números</span>';
   let esq = [...hist].reverse().slice(0,7);
-  document.getElementById('colEsq').innerHTML = esq.map(n=>`<div class="num ${cor(n)}" onclick="pick(${n})">${n}</div>`).join('');
+  document.getElementById('colEsq').innerHTML = esq.length ? esq.map(n=>`<div class="num ${cor(n)}" onclick="pick(${n})">${n}</div>`).join('') : '<div style="color:#888;font-size:11px;text-align:center">Sem<br>números</div>';
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
   let counts={}; hist.forEach(n=>counts[n]=(counts[n]||0)+1);
@@ -107,33 +116,46 @@ function render(){
   let even=hist.filter(n=>n!==0&&n%2===0).length, odd=hist.filter(n=>n%2===1).length;
   let red=hist.filter(n=>REDS.includes(n)).length, black=hist.filter(n=>n!==0&&!REDS.includes(n)).length;
   let c1=hist.filter(n=>COL[n]===1).length, c2=hist.filter(n=>COL[n]===2).length, c3=hist.filter(n=>COL[n]===3).length;
-  let pct=v=>Math.round(v/total*100)+'%';
+  let pct=v=> hist.length===0 ? '0%' : Math.round(v/total*100)+'%';
   document.getElementById('dz1Pct').innerText=pct(dz1); document.getElementById('dz2Pct').innerText=pct(dz2); document.getElementById('dz3Pct').innerText=pct(dz3);
   document.getElementById('lowPct').innerText=pct(low); document.getElementById('highPct').innerText=pct(high);
   document.getElementById('evenPct').innerText=pct(even); document.getElementById('oddPct').innerText=pct(odd);
   document.getElementById('redPct').innerText=pct(red); document.getElementById('blackPct').innerText=pct(black);
   document.getElementById('col1Pct').innerText=pct(c1); document.getElementById('col2Pct').innerText=pct(c2); document.getElementById('col3Pct').innerText=pct(c3);
   document.getElementById('redBar').innerText=pct(red); document.getElementById('blackBar').innerText=pct(black);
-  document.getElementById('dz1').className = dz1>=dz2&&dz1>=dz3?'verde':''; document.getElementById('dz2').className = dz2>=dz1&&dz2>=dz3?'verde':'';
-  document.getElementById('dz3').className = dz3>=dz1&&dz3>=dz2?'verde':'';
+  document.getElementById('dz1').className = hist.length>0 && dz1>=dz2&&dz1>=dz3?'verde':''; document.getElementById('dz2').className = hist.length>0 && dz2>=dz1&&dz2>=dz3?'verde':'';
+  document.getElementById('dz3').className = hist.length>0 && dz3>=dz1&&dz3>=dz2?'verde':'';
+  // HOT / COLD - SE ZEROU, FICA VAZIO
+  if(hist.length===0){
+    document.getElementById('hotCold').innerHTML = Array(5).fill('<div class="hot-item">🔥<div class="bola-hot vazia">-</div><small>0x</small></div><div class="hot-item">❄️<div class="bola-hot vazia">-</div><small>0x</small></div>').join('');
+    previsaoAtual=[];
+    document.getElementById('confPct').innerText='--%';
+    document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 8</span>';
+    return;
+  }
   let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
-  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,5).filter(x=>x.qtd>0); if(hot.length===0) hot=[{n:6,qtd:4},{n:29,qtd:4},{n:36,qtd:3},{n:3,qtd:2},{n:22,qtd:2}];
+  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,5).filter(x=>x.qtd>0);
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,5);
   let hc=''; for(let i=0;i<5;i++){ hc+=`<div class="hot-item">🔥<div class="bola-hot ${cor(hot[i].n)}">${hot[i].n}</div><small>${hot[i].qtd}x</small></div><div class="hot-item">❄️<div class="bola-hot ${cor(cold[i].n)}">${cold[i].n}</div><small>${cold[i].qtd}x</small></div>`; }
   document.getElementById('hotCold').innerHTML=hc;
-  if(hist.length>0){
-    let ultimo = hist[hist.length-1]; let pos = RODA.indexOf(ultimo); let viz = [];
-    if(pos>=0){ viz = [RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37]]; }
-    let base = hot.slice(0,5).map(h=>h.n); let lista8 = [...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
-    while(lista8.length<8){ let r=Math.floor(Math.random()*37); if(!lista8.includes(r)) lista8.push(r); }
-    previsaoAtual = lista8.slice(0,8).sort((a,b)=>a-b);
-    document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%';
-  }
+  let ultimo = hist[hist.length-1]; let pos = RODA.indexOf(ultimo); let viz = [];
+  if(pos>=0){ viz = [RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37]]; }
+  let base = hot.slice(0,5).map(h=>h.n); let lista8 = [...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
+  while(lista8.length<8){ let r=Math.floor(Math.random()*37); if(!lista8.includes(r)) lista8.push(r); }
+  previsaoAtual = lista8.slice(0,8).sort((a,b)=>a-b);
+  document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%';
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){ hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n); render(); }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function limparTudo(){ if(!confirm('Zerar tudo e começar do zero?')) return; hist=[]; localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); previsaoAtual=[3,6,15,18,22,29,31,36]; render(); }
+function limparTudo(){
+  if(!confirm('Zerar TUDO e começar do zero?')) return;
+  hist=[]; previsaoAtual=[];
+  localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp');
+  localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron');
+  localStorage.removeItem('cntA'); localStorage.removeItem('cntB');
+  render();
+}
 function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números em ordem: '+previsaoAtual.join(' - ')); }
 render();
 </script>

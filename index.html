@@ -20,7 +20,7 @@ body{touch-action:pan-x pan-y}
 .bola-top.red{background:#b50000}.bola-top.black{background:#222}.bola-top.green{background:#00a000}
 .previsao-top{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:6px 12px;display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0;flex-wrap:wrap}
 .previsao-top b{color:#D4AF37;font-size:13px;white-space:nowrap}.previsao-top .bolas{display:flex;gap:6px}.previsao-top .conf{color:#fff;font-weight:900}
-.btn-voltar{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:8px 14px;border-radius:8px;font-weight:900;cursor:pointer;font-size:13px;white-space:nowrap}
+.btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 14px;border-radius:8px;font-weight:900;cursor:pointer;font-size:13px;white-space:nowrap}
 .meio{flex:1;display:grid;grid-template-columns:68px 1fr 125px;gap:6px;min-height:0}
 .col-esq{display:flex;flex-direction:column;gap:4px;min-height:0}
 .btn-remover{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px 4px;border-radius:8px;font-size:10px;text-align:center;font-weight:900;cursor:pointer;line-height:1.2}
@@ -57,7 +57,7 @@ body{touch-action:pan-x pan-y}
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
     <div class="hist-top"><div id="histTop" style="display:flex;gap:5px"></div><b style="color:#D4AF37;font-size:11px">Análise<br>estatística</b><span>2 ⌄</span><span>📊</span></div>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
-    <button class="btn-voltar" onclick="window.location.href='index.html'">VOLTAR</button>
+    <button class="btn-voltar" onclick="limparTudo()">🗑️ LIMPAR</button>
   </div>
   <div class="previsao-top"><b>🎯 8 NÚMEROS QUE PODEM SAIR &nbsp; <span class="conf" id="confPct">70%</span></b><div class="bolas" id="prevBolas"></div><span style="font-size:12px">🧠 IA RAFIGASP</span></div>
   <div class="meio">
@@ -133,6 +133,7 @@ function render(){
 }
 function pick(n){ hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n); render(); }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
+function limparTudo(){ if(!confirm('Zerar tudo e começar do zero?')) return; hist=[]; localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); previsaoAtual=[3,6,15,18,22,29,31,36]; render(); }
 function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números em ordem: '+previsaoAtual.join(' - ')); }
 render();
 </script>

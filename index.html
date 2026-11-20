@@ -19,6 +19,11 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
 .bola-top.red{background:#b50000}
 .bola-top.black{background:#222}
 .bola-top.green{background:#00a000}
+/* PREVISÃO EM CIMA - 8 NÚMEROS */
+.previsao-top{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:5px 12px;display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
+.previsao-top b{color:#D4AF37;font-size:13px;white-space:nowrap}
+.previsao-top .bolas{display:flex;gap:6px}
+.previsao-top .conf{color:#fff;font-weight:900}
 .btn-voltar{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:8px 14px;border-radius:8px;font-weight:900;cursor:pointer;font-size:13px;white-space:nowrap}
 .meio{flex:1;display:grid;grid-template-columns:68px 1fr 125px;gap:6px;min-height:0}
 .col-esq{display:flex;flex-direction:column;gap:4px}
@@ -30,7 +35,6 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
 .btn-premium{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:8px 4px;border-radius:8px;text-align:center;font-weight:900;cursor:pointer;font-size:12px}
 .mesa{background:#111;border:1px solid #444;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0;overflow:hidden}
 .linha-analise{text-align:center;background:#000;border:1px solid #D4AF37;padding:4px;border-radius:8px;font-size:11px;color:#D4AF37}
-/* MESA CORRIGIDA - NÃO ESMAGA MAIS */
 .grid-mesa{flex:1;display:grid;grid-template-columns:32px repeat(12,42px) 42px;grid-template-rows:repeat(3,1fr);gap:1px;min-height:0;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;scrollbar-width:thin}
 .grid-mesa::-webkit-scrollbar{height:4px}
 .grid-mesa::-webkit-scrollbar-thumb{background:#D4AF37;border-radius:10px}
@@ -61,13 +65,6 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
 .bola-hot.black{background:#222}
 .bola-hot.green{background:#00a000}
 .btn-prever{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px;border-radius:8px;font-weight:900;cursor:pointer;text-align:center;font-size:11px;margin-top:4px}
-.baixo{display:grid;grid-template-columns:1fr 1fr;gap:6px;height:108px;flex-shrink:0}
-.previsao{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow-x:auto}
-.previsao b{color:#D4AF37;font-size:13px;white-space:nowrap}
-.previsao .bolas{display:flex;gap:6px}
-.teclado{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(4,1fr);gap:3px}
-.teclado button{background:#222;border:1px solid #444;color:#fff;border-radius:7px;font-weight:900;cursor:pointer;font-size:14px}
-.teclado button.zero{background:#00a000}
 @media (orientation: portrait){ #virar{display:flex} #app{filter:blur(4px)} }
 </style>
 </head>
@@ -79,6 +76,14 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
     <div class="hist-top"><div id="histTop" style="display:flex;gap:5px"></div><b style="color:#D4AF37;font-size:11px">Análise<br>estatística</b><span>2 ⌄</span><span>📊</span></div>
     <button class="btn-voltar" onclick="window.location.href='index.html'">VOLTAR</button>
   </div>
+
+  <!-- PREVISÃO AGORA EM CIMA - 8 NÚMEROS -->
+  <div class="previsao-top">
+    <b>🎯 8 NÚMEROS QUE PODEM SAIR &nbsp; <span class="conf" id="confPct">--%</span></b>
+    <div class="bolas" id="prevBolas"></div>
+    <span style="font-size:12px">🧠 IA RAFIGASP</span>
+  </div>
+
   <div class="meio">
     <div class="col-esq">
       <div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div>
@@ -87,7 +92,7 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
       <div class="btn-premium">App<br>Premium</div>
     </div>
     <div class="mesa">
-      <div class="linha-analise">Análise estatística • Últimos <span id="totalHist">0</span> números</div>
+      <div class="linha-analise">Análise estatística • Últimos <span id="totalHist">0</span> números • Toque na mesa para adicionar o número</div>
       <div class="grid-mesa" id="gridMesa"></div>
       <div class="dozen">
         <div id="dz1">1st 12<br><b id="dz1Pct">0%</b></div>
@@ -117,20 +122,14 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
       <button class="btn-prever" onclick="prever()">Prever o<br>próximo número</button>
     </div>
   </div>
-  <div class="baixo">
-    <div class="previsao">
-      <b>Previsão de Números &nbsp; <span id="confPct" style="color:#fff">--%</span></b>
-      <div class="bolas" id="prevBolas"></div>
-      <span style="font-size:12px">🧠 IA RAFIGASP</span>
-    </div>
-    <div class="teclado" id="teclado"></div>
-  </div>
 </div>
 <script>
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
+// Ordem da roda para vizinhos
+const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
-let previsaoAtual=[3,6,16,22,25];
+let previsaoAtual=[3,6,16,22,25,9,18,27];
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
 function bolaHTML(n, cls='bola-top'){ return `<div class="${cls} ${cor(n)}">${n}</div>`; }
 function render(){
@@ -164,15 +163,23 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,5);
   let hc=''; for(let i=0;i<5;i++){ hc+=`<div class="hot-item">🔥<div class="bola-hot ${cor(hot[i].n)}">${hot[i].n}</div><small>${hot[i].qtd}x</small></div><div class="hot-item">❄️<div class="bola-hot ${cor(cold[i].n)}">${cold[i].n}</div><small>${cold[i].qtd}x</small></div>`; }
   document.getElementById('hotCold').innerHTML=hc;
-  if(hist.length>0){ previsaoAtual=hot.slice(0,5).map(h=>h.n); document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%'; }
+  // PREVISÃO 8 NÚMEROS: 5 HOT + 3 vizinhos do último número na roda
+  if(hist.length>0){
+    let ultimo = hist[hist.length-1];
+    let pos = RODA.indexOf(ultimo);
+    let viz = [];
+    if(pos>=0){ viz = [RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37]]; }
+    let base = hot.slice(0,5).map(h=>h.n);
+    let lista8 = [...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
+    while(lista8.length<8){ let r=Math.floor(Math.random()*37); if(!lista8.includes(r)) lista8.push(r); }
+    previsaoAtual = lista8.slice(0,8);
+    document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%';
+  }
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){ hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n); render(); }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: Previsão: '+previsaoAtual.join(' - ')); }
-let tec=document.getElementById('teclado');
-for(let i=0;i<=36;i++){ let b=document.createElement('button'); b.innerText=i; if(i===0) b.className='zero'; b.onclick=()=>pick(i); tec.appendChild(b); }
-for(let i=37;i<40;i++){ let b=document.createElement('button'); b.innerText=''; b.style.opacity='0'; tec.appendChild(b); }
+function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números: '+previsaoAtual.join(' - ')); }
 render();
 </script>
 </body>

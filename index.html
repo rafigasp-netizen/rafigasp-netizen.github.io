@@ -18,10 +18,10 @@ body{touch-action:pan-x pan-y}
 .quadrado-azul{flex:1;display:flex;gap:4px;background:#111;border:2px solid #00E5FF;border-radius:12px;padding:6px 8px;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 12px rgba(0,229,255,0.3)}
 .quadrado-azul .titulo{color:#D4AF37;font-size:11px;font-weight:900;white-space:nowrap;line-height:1.2;text-align:center}
 .quadrado-azul .titulo span{color:#fff;font-size:13px}
-.bola-top{width:32px;height:32px;min-width:32px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.bola-top{width:26px;height:26px;min-width:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px}
 .bola-top.red{background:#b50000}.bola-top.black{background:#222}.bola-top.green{background:#00a000}
-.bola-top.pisca15{animation:pisca15 0.7s infinite;border-color:#FFD700!important;box-shadow:0 0 14px #FFD700}
-@keyframes pisca15{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.15);filter:brightness(1.6)}}
+.bola-top.pisca27{animation:pisca27 0.7s infinite;border-color:#FFD700!important;box-shadow:0 0 14px #FFD700}
+@keyframes pisca27{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.15);filter:brightness(1.6)}}
 .btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-roleta{background:#111;border:2px solid #D4AF37;color:#D4AF37;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-mesa{background:#D4AF37;color:#000;border:0;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:11px;white-space:nowrap;height:44px;line-height:1.2;text-align:center}
@@ -37,7 +37,7 @@ body{touch-action:pan-x pan-y}
 .cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:24px;min-width:0;min-height:60px;white-space:nowrap;overflow:hidden;position:relative;flex-direction:column;line-height:1}
 .cell-mesa.red{background:#b50000}.cell-mesa.black{background:#222}.cell-mesa.green{background:#00a000}
 .cell-mesa.zero{background:#888;color:#000;writing-mode:vertical-rl;font-size:16px;min-width:32px}.cell-mesa.to1{background:#888;font-size:11px}
-.cell-mesa.pisca15{animation:piscaMesa 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 20px #FFD700, inset 0 0 14px #FFD700;z-index:2}
+.cell-mesa.pisca27{animation:piscaMesa 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 20px #FFD700, inset 0 0 14px #FFD700;z-index:2}
 .cell-mesa.destaque-eu{outline:3px solid #00E5FF;outline-offset:-2px;z-index:1}
 @keyframes piscaMesa{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.07);filter:brightness(1.7)}}
 .fire-mesa{position:absolute;top:1px;left:2px;font-size:15px;animation:fogo 0.5s infinite;line-height:1}
@@ -56,7 +56,7 @@ body{touch-action:pan-x pan-y}
 .pista-num{height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,0.3);position:relative;flex-direction:column;line-height:1}
 .pista-num.red{background:#D32F2F}.pista-num.black{background:#333}.pista-num.green{background:#2E7D32}
 .pista-num.selecionado{outline:3px solid #00E5FF;outline-offset:-3px;z-index:1}
-.pista-num.pisca15{animation:piscaPista 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 16px #FFD700, inset 0 0 10px #FFD700;z-index:2}
+.pista-num.pisca27{animation:piscaPista 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 16px #FFD700, inset 0 0 10px #FFD700;z-index:2}
 @keyframes piscaPista{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.12);filter:brightness(1.7)}}
 .fire-pista{position:absolute;top:1px;left:2px;font-size:11px;animation:fogo 0.5s infinite;line-height:1}
 .ice-pista{position:absolute;top:1px;right:2px;font-size:11px;animation:gelo 0.8s infinite;line-height:1}
@@ -100,7 +100,7 @@ body{touch-action:pan-x pan-y}
   <div class="topo">
     <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
-    <div class="quadrado-azul"><div class="titulo">🎯 15 NÚMEROS<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></div></div>
+    <div class="quadrado-azul"><div class="titulo">🎯 27 NÚMEROS<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center"></div></div>
     <button class="btn-mesa" id="btnMesa" onclick="abrirPista()">🇪🇺 CARTÃO<br>EUROPEU</button>
     <button class="btn-roleta" onclick="abrirRoleta()">🎡 ROLETA</button>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
@@ -128,7 +128,7 @@ body{touch-action:pan-x pan-y}
     </div>
     <div class="pista-bottom" id="pistaBottom"></div>
   </div>
-  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>⭐ 15 PISCANDO = APOSTA</span></div>
+  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>⭐ 27 PISCANDO = APOSTA</span></div>
   <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
   <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
 </div>
@@ -171,13 +171,13 @@ function getHotCold(){
 }
 function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
-  let is15 = previsaoAtual.includes(n);
-  d.className='pista-num '+cor(n)+(is15?' pisca15':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
+  let is27 = previsaoAtual.includes(n);
+  d.className='pista-num '+cor(n)+(is27?' pisca27':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
   d.onclick=()=>{ pick(n); };
   let html=`<span>${n}</span>`;
   if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]}x</span>`;
   else if(hist.length>0 && cold.has(n)) html+=`<span class="ice-pista">❄️</span><span class="mini cold">COLD ${counts[n]}x</span>`;
-  if(is15) html+=`<span class="mini" style="color:#FFD700">★ 15</span>`;
+  if(is27) html+=`<span class="mini" style="color:#FFD700">★ 27</span>`;
   d.innerHTML=html;
   return d;
 }
@@ -215,13 +215,13 @@ let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
-function bolaHTML(n, cls='bola-top'){ let pisca = previsaoAtual.includes(n) ? ' pisca15' : ''; return `<div class="${cls} ${cor(n)}${pisca}">${n}</div>`; }
-function gerarNovos15(hot){
+function bolaHTML(n, cls='bola-top'){ let pisca = previsaoAtual.includes(n) ? ' pisca27' : ''; return `<div class="${cls} ${cor(n)}${pisca}">${n}</div>`; }
+function gerarNovos27(hot){
   let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo); let viz=[];
-  if(pos>=0){ viz=[RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37], RODA[(pos+3)%37], RODA[(pos+35)%37]]; }
-  let base = hot.slice(0,8).map(h=>h.n); let lista=[...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
-  while(lista.length<15){ let r=Math.floor(Math.random()*37); if(!lista.includes(r)) lista.push(r); }
-  previsaoAtual = lista.slice(0,15).sort((a,b)=>a-b);
+  if(pos>=0){ for(let k=1;k<=8;k++){ viz.push(RODA[(pos+k)%37]); viz.push(RODA[(pos+37-k)%37]); } }
+  let base = hot.slice(0,10).map(h=>h.n); let lista=[...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
+  while(lista.length<27){ let r=Math.floor(Math.random()*37); if(!lista.includes(r)) lista.push(r); }
+  previsaoAtual = lista.slice(0,27).sort((a,b)=>a-b);
   confAtual = Math.min(90,50+(hot[0]?hot[0].qtd:1)*5)+'%';
   localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
   localStorage.setItem('confTravada', confAtual);
@@ -258,13 +258,13 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   hotSet = new Set(hot.filter(h=>h.qtd>0).map(h=>h.n));
   coldSet = new Set(cold.map(c=>c.n));
-  if(hist.length>0 && previsaoAtual.length!==15){ gerarNovos15(hot); }
+  if(hist.length>0 && previsaoAtual.length!==27){ gerarNovos27(hot); }
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
-  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' pisca15':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
+  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' pisca27':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
   linhas.forEach(linha=>{ linha.forEach(n=>{
     let destaque = (setorAtivo && SETORES[setorAtivo].nums.includes(n)) ? ' destaque-eu' : '';
-    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(previsaoAtual.includes(n)?' pisca15':'')+destaque; d.onclick=()=>pick(n);
+    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(previsaoAtual.includes(n)?' pisca27':'')+destaque; d.onclick=()=>pick(n);
     let html = `<span>${n}</span>`;
     if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]}x</span>`;
     if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]}x</span>`;
@@ -273,7 +273,7 @@ function render(){
   if(document.getElementById('pistaOverlay').classList.contains('aberto')) montarPista();
   if(hist.length===0){
     previsaoAtual=[]; confAtual='--%';
-    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 15</span>'; return;
+    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 27</span>'; return;
   }
   document.getElementById('confPct').innerText=confAtual;
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
@@ -285,8 +285,8 @@ function pick(n){
     let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
     let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
     let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
-    gerarNovos15(hot);
-    alert('✅ ACERTOU! Saiu '+n+' que estava nos 15! Novos 15 gerados: '+previsaoAtual.join(' - '));
+    gerarNovos27(hot);
+    alert('✅ ACERTOU! Saiu '+n+' que estava nos 27! Novos 27 gerados: '+previsaoAtual.join(' - '));
   }
   render();
 }

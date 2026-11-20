@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>RAFIGASP PREMIUM - PAISAGEM</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif;margin:0;padding:0}
@@ -10,16 +10,18 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
 #virar{display:none;position:fixed;inset:0;background:#0a0f1a;z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:12px}
 #virar b{font-size:22px;color:#D4AF37}
 #virar span{font-size:60px}
-#app{width:100vw;height:100vh;height:100dvh;display:flex;flex-direction:column;padding:5px;gap:5px;overflow:hidden}
+#app{width:100vw;height:100vh;height:100dvh;display:flex;flex-direction:column;padding:5px;gap:5px;overflow:hidden;transform-origin:top left}
 .topo{display:flex;gap:6px;align-items:center;height:52px;flex-shrink:0}
 .logo{font-size:14px;font-weight:900;color:#D4AF37;line-height:1.1;white-space:nowrap}
 .logo small{font-size:9px;color:#888;font-weight:400;display:block}
+/* BOTÕES ZOOM */
+.zoomBtn{width:40px;height:36px;background:#000;color:#D4AF37;border:2px solid #D4AF37;border-radius:8px;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;user-select:none}
+.zoomInfo{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#000;border:2px solid #D4AF37;color:#D4AF37;padding:6px 14px;border-radius:20px;font-size:12px;z-index:100;display:none}
 .hist-top{flex:1;display:flex;gap:6px;background:#111;border:1px solid #D4AF37;border-radius:10px;padding:5px 8px;align-items:center;justify-content:center}
 .bola-top{width:32px;height:32px;min-width:32px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
 .bola-top.red{background:#b50000}
 .bola-top.black{background:#222}
 .bola-top.green{background:#00a000}
-/* PREVISÃO EM CIMA - 8 NÚMEROS */
 .previsao-top{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:5px 12px;display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
 .previsao-top b{color:#D4AF37;font-size:13px;white-space:nowrap}
 .previsao-top .bolas{display:flex;gap:6px}
@@ -72,18 +74,17 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
 <div id="virar"><span>🔄</span><b>VIRE O CELULAR</b><p style="color:#aaa;font-size:13px">Esse modelo é em PAISAGEM.<br>Vire o celular deitado para usar igual a foto.</p><button onclick="document.getElementById('virar').style.display='none';document.getElementById('app').style.filter='none'" style="background:#D4AF37;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:900">USAR ASSIM MESMO</button></div>
 <div id="app">
   <div class="topo">
+    <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
     <div class="hist-top"><div id="histTop" style="display:flex;gap:5px"></div><b style="color:#D4AF37;font-size:11px">Análise<br>estatística</b><span>2 ⌄</span><span>📊</span></div>
+    <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
     <button class="btn-voltar" onclick="window.location.href='index.html'">VOLTAR</button>
   </div>
-
-  <!-- PREVISÃO AGORA EM CIMA - 8 NÚMEROS -->
   <div class="previsao-top">
     <b>🎯 8 NÚMEROS QUE PODEM SAIR &nbsp; <span class="conf" id="confPct">--%</span></b>
     <div class="bolas" id="prevBolas"></div>
     <span style="font-size:12px">🧠 IA RAFIGASP</span>
   </div>
-
   <div class="meio">
     <div class="col-esq">
       <div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div>
@@ -123,10 +124,16 @@ body{background:#0a0f1a;color:#fff;overflow:hidden}
     </div>
   </div>
 </div>
+<div class="zoomInfo" id="zoomInfo"></div>
 <script>
+// ===== ZOOM =====
+let zoomLevel=parseFloat(localStorage.getItem('zoomPaisagem')||'1');
+function aplicaZoom(){ let app=document.getElementById('app'); app.style.zoom=zoomLevel; localStorage.setItem('zoomPaisagem',zoomLevel); let i=document.getElementById('zoomInfo'); i.textContent='Zoom '+Math.round(zoomLevel*100)+'%'; i.style.display='block'; setTimeout(()=>i.style.display='none',1000); }
+function zoomMais(e){e&&e.stopPropagation();zoomLevel=Math.min(1.8,zoomLevel+0.1);aplicaZoom();}
+function zoomMenos(e){e&&e.stopPropagation();zoomLevel=Math.max(0.6,zoomLevel-0.1);aplicaZoom();}
+aplicaZoom();
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
-// Ordem da roda para vizinhos
 const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
 let previsaoAtual=[3,6,16,22,25,9,18,27];
@@ -163,7 +170,6 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,5);
   let hc=''; for(let i=0;i<5;i++){ hc+=`<div class="hot-item">🔥<div class="bola-hot ${cor(hot[i].n)}">${hot[i].n}</div><small>${hot[i].qtd}x</small></div><div class="hot-item">❄️<div class="bola-hot ${cor(cold[i].n)}">${cold[i].n}</div><small>${cold[i].qtd}x</small></div>`; }
   document.getElementById('hotCold').innerHTML=hc;
-  // PREVISÃO 8 NÚMEROS: 5 HOT + 3 vizinhos do último número na roda
   if(hist.length>0){
     let ultimo = hist[hist.length-1];
     let pos = RODA.indexOf(ultimo);
@@ -172,14 +178,15 @@ function render(){
     let base = hot.slice(0,5).map(h=>h.n);
     let lista8 = [...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
     while(lista8.length<8){ let r=Math.floor(Math.random()*37); if(!lista8.includes(r)) lista8.push(r); }
-    previsaoAtual = lista8.slice(0,8);
+    // ORDEM CRESCENTE
+    previsaoAtual = lista8.slice(0,8).sort((a,b)=>a-b);
     document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%';
   }
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){ hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n); render(); }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números: '+previsaoAtual.join(' - ')); }
+function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números em ordem: '+previsaoAtual.join(' - ')); }
 render();
 </script>
 </body>

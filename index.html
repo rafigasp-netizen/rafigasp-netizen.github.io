@@ -46,7 +46,6 @@ body{touch-action:pan-x pan-y}
 @keyframes gelo{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.25) rotate(10deg)}}
 .tag-hot{position:absolute;bottom:1px;left:3px;font-size:8px;color:#ffcc00;font-weight:900}
 .tag-cold{position:absolute;bottom:1px;right:3px;font-size:8px;color:#00ccff;font-weight:900}
-/* PISTA EUROPEIA IGUAL A FOTO */
 #pistaOverlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
 #pistaOverlay.aberto{display:flex}
 .pista-titulo{color:#333;font-weight:900;font-size:24px;text-align:center}
@@ -54,9 +53,15 @@ body{touch-action:pan-x pan-y}
 .pista{width:min(96vw,860px);background:#fff;border:2px solid #ccc;border-radius:100px;padding:0;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
 .pista-top,.pista-bottom{display:grid;grid-template-columns:repeat(17,1fr)}
 .pista-meio{display:grid;grid-template-columns:52px 1fr 52px}
-.pista-num{height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,0.3)}
+.pista-num{height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,0.3);position:relative;flex-direction:column;line-height:1}
 .pista-num.red{background:#D32F2F}.pista-num.black{background:#333}.pista-num.green{background:#2E7D32}
-.pista-num.selecionado{outline:3px solid #FFD700;outline-offset:-3px;transform:scale(1.05);z-index:1}
+.pista-num.selecionado{outline:3px solid #00E5FF;outline-offset:-3px;z-index:1}
+.pista-num.pisca8{animation:piscaPista 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 16px #FFD700, inset 0 0 10px #FFD700;z-index:2}
+@keyframes piscaPista{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.12);filter:brightness(1.7)}}
+.fire-pista{position:absolute;top:1px;left:2px;font-size:11px;animation:fogo 0.5s infinite;line-height:1}
+.ice-pista{position:absolute;top:1px;right:2px;font-size:11px;animation:gelo 0.8s infinite;line-height:1}
+.pista-num .mini{font-size:8px;font-weight:900;line-height:1}
+.pista-num .mini.hot{color:#FFEB3B}.pista-num .mini.cold{color:#00E5FF}
 .pista-lado{display:flex;flex-direction:column}
 .pista-lado .pista-num{flex:1}
 .pista-centro{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 0.9fr;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
@@ -64,6 +69,8 @@ body{touch-action:pan-x pan-y}
 .pista-setor:last-child{border-right:0}
 .pista-setor.ativo{background:#FFF9C4;color:#000;font-weight:900}
 .pista-info{color:#333;font-size:13px;text-align:center;min-height:20px;font-weight:700}
+.pista-legenda{display:flex;gap:16px;justify-content:center;font-size:12px;color:#333;font-weight:700}
+.pista-legenda span{display:flex;align-items:center;gap:4px}
 .pista-botoes{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .btn-pista{background:#333;color:#fff;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
 .btn-pista-dourado{background:#D4AF37;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
@@ -73,7 +80,7 @@ body{touch-action:pan-x pan-y}
 .roleta-titulo small{display:block;color:#aaa;font-size:11px;font-weight:400}
 .roleta-wrap{position:relative;width:min(88vw,420px);height:min(88vw,420px)}
 #roleta{width:100%;height:100%;border-radius:50%;border:6px solid #D4AF37;position:relative;overflow:hidden;transition:transform 1.2s cubic-bezier(0.15,0.9,0.25,1);background:#111;box-shadow:0 0 30px rgba(212,175,55,0.4)}
-.pocket{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:2px solid #fff;color:#fff}
+.pocket{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-16px 0 0 -16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;border:2px solid #fff;color:#fff}
 .pocket.red{background:#b50000}.pocket.black{background:#222}.pocket.green{background:#00a000}
 .pocket.ultimo{border-color:#FFD700!important;box-shadow:0 0 14px #FFD700;transform:scale(1.25);z-index:2}
 .roleta-centro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;background:#0a0f1a;border:3px solid #D4AF37;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;text-align:center}
@@ -121,6 +128,7 @@ body{touch-action:pan-x pan-y}
     </div>
     <div class="pista-bottom" id="pistaBottom"></div>
   </div>
+  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>⭐ 8 PISCANDO = APOSTA</span></div>
   <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
   <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
 </div>
@@ -142,7 +150,6 @@ wrap.addEventListener('touchmove',e=>{ if(e.touches.length===2&&pinchDist>0){ le
 let lastTap=0; wrap.addEventListener('touchend',()=>{ let n=Date.now(); if(n-lastTap<350){ zoomLevel=1; aplicaZoom(); } lastTap=n; });
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-// PISTA IGUAL A FOTO
 const PISTA_TOP=[5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3];
 const PISTA_BOTTOM=[8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32,0];
 const PISTA_ESQ=[10,23];
@@ -155,29 +162,50 @@ const SETORES={
 };
 let setorAtivo=null;
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
+function getHotCold(){
+  let counts={}; hist.forEach(n=>counts[n]=(counts[n]||0)+1);
+  let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
+  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+  let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
+  return {counts, hot:new Set(hot.filter(h=>h.qtd>0).map(h=>h.n)), cold:new Set(cold.map(c=>c.n))};
+}
+function criarPistaNum(n, counts, hot, cold){
+  let d=document.createElement('div');
+  let is8 = previsaoAtual.includes(n);
+  d.className='pista-num '+cor(n)+(is8?' pisca8':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
+  d.onclick=()=>{ pick(n); };
+  let html=`<span>${n}</span>`;
+  if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]}x</span>`;
+  else if(hist.length>0 && cold.has(n)) html+=`<span class="ice-pista">❄️</span><span class="mini cold">COLD ${counts[n]}x</span>`;
+  if(is8) html+=`<span class="mini" style="color:#FFD700">★ 8</span>`;
+  d.innerHTML=html;
+  return d;
+}
 function montarPista(){
+  let hc=getHotCold();
   let top=document.getElementById('pistaTop'); top.innerHTML='';
-  PISTA_TOP.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; top.appendChild(d); });
+  PISTA_TOP.forEach(n=>top.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let bot=document.getElementById('pistaBottom'); bot.innerHTML='';
-  PISTA_BOTTOM.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; bot.appendChild(d); });
+  PISTA_BOTTOM.forEach(n=>bot.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let esq=document.getElementById('pistaEsq'); esq.innerHTML='';
-  PISTA_ESQ.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; esq.appendChild(d); });
+  PISTA_ESQ.forEach(n=>esq.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let dir=document.getElementById('pistaDir'); dir.innerHTML='';
-  PISTA_DIR.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; dir.appendChild(d); });
+  PISTA_DIR.forEach(n=>dir.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
+  if(setorAtivo){
+    document.querySelectorAll('.pista-setor').forEach(el=>{ if(el.dataset.setor===setorAtivo) el.classList.add('ativo'); });
+  }
 }
 function clicarSetor(setor, el){
   setorAtivo = setorAtivo===setor ? null : setor;
   document.querySelectorAll('.pista-setor').forEach(d=>d.classList.remove('ativo'));
-  document.querySelectorAll('.pista-num').forEach(d=>d.classList.remove('selecionado'));
   if(setorAtivo){
     if(el) el.classList.add('ativo');
     let nums=SETORES[setor].nums;
-    document.querySelectorAll('.pista-num').forEach(d=>{ if(nums.includes(Number(d.innerText))) d.classList.add('selecionado'); });
     document.getElementById('pistaInfo').innerText = SETORES[setor].nome+' • '+nums.length+' números: '+nums.join(', ')+' • Toque em USAR ESSE SETOR para acender na mesa';
   } else {
     document.getElementById('pistaInfo').innerText='Toque num número da pista para adicionar • Toque num setor para acender na mesa';
   }
-  render();
+  montarPista(); render();
 }
 function abrirPista(){ montarPista(); document.getElementById('pistaOverlay').classList.add('aberto'); }
 function fecharPista(){ document.getElementById('pistaOverlay').classList.remove('aberto'); }
@@ -242,6 +270,7 @@ function render(){
     if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]}x</span>`;
     d.innerHTML = html; grid.appendChild(d);
   }); let t=document.createElement('div'); t.className='cell-mesa to1'; t.innerText='2 to 1'; grid.appendChild(t); });
+  if(document.getElementById('pistaOverlay').classList.contains('aberto')) montarPista();
   if(hist.length===0){
     previsaoAtual=[]; confAtual='--%';
     document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 8</span>'; return;

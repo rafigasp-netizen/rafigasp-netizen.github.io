@@ -33,17 +33,12 @@ body{touch-action:pan-x pan-y}
 .col-esq .num.red{background:#6b0000}.col-esq .num.black{background:#222}.col-esq .num.green{background:#00a000}
 .btn-premium{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:8px 4px;border-radius:8px;text-align:center;font-weight:900;cursor:pointer;font-size:12px}
 .mesa{background:#111;border:1px solid #444;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;overflow:hidden}
-.mesa-eu-bar{display:none;gap:4px;flex-shrink:0}
-.mesa-eu-bar.mostrar{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:4px}
-.mesa-eu-bar div{background:#0a5a1e;border:1px solid #D4AF37;border-radius:6px;padding:5px;text-align:center;font-size:10px;font-weight:900;cursor:pointer;line-height:1.2}
-.mesa-eu-bar div small{display:block;font-size:8px;color:#ffcc00;font-weight:400}
-.mesa-eu-bar div.ativo{background:#D4AF37;color:#000}
 .grid-mesa{flex:1;display:grid;grid-template-columns:32px repeat(12,1fr) 42px;grid-template-rows:repeat(3,1fr);gap:3px;min-height:0;overflow:hidden}
 .cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:24px;min-width:0;min-height:60px;white-space:nowrap;overflow:hidden;position:relative;flex-direction:column;line-height:1}
 .cell-mesa.red{background:#b50000}.cell-mesa.black{background:#222}.cell-mesa.green{background:#00a000}
 .cell-mesa.zero{background:#888;color:#000;writing-mode:vertical-rl;font-size:16px;min-width:32px}.cell-mesa.to1{background:#888;font-size:11px}
 .cell-mesa.pisca8{animation:piscaMesa 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 20px #FFD700, inset 0 0 14px #FFD700;z-index:2}
-.cell-mesa.destaque-eu{outline:2px solid #00E5FF;outline-offset:-2px}
+.cell-mesa.destaque-eu{outline:3px solid #00E5FF;outline-offset:-2px;z-index:1}
 @keyframes piscaMesa{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.07);filter:brightness(1.7)}}
 .fire-mesa{position:absolute;top:1px;left:2px;font-size:15px;animation:fogo 0.5s infinite;line-height:1}
 @keyframes fogo{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.35) rotate(3deg)}}
@@ -51,6 +46,27 @@ body{touch-action:pan-x pan-y}
 @keyframes gelo{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.25) rotate(10deg)}}
 .tag-hot{position:absolute;bottom:1px;left:3px;font-size:8px;color:#ffcc00;font-weight:900}
 .tag-cold{position:absolute;bottom:1px;right:3px;font-size:8px;color:#00ccff;font-weight:900}
+/* PISTA EUROPEIA IGUAL A FOTO */
+#pistaOverlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
+#pistaOverlay.aberto{display:flex}
+.pista-titulo{color:#333;font-weight:900;font-size:24px;text-align:center}
+.pista-sub{color:#888;font-size:12px}
+.pista{width:min(96vw,860px);background:#fff;border:2px solid #ccc;border-radius:100px;padding:0;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.pista-top,.pista-bottom{display:grid;grid-template-columns:repeat(17,1fr)}
+.pista-meio{display:grid;grid-template-columns:52px 1fr 52px}
+.pista-num{height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,0.3)}
+.pista-num.red{background:#D32F2F}.pista-num.black{background:#333}.pista-num.green{background:#2E7D32}
+.pista-num.selecionado{outline:3px solid #FFD700;outline-offset:-3px;transform:scale(1.05);z-index:1}
+.pista-lado{display:flex;flex-direction:column}
+.pista-lado .pista-num{flex:1}
+.pista-centro{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 0.9fr;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
+.pista-setor{display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:#666;font-weight:400;cursor:pointer;padding:8px 4px;line-height:1.2;border-right:1px solid #ddd;background:#fff}
+.pista-setor:last-child{border-right:0}
+.pista-setor.ativo{background:#FFF9C4;color:#000;font-weight:900}
+.pista-info{color:#333;font-size:13px;text-align:center;min-height:20px;font-weight:700}
+.pista-botoes{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.btn-pista{background:#333;color:#fff;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
+.btn-pista-dourado{background:#D4AF37;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
 #roletaOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px}
 #roletaOverlay.aberto{display:flex}
 .roleta-titulo{color:#D4AF37;font-weight:900;font-size:16px;text-align:center}
@@ -78,25 +94,36 @@ body{touch-action:pan-x pan-y}
     <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
     <div class="quadrado-azul"><div class="titulo">🎯 8 NÚMEROS<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:6px"></div></div>
-    <button class="btn-mesa" id="btnMesa" onclick="trocarMesa()">🇪🇺 MESA<br>EUROPEIA</button>
+    <button class="btn-mesa" id="btnMesa" onclick="abrirPista()">🇪🇺 CARTÃO<br>EUROPEU</button>
     <button class="btn-roleta" onclick="abrirRoleta()">🎡 ROLETA</button>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
     <button class="btn-voltar" onclick="limparTudo()">🗑️ LIMPAR</button>
   </div>
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
-    <div class="mesa">
-      <div class="mesa-eu-bar" id="mesaEuBar">
-        <div onclick="destacarSetor('voisins',this)">VOISINS DU ZÉRO<small>17 números • ao lado do 0</small></div>
-        <div onclick="destacarSetor('tiers',this)">TIERS<small>12 números</small></div>
-        <div onclick="destacarSetor('orphelins',this)">ORPHELINS<small>8 números</small></div>
-        <div onclick="destacarSetor('zero',this)">JEU ZÉRO<small>0 + vizinhos</small></div>
-      </div>
-      <div class="grid-mesa" id="gridMesa"></div>
-    </div>
+    <div class="mesa"><div class="grid-mesa" id="gridMesa"></div></div>
   </div>
 </div></div>
 <div class="zoomInfo" id="zoomInfo"></div>
+<div id="pistaOverlay">
+  <div class="pista-titulo">European Roulette</div>
+  <div class="pista">
+    <div class="pista-top" id="pistaTop"></div>
+    <div class="pista-meio">
+      <div class="pista-lado" id="pistaEsq"></div>
+      <div class="pista-centro">
+        <div class="pista-setor" data-setor="serie58" onclick="clicarSetor('serie58',this)">SERIE 5/8</div>
+        <div class="pista-setor" data-setor="orphelins" onclick="clicarSetor('orphelins',this)">ORPHELINS</div>
+        <div class="pista-setor" data-setor="serie023" onclick="clicarSetor('serie023',this)">SERIE 0/2/3</div>
+        <div class="pista-setor" data-setor="zero" onclick="clicarSetor('zero',this)">ZERO SPIEL</div>
+      </div>
+      <div class="pista-lado" id="pistaDir"></div>
+    </div>
+    <div class="pista-bottom" id="pistaBottom"></div>
+  </div>
+  <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
+  <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
+</div>
 <div id="roletaOverlay">
   <div class="roleta-titulo">🎡 ROLETA EUROPEIA<small>0 a 36 • Só 1 zero • Mesa normal</small></div>
   <div class="roleta-wrap"><div class="seta-roleta">⬇️</div><div id="roleta"></div><div class="roleta-centro"><span>ÚLTIMO NÚMERO</span><b id="roletaCentro">-</b><span id="roletaCor">-</span></div></div>
@@ -114,34 +141,52 @@ wrap.addEventListener('touchstart',e=>{ if(e.touches.length===2){ let dx=e.touch
 wrap.addEventListener('touchmove',e=>{ if(e.touches.length===2&&pinchDist>0){ let dx=e.touches[0].clientX-e.touches[1].clientX, dy=e.touches[0].clientY-e.touches[1].clientY; let d=Math.sqrt(dx*dx+dy*dy); zoomLevel=Math.min(2.5,Math.max(1,pinchStart*(d/pinchDist))); let app=document.getElementById('app'); app.style.transform='scale('+zoomLevel+')'; app.style.width=(100/zoomLevel)+'%'; app.style.height=(100/zoomLevel)+'%'; localStorage.setItem('zoomPaisagem',zoomLevel); } },{passive:true});
 let lastTap=0; wrap.addEventListener('touchend',()=>{ let n=Date.now(); if(n-lastTap<350){ zoomLevel=1; aplicaZoom(); } lastTap=n; });
 const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
-const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
-const SETORES={voisins:[22,18,29,7,28,12,35,3,26,0,32,15,19,4,21,2,25],tiers:[27,13,36,11,30,8,23,10,5,24,16,33],orphelins:[17,34,6,1,20,14,31,9],zero:[12,35,3,26,0,32,15]};
-let tipoMesa = localStorage.getItem('tipoMesa') || 'EU';
-let setorAtivo = null;
-function trocarMesa(){
-  tipoMesa = tipoMesa==='EU' ? 'NORMAL' : 'EU';
-  localStorage.setItem('tipoMesa', tipoMesa);
-  setorAtivo=null;
-  atualizarBotaoMesa(); render();
+// PISTA IGUAL A FOTO
+const PISTA_TOP=[5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3];
+const PISTA_BOTTOM=[8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32,0];
+const PISTA_ESQ=[10,23];
+const PISTA_DIR=[26];
+const SETORES={
+  serie58:{nome:'SERIE 5/8', nums:[5,24,16,33,10,23,8,30,11,36,1,20,14]},
+  orphelins:{nome:'ORPHELINS', nums:[1,20,14,31,9,17,34,6,13,27]},
+  serie023:{nome:'SERIE 0/2/3', nums:[22,18,29,7,28,12,35,25,2,21,4,19,15]},
+  zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
+};
+let setorAtivo=null;
+function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
+function montarPista(){
+  let top=document.getElementById('pistaTop'); top.innerHTML='';
+  PISTA_TOP.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; top.appendChild(d); });
+  let bot=document.getElementById('pistaBottom'); bot.innerHTML='';
+  PISTA_BOTTOM.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; bot.appendChild(d); });
+  let esq=document.getElementById('pistaEsq'); esq.innerHTML='';
+  PISTA_ESQ.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; esq.appendChild(d); });
+  let dir=document.getElementById('pistaDir'); dir.innerHTML='';
+  PISTA_DIR.forEach(n=>{ let d=document.createElement('div'); d.className='pista-num '+cor(n); d.innerText=n; d.onclick=()=>{ pick(n); }; dir.appendChild(d); });
 }
-function atualizarBotaoMesa(){
-  let b=document.getElementById('btnMesa'); let bar=document.getElementById('mesaEuBar');
-  if(tipoMesa==='EU'){ b.innerHTML='🇪🇺 MESA<br>EUROPEIA'; bar.classList.add('mostrar'); }
-  else { b.innerHTML='MESA<br>NORMAL'; bar.classList.remove('mostrar'); }
-}
-function destacarSetor(setor, el){
+function clicarSetor(setor, el){
   setorAtivo = setorAtivo===setor ? null : setor;
-  document.querySelectorAll('#mesaEuBar div').forEach(d=>d.classList.remove('ativo'));
-  if(setorAtivo && el) el.classList.add('ativo');
+  document.querySelectorAll('.pista-setor').forEach(d=>d.classList.remove('ativo'));
+  document.querySelectorAll('.pista-num').forEach(d=>d.classList.remove('selecionado'));
+  if(setorAtivo){
+    if(el) el.classList.add('ativo');
+    let nums=SETORES[setor].nums;
+    document.querySelectorAll('.pista-num').forEach(d=>{ if(nums.includes(Number(d.innerText))) d.classList.add('selecionado'); });
+    document.getElementById('pistaInfo').innerText = SETORES[setor].nome+' • '+nums.length+' números: '+nums.join(', ')+' • Toque em USAR ESSE SETOR para acender na mesa';
+  } else {
+    document.getElementById('pistaInfo').innerText='Toque num número da pista para adicionar • Toque num setor para acender na mesa';
+  }
   render();
 }
+function abrirPista(){ montarPista(); document.getElementById('pistaOverlay').classList.add('aberto'); }
+function fecharPista(){ document.getElementById('pistaOverlay').classList.remove('aberto'); }
+function fecharPistaEAplicar(){ fecharPista(); render(); }
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
 let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
-function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
 function bolaHTML(n, cls='bola-top'){ let pisca = previsaoAtual.includes(n) ? ' pisca8' : ''; return `<div class="${cls} ${cor(n)}${pisca}">${n}</div>`; }
 function gerarNovos8(hot){
   let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo); let viz=[];
@@ -190,7 +235,7 @@ function render(){
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
   let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' pisca8':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
   linhas.forEach(linha=>{ linha.forEach(n=>{
-    let destaque = (tipoMesa==='EU' && setorAtivo && SETORES[setorAtivo].includes(n)) ? ' destaque-eu' : '';
+    let destaque = (setorAtivo && SETORES[setorAtivo].nums.includes(n)) ? ' destaque-eu' : '';
     let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(previsaoAtual.includes(n)?' pisca8':'')+destaque; d.onclick=()=>pick(n);
     let html = `<span>${n}</span>`;
     if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]}x</span>`;
@@ -217,9 +262,8 @@ function pick(n){
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
-function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP - 8 travados até acertar: '+previsaoAtual.join(' - ')); }
-atualizarBotaoMesa(); render(); montarRoleta();
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+render(); montarPista(); montarRoleta();
 </script>
 </body>
 </html>

@@ -20,8 +20,10 @@ body{touch-action:pan-x pan-y}
 .bola-top.red{background:#b50000}.bola-top.black{background:#222}.bola-top.green{background:#00a000}
 .previsao-top{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:6px 12px;display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0;flex-wrap:wrap}
 .previsao-top b{color:#D4AF37;font-size:13px;white-space:nowrap}.previsao-top .bolas{display:flex;gap:6px}.previsao-top .conf{color:#fff;font-weight:900}
+.bola-top.pisca8{animation:pisca8 0.7s infinite;border-color:#FFD700!important;box-shadow:0 0 12px #FFD700}
+@keyframes pisca8{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.15);filter:brightness(1.6)}}
 .btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 14px;border-radius:8px;font-weight:900;cursor:pointer;font-size:13px;white-space:nowrap}
-.meio{flex:1;display:grid;grid-template-columns:68px 1fr 125px;gap:6px;min-height:0}
+.meio{flex:1;display:grid;grid-template-columns:68px 1fr 150px;gap:6px;min-height:0}
 .col-esq{display:flex;flex-direction:column;gap:4px;min-height:0}
 .btn-remover{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px 4px;border-radius:8px;font-size:10px;text-align:center;font-weight:900;cursor:pointer;line-height:1.2}
 .pct-ico{text-align:center;font-size:14px}
@@ -31,19 +33,26 @@ body{touch-action:pan-x pan-y}
 .mesa{background:#111;border:1px solid #444;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;overflow:hidden}
 .linha-analise{text-align:center;background:#000;border:1px solid #D4AF37;padding:4px;border-radius:8px;font-size:11px;color:#D4AF37;flex-shrink:0}
 .grid-mesa{flex:1;display:grid;grid-template-columns:32px repeat(12,1fr) 42px;grid-template-rows:repeat(3,minmax(56px,1fr));gap:2px;min-height:0;overflow:hidden}
-.cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:18px;min-width:0;min-height:56px;white-space:nowrap;overflow:hidden}
+.cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:18px;min-width:0;min-height:56px;white-space:nowrap;overflow:hidden;position:relative}
 .cell-mesa.red{background:#b50000}.cell-mesa.black{background:#222}.cell-mesa.green{background:#00a000}
 .cell-mesa.zero{background:#888;color:#000;writing-mode:vertical-rl;font-size:14px;min-width:32px}.cell-mesa.to1{background:#888;font-size:11px}
+.cell-mesa.pisca8{animation:piscaMesa 0.7s infinite;border:3px solid #FFD700!important;box-shadow:0 0 18px #FFD700, inset 0 0 12px #FFD700;z-index:2}
+@keyframes piscaMesa{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.06);filter:brightness(1.7)}}
 .dozen{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;flex-shrink:0}.dozen div{background:#888;color:#fff;padding:5px;text-align:center;border:1px solid #222;font-size:11px;border-radius:4px}.dozen div.verde{background:#0a5a1e}
 .even{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;flex-shrink:0}.even div{background:#888;color:#fff;padding:5px 2px;text-align:center;border:1px solid #222;font-size:10px;border-radius:4px}.even .losango-red{color:#ff4444;font-size:16px}.even .losango-black{color:#000;font-size:16px}
 .pct-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;flex-shrink:0}.pct-bar div{background:#222;padding:4px;text-align:center;border-radius:5px;font-size:9px}.pct-bar b{color:#ffcc00;display:block;font-size:12px}
 .col-dir{background:#111;border:1px solid #D4AF37;border-radius:10px;padding:5px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .col-dir h3{text-align:center;font-size:12px;color:#D4AF37}
 .hotcold-head{display:grid;grid-template-columns:1fr 1fr;text-align:center;font-size:10px}.hotcold-head b{padding:2px}
-.hotcold{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px;min-height:0;overflow:hidden}
-.hot-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:10px;line-height:1;min-height:0}
-.bola-hot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #fff;font-size:13px}
+.hotcold{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px;min-height:0;overflow-y:auto}
+.hot-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:10px;line-height:1;min-height:0;padding:2px 0}
+.bola-hot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #fff;font-size:13px;position:relative}
 .bola-hot.red{background:#b50000}.bola-hot.black{background:#222}.bola-hot.green{background:#00a000}.bola-hot.vazia{background:#333;color:#888;border-color:#555}
+.fire{font-size:16px;animation:fogo 0.5s infinite;display:block;line-height:1}
+@keyframes fogo{0%,100%{transform:scale(1) rotate(-3deg);filter:brightness(1)}50%{transform:scale(1.35) rotate(3deg);filter:brightness(1.5)}}
+.ice{font-size:16px;animation:gelo 0.8s infinite;display:block;line-height:1}
+@keyframes gelo{0%,100%{transform:scale(1) rotate(0deg);filter:brightness(1)}50%{transform:scale(1.25) rotate(10deg);filter:brightness(1.6)}}
+.hot-item.hotBg{background:rgba(255,80,0,0.15);border-radius:6px}.hot-item.coldBg{background:rgba(0,150,255,0.15);border-radius:6px}
 .btn-prever{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px;border-radius:8px;font-weight:900;cursor:pointer;text-align:center;font-size:11px;margin-top:4px;flex-shrink:0}
 #virar{display:none;position:fixed;inset:0;background:#0a0f1a;z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:12px}
 @media (orientation: portrait){ #virar{display:flex} }
@@ -63,26 +72,19 @@ body{touch-action:pan-x pan-y}
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
     <div class="mesa">
-      <div class="linha-analise">Análise estatística • Últimos <span id="totalHist">0</span> números • Toque na mesa para adicionar o número</div>
+      <div class="linha-analise">Análise estatística • Últimos <span id="totalHist">0</span> números • Toque na mesa para adicionar o número • <span style="color:#FFD700">✨ 8 piscando = apostar</span></div>
       <div class="grid-mesa" id="gridMesa"></div>
       <div class="dozen"><div id="dz1">1st 12<br><b id="dz1Pct">0%</b></div><div id="dz2">2nt 12<br><b id="dz2Pct">0%</b></div><div id="dz3">3rt 12<br><b id="dz3Pct">0%</b></div></div>
       <div class="even"><div>1 - 18<br><b id="lowPct">0%</b></div><div>EVEN<br><b id="evenPct">0%</b></div><div><span class="losango-red">◆</span><br><b id="redPct">0%</b></div><div><span class="losango-black">◆</span><br><b id="blackPct">0%</b></div><div>ODD<br><b id="oddPct">0%</b></div><div>19 - 36<br><b id="highPct">0%</b></div></div>
       <div class="pct-bar"><div>COL 1<b id="col1Pct">0%</b></div><div>COL 2<b id="col2Pct">0%</b></div><div>COL 3<b id="col3Pct">0%</b></div><div>VERMELHO<b id="redBar">0%</b></div><div>PRETO<b id="blackBar">0%</b></div></div>
     </div>
-    <div class="col-dir"><h3>HOT &nbsp; COLD</h3><div class="hotcold-head"><b style="color:#ff8c00">🔥 HOT</b><b style="color:#00aaff">❄️ COLD</b></div><div class="hotcold" id="hotCold"></div><button class="btn-prever" onclick="prever()">Prever o<br>próximo número</button></div>
+    <div class="col-dir"><h3>HOT &nbsp; COLD - TOP 10</h3><div class="hotcold-head"><b style="color:#ff8c00">🔥 HOT (10)</b><b style="color:#00aaff">❄️ COLD (10)</b></div><div class="hotcold" id="hotCold"></div><button class="btn-prever" onclick="prever()">Prever o<br>próximo número</button></div>
   </div>
 </div></div>
 <div class="zoomInfo" id="zoomInfo"></div>
 <script>
 let zoomLevel=1;
-function aplicaZoom(){
-  let app=document.getElementById('app');
-  app.style.transform='scale('+zoomLevel+')';
-  app.style.width=(100/zoomLevel)+'%';
-  app.style.height=(100/zoomLevel)+'%';
-  localStorage.setItem('zoomPaisagem',zoomLevel);
-  let i=document.getElementById('zoomInfo'); i.textContent='Zoom '+Math.round(zoomLevel*100)+'%'; i.style.display='block'; setTimeout(()=>i.style.display='none',1000);
-}
+function aplicaZoom(){ let app=document.getElementById('app'); app.style.transform='scale('+zoomLevel+')'; app.style.width=(100/zoomLevel)+'%'; app.style.height=(100/zoomLevel)+'%'; localStorage.setItem('zoomPaisagem',zoomLevel); let i=document.getElementById('zoomInfo'); i.textContent='Zoom '+Math.round(zoomLevel*100)+'%'; i.style.display='block'; setTimeout(()=>i.style.display='none',1000); }
 function zoomMais(e){e&&e.stopPropagation();zoomLevel=Math.min(2.5,zoomLevel+0.15);aplicaZoom();}
 function zoomMenos(e){e&&e.stopPropagation();zoomLevel=Math.max(1,zoomLevel-0.15);aplicaZoom();}
 aplicaZoom();
@@ -94,9 +96,21 @@ const REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const COL={0:0,1:1,2:2,3:3,4:1,5:2,6:3,7:1,8:2,9:3,10:1,11:2,12:3,13:1,14:2,15:3,16:1,17:2,18:3,19:1,20:2,21:3,22:1,23:2,24:3,25:1,26:2,27:3,28:1,29:2,30:3,31:1,32:2,33:3,34:1,35:2,36:3};
 const RODA=[0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
-let previsaoAtual=[];
+// 8 TRAVADOS - só muda quando ACERTA
+let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
+let confAtual = localStorage.getItem('confTravada') || '--%';
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
-function bolaHTML(n, cls='bola-top'){ return `<div class="${cls} ${cor(n)}">${n}</div>`; }
+function bolaHTML(n, cls='bola-top'){ let pisca = previsaoAtual.includes(n) ? ' pisca8' : ''; return `<div class="${cls} ${cor(n)}${pisca}">${n}</div>`; }
+function gerarNovos8(hot, counts){
+  let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo); let viz=[];
+  if(pos>=0){ viz=[RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37]]; }
+  let base = hot.slice(0,5).map(h=>h.n); let lista=[...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
+  while(lista.length<8){ let r=Math.floor(Math.random()*37); if(!lista.includes(r)) lista.push(r); }
+  previsaoAtual = lista.slice(0,8).sort((a,b)=>a-b);
+  confAtual = Math.min(90,50+(hot[0]?hot[0].qtd:1)*5)+'%';
+  localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
+  localStorage.setItem('confTravada', confAtual);
+}
 function render(){
   document.getElementById('totalHist').innerText = hist.length;
   let ult5 = hist.slice(-5);
@@ -106,8 +120,8 @@ function render(){
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
   let counts={}; hist.forEach(n=>counts[n]=(counts[n]||0)+1);
-  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'; zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
-  linhas.forEach(linha=>{ linha.forEach(n=>{ let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`; d.innerText=n; d.onclick=()=>pick(n); grid.appendChild(d); }); let t=document.createElement('div'); t.className='cell-mesa to1'; t.innerText='2 to 1'; grid.appendChild(t); });
+  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' pisca8':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
+  linhas.forEach(linha=>{ linha.forEach(n=>{ let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(previsaoAtual.includes(n)?' pisca8':''); d.innerText=n; d.onclick=()=>pick(n); grid.appendChild(d); }); let t=document.createElement('div'); t.className='cell-mesa to1'; t.innerText='2 to 1'; grid.appendChild(t); });
   let total = hist.filter(n=>n!==0).length || 1;
   let dz1=hist.filter(n=>n>=1&&n<=12).length, dz2=hist.filter(n=>n>=13&&n<=24).length, dz3=hist.filter(n=>n>=25&&n<=36).length;
   let low=hist.filter(n=>n>=1&&n<=18).length, high=hist.filter(n=>n>=19&&n<=36).length;
@@ -124,26 +138,36 @@ function render(){
   document.getElementById('dz1').className = hist.length>0 && dz1>=dz2&&dz1>=dz3?'verde':''; document.getElementById('dz2').className = hist.length>0 && dz2>=dz1&&dz2>=dz3?'verde':'';
   document.getElementById('dz3').className = hist.length>0 && dz3>=dz1&&dz3>=dz2?'verde':'';
   if(hist.length===0){
-    document.getElementById('hotCold').innerHTML = Array(5).fill('<div class="hot-item">🔥<div class="bola-hot vazia">-</div><small>0x</small></div><div class="hot-item">❄️<div class="bola-hot vazia">-</div><small>0x</small></div>').join('');
-    previsaoAtual=[]; document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 8</span>'; return;
+    document.getElementById('hotCold').innerHTML = Array(10).fill('<div class="hot-item hotBg"><span class="fire">🔥</span><div class="bola-hot vazia">-</div><small>0x</small></div><div class="hot-item coldBg"><span class="ice">❄️</span><div class="bola-hot vazia">-</div><small>0x</small></div>').join('');
+    previsaoAtual=[]; confAtual='--%';
+    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 8</span>'; return;
   }
   let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
-  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,5).filter(x=>x.qtd>0);
-  let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,5);
-  let hc=''; for(let i=0;i<5;i++){ hc+=`<div class="hot-item">🔥<div class="bola-hot ${cor(hot[i].n)}">${hot[i].n}</div><small>${hot[i].qtd}x</small></div><div class="hot-item">❄️<div class="bola-hot ${cor(cold[i].n)}">${cold[i].n}</div><small>${cold[i].qtd}x</small></div>`; }
+  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+  let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
+  // Se ainda não tem 8 travados, gera. Se já tem, NÃO muda até acertar.
+  if(previsaoAtual.length!==8){ gerarNovos8(hot, counts); }
+  let hc=''; for(let i=0;i<10;i++){ hc+=`<div class="hot-item hotBg"><span class="fire">🔥</span><div class="bola-hot ${cor(hot[i].n)}">${hot[i].n}</div><small>${hot[i].qtd}x</small></div><div class="hot-item coldBg"><span class="ice">❄️</span><div class="bola-hot ${cor(cold[i].n)}">${cold[i].n}</div><small>${cold[i].qtd}x</small></div>`; }
   document.getElementById('hotCold').innerHTML=hc;
-  let ultimo = hist[hist.length-1]; let pos = RODA.indexOf(ultimo); let viz = [];
-  if(pos>=0){ viz = [RODA[(pos+1)%37], RODA[(pos+2)%37], RODA[(pos+36)%37]]; }
-  let base = hot.slice(0,5).map(h=>h.n); let lista8 = [...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
-  while(lista8.length<8){ let r=Math.floor(Math.random()*37); if(!lista8.includes(r)) lista8.push(r); }
-  previsaoAtual = lista8.slice(0,8).sort((a,b)=>a-b);
-  document.getElementById('confPct').innerText=Math.min(90,50+hot[0].qtd*5)+'%';
+  document.getElementById('confPct').innerText=confAtual;
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
-function pick(n){ hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n); render(); }
+function pick(n){
+  let acertou = previsaoAtual.includes(n);
+  hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
+  if(acertou){
+    // ACERTOU - gera 8 NOVOS e pisca
+    let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
+    let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
+    let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+    gerarNovos8(hot, counts);
+    alert('✅ ACERTOU! Saiu '+n+' que estava nos 8! Novos 8 gerados: '+previsaoAtual.join(' - '));
+  }
+  render();
+}
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
-function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP: 8 números em ordem: '+previsaoAtual.join(' - ')); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function prever(){ if(hist.length<3){alert('Digite pelo menos 3 números!');return;} render(); alert('IA RAFIGASP - 8 travados até acertar: '+previsaoAtual.join(' - ')); }
 render();
 </script>
 </body>

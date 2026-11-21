@@ -20,8 +20,7 @@ body{touch-action:pan-x pan-y}
 .quadrado-azul .titulo span{color:#fff;font-size:13px}
 .bola-top{width:38px;height:38px;min-width:38px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
 .bola-top.red{background:#b50000}.bola-top.black{background:#222}.bola-top.green{background:#00a000}
-.bola-top.amarelo3{border-color:#FFD700!important;box-shadow:0 0 10px #FFD700}
-.bola-top.verde-grupo{background:#00C853!important;border-color:#00FF00!important;box-shadow:0 0 10px #00FF00;color:#fff}
+.bola-top.amarelo{border-color:#FFD700!important;box-shadow:0 0 10px #FFD700}
 .btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-roleta{background:#111;border:2px solid #D4AF37;color:#D4AF37;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-mesa{background:#D4AF37;color:#000;border:0;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:11px;white-space:nowrap;height:44px;line-height:1.2;text-align:center}
@@ -33,19 +32,17 @@ body{touch-action:pan-x pan-y}
 .col-esq .num.red{background:#6b0000}.col-esq .num.black{background:#222}.col-esq .num.green{background:#00a000}
 .btn-premium{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:8px 4px;border-radius:8px;text-align:center;font-weight:900;cursor:pointer;font-size:12px}
 .mesa{background:#111;border:1px solid #444;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;overflow:hidden}
-.barra-verde{display:none;background:#00C853;color:#fff;font-weight:900;font-size:13px;text-align:center;padding:6px 8px;border-radius:8px}
-.barra-verde.mostrar{display:block}
+.barra-amarela{display:none;background:#FFD700;color:#000;font-weight:900;font-size:13px;text-align:center;padding:6px 8px;border-radius:8px}
+.barra-amarela.mostrar{display:block}
 .grid-mesa{flex:1;display:grid;grid-template-columns:32px repeat(12,1fr) 42px;grid-template-rows:repeat(3,1fr);gap:3px;min-height:0;overflow:hidden}
 .cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:24px;min-width:0;min-height:60px;white-space:nowrap;overflow:hidden;position:relative;flex-direction:column;line-height:1}
 .cell-mesa.red{background:#b50000}.cell-mesa.black{background:#222}.cell-mesa.green{background:#00a000}
 .cell-mesa.zero{background:#888;color:#000;writing-mode:vertical-rl;font-size:16px;min-width:32px}.cell-mesa.to1{background:#888;font-size:11px}
-.cell-mesa.amarelo3{border:3px solid #FFD700!important;box-shadow:0 0 12px #FFD700, inset 0 0 10px rgba(255,215,0,0.4);z-index:2}
-.cell-mesa.verde-grupo{background:#00C853!important;border:3px solid #00FF00!important;box-shadow:0 0 14px #00FF00, inset 0 0 12px rgba(0,255,0,0.5);z-index:3;color:#fff}
+.cell-mesa.amarelo{border:3px solid #FFD700!important;box-shadow:0 0 12px #FFD700, inset 0 0 10px rgba(255,215,0,0.4);z-index:2}
 .fire-mesa{position:absolute;top:1px;left:2px;font-size:15px}
 .ice-mesa{position:absolute;top:1px;right:2px;font-size:15px}
 .tag-hot{position:absolute;bottom:1px;left:3px;font-size:8px;color:#ffcc00;font-weight:900}
 .tag-cold{position:absolute;bottom:1px;right:3px;font-size:8px;color:#00ccff;font-weight:900}
-.tag-verde{position:absolute;bottom:1px;left:50%;transform:translateX(-50%);font-size:8px;color:#fff;font-weight:900;background:#00C853;padding:1px 4px;border-radius:4px}
 #pistaOverlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
 #pistaOverlay.aberto{display:flex}
 .pista-titulo{color:#333;font-weight:900;font-size:24px;text-align:center}
@@ -56,8 +53,7 @@ body{touch-action:pan-x pan-y}
 .pista-num{height:46px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,0.3);position:relative;flex-direction:column;line-height:1}
 .pista-num.red{background:#D32F2F}.pista-num.black{background:#333}.pista-num.green{background:#2E7D32}
 .pista-num.selecionado{outline:3px solid #00E5FF;outline-offset:-3px;z-index:1}
-.pista-num.amarelo3{border:3px solid #FFD700!important;box-shadow:0 0 10px #FFD700, inset 0 0 8px rgba(255,215,0,0.5);z-index:2}
-.pista-num.verde-grupo{background:#00C853!important;border:3px solid #00FF00!important;box-shadow:0 0 12px #00FF00;z-index:3}
+.pista-num.amarelo{border:3px solid #FFD700!important;box-shadow:0 0 10px #FFD700, inset 0 0 8px rgba(255,215,0,0.5);z-index:2}
 .fire-pista{position:absolute;top:1px;left:2px;font-size:11px}
 .ice-pista{position:absolute;top:1px;right:2px;font-size:11px}
 .pista-num .mini{font-size:8px;font-weight:900;line-height:1}
@@ -74,8 +70,6 @@ body{touch-action:pan-x pan-y}
 .pista-botoes{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .btn-pista{background:#333;color:#fff;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
 .btn-pista-dourado{background:#D4AF37;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
-.btn-grupo{border:2px solid #00C853;background:#fff;color:#00C853;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px}
-.btn-grupo.ativo{background:#00C853;color:#fff}
 #roletaOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px}
 #roletaOverlay.aberto{display:flex}
 .roleta-titulo{color:#D4AF37;font-weight:900;font-size:16px;text-align:center}
@@ -102,7 +96,7 @@ body{touch-action:pan-x pan-y}
   <div class="topo">
     <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
-    <div class="quadrado-azul"><div class="titulo">🎯 3 NÚMEROS<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"></div></div>
+    <div class="quadrado-azul"><div class="titulo">🟡 AMARELO<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"></div></div>
     <button class="btn-mesa" id="btnMesa" onclick="abrirPista()">🇪🇺 CARTÃO<br>EUROPEU</button>
     <button class="btn-roleta" onclick="abrirRoleta()">🎡 ROLETA</button>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
@@ -110,7 +104,7 @@ body{touch-action:pan-x pan-y}
   </div>
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
-    <div class="mesa"><div id="barraVerde" class="barra-verde"></div><div class="grid-mesa" id="gridMesa"></div></div>
+    <div class="mesa"><div id="barraAmarela" class="barra-amarela"></div><div class="grid-mesa" id="gridMesa"></div></div>
   </div>
 </div></div>
 <div class="zoomInfo" id="zoomInfo"></div>
@@ -130,20 +124,8 @@ body{touch-action:pan-x pan-y}
     </div>
     <div class="pista-bottom" id="pistaBottom"></div>
   </div>
-  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 3 AMARELO PARADO</span><span>🟢 GRUPO 1-10 VERDE</span></div>
-  <div id="pistaVerde" style="display:none;background:#00C853;color:#fff;font-weight:900;font-size:13px;text-align:center;padding:6px 10px;border-radius:8px"></div>
-  <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
-    <button class="btn-grupo" id="btnG1" onclick="forcarGrupo(1)">GRUPO 1 🟢</button>
-    <button class="btn-grupo" id="btnG2" onclick="forcarGrupo(2)">GRUPO 2 🟢</button>
-    <button class="btn-grupo" id="btnG3" onclick="forcarGrupo(3)">GRUPO 3 🟢</button>
-    <button class="btn-grupo" id="btnG4" onclick="forcarGrupo(4)">GRUPO 4 🟢</button>
-    <button class="btn-grupo" id="btnG5" onclick="forcarGrupo(5)">GRUPO 5 🟢</button>
-    <button class="btn-grupo" id="btnG6" onclick="forcarGrupo(6)">GRUPO 6 🟢</button>
-    <button class="btn-grupo" id="btnG7" onclick="forcarGrupo(7)">GRUPO 7 🟢</button>
-    <button class="btn-grupo" id="btnG8" onclick="forcarGrupo(8)">GRUPO 8 🟢</button>
-    <button class="btn-grupo" id="btnG9" onclick="forcarGrupo(9)">GRUPO 9 🟢</button>
-    <button class="btn-grupo" id="btnG10" onclick="forcarGrupo(10)">GRUPO 10 🟢</button>
-  </div>
+  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 AMARELO = ACUMULANDO</span></div>
+  <div id="pistaAmarela" style="display:none;background:#FFD700;color:#000;font-weight:900;font-size:13px;text-align:center;padding:6px 10px;border-radius:8px"></div>
   <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
   <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
 </div>
@@ -175,29 +157,6 @@ const SETORES={
   serie023:{nome:'SERIE 0/2/3', nums:[22,18,29,7,28,12,35,25,2,21,4,19,15]},
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
-const GRUPOS_VERDE={
-  1:[13,14,15,16,29,30,31,32,33,34,35,36],
-  2:[9,10,11,12,13,14,15,16,29,30,31,32],
-  3:[9,10,11,12,13,14,15,16,29,30,31,32,33,34,35,36],
-  4:[13,14,15,16,17,18,19,20,21,22,23,24,29,30,31,32],
-  5:[17,18,19,20,26,27,28,29,30,31,32],
-  6:[9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28],
-  7:[9,10,11,12,21,22,23,24,25,26,27,28],
-  8:[13,14,15,16,21,22,23,24,25,26,27,28,33,34,35,36],
-  9:[13,14,15,16,21,22,23,24,29,30,31,32,33,34,35,36],
-  10:[9,10,11,12,17,18,19,20,25,26,27,28,29,30,31,32]
-};
-let grupoVerdeForcado=null;
-function getGrupoVerde(){
-  if(grupoVerdeForcado) return grupoVerdeForcado;
-  let ultimo = hist.length? hist[hist.length-1] : null;
-  if(ultimo>=1 && ultimo<=10) return ultimo;
-  return null;
-}
-function forcarGrupo(g){
-  grupoVerdeForcado = (grupoVerdeForcado===g) ? null : g;
-  render();
-}
 let setorAtivo=null;
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
 function getHotCold(){
@@ -207,39 +166,34 @@ function getHotCold(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   return {counts, hot:new Set(hot.filter(h=>h.qtd>0).map(h=>h.n)), cold:new Set(cold.map(c=>c.n))};
 }
-function criarPistaNum(n, counts, hot, cold, verdeSet){
+function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
-  let is3 = previsaoAtual.includes(n);
-  let isVerde = verdeSet.has(n);
-  d.className='pista-num '+cor(n)+(is3 && !isVerde?' amarelo3':'')+(isVerde?' verde-grupo':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
+  let isAmarelo = previsaoAtual.includes(n);
+  d.className='pista-num '+cor(n)+(isAmarelo?' amarelo':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
   d.onclick=()=>{ pick(n); };
   let html=`<span>${n}</span>`;
-  if(isVerde) html+=`<span class="mini" style="color:#fff;background:#00C853;padding:1px 3px;border-radius:3px">🟢 VERDE</span>`;
-  else if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]}x</span>`;
+  if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]}x</span>`;
   else if(hist.length>0 && cold.has(n)) html+=`<span class="ice-pista">❄️</span><span class="mini cold">COLD ${counts[n]}x</span>`;
-  if(is3 && !isVerde) html+=`<span class="mini" style="color:#FFD700">★ 3</span>`;
+  if(isAmarelo) html+=`<span class="mini" style="color:#FFD700">★ AMARELO</span>`;
   d.innerHTML=html;
   return d;
 }
 function montarPista(){
   let hc=getHotCold();
-  let g=getGrupoVerde();
-  let verdeSet = g ? new Set(GRUPOS_VERDE[g]) : new Set();
   let top=document.getElementById('pistaTop'); top.innerHTML='';
-  PISTA_TOP.forEach(n=>top.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold, verdeSet)));
+  PISTA_TOP.forEach(n=>top.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let bot=document.getElementById('pistaBottom'); bot.innerHTML='';
-  PISTA_BOTTOM.forEach(n=>bot.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold, verdeSet)));
+  PISTA_BOTTOM.forEach(n=>bot.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let esq=document.getElementById('pistaEsq'); esq.innerHTML='';
-  PISTA_ESQ.forEach(n=>esq.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold, verdeSet)));
+  PISTA_ESQ.forEach(n=>esq.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   let dir=document.getElementById('pistaDir'); dir.innerHTML='';
-  PISTA_DIR.forEach(n=>dir.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold, verdeSet)));
+  PISTA_DIR.forEach(n=>dir.appendChild(criarPistaNum(n, hc.counts, hc.hot, hc.cold)));
   if(setorAtivo){
     document.querySelectorAll('.pista-setor').forEach(el=>{ if(el.dataset.setor===setorAtivo) el.classList.add('ativo'); });
   }
-  let pv=document.getElementById('pistaVerde');
-  if(g){ pv.style.display='block'; pv.innerText='🟢 SAIU '+ (grupoVerdeForcado? 'FORÇADO ' : '') + g + ' • GRUPO '+g+' VERDE: '+GRUPOS_VERDE[g].join(', '); }
+  let pv=document.getElementById('pistaAmarela');
+  if(previsaoAtual.length>0){ pv.style.display='block'; pv.innerText='🟡 ACUMULADO: '+previsaoAtual.length+' amarelo(s) • '+previsaoAtual.join(', '); }
   else { pv.style.display='none'; }
-  for(let i=1;i<=10;i++){ let b=document.getElementById('btnG'+i); if(b) b.classList.toggle('ativo', g===i); }
 }
 function clicarSetor(setor, el){
   setorAtivo = setorAtivo===setor ? null : setor;
@@ -257,21 +211,28 @@ function abrirPista(){ montarPista(); document.getElementById('pistaOverlay').cl
 function fecharPista(){ document.getElementById('pistaOverlay').classList.remove('aberto'); }
 function fecharPistaEAplicar(){ fecharPista(); render(); }
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
+// AMARELO ACUMULADO - começa com 1, acumula quando erra, zera quando acerta
 let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
-function bolaHTML(n, cls='bola-top'){ let g=getGrupoVerde(); let verde = g && GRUPOS_VERDE[g].includes(n); let fixo = previsaoAtual.includes(n) && !verde ? ' amarelo3' : ''; let v = verde ? ' verde-grupo' : ''; return `<div class="${cls} ${cor(n)}${fixo}${v}">${n}</div>`; }
-function gerarNovos3(hot){
-  let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo); let viz=[];
-  if(pos>=0){ viz=[RODA[(pos+1)%37], RODA[(pos+36)%37]]; }
-  let base = hot.slice(0,2).map(h=>h.n); let lista=[...base, ...viz].filter((v,i,a)=>a.indexOf(v)===i);
-  while(lista.length<3){ let r=Math.floor(Math.random()*37); if(!lista.includes(r)) lista.push(r); }
-  previsaoAtual = lista.slice(0,3).sort((a,b)=>a-b);
-  confAtual = Math.min(90,50+(hot[0]?hot[0].qtd:1)*5)+'%';
-  localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
-  localStorage.setItem('confTravada', confAtual);
+function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; return `<div class="${cls} ${cor(n)}${fixo}">${n}</div>`; }
+// Gera 1 novo amarelo: 1º quente ou vizinho do último que ainda não está no acumulado
+function proximoAmarelo(hot){
+  let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo);
+  let candidatos=[];
+  if(hot && hot.length) candidatos.push(...hot.map(h=>h.n));
+  if(pos>=0){ for(let k=1;k<=18;k++){ candidatos.push(RODA[(pos+k)%37]); candidatos.push(RODA[(pos+37-k)%37]); } }
+  for(let i=0;i<=36;i++) candidatos.push(i);
+  for(let c of candidatos){ if(!previsaoAtual.includes(c)) return c; }
+  return Math.floor(Math.random()*37);
 }
+function gerarPrimeiroAmarelo(hot){
+  previsaoAtual=[proximoAmarelo(hot)];
+  confAtual='--%';
+  localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
+}
+function salvarPrevisao(){ localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual)); localStorage.setItem('confTravada', confAtual); }
 function montarRoleta(){
   let r=document.getElementById('roleta'); r.innerHTML='';
   let ultimo = hist.length? hist[hist.length-1] : null;
@@ -304,54 +265,65 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   hotSet = new Set(hot.filter(h=>h.qtd>0).map(h=>h.n));
   coldSet = new Set(cold.map(c=>c.n));
-  if(hist.length>0 && previsaoAtual.length!==3){ gerarNovos3(hot); }
-  let g=getGrupoVerde();
-  let verdeSet = g ? new Set(GRUPOS_VERDE[g]) : new Set();
-  let barra=document.getElementById('barraVerde');
-  if(g){ barra.classList.add('mostrar'); barra.innerText='🟢 SAIU '+ (grupoVerdeForcado? 'FORÇADO ' : '') + g + ' • GRUPO '+g+' VERDE: '+GRUPOS_VERDE[g].join(', '); }
+  if(hist.length>0 && previsaoAtual.length===0){ gerarPrimeiroAmarelo(hot); }
+  let barra=document.getElementById('barraAmarela');
+  if(previsaoAtual.length>0){ barra.classList.add('mostrar'); barra.innerText='🟡 ACUMULADO: '+previsaoAtual.length+' amarelo(s) • '+previsaoAtual.join(' - ')+' • Errou acumula +1 • Acertou zera'; }
   else { barra.classList.remove('mostrar'); barra.innerText=''; }
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
-  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0) && !verdeSet.has(0)?' amarelo3':'')+(verdeSet.has(0)?' verde-grupo':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
+  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' amarelo':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
   linhas.forEach(linha=>{ linha.forEach(n=>{
     let destaque = (setorAtivo && SETORES[setorAtivo].nums.includes(n)) ? ' destaque-eu' : '';
-    let isVerde = verdeSet.has(n);
-    let isAmarelo = previsaoAtual.includes(n) && !isVerde;
-    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo3':'')+(isVerde?' verde-grupo':'')+destaque; d.onclick=()=>pick(n);
+    let isAmarelo = previsaoAtual.includes(n);
+    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo':'')+destaque; d.onclick=()=>pick(n);
     let html = `<span>${n}</span>`;
-    if(isVerde) html += `<span class="tag-verde">🟢 VERDE</span>`;
-    else {
-      if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]}x</span>`;
-      if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]}x</span>`;
-    }
+    if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]}x</span>`;
+    if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]}x</span>`;
     d.innerHTML = html; grid.appendChild(d);
   }); let t=document.createElement('div'); t.className='cell-mesa to1'; t.innerText='2 to 1'; grid.appendChild(t); });
   if(document.getElementById('pistaOverlay').classList.contains('aberto')) montarPista();
   if(hist.length===0){
     previsaoAtual=[]; confAtual='--%';
-    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite números para gerar os 3</span>'; return;
+    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite 1 número para gerar o 1º amarelo</span>'; return;
   }
-  document.getElementById('confPct').innerText=confAtual;
+  document.getElementById('confPct').innerText=previsaoAtual.length+' acumulado';
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){
-  let acertou = previsaoAtual.includes(n);
-  if(n>=1 && n<=10) grupoVerdeForcado=null;
-  hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
-  if(acertou){
+  // Se ainda não tem amarelo, esse primeiro número só cria o 1º amarelo
+  if(hist.length===0){
+    hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
     let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
     let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
     let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
-    gerarNovos3(hot);
-    if(n>=1 && n<=10) alert('🟢 SAIU '+n+'! GRUPO '+n+' FICOU VERDE: '+GRUPOS_VERDE[n].join(', '));
-    else alert('✅ ACERTOU! Saiu '+n+' que estava nos 3! Novos 3 gerados: '+previsaoAtual.join(' - '));
-  } else if(n>=1 && n<=10){
-    alert('🟢 SAIU '+n+'! GRUPO '+n+' FICOU VERDE: '+GRUPOS_VERDE[n].join(', '));
+    gerarPrimeiroAmarelo(hot);
+    render(); return;
+  }
+  let acertou = previsaoAtual.includes(n);
+  hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
+  let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
+  let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
+  let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+  if(acertou){
+    let qtdAntes = previsaoAtual.length;
+    // ZERA - volta pra 1 amarelo novo
+    previsaoAtual=[];
+    let novo = proximoAmarelo(hot);
+    previsaoAtual=[novo];
+    salvarPrevisao();
+    alert('✅ ACERTOU! Saiu '+n+' que estava nos amarelos! Tinha acumulado '+qtdAntes+' amarelo(s). ZEROU! Novo 1º amarelo: '+novo);
+  } else {
+    // ERROU - ACUMULA +1 amarelo
+    let novo = proximoAmarelo(hot);
+    if(!previsaoAtual.includes(novo)) previsaoAtual.push(novo);
+    previsaoAtual.sort((a,b)=>a-b);
+    salvarPrevisao();
+    // sem alert toda hora pra não travar, só mostra na barra
   }
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; setorAtivo=null; grupoVerdeForcado=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>

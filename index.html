@@ -24,6 +24,7 @@ body{touch-action:pan-x pan-y}
 .btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-roleta{background:#111;border:2px solid #D4AF37;color:#D4AF37;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-mesa{background:#D4AF37;color:#000;border:0;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:11px;white-space:nowrap;height:44px;line-height:1.2;text-align:center}
+.btn-avaliar{background:#00C853;color:#fff;border:0;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px;line-height:1.2}
 .meio{flex:1;display:grid;grid-template-columns:68px 1fr;gap:6px;min-height:0}
 .col-esq{display:flex;flex-direction:column;gap:4px;min-height:0}
 .btn-remover{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px 4px;border-radius:8px;font-size:10px;text-align:center;font-weight:900;cursor:pointer;line-height:1.2}
@@ -34,6 +35,8 @@ body{touch-action:pan-x pan-y}
 .mesa{background:#111;border:1px solid #444;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;overflow:hidden}
 .barra-amarela{display:none;background:#FFD700;color:#000;font-weight:900;font-size:13px;text-align:center;padding:6px 8px;border-radius:8px}
 .barra-amarela.mostrar{display:block}
+.barra-analise{display:none;background:#00C853;color:#fff;font-weight:900;font-size:14px;text-align:center;padding:8px;border-radius:8px}
+.barra-analise.mostrar{display:block}
 .grid-mesa{flex:1;display:grid;grid-template-columns:32px repeat(12,1fr) 42px;grid-template-rows:repeat(3,1fr);gap:3px;min-height:0;overflow:hidden}
 .cell-mesa{border:1px solid #222;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;font-size:24px;min-width:0;min-height:60px;white-space:nowrap;overflow:hidden;position:relative;flex-direction:column;line-height:1}
 .cell-mesa.red{background:#b50000}.cell-mesa.black{background:#222}.cell-mesa.green{background:#00a000}
@@ -97,6 +100,7 @@ body{touch-action:pan-x pan-y}
     <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
     <div class="quadrado-azul"><div class="titulo">🟡 AMARELO<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"></div></div>
+    <button class="btn-avaliar" onclick="avaliar10()">📊 AVALIAR<br>10 NÚMEROS</button>
     <button class="btn-mesa" id="btnMesa" onclick="abrirPista()">🇪🇺 CARTÃO<br>EUROPEU</button>
     <button class="btn-roleta" onclick="abrirRoleta()">🎡 ROLETA</button>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
@@ -104,7 +108,7 @@ body{touch-action:pan-x pan-y}
   </div>
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
-    <div class="mesa"><div id="barraAmarela" class="barra-amarela"></div><div class="grid-mesa" id="gridMesa"></div></div>
+    <div class="mesa"><div id="barraAnalise" class="barra-analise"></div><div id="barraAmarela" class="barra-amarela"></div><div class="grid-mesa" id="gridMesa"></div></div>
   </div>
 </div></div>
 <div class="zoomInfo" id="zoomInfo"></div>
@@ -124,8 +128,9 @@ body{touch-action:pan-x pan-y}
     </div>
     <div class="pista-bottom" id="pistaBottom"></div>
   </div>
-  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 AMARELO = ACUMULANDO</span></div>
+  <div class="pista-legenda"><span>🔥 10 QUENTES</span><span>❄️ 10 FRIOS</span><span>🟡 AMARELO = PRA JOGAR</span></div>
   <div id="pistaAmarela" style="display:none;background:#FFD700;color:#000;font-weight:900;font-size:13px;text-align:center;padding:6px 10px;border-radius:8px"></div>
+  <div id="pistaAnalise" style="display:none;background:#00C853;color:#fff;font-weight:900;font-size:13px;text-align:center;padding:6px 10px;border-radius:8px"></div>
   <div class="pista-info" id="pistaInfo">Toque num número da pista para adicionar • Toque num setor para acender na mesa</div>
   <div class="pista-botoes"><button class="btn-pista-dourado" onclick="fecharPistaEAplicar()">✅ USAR ESSE SETOR NA MESA</button><button class="btn-pista" onclick="fecharPista()">FECHAR ✕</button></div>
 </div>
@@ -158,6 +163,8 @@ const SETORES={
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
 let setorAtivo=null;
+let doisParaJogar=[];
+let motivo2='';
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
 function getHotCold(){
   let counts={}; hist.forEach(n=>counts[n]=(counts[n]||0)+1);
@@ -165,6 +172,43 @@ function getHotCold(){
   let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   return {counts, hot:new Set(hot.filter(h=>h.qtd>0).map(h=>h.n)), cold:new Set(cold.map(c=>c.n))};
+}
+// AVALIA OS ÚLTIMOS 10 E DEVOLVE 2 NÚMEROS PRA JOGAR
+function calcular2ParaJogar(){
+  if(hist.length<1) return {dois:[], motivo:''};
+  let ult10 = hist.slice(-10);
+  let counts={}; ult10.forEach(n=>counts[n]=(counts[n]||0)+1);
+  let arr=[]; for(let i=0;i<=36;i++) if(counts[i]) arr.push({n:i,qtd:counts[i]});
+  arr.sort((a,b)=>b.qtd-a.qtd);
+  let ultimo = hist[hist.length-1];
+  let pos = RODA.indexOf(ultimo);
+  let vizDir = RODA[(pos+1)%37];
+  let vizEsq = RODA[(pos+36)%37];
+  // 1º número: o que mais repetiu nos últimos 10 (se ninguém repetiu, usa vizinho da direita)
+  let n1 = (arr.length && arr[0].qtd>=2) ? arr[0].n : vizDir;
+  // 2º número: o vizinho do último que NÃO saiu nos últimos 10 (se os 2 vizinhos já saíram, usa o 2º mais repetido)
+  let n2 = null;
+  if(!ult10.includes(vizDir) && vizDir!==n1) n2=vizDir;
+  else if(!ult10.includes(vizEsq) && vizEsq!==n1) n2=vizEsq;
+  else if(arr.length>1) n2=arr[1].n;
+  else n2=vizEsq;
+  if(n2===n1) n2 = vizEsq===n1 ? vizDir : vizEsq;
+  let motivo = 'Últimos 10: '+ult10.join(', ')+' • ';
+  if(arr.length && arr[0].qtd>=2) motivo+='1º = '+n1+' repetiu '+arr[0].qtd+'x nos 10';
+  else motivo+='1º = '+n1+' vizinho do último '+ultimo;
+  motivo+=' • 2º = '+n2+' vizinho que não saiu nos 10';
+  return {dois:[n1,n2].sort((a,b)=>a-b), motivo};
+}
+function avaliar10(){
+  if(hist.length<10){ alert('Falta número! Digita pelo menos 10 números. Você tem '+hist.length+'.\n\nEx: digita 10 números que saíram e clica de novo.'); return; }
+  let r = calcular2ParaJogar();
+  doisParaJogar = r.dois;
+  motivo2 = r.motivo;
+  // Os 2 viram os amarelos pra jogar - zera o acumulado antigo e coloca os 2
+  previsaoAtual = [...r.dois];
+  salvarPrevisao();
+  alert('📊 AVALIEI OS ÚLTIMOS 10!\n\nÚltimos 10: '+hist.slice(-10).join(', ')+'\n\n🎯 2 PRA JOGAR: '+r.dois.join(' e ')+'\n\n'+r.motivo);
+  render();
 }
 function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
@@ -174,7 +218,7 @@ function criarPistaNum(n, counts, hot, cold){
   let html=`<span>${n}</span>`;
   if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]}x</span>`;
   else if(hist.length>0 && cold.has(n)) html+=`<span class="ice-pista">❄️</span><span class="mini cold">COLD ${counts[n]}x</span>`;
-  if(isAmarelo) html+=`<span class="mini" style="color:#FFD700">★ AMARELO</span>`;
+  if(isAmarelo) html+=`<span class="mini" style="color:#FFD700">★ PRA JOGAR</span>`;
   d.innerHTML=html;
   return d;
 }
@@ -194,6 +238,9 @@ function montarPista(){
   let pv=document.getElementById('pistaAmarela');
   if(previsaoAtual.length>0){ pv.style.display='block'; pv.innerText='🟡 ACUMULADO: '+previsaoAtual.length+' amarelo(s) • '+previsaoAtual.join(', '); }
   else { pv.style.display='none'; }
+  let pa=document.getElementById('pistaAnalise');
+  if(doisParaJogar.length===2){ pa.style.display='block'; pa.innerText='🎯 2 PRA JOGAR: '+doisParaJogar.join(' e ')+' • '+motivo2; }
+  else { pa.style.display='none'; }
 }
 function clicarSetor(setor, el){
   setorAtivo = setorAtivo===setor ? null : setor;
@@ -211,13 +258,11 @@ function abrirPista(){ montarPista(); document.getElementById('pistaOverlay').cl
 function fecharPista(){ document.getElementById('pistaOverlay').classList.remove('aberto'); }
 function fecharPistaEAplicar(){ fecharPista(); render(); }
 let hist = JSON.parse(localStorage.getItem('historico_rafigasp')||'[]');
-// AMARELO ACUMULADO - começa com 1, acumula quando erra, zera quando acerta
 let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
 function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; return `<div class="${cls} ${cor(n)}${fixo}">${n}</div>`; }
-// Gera 1 novo amarelo: 1º quente ou vizinho do último que ainda não está no acumulado
 function proximoAmarelo(hot){
   let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo);
   let candidatos=[];
@@ -228,7 +273,11 @@ function proximoAmarelo(hot){
   return Math.floor(Math.random()*37);
 }
 function gerarPrimeiroAmarelo(hot){
-  previsaoAtual=[proximoAmarelo(hot)];
+  if(hist.length>=10){
+    let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois];
+  } else {
+    previsaoAtual=[proximoAmarelo(hot)];
+  }
   confAtual='--%';
   localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
 }
@@ -266,6 +315,10 @@ function render(){
   hotSet = new Set(hot.filter(h=>h.qtd>0).map(h=>h.n));
   coldSet = new Set(cold.map(c=>c.n));
   if(hist.length>0 && previsaoAtual.length===0){ gerarPrimeiroAmarelo(hot); }
+  let barraA=document.getElementById('barraAnalise');
+  if(doisParaJogar.length===2){ barraA.classList.add('mostrar'); barraA.innerText='🎯 2 PRA JOGAR: '+doisParaJogar.join(' e ')+' • Últimos 10: '+hist.slice(-10).join(', '); }
+  else if(hist.length>=10){ let r=calcular2ParaJogar(); barraA.classList.add('mostrar'); barraA.innerText='🎯 2 PRA JOGAR: '+r.dois.join(' e ')+' • Clica em AVALIAR 10 pra travar'; }
+  else { barraA.classList.remove('mostrar'); barraA.innerText=''; }
   let barra=document.getElementById('barraAmarela');
   if(previsaoAtual.length>0){ barra.classList.add('mostrar'); barra.innerText='🟡 ACUMULADO: '+previsaoAtual.length+' amarelo(s) • '+previsaoAtual.join(' - ')+' • Errou acumula +1 • Acertou zera'; }
   else { barra.classList.remove('mostrar'); barra.innerText=''; }
@@ -283,14 +336,13 @@ function render(){
   }); let t=document.createElement('div'); t.className='cell-mesa to1'; t.innerText='2 to 1'; grid.appendChild(t); });
   if(document.getElementById('pistaOverlay').classList.contains('aberto')) montarPista();
   if(hist.length===0){
-    previsaoAtual=[]; confAtual='--%';
-    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite 1 número para gerar o 1º amarelo</span>'; return;
+    previsaoAtual=[]; doisParaJogar=[]; confAtual='--%';
+    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite 10 números e clica em AVALIAR 10</span>'; return;
   }
   document.getElementById('confPct').innerText=previsaoAtual.length+' acumulado';
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){
-  // Se ainda não tem amarelo, esse primeiro número só cria o 1º amarelo
   if(hist.length===0){
     hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
     let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
@@ -306,24 +358,22 @@ function pick(n){
   let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
   if(acertou){
     let qtdAntes = previsaoAtual.length;
-    // ZERA - volta pra 1 amarelo novo
     previsaoAtual=[];
-    let novo = proximoAmarelo(hot);
-    previsaoAtual=[novo];
+    // Depois do acerto, avalia os novos últimos 10 e já manda 2 novos
+    if(hist.length>=10){ let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; }
+    else { previsaoAtual=[proximoAmarelo(hot)]; }
     salvarPrevisao();
-    alert('✅ ACERTOU! Saiu '+n+' que estava nos amarelos! Tinha acumulado '+qtdAntes+' amarelo(s). ZEROU! Novo 1º amarelo: '+novo);
+    alert('✅ ACERTOU! Saiu '+n+'! Tinha acumulado '+qtdAntes+' amarelo(s). ZEROU!\n\n🎯 Novos 2 pra jogar: '+previsaoAtual.join(' e '));
   } else {
-    // ERROU - ACUMULA +1 amarelo
     let novo = proximoAmarelo(hot);
     if(!previsaoAtual.includes(novo)) previsaoAtual.push(novo);
     previsaoAtual.sort((a,b)=>a-b);
     salvarPrevisao();
-    // sem alert toda hora pra não travar, só mostra na barra
   }
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>

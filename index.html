@@ -24,7 +24,6 @@ body{touch-action:pan-x pan-y}
 .btn-voltar{background:#2a0000;border:1px solid #ff4444;color:#ff8888;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-roleta{background:#111;border:2px solid #D4AF37;color:#D4AF37;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px}
 .btn-mesa{background:#D4AF37;color:#000;border:0;padding:8px 8px;border-radius:8px;font-weight:900;cursor:pointer;font-size:11px;white-space:nowrap;height:44px;line-height:1.2;text-align:center}
-.btn-avaliar{background:#00C853;color:#fff;border:0;padding:8px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;height:44px;line-height:1.2}
 .meio{flex:1;display:grid;grid-template-columns:68px 1fr;gap:6px;min-height:0}
 .col-esq{display:flex;flex-direction:column;gap:4px;min-height:0}
 .btn-remover{background:#111;border:1px solid #D4AF37;color:#D4AF37;padding:7px 4px;border-radius:8px;font-size:10px;text-align:center;font-weight:900;cursor:pointer;line-height:1.2}
@@ -96,7 +95,6 @@ body{touch-action:pan-x pan-y}
     <div class="zoomBtn" onclick="zoomMenos(event)">🔍-</div>
     <div class="logo">‹ RAFIGASP<small>COACH DA ROLETA</small></div>
     <div class="quadrado-azul"><div class="titulo">🟡 AMARELO<br><span id="confPct">--%</span></div><div id="prevBolas" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"></div></div>
-    <button class="btn-avaliar" onclick="avaliar10()">📊 AVALIAR<br>10 NÚMEROS</button>
     <button class="btn-mesa" id="btnMesa" onclick="abrirPista()">🇪🇺 CARTÃO<br>EUROPEU</button>
     <button class="btn-roleta" onclick="abrirRoleta()">🎡 ROLETA</button>
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
@@ -168,7 +166,7 @@ function getHotCold(){
   return {counts, hot:new Set(hot.filter(h=>h.qtd>0).map(h=>h.n)), cold:new Set(cold.map(c=>c.n))};
 }
 function calcular2ParaJogar(){
-  if(hist.length<1) return {dois:[], motivo:''};
+  if(hist.length<10) return {dois:[], motivo:''};
   let ult10 = hist.slice(-10);
   let counts={}; ult10.forEach(n=>counts[n]=(counts[n]||0)+1);
   let arr=[]; for(let i=0;i<=36;i++) if(counts[i]) arr.push({n:i,qtd:counts[i]});
@@ -189,16 +187,6 @@ function calcular2ParaJogar(){
   else motivo+='1º = '+n1+' vizinho do último '+ultimo;
   motivo+=' • 2º = '+n2+' vizinho que não saiu nos 10';
   return {dois:[n1,n2].sort((a,b)=>a-b), motivo};
-}
-function avaliar10(){
-  if(hist.length<10){ alert('Falta número! Digita pelo menos 10 números. Você tem '+hist.length+'.'); return; }
-  let r = calcular2ParaJogar();
-  doisParaJogar = r.dois;
-  motivo2 = r.motivo;
-  previsaoAtual = [...r.dois];
-  salvarPrevisao();
-  alert('📊 AVALIEI OS ÚLTIMOS 10!\n\nÚltimos 10: '+hist.slice(-10).join(', ')+'\n\n🎯 2 PRA JOGAR: '+r.dois.join(' e ')+'\n\n'+r.motivo);
-  render();
 }
 function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
@@ -256,15 +244,6 @@ function proximoAmarelo(hot){
   for(let c of candidatos){ if(!previsaoAtual.includes(c)) return c; }
   return Math.floor(Math.random()*37);
 }
-function gerarPrimeiroAmarelo(hot){
-  if(hist.length>=10){
-    let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois];
-  } else {
-    previsaoAtual=[proximoAmarelo(hot)];
-  }
-  confAtual='--%';
-  localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual));
-}
 function salvarPrevisao(){ localStorage.setItem('previsaoTravada', JSON.stringify(previsaoAtual)); localStorage.setItem('confTravada', confAtual); }
 function montarRoleta(){
   let r=document.getElementById('roleta'); r.innerHTML='';
@@ -298,7 +277,17 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   hotSet = new Set(hot.filter(h=>h.qtd>0).map(h=>h.n));
   coldSet = new Set(cold.map(c=>c.n));
-  if(hist.length>0 && previsaoAtual.length===0){ gerarPrimeiroAmarelo(hot); }
+  // AUTOMÁTICO: se já tem 10 e ainda não tem previsão, gera os 2 na hora
+  if(hist.length>=10 && previsaoAtual.length===0){
+    let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; salvarPrevisao();
+  }
+  // Se caiu pra menos de 10 (removeu), limpa os 2
+  if(hist.length<10 && previsaoAtual.length>0 && hist.length!==0){
+    // mantém vazio até chegar em 10 de novo - limpa se ainda não chegou em 10 e não é acumulado antigo
+    // Não limpa acumulado pós-10, só garante que antes de 10 não mostra
+    if(doisParaJogar.length===0 && previsaoAtual.length===0){}
+  }
+  if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; }
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
   let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' amarelo':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
@@ -314,32 +303,35 @@ function render(){
   if(document.getElementById('pistaOverlay').classList.contains('aberto')) montarPista();
   if(hist.length===0){
     previsaoAtual=[]; doisParaJogar=[]; confAtual='--%';
-    document.getElementById('confPct').innerText='--%'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite 10 números e clica em AVALIAR 10</span>'; return;
+    document.getElementById('confPct').innerText='Digite 10'; document.getElementById('prevBolas').innerHTML='<span style="color:#888;font-size:12px">Digite 10 números</span>'; return;
   }
-  document.getElementById('confPct').innerText=previsaoAtual.length+' acumulado';
+  if(hist.length<10){
+    document.getElementById('confPct').innerText='Faltam '+(10-hist.length)+' pra 10';
+    document.getElementById('prevBolas').innerHTML='<span style="color:#fff;font-size:12px">Você tem '+hist.length+'/10</span>'; return;
+  }
+  document.getElementById('confPct').innerText=previsaoAtual.length+' pra jogar';
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){
-  if(hist.length===0){
-    hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
-    let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
-    let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
-    let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
-    gerarPrimeiroAmarelo(hot);
-    render(); return;
-  }
+  let eraAntes10 = hist.length<10;
   let acertou = previsaoAtual.includes(n);
   hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
   let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
   let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
   let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
+  // CHEGOU NO 10º NÚMERO -> AUTOMÁTICO, SEM CLICAR EM NADA
+  if(hist.length===10){
+    let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; salvarPrevisao();
+    alert('🎯 CHEGOU EM 10! AUTOMÁTICO!\n\nÚltimos 10: '+hist.slice(-10).join(', ')+'\n\n2 PRA JOGAR: '+r.dois.join(' e '));
+    render(); return;
+  }
+  if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); render(); return; }
   if(acertou){
     let qtdAntes = previsaoAtual.length;
     previsaoAtual=[];
-    if(hist.length>=10){ let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; }
-    else { previsaoAtual=[proximoAmarelo(hot)]; }
+    let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois];
     salvarPrevisao();
-    alert('✅ ACERTOU! Saiu '+n+'! Tinha acumulado '+qtdAntes+' amarelo(s). ZEROU!\n\n🎯 Novos 2 pra jogar: '+previsaoAtual.join(' e '));
+    alert('✅ ACERTOU! Saiu '+n+'! Tinha acumulado '+qtdAntes+'. ZEROU!\n\n🎯 Novos 2 pra jogar: '+previsaoAtual.join(' e '));
   } else {
     let novo = proximoAmarelo(hot);
     if(!previsaoAtual.includes(novo)) previsaoAtual.push(novo);
@@ -348,7 +340,7 @@ function pick(n){
   }
   render();
 }
-function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); render(); }
+function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); } render(); }
 function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>

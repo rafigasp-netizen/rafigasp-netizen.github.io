@@ -86,6 +86,8 @@ body{touch-action:pan-x pan-y}
 .btn-fechar{background:#222;color:#fff;border:1px solid #888;padding:12px 18px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px}
 #virar{display:none;position:fixed;inset:0;background:#0a0f1a;z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:12px}
 @media (orientation: portrait){ #virar{display:flex} }
+@keyframes pisca1{0%{box-shadow:0 0 0 3px #FF0000, 0 0 15px #FF0000;background:#FF0000!important}50%{box-shadow:0 0 0 3px #FFD700, 0 0 15px #FFD700;background:#FFD700!important;color:#000!important}100%{box-shadow:0 0 0 3px #FF0000, 0 0 15px #FF0000;background:#FF0000!important}}
+.cell-mesa.piscar, .pista-num.piscar, .bola-top.piscar{animation:pisca1 0.4s infinite !important;z-index:5}
 </style>
 </head>
 <body>
@@ -155,6 +157,8 @@ const SETORES={
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
 let setorAtivo=null;
+let alertaUm = localStorage.getItem('alertaUm') === '1';
+const NUMS_PISCAR = [2,13,14,15,16,28,29];
 let doisParaJogar=[];
 let motivo2='';
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
@@ -191,7 +195,7 @@ function calcular2ParaJogar(){
 function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
   let isAmarelo = previsaoAtual.includes(n);
-  d.className='pista-num '+cor(n)+(isAmarelo?' amarelo':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
+  d.className='pista-num '+cor(n)+(isAmarelo?' amarelo':'')+(alertaUm && NUMS_PISCAR.includes(n)?' piscar':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
   d.onclick=()=>{ pick(n); };
   let html=`<span>${n}</span>`;
   if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]||0}x</span>`;
@@ -234,7 +238,7 @@ let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
-function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; return `<div class="${cls} ${cor(n)}${fixo}">${n}</div>`; }
+function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; let pisc = (alertaUm && NUMS_PISCAR.includes(n)) ? ' piscar' : ''; return `<div class="${cls} ${cor(n)}${fixo}${pisc}">${n}</div>`; }
 function proximoAmarelo(hot){
   let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo);
   let candidatos=[];
@@ -277,15 +281,8 @@ function render(){
   let cold=[...arr].sort((a,b)=>a.qtd-b.qtd).slice(0,10);
   hotSet = new Set(hot.filter(h=>h.qtd>0).map(h=>h.n));
   coldSet = new Set(cold.map(c=>c.n));
-  // AUTOMÁTICO: se já tem 10 e ainda não tem previsão, gera os 2 na hora
   if(hist.length>=10 && previsaoAtual.length===0){
     let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; salvarPrevisao();
-  }
-  // Se caiu pra menos de 10 (removeu), limpa os 2
-  if(hist.length<10 && previsaoAtual.length>0 && hist.length!==0){
-    // mantém vazio até chegar em 10 de novo - limpa se ainda não chegou em 10 e não é acumulado antigo
-    // Não limpa acumulado pós-10, só garante que antes de 10 não mostra
-    if(doisParaJogar.length===0 && previsaoAtual.length===0){}
   }
   if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; }
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
@@ -294,7 +291,7 @@ function render(){
   linhas.forEach(linha=>{ linha.forEach(n=>{
     let destaque = (setorAtivo && SETORES[setorAtivo].nums.includes(n)) ? ' destaque-eu' : '';
     let isAmarelo = previsaoAtual.includes(n);
-    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo':'')+destaque; d.onclick=()=>pick(n);
+    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo':'')+destaque+(alertaUm && NUMS_PISCAR.includes(n)?' piscar':''); d.onclick=()=>pick(n);
     let html = `<span>${n}</span>`;
     if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]||0}x</span>`;
     if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]||0}x</span>`;
@@ -316,10 +313,12 @@ function pick(n){
   let eraAntes10 = hist.length<10;
   let acertou = previsaoAtual.includes(n);
   hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
+  // REGRA DO PISCA: sai 1 liga, acerta um dos 7 desliga
+  if(n === 1){ alertaUm = true; localStorage.setItem('alertaUm','1'); }
+  else if(alertaUm && NUMS_PISCAR.includes(n)){ alertaUm = false; localStorage.setItem('alertaUm','0'); setTimeout(()=>alert('✅ ACERTOU O '+n+'! Parou de piscar!'),100); }
   let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
   let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
   let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
-  // CHEGOU NO 10º NÚMERO -> AUTOMÁTICO, SEM CLICAR EM NADA
   if(hist.length===10){
     let r=calcular2ParaJogar(); doisParaJogar=r.dois; motivo2=r.motivo; previsaoAtual=[...r.dois]; salvarPrevisao();
     alert('🎯 CHEGOU EM 10! AUTOMÁTICO!\n\nÚltimos 10: '+hist.slice(-10).join(', ')+'\n\n2 PRA JOGAR: '+r.dois.join(' e '));
@@ -341,7 +340,7 @@ function pick(n){
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); } render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertaUm=false; localStorage.setItem('alertaUm','0'); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>

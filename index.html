@@ -88,8 +88,8 @@ body{touch-action:pan-x pan-y}
 @keyframes piscaAmarelo{0%{background:#FFD700!important;color:#000!important;border-color:#FFD700!important;box-shadow:0 0 18px #FFD700, inset 0 0 20px rgba(255,215,0,0.6);transform:scale(1.02)}50%{background:#FFF176!important;color:#000!important;border-color:#FFF176!important;box-shadow:0 0 30px #FFEA00, inset 0 0 30px rgba(255,235,59,0.8);transform:scale(1.05)}100%{background:#FFD700!important;color:#000!important;border-color:#FFD700!important;box-shadow:0 0 18px #FFD700, inset 0 0 20px rgba(255,215,0,0.6);transform:scale(1.02)}}
 .cell-mesa.piscar, .pista-num.piscar, .bola-top.piscar{animation:piscaAmarelo 0.5s infinite !important;z-index:5}
 .cell-mesa.piscar span, .pista-num.piscar span{color:#000!important}
-.blocos-bar{display:flex;gap:5px;flex-shrink:0}
-.bloco-chip{flex:1;background:#111;border:1px solid #444;border-radius:8px;padding:4px 2px;text-align:center;font-size:10px;line-height:1.2;cursor:pointer}
+.blocos-bar{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.bloco-chip{flex:1;min-width:140px;background:#111;border:1px solid #444;border-radius:8px;padding:4px 2px;text-align:center;font-size:10px;line-height:1.2;cursor:pointer}
 .bloco-chip b{color:#D4AF37;font-size:11px;display:block}
 .bloco-chip.ativo{border:2px solid #FFD700;background:#3a3000;box-shadow:0 0 10px #FFD700}
 .bloco-chip.ativo b{color:#FFD700}
@@ -162,15 +162,17 @@ const SETORES={
   serie023:{nome:'SERIE 0/2/3', nums:[22,18,29,7,28,12,35,25,2,21,4,19,15]},
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
-// BLOCOS SALVOS - EDITE AQUI SE QUISER MUDAR
+// BLOCOS SALVOS
 const BLOCOS = {
   1:{gatilho:1, nome:'BLOCO 1', nums:[2,13,14,15,16,28,29]},
   2:{gatilho:2, nome:'BLOCO 2', nums:[0,6,22,28,29,30]},
-  3:{gatilho:3, nome:'BLOCO 3', nums:[23,24,25,26,34,35]}
+  3:{gatilho:3, nome:'BLOCO 3', nums:[23,24,25,26,34,35]},
+  4:{gatilho:4, nome:'BLOCO 4', nums:[0,9,29,30,31]}
 };
-let alertas = JSON.parse(localStorage.getItem('alertasBlocos')||'{"1":false,"2":false,"3":false}');
+let alertas = JSON.parse(localStorage.getItem('alertasBlocos')||'{"1":false,"2":false,"3":false,"4":false}');
+if(alertas["4"]===undefined) alertas["4"]=false;
 function salvarAlertas(){ localStorage.setItem('alertasBlocos', JSON.stringify(alertas)); }
-function estaPiscando(n){ return (alertas["1"] && BLOCOS[1].nums.includes(n)) || (alertas["2"] && BLOCOS[2].nums.includes(n)) || (alertas["3"] && BLOCOS[3].nums.includes(n)); }
+function estaPiscando(n){ return Object.keys(BLOCOS).some(k=> alertas[k] && BLOCOS[k].nums.includes(n)); }
 function renderBlocosBar(){
   let el=document.getElementById('blocosBar'); if(!el) return;
   el.innerHTML = Object.keys(BLOCOS).map(k=>{
@@ -334,7 +336,6 @@ function render(){
 function pick(n){
   let acertou = previsaoAtual.includes(n);
   hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
-  // REGRA DOS 3 BLOCOS
   Object.keys(BLOCOS).forEach(k=>{
     let b=BLOCOS[k];
     if(n === b.gatilho){ alertas[k]=true; }
@@ -365,7 +366,7 @@ function pick(n){
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); } render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertas={"1":false,"2":false,"3":false}; salvarAlertas(); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertas={"1":false,"2":false,"3":false,"4":false}; salvarAlertas(); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>

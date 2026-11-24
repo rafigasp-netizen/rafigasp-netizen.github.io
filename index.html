@@ -44,7 +44,6 @@ body{touch-action:pan-x pan-y}
 #pistaOverlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
 #pistaOverlay.aberto{display:flex}
 .pista-titulo{color:#333;font-weight:900;font-size:24px;text-align:center}
-.pista-sub{color:#888;font-size:12px}
 .pista{width:min(96vw,860px);background:#fff;border:2px solid #ccc;border-radius:100px;padding:0;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
 .pista-top,.pista-bottom{display:grid;grid-template-columns:repeat(17,1fr)}
 .pista-meio{display:grid;grid-template-columns:52px 1fr 52px}
@@ -89,6 +88,11 @@ body{touch-action:pan-x pan-y}
 @keyframes piscaAmarelo{0%{background:#FFD700!important;color:#000!important;border-color:#FFD700!important;box-shadow:0 0 18px #FFD700, inset 0 0 20px rgba(255,215,0,0.6);transform:scale(1.02)}50%{background:#FFF176!important;color:#000!important;border-color:#FFF176!important;box-shadow:0 0 30px #FFEA00, inset 0 0 30px rgba(255,235,59,0.8);transform:scale(1.05)}100%{background:#FFD700!important;color:#000!important;border-color:#FFD700!important;box-shadow:0 0 18px #FFD700, inset 0 0 20px rgba(255,215,0,0.6);transform:scale(1.02)}}
 .cell-mesa.piscar, .pista-num.piscar, .bola-top.piscar{animation:piscaAmarelo 0.5s infinite !important;z-index:5}
 .cell-mesa.piscar span, .pista-num.piscar span{color:#000!important}
+.blocos-bar{display:flex;gap:5px;flex-shrink:0}
+.bloco-chip{flex:1;background:#111;border:1px solid #444;border-radius:8px;padding:4px 2px;text-align:center;font-size:10px;line-height:1.2;cursor:pointer}
+.bloco-chip b{color:#D4AF37;font-size:11px;display:block}
+.bloco-chip.ativo{border:2px solid #FFD700;background:#3a3000;box-shadow:0 0 10px #FFD700}
+.bloco-chip.ativo b{color:#FFD700}
 </style>
 </head>
 <body>
@@ -103,6 +107,7 @@ body{touch-action:pan-x pan-y}
     <div class="zoomBtn" onclick="zoomMais(event)">🔍+</div>
     <button class="btn-voltar" onclick="limparTudo()">🗑️ LIMPAR</button>
   </div>
+  <div class="blocos-bar" id="blocosBar"></div>
   <div class="meio">
     <div class="col-esq"><div class="btn-remover" onclick="removerUltimo()">◀ Remover<br>último número</div><div class="pct-ico">% 📊</div><div id="colEsq" style="flex:1;display:flex;flex-direction:column;gap:4px;min-height:0"></div><div class="btn-premium">App<br>Premium</div></div>
     <div class="mesa"><div class="grid-mesa" id="gridMesa"></div></div>
@@ -157,9 +162,24 @@ const SETORES={
   serie023:{nome:'SERIE 0/2/3', nums:[22,18,29,7,28,12,35,25,2,21,4,19,15]},
   zero:{nome:'ZERO SPIEL', nums:[26,0,32,15,3,35]}
 };
+// BLOCOS SALVOS - EDITE AQUI SE QUISER MUDAR
+const BLOCOS = {
+  1:{gatilho:1, nome:'BLOCO 1', nums:[2,13,14,15,16,28,29]},
+  2:{gatilho:2, nome:'BLOCO 2', nums:[0,6,22,28,29,30]},
+  3:{gatilho:3, nome:'BLOCO 3', nums:[23,24,25,26,34,35]}
+};
+let alertas = JSON.parse(localStorage.getItem('alertasBlocos')||'{"1":false,"2":false,"3":false}');
+function salvarAlertas(){ localStorage.setItem('alertasBlocos', JSON.stringify(alertas)); }
+function estaPiscando(n){ return (alertas["1"] && BLOCOS[1].nums.includes(n)) || (alertas["2"] && BLOCOS[2].nums.includes(n)) || (alertas["3"] && BLOCOS[3].nums.includes(n)); }
+function renderBlocosBar(){
+  let el=document.getElementById('blocosBar'); if(!el) return;
+  el.innerHTML = Object.keys(BLOCOS).map(k=>{
+    let b=BLOCOS[k]; let ativo=alertas[k];
+    return `<div class="bloco-chip ${ativo?'ativo':''}" onclick="toggleBloco(${k})"><b>${b.nome} ${ativo?'🟡 PISCANDO':''}</b>Se sair ${b.gatilho} → ${b.nums.join(', ')}</div>`;
+  }).join('');
+}
+function toggleBloco(k){ alertas[k]=!alertas[k]; salvarAlertas(); render(); }
 let setorAtivo=null;
-let alertaDois = localStorage.getItem('alertaDois') === '1';
-const NUMS_PISCAR = [0,6,22,28,29,30];
 let doisParaJogar=[];
 let motivo2='';
 function cor(n){ if(n===0) return 'green'; return REDS.includes(n)?'red':'black'; }
@@ -196,7 +216,7 @@ function calcular2ParaJogar(){
 function criarPistaNum(n, counts, hot, cold){
   let d=document.createElement('div');
   let isAmarelo = previsaoAtual.includes(n);
-  d.className='pista-num '+cor(n)+(isAmarelo?' amarelo':'')+(alertaDois && NUMS_PISCAR.includes(n)?' piscar':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
+  d.className='pista-num '+cor(n)+(isAmarelo?' amarelo':'')+(estaPiscando(n)?' piscar':'')+(setorAtivo && SETORES[setorAtivo].nums.includes(n)?' selecionado':'');
   d.onclick=()=>{ pick(n); };
   let html=`<span>${n}</span>`;
   if(hist.length>0 && hot.has(n)) html+=`<span class="fire-pista">🔥</span><span class="mini hot">HOT ${counts[n]||0}x</span>`;
@@ -239,7 +259,7 @@ let previsaoAtual = JSON.parse(localStorage.getItem('previsaoTravada')||'[]');
 let confAtual = localStorage.getItem('confTravada') || '--%';
 let hotSet = new Set(), coldSet = new Set();
 let anguloRoleta = 0;
-function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; let pisc = (alertaDois && NUMS_PISCAR.includes(n)) ? ' piscar' : ''; return `<div class="${cls} ${cor(n)}${fixo}${pisc}">${n}</div>`; }
+function bolaHTML(n, cls='bola-top'){ let fixo = previsaoAtual.includes(n) ? ' amarelo' : ''; let pisc = estaPiscando(n) ? ' piscar' : ''; return `<div class="${cls} ${cor(n)}${fixo}${pisc}">${n}</div>`; }
 function proximoAmarelo(hot){
   let ultimo = hist.length? hist[hist.length-1] : 0; let pos = RODA.indexOf(ultimo);
   let candidatos=[];
@@ -274,6 +294,7 @@ function girarRoleta(){
   setTimeout(()=>{ pick(n); montarRoleta(); }, 1250);
 }
 function render(){
+  renderBlocosBar();
   let esq = [...hist].reverse().slice(0,7);
   document.getElementById('colEsq').innerHTML = esq.length ? esq.map(n=>`<div class="num ${cor(n)}" onclick="pick(${n})">${n}</div>`).join('') : '<div style="color:#888;font-size:11px;text-align:center">Sem<br>números</div>';
   let counts={}; hist.forEach(n=>counts[n]=(counts[n]||0)+1);
@@ -288,11 +309,11 @@ function render(){
   if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; }
   let grid = document.getElementById('gridMesa'); grid.innerHTML='';
   let linhas=[[3,6,9,12,15,18,21,24,27,30,33,36],[2,5,8,11,14,17,20,23,26,29,32,35],[1,4,7,10,13,16,19,22,25,28,31,34]];
-  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' amarelo':'')+(alertaDois && NUMS_PISCAR.includes(0)?' piscar':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
+  let zeroDiv=document.createElement('div'); zeroDiv.className='cell-mesa zero'+(previsaoAtual.includes(0)?' amarelo':'')+(estaPiscando(0)?' piscar':''); zeroDiv.style.gridRow='1 / span 3'; zeroDiv.innerText='0'; zeroDiv.onclick=()=>pick(0); grid.appendChild(zeroDiv);
   linhas.forEach(linha=>{ linha.forEach(n=>{
     let destaque = (setorAtivo && SETORES[setorAtivo].nums.includes(n)) ? ' destaque-eu' : '';
     let isAmarelo = previsaoAtual.includes(n);
-    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo':'')+destaque+(alertaDois && NUMS_PISCAR.includes(n)?' piscar':''); d.onclick=()=>pick(n);
+    let d=document.createElement('div'); d.className=`cell-mesa ${cor(n)}`+(isAmarelo?' amarelo':'')+destaque+(estaPiscando(n)?' piscar':''); d.onclick=()=>pick(n);
     let html = `<span>${n}</span>`;
     if(hist.length>0 && hotSet.has(n)) html += `<span class="fire-mesa">🔥</span><span class="tag-hot">HOT ${counts[n]||0}x</span>`;
     if(hist.length>0 && coldSet.has(n)) html += `<span class="ice-mesa">❄️</span><span class="tag-cold">COLD ${counts[n]||0}x</span>`;
@@ -311,11 +332,15 @@ function render(){
   document.getElementById('prevBolas').innerHTML=previsaoAtual.map(n=>bolaHTML(n)).join('');
 }
 function pick(n){
-  let eraAntes10 = hist.length<10;
   let acertou = previsaoAtual.includes(n);
   hist.push(n); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); localStorage.setItem('ultimo_rafigasp',n);
-  if(n === 2){ alertaDois = true; localStorage.setItem('alertaDois','1'); }
-  else if(alertaDois && NUMS_PISCAR.includes(n)){ alertaDois = false; localStorage.setItem('alertaDois','0'); setTimeout(()=>alert('✅ ACERTOU O '+n+'! Parou de piscar!'),100); }
+  // REGRA DOS 3 BLOCOS
+  Object.keys(BLOCOS).forEach(k=>{
+    let b=BLOCOS[k];
+    if(n === b.gatilho){ alertas[k]=true; }
+    else if(alertas[k] && b.nums.includes(n)){ alertas[k]=false; setTimeout(()=>alert('✅ ACERTOU BLOCO '+k+'! Saiu '+n+'! Parou de piscar!'),100); }
+  });
+  salvarAlertas();
   let counts={}; hist.forEach(x=>counts[x]=(counts[x]||0)+1);
   let arr=[]; for(let i=0;i<=36;i++) arr.push({n:i,qtd:counts[i]||0});
   let hot=[...arr].sort((a,b)=>b.qtd-a.qtd).slice(0,10);
@@ -340,7 +365,7 @@ function pick(n){
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); } render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertaDois=false; localStorage.setItem('alertaDois','0'); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertas={"1":false,"2":false,"3":false}; salvarAlertas(); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>

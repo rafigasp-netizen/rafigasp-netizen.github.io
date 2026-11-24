@@ -168,10 +168,11 @@ const BLOCOS = {
   2:{gatilho:2, nome:'BLOCO 2', nums:[0,6,22,28,29,30]},
   3:{gatilho:3, nome:'BLOCO 3', nums:[23,24,25,26,34,35]},
   4:{gatilho:4, nome:'BLOCO 4', nums:[0,9,29,30,31]},
-  5:{gatilho:5, nome:'BLOCO 5', nums:[0,8,22,23,28,29,30]}
+  5:{gatilho:5, nome:'BLOCO 5', nums:[0,8,22,23,28,29,30]},
+  6:{gatilho:6, nome:'BLOCO 6', nums:[0,1,14,22,23,24,36]}
 };
-let alertas = JSON.parse(localStorage.getItem('alertasBlocos')||'{"1":false,"2":false,"3":false,"4":false,"5":false}');
-if(alertas["5"]===undefined) alertas["5"]=false;
+let alertas = JSON.parse(localStorage.getItem('alertasBlocos')||'{"1":false,"2":false,"3":false,"4":false,"5":false,"6":false}');
+if(alertas["6"]===undefined) alertas["6"]=false;
 function salvarAlertas(){ localStorage.setItem('alertasBlocos', JSON.stringify(alertas)); }
 function estaPiscando(n){ return Object.keys(BLOCOS).some(k=> alertas[k] && BLOCOS[k].nums.includes(n)); }
 function renderBlocosBar(){
@@ -367,7 +368,7 @@ function pick(n){
   render();
 }
 function removerUltimo(){ hist.pop(); localStorage.setItem('historico_rafigasp',JSON.stringify(hist)); if(hist.length<10){ previsaoAtual=[]; doisParaJogar=[]; salvarPrevisao(); } render(); }
-function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertas={"1":false,"2":false,"3":false,"4":false,"5":false}; salvarAlertas(); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
+function limparTudo(){ if(!confirm('Zerar TUDO e começar do zero?')) return; hist=[]; previsaoAtual=[]; doisParaJogar=[]; motivo2=''; confAtual='--%'; setorAtivo=null; alertas={"1":false,"2":false,"3":false,"4":false,"5":false,"6":false}; salvarAlertas(); hotSet=new Set(); coldSet=new Set(); localStorage.removeItem('historico_rafigasp'); localStorage.removeItem('ultimo_rafigasp'); localStorage.removeItem('previsaoTravada'); localStorage.removeItem('confTravada'); localStorage.removeItem('histA'); localStorage.removeItem('histB'); localStorage.removeItem('histGeralCron'); localStorage.removeItem('cntA'); localStorage.removeItem('cntB'); render(); }
 render(); montarPista(); montarRoleta();
 </script>
 </body>
